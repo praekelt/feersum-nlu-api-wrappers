@@ -66,6 +66,14 @@ class TestTextClassifiersApi(unittest.TestCase):
         """
         pass
 
+    def test_text_classifier_get_training_samples(self):
+        """
+        Test case for text_classifier_get_training_samples
+
+        Get training samples.
+        """
+        pass
+
     def test_text_classifier_retrieve(self):
         """
         Test case for text_classifier_retrieve

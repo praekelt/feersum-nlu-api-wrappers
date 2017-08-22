@@ -39,6 +39,12 @@ try:
     print("api_response", api_response)
     print()
 
+    # Get the training samples of the text classifier.
+    api_response = api_instance.text_classifier_get_training_samples(instance_name)
+    print("type(api_response)", type(api_response))
+    print("api_response", api_response)
+    print()
+
     # Train the text classifier.
     api_response = api_instance.text_classifier_train(instance_name, train_details)
     print("type(api_response)", type(api_response))
