@@ -27,25 +27,30 @@ text_input = feersum_nlu.TextInput("I would please like to fill in a claim form.
 try:
     # Create the text classifier.
     api_response = api_instance.text_classifier_create(create_details)
-    print(api_response)
+    print("type(api_response)", type(api_response))
+    print("api_response", api_response)
 
     # Add training samples to the text classifier.
     api_response = api_instance.text_classifier_add_training_samples(instance_name, labelled_text_samples)
-    print(api_response)
+    print("type(api_response)", type(api_response))
+    print("api_response", api_response)
 
     # Train the text classifier.
     api_response = api_instance.text_classifier_train(instance_name, train_details)
-    print(api_response)
+    print("type(api_response)", type(api_response))
+    print("api_response", api_response)
 
     # Get the details of all loaded text classifiers.
     api_response = api_instance.text_classifier_get_details_all()
-    print(api_response)
+    print("type(api_response)", type(api_response))
+    print("api_response", api_response)
 
     # Classify text.
     api_response = api_instance.text_classifier_retrieve(instance_name, text_input)
-    print(api_response)
+    print("type(api_response)", type(api_response))
+    print("api_response", api_response)
 except ApiException as e:
-    print("Exception when calling DateParsersApi->date_parser_retrieve: %s\n" % e)
+    print("Exception when calling a text classifier operation: %s\n" % e)
 except urllib3.exceptions.MaxRetryError:
     print("Connection MaxRetryError!")
 
