@@ -19,6 +19,7 @@ try:
     api_response = api_instance.sentiment_detector_retrieve(model_instance_name, text_input)
     print("type(api_response)", type(api_response))
     print("api_response", api_response)
+    print()
 except ApiException as e:
     print("Exception when calling SentimentDetectorsApi->sentiment_detector_retrieve: %s\n" % e)
 except urllib3.exceptions.MaxRetryError:
