@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
 **id** | **str** |  | 
+**desc** | **str** |  | [optional] 
 **training_accuracy** | **float** |  | [optional] 
 **training_stamp** | **str** |  | [optional] 
 **training_cm** | **object** |  | [optional] 
