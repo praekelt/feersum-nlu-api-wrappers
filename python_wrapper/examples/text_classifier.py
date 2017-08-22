@@ -6,8 +6,8 @@ from feersum_nlu.rest import ApiException
 # Configure API key authorization: APIKeyHeader
 feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
-# feersum_nlu.configuration.host = "http://127.0.0.1:8000/nlu/v2"
-feersum_nlu.configuration.host = "http://dev-bernardt.za.prk.hosting:8000/nlu/v2"
+feersum_nlu.configuration.host = "http://127.0.0.1:8000/nlu/v2"
+# feersum_nlu.configuration.host = "http://dev-bernardt.za.prk.hosting:8000/nlu/v2"
 
 api_instance = feersum_nlu.TextClassifiersApi()
 
