@@ -58,6 +58,22 @@ class TestTextClassifiersApi(unittest.TestCase):
         """
         pass
 
+    def test_text_classifier_del_training_samples(self):
+        """
+        Test case for text_classifier_del_training_samples
+
+        Delete training samples.
+        """
+        pass
+
+    def test_text_classifier_get_details(self):
+        """
+        Test case for text_classifier_get_details
+
+        Get details of named instance.
+        """
+        pass
+
     def test_text_classifier_get_details_all(self):
         """
         Test case for text_classifier_get_details_all

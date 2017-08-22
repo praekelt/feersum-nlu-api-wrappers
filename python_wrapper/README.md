@@ -79,6 +79,8 @@ Class | Method | HTTP request | Description
 *SentimentDetectorsApi* | [**sentiment_detector_retrieve**](docs/SentimentDetectorsApi.md#sentiment_detector_retrieve) | **POST** /sentiment_detectors/{instance_name}/retrieve | Detect sentiment.
 *TextClassifiersApi* | [**text_classifier_add_training_samples**](docs/TextClassifiersApi.md#text_classifier_add_training_samples) | **POST** /text_classifiers/{instance_name}/training_samples | Add training samples.
 *TextClassifiersApi* | [**text_classifier_create**](docs/TextClassifiersApi.md#text_classifier_create) | **POST** /text_classifiers | Create a text classifier.
+*TextClassifiersApi* | [**text_classifier_del_training_samples**](docs/TextClassifiersApi.md#text_classifier_del_training_samples) | **DELETE** /text_classifiers/{instance_name}/training_samples | Delete training samples.
+*TextClassifiersApi* | [**text_classifier_get_details**](docs/TextClassifiersApi.md#text_classifier_get_details) | **GET** /text_classifiers/{instance_name} | Get details of named instance.
 *TextClassifiersApi* | [**text_classifier_get_details_all**](docs/TextClassifiersApi.md#text_classifier_get_details_all) | **GET** /text_classifiers | Get list of loaded text classifiers.
 *TextClassifiersApi* | [**text_classifier_get_training_samples**](docs/TextClassifiersApi.md#text_classifier_get_training_samples) | **GET** /text_classifiers/{instance_name}/training_samples | Get training samples.
 *TextClassifiersApi* | [**text_classifier_retrieve**](docs/TextClassifiersApi.md#text_classifier_retrieve) | **POST** /text_classifiers/{instance_name}/retrieve | Classify text.
