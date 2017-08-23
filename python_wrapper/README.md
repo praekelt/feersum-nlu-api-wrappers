@@ -76,6 +76,14 @@ All URIs are relative to *http://dev-bernardt.za.prk.hosting:8000/nlu/v2*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DateParsersApi* | [**date_parser_retrieve**](docs/DateParsersApi.md#date_parser_retrieve) | **POST** /date_parsers/{instance_name}/retrieve | Extract dates.
+*IntentClassifiersApi* | [**intent_classifier_add_training_samples**](docs/IntentClassifiersApi.md#intent_classifier_add_training_samples) | **POST** /intent_classifiers/{instance_name}/training_samples | Add training samples.
+*IntentClassifiersApi* | [**intent_classifier_create**](docs/IntentClassifiersApi.md#intent_classifier_create) | **POST** /intent_classifiers | Create a text classifier.
+*IntentClassifiersApi* | [**intent_classifier_del_training_samples**](docs/IntentClassifiersApi.md#intent_classifier_del_training_samples) | **DELETE** /intent_classifiers/{instance_name}/training_samples | Delete training samples.
+*IntentClassifiersApi* | [**intent_classifier_get_details**](docs/IntentClassifiersApi.md#intent_classifier_get_details) | **GET** /intent_classifiers/{instance_name} | Get details of named instance.
+*IntentClassifiersApi* | [**intent_classifier_get_details_all**](docs/IntentClassifiersApi.md#intent_classifier_get_details_all) | **GET** /intent_classifiers | Get list of loaded intent classifiers.
+*IntentClassifiersApi* | [**intent_classifier_get_training_samples**](docs/IntentClassifiersApi.md#intent_classifier_get_training_samples) | **GET** /intent_classifiers/{instance_name}/training_samples | Get training samples.
+*IntentClassifiersApi* | [**intent_classifier_retrieve**](docs/IntentClassifiersApi.md#intent_classifier_retrieve) | **POST** /intent_classifiers/{instance_name}/retrieve | Classify intent.
+*IntentClassifiersApi* | [**intent_classifier_train**](docs/IntentClassifiersApi.md#intent_classifier_train) | **POST** /intent_classifiers/{instance_name}/train | Train the named intent classifier.
 *SentimentDetectorsApi* | [**sentiment_detector_retrieve**](docs/SentimentDetectorsApi.md#sentiment_detector_retrieve) | **POST** /sentiment_detectors/{instance_name}/retrieve | Detect sentiment.
 *TextClassifiersApi* | [**text_classifier_add_training_samples**](docs/TextClassifiersApi.md#text_classifier_add_training_samples) | **POST** /text_classifiers/{instance_name}/training_samples | Add training samples.
 *TextClassifiersApi* | [**text_classifier_create**](docs/TextClassifiersApi.md#text_classifier_create) | **POST** /text_classifiers | Create a text classifier.
@@ -85,6 +93,7 @@ Class | Method | HTTP request | Description
 *TextClassifiersApi* | [**text_classifier_get_training_samples**](docs/TextClassifiersApi.md#text_classifier_get_training_samples) | **GET** /text_classifiers/{instance_name}/training_samples | Get training samples.
 *TextClassifiersApi* | [**text_classifier_retrieve**](docs/TextClassifiersApi.md#text_classifier_retrieve) | **POST** /text_classifiers/{instance_name}/retrieve | Classify text.
 *TextClassifiersApi* | [**text_classifier_train**](docs/TextClassifiersApi.md#text_classifier_train) | **POST** /text_classifiers/{instance_name}/train | Train the named text classifier.
+*WordManifoldsApi* | [**word_manifold_create**](docs/WordManifoldsApi.md#word_manifold_create) | **POST** /word_manifolds | Create a word manifold model.
 
 
 ## Documentation For Models

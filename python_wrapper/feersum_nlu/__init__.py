@@ -41,8 +41,10 @@ from .models.train_details import TrainDetails
 
 # import apis into sdk package
 from .apis.date_parsers_api import DateParsersApi
+from .apis.intent_classifiers_api import IntentClassifiersApi
 from .apis.sentiment_detectors_api import SentimentDetectorsApi
 from .apis.text_classifiers_api import TextClassifiersApi
+from .apis.word_manifolds_api import WordManifoldsApi
 
 # import ApiClient
 from .api_client import ApiClient
