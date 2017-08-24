@@ -76,8 +76,16 @@ All URIs are relative to *http://dev-bernardt.za.prk.hosting:8000/nlu/v2*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DateParsersApi* | [**date_parser_retrieve**](docs/DateParsersApi.md#date_parser_retrieve) | **POST** /date_parsers/{instance_name}/retrieve | Extract dates.
+*FaqMatchersApi* | [**faq_matcher_add_training_samples**](docs/FaqMatchersApi.md#faq_matcher_add_training_samples) | **POST** /faq_matchers/{instance_name}/training_samples | Add training samples.
+*FaqMatchersApi* | [**faq_matcher_create**](docs/FaqMatchersApi.md#faq_matcher_create) | **POST** /faq_matchers | Create an FAQ matcher.
+*FaqMatchersApi* | [**faq_matcher_del_training_samples**](docs/FaqMatchersApi.md#faq_matcher_del_training_samples) | **DELETE** /faq_matchers/{instance_name}/training_samples | Delete training samples.
+*FaqMatchersApi* | [**faq_matcher_get_details**](docs/FaqMatchersApi.md#faq_matcher_get_details) | **GET** /faq_matchers/{instance_name} | Get details of named instance.
+*FaqMatchersApi* | [**faq_matcher_get_details_all**](docs/FaqMatchersApi.md#faq_matcher_get_details_all) | **GET** /faq_matchers | Get list of loaded FAQ matchers.
+*FaqMatchersApi* | [**faq_matcher_get_training_samples**](docs/FaqMatchersApi.md#faq_matcher_get_training_samples) | **GET** /faq_matchers/{instance_name}/training_samples | Get training samples.
+*FaqMatchersApi* | [**faq_matcher_retrieve**](docs/FaqMatchersApi.md#faq_matcher_retrieve) | **POST** /faq_matchers/{instance_name}/retrieve | Match retrieve and FAQ.
+*FaqMatchersApi* | [**faq_matcher_train**](docs/FaqMatchersApi.md#faq_matcher_train) | **POST** /faq_matchers/{instance_name}/train | Train the named FAQ matcher.
 *IntentClassifiersApi* | [**intent_classifier_add_training_samples**](docs/IntentClassifiersApi.md#intent_classifier_add_training_samples) | **POST** /intent_classifiers/{instance_name}/training_samples | Add training samples.
-*IntentClassifiersApi* | [**intent_classifier_create**](docs/IntentClassifiersApi.md#intent_classifier_create) | **POST** /intent_classifiers | Create a text classifier.
+*IntentClassifiersApi* | [**intent_classifier_create**](docs/IntentClassifiersApi.md#intent_classifier_create) | **POST** /intent_classifiers | Create an intent classifier.
 *IntentClassifiersApi* | [**intent_classifier_del_training_samples**](docs/IntentClassifiersApi.md#intent_classifier_del_training_samples) | **DELETE** /intent_classifiers/{instance_name}/training_samples | Delete training samples.
 *IntentClassifiersApi* | [**intent_classifier_get_details**](docs/IntentClassifiersApi.md#intent_classifier_get_details) | **GET** /intent_classifiers/{instance_name} | Get details of named instance.
 *IntentClassifiersApi* | [**intent_classifier_get_details_all**](docs/IntentClassifiersApi.md#intent_classifier_get_details_all) | **GET** /intent_classifiers | Get list of loaded intent classifiers.
@@ -103,6 +111,7 @@ Class | Method | HTTP request | Description
  - [DateList](docs/DateList.md)
  - [InstanceDetail](docs/InstanceDetail.md)
  - [InstanceDetailList](docs/InstanceDetailList.md)
+ - [LabeledWordManifold](docs/LabeledWordManifold.md)
  - [LabelledTextSamples](docs/LabelledTextSamples.md)
  - [LabelledTextSamplesInner](docs/LabelledTextSamplesInner.md)
  - [ScoredLabel](docs/ScoredLabel.md)

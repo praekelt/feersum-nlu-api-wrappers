@@ -24,18 +24,32 @@
 
 from __future__ import absolute_import
 
-# import models into model package
-from .create_details import CreateDetails
-from .date import Date
-from .date_list import DateList
-from .instance_detail import InstanceDetail
-from .instance_detail_list import InstanceDetailList
-from .labeled_word_manifold import LabeledWordManifold
-from .labelled_text_samples import LabelledTextSamples
-from .labelled_text_samples_inner import LabelledTextSamplesInner
-from .scored_label import ScoredLabel
-from .scored_label_list import ScoredLabelList
-from .sentiment import Sentiment
-from .text_input import TextInput
-from .total_samples import TotalSamples
-from .train_details import TrainDetails
+import os
+import sys
+import unittest
+
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from feersum_nlu.apis.word_manifolds_api import WordManifoldsApi
+
+
+class TestWordManifoldsApi(unittest.TestCase):
+    """ WordManifoldsApi unit test stubs """
+
+    def setUp(self):
+        self.api = feersum_nlu.apis.word_manifolds_api.WordManifoldsApi()
+
+    def tearDown(self):
+        pass
+
+    def test_word_manifold_create(self):
+        """
+        Test case for word_manifold_create
+
+        Create a word manifold model.
+        """
+        pass
+
+
+if __name__ == '__main__':
+    unittest.main()

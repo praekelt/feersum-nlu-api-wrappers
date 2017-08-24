@@ -71,7 +71,7 @@ class InstanceDetail(object):
     def name(self):
         """
         Gets the name of this InstanceDetail.
-
+        The name of the model instance.
 
         :return: The name of this InstanceDetail.
         :rtype: str
@@ -82,7 +82,7 @@ class InstanceDetail(object):
     def name(self, name):
         """
         Sets the name of this InstanceDetail.
-
+        The name of the model instance.
 
         :param name: The name of this InstanceDetail.
         :type: str
@@ -96,7 +96,7 @@ class InstanceDetail(object):
     def id(self):
         """
         Gets the id of this InstanceDetail.
-
+        The unique id of a specific version of the model instance.
 
         :return: The id of this InstanceDetail.
         :rtype: str
@@ -107,7 +107,7 @@ class InstanceDetail(object):
     def id(self, id):
         """
         Sets the id of this InstanceDetail.
-
+        The unique id of a specific version of the model instance.
 
         :param id: The id of this InstanceDetail.
         :type: str
@@ -121,7 +121,7 @@ class InstanceDetail(object):
     def desc(self):
         """
         Gets the desc of this InstanceDetail.
-
+        A longer description of the model instances purpose in life.
 
         :return: The desc of this InstanceDetail.
         :rtype: str
@@ -132,7 +132,7 @@ class InstanceDetail(object):
     def desc(self, desc):
         """
         Sets the desc of this InstanceDetail.
-
+        A longer description of the model instances purpose in life.
 
         :param desc: The desc of this InstanceDetail.
         :type: str
@@ -144,7 +144,7 @@ class InstanceDetail(object):
     def training_accuracy(self):
         """
         Gets the training_accuracy of this InstanceDetail.
-
+        The accuracy of the model as measured on the training set.
 
         :return: The training_accuracy of this InstanceDetail.
         :rtype: float
@@ -155,7 +155,7 @@ class InstanceDetail(object):
     def training_accuracy(self, training_accuracy):
         """
         Sets the training_accuracy of this InstanceDetail.
-
+        The accuracy of the model as measured on the training set.
 
         :param training_accuracy: The training_accuracy of this InstanceDetail.
         :type: float
@@ -167,7 +167,7 @@ class InstanceDetail(object):
     def training_stamp(self):
         """
         Gets the training_stamp of this InstanceDetail.
-
+        The time when the training operation concluded.
 
         :return: The training_stamp of this InstanceDetail.
         :rtype: str
@@ -178,7 +178,7 @@ class InstanceDetail(object):
     def training_stamp(self, training_stamp):
         """
         Sets the training_stamp of this InstanceDetail.
-
+        The time when the training operation concluded.
 
         :param training_stamp: The training_stamp of this InstanceDetail.
         :type: str
@@ -190,7 +190,7 @@ class InstanceDetail(object):
     def training_cm(self):
         """
         Gets the training_cm of this InstanceDetail.
-
+        The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
 
         :return: The training_cm of this InstanceDetail.
         :rtype: object
@@ -201,7 +201,7 @@ class InstanceDetail(object):
     def training_cm(self, training_cm):
         """
         Sets the training_cm of this InstanceDetail.
-
+        The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
 
         :param training_cm: The training_cm of this InstanceDetail.
         :type: object

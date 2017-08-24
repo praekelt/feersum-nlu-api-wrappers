@@ -13,10 +13,9 @@ api_instance = feersum_nlu.WordManifoldsApi()
 
 instance_name = 'test_wm'
 
-# create_details = feersum_nlu.CreateDetails(name=instance_name, desc="Test word manifold.",
-#                                            load_from_store=False, input_file="glove.6B.200d.txt")
-
-create_details = feersum_nlu.CreateDetails(name=instance_name, load_from_store=True)
+create_details = feersum_nlu.CreateDetails(name=instance_name, desc="Test word manifold.",
+                                           load_from_store=False, input_file="glove.6B.200d.txt")
+# create_details = feersum_nlu.CreateDetails(name=instance_name, load_from_store=True)
 
 print()
 

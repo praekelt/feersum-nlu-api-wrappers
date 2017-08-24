@@ -30,6 +30,7 @@ from .models.date import Date
 from .models.date_list import DateList
 from .models.instance_detail import InstanceDetail
 from .models.instance_detail_list import InstanceDetailList
+from .models.labeled_word_manifold import LabeledWordManifold
 from .models.labelled_text_samples import LabelledTextSamples
 from .models.labelled_text_samples_inner import LabelledTextSamplesInner
 from .models.scored_label import ScoredLabel
@@ -41,6 +42,7 @@ from .models.train_details import TrainDetails
 
 # import apis into sdk package
 from .apis.date_parsers_api import DateParsersApi
+from .apis.faq_matchers_api import FaqMatchersApi
 from .apis.intent_classifiers_api import IntentClassifiersApi
 from .apis.sentiment_detectors_api import SentimentDetectorsApi
 from .apis.text_classifiers_api import TextClassifiersApi
