@@ -87,7 +87,7 @@ class TrainDetails(object):
     def word_manifold(self):
         """
         Gets the word_manifold of this TrainDetails.
-        The word manifold instance to use for training and later inference.   Rather use word_manifold_list for supplying a language labelled list of word manifold instances to use in a multi-language system. 
+        The word manifold instance to use for training and later inference.   Rather use the word_manifold_list for supplying a language labelled list of word manifold instances to use in a multi-language system. 
 
         :return: The word_manifold of this TrainDetails.
         :rtype: str
@@ -98,7 +98,7 @@ class TrainDetails(object):
     def word_manifold(self, word_manifold):
         """
         Sets the word_manifold of this TrainDetails.
-        The word manifold instance to use for training and later inference.   Rather use word_manifold_list for supplying a language labelled list of word manifold instances to use in a multi-language system. 
+        The word manifold instance to use for training and later inference.   Rather use the word_manifold_list for supplying a language labelled list of word manifold instances to use in a multi-language system. 
 
         :param word_manifold: The word_manifold of this TrainDetails.
         :type: str

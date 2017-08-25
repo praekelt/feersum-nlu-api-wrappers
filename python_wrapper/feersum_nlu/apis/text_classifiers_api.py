@@ -51,7 +51,7 @@ class TextClassifiersApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def text_classifier_add_training_samples(self, instance_name, labelled_text_samples, **kwargs):
+    def text_classifier_add_training_samples(self, instance_name, labelled_text_sample_list, **kwargs):
         """
         Add training samples.
         Add training samples to named text classifier.
@@ -62,24 +62,24 @@ class TextClassifiersApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.text_classifier_add_training_samples(instance_name, labelled_text_samples, callback=callback_function)
+        >>> thread = api.text_classifier_add_training_samples(instance_name, labelled_text_sample_list, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str instance_name: The name of the model instance. (required)
-        :param LabelledTextSamples labelled_text_samples: List of labelled text samples. (required)
+        :param LabelledTextSampleList labelled_text_sample_list: List of labelled text samples. (required)
         :return: TotalSamples
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.text_classifier_add_training_samples_with_http_info(instance_name, labelled_text_samples, **kwargs)
+            return self.text_classifier_add_training_samples_with_http_info(instance_name, labelled_text_sample_list, **kwargs)
         else:
-            (data) = self.text_classifier_add_training_samples_with_http_info(instance_name, labelled_text_samples, **kwargs)
+            (data) = self.text_classifier_add_training_samples_with_http_info(instance_name, labelled_text_sample_list, **kwargs)
             return data
 
-    def text_classifier_add_training_samples_with_http_info(self, instance_name, labelled_text_samples, **kwargs):
+    def text_classifier_add_training_samples_with_http_info(self, instance_name, labelled_text_sample_list, **kwargs):
         """
         Add training samples.
         Add training samples to named text classifier.
@@ -90,18 +90,18 @@ class TextClassifiersApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.text_classifier_add_training_samples_with_http_info(instance_name, labelled_text_samples, callback=callback_function)
+        >>> thread = api.text_classifier_add_training_samples_with_http_info(instance_name, labelled_text_sample_list, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str instance_name: The name of the model instance. (required)
-        :param LabelledTextSamples labelled_text_samples: List of labelled text samples. (required)
+        :param LabelledTextSampleList labelled_text_sample_list: List of labelled text samples. (required)
         :return: TotalSamples
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'labelled_text_samples']
+        all_params = ['instance_name', 'labelled_text_sample_list']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -119,9 +119,9 @@ class TextClassifiersApi(object):
         # verify the required parameter 'instance_name' is set
         if ('instance_name' not in params) or (params['instance_name'] is None):
             raise ValueError("Missing the required parameter `instance_name` when calling `text_classifier_add_training_samples`")
-        # verify the required parameter 'labelled_text_samples' is set
-        if ('labelled_text_samples' not in params) or (params['labelled_text_samples'] is None):
-            raise ValueError("Missing the required parameter `labelled_text_samples` when calling `text_classifier_add_training_samples`")
+        # verify the required parameter 'labelled_text_sample_list' is set
+        if ('labelled_text_sample_list' not in params) or (params['labelled_text_sample_list'] is None):
+            raise ValueError("Missing the required parameter `labelled_text_sample_list` when calling `text_classifier_add_training_samples`")
 
 
         collection_formats = {}
@@ -139,8 +139,8 @@ class TextClassifiersApi(object):
         local_var_files = {}
 
         body_params = None
-        if 'labelled_text_samples' in params:
-            body_params = params['labelled_text_samples']
+        if 'labelled_text_sample_list' in params:
+            body_params = params['labelled_text_sample_list']
 
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
@@ -298,7 +298,7 @@ class TextClassifiersApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str instance_name: The name of the model instance. (required)
-        :return: LabelledTextSamples
+        :return: LabelledTextSampleList
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -325,7 +325,7 @@ class TextClassifiersApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str instance_name: The name of the model instance. (required)
-        :return: LabelledTextSamples
+        :return: LabelledTextSampleList
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -386,7 +386,7 @@ class TextClassifiersApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=local_var_files,
-                                            response_type='LabelledTextSamples',
+                                            response_type='LabelledTextSampleList',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
@@ -627,7 +627,7 @@ class TextClassifiersApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str instance_name: The name of the model instance. (required)
-        :return: LabelledTextSamples
+        :return: LabelledTextSampleList
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -654,7 +654,7 @@ class TextClassifiersApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str instance_name: The name of the model instance. (required)
-        :return: LabelledTextSamples
+        :return: LabelledTextSampleList
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -715,7 +715,7 @@ class TextClassifiersApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=local_var_files,
-                                            response_type='LabelledTextSamples',
+                                            response_type='LabelledTextSampleList',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),

@@ -31,17 +31,16 @@ instance_name = 'test_intent_clsfr'
 create_details = feersum_nlu.CreateDetails(name=instance_name, desc="Test intent classifier.", load_from_store=False)
 
 # The training samples.
-labelled_text_samples = []
-labelled_text_samples.append(feersum_nlu.LabelledTextSamplesInner(text="I would like to fill in a claim form",
-                                                                  label="claim"))
-labelled_text_samples.append(feersum_nlu.LabelledTextSamplesInner(text="I would like to get a quote",
-                                                                  label="quote"))
+labelled_text_sample_list = []
+labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to fill in a claim form",
+                                                            label="claim"))
+labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to get a quote",
+                                                            label="quote"))
 
 # train_details = feersum_nlu.TrainDetails(immediate_mode=True)
 train_details = feersum_nlu.TrainDetails(immediate_mode=True, word_manifold=wm_instance_name)
 
 text_input = feersum_nlu.TextInput("How do I get a quote")
-
 
 print()
 
@@ -53,7 +52,7 @@ try:
     print()
 
     print("Add training samples to the intent classifier:")
-    api_response = api_instance.intent_classifier_add_training_samples(instance_name, labelled_text_samples)
+    api_response = api_instance.intent_classifier_add_training_samples(instance_name, labelled_text_sample_list)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -71,7 +70,7 @@ try:
     print()
 
     print("Add training samples to the intent classifier:")
-    api_response = api_instance.intent_classifier_add_training_samples(instance_name, labelled_text_samples)
+    api_response = api_instance.intent_classifier_add_training_samples(instance_name, labelled_text_sample_list)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -103,4 +102,3 @@ except ApiException as e:
     print("Exception when calling an intent classifier operation: %s\n" % e)
 except urllib3.exceptions.MaxRetryError:
     print("Connection MaxRetryError!")
-

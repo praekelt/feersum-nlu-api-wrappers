@@ -31,8 +31,8 @@ from .models.date_list import DateList
 from .models.instance_detail import InstanceDetail
 from .models.instance_detail_list import InstanceDetailList
 from .models.labeled_word_manifold import LabeledWordManifold
-from .models.labelled_text_samples import LabelledTextSamples
-from .models.labelled_text_samples_inner import LabelledTextSamplesInner
+from .models.labelled_text_sample import LabelledTextSample
+from .models.labelled_text_sample_list import LabelledTextSampleList
 from .models.scored_label import ScoredLabel
 from .models.scored_label_list import ScoredLabelList
 from .models.sentiment import Sentiment

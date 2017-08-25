@@ -1,4 +1,4 @@
-# LabelledTextSamplesInner
+# LabelledTextSample
 
 ## Properties
 Name | Type | Description | Notes

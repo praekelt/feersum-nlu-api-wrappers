@@ -27,17 +27,21 @@ security:
 
 tags:
 - name: text_classifiers
-  description: Interface to the text classifier model instances.
+  description: The interface to your Naive Bayes text classifier model instances. A Naive Bayes text classifier model is useful for things like classifying phrases into predefined action or intent categories and may be trained by providing a number of example labeled phrases.
 - name: word_manifolds
-  description: Interface to the word manifold model instances.
+  description: The interface to your word embedding model instances. Word embeddings are the language models used by the intent classifier, FAQ matcher and some entity extraction and language identifications models.
 - name: intent_classifiers
-  description: Interface to the intent classifier model instances.
+  description: The interface to your intent classifier model instances. An intent classifier is typically used to classify a user's utterance into a predifined action or intent category. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier.
 - name: faq_matchers
-  description: Interface to the FAQ matcher/classifier model instances.
+  description: Interface to your FAQ matcher/classifier model instances. An FAQ matcher is used to match a user's question to a list of predifined FAQs. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier.
+- name: lr2_language_recogniser
+  description: The interface to your LR2 language recogniser model instances. LR2 is a language recogniser based on word embedding language models.
+- name: lr3_language_recogniser
+  description: The interface to your LR3 language recogniser model instances. LR3 is a language recogniser based on n-gram text classification trained over the 11 official South African languages.
 - name: date_parsers
-  description: Interface to the date parser model instances.
+  description: The interface to your date parser model instances.
 - name: sentiment_detectors
-  description: Interface to the sentiment detector model instances.
+  description: Interface to your sentiment detector model instances.
 
 paths:
 ###################################
@@ -105,7 +109,7 @@ paths:
       description: Add training samples to named text classifier.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_samples"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -123,7 +127,7 @@ paths:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
         200:
-          $ref: "#/responses/labelled_text_samples"        
+          $ref: "#/responses/labelled_text_sample_list"        
         400:
           description: bad request
 
@@ -138,7 +142,7 @@ paths:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
         200:
-          $ref: "#/responses/labelled_text_samples"        
+          $ref: "#/responses/labelled_text_sample_list"        
         400:
           description: bad request
 ########
@@ -268,7 +272,7 @@ paths:
       description: Add training samples to named intent classifier.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_samples"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -286,7 +290,7 @@ paths:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
         200:
-          $ref: "#/responses/labelled_text_samples"        
+          $ref: "#/responses/labelled_text_sample_list"        
         400:
           description: bad request
 
@@ -301,7 +305,7 @@ paths:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
         200:
-          $ref: "#/responses/labelled_text_samples"        
+          $ref: "#/responses/labelled_text_sample_list"        
         400:
           description: bad request
 ########
@@ -406,11 +410,11 @@ paths:
       - faq_matchers
       summary: Add training samples.
       x-swagger-router-controller: rest_api.flask_server
-      operationId: faq_matchers_add_training_samples
+      operationId: faq_matcher_add_training_samples
       description: Add training samples to named faq matcher.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_samples"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -428,7 +432,7 @@ paths:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
         200:
-          $ref: "#/responses/labelled_text_samples"        
+          $ref: "#/responses/labelled_text_sample_list"        
         400:
           description: bad request
 
@@ -443,7 +447,7 @@ paths:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
         200:
-          $ref: "#/responses/labelled_text_samples"        
+          $ref: "#/responses/labelled_text_sample_list"        
         400:
           description: bad request
 ########
@@ -550,13 +554,13 @@ parameters:
     schema:
       $ref: "#/definitions/create_details"
           
-  body_param_labelled_text_samples:
+  body_param_labelled_text_sample_list:
     in: body
-    name: labelled_text_samples
+    name: labelled_text_sample_list
     description: List of labelled text samples.
     required: true
     schema:
-      $ref: "#/definitions/labelled_text_samples"
+      $ref: "#/definitions/labelled_text_sample_list"
     
   body_param_train_details:        
     in: body
@@ -594,10 +598,10 @@ responses:
     schema:
       $ref: "#/definitions/total_samples"
 
-  labelled_text_samples:
+  labelled_text_sample_list:
     description: The list of labeled text samples.
     schema:
-      $ref: "#/definitions/labelled_text_samples"
+      $ref: "#/definitions/labelled_text_sample_list"
       
   scored_labels:
     description: The list of scored and sorted labels.
@@ -644,6 +648,9 @@ definitions:
       training_cm:
         description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
+      cm_labels:
+        description: A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer.
+        type: object
         
   instance_detail_list:
     description: A list of models' instance details.
@@ -663,23 +670,29 @@ definitions:
       desc:
         type: string
       input_file:
+        description: Used for things like the input vector file when creating a word embedding.
         type: string
       load_from_store:
         type: boolean
         
-  labelled_text_samples:
+  labelled_text_sample:
+    description: Labelled text sample.
+    type: object
+    required:
+      - text
+      - label
+    properties:
+      text:
+        type: string
+      label:
+        type: string
+
+  labelled_text_sample_list:
     description: List of labelled text samples.
     type: array
     items:
-      required:
-        - text
-        - label
-      properties:
-        text:
-          type: string
-        label:
-          type: string
-          
+      $ref: "#/definitions/labelled_text_sample"
+
   labeled_word_manifold:  
     description: A labelled (e.g. lang_code labelled) word manifold instance.
     type: object
@@ -693,7 +706,7 @@ definitions:
         type: string
 
   train_details:
-    description: The parameters provided to the train operations.
+    description: The parameters provided to the train operation.
     type: object
     required:
       - immediate_mode
@@ -704,7 +717,7 @@ definitions:
         description: |
           The word manifold instance to use for training and later inference. 
           
-          Rather use word_manifold_list for supplying a language labelled list of word manifold instances to use in a multi-language system.
+          Rather use the word_manifold_list for supplying a language labelled list of word manifold instances to use in a multi-language system.
         type: string
       word_manifold_list:
         type: array

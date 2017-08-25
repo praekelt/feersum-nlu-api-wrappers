@@ -113,7 +113,7 @@ class CreateDetails(object):
     def input_file(self):
         """
         Gets the input_file of this CreateDetails.
-
+        Used for things like the input vector file when creating a word embedding.
 
         :return: The input_file of this CreateDetails.
         :rtype: str
@@ -124,7 +124,7 @@ class CreateDetails(object):
     def input_file(self, input_file):
         """
         Sets the input_file of this CreateDetails.
-
+        Used for things like the input vector file when creating a word embedding.
 
         :param input_file: The input_file of this CreateDetails.
         :type: str

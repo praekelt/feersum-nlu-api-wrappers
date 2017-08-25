@@ -1,12 +1,10 @@
-# CreateDetails
+# LabeledWordManifold
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | 
-**desc** | **str** |  | [optional] 
-**input_file** | **str** | Used for things like the input vector file when creating a word embedding. | [optional] 
-**load_from_store** | **bool** |  | 
+**label** | **str** |  | 
+**word_manifold** | **str** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
