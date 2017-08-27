@@ -56,7 +56,7 @@ class Configuration(object):
         Constructor
         """
         # Default Base url
-        self.host = "http://dev-bernardt.za.prk.hosting:8000/nlu/v2"
+        self.host = "http://127.0.0.1:8000/nlu/v2"
         # Default api client
         self.api_client = None
         # Temp file folder for downloading files

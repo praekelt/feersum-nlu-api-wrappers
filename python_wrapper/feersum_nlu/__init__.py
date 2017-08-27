@@ -28,11 +28,14 @@ from __future__ import absolute_import
 from .models.create_details import CreateDetails
 from .models.date import Date
 from .models.date_list import DateList
+from .models.entity import Entity
+from .models.entity_list import EntityList
 from .models.instance_detail import InstanceDetail
 from .models.instance_detail_list import InstanceDetailList
 from .models.labeled_word_manifold import LabeledWordManifold
 from .models.labelled_text_sample import LabelledTextSample
 from .models.labelled_text_sample_list import LabelledTextSampleList
+from .models.regex_ent_create_details import RegexEntCreateDetails
 from .models.scored_label import ScoredLabel
 from .models.scored_label_list import ScoredLabelList
 from .models.sentiment import Sentiment
@@ -44,6 +47,7 @@ from .models.train_details import TrainDetails
 from .apis.date_parsers_api import DateParsersApi
 from .apis.faq_matchers_api import FaqMatchersApi
 from .apis.intent_classifiers_api import IntentClassifiersApi
+from .apis.regex_entity_extractors_api import RegexEntityExtractorsApi
 from .apis.sentiment_detectors_api import SentimentDetectorsApi
 from .apis.text_classifiers_api import TextClassifiersApi
 from .apis.word_manifolds_api import WordManifoldsApi

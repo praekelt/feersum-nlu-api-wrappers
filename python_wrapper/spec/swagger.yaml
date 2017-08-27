@@ -5,7 +5,7 @@ info:
   version: 2.0.1
   title: Feersum NLU API
 
-host: dev-bernardt.za.prk.hosting:8000
+host: 127.0.0.1:8000
 basePath: /nlu/v2
 schemes:
 - http
@@ -29,7 +29,7 @@ tags:
 - name: text_classifiers
   description: The interface to your Naive Bayes text classifier model instances. A Naive Bayes text classifier model is useful for things like classifying phrases into predefined action or intent categories and may be trained by providing a number of example labeled phrases.
 - name: word_manifolds
-  description: The interface to your word embedding model instances. Word embeddings are the language models used by the intent classifier, FAQ matcher and some entity extraction and language identifications models.
+  description: The interface to your word embedding model instances. Word embeddings are the language models used by the intent classifier, FAQ matcher and some entity extraction and language identification models.
 - name: intent_classifiers
   description: The interface to your intent classifier model instances. An intent classifier is typically used to classify a user's utterance into a predifined action or intent category. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier.
 - name: faq_matchers
@@ -42,8 +42,11 @@ tags:
   description: The interface to your date parser model instances.
 - name: sentiment_detectors
   description: Interface to your sentiment detector model instances.
+- name: regex_entity_extractors
+  description: Interface to your regular expression entity extractor instances.
 
 paths:
+###################################
 ###################################
 ########
 ## text_classifiers root
@@ -187,6 +190,7 @@ paths:
 
 
 ###################################
+###################################
 ########
 ## word_manifolds root
 ########
@@ -207,6 +211,7 @@ paths:
           description: bad request
           
           
+###################################
 ###################################
 ########
 ## intent_classifiers root
@@ -350,6 +355,7 @@ paths:
 
 
 ###################################
+###################################
 ########
 ## FAQ matchers root
 ########
@@ -492,6 +498,7 @@ paths:
 
 
 ###################################
+###################################
 ########
 ## Extract a list of dates from the text input.
 ########
@@ -513,6 +520,7 @@ paths:
           description: bad request
 
 
+###################################
 ###################################
 ########
 ## Detect the sentiment of the text input.
@@ -536,6 +544,80 @@ paths:
        
           
 ###################################
+###################################
+########
+## regex_entity_extractors root
+########
+  /regex_entity_extractors:
+    post:
+      tags:
+      - regex_entity_extractors
+      summary: Create a regular expression entity extractor.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: regex_entity_extractor_create
+      description: Create a new regular expression entity extractor or load one from the store.
+      parameters:
+      - $ref: "#/parameters/body_param_regex_ent_create_details"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
+        400:
+          description: bad request
+          
+    get:
+      tags:
+      - regex_entity_extractors
+      summary: Get list of loaded regular expression entity extractors.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: regex_entity_extractor_get_details_all
+      description: Get the list of loaded regular expression entity extractors.
+      responses:
+        200:
+          $ref: "#/responses/instance_detail_list"
+        400:
+          description: bad request
+
+########
+## regex_entity_extractors Get details of named instance
+########
+  /regex_entity_extractors/{instance_name}:
+    get:
+      tags:
+      - regex_entity_extractors
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: regex_entity_extractor_get_details
+      description: Get the details of the named regular expression entity extractor instance.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
+        400:
+          description: bad request
+
+########
+## regex_entity_extractors retrieve
+########
+  /regex_entity_extractors/{instance_name}/retrieve:
+    post:
+      tags:
+      - regex_entity_extractors
+      summary: Extract information based on the regular expression.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: regex_entity_extractor_retrieve
+      description: Extract the entities matching the regular expression.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_text_input"
+      responses:
+        200:
+          $ref: "#/responses/entity_list"
+        400:
+          description: bad request
+
+
+###################################
 # Descriptions of common parameters
 ###################################
 parameters:
@@ -553,6 +635,14 @@ parameters:
     required: true
     schema:
       $ref: "#/definitions/create_details"
+          
+  body_param_regex_ent_create_details:
+    in: body
+    name: regex_ent_create_details
+    description: The details of the instance to create.
+    required: true
+    schema:
+      $ref: "#/definitions/regex_ent_create_details"
           
   body_param_labelled_text_sample_list:
     in: body
@@ -607,6 +697,11 @@ responses:
     description: The list of scored and sorted labels.
     schema:
       $ref: "#/definitions/scored_label_list"
+
+  entity_list:
+    description: The list of extracted entities.
+    schema:
+      $ref: "#/definitions/entity_list"
 
   date_list:                  
     description: The list of structured dates.
@@ -675,6 +770,23 @@ definitions:
       load_from_store:
         type: boolean
         
+  regex_ent_create_details:
+    description: The details of the model instance to create.
+    type: object
+    required:
+    - name
+    - load_from_store
+    properties:
+      name:
+        type: string
+      desc:
+        type: string
+      regex:
+        description: The regular expression.
+        type: string
+      load_from_store:
+        type: boolean
+
   labelled_text_sample:
     description: Labelled text sample.
     type: object
@@ -779,6 +891,16 @@ definitions:
     items:
       $ref: "#/definitions/date"
       
+  entity:
+    description: An entity.
+    type: object
+
+  entity_list:   
+    description: A list of entities.
+    type: array
+    items:
+      $ref: "#/definitions/entity"
+
   sentiment:   
     description: A sentiment value that may range from -1.0 (very UNhappy) to 1.0 (very happy).
     type: object

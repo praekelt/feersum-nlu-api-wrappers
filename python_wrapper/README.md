@@ -71,7 +71,7 @@ except ApiException as e:
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://dev-bernardt.za.prk.hosting:8000/nlu/v2*
+All URIs are relative to *http://127.0.0.1:8000/nlu/v2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -92,6 +92,10 @@ Class | Method | HTTP request | Description
 *IntentClassifiersApi* | [**intent_classifier_get_training_samples**](docs/IntentClassifiersApi.md#intent_classifier_get_training_samples) | **GET** /intent_classifiers/{instance_name}/training_samples | Get training samples.
 *IntentClassifiersApi* | [**intent_classifier_retrieve**](docs/IntentClassifiersApi.md#intent_classifier_retrieve) | **POST** /intent_classifiers/{instance_name}/retrieve | Classify intent.
 *IntentClassifiersApi* | [**intent_classifier_train**](docs/IntentClassifiersApi.md#intent_classifier_train) | **POST** /intent_classifiers/{instance_name}/train | Train the named intent classifier.
+*RegexEntityExtractorsApi* | [**regex_entity_extractor_create**](docs/RegexEntityExtractorsApi.md#regex_entity_extractor_create) | **POST** /regex_entity_extractors | Create a regular expression entity extractor.
+*RegexEntityExtractorsApi* | [**regex_entity_extractor_get_details**](docs/RegexEntityExtractorsApi.md#regex_entity_extractor_get_details) | **GET** /regex_entity_extractors/{instance_name} | Get details of named instance.
+*RegexEntityExtractorsApi* | [**regex_entity_extractor_get_details_all**](docs/RegexEntityExtractorsApi.md#regex_entity_extractor_get_details_all) | **GET** /regex_entity_extractors | Get list of loaded regular expression entity extractors.
+*RegexEntityExtractorsApi* | [**regex_entity_extractor_retrieve**](docs/RegexEntityExtractorsApi.md#regex_entity_extractor_retrieve) | **POST** /regex_entity_extractors/{instance_name}/retrieve | Extract information based on the regular expression.
 *SentimentDetectorsApi* | [**sentiment_detector_retrieve**](docs/SentimentDetectorsApi.md#sentiment_detector_retrieve) | **POST** /sentiment_detectors/{instance_name}/retrieve | Detect sentiment.
 *TextClassifiersApi* | [**text_classifier_add_training_samples**](docs/TextClassifiersApi.md#text_classifier_add_training_samples) | **POST** /text_classifiers/{instance_name}/training_samples | Add training samples.
 *TextClassifiersApi* | [**text_classifier_create**](docs/TextClassifiersApi.md#text_classifier_create) | **POST** /text_classifiers | Create a text classifier.
@@ -109,11 +113,14 @@ Class | Method | HTTP request | Description
  - [CreateDetails](docs/CreateDetails.md)
  - [Date](docs/Date.md)
  - [DateList](docs/DateList.md)
+ - [Entity](docs/Entity.md)
+ - [EntityList](docs/EntityList.md)
  - [InstanceDetail](docs/InstanceDetail.md)
  - [InstanceDetailList](docs/InstanceDetailList.md)
  - [LabeledWordManifold](docs/LabeledWordManifold.md)
  - [LabelledTextSample](docs/LabelledTextSample.md)
  - [LabelledTextSampleList](docs/LabelledTextSampleList.md)
+ - [RegexEntCreateDetails](docs/RegexEntCreateDetails.md)
  - [ScoredLabel](docs/ScoredLabel.md)
  - [ScoredLabelList](docs/ScoredLabelList.md)
  - [Sentiment](docs/Sentiment.md)
