@@ -28,20 +28,20 @@ api_instance = feersum_nlu.SimilarityEntityExtractorsApi()
 
 instance_name = 'test_similarity_extr'
 
-regex_ent_create_details = \
+similarity_ent_create_details = \
     feersum_nlu.SimilarityEntCreateDetails(name=instance_name, desc="Test similarity extractor.",
                                            similar_words=["red", "green", "blue"],
-                                           threshold=0.6,
-                                           word_manifold="test_wm,",
+                                           threshold=0.55,
+                                           word_manifold="test_wm",
                                            load_from_store=False)
 
-text_input = feersum_nlu.TextInput("My car has license number JMS 007 GP.")
+text_input = feersum_nlu.TextInput("I have an orange car.")
 
 print()
 
 try:
     print("Create the entity extractor:")
-    api_response = api_instance.similarity_entity_extractor_create(regex_ent_create_details)
+    api_response = api_instance.similarity_entity_extractor_create(similarity_ent_create_details)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
