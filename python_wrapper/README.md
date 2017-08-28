@@ -76,6 +76,10 @@ All URIs are relative to *http://127.0.0.1:8000/nlu/v2*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DateParsersApi* | [**date_parser_retrieve**](docs/DateParsersApi.md#date_parser_retrieve) | **POST** /date_parsers/{instance_name}/retrieve | Extract dates.
+*DucklingEntityExtractorsApi* | [**duckling_entity_extractor_create**](docs/DucklingEntityExtractorsApi.md#duckling_entity_extractor_create) | **POST** /duckling_entity_extractors | Create a duckling entity extractor.
+*DucklingEntityExtractorsApi* | [**duckling_entity_extractor_get_details**](docs/DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_details) | **GET** /duckling_entity_extractors/{instance_name} | Get details of named instance.
+*DucklingEntityExtractorsApi* | [**duckling_entity_extractor_get_details_all**](docs/DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_details_all) | **GET** /duckling_entity_extractors | Get list of loaded regular expression entity extractors.
+*DucklingEntityExtractorsApi* | [**duckling_entity_extractor_retrieve**](docs/DucklingEntityExtractorsApi.md#duckling_entity_extractor_retrieve) | **POST** /duckling_entity_extractors/{instance_name}/retrieve | Extract information based on the regular expression.
 *FaqMatchersApi* | [**faq_matcher_add_training_samples**](docs/FaqMatchersApi.md#faq_matcher_add_training_samples) | **POST** /faq_matchers/{instance_name}/training_samples | Add training samples.
 *FaqMatchersApi* | [**faq_matcher_create**](docs/FaqMatchersApi.md#faq_matcher_create) | **POST** /faq_matchers | Create an FAQ matcher.
 *FaqMatchersApi* | [**faq_matcher_del_training_samples**](docs/FaqMatchersApi.md#faq_matcher_del_training_samples) | **DELETE** /faq_matchers/{instance_name}/training_samples | Delete training samples.
@@ -97,6 +101,10 @@ Class | Method | HTTP request | Description
 *RegexEntityExtractorsApi* | [**regex_entity_extractor_get_details_all**](docs/RegexEntityExtractorsApi.md#regex_entity_extractor_get_details_all) | **GET** /regex_entity_extractors | Get list of loaded regular expression entity extractors.
 *RegexEntityExtractorsApi* | [**regex_entity_extractor_retrieve**](docs/RegexEntityExtractorsApi.md#regex_entity_extractor_retrieve) | **POST** /regex_entity_extractors/{instance_name}/retrieve | Extract information based on the regular expression.
 *SentimentDetectorsApi* | [**sentiment_detector_retrieve**](docs/SentimentDetectorsApi.md#sentiment_detector_retrieve) | **POST** /sentiment_detectors/{instance_name}/retrieve | Detect sentiment.
+*SimilarityEntityExtractorsApi* | [**similarity_entity_extractor_create**](docs/SimilarityEntityExtractorsApi.md#similarity_entity_extractor_create) | **POST** /similarity_entity_extractors | Create a word similarity entity extractor.
+*SimilarityEntityExtractorsApi* | [**similarity_entity_extractor_get_details**](docs/SimilarityEntityExtractorsApi.md#similarity_entity_extractor_get_details) | **GET** /similarity_entity_extractors/{instance_name} | Get details of named instance.
+*SimilarityEntityExtractorsApi* | [**similarity_entity_extractor_get_details_all**](docs/SimilarityEntityExtractorsApi.md#similarity_entity_extractor_get_details_all) | **GET** /similarity_entity_extractors | Get list of loaded similarity entity extractors.
+*SimilarityEntityExtractorsApi* | [**similarity_entity_extractor_retrieve**](docs/SimilarityEntityExtractorsApi.md#similarity_entity_extractor_retrieve) | **POST** /similarity_entity_extractors/{instance_name}/retrieve | Extract information based on word similarity.
 *TextClassifiersApi* | [**text_classifier_add_training_samples**](docs/TextClassifiersApi.md#text_classifier_add_training_samples) | **POST** /text_classifiers/{instance_name}/training_samples | Add training samples.
 *TextClassifiersApi* | [**text_classifier_create**](docs/TextClassifiersApi.md#text_classifier_create) | **POST** /text_classifiers | Create a text classifier.
 *TextClassifiersApi* | [**text_classifier_del_training_samples**](docs/TextClassifiersApi.md#text_classifier_del_training_samples) | **DELETE** /text_classifiers/{instance_name}/training_samples | Delete training samples.
@@ -113,6 +121,7 @@ Class | Method | HTTP request | Description
  - [CreateDetails](docs/CreateDetails.md)
  - [Date](docs/Date.md)
  - [DateList](docs/DateList.md)
+ - [DucklingEntCreateDetails](docs/DucklingEntCreateDetails.md)
  - [Entity](docs/Entity.md)
  - [EntityList](docs/EntityList.md)
  - [InstanceDetail](docs/InstanceDetail.md)
@@ -124,6 +133,7 @@ Class | Method | HTTP request | Description
  - [ScoredLabel](docs/ScoredLabel.md)
  - [ScoredLabelList](docs/ScoredLabelList.md)
  - [Sentiment](docs/Sentiment.md)
+ - [SimilarityEntCreateDetails](docs/SimilarityEntCreateDetails.md)
  - [TextInput](docs/TextInput.md)
  - [TotalSamples](docs/TotalSamples.md)
  - [TrainDetails](docs/TrainDetails.md)

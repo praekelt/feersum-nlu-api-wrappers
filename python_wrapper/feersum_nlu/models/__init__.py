@@ -28,6 +28,7 @@ from __future__ import absolute_import
 from .create_details import CreateDetails
 from .date import Date
 from .date_list import DateList
+from .duckling_ent_create_details import DucklingEntCreateDetails
 from .entity import Entity
 from .entity_list import EntityList
 from .instance_detail import InstanceDetail
@@ -39,6 +40,7 @@ from .regex_ent_create_details import RegexEntCreateDetails
 from .scored_label import ScoredLabel
 from .scored_label_list import ScoredLabelList
 from .sentiment import Sentiment
+from .similarity_ent_create_details import SimilarityEntCreateDetails
 from .text_input import TextInput
 from .total_samples import TotalSamples
 from .train_details import TrainDetails

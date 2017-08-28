@@ -44,6 +44,10 @@ tags:
   description: Interface to your sentiment detector model instances.
 - name: regex_entity_extractors
   description: Interface to your regular expression entity extractor instances.
+- name: duckling_entity_extractors
+  description: Interface to your duckling entity extractor instances.
+- name: similarity_entity_extractors
+  description: Interface to your word similarity entity extractor instances.
 
 paths:
 ###################################
@@ -618,6 +622,154 @@ paths:
 
 
 ###################################
+###################################
+########
+## duckling_entity_extractors root
+########
+  /duckling_entity_extractors:
+    post:
+      tags:
+      - duckling_entity_extractors
+      summary: Create a duckling entity extractor.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: duckling_entity_extractor_create
+      description: Create a new duckling entity extractor or load one from the store.
+      parameters:
+      - $ref: "#/parameters/body_param_duckling_ent_create_details"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
+        400:
+          description: bad request
+          
+    get:
+      tags:
+      - duckling_entity_extractors
+      summary: Get list of loaded regular expression entity extractors.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: duckling_entity_extractor_get_details_all
+      description: Get the list of loaded duckling entity extractors.
+      responses:
+        200:
+          $ref: "#/responses/instance_detail_list"
+        400:
+          description: bad request
+
+########
+## duckling_entity_extractors Get details of named instance
+########
+  /duckling_entity_extractors/{instance_name}:
+    get:
+      tags:
+      - duckling_entity_extractors
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: duckling_entity_extractor_get_details
+      description: Get the details of the named duckling entity extractor instance.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
+        400:
+          description: bad request
+
+########
+## duckling_entity_extractors retrieve
+########
+  /duckling_entity_extractors/{instance_name}/retrieve:
+    post:
+      tags:
+      - duckling_entity_extractors
+      summary: Extract information based on the regular expression.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: duckling_entity_extractor_retrieve
+      description: Extract the entities parsed by duckling.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_text_input"
+      responses:
+        200:
+          $ref: "#/responses/entity_list"
+        400:
+          description: bad request
+
+
+###################################
+###################################
+########
+## similarity_entity_extractors root
+########
+  /similarity_entity_extractors:
+    post:
+      tags:
+      - similarity_entity_extractors
+      summary: Create a word similarity entity extractor.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: similarity_entity_extractor_create
+      description: Create a new word similarity entity extractor or load one from the store.
+      parameters:
+      - $ref: "#/parameters/body_param_similarity_ent_create_details"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
+        400:
+          description: bad request
+          
+    get:
+      tags:
+      - similarity_entity_extractors
+      summary: Get list of loaded similarity entity extractors.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: similarity_entity_extractor_get_details_all
+      description: Get the list of loaded similarity entity extractors.
+      responses:
+        200:
+          $ref: "#/responses/instance_detail_list"
+        400:
+          description: bad request
+
+########
+## similarity_entity_extractors Get details of named instance
+########
+  /similarity_entity_extractors/{instance_name}:
+    get:
+      tags:
+      - similarity_entity_extractors
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: similarity_entity_extractor_get_details
+      description: Get the details of the named similarity entity extractor instance.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
+        400:
+          description: bad request
+
+########
+## similarity_entity_extractors retrieve
+########
+  /similarity_entity_extractors/{instance_name}/retrieve:
+    post:
+      tags:
+      - similarity_entity_extractors
+      summary: Extract information based on word similarity.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: similarity_entity_extractor_retrieve
+      description: Extract the word entities that are similar to the list of words.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_text_input"
+      responses:
+        200:
+          $ref: "#/responses/entity_list"
+        400:
+          description: bad request
+
+
+###################################
 # Descriptions of common parameters
 ###################################
 parameters:
@@ -644,6 +796,22 @@ parameters:
     schema:
       $ref: "#/definitions/regex_ent_create_details"
           
+  body_param_duckling_ent_create_details:
+    in: body
+    name: duckling_ent_create_details
+    description: The details of the instance to create.
+    required: true
+    schema:
+      $ref: "#/definitions/duckling_ent_create_details"
+
+  body_param_similarity_ent_create_details:
+    in: body
+    name: similarity_ent_create_details
+    description: The details of the instance to create.
+    required: true
+    schema:
+      $ref: "#/definitions/similarity_ent_create_details"
+
   body_param_labelled_text_sample_list:
     in: body
     name: labelled_text_sample_list
@@ -783,6 +951,42 @@ definitions:
         type: string
       regex:
         description: The regular expression.
+        type: string
+      load_from_store:
+        type: boolean
+
+  duckling_ent_create_details:
+    description: The details of the model instance to create.
+    type: object
+    required:
+    - name
+    - load_from_store
+    properties:
+      name:
+        type: string
+      desc:
+        type: string
+      load_from_store:
+        type: boolean
+
+  similarity_ent_create_details:
+    description: The details of the model instance to create.
+    type: object
+    required:
+    - name
+    - load_from_store
+    properties:
+      name:
+        type: string
+      desc:
+        type: string
+      similar_words:
+        type: array
+        items:
+          type: string
+      threshold:
+        type: number
+      word_manifold:
         type: string
       load_from_store:
         type: boolean
