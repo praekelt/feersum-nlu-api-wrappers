@@ -36,6 +36,8 @@ from .instance_detail_list import InstanceDetailList
 from .labeled_word_manifold import LabeledWordManifold
 from .labelled_text_sample import LabelledTextSample
 from .labelled_text_sample_list import LabelledTextSampleList
+from .new_word import NewWord
+from .new_word_list import NewWordList
 from .regex_ent_create_details import RegexEntCreateDetails
 from .scored_label import ScoredLabel
 from .scored_label_list import ScoredLabelList

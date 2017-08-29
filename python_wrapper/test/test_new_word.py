@@ -30,33 +30,23 @@ import unittest
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
-from feersum_nlu.apis.word_manifolds_api import WordManifoldsApi
+from feersum_nlu.models.new_word import NewWord
 
 
-class TestWordManifoldsApi(unittest.TestCase):
-    """ WordManifoldsApi unit test stubs """
+class TestNewWord(unittest.TestCase):
+    """ NewWord unit test stubs """
 
     def setUp(self):
-        self.api = feersum_nlu.apis.word_manifolds_api.WordManifoldsApi()
+        pass
 
     def tearDown(self):
         pass
 
-    def test_word_manifold_add_similar_words(self):
+    def testNewWord(self):
         """
-        Test case for word_manifold_add_similar_words
-
-        Add new words.
+        Test NewWord
         """
-        pass
-
-    def test_word_manifold_create(self):
-        """
-        Test case for word_manifold_create
-
-        Create a word manifold model.
-        """
-        pass
+        model = feersum_nlu.models.new_word.NewWord()
 
 
 if __name__ == '__main__':

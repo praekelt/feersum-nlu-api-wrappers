@@ -36,6 +36,8 @@ from .models.instance_detail_list import InstanceDetailList
 from .models.labeled_word_manifold import LabeledWordManifold
 from .models.labelled_text_sample import LabelledTextSample
 from .models.labelled_text_sample_list import LabelledTextSampleList
+from .models.new_word import NewWord
+from .models.new_word_list import NewWordList
 from .models.regex_ent_create_details import RegexEntCreateDetails
 from .models.scored_label import ScoredLabel
 from .models.scored_label_list import ScoredLabelList

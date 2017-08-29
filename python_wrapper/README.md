@@ -113,6 +113,7 @@ Class | Method | HTTP request | Description
 *TextClassifiersApi* | [**text_classifier_get_training_samples**](docs/TextClassifiersApi.md#text_classifier_get_training_samples) | **GET** /text_classifiers/{instance_name}/training_samples | Get training samples.
 *TextClassifiersApi* | [**text_classifier_retrieve**](docs/TextClassifiersApi.md#text_classifier_retrieve) | **POST** /text_classifiers/{instance_name}/retrieve | Classify text.
 *TextClassifiersApi* | [**text_classifier_train**](docs/TextClassifiersApi.md#text_classifier_train) | **POST** /text_classifiers/{instance_name}/train | Train the named text classifier.
+*WordManifoldsApi* | [**word_manifold_add_similar_words**](docs/WordManifoldsApi.md#word_manifold_add_similar_words) | **POST** /word_manifolds/{instance_name}/vocab | Add new words.
 *WordManifoldsApi* | [**word_manifold_create**](docs/WordManifoldsApi.md#word_manifold_create) | **POST** /word_manifolds | Create a word manifold model.
 
 
@@ -129,6 +130,8 @@ Class | Method | HTTP request | Description
  - [LabeledWordManifold](docs/LabeledWordManifold.md)
  - [LabelledTextSample](docs/LabelledTextSample.md)
  - [LabelledTextSampleList](docs/LabelledTextSampleList.md)
+ - [NewWord](docs/NewWord.md)
+ - [NewWordList](docs/NewWordList.md)
  - [RegexEntCreateDetails](docs/RegexEntCreateDetails.md)
  - [ScoredLabel](docs/ScoredLabel.md)
  - [ScoredLabelList](docs/ScoredLabelList.md)

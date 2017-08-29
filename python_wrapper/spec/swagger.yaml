@@ -29,7 +29,7 @@ tags:
 - name: text_classifiers
   description: The interface to your Naive Bayes text classifier model instances. A Naive Bayes text classifier model is useful for things like classifying phrases into predefined action or intent categories and may be trained by providing a number of example labeled phrases.
 - name: word_manifolds
-  description: The interface to your word embedding model instances. Word embeddings are the language models used by the intent classifier, FAQ matcher and some entity extraction and language identification models.
+  description: The interface to your word embedding model instances. Word embeddings are the language models used by the intent classifier, FAQ matcher as well as some entity extraction and language identification models.
 - name: intent_classifiers
   description: The interface to your intent classifier model instances. An intent classifier is typically used to classify a user's utterance into a predifined action or intent category. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier.
 - name: faq_matchers
@@ -208,6 +208,26 @@ paths:
       description: Create a new word manifold model using an input file or load a model from the store.
       parameters:
       - $ref: "#/parameters/body_param_create_details"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
+        400:
+          description: bad request
+          
+########
+## word_manifolds vocab
+########
+  /word_manifolds/{instance_name}/vocab:
+    post:
+      tags:
+      - word_manifolds
+      summary: Add new words. 
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: word_manifold_add_similar_words
+      description: Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold it could take a few seconds to complete.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_new_word_list"
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -780,6 +800,14 @@ parameters:
     required: true
     type: string
     
+  body_param_new_word_list:
+    in: body
+    name: new_word_list
+    description: List of new words.
+    required: true
+    schema:
+      $ref: "#/definitions/new_word_list"
+          
   body_param_create_details:
     in: body
     name: create_details
@@ -881,6 +909,10 @@ responses:
     schema:
       $ref: "#/definitions/sentiment"
 
+  new_word_list:                  
+    description: The list of structured dates.
+    schema:
+      $ref: "#/definitions/new_word_list"
 
 ####################################
 # Descriptions of common definitions
@@ -1095,6 +1127,24 @@ definitions:
     items:
       $ref: "#/definitions/date"
       
+  new_word:
+    description: A new word similar to an existing word.
+    type: object
+    required:
+    - new_word
+    - similar_to
+    properties:
+      new_word:
+        type: string
+      similar_to:
+        type: string
+
+  new_word_list:   
+    description: A list of new words.
+    type: array
+    items:
+      $ref: "#/definitions/new_word"
+
   entity:
     description: An entity.
     type: object

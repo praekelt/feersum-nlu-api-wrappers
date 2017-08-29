@@ -51,6 +51,125 @@ class WordManifoldsApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
+    def word_manifold_add_similar_words(self, instance_name, new_word_list, **kwargs):
+        """
+        Add new words.
+        Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold it could take a few seconds to complete.
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.word_manifold_add_similar_words(instance_name, new_word_list, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str instance_name: The name of the model instance. (required)
+        :param NewWordList new_word_list: List of new words. (required)
+        :return: InstanceDetail
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.word_manifold_add_similar_words_with_http_info(instance_name, new_word_list, **kwargs)
+        else:
+            (data) = self.word_manifold_add_similar_words_with_http_info(instance_name, new_word_list, **kwargs)
+            return data
+
+    def word_manifold_add_similar_words_with_http_info(self, instance_name, new_word_list, **kwargs):
+        """
+        Add new words.
+        Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold it could take a few seconds to complete.
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.word_manifold_add_similar_words_with_http_info(instance_name, new_word_list, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str instance_name: The name of the model instance. (required)
+        :param NewWordList new_word_list: List of new words. (required)
+        :return: InstanceDetail
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['instance_name', 'new_word_list']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method word_manifold_add_similar_words" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'instance_name' is set
+        if ('instance_name' not in params) or (params['instance_name'] is None):
+            raise ValueError("Missing the required parameter `instance_name` when calling `word_manifold_add_similar_words`")
+        # verify the required parameter 'new_word_list' is set
+        if ('new_word_list' not in params) or (params['new_word_list'] is None):
+            raise ValueError("Missing the required parameter `new_word_list` when calling `word_manifold_add_similar_words`")
+
+
+        collection_formats = {}
+
+        resource_path = '/word_manifolds/{instance_name}/vocab'.replace('{format}', 'json')
+        path_params = {}
+        if 'instance_name' in params:
+            path_params['instance_name'] = params['instance_name']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'new_word_list' in params:
+            body_params = params['new_word_list']
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['APIKeyHeader']
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=local_var_files,
+                                            response_type='InstanceDetail',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'),
+                                            _return_http_data_only=params.get('_return_http_data_only'),
+                                            _preload_content=params.get('_preload_content', True),
+                                            _request_timeout=params.get('_request_timeout'),
+                                            collection_formats=collection_formats)
+
     def word_manifold_create(self, create_details, **kwargs):
         """
         Create a word manifold model.
