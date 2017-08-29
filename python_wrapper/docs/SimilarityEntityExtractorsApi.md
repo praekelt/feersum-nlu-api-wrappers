@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **similarity_entity_extractor_create**
-> InstanceDetail similarity_entity_extractor_create(similarity_ent_create_details)
+> SimilarityInstanceDetail similarity_entity_extractor_create(similarity_ent_create_details)
 
 Create a word similarity entity extractor.
 
@@ -50,7 +50,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**SimilarityInstanceDetail**](SimilarityInstanceDetail.md)
 
 ### Authorization
 
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **similarity_entity_extractor_get_details**
-> InstanceDetail similarity_entity_extractor_get_details(instance_name)
+> SimilarityInstanceDetail similarity_entity_extractor_get_details(instance_name)
 
 Get details of named instance.
 
@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**SimilarityInstanceDetail**](SimilarityInstanceDetail.md)
 
 ### Authorization
 
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **similarity_entity_extractor_get_details_all**
-> InstanceDetailList similarity_entity_extractor_get_details_all()
+> SimilarityInstanceDetailList similarity_entity_extractor_get_details_all()
 
 Get list of loaded similarity entity extractors.
 
@@ -152,7 +152,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InstanceDetailList**](InstanceDetailList.md)
+[**SimilarityInstanceDetailList**](SimilarityInstanceDetailList.md)
 
 ### Authorization
 

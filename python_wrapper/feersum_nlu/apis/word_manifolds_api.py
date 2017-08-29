@@ -173,7 +173,7 @@ class WordManifoldsApi(object):
     def word_manifold_create(self, create_details, **kwargs):
         """
         Create a word manifold model.
-        Create a new word manifold model using an input file or load a model from the store.
+        Create a new word manifold model using an input file or load a model from the store. Warning! - These models are quite big and takes a few seconds to load/create.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -200,7 +200,7 @@ class WordManifoldsApi(object):
     def word_manifold_create_with_http_info(self, create_details, **kwargs):
         """
         Create a word manifold model.
-        Create a new word manifold model using an input file or load a model from the store.
+        Create a new word manifold model using an input file or load a model from the store. Warning! - These models are quite big and takes a few seconds to load/create.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function

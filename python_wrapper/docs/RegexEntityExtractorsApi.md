@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **regex_entity_extractor_create**
-> InstanceDetail regex_entity_extractor_create(regex_ent_create_details)
+> RegexInstanceDetail regex_entity_extractor_create(regex_ent_create_details)
 
 Create a regular expression entity extractor.
 
@@ -50,7 +50,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**RegexInstanceDetail**](RegexInstanceDetail.md)
 
 ### Authorization
 
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **regex_entity_extractor_get_details**
-> InstanceDetail regex_entity_extractor_get_details(instance_name)
+> RegexInstanceDetail regex_entity_extractor_get_details(instance_name)
 
 Get details of named instance.
 
@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**RegexInstanceDetail**](RegexInstanceDetail.md)
 
 ### Authorization
 
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **regex_entity_extractor_get_details_all**
-> InstanceDetailList regex_entity_extractor_get_details_all()
+> RegexInstanceDetailList regex_entity_extractor_get_details_all()
 
 Get list of loaded regular expression entity extractors.
 
@@ -152,7 +152,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InstanceDetailList**](InstanceDetailList.md)
+[**RegexInstanceDetailList**](RegexInstanceDetailList.md)
 
 ### Authorization
 

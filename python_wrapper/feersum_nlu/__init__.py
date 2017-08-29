@@ -29,6 +29,8 @@ from .models.create_details import CreateDetails
 from .models.date import Date
 from .models.date_list import DateList
 from .models.duckling_ent_create_details import DucklingEntCreateDetails
+from .models.duckling_instance_detail import DucklingInstanceDetail
+from .models.duckling_instance_detail_list import DucklingInstanceDetailList
 from .models.entity import Entity
 from .models.entity_list import EntityList
 from .models.instance_detail import InstanceDetail
@@ -39,10 +41,14 @@ from .models.labelled_text_sample_list import LabelledTextSampleList
 from .models.new_word import NewWord
 from .models.new_word_list import NewWordList
 from .models.regex_ent_create_details import RegexEntCreateDetails
+from .models.regex_instance_detail import RegexInstanceDetail
+from .models.regex_instance_detail_list import RegexInstanceDetailList
 from .models.scored_label import ScoredLabel
 from .models.scored_label_list import ScoredLabelList
 from .models.sentiment import Sentiment
 from .models.similarity_ent_create_details import SimilarityEntCreateDetails
+from .models.similarity_instance_detail import SimilarityInstanceDetail
+from .models.similarity_instance_detail_list import SimilarityInstanceDetailList
 from .models.text_input import TextInput
 from .models.total_samples import TotalSamples
 from .models.train_details import TrainDetails

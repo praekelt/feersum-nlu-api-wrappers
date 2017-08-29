@@ -205,7 +205,7 @@ paths:
       summary: Create a word manifold model.
       x-swagger-router-controller: rest_api.flask_server
       operationId: word_manifold_create
-      description: Create a new word manifold model using an input file or load a model from the store.
+      description: Create a new word manifold model using an input file or load a model from the store. Warning! - These models are quite big and takes a few seconds to load/create.
       parameters:
       - $ref: "#/parameters/body_param_create_details"
       responses:
@@ -584,7 +584,7 @@ paths:
       - $ref: "#/parameters/body_param_regex_ent_create_details"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/regex_instance_detail"
         400:
           description: bad request
           
@@ -597,7 +597,7 @@ paths:
       description: Get the list of loaded regular expression entity extractors.
       responses:
         200:
-          $ref: "#/responses/instance_detail_list"
+          $ref: "#/responses/regex_instance_detail_list"
         400:
           description: bad request
 
@@ -616,7 +616,7 @@ paths:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/regex_instance_detail"
         400:
           description: bad request
 
@@ -658,7 +658,7 @@ paths:
       - $ref: "#/parameters/body_param_duckling_ent_create_details"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/duckling_instance_detail"
         400:
           description: bad request
           
@@ -671,7 +671,7 @@ paths:
       description: Get the list of loaded duckling entity extractors.
       responses:
         200:
-          $ref: "#/responses/instance_detail_list"
+          $ref: "#/responses/duckling_instance_detail_list"
         400:
           description: bad request
 
@@ -690,7 +690,7 @@ paths:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/duckling_instance_detail"
         400:
           description: bad request
 
@@ -732,7 +732,7 @@ paths:
       - $ref: "#/parameters/body_param_similarity_ent_create_details"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/similarity_instance_detail"
         400:
           description: bad request
           
@@ -745,7 +745,7 @@ paths:
       description: Get the list of loaded similarity entity extractors.
       responses:
         200:
-          $ref: "#/responses/instance_detail_list"
+          $ref: "#/responses/similarity_instance_detail_list"
         400:
           description: bad request
 
@@ -764,7 +764,7 @@ paths:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/similarity_instance_detail"
         400:
           description: bad request
 
@@ -879,6 +879,36 @@ responses:
     schema:
       $ref: "#/definitions/instance_detail_list"
       
+  regex_instance_detail:
+    description: The model instance detail
+    schema:
+      $ref: "#/definitions/regex_instance_detail"
+      
+  regex_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      $ref: "#/definitions/regex_instance_detail_list"
+      
+  duckling_instance_detail:
+    description: The model instance detail
+    schema:
+      $ref: "#/definitions/duckling_instance_detail"
+      
+  duckling_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      $ref: "#/definitions/duckling_instance_detail_list"
+      
+  similarity_instance_detail:
+    description: The model instance detail
+    schema:
+      $ref: "#/definitions/similarity_instance_detail"
+      
+  similarity_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      $ref: "#/definitions/similarity_instance_detail_list"
+      
   total_samples:
     description: The total number of samples of this type in the model.
     schema:
@@ -932,7 +962,7 @@ definitions:
         description: The unique id of a specific version of the model instance.
         type: string
       desc:
-        description: A longer description of the model instances purpose in life.
+        description: A longer description of the model instance's purpose in life.
         type: string
       training_accuracy:
         description: The accuracy of the model as measured on the training set. 
@@ -952,6 +982,97 @@ definitions:
     type: array
     items:
       $ref: "#/definitions/instance_detail"
+
+
+  regex_instance_detail:
+    description: The model instance detail.
+    type: object
+    required:
+    - name
+    - id
+    - regex
+    properties:
+      name:
+        description: The name of the model instance.
+        type: string
+      id:
+        description: The unique id of a specific version of the model instance.
+        type: string
+      desc:
+        description: A longer description of the model instance's purpose in life.
+        type: string
+      regex:
+        description: The regular expression i.e. "(?P<license>([A-Z]{3}[ ]?[0-9]{3}[ ]?(GP|NW|MP|EC|L|NC|NW)))"
+        type: string
+
+        
+  regex_instance_detail_list:
+    description: A list of models' instance details.
+    type: array
+    items:
+      $ref: "#/definitions/regex_instance_detail"
+      
+      
+  duckling_instance_detail:
+    description: The model instance detail.
+    type: object
+    required:
+    - name
+    - id
+    properties:
+      name:
+        description: The name of the model instance.
+        type: string
+      id:
+        description: The unique id of a specific version of the model instance.
+        type: string
+      desc:
+        description: A longer description of the model instance's purpose in life.
+        type: string
+
+        
+  duckling_instance_detail_list:
+    description: A list of models' instance details.
+    type: array
+    items:
+      $ref: "#/definitions/duckling_instance_detail"
+
+  similarity_instance_detail:
+    description: The model instance detail.
+    type: object
+    required:
+    - name
+    - id
+    - similar_words
+    - threshold
+    - word_manifold
+    properties:
+      name:
+        description: The name of the model instance.
+        type: string
+      id:
+        description: The unique id of a specific version of the model instance.
+        type: string
+      desc:
+        description: A longer description of the model instance's purpose in life.
+        type: string
+      similar_words:
+        description: The list of similar words to test against.
+        type: array
+        items:
+          type: string
+      threshold:
+        type: number
+      word_manifold:
+        type: string
+
+        
+  similarity_instance_detail_list:
+    description: A list of models' instance details.
+    type: array
+    items:
+      $ref: "#/definitions/similarity_instance_detail"
+
 
   create_details:
     description: The details of the model instance to create.

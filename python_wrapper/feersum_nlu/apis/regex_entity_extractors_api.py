@@ -67,7 +67,7 @@ class RegexEntityExtractorsApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param RegexEntCreateDetails regex_ent_create_details: The details of the instance to create. (required)
-        :return: InstanceDetail
+        :return: RegexInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -94,7 +94,7 @@ class RegexEntityExtractorsApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param RegexEntCreateDetails regex_ent_create_details: The details of the instance to create. (required)
-        :return: InstanceDetail
+        :return: RegexInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -155,7 +155,7 @@ class RegexEntityExtractorsApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=local_var_files,
-                                            response_type='InstanceDetail',
+                                            response_type='RegexInstanceDetail',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
@@ -179,7 +179,7 @@ class RegexEntityExtractorsApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str instance_name: The name of the model instance. (required)
-        :return: InstanceDetail
+        :return: RegexInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -206,7 +206,7 @@ class RegexEntityExtractorsApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str instance_name: The name of the model instance. (required)
-        :return: InstanceDetail
+        :return: RegexInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -267,7 +267,7 @@ class RegexEntityExtractorsApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=local_var_files,
-                                            response_type='InstanceDetail',
+                                            response_type='RegexInstanceDetail',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
@@ -290,7 +290,7 @@ class RegexEntityExtractorsApi(object):
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :return: InstanceDetailList
+        :return: RegexInstanceDetailList
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -316,7 +316,7 @@ class RegexEntityExtractorsApi(object):
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :return: InstanceDetailList
+        :return: RegexInstanceDetailList
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -372,7 +372,7 @@ class RegexEntityExtractorsApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=local_var_files,
-                                            response_type='InstanceDetailList',
+                                            response_type='RegexInstanceDetailList',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),

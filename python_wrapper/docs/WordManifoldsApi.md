@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 Create a word manifold model.
 
-Create a new word manifold model using an input file or load a model from the store.
+Create a new word manifold model using an input file or load a model from the store. Warning! - These models are quite big and takes a few seconds to load/create.
 
 ### Example 
 ```python

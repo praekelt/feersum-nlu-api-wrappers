@@ -124,7 +124,7 @@ class InstanceDetail(object):
     def desc(self):
         """
         Gets the desc of this InstanceDetail.
-        A longer description of the model instances purpose in life.
+        A longer description of the model instance's purpose in life.
 
         :return: The desc of this InstanceDetail.
         :rtype: str
@@ -135,7 +135,7 @@ class InstanceDetail(object):
     def desc(self, desc):
         """
         Sets the desc of this InstanceDetail.
-        A longer description of the model instances purpose in life.
+        A longer description of the model instance's purpose in life.
 
         :param desc: The desc of this InstanceDetail.
         :type: str
