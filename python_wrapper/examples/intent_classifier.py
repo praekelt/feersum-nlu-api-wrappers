@@ -4,7 +4,7 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'FEERSUM'  # 'YOUR_API_KEY'
 
 feersum_nlu.configuration.host = "http://127.0.0.1:8000/nlu/v2"
 # feersum_nlu.configuration.host = "http://dev-bernardt.za.prk.hosting:8000/nlu/v2"
@@ -14,9 +14,9 @@ feersum_nlu.configuration.host = "http://127.0.0.1:8000/nlu/v2"
 print("Create the word manifold model:")
 wm_api_instance = feersum_nlu.WordManifoldsApi()
 wm_instance_name = 'test_wm'
-# wm_create_details = feersum_nlu.CreateDetails(name=wm_instance_name, desc="Test word manifold.",
-#                                               load_from_store=False, input_file="glove.6B.200d.txt")
-wm_create_details = feersum_nlu.CreateDetails(name=wm_instance_name, load_from_store=True)
+wm_create_details = feersum_nlu.CreateDetails(name=wm_instance_name, desc="Test word manifold.",
+                                              load_from_store=False, input_file="glove.6B.50d.trimmed.txt")
+# wm_create_details = feersum_nlu.CreateDetails(name=wm_instance_name, load_from_store=True)
 wm_api_response = wm_api_instance.word_manifold_create(wm_create_details)
 print(" type(wm_api_response)", type(wm_api_response))
 print(" wm_api_response", wm_api_response)
