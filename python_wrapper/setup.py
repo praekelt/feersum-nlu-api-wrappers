@@ -3,7 +3,7 @@
 """
     Feersum NLU API
 
-    This is an HTTP API for Feersum NLU
+    This is the HTTP API for Feersum NLU
 
     OpenAPI spec version: 2.0.1
     
@@ -48,7 +48,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     long_description="""\
-    This is an HTTP API for Feersum NLU
+    This is the HTTP API for Feersum NLU
     """
 )
 

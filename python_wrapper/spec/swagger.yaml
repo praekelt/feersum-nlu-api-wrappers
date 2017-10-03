@@ -1,7 +1,7 @@
 swagger: "2.0"
 
 info:
-  description: This is an HTTP API for Feersum NLU
+  description: This is the HTTP API for Feersum NLU
   version: 2.0.1
   title: Feersum NLU API
 
@@ -9,7 +9,7 @@ host: nlu.playground.feersum.io:8100
 basePath: /nlu/v2
 schemes:
 - http
-- https
+# - https
   
 consumes:
 - application/json
@@ -29,23 +29,23 @@ tags:
 - name: text_classifiers
   description: The interface to your Naive Bayes text classifier model instances. A Naive Bayes text classifier model is useful for things like classifying phrases into predefined action or intent categories and may be trained by providing a number of example labeled phrases. Only whole word text features are exposed at the moment.
 - name: word_manifolds
-  description: The interface to your word embedding model instances. Word embeddings are the language models used by the intent classifier, FAQ matcher as well as some entity extraction and language identification models.
+  description: The interface to your word embedding model instances. Word embeddings are the language models used by the intent classifier, FAQ matcher as well as some entity extraction and language identification models. Note that the service is pre-loaded with default word embeddings which should be sufficient for most use cases.
 - name: intent_classifiers
   description: The interface to your intent classifier model instances. An intent classifier is typically used to classify a user's utterance into a predefined action or intent category. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier.
 - name: faq_matchers
   description: Interface to your FAQ matcher/classifier model instances. An FAQ matcher is used to match a user's question to a list of predefined FAQs. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier.
 - name: lr4_language_recognisers
-  description: The interface to your LR4 language recogniser model instances. LR4 loads pre-trained language recogniser models trained over a set of languages. It is typically quite accurate.
+  description: The interface to your LR4 language recogniser model instances. LR4 loads pre-trained language recogniser models trained over a set of languages. An 'lid_za' model is available that was trained on all 11 South African languages.
 - name: date_parsers
-  description: The interface to your date parser model instances. Also see the duckling entity extractor which also supports durations and intervals.
+  description: The interface to your date parser model instances. Also see the duckling entity extractor which includes durations and intervals.
 - name: sentiment_detectors
   description: Interface to your sentiment detector model instances.
 - name: regex_entity_extractors
   description: Interface to your regular expression entity extractor instances.
 - name: duckling_entity_extractors
-  description: Interface to your duckling entity extractor instances.
+  description: Interface to your duckling entity extractor instances. Duckling is an open source component that supports the extraction of dates, durations and intervals. It does support things like distances, volumes, etc., but these are not exposed at the moment.
 - name: similarity_entity_extractors
-  description: Interface to your word similarity entity extractor instances.
+  description: Interface to your word similarity entity extractor instances. A word embedding is used to find similar words.
 
 paths:
 ###################################
@@ -221,7 +221,7 @@ paths:
       summary: Add new words. 
       x-swagger-router-controller: rest_api.flask_server
       operationId: word_manifold_add_similar_words
-      description: Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold it could take a few seconds to complete.
+      description: Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold to the store it could take a few seconds to complete.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
       - $ref: "#/parameters/body_param_new_word_list"

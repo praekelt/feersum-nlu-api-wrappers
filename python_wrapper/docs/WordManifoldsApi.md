@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 Add new words.
 
-Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold it could take a few seconds to complete.
+Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold to the store it could take a few seconds to complete.
 
 ### Example 
 ```python

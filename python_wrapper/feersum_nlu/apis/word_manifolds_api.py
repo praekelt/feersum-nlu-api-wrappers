@@ -3,7 +3,7 @@
 """
     Feersum NLU API
 
-    This is an HTTP API for Feersum NLU
+    This is the HTTP API for Feersum NLU
 
     OpenAPI spec version: 2.0.1
     
@@ -54,7 +54,7 @@ class WordManifoldsApi(object):
     def word_manifold_add_similar_words(self, instance_name, new_word_list, **kwargs):
         """
         Add new words.
-        Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold it could take a few seconds to complete.
+        Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold to the store it could take a few seconds to complete.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -82,7 +82,7 @@ class WordManifoldsApi(object):
     def word_manifold_add_similar_words_with_http_info(self, instance_name, new_word_list, **kwargs):
         """
         Add new words.
-        Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold it could take a few seconds to complete.
+        Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold to the store it could take a few seconds to complete.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
