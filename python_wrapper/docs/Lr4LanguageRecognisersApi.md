@@ -1,21 +1,21 @@
-# feersum_nlu.SimilarityEntityExtractorsApi
+# feersum_nlu.Lr4LanguageRecognisersApi
 
 All URIs are relative to *http://nlu.playground.feersum.io:8100/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**similarity_entity_extractor_create**](SimilarityEntityExtractorsApi.md#similarity_entity_extractor_create) | **POST** /similarity_entity_extractors | Create a word similarity entity extractor.
-[**similarity_entity_extractor_get_details**](SimilarityEntityExtractorsApi.md#similarity_entity_extractor_get_details) | **GET** /similarity_entity_extractors/{instance_name} | Get details of named instance.
-[**similarity_entity_extractor_get_details_all**](SimilarityEntityExtractorsApi.md#similarity_entity_extractor_get_details_all) | **GET** /similarity_entity_extractors | Get list of loaded similarity entity extractors.
-[**similarity_entity_extractor_retrieve**](SimilarityEntityExtractorsApi.md#similarity_entity_extractor_retrieve) | **POST** /similarity_entity_extractors/{instance_name}/retrieve | Extract information based on word similarity.
+[**lr4_language_recogniser_create**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_create) | **POST** /lr4_language_recognisers | Create a LR4 text language detector.
+[**lr4_language_recogniser_get_details**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_get_details) | **GET** /lr4_language_recognisers/{instance_name} | Get details of named instance.
+[**lr4_language_recogniser_get_details_all**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_get_details_all) | **GET** /lr4_language_recognisers | Get list of loaded LR4 text language detectors.
+[**lr4_language_recogniser_retrieve**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_retrieve) | **POST** /lr4_language_recognisers/{instance_name}/retrieve | Recognise the language the text is written in.
 
 
-# **similarity_entity_extractor_create**
-> SimilarityInstanceDetail similarity_entity_extractor_create(similarity_ent_create_details)
+# **lr4_language_recogniser_create**
+> Lr4InstanceDetail lr4_language_recogniser_create(lr4_create_details)
 
-Create a word similarity entity extractor.
+Create a LR4 text language detector.
 
-Create a new word similarity entity extractor or load one from the store.
+Create a new LR4 language detector from the pre-trained model name provided. 'lid_za' is currently the only pre-trained model that is available, but it was trained on all 11 languages and is pretty accurate.
 
 ### Example 
 ```python
@@ -31,26 +31,26 @@ feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.SimilarityEntityExtractorsApi()
-similarity_ent_create_details = feersum_nlu.SimilarityEntCreateDetails() # SimilarityEntCreateDetails | The details of the instance to create.
+api_instance = feersum_nlu.Lr4LanguageRecognisersApi()
+lr4_create_details = feersum_nlu.Lr4CreateDetails() # Lr4CreateDetails | The details of the instance to create.
 
 try: 
-    # Create a word similarity entity extractor.
-    api_response = api_instance.similarity_entity_extractor_create(similarity_ent_create_details)
+    # Create a LR4 text language detector.
+    api_response = api_instance.lr4_language_recogniser_create(lr4_create_details)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling SimilarityEntityExtractorsApi->similarity_entity_extractor_create: %s\n" % e)
+    print("Exception when calling Lr4LanguageRecognisersApi->lr4_language_recogniser_create: %s\n" % e)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **similarity_ent_create_details** | [**SimilarityEntCreateDetails**](SimilarityEntCreateDetails.md)| The details of the instance to create. | 
+ **lr4_create_details** | [**Lr4CreateDetails**](Lr4CreateDetails.md)| The details of the instance to create. | 
 
 ### Return type
 
-[**SimilarityInstanceDetail**](SimilarityInstanceDetail.md)
+[**Lr4InstanceDetail**](Lr4InstanceDetail.md)
 
 ### Authorization
 
@@ -63,12 +63,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **similarity_entity_extractor_get_details**
-> SimilarityInstanceDetail similarity_entity_extractor_get_details(instance_name)
+# **lr4_language_recogniser_get_details**
+> Lr4InstanceDetail lr4_language_recogniser_get_details(instance_name)
 
 Get details of named instance.
 
-Get the details of the named similarity entity extractor instance.
+Get the details of the named LR4 text language detector instance.
 
 ### Example 
 ```python
@@ -84,15 +84,15 @@ feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.SimilarityEntityExtractorsApi()
+api_instance = feersum_nlu.Lr4LanguageRecognisersApi()
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
 try: 
     # Get details of named instance.
-    api_response = api_instance.similarity_entity_extractor_get_details(instance_name)
+    api_response = api_instance.lr4_language_recogniser_get_details(instance_name)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling SimilarityEntityExtractorsApi->similarity_entity_extractor_get_details: %s\n" % e)
+    print("Exception when calling Lr4LanguageRecognisersApi->lr4_language_recogniser_get_details: %s\n" % e)
 ```
 
 ### Parameters
@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SimilarityInstanceDetail**](SimilarityInstanceDetail.md)
+[**Lr4InstanceDetail**](Lr4InstanceDetail.md)
 
 ### Authorization
 
@@ -116,12 +116,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **similarity_entity_extractor_get_details_all**
-> SimilarityInstanceDetailList similarity_entity_extractor_get_details_all()
+# **lr4_language_recogniser_get_details_all**
+> Lr4InstanceDetailList lr4_language_recogniser_get_details_all()
 
-Get list of loaded similarity entity extractors.
+Get list of loaded LR4 text language detectors.
 
-Get the list of loaded similarity entity extractors.
+Get list of loaded LR4 text language detectors.
 
 ### Example 
 ```python
@@ -137,14 +137,14 @@ feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.SimilarityEntityExtractorsApi()
+api_instance = feersum_nlu.Lr4LanguageRecognisersApi()
 
 try: 
-    # Get list of loaded similarity entity extractors.
-    api_response = api_instance.similarity_entity_extractor_get_details_all()
+    # Get list of loaded LR4 text language detectors.
+    api_response = api_instance.lr4_language_recogniser_get_details_all()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling SimilarityEntityExtractorsApi->similarity_entity_extractor_get_details_all: %s\n" % e)
+    print("Exception when calling Lr4LanguageRecognisersApi->lr4_language_recogniser_get_details_all: %s\n" % e)
 ```
 
 ### Parameters
@@ -152,7 +152,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SimilarityInstanceDetailList**](SimilarityInstanceDetailList.md)
+[**Lr4InstanceDetailList**](Lr4InstanceDetailList.md)
 
 ### Authorization
 
@@ -165,12 +165,12 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **similarity_entity_extractor_retrieve**
-> EntityList similarity_entity_extractor_retrieve(instance_name, text_input)
+# **lr4_language_recogniser_retrieve**
+> ScoredLabelList lr4_language_recogniser_retrieve(instance_name, text_input)
 
-Extract information based on word similarity.
+Recognise the language the text is written in.
 
-Extract the word entities that are similar to the list of words used to create this model instance.
+Recognise the language the text is written in.
 
 ### Example 
 ```python
@@ -186,16 +186,16 @@ feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.SimilarityEntityExtractorsApi()
+api_instance = feersum_nlu.Lr4LanguageRecognisersApi()
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 
 try: 
-    # Extract information based on word similarity.
-    api_response = api_instance.similarity_entity_extractor_retrieve(instance_name, text_input)
+    # Recognise the language the text is written in.
+    api_response = api_instance.lr4_language_recogniser_retrieve(instance_name, text_input)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling SimilarityEntityExtractorsApi->similarity_entity_extractor_retrieve: %s\n" % e)
+    print("Exception when calling Lr4LanguageRecognisersApi->lr4_language_recogniser_retrieve: %s\n" % e)
 ```
 
 ### Parameters
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EntityList**](EntityList.md)
+[**ScoredLabelList**](ScoredLabelList.md)
 
 ### Authorization
 

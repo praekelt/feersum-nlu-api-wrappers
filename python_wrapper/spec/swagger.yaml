@@ -5,7 +5,7 @@ info:
   version: 2.0.1
   title: Feersum NLU API
 
-host: 127.0.0.1:8000
+host: nlu.playground.feersum.io:8100
 basePath: /nlu/v2
 schemes:
 - http
@@ -27,19 +27,17 @@ security:
 
 tags:
 - name: text_classifiers
-  description: The interface to your Naive Bayes text classifier model instances. A Naive Bayes text classifier model is useful for things like classifying phrases into predefined action or intent categories and may be trained by providing a number of example labeled phrases.
+  description: The interface to your Naive Bayes text classifier model instances. A Naive Bayes text classifier model is useful for things like classifying phrases into predefined action or intent categories and may be trained by providing a number of example labeled phrases. Only whole word text features are exposed at the moment.
 - name: word_manifolds
   description: The interface to your word embedding model instances. Word embeddings are the language models used by the intent classifier, FAQ matcher as well as some entity extraction and language identification models.
 - name: intent_classifiers
-  description: The interface to your intent classifier model instances. An intent classifier is typically used to classify a user's utterance into a predifined action or intent category. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier.
+  description: The interface to your intent classifier model instances. An intent classifier is typically used to classify a user's utterance into a predefined action or intent category. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier.
 - name: faq_matchers
-  description: Interface to your FAQ matcher/classifier model instances. An FAQ matcher is used to match a user's question to a list of predifined FAQs. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier.
-- name: lr2_language_recogniser
-  description: The interface to your LR2 language recogniser model instances. LR2 is a language recogniser based on word embedding language models.
-- name: lr3_language_recogniser
-  description: The interface to your LR3 language recogniser model instances. LR3 is a language recogniser based on n-gram text classification trained over the 11 official South African languages.
+  description: Interface to your FAQ matcher/classifier model instances. An FAQ matcher is used to match a user's question to a list of predefined FAQs. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier.
+- name: lr4_language_recognisers
+  description: The interface to your LR4 language recogniser model instances. LR4 loads pre-trained language recogniser models trained over a set of languages. It is typically quite accurate.
 - name: date_parsers
-  description: The interface to your date parser model instances.
+  description: The interface to your date parser model instances. Also see the duckling entity extractor which also supports durations and intervals.
 - name: sentiment_detectors
   description: Interface to your sentiment detector model instances.
 - name: regex_entity_extractors
@@ -192,7 +190,6 @@ paths:
         400:
           description: bad request
 
-
 ###################################
 ###################################
 ########
@@ -205,7 +202,7 @@ paths:
       summary: Create a word manifold model.
       x-swagger-router-controller: rest_api.flask_server
       operationId: word_manifold_create
-      description: Create a new word manifold model using an input file or load a model from the store. Warning! - These models are quite big and takes a few seconds to load/create.
+      description: Create a new word manifold model using an input file or load a model from the store. Warning! - These models are quite big and each takes a few seconds to load/create.
       parameters:
       - $ref: "#/parameters/body_param_create_details"
       responses:
@@ -233,7 +230,6 @@ paths:
           $ref: "#/responses/instance_detail"
         400:
           description: bad request
-          
           
 ###################################
 ###################################
@@ -377,7 +373,6 @@ paths:
         400:
           description: bad request
 
-
 ###################################
 ###################################
 ########
@@ -480,6 +475,7 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"        
         400:
           description: bad request
+          
 ########
 ## faq_matchers train
 ########
@@ -520,7 +516,6 @@ paths:
         400:
           description: bad request
 
-
 ###################################
 ###################################
 ########
@@ -542,7 +537,6 @@ paths:
           $ref: "#/responses/date_list"
         400:
           description: bad request
-
 
 ###################################
 ###################################
@@ -566,7 +560,6 @@ paths:
         400:
           description: bad request
        
-          
 ###################################
 ###################################
 ########
@@ -639,7 +632,6 @@ paths:
           $ref: "#/responses/entity_list"
         400:
           description: bad request
-
 
 ###################################
 ###################################
@@ -714,7 +706,6 @@ paths:
         400:
           description: bad request
 
-
 ###################################
 ###################################
 ########
@@ -778,7 +769,7 @@ paths:
       summary: Extract information based on word similarity.
       x-swagger-router-controller: rest_api.flask_server
       operationId: similarity_entity_extractor_retrieve
-      description: Extract the word entities that are similar to the list of words.
+      description: Extract the word entities that are similar to the list of words used to create this model instance.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
       - $ref: "#/parameters/body_param_text_input"
@@ -788,6 +779,78 @@ paths:
         400:
           description: bad request
 
+###################################
+###################################
+########
+## lr4_language_recognisers root
+########
+  /lr4_language_recognisers:
+    post:
+      tags:
+      - lr4_language_recognisers
+      summary: Create a LR4 text language detector.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: lr4_language_recogniser_create
+      description: Create a new LR4 language detector from the pre-trained model name provided. 'lid_za' is currently the only pre-trained model that is available, but it was trained on all 11 languages and is pretty accurate.
+      parameters:
+      - $ref: "#/parameters/body_param_lr4_create_details"
+      responses:
+        200:
+          $ref: "#/responses/lr4_instance_detail"
+        400:
+          description: bad request
+          
+    get:
+      tags:
+      - lr4_language_recognisers
+      summary: Get list of loaded LR4 text language detectors.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: lr4_language_recogniser_get_details_all
+      description: Get list of loaded LR4 text language detectors.
+      responses:
+        200:
+          $ref: "#/responses/lr4_instance_detail_list"
+        400:
+          description: bad request
+
+########
+## lr4_language_recognisers Get details of named instance
+########
+  /lr4_language_recognisers/{instance_name}:
+    get:
+      tags:
+      - lr4_language_recognisers
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: lr4_language_recogniser_get_details
+      description: Get the details of the named LR4 text language detector instance.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      responses:
+        200:
+          $ref: "#/responses/lr4_instance_detail"
+        400:
+          description: bad request
+
+########
+## lr4_language_recognisers retrieve
+########
+  /lr4_language_recognisers/{instance_name}/retrieve:
+    post:
+      tags:
+      - lr4_language_recognisers
+      summary: Recognise the language the text is written in.
+      x-swagger-router-controller: rest_api.flask_server
+      operationId: lr4_language_recogniser_retrieve
+      description: Recognise the language the text is written in.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_text_input"
+      responses:
+        200:
+          $ref: "#/responses/scored_labels"
+        400:
+          description: bad request
 
 ###################################
 # Descriptions of common parameters
@@ -840,6 +903,14 @@ parameters:
     schema:
       $ref: "#/definitions/similarity_ent_create_details"
 
+  body_param_lr4_create_details:
+    in: body
+    name: lr4_create_details
+    description: The details of the instance to create.
+    required: true
+    schema:
+      $ref: "#/definitions/lr4_create_details"
+          
   body_param_labelled_text_sample_list:
     in: body
     name: labelled_text_sample_list
@@ -863,7 +934,6 @@ parameters:
     required: true
     schema:
       $ref: "#/definitions/text_input"
-
 
 ##################################
 # Descriptions of common responses
@@ -909,6 +979,16 @@ responses:
     schema:
       $ref: "#/definitions/similarity_instance_detail_list"
       
+  lr4_instance_detail:
+    description: The model instance detail
+    schema:
+      $ref: "#/definitions/lr4_instance_detail"
+      
+  lr4_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      $ref: "#/definitions/lr4_instance_detail_list"
+
   total_samples:
     description: The total number of samples of this type in the model.
     schema:
@@ -983,7 +1063,6 @@ definitions:
     items:
       $ref: "#/definitions/instance_detail"
 
-
   regex_instance_detail:
     description: The model instance detail.
     type: object
@@ -1005,13 +1084,11 @@ definitions:
         description: The regular expression i.e. "(?P<license>([A-Z]{3}[ ]?[0-9]{3}[ ]?(GP|NW|MP|EC|L|NC|NW)))"
         type: string
 
-        
   regex_instance_detail_list:
     description: A list of models' instance details.
     type: array
     items:
       $ref: "#/definitions/regex_instance_detail"
-      
       
   duckling_instance_detail:
     description: The model instance detail.
@@ -1030,7 +1107,6 @@ definitions:
         description: A longer description of the model instance's purpose in life.
         type: string
 
-        
   duckling_instance_detail_list:
     description: A list of models' instance details.
     type: array
@@ -1066,13 +1142,38 @@ definitions:
       word_manifold:
         type: string
 
-        
   similarity_instance_detail_list:
     description: A list of models' instance details.
     type: array
     items:
       $ref: "#/definitions/similarity_instance_detail"
 
+  lr4_instance_detail:
+    description: The model instance detail.
+    type: object
+    required:
+    - name
+    - id
+    - model_file
+    properties:
+      name:
+        description: The name of the model instance.
+        type: string
+      id:
+        description: The unique id of a specific version of the model instance.
+        type: string
+      desc:
+        description: A longer description of the model instance's purpose in life.
+        type: string
+      model_file:
+        description: The pre-trained model this instance was created from.
+        type: string
+
+  lr4_instance_detail_list:
+    description: A list of models' instance details.
+    type: array
+    items:
+      $ref: "#/definitions/lr4_instance_detail"
 
   create_details:
     description: The details of the model instance to create.
@@ -1143,6 +1244,21 @@ definitions:
         type: string
       load_from_store:
         type: boolean
+
+  lr4_create_details:
+    description: The details of the model instance to create.
+    type: object
+    required:
+    - name
+    - model_file
+    properties:
+      name:
+        type: string
+      desc:
+        type: string
+      model_file:
+        description: The pre-trained model to load.
+        type: string
 
   labelled_text_sample:
     description: Labelled text sample.
@@ -1269,6 +1385,7 @@ definitions:
   entity:
     description: An entity.
     type: object
+
 
   entity_list:   
     description: A list of entities.

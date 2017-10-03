@@ -38,6 +38,9 @@ from .instance_detail_list import InstanceDetailList
 from .labeled_word_manifold import LabeledWordManifold
 from .labelled_text_sample import LabelledTextSample
 from .labelled_text_sample_list import LabelledTextSampleList
+from .lr4_create_details import Lr4CreateDetails
+from .lr4_instance_detail import Lr4InstanceDetail
+from .lr4_instance_detail_list import Lr4InstanceDetailList
 from .new_word import NewWord
 from .new_word_list import NewWordList
 from .regex_ent_create_details import RegexEntCreateDetails

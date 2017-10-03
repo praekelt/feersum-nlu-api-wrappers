@@ -4,10 +4,10 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'FEERSUM'  # 'YOUR_API_KEY'
+feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'FEERSUM-NLU-f9b-bdc0-455e-a3b1-7c761'  # 'YOUR_API_KEY'
 
-feersum_nlu.configuration.host = "http://127.0.0.1:8000/nlu/v2"
-# feersum_nlu.configuration.host = "http://dev-bernardt.za.prk.hosting:8000/nlu/v2"
+# feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
+feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8000/nlu/v2"
 
 
 # === Word manifold to use ===
@@ -31,7 +31,7 @@ instance_name = 'test_similarity_extr'
 similarity_ent_create_details = \
     feersum_nlu.SimilarityEntCreateDetails(name=instance_name, desc="Test similarity extractor.",
                                            similar_words=["red", "green", "blue"],
-                                           threshold=0.4,
+                                           threshold=0.65,
                                            word_manifold="test_wm",
                                            load_from_store=False)
 

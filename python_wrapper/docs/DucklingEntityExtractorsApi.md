@@ -1,6 +1,6 @@
 # feersum_nlu.DucklingEntityExtractorsApi
 
-All URIs are relative to *http://127.0.0.1:8000/nlu/v2*
+All URIs are relative to *http://nlu.playground.feersum.io:8100/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

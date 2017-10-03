@@ -71,7 +71,7 @@ except ApiException as e:
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://127.0.0.1:8000/nlu/v2*
+All URIs are relative to *http://nlu.playground.feersum.io:8100/nlu/v2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -96,6 +96,10 @@ Class | Method | HTTP request | Description
 *IntentClassifiersApi* | [**intent_classifier_get_training_samples**](docs/IntentClassifiersApi.md#intent_classifier_get_training_samples) | **GET** /intent_classifiers/{instance_name}/training_samples | Get training samples.
 *IntentClassifiersApi* | [**intent_classifier_retrieve**](docs/IntentClassifiersApi.md#intent_classifier_retrieve) | **POST** /intent_classifiers/{instance_name}/retrieve | Classify intent.
 *IntentClassifiersApi* | [**intent_classifier_train**](docs/IntentClassifiersApi.md#intent_classifier_train) | **POST** /intent_classifiers/{instance_name}/train | Train the named intent classifier.
+*Lr4LanguageRecognisersApi* | [**lr4_language_recogniser_create**](docs/Lr4LanguageRecognisersApi.md#lr4_language_recogniser_create) | **POST** /lr4_language_recognisers | Create a LR4 text language detector.
+*Lr4LanguageRecognisersApi* | [**lr4_language_recogniser_get_details**](docs/Lr4LanguageRecognisersApi.md#lr4_language_recogniser_get_details) | **GET** /lr4_language_recognisers/{instance_name} | Get details of named instance.
+*Lr4LanguageRecognisersApi* | [**lr4_language_recogniser_get_details_all**](docs/Lr4LanguageRecognisersApi.md#lr4_language_recogniser_get_details_all) | **GET** /lr4_language_recognisers | Get list of loaded LR4 text language detectors.
+*Lr4LanguageRecognisersApi* | [**lr4_language_recogniser_retrieve**](docs/Lr4LanguageRecognisersApi.md#lr4_language_recogniser_retrieve) | **POST** /lr4_language_recognisers/{instance_name}/retrieve | Recognise the language the text is written in.
 *RegexEntityExtractorsApi* | [**regex_entity_extractor_create**](docs/RegexEntityExtractorsApi.md#regex_entity_extractor_create) | **POST** /regex_entity_extractors | Create a regular expression entity extractor.
 *RegexEntityExtractorsApi* | [**regex_entity_extractor_get_details**](docs/RegexEntityExtractorsApi.md#regex_entity_extractor_get_details) | **GET** /regex_entity_extractors/{instance_name} | Get details of named instance.
 *RegexEntityExtractorsApi* | [**regex_entity_extractor_get_details_all**](docs/RegexEntityExtractorsApi.md#regex_entity_extractor_get_details_all) | **GET** /regex_entity_extractors | Get list of loaded regular expression entity extractors.
@@ -132,6 +136,9 @@ Class | Method | HTTP request | Description
  - [LabeledWordManifold](docs/LabeledWordManifold.md)
  - [LabelledTextSample](docs/LabelledTextSample.md)
  - [LabelledTextSampleList](docs/LabelledTextSampleList.md)
+ - [Lr4CreateDetails](docs/Lr4CreateDetails.md)
+ - [Lr4InstanceDetail](docs/Lr4InstanceDetail.md)
+ - [Lr4InstanceDetailList](docs/Lr4InstanceDetailList.md)
  - [NewWord](docs/NewWord.md)
  - [NewWordList](docs/NewWordList.md)
  - [RegexEntCreateDetails](docs/RegexEntCreateDetails.md)

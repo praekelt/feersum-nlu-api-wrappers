@@ -1,6 +1,6 @@
 # feersum_nlu.WordManifoldsApi
 
-All URIs are relative to *http://127.0.0.1:8000/nlu/v2*
+All URIs are relative to *http://nlu.playground.feersum.io:8100/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 Create a word manifold model.
 
-Create a new word manifold model using an input file or load a model from the store. Warning! - These models are quite big and takes a few seconds to load/create.
+Create a new word manifold model using an input file or load a model from the store. Warning! - These models are quite big and each takes a few seconds to load/create.
 
 ### Example 
 ```python

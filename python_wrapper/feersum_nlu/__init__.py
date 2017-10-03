@@ -38,6 +38,9 @@ from .models.instance_detail_list import InstanceDetailList
 from .models.labeled_word_manifold import LabeledWordManifold
 from .models.labelled_text_sample import LabelledTextSample
 from .models.labelled_text_sample_list import LabelledTextSampleList
+from .models.lr4_create_details import Lr4CreateDetails
+from .models.lr4_instance_detail import Lr4InstanceDetail
+from .models.lr4_instance_detail_list import Lr4InstanceDetailList
 from .models.new_word import NewWord
 from .models.new_word_list import NewWordList
 from .models.regex_ent_create_details import RegexEntCreateDetails
@@ -58,6 +61,7 @@ from .apis.date_parsers_api import DateParsersApi
 from .apis.duckling_entity_extractors_api import DucklingEntityExtractorsApi
 from .apis.faq_matchers_api import FaqMatchersApi
 from .apis.intent_classifiers_api import IntentClassifiersApi
+from .apis.lr4_language_recognisers_api import Lr4LanguageRecognisersApi
 from .apis.regex_entity_extractors_api import RegexEntityExtractorsApi
 from .apis.sentiment_detectors_api import SentimentDetectorsApi
 from .apis.similarity_entity_extractors_api import SimilarityEntityExtractorsApi
