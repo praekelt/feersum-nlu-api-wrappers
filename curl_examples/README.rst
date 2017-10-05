@@ -4,20 +4,20 @@ Feersum NLU HTTP API Curl Examples
 
 .. code-block:: sh
 
-SERVICE="http://nlu.playground.feersum.io:8100"
-AUTH_TOKEN="FEERSUM-NLU-f9b-bdc0-455e-a3b1-7c761"
-# One can get the below and more curl commands from 'trying out' commands from the swagger generated UI
-# at `<http://nlu.playground.feersum.io:8100/nlu/v2/ui/>`_
+    SERVICE="http://nlu.playground.feersum.io:8100"
+    AUTH_TOKEN="FEERSUM-NLU-f9b-bdc0-455e-a3b1-7c761"
+    # One can get the below and more curl commands from 'trying out' commands from the swagger generated UI
+    # at `<http://nlu.playground.feersum.io:8100/nlu/v2/ui/>`_
 
 
 .. code-block:: sh
 
-# Detect some sentiment:
-curl -XPOST 'http://'"$SERVICE"'/nlu/v2/sentiment_detectors/generic/retrieve' \
-	-H 'Content-Type: application/json' \
-	-H 'Accept: application/json' \
-	-H 'AUTH_TOKEN: FEERSUM-NLU-f9b-bdc0-455e-a3b1-7c761' \
-	-d '{"text": "I am happy."}' 
+    # Detect some sentiment:
+    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/sentiment_detectors/generic/retrieve' \
+    	-H 'Content-Type: application/json' \
+    	-H 'Accept: application/json' \
+    	-H 'AUTH_TOKEN: FEERSUM-NLU-f9b-bdc0-455e-a3b1-7c761' \
+    	-d '{"text": "I am happy."}' 
 
 
 .. code-block:: sh
