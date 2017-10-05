@@ -9,6 +9,7 @@ feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
 feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8100/nlu/v2"
 
+
 api_instance = feersum_nlu.DateParsersApi()
 
 model_instance_name = 'generic'
