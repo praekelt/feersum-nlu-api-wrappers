@@ -34,7 +34,7 @@ Installing
 
 Please close this repo and have a look at the examples.
 
-A pypi package will soon be available for the Python wrapper.
+A pypi (pip install) package will soon be available for the Python wrapper.
 
 
 
