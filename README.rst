@@ -3,7 +3,7 @@ FeersumNLU API Wrappers
 
 (Note: This repo is currently being updated with more examples)
 
-This git repo host Python and other language wrappers for the FeersumNLU RESTful HTTP API. There are also some curl examples of direct HTTP access. These wrappers are for version 2.0.1 of the HTTP API. 
+This git repo hosts Python and other language wrappers for the FeersumNLU RESTful HTTP API. There are also some curl examples of direct HTTP access. These wrappers are for version 2.0.1 of the HTTP API.
 
 The API wrappers are auto-generated from a Swagger spec of the API available at `<http://nlu.playground.feersum.io:8100/nlu/v2/swagger.json>`_
 
