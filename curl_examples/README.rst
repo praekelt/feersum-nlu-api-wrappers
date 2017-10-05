@@ -5,7 +5,7 @@ Feersum NLU HTTP API Curl Examples
 .. code-block:: sh
 
     SERVICE="nlu.playground.feersum.io:8100"
-    AUTH_TOKEN="FEERSUM-NLU-f9b-bdc0-455e-a3b1-7c761"
+    AUTH_TOKEN="YOUR_API_KEY"
     #
     # One can get the below and more curl commands from 'trying out' commands from the swagger generated UI
     # at `<http://nlu.playground.feersum.io:8100/nlu/v2/ui/>`_
