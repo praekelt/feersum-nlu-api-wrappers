@@ -1,6 +1,8 @@
 FeersumNLU API Wrappers
 ***********************
 
+(Note: This repo is currently being updated with more examples)
+
 This git repo host Python and other language wrappers for the FeersumNLU RESTful HTTP API. There are also some curl examples of direct HTTP access. These wrappers are for version 2.0.1 of the HTTP API.
 
 Overview
