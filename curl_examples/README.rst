@@ -5,9 +5,10 @@ The below commands can be run from a bash or similar terminal
 
 .. code-block:: sh
 
+    # === Setup some environment variables ===
     SERVICE="nlu.playground.feersum.io:8100"
     AUTH_TOKEN="YOUR_API_KEY"
-    #
+    
     # Note: One can get the below and more curl commands from 'trying out' commands from the 
     # swagger generated UI at <http://nlu.playground.feersum.io:8100/nlu/v2/ui/>
 
@@ -49,3 +50,41 @@ The below commands can be run from a bash or similar terminal
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
     	-d '{"text": "Watter taal praat ek?"}' 
 
+
+
+.. code-block:: sh
+
+    # === Do text language identification ===
+    # Create the model:
+    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/text_classifiers' \
+        -H 'Content-Type: application/json' \
+        -H 'Accept: application/json' \
+        -H 'AUTH_TOKEN: MomConnect-c4-438c-90da-86d4033eac4f' \
+        -d '{"desc": "Example text classifier", "load_from_store": false, "name": "txt_clsfr_ex_1"}' 
+
+
+    # Provide training data:
+    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
+        -H 'Content-Type: application/json' \
+        -H 'Accept: application/json' \
+        -H 'AUTH_TOKEN: MomConnect-c4-438c-90da-86d4033eac4f' \
+        -d '[{"label": "greeting", "text": "hello"}]' 
+
+    # Get the training data:
+    curl -XGET 'http://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
+        -H 'Accept: application/json' \
+        -H 'AUTH_TOKEN: MomConnect-c4-438c-90da-86d4033eac4f' \
+
+    # Train the model:
+    curl -XPOST 'http://nlu.playground.feersum.io:8100/nlu/v2/text_classifiers/txt_clsfr_ex_1/train' \
+        -H 'Content-Type: application/json' \
+        -H 'Accept: application/json' \
+        -H 'AUTH_TOKEN: MomConnect-c4-438c-90da-86d4033eac4f' \
+        -d '{"immediate_mode": true}' 
+
+    # Make predictions using the model:
+    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/retrieve'
+        -H 'Content-Type: application/json'
+        -H 'Accept: application/json'
+        -H 'AUTH_TOKEN: MomConnect-c4-438c-90da-86d4033eac4f'
+        -d '{"text": "hello"}' 
