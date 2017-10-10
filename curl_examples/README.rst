@@ -72,7 +72,7 @@ The below commands can be run from a bash or similar terminal
     # Get the training data:
     curl -XGET 'http://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
         -H 'Accept: application/json' \
-    	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
+    	-H 'AUTH_TOKEN: '"$AUTH_TOKEN"
 
     # Train the model:
     curl -XPOST 'http://nlu.playground.feersum.io:8100/nlu/v2/text_classifiers/txt_clsfr_ex_1/train' \
