@@ -62,7 +62,6 @@ The below commands can be run from a bash or similar terminal
         -H 'AUTH_TOKEN: MomConnect-c4-438c-90da-86d4033eac4f' \
         -d '{"desc": "Example text classifier", "load_from_store": false, "name": "txt_clsfr_ex_1"}' 
 
-
     # Provide training data:
     curl -XPOST 'http://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
         -H 'Content-Type: application/json' \
