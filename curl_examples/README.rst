@@ -54,7 +54,7 @@ The below commands can be run from a bash or similar terminal
 
 .. code-block:: sh
 
-    # === Do text language identification ===
+    # === Do text classification ===
     # Create the model:
     curl -XPOST 'http://'"$SERVICE"'/nlu/v2/text_classifiers' \
         -H 'Content-Type: application/json' \
