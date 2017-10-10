@@ -9,19 +9,19 @@ feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
 feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8100/nlu/v2"
 
-
-# === Word manifold to use ===
-print("Create the word manifold model:")
-wm_api_instance = feersum_nlu.WordManifoldsApi()
-wm_instance_name = 'test_wm'
-wm_create_details = feersum_nlu.CreateDetails(name=wm_instance_name, desc="Test word manifold.",
-                                              load_from_store=False, input_file="glove.6B.50d.trimmed.txt")
-# wm_create_details = feersum_nlu.CreateDetails(name=wm_instance_name, load_from_store=True)
-wm_api_response = wm_api_instance.word_manifold_create(wm_create_details)
-print(" type(wm_api_response)", type(wm_api_response))
-print(" wm_api_response", wm_api_response)
-print()
-# === ===
+# wm_instance_name = 'feers_wm_eng'
+# We'll use the built-in manifolds, not the ones defined below!
+# # === Word manifold to use ===
+# print("Create the word manifold model:")
+# wm_api_instance = feersum_nlu.WordManifoldsApi()
+# wm_create_details = feersum_nlu.CreateDetails(name=wm_instance_name, desc="Test word manifold.",
+#                                               load_from_store=False, input_file="glove.6B.50d.trimmed.txt")
+# # wm_create_details = feersum_nlu.CreateDetails(name=wm_instance_name, load_from_store=True)
+# wm_api_response = wm_api_instance.word_manifold_create(wm_create_details)
+# print(" type(wm_api_response)", type(wm_api_response))
+# print(" wm_api_response", wm_api_response)
+# print()
+# # === ===
 
 
 api_instance = feersum_nlu.FaqMatchersApi()
@@ -33,14 +33,31 @@ create_details = feersum_nlu.CreateDetails(name=instance_name, desc="Test FAQ ma
 # The training samples.
 labelled_text_sample_list = []
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How do I claim?",
-                                                            label="claim"))
+                                                                label="claim"))
+labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Hoe moet ek eis?",
+                                                                label="claim"))
+
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How do I get a quote?",
-                                                            label="quote"))
+                                                                label="quote"))
+labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Hoe kan ek 'n prys kry?",
+                                                                label="quote"))
 
+# Use default English manifold.
 # train_details = feersum_nlu.TrainDetails(immediate_mode=True)
-train_details = feersum_nlu.TrainDetails(immediate_mode=True, word_manifold=wm_instance_name)
+# OR
+# Use specified single manifold; the language defaults to English.
+# train_details = feersum_nlu.TrainDetails(immediate_mode=True, word_manifold=wm_instance_name)
+# OR
+# Use specified list of manifolds for multiple languaages.
+word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
+                      feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
+                      feersum_nlu.LabeledWordManifold('xho', 'feers_wm_xho'),
+                      feersum_nlu.LabeledWordManifold('nso', 'feers_wm_nso')]
 
-text_input = feersum_nlu.TextInput("How do I put in claim?")
+train_details = feersum_nlu.TrainDetails(immediate_mode=True, word_manifold_list=word_manifold_list)
+# train_details = feersum_nlu.TrainDetails(immediate_mode=True, word_manifold_list=word_manifold_list)
+
+text_input = feersum_nlu.TextInput("Waar kan ek 'n prys kry?")
 
 print()
 

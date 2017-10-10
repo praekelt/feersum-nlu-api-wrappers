@@ -18,9 +18,9 @@ create_details = feersum_nlu.CreateDetails(name=instance_name, desc="Test text c
 # The training samples.
 labelled_text_sample_list = []
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to fill in a claim form",
-                                                            label="claim"))
+                                                                label="claim"))
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to get a quote",
-                                                            label="quote"))
+                                                                label="quote"))
 
 train_details = feersum_nlu.TrainDetails(immediate_mode=True)
 

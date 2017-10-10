@@ -13,7 +13,6 @@ api_instance = feersum_nlu.RegexEntityExtractorsApi()
 
 instance_name = 'test_regex_extr'
 
-
 # Try both the year, make and model  &  the make, model, year regular expressions below.
 # ToDo: Jeep Grand Cherokee !!!
 vehicle_make_reg_ex = "(Suzuki|Honda|Ford|VW|Jeep|Toyota|Fiat|Porsche|Nissan|Chev|Chevrolet|Datsun|Mitsubishi|Subaru)"

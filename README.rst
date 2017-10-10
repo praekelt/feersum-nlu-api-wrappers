@@ -32,7 +32,33 @@ information extraction, entity extraction, and text-based language identificatio
 Installing
 **********
 
-Please close this repo and have a look at the examples.
+Please clone this repo and have a look at the examples.
+
+To get started with the Python wrappers install Python 3.5 (or 3.6) and then:
+
+.. code-block:: sh
+
+    $ cd python_wrapper/
+    $ pip install virtualenv
+    $ sudo /usr/bin/easy_install virtualenv
+    $ virtualenv -p /usr/local/bin/python3.5 .pyenv
+    $ source .pyenv/bin/activate
+    $ pip install pip-tools
+    $ pip install appdirs
+
+The to install the required dependencies run:
+
+.. code-block:: sh
+
+    $ make deps
+
+To start executing example notebooks run:
+
+.. code-block:: sh
+
+    $ jupyter notebook
+
+Or alternatively open the python_wrappers folder as a project in an IDE like PyCharm and run the example scripts in the examples folder.
 
 A pypi (pip install) package will soon be available for the Python wrapper.
 

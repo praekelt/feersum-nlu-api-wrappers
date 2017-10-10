@@ -19,7 +19,7 @@ new_word_list_b = [{'new_word': 'chatbots', 'similar_to': 'robots'},
                    {'new_word': 'shaki', 'similar_to': 'browb'}]  # NewWordList | List of new words.
 
 create_details = feersum_nlu.CreateDetails(name=instance_name, desc="Test word manifold.",
-                                           load_from_store=True, input_file="glove.6B.50d.trimmed.txt")
+                                           load_from_store=False, input_file="glove.6B.50d.trimmed.txt")
 # create_details = feersum_nlu.CreateDetails(name=instance_name, load_from_store=True)
 
 print()
