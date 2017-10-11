@@ -170,4 +170,4 @@ The below commands can be run from a bash or similar terminal
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
-        -d '{"text": "hello"}' 
+        -d '{"text": "what is you name?"}' 

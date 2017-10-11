@@ -9,6 +9,11 @@ feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
 feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8100/nlu/v2"
 
+api_instance = feersum_nlu.FaqMatchersApi()
+
+instance_name = 'test_faq_mtchr'
+
+
 # wm_instance_name = 'feers_wm_eng'
 # We'll use the built-in manifolds, not the ones defined below!
 # # === Word manifold to use ===
@@ -23,10 +28,6 @@ feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8100/nlu/v2"
 # print()
 # # === ===
 
-
-api_instance = feersum_nlu.FaqMatchersApi()
-
-instance_name = 'test_faq_mtchr'
 
 create_details = feersum_nlu.CreateDetails(name=instance_name, desc="Test FAQ matcher.", load_from_store=False)
 
