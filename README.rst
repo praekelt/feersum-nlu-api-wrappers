@@ -62,6 +62,7 @@ To install the dependencies required to run the module examples from the python_
 
 .. code-block:: sh
 
+    $ make requirements
     $ make deps
 
 
@@ -89,7 +90,7 @@ Or alternatively run the example python scripts in the examples folder e.g.:
 
 .. code-block:: sh
 
-    $ python examples/faq_matcher.py
+    $ PYTHONPATH=. python examples/faq_matcher.py
 
 Remember to set your API token in the example scripts and notebooks.
 
