@@ -55,8 +55,8 @@ If you don't have virtualenv installed first run:
     $ sudo /usr/bin/easy_install virtualenv
 
 
-Install Option 1 Using make
-===========================
+Install Option 1 - Using make
+=============================
 
 To install the dependencies required to run the module examples from the python_wrapper folder run:
 
@@ -65,8 +65,8 @@ To install the dependencies required to run the module examples from the python_
     $ make deps
 
 
-Install Option 2 Using setuptools
-=================================
+Install Option 2 - Using setuptools
+===================================
 
 Alternatively to install the feersum_nlu wrapper module into your Python environment run:
 
