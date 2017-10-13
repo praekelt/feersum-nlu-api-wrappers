@@ -32,37 +32,66 @@ information extraction, entity extraction, and text-based language identificatio
 Installing
 **********
 
-Please clone this repo and have a look at the examples.
+Please clone this repo and have a look at the examples. It is recommended that you create a Python virtual environment and then follow one of the install options below to run the examples. The examples were tested with Python 3.5 and 3.6.
+
+Creating a Python Virtual Environment
+=====================================
 
 To get started with the Python wrappers install Python 3.5 (or 3.6) and then:
 
 .. code-block:: sh
 
     $ cd python_wrapper/
-    $ pip install virtualenv
-    $ sudo /usr/bin/easy_install virtualenv
     $ virtualenv -p /usr/local/bin/python3.5 .pyenv
     $ source .pyenv/bin/activate
     $ pip install pip-tools
     $ pip install appdirs
 
-Then to install the required dependencies run:
+If you don't have virtualenv installed first run:
+
+.. code-block:: sh
+
+    $ pip install virtualenv
+    $ sudo /usr/bin/easy_install virtualenv
+
+
+Install Option 1 Using make
+===========================
+
+To install the dependencies required to run the module examples from the python_wrapper folder run:
 
 .. code-block:: sh
 
     $ make deps
 
+
+Install Option 2 Using setuptools
+=================================
+
+Alternatively to install the feersum_nlu wrapper module into your Python environment run:
+
+.. code-block:: sh
+
+    $ python setup.py install
+
+The benefit of installing the feersum_nlu module into you Python environment is that you can more easily use it from outside of the python_wrapper folder and in your own projects.
+
+
+Running the Examples
+====================
 To start executing example notebooks run:
 
 .. code-block:: sh
 
     $ jupyter notebook
 
-Or alternatively open the python_wrappers folder as a project in an IDE like PyCharm and run the example scripts in the examples folder.
+Or alternatively run the example python scripts in the examples folder e.g.:
 
-A pypi (pip install) package will soon be available for the Python wrapper.
+.. code-block:: sh
 
+    $ python examples/faq_matcher.py
 
+Remember to set your API token in the example scripts and notebooks.
 
 The Playground Instance
 ***********************

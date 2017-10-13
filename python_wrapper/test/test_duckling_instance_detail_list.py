@@ -3,7 +3,7 @@
 """
     Feersum NLU API
 
-    This is the HTTP API for Feersum NLU
+    This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
 
     OpenAPI spec version: 2.0.1
     
