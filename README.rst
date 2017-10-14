@@ -11,7 +11,7 @@ and are auto-generated from a Swagger spec of the API available at
 Overview
 ********
 
-FeersumNLU provides Natural Language solutions for chat-based interactions, where messages from
+FeersumNLU provides Natural Language Understanding solutions for chat-based interactions, where messages from
 the end-user may be long or very short. Our product is also designed to be language-agnostic, which
 means it can be scaled to work with any language, even in markets where large bodies of labelled
 data do not exist. Our Natural Language Understanding models are developed locally, and can be
