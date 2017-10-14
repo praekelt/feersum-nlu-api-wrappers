@@ -12,7 +12,7 @@ Overview
 ********
 
 FeersumNLU provides Natural Language solutions for chat-based interactions, where messages from
-the end-user are especially short. Our product is also designed to be language-agnostic, which
+the end-user may be long or very short. Our product is also designed to be language-agnostic, which
 means it can be scaled to work with any language, even in markets where large bodies of labelled
 data do not exist. Our Natural Language Understanding models are developed locally, and can be
 modified to provide solutions for specialised industries like finance or health.
@@ -37,7 +37,7 @@ Please clone this repo and have a look at the examples. It is recommended that y
 Creating a Python Virtual Environment
 =====================================
 
-To get started with the Python wrappers install Python 3.5 (or 3.6) and then:
+To get started with the Python wrappers install Python 3.5 (or 3.6) and pip. Then do:
 
 .. code-block:: sh
 
@@ -93,6 +93,7 @@ Or alternatively run the example python scripts in the examples folder e.g.:
     $ PYTHONPATH=. python examples/faq_matcher.py
 
 Remember to set your API token in the example scripts and notebooks.
+
 
 The Playground Instance
 ***********************
