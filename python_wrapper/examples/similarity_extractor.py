@@ -6,8 +6,8 @@ from feersum_nlu.rest import ApiException
 # Configure API key authorization: APIKeyHeader
 feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
-feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
-# feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8100/nlu/v2"
+# feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
+feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8100/nlu/v2"
 
 # We'll use the built-in manifolds, not the ones defined below!
 # # === Word manifold to use ===
@@ -32,7 +32,7 @@ similarity_ent_create_details = \
     feersum_nlu.SimilarityEntCreateDetails(name=instance_name, desc="Test similarity extractor.",
                                            similar_words=["red", "green", "blue"],
                                            threshold=0.5,
-                                           word_manifold="feers_wm_eng",
+                                           word_manifold="feers_wm_eng",  # This is one of the built-in word embeddings.
                                            load_from_store=False)
 
 text_input = feersum_nlu.TextInput("I have an orange car.")
