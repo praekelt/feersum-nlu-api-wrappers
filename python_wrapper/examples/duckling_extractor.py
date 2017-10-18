@@ -6,8 +6,8 @@ from feersum_nlu.rest import ApiException
 # Configure API key authorization: APIKeyHeader
 feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
-# feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
-feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8100/nlu/v2"
+feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
+# feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8100/nlu/v2"
 
 api_instance = feersum_nlu.DucklingEntityExtractorsApi()
 
@@ -17,7 +17,7 @@ duckling_ent_create_details = \
     feersum_nlu.DucklingEntCreateDetails(name=instance_name, desc="Test duckling extractor.",
                                          load_from_store=False)
 
-text_input = feersum_nlu.TextInput("The day after tomorrow at 11:00 in the evening.")
+text_input = feersum_nlu.TextInput("I was 3 weeks pregnant one month ago.")
 
 print()
 

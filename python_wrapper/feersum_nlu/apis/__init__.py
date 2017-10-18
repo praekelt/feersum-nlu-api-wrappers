@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 # import apis into api package
+from .dashboard_api import DashboardApi
 from .date_parsers_api import DateParsersApi
 from .duckling_entity_extractors_api import DucklingEntityExtractorsApi
 from .faq_matchers_api import FaqMatchersApi

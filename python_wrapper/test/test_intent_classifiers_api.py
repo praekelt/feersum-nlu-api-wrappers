@@ -58,6 +58,14 @@ class TestIntentClassifiersApi(unittest.TestCase):
         """
         pass
 
+    def test_intent_classifier_curate(self):
+        """
+        Test case for intent_classifier_curate
+
+        Endpoint to aid in the curation of a model instance.
+        """
+        pass
+
     def test_intent_classifier_del_training_samples(self):
         """
         Test case for intent_classifier_del_training_samples
@@ -79,6 +87,14 @@ class TestIntentClassifiersApi(unittest.TestCase):
         Test case for intent_classifier_get_details_all
 
         Get list of loaded intent classifiers.
+        """
+        pass
+
+    def test_intent_classifier_get_labels(self):
+        """
+        Test case for intent_classifier_get_labels
+
+        Get list of possible labels.
         """
         pass
 

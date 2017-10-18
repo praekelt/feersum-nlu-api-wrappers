@@ -6,8 +6,8 @@ from feersum_nlu.rest import ApiException
 # Configure API key authorization: APIKeyHeader
 feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
-# feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
-feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8100/nlu/v2"
+feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
+# feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8100/nlu/v2"
 
 api_instance = feersum_nlu.FaqMatchersApi()
 
@@ -63,7 +63,6 @@ word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
                       feersum_nlu.LabeledWordManifold('tso', 'feers_wm_tso')]
 
 train_details = feersum_nlu.TrainDetails(immediate_mode=True, word_manifold_list=word_manifold_list)
-# train_details = feersum_nlu.TrainDetails(immediate_mode=True, word_manifold_list=word_manifold_list)
 
 text_input = feersum_nlu.TextInput("Waar kan ek 'n prys kry?")
 
@@ -114,6 +113,22 @@ try:
 
     print("Get the details of specific named loaded FAQ matcher:")
     api_response = api_instance.faq_matcher_get_details(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be available
+    # after training.
+    print("Get the labels of named loaded FAQ matcher:")
+    api_response = api_instance.faq_matcher_get_labels(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Get some curate details of specific named loaded FAQ matcher:")
+    # Use the same labels as returned in the confusion matrix.
+    label_pair = feersum_nlu.LabelPair(matrix_name='train', true_label='0', predicted_label='0')
+    api_response = api_instance.faq_matcher_curate(instance_name, label_pair)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()

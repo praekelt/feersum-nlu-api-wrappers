@@ -6,9 +6,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**faq_matcher_add_training_samples**](FaqMatchersApi.md#faq_matcher_add_training_samples) | **POST** /faq_matchers/{instance_name}/training_samples | Add training samples.
 [**faq_matcher_create**](FaqMatchersApi.md#faq_matcher_create) | **POST** /faq_matchers | Create an FAQ matcher.
+[**faq_matcher_curate**](FaqMatchersApi.md#faq_matcher_curate) | **POST** /faq_matchers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
 [**faq_matcher_del_training_samples**](FaqMatchersApi.md#faq_matcher_del_training_samples) | **DELETE** /faq_matchers/{instance_name}/training_samples | Delete training samples.
 [**faq_matcher_get_details**](FaqMatchersApi.md#faq_matcher_get_details) | **GET** /faq_matchers/{instance_name} | Get details of named instance.
 [**faq_matcher_get_details_all**](FaqMatchersApi.md#faq_matcher_get_details_all) | **GET** /faq_matchers | Get list of loaded FAQ matchers.
+[**faq_matcher_get_labels**](FaqMatchersApi.md#faq_matcher_get_labels) | **GET** /faq_matchers/{instance_name}/get_labels | Get list of possible labels.
 [**faq_matcher_get_training_samples**](FaqMatchersApi.md#faq_matcher_get_training_samples) | **GET** /faq_matchers/{instance_name}/training_samples | Get training samples.
 [**faq_matcher_retrieve**](FaqMatchersApi.md#faq_matcher_retrieve) | **POST** /faq_matchers/{instance_name}/retrieve | Match retrieve and FAQ.
 [**faq_matcher_train**](FaqMatchersApi.md#faq_matcher_train) | **POST** /faq_matchers/{instance_name}/train | Train the named FAQ matcher.
@@ -110,6 +112,61 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**InstanceDetail**](InstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **faq_matcher_curate**
+> LabelledTextSampleList faq_matcher_curate(instance_name, label_pair)
+
+Endpoint to aid in the curation of a model instance.
+
+Access the list of samples behind a cell of the confusion matrix of the training or testing samples.
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.FaqMatchersApi()
+instance_name = 'instance_name_example' # str | The name of the model instance.
+label_pair = feersum_nlu.LabelPair() # LabelPair | The true label, predicted label and matrix (train/test) to use.
+
+try: 
+    # Endpoint to aid in the curation of a model instance.
+    api_response = api_instance.faq_matcher_curate(instance_name, label_pair)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling FaqMatchersApi->faq_matcher_curate: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **label_pair** | [**LabelPair**](LabelPair.md)| The true label, predicted label and matrix (train/test) to use. | 
+
+### Return type
+
+[**LabelledTextSampleList**](LabelledTextSampleList.md)
 
 ### Authorization
 
@@ -265,6 +322,59 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**InstanceDetailList**](InstanceDetailList.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **faq_matcher_get_labels**
+> LabelList faq_matcher_get_labels(instance_name)
+
+Get list of possible labels.
+
+Returns the classifier's list of possible class labels.
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.FaqMatchersApi()
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try: 
+    # Get list of possible labels.
+    api_response = api_instance.faq_matcher_get_labels(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling FaqMatchersApi->faq_matcher_get_labels: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+
+### Return type
+
+[**LabelList**](LabelList.md)
 
 ### Authorization
 

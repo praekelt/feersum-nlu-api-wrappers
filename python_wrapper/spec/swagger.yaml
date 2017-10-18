@@ -1,1403 +1,1826 @@
+---
 swagger: "2.0"
-
 info:
-  description: This is the HTTP API for Feersum NLU
-  version: 2.0.1
-  title: Feersum NLU API
-
-host: nlu.playground.feersum.io:8100
-basePath: /nlu/v2
+  description: "This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers\
+    \ for examples of how to use the API."
+  version: "2.0.1"
+  title: "Feersum NLU API"
+host: "nlu.playground.feersum.io:8100"
+basePath: "/nlu/v2"
+tags:
+- name: "dashboard"
+  description: "A service endpoint to get your list of loaded model instances, the\
+    \ total API hits for each, API version, etc. This end-point my also be used to\
+    \ test if your service is available."
+- name: "text_classifiers"
+  description: "The interface to your Naive Bayes text classifier model instances.\
+    \ A Naive Bayes text classifier model is useful for things like classifying phrases\
+    \ into predefined action or intent categories and may be trained by providing\
+    \ a number of example labeled phrases. Only whole word text features are exposed\
+    \ at the moment. To use a model of this type, first create one, provide training\
+    \ samples and train it up. Inference/predictions may then be made using the retrieve\
+    \ endpoint."
+- name: "word_manifolds"
+  description: "The interface to your word embedding model instances. Word embeddings\
+    \ are the language models used by the intent classifier, FAQ matcher as well as\
+    \ some entity extraction and language identification models. Note that the service\
+    \ is pre-loaded with default word embeddings which should be sufficient for most\
+    \ use cases."
+- name: "intent_classifiers"
+  description: "The interface to your intent classifier model instances. An intent\
+    \ classifier is typically used to classify a user's utterance into a predefined\
+    \ action or intent category. Because it makes use of a word embedding language\
+    \ model and also matches text based on word similarity it would typically perform\
+    \ better than the Naive Bayes text classifier. To use a model of this type, first\
+    \ create one, provide training samples and train it up. Inference/predictions\
+    \ may then be made using the retrieve endpoint."
+- name: "faq_matchers"
+  description: "Interface to your FAQ matcher/classifier model instances. An FAQ matcher\
+    \ is used to match a user's question to a list of predefined FAQs. Because it\
+    \ makes use of a word embedding language model and also matches text based on\
+    \ word similarity it would typically perform better than the Naive Bayes text\
+    \ classifier. To use a model of this type, first create one, provide training\
+    \ samples and train it up. Inference/predictions may then be made using the retrieve\
+    \ endpoint."
+- name: "lr4_language_recognisers"
+  description: "The interface to your LR4 language recogniser model instances. LR4\
+    \ loads pre-trained language recogniser models trained over a set of languages.\
+    \ An 'lid_za' model is available that was trained on all 11 South African languages."
+- name: "date_parsers"
+  description: "The interface to your date parser model instances. Also see the duckling\
+    \ entity extractor which includes durations and intervals."
+- name: "sentiment_detectors"
+  description: "Interface to your sentiment detector model instances."
+- name: "regex_entity_extractors"
+  description: "Interface to your regular expression entity extractor instances."
+- name: "duckling_entity_extractors"
+  description: "Interface to your duckling entity extractor instances. Duckling is\
+    \ an open source component that supports the extraction of dates, durations and\
+    \ intervals. It does support things like distances, volumes, etc., but these are\
+    \ not exposed at the moment."
+- name: "similarity_entity_extractors"
+  description: "Interface to your word similarity entity extractor instances. A word\
+    \ embedding is used to find similar words."
 schemes:
-- http
-# - https
-  
+- "http"
 consumes:
-- application/json
+- "application/json"
 produces:
-- application/json
-  
-# Global security (applies to all operations):
-securityDefinitions:
-   APIKeyHeader:
-     type: apiKey
-     in: header
-     name: AUTH_TOKEN
+- "application/json"
 security:
 - APIKeyHeader: []
-
-tags:
-- name: text_classifiers
-  description: The interface to your Naive Bayes text classifier model instances. A Naive Bayes text classifier model is useful for things like classifying phrases into predefined action or intent categories and may be trained by providing a number of example labeled phrases. Only whole word text features are exposed at the moment.
-- name: word_manifolds
-  description: The interface to your word embedding model instances. Word embeddings are the language models used by the intent classifier, FAQ matcher as well as some entity extraction and language identification models. Note that the service is pre-loaded with default word embeddings which should be sufficient for most use cases.
-- name: intent_classifiers
-  description: The interface to your intent classifier model instances. An intent classifier is typically used to classify a user's utterance into a predefined action or intent category. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier.
-- name: faq_matchers
-  description: Interface to your FAQ matcher/classifier model instances. An FAQ matcher is used to match a user's question to a list of predefined FAQs. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier.
-- name: lr4_language_recognisers
-  description: The interface to your LR4 language recogniser model instances. LR4 loads pre-trained language recogniser models trained over a set of languages. An 'lid_za' model is available that was trained on all 11 South African languages.
-- name: date_parsers
-  description: The interface to your date parser model instances. Also see the duckling entity extractor which includes durations and intervals.
-- name: sentiment_detectors
-  description: Interface to your sentiment detector model instances.
-- name: regex_entity_extractors
-  description: Interface to your regular expression entity extractor instances.
-- name: duckling_entity_extractors
-  description: Interface to your duckling entity extractor instances. Duckling is an open source component that supports the extraction of dates, durations and intervals. It does support things like distances, volumes, etc., but these are not exposed at the moment.
-- name: similarity_entity_extractors
-  description: Interface to your word similarity entity extractor instances. A word embedding is used to find similar words.
-
 paths:
-###################################
-###################################
-########
-## text_classifiers root
-########
-  /text_classifiers:
-    post:
-      tags:
-      - text_classifiers
-      summary: Create a text classifier.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: text_classifier_create
-      description: Create a new text classifier or load one from the store.
-      parameters:
-      - $ref: "#/parameters/body_param_create_details"
-      responses:
-        200:
-          $ref: "#/responses/instance_detail"
-        400:
-          description: bad request
-          
+  /dashboard:
     get:
       tags:
-      - text_classifiers
-      summary: Get list of loaded text classifiers.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: text_classifier_get_details_all
-      description: Get the list of loaded text classifiers.
+      - "dashboard"
+      summary: "Your service dashboard."
+      description: "Get your list of loaded model instances, the total API hits for\
+        \ each, API version, etc."
+      operationId: "dashboard_get_details"
+      parameters: []
       responses:
         200:
-          $ref: "#/responses/instance_detail_list"
+          description: "Your dashboard content."
+          schema:
+            $ref: "#/definitions/dashboard_detail"
         400:
-          description: bad request
-
-########
-## text_classifiers Get details of named instance
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+  /text_classifiers:
+    get:
+      tags:
+      - "text_classifiers"
+      summary: "Get list of loaded text classifiers."
+      description: "Get the list of loaded text classifiers."
+      operationId: "text_classifier_get_details_all"
+      parameters: []
+      responses:
+        200:
+          description: "A list of models' instance details"
+          schema:
+            $ref: "#/definitions/instance_detail_list"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+    post:
+      tags:
+      - "text_classifiers"
+      summary: "Create a text classifier."
+      description: "Create a new text classifier or load one from the store."
+      operationId: "text_classifier_create"
+      parameters:
+      - in: "body"
+        name: "create_details"
+        description: "The details of the instance to create."
+        required: true
+        schema:
+          $ref: "#/definitions/create_details"
+      responses:
+        200:
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/instance_detail"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /text_classifiers/{instance_name}:
     get:
       tags:
-      - text_classifiers
-      summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: text_classifier_get_details
-      description: Get the details of the named text classifier instance.
+      - "text_classifiers"
+      summary: "Get details of named instance."
+      description: "Get the details of the named text classifier instance."
+      operationId: "text_classifier_get_details"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/instance_detail"
         400:
-          description: bad request
-
-########
-## text_classifiers training samples
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /text_classifiers/{instance_name}/training_samples:
-    post:
-      tags:
-      - text_classifiers
-      summary: Add training samples.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: text_classifier_add_training_samples
-      description: Add training samples to named text classifier.
-      parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
-      responses:
-        200:
-          $ref: "#/responses/total_samples"        
-        400:
-          description: bad request
-          
     get:
       tags:
-      - text_classifiers
-      summary: Get training samples.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: text_classifier_get_training_samples
-      description: Get the training samples of the named text classifier.
+      - "text_classifiers"
+      summary: "Get training samples."
+      description: "Get the training samples of the named text classifier."
+      operationId: "text_classifier_get_training_samples"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          description: "The list of labeled text samples."
+          schema:
+            $ref: "#/definitions/labelled_text_sample_list"
         400:
-          description: bad request
-
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+    post:
+      tags:
+      - "text_classifiers"
+      summary: "Add training samples."
+      description: "Add training samples to named text classifier."
+      operationId: "text_classifier_add_training_samples"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "labelled_text_sample_list"
+        description: "List of labelled text samples."
+        required: true
+        schema:
+          $ref: "#/definitions/labelled_text_sample_list"
+      responses:
+        200:
+          description: "The total number of samples of this type in the model."
+          schema:
+            $ref: "#/definitions/total_samples"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
     delete:
       tags:
-      - text_classifiers
-      summary: Delete training samples.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: text_classifier_del_training_samples
-      description: Delete the training samples of the named text classifier.
+      - "text_classifiers"
+      summary: "Delete training samples."
+      description: "Delete the training samples of the named text classifier."
+      operationId: "text_classifier_del_training_samples"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          description: "The list of labeled text samples."
+          schema:
+            $ref: "#/definitions/labelled_text_sample_list"
         400:
-          description: bad request
-########
-## text_classifiers train
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /text_classifiers/{instance_name}/train:
     post:
       tags:
-      - text_classifiers
-      summary: Train the named text classifier.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: text_classifier_train
-      description: Train the named text classifier with the training and testing data already provided.
+      - "text_classifiers"
+      summary: "Train the named text classifier."
+      description: "Train the named text classifier with the training and testing\
+        \ data already provided."
+      operationId: "text_classifier_train"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_train_details"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "train_details"
+        description: "The arguments provided to the train operation."
+        required: true
+        schema:
+          $ref: "#/definitions/train_details"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/instance_detail"
         400:
-          description: bad request
-
-########
-## text_classifiers retrieve
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /text_classifiers/{instance_name}/retrieve:
     post:
       tags:
-      - text_classifiers
-      summary: Classify text.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: text_classifier_retrieve
-      description: Classifies the text and returns a probability sorted list of classes.
+      - "text_classifiers"
+      summary: "Classify text."
+      description: "Classifies the text and returns a probability sorted list of classes."
+      operationId: "text_classifier_retrieve"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "text_input"
+        description: "The input text."
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/scored_labels"
+          description: "The list of scored and sorted labels."
+          schema:
+            $ref: "#/definitions/scored_label_list"
         400:
-          description: bad request
-
-###################################
-###################################
-########
-## word_manifolds root
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+  /text_classifiers/{instance_name}/get_labels:
+    get:
+      tags:
+      - "text_classifiers"
+      summary: "Get list of possible labels."
+      description: "Returns the classifier's list of possible class labels."
+      operationId: "text_classifier_get_labels"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The list of possible labels."
+          schema:
+            $ref: "#/definitions/label_list"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+  /text_classifiers/{instance_name}/curate:
+    post:
+      tags:
+      - "text_classifiers"
+      summary: "Endpoint to aid in the curation of a model instance."
+      description: "Access the list of samples behind a cell of the confusion matrix\
+        \ of the training or testing samples."
+      operationId: "text_classifier_curate"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "label_pair"
+        description: "The true label, predicted label and matrix (train/test) to use."
+        required: true
+        schema:
+          $ref: "#/definitions/label_pair"
+      responses:
+        200:
+          description: "The list of labeled text samples."
+          schema:
+            $ref: "#/definitions/labelled_text_sample_list"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /word_manifolds:
     post:
       tags:
-      - word_manifolds
-      summary: Create a word manifold model.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: word_manifold_create
-      description: Create a new word manifold model using an input file or load a model from the store. Warning! - These models are quite big and each takes a few seconds to load/create.
+      - "word_manifolds"
+      summary: "Create a word manifold model."
+      description: "Create a new word manifold model using an input file or load a\
+        \ model from the store. Warning! - These models are quite big and each takes\
+        \ a few seconds to load/create."
+      operationId: "word_manifold_create"
       parameters:
-      - $ref: "#/parameters/body_param_create_details"
+      - in: "body"
+        name: "create_details"
+        description: "The details of the instance to create."
+        required: true
+        schema:
+          $ref: "#/definitions/create_details"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/instance_detail"
         400:
-          description: bad request
-          
-########
-## word_manifolds vocab
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /word_manifolds/{instance_name}/vocab:
     post:
       tags:
-      - word_manifolds
-      summary: Add new words. 
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: word_manifold_add_similar_words
-      description: Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold to the store it could take a few seconds to complete.
+      - "word_manifolds"
+      summary: "Add new words."
+      description: "Add new words to the manifold that are similar to existing words\
+        \ and save the manifold. Warning! - Because this operation saves the updated\
+        \ word manifold to the store it could take a few seconds to complete."
+      operationId: "word_manifold_add_similar_words"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_new_word_list"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "new_word_list"
+        description: "List of new words."
+        required: true
+        schema:
+          $ref: "#/definitions/new_word_list"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/instance_detail"
         400:
-          description: bad request
-          
-###################################
-###################################
-########
-## intent_classifiers root
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /intent_classifiers:
-    post:
-      tags:
-      - intent_classifiers
-      summary: Create an intent classifier.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: intent_classifier_create
-      description: Create a new intent classifier or load one from the store.
-      parameters:
-      - $ref: "#/parameters/body_param_create_details"
-      responses:
-        200:
-          $ref: "#/responses/instance_detail"
-        400:
-          description: bad request
-          
     get:
       tags:
-      - intent_classifiers
-      summary: Get list of loaded intent classifiers.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: intent_classifier_get_details_all
-      description: Get the list of loaded intent classifiers.
+      - "intent_classifiers"
+      summary: "Get list of loaded intent classifiers."
+      description: "Get the list of loaded intent classifiers."
+      operationId: "intent_classifier_get_details_all"
+      parameters: []
       responses:
         200:
-          $ref: "#/responses/instance_detail_list"
+          description: "A list of models' instance details"
+          schema:
+            $ref: "#/definitions/instance_detail_list"
         400:
-          description: bad request
-
-########
-## intent_classifiers Get details of named instance
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+    post:
+      tags:
+      - "intent_classifiers"
+      summary: "Create an intent classifier."
+      description: "Create a new intent classifier or load one from the store."
+      operationId: "intent_classifier_create"
+      parameters:
+      - in: "body"
+        name: "create_details"
+        description: "The details of the instance to create."
+        required: true
+        schema:
+          $ref: "#/definitions/create_details"
+      responses:
+        200:
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/instance_detail"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /intent_classifiers/{instance_name}:
     get:
       tags:
-      - intent_classifiers
-      summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: intent_classifier_get_details
-      description: Get the details of the named intent classifier instance.
+      - "intent_classifiers"
+      summary: "Get details of named instance."
+      description: "Get the details of the named intent classifier instance."
+      operationId: "intent_classifier_get_details"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/instance_detail"
         400:
-          description: bad request
-
-########
-## intent_classifiers training samples
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /intent_classifiers/{instance_name}/training_samples:
-    post:
-      tags:
-      - intent_classifiers
-      summary: Add training samples.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: intent_classifier_add_training_samples
-      description: Add training samples to named intent classifier.
-      parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
-      responses:
-        200:
-          $ref: "#/responses/total_samples"        
-        400:
-          description: bad request
-          
     get:
       tags:
-      - intent_classifiers
-      summary: Get training samples.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: intent_classifier_get_training_samples
-      description: Get the training samples of the named intent classifier.
+      - "intent_classifiers"
+      summary: "Get training samples."
+      description: "Get the training samples of the named intent classifier."
+      operationId: "intent_classifier_get_training_samples"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          description: "The list of labeled text samples."
+          schema:
+            $ref: "#/definitions/labelled_text_sample_list"
         400:
-          description: bad request
-
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+    post:
+      tags:
+      - "intent_classifiers"
+      summary: "Add training samples."
+      description: "Add training samples to named intent classifier."
+      operationId: "intent_classifier_add_training_samples"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "labelled_text_sample_list"
+        description: "List of labelled text samples."
+        required: true
+        schema:
+          $ref: "#/definitions/labelled_text_sample_list"
+      responses:
+        200:
+          description: "The total number of samples of this type in the model."
+          schema:
+            $ref: "#/definitions/total_samples"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
     delete:
       tags:
-      - intent_classifiers
-      summary: Delete training samples.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: intent_classifier_del_training_samples
-      description: Delete the training samples of the named intent classifier.
+      - "intent_classifiers"
+      summary: "Delete training samples."
+      description: "Delete the training samples of the named intent classifier."
+      operationId: "intent_classifier_del_training_samples"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          description: "The list of labeled text samples."
+          schema:
+            $ref: "#/definitions/labelled_text_sample_list"
         400:
-          description: bad request
-########
-## intent_classifiers train
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /intent_classifiers/{instance_name}/train:
     post:
       tags:
-      - intent_classifiers
-      summary: Train the named intent classifier.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: intent_classifier_train
-      description: Train the named intent classifier with the training and testing data already provided.
+      - "intent_classifiers"
+      summary: "Train the named intent classifier."
+      description: "Train the named intent classifier with the training and testing\
+        \ data already provided."
+      operationId: "intent_classifier_train"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_train_details"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "train_details"
+        description: "The arguments provided to the train operation."
+        required: true
+        schema:
+          $ref: "#/definitions/train_details"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/instance_detail"
         400:
-          description: bad request
-
-########
-## intent_classifiers retrieve
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /intent_classifiers/{instance_name}/retrieve:
     post:
       tags:
-      - intent_classifiers
-      summary: Classify intent.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: intent_classifier_retrieve
-      description: Classifies the intent and returns a probability sorted list of classes.
+      - "intent_classifiers"
+      summary: "Classify intent."
+      description: "Classifies the intent and returns a probability sorted list of\
+        \ classes."
+      operationId: "intent_classifier_retrieve"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "text_input"
+        description: "The input text."
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/scored_labels"
+          description: "The list of scored and sorted labels."
+          schema:
+            $ref: "#/definitions/scored_label_list"
         400:
-          description: bad request
-
-###################################
-###################################
-########
-## FAQ matchers root
-########
-  /faq_matchers:
-    post:
-      tags:
-      - faq_matchers
-      summary: Create an FAQ matcher.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: faq_matcher_create
-      description: Create a new faq matcher or load one from the store.
-      parameters:
-      - $ref: "#/parameters/body_param_create_details"
-      responses:
-        200:
-          $ref: "#/responses/instance_detail"
-        400:
-          description: bad request
-          
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+  /intent_classifiers/{instance_name}/get_labels:
     get:
       tags:
-      - faq_matchers
-      summary: Get list of loaded FAQ matchers.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: faq_matcher_get_details_all
-      description: Get the list of loaded faq matchers.
+      - "intent_classifiers"
+      summary: "Get list of possible labels."
+      description: "Returns the classifier's list of possible class labels."
+      operationId: "intent_classifier_get_labels"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/instance_detail_list"
+          description: "The list of possible labels."
+          schema:
+            $ref: "#/definitions/label_list"
         400:
-          description: bad request
-
-########
-## faq_matchers Get details of named instance
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+  /intent_classifiers/{instance_name}/curate:
+    post:
+      tags:
+      - "intent_classifiers"
+      summary: "Endpoint to aid in the curation of a model instance."
+      description: "Access the list of samples behind a cell of the confusion matrix\
+        \ of the training or testing samples."
+      operationId: "intent_classifier_curate"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "label_pair"
+        description: "The true label, predicted label and matrix (train/test) to use."
+        required: true
+        schema:
+          $ref: "#/definitions/label_pair"
+      responses:
+        200:
+          description: "The list of labeled text samples."
+          schema:
+            $ref: "#/definitions/labelled_text_sample_list"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+  /faq_matchers:
+    get:
+      tags:
+      - "faq_matchers"
+      summary: "Get list of loaded FAQ matchers."
+      description: "Get the list of loaded faq matchers."
+      operationId: "faq_matcher_get_details_all"
+      parameters: []
+      responses:
+        200:
+          description: "A list of models' instance details"
+          schema:
+            $ref: "#/definitions/instance_detail_list"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+    post:
+      tags:
+      - "faq_matchers"
+      summary: "Create an FAQ matcher."
+      description: "Create a new faq matcher or load one from the store."
+      operationId: "faq_matcher_create"
+      parameters:
+      - in: "body"
+        name: "create_details"
+        description: "The details of the instance to create."
+        required: true
+        schema:
+          $ref: "#/definitions/create_details"
+      responses:
+        200:
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/instance_detail"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /faq_matchers/{instance_name}:
     get:
       tags:
-      - faq_matchers
-      summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: faq_matcher_get_details
-      description: Get the details of the named FAQ matcher instance.
+      - "faq_matchers"
+      summary: "Get details of named instance."
+      description: "Get the details of the named FAQ matcher instance."
+      operationId: "faq_matcher_get_details"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/instance_detail"
         400:
-          description: bad request
-
-########
-## faq_matchers training samples
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /faq_matchers/{instance_name}/training_samples:
-    post:
-      tags:
-      - faq_matchers
-      summary: Add training samples.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: faq_matcher_add_training_samples
-      description: Add training samples to named faq matcher.
-      parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
-      responses:
-        200:
-          $ref: "#/responses/total_samples"        
-        400:
-          description: bad request
-          
     get:
       tags:
-      - faq_matchers
-      summary: Get training samples.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: faq_matcher_get_training_samples
-      description: Get the training samples of the named faq matcher.
+      - "faq_matchers"
+      summary: "Get training samples."
+      description: "Get the training samples of the named faq matcher."
+      operationId: "faq_matcher_get_training_samples"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          description: "The list of labeled text samples."
+          schema:
+            $ref: "#/definitions/labelled_text_sample_list"
         400:
-          description: bad request
-
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+    post:
+      tags:
+      - "faq_matchers"
+      summary: "Add training samples."
+      description: "Add training samples to named faq matcher."
+      operationId: "faq_matcher_add_training_samples"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "labelled_text_sample_list"
+        description: "List of labelled text samples."
+        required: true
+        schema:
+          $ref: "#/definitions/labelled_text_sample_list"
+      responses:
+        200:
+          description: "The total number of samples of this type in the model."
+          schema:
+            $ref: "#/definitions/total_samples"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
     delete:
       tags:
-      - faq_matchers
-      summary: Delete training samples.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: faq_matcher_del_training_samples
-      description: Delete the training samples of the named FAQ matcher.
+      - "faq_matchers"
+      summary: "Delete training samples."
+      description: "Delete the training samples of the named FAQ matcher."
+      operationId: "faq_matcher_del_training_samples"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          description: "The list of labeled text samples."
+          schema:
+            $ref: "#/definitions/labelled_text_sample_list"
         400:
-          description: bad request
-          
-########
-## faq_matchers train
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /faq_matchers/{instance_name}/train:
     post:
       tags:
-      - faq_matchers
-      summary: Train the named FAQ matcher.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: faq_matcher_train
-      description: Train the named FAQ matcher with the training and testing data already provided.
+      - "faq_matchers"
+      summary: "Train the named FAQ matcher."
+      description: "Train the named FAQ matcher with the training and testing data\
+        \ already provided."
+      operationId: "faq_matcher_train"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_train_details"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "train_details"
+        description: "The arguments provided to the train operation."
+        required: true
+        schema:
+          $ref: "#/definitions/train_details"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/instance_detail"
         400:
-          description: bad request
-
-########
-## faq_matchers retrieve
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /faq_matchers/{instance_name}/retrieve:
     post:
       tags:
-      - faq_matchers
-      summary: Match retrieve and FAQ.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: faq_matcher_retrieve
-      description: Matchers the FAQ and returns a probability sorted list of answer labels.
+      - "faq_matchers"
+      summary: "Match retrieve and FAQ."
+      description: "Matchers the FAQ and returns a probability sorted list of answer\
+        \ labels."
+      operationId: "faq_matcher_retrieve"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "text_input"
+        description: "The input text."
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/scored_labels"
+          description: "The list of scored and sorted labels."
+          schema:
+            $ref: "#/definitions/scored_label_list"
         400:
-          description: bad request
-
-###################################
-###################################
-########
-## Extract a list of dates from the text input.
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+  /faq_matchers/{instance_name}/get_labels:
+    get:
+      tags:
+      - "faq_matchers"
+      summary: "Get list of possible labels."
+      description: "Returns the classifier's list of possible class labels."
+      operationId: "faq_matcher_get_labels"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The list of possible labels."
+          schema:
+            $ref: "#/definitions/label_list"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+  /faq_matchers/{instance_name}/curate:
+    post:
+      tags:
+      - "faq_matchers"
+      summary: "Endpoint to aid in the curation of a model instance."
+      description: "Access the list of samples behind a cell of the confusion matrix\
+        \ of the training or testing samples."
+      operationId: "faq_matcher_curate"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "label_pair"
+        description: "The true label, predicted label and matrix (train/test) to use."
+        required: true
+        schema:
+          $ref: "#/definitions/label_pair"
+      responses:
+        200:
+          description: "The list of labeled text samples."
+          schema:
+            $ref: "#/definitions/labelled_text_sample_list"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /date_parsers/{instance_name}/retrieve:
     post:
       tags:
-      - date_parsers
-      summary: Extract dates.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: date_parser_retrieve
-      description: Parses one or more dates from text.
+      - "date_parsers"
+      summary: "Extract dates."
+      description: "Parses one or more dates from text."
+      operationId: "date_parser_retrieve"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "text_input"
+        description: "The input text."
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/date_list"
+          description: "The list of structured dates."
+          schema:
+            $ref: "#/definitions/date_list"
         400:
-          description: bad request
-
-###################################
-###################################
-########
-## Detect the sentiment of the text input.
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /sentiment_detectors/{instance_name}/retrieve:
     post:
       tags:
-      - sentiment_detectors
-      summary: Detect sentiment.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: sentiment_detector_retrieve
-      description: Detect the general sentiment in the input text.
+      - "sentiment_detectors"
+      summary: "Detect sentiment."
+      description: "Detect the general sentiment in the input text."
+      operationId: "sentiment_detector_retrieve"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "text_input"
+        description: "The input text."
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/sentiment"
+          description: "The coarse sentiment."
+          schema:
+            $ref: "#/definitions/sentiment"
         400:
-          description: bad request
-       
-###################################
-###################################
-########
-## regex_entity_extractors root
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /regex_entity_extractors:
-    post:
-      tags:
-      - regex_entity_extractors
-      summary: Create a regular expression entity extractor.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: regex_entity_extractor_create
-      description: Create a new regular expression entity extractor or load one from the store.
-      parameters:
-      - $ref: "#/parameters/body_param_regex_ent_create_details"
-      responses:
-        200:
-          $ref: "#/responses/regex_instance_detail"
-        400:
-          description: bad request
-          
     get:
       tags:
-      - regex_entity_extractors
-      summary: Get list of loaded regular expression entity extractors.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: regex_entity_extractor_get_details_all
-      description: Get the list of loaded regular expression entity extractors.
+      - "regex_entity_extractors"
+      summary: "Get list of loaded regular expression entity extractors."
+      description: "Get the list of loaded regular expression entity extractors."
+      operationId: "regex_entity_extractor_get_details_all"
+      parameters: []
       responses:
         200:
-          $ref: "#/responses/regex_instance_detail_list"
+          description: "A list of models' instance details"
+          schema:
+            $ref: "#/definitions/regex_instance_detail_list"
         400:
-          description: bad request
-
-########
-## regex_entity_extractors Get details of named instance
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+    post:
+      tags:
+      - "regex_entity_extractors"
+      summary: "Create a regular expression entity extractor."
+      description: "Create a new regular expression entity extractor or load one from\
+        \ the store."
+      operationId: "regex_entity_extractor_create"
+      parameters:
+      - in: "body"
+        name: "regex_ent_create_details"
+        description: "The details of the instance to create."
+        required: true
+        schema:
+          $ref: "#/definitions/regex_ent_create_details"
+      responses:
+        200:
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/regex_instance_detail"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /regex_entity_extractors/{instance_name}:
     get:
       tags:
-      - regex_entity_extractors
-      summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: regex_entity_extractor_get_details
-      description: Get the details of the named regular expression entity extractor instance.
+      - "regex_entity_extractors"
+      summary: "Get details of named instance."
+      description: "Get the details of the named regular expression entity extractor\
+        \ instance."
+      operationId: "regex_entity_extractor_get_details"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/regex_instance_detail"
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/regex_instance_detail"
         400:
-          description: bad request
-
-########
-## regex_entity_extractors retrieve
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /regex_entity_extractors/{instance_name}/retrieve:
     post:
       tags:
-      - regex_entity_extractors
-      summary: Extract information based on the regular expression.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: regex_entity_extractor_retrieve
-      description: Extract the entities matching the regular expression.
+      - "regex_entity_extractors"
+      summary: "Extract information based on the regular expression."
+      description: "Extract the entities matching the regular expression."
+      operationId: "regex_entity_extractor_retrieve"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "text_input"
+        description: "The input text."
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/entity_list"
+          description: "The list of extracted entities."
+          schema:
+            $ref: "#/definitions/entity_list"
         400:
-          description: bad request
-
-###################################
-###################################
-########
-## duckling_entity_extractors root
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /duckling_entity_extractors:
-    post:
-      tags:
-      - duckling_entity_extractors
-      summary: Create a duckling entity extractor.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: duckling_entity_extractor_create
-      description: Create a new duckling entity extractor or load one from the store.
-      parameters:
-      - $ref: "#/parameters/body_param_duckling_ent_create_details"
-      responses:
-        200:
-          $ref: "#/responses/duckling_instance_detail"
-        400:
-          description: bad request
-          
     get:
       tags:
-      - duckling_entity_extractors
-      summary: Get list of loaded regular expression entity extractors.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: duckling_entity_extractor_get_details_all
-      description: Get the list of loaded duckling entity extractors.
+      - "duckling_entity_extractors"
+      summary: "Get list of loaded regular expression entity extractors."
+      description: "Get the list of loaded duckling entity extractors."
+      operationId: "duckling_entity_extractor_get_details_all"
+      parameters: []
       responses:
         200:
-          $ref: "#/responses/duckling_instance_detail_list"
+          description: "A list of models' instance details"
+          schema:
+            $ref: "#/definitions/duckling_instance_detail_list"
         400:
-          description: bad request
-
-########
-## duckling_entity_extractors Get details of named instance
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+    post:
+      tags:
+      - "duckling_entity_extractors"
+      summary: "Create a duckling entity extractor."
+      description: "Create a new duckling entity extractor or load one from the store."
+      operationId: "duckling_entity_extractor_create"
+      parameters:
+      - in: "body"
+        name: "duckling_ent_create_details"
+        description: "The details of the instance to create."
+        required: true
+        schema:
+          $ref: "#/definitions/duckling_ent_create_details"
+      responses:
+        200:
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/duckling_instance_detail"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /duckling_entity_extractors/{instance_name}:
     get:
       tags:
-      - duckling_entity_extractors
-      summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: duckling_entity_extractor_get_details
-      description: Get the details of the named duckling entity extractor instance.
+      - "duckling_entity_extractors"
+      summary: "Get details of named instance."
+      description: "Get the details of the named duckling entity extractor instance."
+      operationId: "duckling_entity_extractor_get_details"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/duckling_instance_detail"
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/duckling_instance_detail"
         400:
-          description: bad request
-
-########
-## duckling_entity_extractors retrieve
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /duckling_entity_extractors/{instance_name}/retrieve:
     post:
       tags:
-      - duckling_entity_extractors
-      summary: Extract information based on the regular expression.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: duckling_entity_extractor_retrieve
-      description: Extract the entities parsed by duckling.
+      - "duckling_entity_extractors"
+      summary: "Extract information based on the regular expression."
+      description: "Extract the entities parsed by duckling."
+      operationId: "duckling_entity_extractor_retrieve"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "text_input"
+        description: "The input text."
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/entity_list"
+          description: "The list of extracted entities."
+          schema:
+            $ref: "#/definitions/entity_list"
         400:
-          description: bad request
-
-###################################
-###################################
-########
-## similarity_entity_extractors root
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /similarity_entity_extractors:
-    post:
-      tags:
-      - similarity_entity_extractors
-      summary: Create a word similarity entity extractor.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: similarity_entity_extractor_create
-      description: Create a new word similarity entity extractor or load one from the store.
-      parameters:
-      - $ref: "#/parameters/body_param_similarity_ent_create_details"
-      responses:
-        200:
-          $ref: "#/responses/similarity_instance_detail"
-        400:
-          description: bad request
-          
     get:
       tags:
-      - similarity_entity_extractors
-      summary: Get list of loaded similarity entity extractors.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: similarity_entity_extractor_get_details_all
-      description: Get the list of loaded similarity entity extractors.
+      - "similarity_entity_extractors"
+      summary: "Get list of loaded similarity entity extractors."
+      description: "Get the list of loaded similarity entity extractors."
+      operationId: "similarity_entity_extractor_get_details_all"
+      parameters: []
       responses:
         200:
-          $ref: "#/responses/similarity_instance_detail_list"
+          description: "A list of models' instance details"
+          schema:
+            $ref: "#/definitions/similarity_instance_detail_list"
         400:
-          description: bad request
-
-########
-## similarity_entity_extractors Get details of named instance
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+    post:
+      tags:
+      - "similarity_entity_extractors"
+      summary: "Create a word similarity entity extractor."
+      description: "Create a new word similarity entity extractor or load one from\
+        \ the store."
+      operationId: "similarity_entity_extractor_create"
+      parameters:
+      - in: "body"
+        name: "similarity_ent_create_details"
+        description: "The details of the instance to create."
+        required: true
+        schema:
+          $ref: "#/definitions/similarity_ent_create_details"
+      responses:
+        200:
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/similarity_instance_detail"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /similarity_entity_extractors/{instance_name}:
     get:
       tags:
-      - similarity_entity_extractors
-      summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: similarity_entity_extractor_get_details
-      description: Get the details of the named similarity entity extractor instance.
+      - "similarity_entity_extractors"
+      summary: "Get details of named instance."
+      description: "Get the details of the named similarity entity extractor instance."
+      operationId: "similarity_entity_extractor_get_details"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/similarity_instance_detail"
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/similarity_instance_detail"
         400:
-          description: bad request
-
-########
-## similarity_entity_extractors retrieve
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /similarity_entity_extractors/{instance_name}/retrieve:
     post:
       tags:
-      - similarity_entity_extractors
-      summary: Extract information based on word similarity.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: similarity_entity_extractor_retrieve
-      description: Extract the word entities that are similar to the list of words used to create this model instance.
+      - "similarity_entity_extractors"
+      summary: "Extract information based on word similarity."
+      description: "Extract the word entities that are similar to the list of words\
+        \ used to create this model instance."
+      operationId: "similarity_entity_extractor_retrieve"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "text_input"
+        description: "The input text."
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/entity_list"
+          description: "The list of extracted entities."
+          schema:
+            $ref: "#/definitions/entity_list"
         400:
-          description: bad request
-
-###################################
-###################################
-########
-## lr4_language_recognisers root
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /lr4_language_recognisers:
-    post:
-      tags:
-      - lr4_language_recognisers
-      summary: Create a LR4 text language detector.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: lr4_language_recogniser_create
-      description: Create a new LR4 language detector from the pre-trained model name provided. 'lid_za' is currently the only pre-trained model that is available, but it was trained on all 11 languages and is pretty accurate.
-      parameters:
-      - $ref: "#/parameters/body_param_lr4_create_details"
-      responses:
-        200:
-          $ref: "#/responses/lr4_instance_detail"
-        400:
-          description: bad request
-          
     get:
       tags:
-      - lr4_language_recognisers
-      summary: Get list of loaded LR4 text language detectors.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: lr4_language_recogniser_get_details_all
-      description: Get list of loaded LR4 text language detectors.
+      - "lr4_language_recognisers"
+      summary: "Get list of loaded LR4 text language detectors."
+      description: "Get list of loaded LR4 text language detectors."
+      operationId: "lr4_language_recogniser_get_details_all"
+      parameters: []
       responses:
         200:
-          $ref: "#/responses/lr4_instance_detail_list"
+          description: "A list of models' instance details"
+          schema:
+            $ref: "#/definitions/lr4_instance_detail_list"
         400:
-          description: bad request
-
-########
-## lr4_language_recognisers Get details of named instance
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+    post:
+      tags:
+      - "lr4_language_recognisers"
+      summary: "Create a LR4 text language detector."
+      description: "Create a new LR4 language detector from the pre-trained model\
+        \ name provided. 'lid_za' is currently the only pre-trained model that is\
+        \ available, but it was trained on all 11 languages and is pretty accurate."
+      operationId: "lr4_language_recogniser_create"
+      parameters:
+      - in: "body"
+        name: "lr4_create_details"
+        description: "The details of the instance to create."
+        required: true
+        schema:
+          $ref: "#/definitions/lr4_create_details"
+      responses:
+        200:
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/lr4_instance_detail"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /lr4_language_recognisers/{instance_name}:
     get:
       tags:
-      - lr4_language_recognisers
-      summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: lr4_language_recogniser_get_details
-      description: Get the details of the named LR4 text language detector instance.
+      - "lr4_language_recognisers"
+      summary: "Get details of named instance."
+      description: "Get the details of the named LR4 text language detector instance."
+      operationId: "lr4_language_recogniser_get_details"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
       responses:
         200:
-          $ref: "#/responses/lr4_instance_detail"
+          description: "The model instance detail"
+          schema:
+            $ref: "#/definitions/lr4_instance_detail"
         400:
-          description: bad request
-
-########
-## lr4_language_recognisers retrieve
-########
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /lr4_language_recognisers/{instance_name}/retrieve:
     post:
       tags:
-      - lr4_language_recognisers
-      summary: Recognise the language the text is written in.
-      x-swagger-router-controller: rest_api.flask_server
-      operationId: lr4_language_recogniser_retrieve
-      description: Recognise the language the text is written in.
+      - "lr4_language_recognisers"
+      summary: "Recognise the language the text is written in."
+      description: "Recognise the language the text is written in."
+      operationId: "lr4_language_recogniser_retrieve"
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "text_input"
+        description: "The input text."
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/scored_labels"
+          description: "The list of scored and sorted labels."
+          schema:
+            $ref: "#/definitions/scored_label_list"
         400:
-          description: bad request
-
-###################################
-# Descriptions of common parameters
-###################################
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+  /lr4_language_recognisers/{instance_name}/get_labels:
+    get:
+      tags:
+      - "lr4_language_recognisers"
+      summary: "Get list of possible labels."
+      description: "Returns the classifier's list of possible class labels."
+      operationId: "lr4_language_recogniser_get_labels"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The list of possible labels."
+          schema:
+            $ref: "#/definitions/label_list"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+securityDefinitions:
+  APIKeyHeader:
+    type: "apiKey"
+    name: "AUTH_TOKEN"
+    in: "header"
+definitions:
+  dashboard_detail:
+    type: "object"
+    required:
+    - "api_version"
+    - "object_list"
+    - "peak_api_hit_rate"
+    - "service_name"
+    properties:
+      api_version:
+        type: "string"
+        description: "The version of the http api."
+      service_name:
+        type: "string"
+        description: "The details of this service."
+      peak_api_hit_rate:
+        type: "number"
+        description: "The peak api hit rate (hits/s) over the last couple of window\
+          \ periods. A window period is in the order of 5 minutes."
+      object_list:
+        $ref: "#/definitions/instance_detail_list"
+    description: "Your dashboard content."
+  instance_detail:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+        description: "The name of the model instance."
+      id:
+        type: "string"
+        description: "The unique id of a specific version of the model instance."
+      desc:
+        type: "string"
+        description: "A longer description of the model instance's purpose in life."
+      training_accuracy:
+        type: "number"
+        description: "The accuracy of the model as measured on the training set."
+      peak_api_hit_rate:
+        type: "number"
+        description: "The peak api hit rate (hits/s) over the last couple of window\
+          \ periods. A window period is in the order of 5 minutes."
+      training_stamp:
+        type: "string"
+        description: "The time when the training operation concluded."
+      training_cm:
+        type: "object"
+        description: "The confusion matrix as measured on the training set. The matrix\
+          \ is expected to be quite sparse so a compact dict of dicts representation\
+          \ is used."
+        properties: {}
+      cm_labels:
+        type: "object"
+        description: "A dict that, if present, maps from the confusion matrix row\
+          \ and column labels to longer more descriptive labels. For example, if present\
+          \ it maps an FAQ answer ID to the string answer which may be either a label\
+          \ or the full text answer."
+        properties: {}
+      model_type:
+        type: "string"
+        description: "The type of this model."
+    description: "The model instance detail."
+  instance_detail_list:
+    type: "array"
+    description: "A list of models' instance details."
+    items:
+      $ref: "#/definitions/instance_detail"
+  regex_instance_detail:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    - "regex"
+    properties:
+      name:
+        type: "string"
+        description: "The name of the model instance."
+      id:
+        type: "string"
+        description: "The unique id of a specific version of the model instance."
+      desc:
+        type: "string"
+        description: "A longer description of the model instance's purpose in life."
+      regex:
+        type: "string"
+        description: "The regular expression i.e. \"(?P<license>([A-Z]{3}[ ]?[0-9]{3}[\
+          \ ]?(GP|NW|MP|EC|L|NC|NW)))\""
+    description: "The model instance detail."
+  regex_instance_detail_list:
+    type: "array"
+    description: "A list of models' instance details."
+    items:
+      $ref: "#/definitions/regex_instance_detail"
+  duckling_instance_detail:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    properties:
+      name:
+        type: "string"
+        description: "The name of the model instance."
+      id:
+        type: "string"
+        description: "The unique id of a specific version of the model instance."
+      desc:
+        type: "string"
+        description: "A longer description of the model instance's purpose in life."
+    description: "The model instance detail."
+  duckling_instance_detail_list:
+    type: "array"
+    description: "A list of models' instance details."
+    items:
+      $ref: "#/definitions/duckling_instance_detail"
+  similarity_instance_detail:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    - "similar_words"
+    - "threshold"
+    - "word_manifold"
+    properties:
+      name:
+        type: "string"
+        description: "The name of the model instance."
+      id:
+        type: "string"
+        description: "The unique id of a specific version of the model instance."
+      desc:
+        type: "string"
+        description: "A longer description of the model instance's purpose in life."
+      similar_words:
+        type: "array"
+        description: "The list of similar words to test against."
+        items:
+          type: "string"
+      threshold:
+        type: "number"
+      word_manifold:
+        type: "string"
+    description: "The model instance detail."
+  similarity_instance_detail_list:
+    type: "array"
+    description: "A list of models' instance details."
+    items:
+      $ref: "#/definitions/similarity_instance_detail"
+  lr4_instance_detail:
+    type: "object"
+    required:
+    - "id"
+    - "model_file"
+    - "name"
+    properties:
+      name:
+        type: "string"
+        description: "The name of the model instance."
+      id:
+        type: "string"
+        description: "The unique id of a specific version of the model instance."
+      desc:
+        type: "string"
+        description: "A longer description of the model instance's purpose in life."
+      model_file:
+        type: "string"
+        description: "The pre-trained model this instance was created from."
+    description: "The model instance detail."
+  lr4_instance_detail_list:
+    type: "array"
+    description: "A list of models' instance details."
+    items:
+      $ref: "#/definitions/lr4_instance_detail"
+  create_details:
+    type: "object"
+    required:
+    - "load_from_store"
+    - "name"
+    properties:
+      name:
+        type: "string"
+      desc:
+        type: "string"
+      input_file:
+        type: "string"
+        description: "Used for things like the input vector file when creating a word\
+          \ embedding."
+      load_from_store:
+        type: "boolean"
+    description: "The details of the model instance to create."
+  regex_ent_create_details:
+    type: "object"
+    required:
+    - "load_from_store"
+    - "name"
+    properties:
+      name:
+        type: "string"
+      desc:
+        type: "string"
+      regex:
+        type: "string"
+        description: "The regular expression."
+      load_from_store:
+        type: "boolean"
+    description: "The details of the model instance to create."
+  duckling_ent_create_details:
+    type: "object"
+    required:
+    - "load_from_store"
+    - "name"
+    properties:
+      name:
+        type: "string"
+      desc:
+        type: "string"
+      load_from_store:
+        type: "boolean"
+    description: "The details of the model instance to create."
+  similarity_ent_create_details:
+    type: "object"
+    required:
+    - "load_from_store"
+    - "name"
+    properties:
+      name:
+        type: "string"
+      desc:
+        type: "string"
+      similar_words:
+        type: "array"
+        items:
+          type: "string"
+      threshold:
+        type: "number"
+      word_manifold:
+        type: "string"
+      load_from_store:
+        type: "boolean"
+    description: "The details of the model instance to create."
+  lr4_create_details:
+    type: "object"
+    required:
+    - "model_file"
+    - "name"
+    properties:
+      name:
+        type: "string"
+      desc:
+        type: "string"
+      model_file:
+        type: "string"
+        description: "The pre-trained model to load."
+    description: "The details of the model instance to create."
+  labelled_text_sample:
+    type: "object"
+    required:
+    - "label"
+    - "text"
+    properties:
+      text:
+        type: "string"
+      label:
+        type: "string"
+    description: "Labelled text sample."
+  labelled_text_sample_list:
+    type: "array"
+    description: "List of labelled text samples."
+    items:
+      $ref: "#/definitions/labelled_text_sample"
+  labeled_word_manifold:
+    type: "object"
+    required:
+    - "label"
+    - "word_manifold"
+    properties:
+      label:
+        type: "string"
+      word_manifold:
+        type: "string"
+    description: "A labelled (e.g. lang_code labelled) word manifold instance."
+  train_details:
+    type: "object"
+    required:
+    - "immediate_mode"
+    properties:
+      immediate_mode:
+        type: "boolean"
+      word_manifold:
+        type: "string"
+        description: "The word manifold instance to use for training and later inference.\
+          \ \n\nRather use the word_manifold_list for supplying a language labelled\
+          \ list of word manifold instances to use in a multi-language system.\n"
+      word_manifold_list:
+        type: "array"
+        items:
+          $ref: "#/definitions/labeled_word_manifold"
+    description: "The parameters provided to the train operation."
+  total_samples:
+    type: "object"
+    required:
+    - "total_samples"
+    properties:
+      total_samples:
+        type: "integer"
+    description: "The total number of samples of this type now loaded into the model."
+  text_input:
+    type: "object"
+    required:
+    - "text"
+    properties:
+      text:
+        type: "string"
+    description: "The text input to be classified, matched or parsed."
+  scored_label:
+    type: "object"
+    required:
+    - "label"
+    - "probability"
+    properties:
+      label:
+        type: "string"
+      probability:
+        type: "number"
+    description: "A class label with an associated probablity."
+  scored_label_list:
+    type: "array"
+    description: "A list of scored and sorted class labels."
+    items:
+      $ref: "#/definitions/scored_label"
+  label_list:
+    type: "array"
+    description: "A list of possible class labels."
+    items:
+      $ref: "#/definitions/label"
+  label:
+    type: "object"
+    required:
+    - "label"
+    properties:
+      label:
+        type: "string"
+    description: "A class label."
+  label_pair:
+    type: "object"
+    required:
+    - "matrix_name"
+    - "predicted_label"
+    - "true_label"
+    properties:
+      true_label:
+        type: "string"
+      predicted_label:
+        type: "string"
+      matrix_name:
+        type: "string"
+    description: "The true label, predicted label and matrix (train/test) to use."
+  date:
+    type: "object"
+    required:
+    - "date"
+    - "granularity"
+    properties:
+      date:
+        type: "string"
+      granularity:
+        type: "string"
+        enum:
+        - "second"
+        - "minute"
+        - "hour"
+        - "day"
+        - "week"
+        - "month"
+        - "year"
+    description: "A structured date-time string with a best guess on the specificity/granularity\
+      \ (i.e. hour, day, month)"
+  date_list:
+    type: "array"
+    description: "A list of structured date-time strings."
+    items:
+      $ref: "#/definitions/date"
+  new_word:
+    type: "object"
+    required:
+    - "new_word"
+    - "similar_to"
+    properties:
+      new_word:
+        type: "string"
+      similar_to:
+        type: "string"
+    description: "A new word similar to an existing word."
+  new_word_list:
+    type: "array"
+    description: "A list of new words."
+    items:
+      $ref: "#/definitions/new_word"
+  entity:
+    type: "object"
+    description: "An entity."
+  entity_list:
+    type: "array"
+    description: "A list of entities."
+    items:
+      $ref: "#/definitions/entity"
+  sentiment:
+    type: "object"
+    required:
+    - "value"
+    properties:
+      value:
+        type: "number"
+    description: "A sentiment value that may range from -1.0 (very UNhappy) to 1.0\
+      \ (very happy)."
 parameters:
   path_param_instance_name:
-    in: path
-    name: instance_name
-    description: The name of the model instance.
+    name: "instance_name"
+    in: "path"
+    description: "The name of the model instance."
     required: true
-    type: string
-    
+    type: "string"
   body_param_new_word_list:
-    in: body
-    name: new_word_list
-    description: List of new words.
+    in: "body"
+    name: "new_word_list"
+    description: "List of new words."
     required: true
     schema:
       $ref: "#/definitions/new_word_list"
-          
   body_param_create_details:
-    in: body
-    name: create_details
-    description: The details of the instance to create.
+    in: "body"
+    name: "create_details"
+    description: "The details of the instance to create."
     required: true
     schema:
       $ref: "#/definitions/create_details"
-          
+  body_param_label_pair:
+    in: "body"
+    name: "label_pair"
+    description: "The true label, predicted label and matrix (train/test) to use."
+    required: true
+    schema:
+      $ref: "#/definitions/label_pair"
   body_param_regex_ent_create_details:
-    in: body
-    name: regex_ent_create_details
-    description: The details of the instance to create.
+    in: "body"
+    name: "regex_ent_create_details"
+    description: "The details of the instance to create."
     required: true
     schema:
       $ref: "#/definitions/regex_ent_create_details"
-          
   body_param_duckling_ent_create_details:
-    in: body
-    name: duckling_ent_create_details
-    description: The details of the instance to create.
+    in: "body"
+    name: "duckling_ent_create_details"
+    description: "The details of the instance to create."
     required: true
     schema:
       $ref: "#/definitions/duckling_ent_create_details"
-
   body_param_similarity_ent_create_details:
-    in: body
-    name: similarity_ent_create_details
-    description: The details of the instance to create.
+    in: "body"
+    name: "similarity_ent_create_details"
+    description: "The details of the instance to create."
     required: true
     schema:
       $ref: "#/definitions/similarity_ent_create_details"
-
   body_param_lr4_create_details:
-    in: body
-    name: lr4_create_details
-    description: The details of the instance to create.
+    in: "body"
+    name: "lr4_create_details"
+    description: "The details of the instance to create."
     required: true
     schema:
       $ref: "#/definitions/lr4_create_details"
-          
   body_param_labelled_text_sample_list:
-    in: body
-    name: labelled_text_sample_list
-    description: List of labelled text samples.
+    in: "body"
+    name: "labelled_text_sample_list"
+    description: "List of labelled text samples."
     required: true
     schema:
       $ref: "#/definitions/labelled_text_sample_list"
-    
-  body_param_train_details:        
-    in: body
-    name: train_details
-    description: The arguments provided to the train operation.
+  body_param_train_details:
+    in: "body"
+    name: "train_details"
+    description: "The arguments provided to the train operation."
     required: true
     schema:
       $ref: "#/definitions/train_details"
-          
   body_param_text_input:
-    in: body
-    name: text_input
-    description: The input text.
+    in: "body"
+    name: "text_input"
+    description: "The input text."
     required: true
     schema:
       $ref: "#/definitions/text_input"
-
-##################################
-# Descriptions of common responses
-##################################
 responses:
-  instance_detail:
-    description: The model instance detail
+  dashboard_detail:
+    description: "Your dashboard content."
     schema:
-      $ref: "#/definitions/instance_detail"
-      
-  instance_detail_list:
-    description: A list of models' instance details
-    schema:
-      $ref: "#/definitions/instance_detail_list"
-      
-  regex_instance_detail:
-    description: The model instance detail
-    schema:
-      $ref: "#/definitions/regex_instance_detail"
-      
-  regex_instance_detail_list:
-    description: A list of models' instance details
-    schema:
-      $ref: "#/definitions/regex_instance_detail_list"
-      
-  duckling_instance_detail:
-    description: The model instance detail
-    schema:
-      $ref: "#/definitions/duckling_instance_detail"
-      
-  duckling_instance_detail_list:
-    description: A list of models' instance details
-    schema:
-      $ref: "#/definitions/duckling_instance_detail_list"
-      
-  similarity_instance_detail:
-    description: The model instance detail
-    schema:
-      $ref: "#/definitions/similarity_instance_detail"
-      
-  similarity_instance_detail_list:
-    description: A list of models' instance details
-    schema:
-      $ref: "#/definitions/similarity_instance_detail_list"
-      
-  lr4_instance_detail:
-    description: The model instance detail
-    schema:
-      $ref: "#/definitions/lr4_instance_detail"
-      
-  lr4_instance_detail_list:
-    description: A list of models' instance details
-    schema:
-      $ref: "#/definitions/lr4_instance_detail_list"
-
-  total_samples:
-    description: The total number of samples of this type in the model.
-    schema:
-      $ref: "#/definitions/total_samples"
-
-  labelled_text_sample_list:
-    description: The list of labeled text samples.
-    schema:
-      $ref: "#/definitions/labelled_text_sample_list"
-      
-  scored_labels:
-    description: The list of scored and sorted labels.
-    schema:
-      $ref: "#/definitions/scored_label_list"
-
-  entity_list:
-    description: The list of extracted entities.
-    schema:
-      $ref: "#/definitions/entity_list"
-
-  date_list:                  
-    description: The list of structured dates.
+      $ref: "#/definitions/dashboard_detail"
+  date_list:
+    description: "The list of structured dates."
     schema:
       $ref: "#/definitions/date_list"
-
-  sentiment:                  
-    description: The coarse sentiment.
+  duckling_instance_detail:
+    description: "The model instance detail"
     schema:
-      $ref: "#/definitions/sentiment"
-
-  new_word_list:                  
-    description: The list of structured dates.
+      $ref: "#/definitions/duckling_instance_detail"
+  duckling_instance_detail_list:
+    description: "A list of models' instance details"
+    schema:
+      $ref: "#/definitions/duckling_instance_detail_list"
+  entity_list:
+    description: "The list of extracted entities."
+    schema:
+      $ref: "#/definitions/entity_list"
+  instance_detail:
+    description: "The model instance detail"
+    schema:
+      $ref: "#/definitions/instance_detail"
+  instance_detail_list:
+    description: "A list of models' instance details"
+    schema:
+      $ref: "#/definitions/instance_detail_list"
+  labelled_text_sample_list:
+    description: "The list of labeled text samples."
+    schema:
+      $ref: "#/definitions/labelled_text_sample_list"
+  labels:
+    description: "The list of possible labels."
+    schema:
+      $ref: "#/definitions/label_list"
+  lr4_instance_detail:
+    description: "The model instance detail"
+    schema:
+      $ref: "#/definitions/lr4_instance_detail"
+  lr4_instance_detail_list:
+    description: "A list of models' instance details"
+    schema:
+      $ref: "#/definitions/lr4_instance_detail_list"
+  new_word_list:
+    description: "The list of structured dates."
     schema:
       $ref: "#/definitions/new_word_list"
-
-####################################
-# Descriptions of common definitions
-####################################
-definitions:
-  instance_detail:
-    description: The model instance detail.
-    type: object
-    required:
-    - name
-    - id
-    properties:
-      name:
-        description: The name of the model instance.
-        type: string
-      id:
-        description: The unique id of a specific version of the model instance.
-        type: string
-      desc:
-        description: A longer description of the model instance's purpose in life.
-        type: string
-      training_accuracy:
-        description: The accuracy of the model as measured on the training set. 
-        type: number
-      training_stamp:
-        description: The time when the training operation concluded.
-        type: string
-      training_cm:
-        description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
-        type: object
-      cm_labels:
-        description: A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer.
-        type: object
-        
-  instance_detail_list:
-    description: A list of models' instance details.
-    type: array
-    items:
-      $ref: "#/definitions/instance_detail"
-
   regex_instance_detail:
-    description: The model instance detail.
-    type: object
-    required:
-    - name
-    - id
-    - regex
-    properties:
-      name:
-        description: The name of the model instance.
-        type: string
-      id:
-        description: The unique id of a specific version of the model instance.
-        type: string
-      desc:
-        description: A longer description of the model instance's purpose in life.
-        type: string
-      regex:
-        description: The regular expression i.e. "(?P<license>([A-Z]{3}[ ]?[0-9]{3}[ ]?(GP|NW|MP|EC|L|NC|NW)))"
-        type: string
-
-  regex_instance_detail_list:
-    description: A list of models' instance details.
-    type: array
-    items:
+    description: "The model instance detail"
+    schema:
       $ref: "#/definitions/regex_instance_detail"
-      
-  duckling_instance_detail:
-    description: The model instance detail.
-    type: object
-    required:
-    - name
-    - id
-    properties:
-      name:
-        description: The name of the model instance.
-        type: string
-      id:
-        description: The unique id of a specific version of the model instance.
-        type: string
-      desc:
-        description: A longer description of the model instance's purpose in life.
-        type: string
-
-  duckling_instance_detail_list:
-    description: A list of models' instance details.
-    type: array
-    items:
-      $ref: "#/definitions/duckling_instance_detail"
-
+  regex_instance_detail_list:
+    description: "A list of models' instance details"
+    schema:
+      $ref: "#/definitions/regex_instance_detail_list"
+  scored_labels:
+    description: "The list of scored and sorted labels."
+    schema:
+      $ref: "#/definitions/scored_label_list"
+  sentiment:
+    description: "The coarse sentiment."
+    schema:
+      $ref: "#/definitions/sentiment"
   similarity_instance_detail:
-    description: The model instance detail.
-    type: object
-    required:
-    - name
-    - id
-    - similar_words
-    - threshold
-    - word_manifold
-    properties:
-      name:
-        description: The name of the model instance.
-        type: string
-      id:
-        description: The unique id of a specific version of the model instance.
-        type: string
-      desc:
-        description: A longer description of the model instance's purpose in life.
-        type: string
-      similar_words:
-        description: The list of similar words to test against.
-        type: array
-        items:
-          type: string
-      threshold:
-        type: number
-      word_manifold:
-        type: string
-
-  similarity_instance_detail_list:
-    description: A list of models' instance details.
-    type: array
-    items:
+    description: "The model instance detail"
+    schema:
       $ref: "#/definitions/similarity_instance_detail"
-
-  lr4_instance_detail:
-    description: The model instance detail.
-    type: object
-    required:
-    - name
-    - id
-    - model_file
-    properties:
-      name:
-        description: The name of the model instance.
-        type: string
-      id:
-        description: The unique id of a specific version of the model instance.
-        type: string
-      desc:
-        description: A longer description of the model instance's purpose in life.
-        type: string
-      model_file:
-        description: The pre-trained model this instance was created from.
-        type: string
-
-  lr4_instance_detail_list:
-    description: A list of models' instance details.
-    type: array
-    items:
-      $ref: "#/definitions/lr4_instance_detail"
-
-  create_details:
-    description: The details of the model instance to create.
-    type: object
-    required:
-    - name
-    - load_from_store
-    properties:
-      name:
-        type: string
-      desc:
-        type: string
-      input_file:
-        description: Used for things like the input vector file when creating a word embedding.
-        type: string
-      load_from_store:
-        type: boolean
-        
-  regex_ent_create_details:
-    description: The details of the model instance to create.
-    type: object
-    required:
-    - name
-    - load_from_store
-    properties:
-      name:
-        type: string
-      desc:
-        type: string
-      regex:
-        description: The regular expression.
-        type: string
-      load_from_store:
-        type: boolean
-
-  duckling_ent_create_details:
-    description: The details of the model instance to create.
-    type: object
-    required:
-    - name
-    - load_from_store
-    properties:
-      name:
-        type: string
-      desc:
-        type: string
-      load_from_store:
-        type: boolean
-
-  similarity_ent_create_details:
-    description: The details of the model instance to create.
-    type: object
-    required:
-    - name
-    - load_from_store
-    properties:
-      name:
-        type: string
-      desc:
-        type: string
-      similar_words:
-        type: array
-        items:
-          type: string
-      threshold:
-        type: number
-      word_manifold:
-        type: string
-      load_from_store:
-        type: boolean
-
-  lr4_create_details:
-    description: The details of the model instance to create.
-    type: object
-    required:
-    - name
-    - model_file
-    properties:
-      name:
-        type: string
-      desc:
-        type: string
-      model_file:
-        description: The pre-trained model to load.
-        type: string
-
-  labelled_text_sample:
-    description: Labelled text sample.
-    type: object
-    required:
-      - text
-      - label
-    properties:
-      text:
-        type: string
-      label:
-        type: string
-
-  labelled_text_sample_list:
-    description: List of labelled text samples.
-    type: array
-    items:
-      $ref: "#/definitions/labelled_text_sample"
-
-  labeled_word_manifold:  
-    description: A labelled (e.g. lang_code labelled) word manifold instance.
-    type: object
-    required:
-    - label
-    - word_manifold
-    properties:
-      label:
-        type: string
-      word_manifold:
-        type: string
-
-  train_details:
-    description: The parameters provided to the train operation.
-    type: object
-    required:
-      - immediate_mode
-    properties:
-      immediate_mode:
-        type: boolean
-      word_manifold:
-        description: |
-          The word manifold instance to use for training and later inference. 
-          
-          Rather use the word_manifold_list for supplying a language labelled list of word manifold instances to use in a multi-language system.
-        type: string
-      word_manifold_list:
-        type: array
-        items:
-          $ref: "#/definitions/labeled_word_manifold"
-
+  similarity_instance_detail_list:
+    description: "A list of models' instance details"
+    schema:
+      $ref: "#/definitions/similarity_instance_detail_list"
   total_samples:
-    description: The total number of samples of this type now loaded into the model.
-    type: object
-    required:
-    - total_samples
-    properties:
-      total_samples:
-        type: integer
-
-  text_input:     
-    description: The text input to be classified, matched or parsed.
-    type: object
-    required:
-    - text
-    properties:
-      text:
-        type: string
-
-  scored_label:  
-    description: A class label with an associated probablity.
-    type: object
-    required:
-    - label
-    - probability
-    properties:
-      label:
-        type: string
-      probability:
-        type: number
-
-  scored_label_list:  
-    description: A list of scored class labels.
-    type: array
-    items:
-      $ref: "#/definitions/scored_label"
-      
-  date:
-    description: A structured date-time string with a best guess on the specificity/granularity (i.e. hour, day, month)
-    type: object
-    required:
-    - date
-    - granularity
-    properties:
-      date:
-        type: string
-      granularity:
-        type: string
-        enum: [second, minute, hour, day, week, month, year]
-
-  date_list:   
-    description: A list of structured date-time strings.
-    type: array
-    items:
-      $ref: "#/definitions/date"
-      
-  new_word:
-    description: A new word similar to an existing word.
-    type: object
-    required:
-    - new_word
-    - similar_to
-    properties:
-      new_word:
-        type: string
-      similar_to:
-        type: string
-
-  new_word_list:   
-    description: A list of new words.
-    type: array
-    items:
-      $ref: "#/definitions/new_word"
-
-  entity:
-    description: An entity.
-    type: object
-
-
-  entity_list:   
-    description: A list of entities.
-    type: array
-    items:
-      $ref: "#/definitions/entity"
-
-  sentiment:   
-    description: A sentiment value that may range from -1.0 (very UNhappy) to 1.0 (very happy).
-    type: object
-    required:
-    - value
-    properties:
-      value:
-        type: number
+    description: "The total number of samples of this type in the model."
+    schema:
+      $ref: "#/definitions/total_samples"

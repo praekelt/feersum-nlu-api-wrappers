@@ -1,0 +1,13 @@
+# DashboardDetail
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**api_version** | **str** | The version of the http api. | 
+**service_name** | **str** | The details of this service. | 
+**peak_api_hit_rate** | **float** | The peak api hit rate (hits/s) over the last couple of window periods. A window period is in the order of 5 minutes. | 
+**object_list** | [**InstanceDetailList**](InstanceDetailList.md) |  | 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

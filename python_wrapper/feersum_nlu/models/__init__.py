@@ -26,6 +26,7 @@ from __future__ import absolute_import
 
 # import models into model package
 from .create_details import CreateDetails
+from .dashboard_detail import DashboardDetail
 from .date import Date
 from .date_list import DateList
 from .duckling_ent_create_details import DucklingEntCreateDetails
@@ -35,6 +36,9 @@ from .entity import Entity
 from .entity_list import EntityList
 from .instance_detail import InstanceDetail
 from .instance_detail_list import InstanceDetailList
+from .label import Label
+from .label_list import LabelList
+from .label_pair import LabelPair
 from .labeled_word_manifold import LabeledWordManifold
 from .labelled_text_sample import LabelledTextSample
 from .labelled_text_sample_list import LabelledTextSampleList

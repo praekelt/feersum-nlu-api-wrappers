@@ -6,9 +6,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**intent_classifier_add_training_samples**](IntentClassifiersApi.md#intent_classifier_add_training_samples) | **POST** /intent_classifiers/{instance_name}/training_samples | Add training samples.
 [**intent_classifier_create**](IntentClassifiersApi.md#intent_classifier_create) | **POST** /intent_classifiers | Create an intent classifier.
+[**intent_classifier_curate**](IntentClassifiersApi.md#intent_classifier_curate) | **POST** /intent_classifiers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
 [**intent_classifier_del_training_samples**](IntentClassifiersApi.md#intent_classifier_del_training_samples) | **DELETE** /intent_classifiers/{instance_name}/training_samples | Delete training samples.
 [**intent_classifier_get_details**](IntentClassifiersApi.md#intent_classifier_get_details) | **GET** /intent_classifiers/{instance_name} | Get details of named instance.
 [**intent_classifier_get_details_all**](IntentClassifiersApi.md#intent_classifier_get_details_all) | **GET** /intent_classifiers | Get list of loaded intent classifiers.
+[**intent_classifier_get_labels**](IntentClassifiersApi.md#intent_classifier_get_labels) | **GET** /intent_classifiers/{instance_name}/get_labels | Get list of possible labels.
 [**intent_classifier_get_training_samples**](IntentClassifiersApi.md#intent_classifier_get_training_samples) | **GET** /intent_classifiers/{instance_name}/training_samples | Get training samples.
 [**intent_classifier_retrieve**](IntentClassifiersApi.md#intent_classifier_retrieve) | **POST** /intent_classifiers/{instance_name}/retrieve | Classify intent.
 [**intent_classifier_train**](IntentClassifiersApi.md#intent_classifier_train) | **POST** /intent_classifiers/{instance_name}/train | Train the named intent classifier.
@@ -110,6 +112,61 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**InstanceDetail**](InstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **intent_classifier_curate**
+> LabelledTextSampleList intent_classifier_curate(instance_name, label_pair)
+
+Endpoint to aid in the curation of a model instance.
+
+Access the list of samples behind a cell of the confusion matrix of the training or testing samples.
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.IntentClassifiersApi()
+instance_name = 'instance_name_example' # str | The name of the model instance.
+label_pair = feersum_nlu.LabelPair() # LabelPair | The true label, predicted label and matrix (train/test) to use.
+
+try: 
+    # Endpoint to aid in the curation of a model instance.
+    api_response = api_instance.intent_classifier_curate(instance_name, label_pair)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling IntentClassifiersApi->intent_classifier_curate: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **label_pair** | [**LabelPair**](LabelPair.md)| The true label, predicted label and matrix (train/test) to use. | 
+
+### Return type
+
+[**LabelledTextSampleList**](LabelledTextSampleList.md)
 
 ### Authorization
 
@@ -265,6 +322,59 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**InstanceDetailList**](InstanceDetailList.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **intent_classifier_get_labels**
+> LabelList intent_classifier_get_labels(instance_name)
+
+Get list of possible labels.
+
+Returns the classifier's list of possible class labels.
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.IntentClassifiersApi()
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try: 
+    # Get list of possible labels.
+    api_response = api_instance.intent_classifier_get_labels(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling IntentClassifiersApi->intent_classifier_get_labels: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+
+### Return type
+
+[**LabelList**](LabelList.md)
 
 ### Authorization
 

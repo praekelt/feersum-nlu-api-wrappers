@@ -6,8 +6,8 @@ from feersum_nlu.rest import ApiException
 # Configure API key authorization: APIKeyHeader
 feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
-# feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
-feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8100/nlu/v2"
+feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
+# feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8100/nlu/v2"
 
 api_instance = feersum_nlu.TextClassifiersApi()
 
@@ -73,6 +73,22 @@ try:
 
     print("Get the details of specific named loaded text classifiers:")
     api_response = api_instance.text_classifier_get_details(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be available
+    # after training.
+    print("Get the labels of named loaded text classifiers:")
+    api_response = api_instance.text_classifier_get_labels(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Get some curate details of specific named loaded text classifier:")
+    # Use the same labels as returned in the confusion matrix.
+    label_pair = feersum_nlu.LabelPair(matrix_name='train', true_label='claim', predicted_label='claim')
+    api_response = api_instance.text_classifier_curate(instance_name, label_pair)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()

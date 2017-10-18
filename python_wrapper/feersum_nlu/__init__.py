@@ -26,6 +26,7 @@ from __future__ import absolute_import
 
 # import models into sdk package
 from .models.create_details import CreateDetails
+from .models.dashboard_detail import DashboardDetail
 from .models.date import Date
 from .models.date_list import DateList
 from .models.duckling_ent_create_details import DucklingEntCreateDetails
@@ -35,6 +36,9 @@ from .models.entity import Entity
 from .models.entity_list import EntityList
 from .models.instance_detail import InstanceDetail
 from .models.instance_detail_list import InstanceDetailList
+from .models.label import Label
+from .models.label_list import LabelList
+from .models.label_pair import LabelPair
 from .models.labeled_word_manifold import LabeledWordManifold
 from .models.labelled_text_sample import LabelledTextSample
 from .models.labelled_text_sample_list import LabelledTextSampleList
@@ -57,6 +61,7 @@ from .models.total_samples import TotalSamples
 from .models.train_details import TrainDetails
 
 # import apis into sdk package
+from .apis.dashboard_api import DashboardApi
 from .apis.date_parsers_api import DateParsersApi
 from .apis.duckling_entity_extractors_api import DucklingEntityExtractorsApi
 from .apis.faq_matchers_api import FaqMatchersApi

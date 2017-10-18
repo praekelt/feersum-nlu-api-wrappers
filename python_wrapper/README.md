@@ -56,16 +56,14 @@ feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 # create an instance of the API class
-api_instance = feersum_nlu.DateParsersApi()
-instance_name = 'instance_name_example' # str | The name of the model instance.
-text_input = feersum_nlu.TextInput() # TextInput | The input text.
+api_instance = feersum_nlu.DashboardApi()
 
 try:
-    # Extract dates.
-    api_response = api_instance.date_parser_retrieve(instance_name, text_input)
+    # Your service dashboard.
+    api_response = api_instance.dashboard_get_details()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling DateParsersApi->date_parser_retrieve: %s\n" % e)
+    print("Exception when calling DashboardApi->dashboard_get_details: %s\n" % e)
 
 ```
 
@@ -75,6 +73,7 @@ All URIs are relative to *http://nlu.playground.feersum.io:8100/nlu/v2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DashboardApi* | [**dashboard_get_details**](docs/DashboardApi.md#dashboard_get_details) | **GET** /dashboard | Your service dashboard.
 *DateParsersApi* | [**date_parser_retrieve**](docs/DateParsersApi.md#date_parser_retrieve) | **POST** /date_parsers/{instance_name}/retrieve | Extract dates.
 *DucklingEntityExtractorsApi* | [**duckling_entity_extractor_create**](docs/DucklingEntityExtractorsApi.md#duckling_entity_extractor_create) | **POST** /duckling_entity_extractors | Create a duckling entity extractor.
 *DucklingEntityExtractorsApi* | [**duckling_entity_extractor_get_details**](docs/DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_details) | **GET** /duckling_entity_extractors/{instance_name} | Get details of named instance.
@@ -82,23 +81,28 @@ Class | Method | HTTP request | Description
 *DucklingEntityExtractorsApi* | [**duckling_entity_extractor_retrieve**](docs/DucklingEntityExtractorsApi.md#duckling_entity_extractor_retrieve) | **POST** /duckling_entity_extractors/{instance_name}/retrieve | Extract information based on the regular expression.
 *FaqMatchersApi* | [**faq_matcher_add_training_samples**](docs/FaqMatchersApi.md#faq_matcher_add_training_samples) | **POST** /faq_matchers/{instance_name}/training_samples | Add training samples.
 *FaqMatchersApi* | [**faq_matcher_create**](docs/FaqMatchersApi.md#faq_matcher_create) | **POST** /faq_matchers | Create an FAQ matcher.
+*FaqMatchersApi* | [**faq_matcher_curate**](docs/FaqMatchersApi.md#faq_matcher_curate) | **POST** /faq_matchers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
 *FaqMatchersApi* | [**faq_matcher_del_training_samples**](docs/FaqMatchersApi.md#faq_matcher_del_training_samples) | **DELETE** /faq_matchers/{instance_name}/training_samples | Delete training samples.
 *FaqMatchersApi* | [**faq_matcher_get_details**](docs/FaqMatchersApi.md#faq_matcher_get_details) | **GET** /faq_matchers/{instance_name} | Get details of named instance.
 *FaqMatchersApi* | [**faq_matcher_get_details_all**](docs/FaqMatchersApi.md#faq_matcher_get_details_all) | **GET** /faq_matchers | Get list of loaded FAQ matchers.
+*FaqMatchersApi* | [**faq_matcher_get_labels**](docs/FaqMatchersApi.md#faq_matcher_get_labels) | **GET** /faq_matchers/{instance_name}/get_labels | Get list of possible labels.
 *FaqMatchersApi* | [**faq_matcher_get_training_samples**](docs/FaqMatchersApi.md#faq_matcher_get_training_samples) | **GET** /faq_matchers/{instance_name}/training_samples | Get training samples.
 *FaqMatchersApi* | [**faq_matcher_retrieve**](docs/FaqMatchersApi.md#faq_matcher_retrieve) | **POST** /faq_matchers/{instance_name}/retrieve | Match retrieve and FAQ.
 *FaqMatchersApi* | [**faq_matcher_train**](docs/FaqMatchersApi.md#faq_matcher_train) | **POST** /faq_matchers/{instance_name}/train | Train the named FAQ matcher.
 *IntentClassifiersApi* | [**intent_classifier_add_training_samples**](docs/IntentClassifiersApi.md#intent_classifier_add_training_samples) | **POST** /intent_classifiers/{instance_name}/training_samples | Add training samples.
 *IntentClassifiersApi* | [**intent_classifier_create**](docs/IntentClassifiersApi.md#intent_classifier_create) | **POST** /intent_classifiers | Create an intent classifier.
+*IntentClassifiersApi* | [**intent_classifier_curate**](docs/IntentClassifiersApi.md#intent_classifier_curate) | **POST** /intent_classifiers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
 *IntentClassifiersApi* | [**intent_classifier_del_training_samples**](docs/IntentClassifiersApi.md#intent_classifier_del_training_samples) | **DELETE** /intent_classifiers/{instance_name}/training_samples | Delete training samples.
 *IntentClassifiersApi* | [**intent_classifier_get_details**](docs/IntentClassifiersApi.md#intent_classifier_get_details) | **GET** /intent_classifiers/{instance_name} | Get details of named instance.
 *IntentClassifiersApi* | [**intent_classifier_get_details_all**](docs/IntentClassifiersApi.md#intent_classifier_get_details_all) | **GET** /intent_classifiers | Get list of loaded intent classifiers.
+*IntentClassifiersApi* | [**intent_classifier_get_labels**](docs/IntentClassifiersApi.md#intent_classifier_get_labels) | **GET** /intent_classifiers/{instance_name}/get_labels | Get list of possible labels.
 *IntentClassifiersApi* | [**intent_classifier_get_training_samples**](docs/IntentClassifiersApi.md#intent_classifier_get_training_samples) | **GET** /intent_classifiers/{instance_name}/training_samples | Get training samples.
 *IntentClassifiersApi* | [**intent_classifier_retrieve**](docs/IntentClassifiersApi.md#intent_classifier_retrieve) | **POST** /intent_classifiers/{instance_name}/retrieve | Classify intent.
 *IntentClassifiersApi* | [**intent_classifier_train**](docs/IntentClassifiersApi.md#intent_classifier_train) | **POST** /intent_classifiers/{instance_name}/train | Train the named intent classifier.
 *Lr4LanguageRecognisersApi* | [**lr4_language_recogniser_create**](docs/Lr4LanguageRecognisersApi.md#lr4_language_recogniser_create) | **POST** /lr4_language_recognisers | Create a LR4 text language detector.
 *Lr4LanguageRecognisersApi* | [**lr4_language_recogniser_get_details**](docs/Lr4LanguageRecognisersApi.md#lr4_language_recogniser_get_details) | **GET** /lr4_language_recognisers/{instance_name} | Get details of named instance.
 *Lr4LanguageRecognisersApi* | [**lr4_language_recogniser_get_details_all**](docs/Lr4LanguageRecognisersApi.md#lr4_language_recogniser_get_details_all) | **GET** /lr4_language_recognisers | Get list of loaded LR4 text language detectors.
+*Lr4LanguageRecognisersApi* | [**lr4_language_recogniser_get_labels**](docs/Lr4LanguageRecognisersApi.md#lr4_language_recogniser_get_labels) | **GET** /lr4_language_recognisers/{instance_name}/get_labels | Get list of possible labels.
 *Lr4LanguageRecognisersApi* | [**lr4_language_recogniser_retrieve**](docs/Lr4LanguageRecognisersApi.md#lr4_language_recogniser_retrieve) | **POST** /lr4_language_recognisers/{instance_name}/retrieve | Recognise the language the text is written in.
 *RegexEntityExtractorsApi* | [**regex_entity_extractor_create**](docs/RegexEntityExtractorsApi.md#regex_entity_extractor_create) | **POST** /regex_entity_extractors | Create a regular expression entity extractor.
 *RegexEntityExtractorsApi* | [**regex_entity_extractor_get_details**](docs/RegexEntityExtractorsApi.md#regex_entity_extractor_get_details) | **GET** /regex_entity_extractors/{instance_name} | Get details of named instance.
@@ -111,9 +115,11 @@ Class | Method | HTTP request | Description
 *SimilarityEntityExtractorsApi* | [**similarity_entity_extractor_retrieve**](docs/SimilarityEntityExtractorsApi.md#similarity_entity_extractor_retrieve) | **POST** /similarity_entity_extractors/{instance_name}/retrieve | Extract information based on word similarity.
 *TextClassifiersApi* | [**text_classifier_add_training_samples**](docs/TextClassifiersApi.md#text_classifier_add_training_samples) | **POST** /text_classifiers/{instance_name}/training_samples | Add training samples.
 *TextClassifiersApi* | [**text_classifier_create**](docs/TextClassifiersApi.md#text_classifier_create) | **POST** /text_classifiers | Create a text classifier.
+*TextClassifiersApi* | [**text_classifier_curate**](docs/TextClassifiersApi.md#text_classifier_curate) | **POST** /text_classifiers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
 *TextClassifiersApi* | [**text_classifier_del_training_samples**](docs/TextClassifiersApi.md#text_classifier_del_training_samples) | **DELETE** /text_classifiers/{instance_name}/training_samples | Delete training samples.
 *TextClassifiersApi* | [**text_classifier_get_details**](docs/TextClassifiersApi.md#text_classifier_get_details) | **GET** /text_classifiers/{instance_name} | Get details of named instance.
 *TextClassifiersApi* | [**text_classifier_get_details_all**](docs/TextClassifiersApi.md#text_classifier_get_details_all) | **GET** /text_classifiers | Get list of loaded text classifiers.
+*TextClassifiersApi* | [**text_classifier_get_labels**](docs/TextClassifiersApi.md#text_classifier_get_labels) | **GET** /text_classifiers/{instance_name}/get_labels | Get list of possible labels.
 *TextClassifiersApi* | [**text_classifier_get_training_samples**](docs/TextClassifiersApi.md#text_classifier_get_training_samples) | **GET** /text_classifiers/{instance_name}/training_samples | Get training samples.
 *TextClassifiersApi* | [**text_classifier_retrieve**](docs/TextClassifiersApi.md#text_classifier_retrieve) | **POST** /text_classifiers/{instance_name}/retrieve | Classify text.
 *TextClassifiersApi* | [**text_classifier_train**](docs/TextClassifiersApi.md#text_classifier_train) | **POST** /text_classifiers/{instance_name}/train | Train the named text classifier.
@@ -124,6 +130,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [CreateDetails](docs/CreateDetails.md)
+ - [DashboardDetail](docs/DashboardDetail.md)
  - [Date](docs/Date.md)
  - [DateList](docs/DateList.md)
  - [DucklingEntCreateDetails](docs/DucklingEntCreateDetails.md)
@@ -133,6 +140,9 @@ Class | Method | HTTP request | Description
  - [EntityList](docs/EntityList.md)
  - [InstanceDetail](docs/InstanceDetail.md)
  - [InstanceDetailList](docs/InstanceDetailList.md)
+ - [Label](docs/Label.md)
+ - [LabelList](docs/LabelList.md)
+ - [LabelPair](docs/LabelPair.md)
  - [LabeledWordManifold](docs/LabeledWordManifold.md)
  - [LabelledTextSample](docs/LabelledTextSample.md)
  - [LabelledTextSampleList](docs/LabelledTextSampleList.md)

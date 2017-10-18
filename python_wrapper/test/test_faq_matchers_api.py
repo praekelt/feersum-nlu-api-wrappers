@@ -58,6 +58,14 @@ class TestFaqMatchersApi(unittest.TestCase):
         """
         pass
 
+    def test_faq_matcher_curate(self):
+        """
+        Test case for faq_matcher_curate
+
+        Endpoint to aid in the curation of a model instance.
+        """
+        pass
+
     def test_faq_matcher_del_training_samples(self):
         """
         Test case for faq_matcher_del_training_samples
@@ -79,6 +87,14 @@ class TestFaqMatchersApi(unittest.TestCase):
         Test case for faq_matcher_get_details_all
 
         Get list of loaded FAQ matchers.
+        """
+        pass
+
+    def test_faq_matcher_get_labels(self):
+        """
+        Test case for faq_matcher_get_labels
+
+        Get list of possible labels.
         """
         pass
 

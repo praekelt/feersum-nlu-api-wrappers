@@ -66,6 +66,14 @@ class TestLr4LanguageRecognisersApi(unittest.TestCase):
         """
         pass
 
+    def test_lr4_language_recogniser_get_labels(self):
+        """
+        Test case for lr4_language_recogniser_get_labels
+
+        Get list of possible labels.
+        """
+        pass
+
     def test_lr4_language_recogniser_retrieve(self):
         """
         Test case for lr4_language_recogniser_retrieve
