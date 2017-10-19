@@ -84,6 +84,8 @@ The benefit of installing the feersum_nlu module into you Python environment is 
 
 Running the Examples
 ====================
+If you use an IDE like PyCharm you can simply open the python_wrapper folder with the IDE.
+
 To start executing example notebooks run:
 
 .. code-block:: sh
