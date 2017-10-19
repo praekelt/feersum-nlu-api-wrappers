@@ -76,6 +76,7 @@ Alternatively to install the feersum_nlu wrapper module into your Python environ
 .. code-block:: sh
 
     $ make requirements
+    $ make deps
     $ python setup.py install
 
 The benefit of installing the feersum_nlu module into you Python environment is that you can more easily use it from outside of the python_wrapper folder and in your own projects.
@@ -89,7 +90,9 @@ To start executing example notebooks run:
 
     $ jupyter notebook
 
-Or alternatively run the example python scripts in the examples folder e.g.:
+The notebooks are all in the example_notebooks folder.
+
+Alternatively run the example python scripts in the examples folder e.g.:
 
 .. code-block:: sh
 
