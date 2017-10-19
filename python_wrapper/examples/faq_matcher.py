@@ -127,7 +127,7 @@ try:
 
     print("Get some curate details of specific named loaded FAQ matcher:")
     # Use the same labels as returned in the confusion matrix.
-    label_pair = feersum_nlu.LabelPair(matrix_name='train', true_label='0', predicted_label='0')
+    label_pair = feersum_nlu.ClassLabelPair(matrix_name='train', true_label='0', predicted_label='0')
     api_response = api_instance.faq_matcher_curate(instance_name, label_pair)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)

@@ -87,7 +87,7 @@ try:
 
     print("Get some curate details of specific named loaded text classifier:")
     # Use the same labels as returned in the confusion matrix.
-    label_pair = feersum_nlu.LabelPair(matrix_name='train', true_label='claim', predicted_label='claim')
+    label_pair = feersum_nlu.ClassLabelPair(matrix_name='train', true_label='claim', predicted_label='claim')
     api_response = api_instance.text_classifier_curate(instance_name, label_pair)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)

@@ -104,7 +104,7 @@ try:
 
     print("Get some curate details of specific named loaded intent classifier:")
     # Use the same labels as returned in the confusion matrix.
-    label_pair = feersum_nlu.LabelPair(matrix_name='train', true_label='1', predicted_label='1')
+    label_pair = feersum_nlu.ClassLabelPair(matrix_name='train', true_label='1', predicted_label='1')
     api_response = api_instance.intent_classifier_curate(instance_name, label_pair)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)

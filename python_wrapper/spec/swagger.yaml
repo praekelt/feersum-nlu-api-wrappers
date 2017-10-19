@@ -284,7 +284,7 @@ paths:
         200:
           description: "The list of possible labels."
           schema:
-            $ref: "#/definitions/label_list"
+            $ref: "#/definitions/class_label_list"
         400:
           description: "bad request"
       x-swagger-router-controller: "rest_api.flask_server"
@@ -307,7 +307,7 @@ paths:
         description: "The true label, predicted label and matrix (train/test) to use."
         required: true
         schema:
-          $ref: "#/definitions/label_pair"
+          $ref: "#/definitions/class_label_pair"
       responses:
         200:
           description: "The list of labeled text samples."
@@ -567,7 +567,7 @@ paths:
         200:
           description: "The list of possible labels."
           schema:
-            $ref: "#/definitions/label_list"
+            $ref: "#/definitions/class_label_list"
         400:
           description: "bad request"
       x-swagger-router-controller: "rest_api.flask_server"
@@ -590,7 +590,7 @@ paths:
         description: "The true label, predicted label and matrix (train/test) to use."
         required: true
         schema:
-          $ref: "#/definitions/label_pair"
+          $ref: "#/definitions/class_label_pair"
       responses:
         200:
           description: "The list of labeled text samples."
@@ -797,7 +797,7 @@ paths:
         200:
           description: "The list of possible labels."
           schema:
-            $ref: "#/definitions/label_list"
+            $ref: "#/definitions/class_label_list"
         400:
           description: "bad request"
       x-swagger-router-controller: "rest_api.flask_server"
@@ -820,7 +820,7 @@ paths:
         description: "The true label, predicted label and matrix (train/test) to use."
         required: true
         schema:
-          $ref: "#/definitions/label_pair"
+          $ref: "#/definitions/class_label_pair"
       responses:
         200:
           description: "The list of labeled text samples."
@@ -1246,7 +1246,7 @@ paths:
         200:
           description: "The list of possible labels."
           schema:
-            $ref: "#/definitions/label_list"
+            $ref: "#/definitions/class_label_list"
         400:
           description: "bad request"
       x-swagger-router-controller: "rest_api.flask_server"
@@ -1256,11 +1256,31 @@ securityDefinitions:
     name: "AUTH_TOKEN"
     in: "header"
 definitions:
+  dashboard_model_detail:
+    type: "object"
+    required:
+    - "model_type"
+    - "name"
+    properties:
+      name:
+        type: "string"
+        description: "The name of the model instance."
+      desc:
+        type: "string"
+        description: "A longer description of the model instance's purpose in life."
+      peak_api_hit_rate:
+        type: "number"
+        description: "The peak api hit rate (hits/s) over the last couple of window\
+          \ periods. A window period is in the order of 5 minutes."
+      model_type:
+        type: "string"
+        description: "The type of this model."
+    description: "The model instance detail."
   dashboard_detail:
     type: "object"
     required:
     - "api_version"
-    - "object_list"
+    - "model_list"
     - "peak_api_hit_rate"
     - "service_name"
     properties:
@@ -1274,12 +1294,16 @@ definitions:
         type: "number"
         description: "The peak api hit rate (hits/s) over the last couple of window\
           \ periods. A window period is in the order of 5 minutes."
-      object_list:
-        $ref: "#/definitions/instance_detail_list"
+      model_list:
+        type: "array"
+        description: "A list of models' instance details."
+        items:
+          $ref: "#/definitions/dashboard_model_detail"
     description: "Your dashboard content."
   instance_detail:
     type: "object"
     required:
+    - "id"
     - "name"
     properties:
       name:
@@ -1294,10 +1318,6 @@ definitions:
       training_accuracy:
         type: "number"
         description: "The accuracy of the model as measured on the training set."
-      peak_api_hit_rate:
-        type: "number"
-        description: "The peak api hit rate (hits/s) over the last couple of window\
-          \ periods. A window period is in the order of 5 minutes."
       training_stamp:
         type: "string"
         description: "The time when the training operation concluded."
@@ -1314,9 +1334,6 @@ definitions:
           \ it maps an FAQ answer ID to the string answer which may be either a label\
           \ or the full text answer."
         properties: {}
-      model_type:
-        type: "string"
-        description: "The type of this model."
     description: "The model instance detail."
   instance_detail_list:
     type: "array"
@@ -1585,20 +1602,15 @@ definitions:
     description: "A list of scored and sorted class labels."
     items:
       $ref: "#/definitions/scored_label"
-  label_list:
+  class_label:
+    type: "string"
+    description: "A class label."
+  class_label_list:
     type: "array"
     description: "A list of possible class labels."
     items:
-      $ref: "#/definitions/label"
-  label:
-    type: "object"
-    required:
-    - "label"
-    properties:
-      label:
-        type: "string"
-    description: "A class label."
-  label_pair:
+      $ref: "#/definitions/class_label"
+  class_label_pair:
     type: "object"
     required:
     - "matrix_name"
@@ -1611,7 +1623,8 @@ definitions:
         type: "string"
       matrix_name:
         type: "string"
-    description: "The true label, predicted label and matrix (train/test) to use."
+    description: "The ground truth label, predicted label and matrix (train/test)\
+      \ to use."
   date:
     type: "object"
     required:
@@ -1697,7 +1710,7 @@ parameters:
     description: "The true label, predicted label and matrix (train/test) to use."
     required: true
     schema:
-      $ref: "#/definitions/label_pair"
+      $ref: "#/definitions/class_label_pair"
   body_param_regex_ent_create_details:
     in: "body"
     name: "regex_ent_create_details"
@@ -1783,7 +1796,7 @@ responses:
   labels:
     description: "The list of possible labels."
     schema:
-      $ref: "#/definitions/label_list"
+      $ref: "#/definitions/class_label_list"
   lr4_instance_detail:
     description: "The model instance detail"
     schema:

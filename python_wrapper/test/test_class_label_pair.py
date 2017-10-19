@@ -30,11 +30,11 @@ import unittest
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
-from feersum_nlu.models.label import Label
+from feersum_nlu.models.class_label_pair import ClassLabelPair
 
 
-class TestLabel(unittest.TestCase):
-    """ Label unit test stubs """
+class TestClassLabelPair(unittest.TestCase):
+    """ ClassLabelPair unit test stubs """
 
     def setUp(self):
         pass
@@ -42,11 +42,11 @@ class TestLabel(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testLabel(self):
+    def testClassLabelPair(self):
         """
-        Test Label
+        Test ClassLabelPair
         """
-        model = feersum_nlu.models.label.Label()
+        model = feersum_nlu.models.class_label_pair.ClassLabelPair()
 
 
 if __name__ == '__main__':

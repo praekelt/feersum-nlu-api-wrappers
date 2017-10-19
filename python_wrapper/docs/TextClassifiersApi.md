@@ -147,7 +147,7 @@ feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.TextClassifiersApi()
 instance_name = 'instance_name_example' # str | The name of the model instance.
-label_pair = feersum_nlu.LabelPair() # LabelPair | The true label, predicted label and matrix (train/test) to use.
+label_pair = feersum_nlu.ClassLabelPair() # ClassLabelPair | The true label, predicted label and matrix (train/test) to use.
 
 try: 
     # Endpoint to aid in the curation of a model instance.
@@ -162,7 +162,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **label_pair** | [**LabelPair**](LabelPair.md)| The true label, predicted label and matrix (train/test) to use. | 
+ **label_pair** | [**ClassLabelPair**](ClassLabelPair.md)| The true label, predicted label and matrix (train/test) to use. | 
 
 ### Return type
 
@@ -335,7 +335,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_get_labels**
-> LabelList text_classifier_get_labels(instance_name)
+> ClassLabelList text_classifier_get_labels(instance_name)
 
 Get list of possible labels.
 
@@ -374,7 +374,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LabelList**](LabelList.md)
+[**ClassLabelList**](ClassLabelList.md)
 
 ### Authorization
 

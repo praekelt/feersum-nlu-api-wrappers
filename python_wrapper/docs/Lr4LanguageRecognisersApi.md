@@ -167,7 +167,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **lr4_language_recogniser_get_labels**
-> LabelList lr4_language_recogniser_get_labels(instance_name)
+> ClassLabelList lr4_language_recogniser_get_labels(instance_name)
 
 Get list of possible labels.
 
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LabelList**](LabelList.md)
+[**ClassLabelList**](ClassLabelList.md)
 
 ### Authorization
 

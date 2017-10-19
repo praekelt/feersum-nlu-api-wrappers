@@ -30,11 +30,11 @@ import unittest
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
-from feersum_nlu.models.label_list import LabelList
+from feersum_nlu.models.dashboard_model_detail import DashboardModelDetail
 
 
-class TestLabelList(unittest.TestCase):
-    """ LabelList unit test stubs """
+class TestDashboardModelDetail(unittest.TestCase):
+    """ DashboardModelDetail unit test stubs """
 
     def setUp(self):
         pass
@@ -42,11 +42,11 @@ class TestLabelList(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testLabelList(self):
+    def testDashboardModelDetail(self):
         """
-        Test LabelList
+        Test DashboardModelDetail
         """
-        model = feersum_nlu.models.label_list.LabelList()
+        model = feersum_nlu.models.dashboard_model_detail.DashboardModelDetail()
 
 
 if __name__ == '__main__':

@@ -129,8 +129,12 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ClassLabel](docs/ClassLabel.md)
+ - [ClassLabelList](docs/ClassLabelList.md)
+ - [ClassLabelPair](docs/ClassLabelPair.md)
  - [CreateDetails](docs/CreateDetails.md)
  - [DashboardDetail](docs/DashboardDetail.md)
+ - [DashboardModelDetail](docs/DashboardModelDetail.md)
  - [Date](docs/Date.md)
  - [DateList](docs/DateList.md)
  - [DucklingEntCreateDetails](docs/DucklingEntCreateDetails.md)
@@ -140,9 +144,6 @@ Class | Method | HTTP request | Description
  - [EntityList](docs/EntityList.md)
  - [InstanceDetail](docs/InstanceDetail.md)
  - [InstanceDetailList](docs/InstanceDetailList.md)
- - [Label](docs/Label.md)
- - [LabelList](docs/LabelList.md)
- - [LabelPair](docs/LabelPair.md)
  - [LabeledWordManifold](docs/LabeledWordManifold.md)
  - [LabelledTextSample](docs/LabelledTextSample.md)
  - [LabelledTextSampleList](docs/LabelledTextSampleList.md)

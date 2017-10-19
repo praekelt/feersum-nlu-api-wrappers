@@ -396,7 +396,7 @@ class Lr4LanguageRecognisersApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str instance_name: The name of the model instance. (required)
-        :return: LabelList
+        :return: ClassLabelList
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -423,7 +423,7 @@ class Lr4LanguageRecognisersApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str instance_name: The name of the model instance. (required)
-        :return: LabelList
+        :return: ClassLabelList
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -484,7 +484,7 @@ class Lr4LanguageRecognisersApi(object):
                                             body=body_params,
                                             post_params=form_params,
                                             files=local_var_files,
-                                            response_type='LabelList',
+                                            response_type='ClassLabelList',
                                             auth_settings=auth_settings,
                                             callback=params.get('callback'),
                                             _return_http_data_only=params.get('_return_http_data_only'),
