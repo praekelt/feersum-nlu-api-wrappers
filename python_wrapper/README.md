@@ -69,7 +69,7 @@ except ApiException as e:
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://nlu.playground.feersum.io:8100/nlu/v2*
+All URIs are relative to *http://nlu.playground.feersum.io:443/nlu/v2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

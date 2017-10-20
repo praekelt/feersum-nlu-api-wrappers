@@ -5,7 +5,7 @@ info:
     \ for examples of how to use the API."
   version: "2.0.1"
   title: "Feersum NLU API"
-host: "nlu.playground.feersum.io:8100"
+host: "nlu.playground.feersum.io:443"
 basePath: "/nlu/v2"
 tags:
 - name: "dashboard"
@@ -63,6 +63,7 @@ tags:
     \ embedding is used to find similar words."
 schemes:
 - "http"
+- "https"
 consumes:
 - "application/json"
 produces:
