@@ -6,8 +6,8 @@ from feersum_nlu.rest import ApiException
 # Configure API key authorization: APIKeyHeader
 feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
-# feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
-feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:8100/nlu/v2"
+# feersum_nlu.configuration.host = "http://127.0.0.1:443/nlu/v2"
+feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:443/nlu/v2"
 
 # We'll use the built-in manifolds, not the ones defined below!
 # # === Word manifold to use ===
