@@ -5,6 +5,10 @@ info:
     \ for examples of how to use the API."
   version: "2.0.1"
   title: "Feersum NLU API"
+  contact:
+    name: "Feersum Engine"
+    url: "https://www.feersum.io"
+    email: "nlu@feersum.io"
 host: "nlu.playground.feersum.io:443"
 basePath: "/nlu/v2"
 tags:
@@ -47,10 +51,14 @@ tags:
     \ loads pre-trained language recogniser models trained over a set of languages.\
     \ An 'lid_za' model is available that was trained on all 11 South African languages."
 - name: "date_parsers"
-  description: "The interface to your date parser model instances. Also see the duckling\
-    \ entity extractor which includes durations and intervals."
+  description: "The interface to your date parser model instances. Only one instance\
+    \ is supported and preloaded at the moment. Use the name 'generic' to call this\
+    \ instance. Also see the duckling entity extractor which includes durations and\
+    \ intervals."
 - name: "sentiment_detectors"
-  description: "Interface to your sentiment detector model instances."
+  description: "Interface to your sentiment detector model instances. Only one instance\
+    \ is supported and preloaded at the moment. Use the name 'generic' to call this\
+    \ instance."
 - name: "regex_entity_extractors"
   description: "Interface to your regular expression entity extractor instances."
 - name: "duckling_entity_extractors"
