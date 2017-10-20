@@ -6,17 +6,17 @@ The below commands can be run from a bash or similar terminal
 .. code-block:: sh
 
     # === Setup some environment variables ===
-    SERVICE="nlu.playground.feersum.io:8100"
+    SERVICE="nlu.playground.feersum.io:443"
     AUTH_TOKEN="YOUR_API_KEY"
     
     # Note: One can get the below and more curl commands from 'trying out' commands from the 
-    # swagger generated UI at <http://nlu.playground.feersum.io:8100/nlu/v2/ui/>
+    # swagger generated UI at <https://nlu.playground.feersum.io:8100/nlu/v2/ui/>
 
 
 .. code-block:: sh
 
     # === Detect some sentiment ===
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/sentiment_detectors/generic/retrieve' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/sentiment_detectors/generic/retrieve' \
     	-H 'Content-Type: application/json' \
     	-H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
@@ -26,7 +26,7 @@ The below commands can be run from a bash or similar terminal
 .. code-block:: sh
 
     # === Parse a date ===
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/date_parsers/generic/retrieve' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/date_parsers/generic/retrieve' \
     	-H 'Content-Type: application/json' \
     	-H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
@@ -37,14 +37,14 @@ The below commands can be run from a bash or similar terminal
 
     # === Do text language identification ===
     # Create the model:
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/lr4_language_recognisers' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/lr4_language_recognisers' \
     	-H 'Content-Type: application/json' \
     	-H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
     	-d '{"desc": "LR4 text lang ID model.", "model_file": "lid_za", "name": "test_model"}' 
 
     # Detect the language of a piece of text:
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/lr4_language_recognisers/test_model/retrieve' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/lr4_language_recognisers/test_model/retrieve' \
     	-H 'Content-Type: application/json' \
     	-H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
@@ -55,57 +55,57 @@ The below commands can be run from a bash or similar terminal
 
     # === Do text classification ===
     # Create the model:
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/text_classifiers' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/text_classifiers' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '{"desc": "Example text classifier", "load_from_store": false, "name": "txt_clsfr_ex_1"}' 
 
     # Provide training data:
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '[{"label": "greeting", "text": "hello"}]' 
 
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '[{"label": "greeting", "text": "hi"}]' 
 
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '[{"label": "question", "text": "What is your name?"}]' 
 
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '[{"label": "question", "text": "How do I?"}]' 
 
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '[{"label": "question", "text": "When should one?"}]' 
 
     # Get the training data (for your info):
-    curl -XGET 'http://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
+    curl -XGET 'https://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/training_samples' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN"
 
     # Train the model:
-    curl -XPOST 'http://nlu.playground.feersum.io:8100/nlu/v2/text_classifiers/txt_clsfr_ex_1/train' \
+    curl -XPOST 'https://nlu.playground.feersum.io:8100/nlu/v2/text_classifiers/txt_clsfr_ex_1/train' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '{"immediate_mode": true}' 
 
     # Make predictions using the model:
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/retrieve'
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/retrieve'
         -H 'Content-Type: application/json'
         -H 'Accept: application/json'
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
@@ -116,57 +116,57 @@ The below commands can be run from a bash or similar terminal
 
     # === Do intent classification ===
     # Create the model:
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/intent_classifiers' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/intent_classifiers' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '{"desc": "Example text classifier", "load_from_store": false, "name": "intent_clsfr_ex_1"}' 
 
     # Provide training data:
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/training_samples' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/training_samples' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '[{"label": "greeting", "text": "hello"}]' 
 
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/training_samples' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/training_samples' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '[{"label": "greeting", "text": "hi"}]' 
 
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/training_samples' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/training_samples' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '[{"label": "question", "text": "What is your name?"}]' 
 
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/training_samples' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/training_samples' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '[{"label": "question", "text": "How do I?"}]' 
 
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/training_samples' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/training_samples' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '[{"label": "question", "text": "When should one?"}]' 
 
     # Get the training data (for your info):
-    curl -XGET 'http://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/training_samples' \
+    curl -XGET 'https://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/training_samples' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN"
 
     # Train the model:
-    curl -XPOST 'http://nlu.playground.feersum.io:8100/nlu/v2/intent_classifiers/intent_clsfr_ex_1/train' \
+    curl -XPOST 'https://nlu.playground.feersum.io:8100/nlu/v2/intent_classifiers/intent_clsfr_ex_1/train' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '{"immediate_mode": true}' 
 
     # Make predictions using the model:
-    curl -XPOST 'http://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/retrieve' \
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/retrieve' \
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \

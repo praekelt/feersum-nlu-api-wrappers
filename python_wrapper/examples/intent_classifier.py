@@ -6,12 +6,12 @@ from feersum_nlu.rest import ApiException
 # Configure API key authorization: APIKeyHeader
 feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
-# feersum_nlu.configuration.host = "http://127.0.0.1:443/nlu/v2"
-feersum_nlu.configuration.host = "http://nlu.playground.feersum.io:443/nlu/v2"
+# feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
+feersum_nlu.configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
 
 api_instance = feersum_nlu.IntentClassifiersApi()
 
-instance_name = 'test_intent_clsfr'
+instance_name = 'new'
 
 
 wm_instance_name = 'feers_wm_eng'
