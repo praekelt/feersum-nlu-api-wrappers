@@ -1569,6 +1569,8 @@ definitions:
     properties:
       immediate_mode:
         type: "boolean"
+      threshold:
+        type: "number"
       word_manifold:
         type: "string"
         description: "The word manifold instance to use for training and later inference.\
