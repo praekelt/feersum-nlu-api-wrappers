@@ -58,22 +58,24 @@ curl -XPOST -is 'https://'"$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/traini
 
 #===
 # Train
-
+# - the 'threshold' parameter is useful to filter out weak matches. It is usually set to 0.85.
 curl -XPOST -is 'https://'"$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/train' \
     -H "AUTH_TOKEN: $AUTH_TOKEN" \
     -H "accept: application/json" -H "content-type: application/json" \
-    -d '{"immediate_mode": true, "thresh_hold": 0.85, "word_manifold_list": {"eng": "feers_wm_eng", "afr": "feers_wm_afr"}}'
+    -d '{"immediate_mode": true, "threshold": 1.0, "word_manifold_list": [{"label": "eng", "word_manifold": "feers_wm_eng"}, {"label": "afr", "word_manifold": "feers_wm_afr"}]}'
 
 
 #===
 #Retrieve/test
 
+# - Demonstrate a weak match of petrol to engine.
 curl -XPOST -is 'https://'"$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/retrieve' \
     -H "AUTH_TOKEN: $AUTH_TOKEN" \
     -H "accept: application/json" -H "content-type: application/json" \
     -d '{"text": "I think I need petrol?"}'
 
 
+# - Demonstrate a verb to noun match of verongeluk to ongeluk.
 curl -XPOST -is 'https://'"$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/retrieve' \
     -H "AUTH_TOKEN: $AUTH_TOKEN" \
     -H "accept: application/json" -H "content-type: application/json" \
