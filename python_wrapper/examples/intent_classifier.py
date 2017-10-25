@@ -11,7 +11,7 @@ feersum_nlu.configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
 
 api_instance = feersum_nlu.IntentClassifiersApi()
 
-instance_name = 'new'
+instance_name = 'test_intent_clsfr'
 
 
 wm_instance_name = 'feers_wm_eng'
