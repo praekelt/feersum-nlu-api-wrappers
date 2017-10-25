@@ -49,7 +49,6 @@ class NewWordList(object):
             
         }
 
-
     def to_dict(self):
         """
         Returns the model properties as a dict
