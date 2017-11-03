@@ -4,7 +4,7 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+feersum_nlu.configuration.api_key['AUTH_TOKEN'] = '8e576a56-5f88-4c82-b0dd-ed5a455094f7'
 
 # feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
 feersum_nlu.configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
