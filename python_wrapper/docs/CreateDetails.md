@@ -3,10 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | 
-**desc** | **str** |  | [optional] 
-**input_file** | **str** | Used for things like the input vector file when creating a word embedding. | [optional] 
-**load_from_store** | **bool** |  | 
+**name** | **str** | The sluggy-url-friendly-name of the instance. | 
+**desc** | **str** | The longer existential description of this instance&#39;s purpose in life. | [optional] 
+**input_file** | **str** | The input file/model on the server (if any) to use. | [optional] 
+**load_from_store** | **bool** | Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

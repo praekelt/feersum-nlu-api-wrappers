@@ -12,7 +12,7 @@ feersum_nlu.configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
 api_instance = feersum_nlu.SentimentDetectorsApi()
 
 model_instance_name = 'generic'
-text_input = feersum_nlu.TextInput("I'm not happy.")  # TextInput | The input text.
+text_input = feersum_nlu.TextInput("I very happy.")  # TextInput | The input text.
 
 print()
 
