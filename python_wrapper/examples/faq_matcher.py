@@ -49,22 +49,14 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Hoe kan ek
 # Use specified single manifold; the language defaults to English.
 # train_details = feersum_nlu.TrainDetails(immediate_mode=True, word_manifold=wm_instance_name)
 # OR
-# Use specified list of manifolds for multiple languaages.
+# Use specified list of manifolds for multiple languages.
 word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
                       feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
-                      feersum_nlu.LabeledWordManifold('nbl', 'feers_wm_nbl'),
-                      feersum_nlu.LabeledWordManifold('xho', 'feers_wm_xho'),
-                      feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul'),
-                      feersum_nlu.LabeledWordManifold('ssw', 'feers_wm_ssw'),
-                      feersum_nlu.LabeledWordManifold('nso', 'feers_wm_nso'),
-                      feersum_nlu.LabeledWordManifold('sot', 'feers_wm_sot'),
-                      feersum_nlu.LabeledWordManifold('tsn', 'feers_wm_tsn'),
-                      feersum_nlu.LabeledWordManifold('ven', 'feers_wm_ven'),
-                      feersum_nlu.LabeledWordManifold('tso', 'feers_wm_tso')]
+                      feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul')]
 
 train_details = feersum_nlu.TrainDetails(immediate_mode=True, word_manifold_list=word_manifold_list)
 
-text_input = feersum_nlu.TextInput("Waar kan ek 'n prys kry?")
+text_input = feersum_nlu.TextInput("Where can I get a quote")
 
 print()
 

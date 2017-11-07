@@ -17,7 +17,7 @@ lr4_create_details = \
     feersum_nlu.Lr4CreateDetails(name=instance_name, desc="Test LR4 lang ident model.",
                                  model_file='lid_za')
 
-text_input = feersum_nlu.TextInput("The day after tomorrow at 11:00 in the evening.")
+text_input = feersum_nlu.TextInput("Isakhiwo sami sebiwe?")
 
 print()
 
