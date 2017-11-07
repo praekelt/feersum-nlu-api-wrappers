@@ -60,3 +60,6 @@ from .similarity_instance_detail_list import SimilarityInstanceDetailList
 from .text_input import TextInput
 from .total_samples import TotalSamples
 from .train_details import TrainDetails
+from .word_and_distance import WordAndDistance
+from .word_and_distance_list import WordAndDistanceList
+from .word_and_threshold import WordAndThreshold

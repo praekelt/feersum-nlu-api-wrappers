@@ -54,7 +54,7 @@ class FaqMatchersApi(object):
     def faq_matcher_add_training_samples(self, instance_name, labelled_text_sample_list, **kwargs):
         """
         Add training samples.
-        Add training samples to named faq matcher.
+        Add training samples to named faq matcher. Returns the FAQ matcher's updated number of training samples.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -82,7 +82,7 @@ class FaqMatchersApi(object):
     def faq_matcher_add_training_samples_with_http_info(self, instance_name, labelled_text_sample_list, **kwargs):
         """
         Add training samples.
-        Add training samples to named faq matcher.
+        Add training samples to named faq matcher. Returns the FAQ matcher's updated number of training samples.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -173,7 +173,7 @@ class FaqMatchersApi(object):
     def faq_matcher_create(self, create_details, **kwargs):
         """
         Create an FAQ matcher.
-        Create a new faq matcher or load one from the store.
+        Create a new faq matcher or load one from the store. Returns the details of the new or loaded instance.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -200,7 +200,7 @@ class FaqMatchersApi(object):
     def faq_matcher_create_with_http_info(self, create_details, **kwargs):
         """
         Create an FAQ matcher.
-        Create a new faq matcher or load one from the store.
+        Create a new faq matcher or load one from the store. Returns the details of the new or loaded instance.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -285,7 +285,7 @@ class FaqMatchersApi(object):
     def faq_matcher_curate(self, instance_name, label_pair, **kwargs):
         """
         Endpoint to aid in the curation of a model instance.
-        Access the list of samples behind a cell of the confusion matrix of the training or testing samples.
+        Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -313,7 +313,7 @@ class FaqMatchersApi(object):
     def faq_matcher_curate_with_http_info(self, instance_name, label_pair, **kwargs):
         """
         Endpoint to aid in the curation of a model instance.
-        Access the list of samples behind a cell of the confusion matrix of the training or testing samples.
+        Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -404,7 +404,7 @@ class FaqMatchersApi(object):
     def faq_matcher_del_training_samples(self, instance_name, **kwargs):
         """
         Delete training samples.
-        Delete the training samples of the named FAQ matcher.
+        Delete the training samples of the named FAQ matcher. Returns the deleted samples.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -431,7 +431,7 @@ class FaqMatchersApi(object):
     def faq_matcher_del_training_samples_with_http_info(self, instance_name, **kwargs):
         """
         Delete training samples.
-        Delete the training samples of the named FAQ matcher.
+        Delete the training samples of the named FAQ matcher. Returns the deleted samples.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -628,7 +628,7 @@ class FaqMatchersApi(object):
     def faq_matcher_get_details_all(self, **kwargs):
         """
         Get list of loaded FAQ matchers.
-        Get the list of loaded faq matchers.
+        Returns the list of loaded faq matchers.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -654,7 +654,7 @@ class FaqMatchersApi(object):
     def faq_matcher_get_details_all_with_http_info(self, **kwargs):
         """
         Get list of loaded FAQ matchers.
-        Get the list of loaded faq matchers.
+        Returns the list of loaded faq matchers.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -845,7 +845,7 @@ class FaqMatchersApi(object):
     def faq_matcher_get_training_samples(self, instance_name, **kwargs):
         """
         Get training samples.
-        Get the training samples of the named faq matcher.
+        Returns the training samples of the named faq matcher.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -872,7 +872,7 @@ class FaqMatchersApi(object):
     def faq_matcher_get_training_samples_with_http_info(self, instance_name, **kwargs):
         """
         Get training samples.
-        Get the training samples of the named faq matcher.
+        Returns the training samples of the named faq matcher.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -1076,7 +1076,7 @@ class FaqMatchersApi(object):
     def faq_matcher_train(self, instance_name, train_details, **kwargs):
         """
         Train the named FAQ matcher.
-        Train the named FAQ matcher with the training and testing data already provided.
+        Train the named FAQ matcher with the training and testing data already provided. Returns the updated instance detail.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -1104,7 +1104,7 @@ class FaqMatchersApi(object):
     def faq_matcher_train_with_http_info(self, instance_name, train_details, **kwargs):
         """
         Train the named FAQ matcher.
-        Train the named FAQ matcher with the training and testing data already provided.
+        Train the named FAQ matcher with the training and testing data already provided. Returns the updated instance detail.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function

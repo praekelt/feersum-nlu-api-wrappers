@@ -1,6 +1,6 @@
 # feersum_nlu.Lr4LanguageRecognisersApi
 
-All URIs are relative to *http://nlu.playground.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Create a LR4 text language detector.
 
-Create a new LR4 language detector from the pre-trained model name provided. 'lid_za' is currently the only pre-trained model that is available, but it was trained on all 11 languages and is pretty accurate.
+Create a new LR4 language detector from the pre-trained model name provided. 'lid_za' is currently the only pre-trained model that is available, but it was trained on all 11 languages and is pretty accurate. Returns the detail of the new instance.
 
 ### Example 
 ```python
@@ -122,7 +122,7 @@ Name | Type | Description  | Notes
 
 Get list of loaded LR4 text language detectors.
 
-Get list of loaded LR4 text language detectors.
+Get the list of loaded LR4 text language detectors.
 
 ### Example 
 ```python
@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 
 Recognise the language the text is written in.
 
-Recognise the language the text is written in.
+Recognise the language the text is written in. Returns the list of scored language codes.
 
 ### Example 
 ```python

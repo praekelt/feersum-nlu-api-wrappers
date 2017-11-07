@@ -110,7 +110,7 @@ class DucklingEntCreateDetails(object):
     def load_from_store(self):
         """
         Gets the load_from_store of this DucklingEntCreateDetails.
-
+        Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified.
 
         :return: The load_from_store of this DucklingEntCreateDetails.
         :rtype: bool
@@ -121,7 +121,7 @@ class DucklingEntCreateDetails(object):
     def load_from_store(self, load_from_store):
         """
         Sets the load_from_store of this DucklingEntCreateDetails.
-
+        Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified.
 
         :param load_from_store: The load_from_store of this DucklingEntCreateDetails.
         :type: bool

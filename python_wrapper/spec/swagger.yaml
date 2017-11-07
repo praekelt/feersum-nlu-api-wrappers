@@ -70,7 +70,6 @@ tags:
   description: "Interface to your word similarity entity extractor instances. A word\
     \ embedding is used to find similar words."
 schemes:
-- "http"
 - "https"
 consumes:
 - "application/json"
@@ -116,7 +115,8 @@ paths:
       tags:
       - "text_classifiers"
       summary: "Create a text classifier."
-      description: "Create a new text classifier or load one from the store."
+      description: "Create a new text classifier or load one from the store. Returns\
+        \ the details of the new or loaded instance."
       operationId: "text_classifier_create"
       parameters:
       - in: "body"
@@ -179,7 +179,8 @@ paths:
       tags:
       - "text_classifiers"
       summary: "Add training samples."
-      description: "Add training samples to named text classifier."
+      description: "Add training samples to named text classifier. Returns the classifier's\
+        \ updated number of training samples."
       operationId: "text_classifier_add_training_samples"
       parameters:
       - name: "instance_name"
@@ -205,7 +206,8 @@ paths:
       tags:
       - "text_classifiers"
       summary: "Delete training samples."
-      description: "Delete the training samples of the named text classifier."
+      description: "Delete the training samples of the named text classifier. Returns\
+        \ the deleted samples."
       operationId: "text_classifier_del_training_samples"
       parameters:
       - name: "instance_name"
@@ -227,7 +229,7 @@ paths:
       - "text_classifiers"
       summary: "Train the named text classifier."
       description: "Train the named text classifier with the training and testing\
-        \ data already provided."
+        \ data already provided. Returns the details of the model instance."
       operationId: "text_classifier_train"
       parameters:
       - name: "instance_name"
@@ -302,7 +304,7 @@ paths:
       tags:
       - "text_classifiers"
       summary: "Endpoint to aid in the curation of a model instance."
-      description: "Access the list of samples behind a cell of the confusion matrix\
+      description: "Returns the list of samples behind a cell of the confusion matrix\
         \ of the training or testing samples."
       operationId: "text_classifier_curate"
       parameters:
@@ -332,7 +334,7 @@ paths:
       summary: "Create a word manifold model."
       description: "Create a new word manifold model using an input file or load a\
         \ model from the store. Warning! - These models are quite big and each takes\
-        \ a few seconds to load/create."
+        \ a few seconds to load/create. Returns the details of the new or loaded instance."
       operationId: "word_manifold_create"
       parameters:
       - in: "body"
@@ -356,7 +358,8 @@ paths:
       summary: "Add new words."
       description: "Add new words to the manifold that are similar to existing words\
         \ and save the manifold. Warning! - Because this operation saves the updated\
-        \ word manifold to the store it could take a few seconds to complete."
+        \ word manifold to the store it could take a few seconds to complete. Returns\
+        \ the details of the updated instance."
       operationId: "word_manifold_add_similar_words"
       parameters:
       - name: "instance_name"
@@ -378,12 +381,68 @@ paths:
         400:
           description: "bad request"
       x-swagger-router-controller: "rest_api.flask_server"
+  /word_manifolds/{instance_name}/similar_words:
+    post:
+      tags:
+      - "word_manifolds"
+      summary: "Find similar words."
+      description: "Returns words from the manifold that are similar to the parameter\
+        \ word."
+      operationId: "word_manifold_get_similar_words"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "word_and_threshold"
+        description: "A word token and an accompanying threshold."
+        required: true
+        schema:
+          $ref: "#/definitions/word_and_threshold"
+      responses:
+        200:
+          description: "A list of words with distances."
+          schema:
+            $ref: "#/definitions/word_and_distance_list"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+  /word_manifolds/{instance_name}/spell_correct:
+    post:
+      tags:
+      - "word_manifolds"
+      summary: "Spell correct a word."
+      description: "Spell correct a word replacing it with the most likely word from\
+        \ the manifold. Returns one or more scored candidate words."
+      operationId: "word_manifold_spell_correct"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "text_input"
+        description: "The input text."
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
+      responses:
+        200:
+          description: "A list of words with distances."
+          schema:
+            $ref: "#/definitions/word_and_distance_list"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /intent_classifiers:
     get:
       tags:
       - "intent_classifiers"
       summary: "Get list of loaded intent classifiers."
-      description: "Get the list of loaded intent classifiers."
+      description: "Returns the list of loaded intent classifiers."
       operationId: "intent_classifier_get_details_all"
       parameters: []
       responses:
@@ -398,7 +457,8 @@ paths:
       tags:
       - "intent_classifiers"
       summary: "Create an intent classifier."
-      description: "Create a new intent classifier or load one from the store."
+      description: "Create a new intent classifier or load one from the store. Returns\
+        \ the details of the new or loaded instance."
       operationId: "intent_classifier_create"
       parameters:
       - in: "body"
@@ -420,7 +480,7 @@ paths:
       tags:
       - "intent_classifiers"
       summary: "Get details of named instance."
-      description: "Get the details of the named intent classifier instance."
+      description: "Returns the details of the named intent classifier instance."
       operationId: "intent_classifier_get_details"
       parameters:
       - name: "instance_name"
@@ -441,7 +501,7 @@ paths:
       tags:
       - "intent_classifiers"
       summary: "Get training samples."
-      description: "Get the training samples of the named intent classifier."
+      description: "Returns the training samples of the named intent classifier."
       operationId: "intent_classifier_get_training_samples"
       parameters:
       - name: "instance_name"
@@ -461,7 +521,8 @@ paths:
       tags:
       - "intent_classifiers"
       summary: "Add training samples."
-      description: "Add training samples to named intent classifier."
+      description: "Add training samples to named intent classifier. Returns the classifier's\
+        \ updated number of training samples."
       operationId: "intent_classifier_add_training_samples"
       parameters:
       - name: "instance_name"
@@ -487,7 +548,8 @@ paths:
       tags:
       - "intent_classifiers"
       summary: "Delete training samples."
-      description: "Delete the training samples of the named intent classifier."
+      description: "Delete the training samples of the named intent classifier. Returns\
+        \ the deleted samples."
       operationId: "intent_classifier_del_training_samples"
       parameters:
       - name: "instance_name"
@@ -509,7 +571,7 @@ paths:
       - "intent_classifiers"
       summary: "Train the named intent classifier."
       description: "Train the named intent classifier with the training and testing\
-        \ data already provided."
+        \ data already provided. Returns the updated instance details."
       operationId: "intent_classifier_train"
       parameters:
       - name: "instance_name"
@@ -585,7 +647,7 @@ paths:
       tags:
       - "intent_classifiers"
       summary: "Endpoint to aid in the curation of a model instance."
-      description: "Access the list of samples behind a cell of the confusion matrix\
+      description: "Returns the list of samples behind a cell of the confusion matrix\
         \ of the training or testing samples."
       operationId: "intent_classifier_curate"
       parameters:
@@ -613,7 +675,7 @@ paths:
       tags:
       - "faq_matchers"
       summary: "Get list of loaded FAQ matchers."
-      description: "Get the list of loaded faq matchers."
+      description: "Returns the list of loaded faq matchers."
       operationId: "faq_matcher_get_details_all"
       parameters: []
       responses:
@@ -628,7 +690,8 @@ paths:
       tags:
       - "faq_matchers"
       summary: "Create an FAQ matcher."
-      description: "Create a new faq matcher or load one from the store."
+      description: "Create a new faq matcher or load one from the store. Returns the\
+        \ details of the new or loaded instance."
       operationId: "faq_matcher_create"
       parameters:
       - in: "body"
@@ -671,7 +734,7 @@ paths:
       tags:
       - "faq_matchers"
       summary: "Get training samples."
-      description: "Get the training samples of the named faq matcher."
+      description: "Returns the training samples of the named faq matcher."
       operationId: "faq_matcher_get_training_samples"
       parameters:
       - name: "instance_name"
@@ -691,7 +754,8 @@ paths:
       tags:
       - "faq_matchers"
       summary: "Add training samples."
-      description: "Add training samples to named faq matcher."
+      description: "Add training samples to named faq matcher. Returns the FAQ matcher's\
+        \ updated number of training samples."
       operationId: "faq_matcher_add_training_samples"
       parameters:
       - name: "instance_name"
@@ -717,7 +781,8 @@ paths:
       tags:
       - "faq_matchers"
       summary: "Delete training samples."
-      description: "Delete the training samples of the named FAQ matcher."
+      description: "Delete the training samples of the named FAQ matcher. Returns\
+        \ the deleted samples."
       operationId: "faq_matcher_del_training_samples"
       parameters:
       - name: "instance_name"
@@ -739,7 +804,7 @@ paths:
       - "faq_matchers"
       summary: "Train the named FAQ matcher."
       description: "Train the named FAQ matcher with the training and testing data\
-        \ already provided."
+        \ already provided. Returns the updated instance detail."
       operationId: "faq_matcher_train"
       parameters:
       - name: "instance_name"
@@ -815,7 +880,7 @@ paths:
       tags:
       - "faq_matchers"
       summary: "Endpoint to aid in the curation of a model instance."
-      description: "Access the list of samples behind a cell of the confusion matrix\
+      description: "Returns the list of samples behind a cell of the confusion matrix\
         \ of the training or testing samples."
       operationId: "faq_matcher_curate"
       parameters:
@@ -1156,7 +1221,7 @@ paths:
       tags:
       - "lr4_language_recognisers"
       summary: "Get list of loaded LR4 text language detectors."
-      description: "Get list of loaded LR4 text language detectors."
+      description: "Get the list of loaded LR4 text language detectors."
       operationId: "lr4_language_recogniser_get_details_all"
       parameters: []
       responses:
@@ -1173,7 +1238,8 @@ paths:
       summary: "Create a LR4 text language detector."
       description: "Create a new LR4 language detector from the pre-trained model\
         \ name provided. 'lid_za' is currently the only pre-trained model that is\
-        \ available, but it was trained on all 11 languages and is pretty accurate."
+        \ available, but it was trained on all 11 languages and is pretty accurate.\
+        \ Returns the detail of the new instance."
       operationId: "lr4_language_recogniser_create"
       parameters:
       - in: "body"
@@ -1216,7 +1282,8 @@ paths:
       tags:
       - "lr4_language_recognisers"
       summary: "Recognise the language the text is written in."
-      description: "Recognise the language the text is written in."
+      description: "Recognise the language the text is written in. Returns the list\
+        \ of scored language codes."
       operationId: "lr4_language_recogniser_retrieve"
       parameters:
       - name: "instance_name"
@@ -1465,6 +1532,7 @@ definitions:
       word_manifold:
         type: "string"
         example: "feers_wm_eng"
+        description: "The word manifold used to measure word similarity."
     description: "The model instance detail."
   similarity_instance_detail_list:
     type: "array"
@@ -1548,6 +1616,9 @@ definitions:
       load_from_store:
         type: "boolean"
         example: false
+        description: "Indicates if a pre-existing model with the specified name should\
+          \ be loaded from the model store. Usually set to False in which case a new\
+          \ model is created with details as specified."
     description: "The details of the model instance to create."
   duckling_ent_create_details:
     type: "object"
@@ -1567,6 +1638,9 @@ definitions:
       load_from_store:
         type: "boolean"
         example: false
+        description: "Indicates if a pre-existing model with the specified name should\
+          \ be loaded from the model store. Usually set to False in which case a new\
+          \ model is created with details as specified."
     description: "The details of the model instance to create."
   similarity_ent_create_details:
     type: "object"
@@ -1598,6 +1672,9 @@ definitions:
       load_from_store:
         type: "boolean"
         example: false
+        description: "Indicates if a pre-existing model with the specified name should\
+          \ be loaded from the model store. Usually set to False in which case a new\
+          \ model is created with details as specified."
     description: "The details of the model instance to create."
   lr4_create_details:
     type: "object"
@@ -1646,9 +1723,11 @@ definitions:
       label:
         type: "string"
         example: "eng"
+        description: "The language code label."
       word_manifold:
         type: "string"
         example: "feers_wm_eng"
+        description: "The name of the word manifold to use for the language code."
     description: "A labelled (e.g. lang_code labelled) word manifold instance."
   train_details:
     type: "object"
@@ -1658,6 +1737,8 @@ definitions:
       immediate_mode:
         type: "boolean"
         example: true
+        description: "Causes the API call to be blocking and return only once training\
+          \ is complete. Forced to true in the current implementation."
       threshold:
         type: "number"
         example: 0.84999999999999997779553950749686919152736663818359375
@@ -1693,6 +1774,32 @@ definitions:
         type: "string"
         example: "Hi, you may call me Tom."
     description: "The text input to be classified, matched or parsed."
+  word_and_threshold:
+    type: "object"
+    required:
+    - "threshold"
+    - "word"
+    properties:
+      word:
+        type: "string"
+        example: "cat"
+      threshold:
+        type: "number"
+        example: 0.75
+    description: "A word and a threshold."
+  word_and_distance:
+    type: "object"
+    required:
+    - "distance"
+    - "word"
+    properties:
+      word:
+        type: "string"
+        example: "cat"
+      distance:
+        type: "number"
+        example: 0.75
+    description: "A word and a distance."
   scored_label:
     type: "object"
     required:
@@ -1711,6 +1818,11 @@ definitions:
     description: "A list of scored and sorted class labels."
     items:
       $ref: "#/definitions/scored_label"
+  word_and_distance_list:
+    type: "array"
+    description: "A list of words with distances."
+    items:
+      $ref: "#/definitions/word_and_distance"
   class_label:
     type: "string"
     description: "A class label."
@@ -1832,6 +1944,13 @@ parameters:
     required: true
     schema:
       $ref: "#/definitions/class_label_pair"
+  body_param_word_and_threshold:
+    in: "body"
+    name: "word_and_threshold"
+    description: "A word token and an accompanying threshold."
+    required: true
+    schema:
+      $ref: "#/definitions/word_and_threshold"
   body_param_regex_ent_create_details:
     in: "body"
     name: "regex_ent_create_details"
@@ -1926,10 +2045,6 @@ responses:
     description: "A list of models' instance details"
     schema:
       $ref: "#/definitions/lr4_instance_detail_list"
-  new_word_list:
-    description: "The list of structured dates."
-    schema:
-      $ref: "#/definitions/new_word_list"
   regex_instance_detail:
     description: "The model instance detail"
     schema:
@@ -1958,3 +2073,7 @@ responses:
     description: "The total number of samples of this type in the model."
     schema:
       $ref: "#/definitions/total_samples"
+  word_and_distance_list:
+    description: "A list of words with distances."
+    schema:
+      $ref: "#/definitions/word_and_distance_list"

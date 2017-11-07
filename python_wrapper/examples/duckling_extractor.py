@@ -1,3 +1,5 @@
+""" Example: Shows how the Duckling entity extractor may be used. """
+
 import urllib3
 
 import feersum_nlu

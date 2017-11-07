@@ -30,49 +30,23 @@ import unittest
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
-from feersum_nlu.apis.word_manifolds_api import WordManifoldsApi
+from feersum_nlu.models.word_and_distance import WordAndDistance
 
 
-class TestWordManifoldsApi(unittest.TestCase):
-    """ WordManifoldsApi unit test stubs """
+class TestWordAndDistance(unittest.TestCase):
+    """ WordAndDistance unit test stubs """
 
     def setUp(self):
-        self.api = feersum_nlu.apis.word_manifolds_api.WordManifoldsApi()
+        pass
 
     def tearDown(self):
         pass
 
-    def test_word_manifold_add_similar_words(self):
+    def testWordAndDistance(self):
         """
-        Test case for word_manifold_add_similar_words
-
-        Add new words.
+        Test WordAndDistance
         """
-        pass
-
-    def test_word_manifold_create(self):
-        """
-        Test case for word_manifold_create
-
-        Create a word manifold model.
-        """
-        pass
-
-    def test_word_manifold_get_similar_words(self):
-        """
-        Test case for word_manifold_get_similar_words
-
-        Find similar words.
-        """
-        pass
-
-    def test_word_manifold_spell_correct(self):
-        """
-        Test case for word_manifold_spell_correct
-
-        Spell correct a word.
-        """
-        pass
+        model = feersum_nlu.models.word_and_distance.WordAndDistance()
 
 
 if __name__ == '__main__':

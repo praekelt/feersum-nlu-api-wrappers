@@ -1,3 +1,5 @@
+""" Example: Shows how to get info about the service using the Dashboard endpoint.  """
+
 import urllib3
 
 import feersum_nlu

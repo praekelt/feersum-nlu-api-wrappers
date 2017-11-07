@@ -60,6 +60,9 @@ from .models.similarity_instance_detail_list import SimilarityInstanceDetailList
 from .models.text_input import TextInput
 from .models.total_samples import TotalSamples
 from .models.train_details import TrainDetails
+from .models.word_and_distance import WordAndDistance
+from .models.word_and_distance_list import WordAndDistanceList
+from .models.word_and_threshold import WordAndThreshold
 
 # import apis into sdk package
 from .apis.dashboard_api import DashboardApi

@@ -65,7 +65,7 @@ class TrainDetails(object):
     def immediate_mode(self):
         """
         Gets the immediate_mode of this TrainDetails.
-
+        Causes the API call to be blocking and return only once training is complete. Forced to true in the current implementation.
 
         :return: The immediate_mode of this TrainDetails.
         :rtype: bool
@@ -76,7 +76,7 @@ class TrainDetails(object):
     def immediate_mode(self, immediate_mode):
         """
         Sets the immediate_mode of this TrainDetails.
-
+        Causes the API call to be blocking and return only once training is complete. Forced to true in the current implementation.
 
         :param immediate_mode: The immediate_mode of this TrainDetails.
         :type: bool

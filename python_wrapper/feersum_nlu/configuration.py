@@ -56,7 +56,7 @@ class Configuration(object):
         Constructor
         """
         # Default Base url
-        self.host = "http://nlu.playground.feersum.io:443/nlu/v2"
+        self.host = "https://nlu.playground.feersum.io:443/nlu/v2"
         # Default api client
         self.api_client = None
         # Temp file folder for downloading files

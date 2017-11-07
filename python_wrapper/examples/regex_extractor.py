@@ -1,3 +1,5 @@
+""" Example: Shows how the RegEx entity extractor may be used. """
+
 import urllib3
 
 import feersum_nlu

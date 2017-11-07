@@ -54,7 +54,7 @@ class TextClassifiersApi(object):
     def text_classifier_add_training_samples(self, instance_name, labelled_text_sample_list, **kwargs):
         """
         Add training samples.
-        Add training samples to named text classifier.
+        Add training samples to named text classifier. Returns the classifier's updated number of training samples.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -82,7 +82,7 @@ class TextClassifiersApi(object):
     def text_classifier_add_training_samples_with_http_info(self, instance_name, labelled_text_sample_list, **kwargs):
         """
         Add training samples.
-        Add training samples to named text classifier.
+        Add training samples to named text classifier. Returns the classifier's updated number of training samples.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -173,7 +173,7 @@ class TextClassifiersApi(object):
     def text_classifier_create(self, create_details, **kwargs):
         """
         Create a text classifier.
-        Create a new text classifier or load one from the store.
+        Create a new text classifier or load one from the store. Returns the details of the new or loaded instance.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -200,7 +200,7 @@ class TextClassifiersApi(object):
     def text_classifier_create_with_http_info(self, create_details, **kwargs):
         """
         Create a text classifier.
-        Create a new text classifier or load one from the store.
+        Create a new text classifier or load one from the store. Returns the details of the new or loaded instance.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -285,7 +285,7 @@ class TextClassifiersApi(object):
     def text_classifier_curate(self, instance_name, label_pair, **kwargs):
         """
         Endpoint to aid in the curation of a model instance.
-        Access the list of samples behind a cell of the confusion matrix of the training or testing samples.
+        Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -313,7 +313,7 @@ class TextClassifiersApi(object):
     def text_classifier_curate_with_http_info(self, instance_name, label_pair, **kwargs):
         """
         Endpoint to aid in the curation of a model instance.
-        Access the list of samples behind a cell of the confusion matrix of the training or testing samples.
+        Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -404,7 +404,7 @@ class TextClassifiersApi(object):
     def text_classifier_del_training_samples(self, instance_name, **kwargs):
         """
         Delete training samples.
-        Delete the training samples of the named text classifier.
+        Delete the training samples of the named text classifier. Returns the deleted samples.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -431,7 +431,7 @@ class TextClassifiersApi(object):
     def text_classifier_del_training_samples_with_http_info(self, instance_name, **kwargs):
         """
         Delete training samples.
-        Delete the training samples of the named text classifier.
+        Delete the training samples of the named text classifier. Returns the deleted samples.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -1076,7 +1076,7 @@ class TextClassifiersApi(object):
     def text_classifier_train(self, instance_name, train_details, **kwargs):
         """
         Train the named text classifier.
-        Train the named text classifier with the training and testing data already provided.
+        Train the named text classifier with the training and testing data already provided. Returns the details of the model instance.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -1104,7 +1104,7 @@ class TextClassifiersApi(object):
     def text_classifier_train_with_http_info(self, instance_name, train_details, **kwargs):
         """
         Train the named text classifier.
-        Train the named text classifier with the training and testing data already provided.
+        Train the named text classifier with the training and testing data already provided. Returns the details of the model instance.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function

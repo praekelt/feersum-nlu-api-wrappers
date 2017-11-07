@@ -1,3 +1,5 @@
+""" Example: Shows how to detect the sentiment in a piece of text. """
+
 import urllib3
 
 import feersum_nlu

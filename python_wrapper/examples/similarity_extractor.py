@@ -1,3 +1,5 @@
+""" Example: Shows how the similar word entity extractor may be used. """
+
 import urllib3
 
 import feersum_nlu

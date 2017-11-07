@@ -1,6 +1,6 @@
 # feersum_nlu.SentimentDetectorsApi
 
-All URIs are relative to *http://nlu.playground.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

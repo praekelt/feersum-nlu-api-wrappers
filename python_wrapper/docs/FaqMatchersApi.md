@@ -1,6 +1,6 @@
 # feersum_nlu.FaqMatchersApi
 
-All URIs are relative to *http://nlu.playground.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 Add training samples.
 
-Add training samples to named faq matcher.
+Add training samples to named faq matcher. Returns the FAQ matcher's updated number of training samples.
 
 ### Example 
 ```python
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 Create an FAQ matcher.
 
-Create a new faq matcher or load one from the store.
+Create a new faq matcher or load one from the store. Returns the details of the new or loaded instance.
 
 ### Example 
 ```python
@@ -129,7 +129,7 @@ Name | Type | Description  | Notes
 
 Endpoint to aid in the curation of a model instance.
 
-Access the list of samples behind a cell of the confusion matrix of the training or testing samples.
+Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
 
 ### Example 
 ```python
@@ -184,7 +184,7 @@ Name | Type | Description  | Notes
 
 Delete training samples.
 
-Delete the training samples of the named FAQ matcher.
+Delete the training samples of the named FAQ matcher. Returns the deleted samples.
 
 ### Example 
 ```python
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
 
 Get list of loaded FAQ matchers.
 
-Get the list of loaded faq matchers.
+Returns the list of loaded faq matchers.
 
 ### Example 
 ```python
@@ -392,7 +392,7 @@ Name | Type | Description  | Notes
 
 Get training samples.
 
-Get the training samples of the named faq matcher.
+Returns the training samples of the named faq matcher.
 
 ### Example 
 ```python
@@ -500,7 +500,7 @@ Name | Type | Description  | Notes
 
 Train the named FAQ matcher.
 
-Train the named FAQ matcher with the training and testing data already provided.
+Train the named FAQ matcher with the training and testing data already provided. Returns the updated instance detail.
 
 ### Example 
 ```python

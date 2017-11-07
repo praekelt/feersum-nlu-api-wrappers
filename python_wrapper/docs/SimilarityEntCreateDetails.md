@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **similar_words** | **list[str]** |  | [optional] 
 **threshold** | **float** | The threshold below which words are not similar. | [optional] 
 **word_manifold** | **str** |  | [optional] 
-**load_from_store** | **bool** |  | 
+**load_from_store** | **bool** | Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

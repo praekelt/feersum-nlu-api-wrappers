@@ -1,3 +1,5 @@
+""" Example: Shows how to create, train and use a text classifier. """
+
 import urllib3
 
 import feersum_nlu

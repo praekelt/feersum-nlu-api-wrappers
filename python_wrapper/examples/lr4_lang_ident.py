@@ -1,3 +1,5 @@
+""" Example: Shows how to identify the language a piece of text is written in. """
+
 import urllib3
 
 import feersum_nlu

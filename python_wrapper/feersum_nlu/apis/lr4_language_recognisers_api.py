@@ -54,7 +54,7 @@ class Lr4LanguageRecognisersApi(object):
     def lr4_language_recogniser_create(self, lr4_create_details, **kwargs):
         """
         Create a LR4 text language detector.
-        Create a new LR4 language detector from the pre-trained model name provided. 'lid_za' is currently the only pre-trained model that is available, but it was trained on all 11 languages and is pretty accurate.
+        Create a new LR4 language detector from the pre-trained model name provided. 'lid_za' is currently the only pre-trained model that is available, but it was trained on all 11 languages and is pretty accurate. Returns the detail of the new instance.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -81,7 +81,7 @@ class Lr4LanguageRecognisersApi(object):
     def lr4_language_recogniser_create_with_http_info(self, lr4_create_details, **kwargs):
         """
         Create a LR4 text language detector.
-        Create a new LR4 language detector from the pre-trained model name provided. 'lid_za' is currently the only pre-trained model that is available, but it was trained on all 11 languages and is pretty accurate.
+        Create a new LR4 language detector from the pre-trained model name provided. 'lid_za' is currently the only pre-trained model that is available, but it was trained on all 11 languages and is pretty accurate. Returns the detail of the new instance.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -278,7 +278,7 @@ class Lr4LanguageRecognisersApi(object):
     def lr4_language_recogniser_get_details_all(self, **kwargs):
         """
         Get list of loaded LR4 text language detectors.
-        Get list of loaded LR4 text language detectors.
+        Get the list of loaded LR4 text language detectors.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -304,7 +304,7 @@ class Lr4LanguageRecognisersApi(object):
     def lr4_language_recogniser_get_details_all_with_http_info(self, **kwargs):
         """
         Get list of loaded LR4 text language detectors.
-        Get list of loaded LR4 text language detectors.
+        Get the list of loaded LR4 text language detectors.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -495,7 +495,7 @@ class Lr4LanguageRecognisersApi(object):
     def lr4_language_recogniser_retrieve(self, instance_name, text_input, **kwargs):
         """
         Recognise the language the text is written in.
-        Recognise the language the text is written in.
+        Recognise the language the text is written in. Returns the list of scored language codes.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -523,7 +523,7 @@ class Lr4LanguageRecognisersApi(object):
     def lr4_language_recogniser_retrieve_with_http_info(self, instance_name, text_input, **kwargs):
         """
         Recognise the language the text is written in.
-        Recognise the language the text is written in.
+        Recognise the language the text is written in. Returns the list of scored language codes.
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function

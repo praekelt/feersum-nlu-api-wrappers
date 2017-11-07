@@ -1,3 +1,5 @@
+""" Example: Shows how to use the simple date parser. """
+
 import urllib3
 
 import feersum_nlu

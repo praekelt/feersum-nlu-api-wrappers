@@ -194,7 +194,7 @@ class SimilarityInstanceDetail(object):
     def word_manifold(self):
         """
         Gets the word_manifold of this SimilarityInstanceDetail.
-
+        The word manifold used to measure word similarity.
 
         :return: The word_manifold of this SimilarityInstanceDetail.
         :rtype: str
@@ -205,7 +205,7 @@ class SimilarityInstanceDetail(object):
     def word_manifold(self, word_manifold):
         """
         Sets the word_manifold of this SimilarityInstanceDetail.
-
+        The word manifold used to measure word similarity.
 
         :param word_manifold: The word_manifold of this SimilarityInstanceDetail.
         :type: str

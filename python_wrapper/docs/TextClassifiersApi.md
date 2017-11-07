@@ -1,6 +1,6 @@
 # feersum_nlu.TextClassifiersApi
 
-All URIs are relative to *http://nlu.playground.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 Add training samples.
 
-Add training samples to named text classifier.
+Add training samples to named text classifier. Returns the classifier's updated number of training samples.
 
 ### Example 
 ```python
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 Create a text classifier.
 
-Create a new text classifier or load one from the store.
+Create a new text classifier or load one from the store. Returns the details of the new or loaded instance.
 
 ### Example 
 ```python
@@ -129,7 +129,7 @@ Name | Type | Description  | Notes
 
 Endpoint to aid in the curation of a model instance.
 
-Access the list of samples behind a cell of the confusion matrix of the training or testing samples.
+Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
 
 ### Example 
 ```python
@@ -184,7 +184,7 @@ Name | Type | Description  | Notes
 
 Delete training samples.
 
-Delete the training samples of the named text classifier.
+Delete the training samples of the named text classifier. Returns the deleted samples.
 
 ### Example 
 ```python
@@ -500,7 +500,7 @@ Name | Type | Description  | Notes
 
 Train the named text classifier.
 
-Train the named text classifier with the training and testing data already provided.
+Train the named text classifier with the training and testing data already provided. Returns the details of the model instance.
 
 ### Example 
 ```python
