@@ -105,9 +105,9 @@ The below commands can be run from a bash or similar terminal
         -d '{"immediate_mode": true}' 
 
     # Make predictions using the model:
-    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/retrieve'
-        -H 'Content-Type: application/json'
-        -H 'Accept: application/json'
+    curl -XPOST 'https://'"$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/retrieve' \
+        -H 'Content-Type: application/json' \
+        -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
         -d '{"text": "hello"}' 
 
