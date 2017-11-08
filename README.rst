@@ -83,7 +83,7 @@ The benefit of installing the feersum_nlu module into you Python environment is 
 Install Option 3 - Using pip
 ============================
 
-The feersum_nlu wrapper module is also available via pip `<https://pypi.python.org/pypi/feersum_nlu>`_. To install it using pip run:
+The feersum_nlu wrapper module is also available from the Python Package Index `<https://pypi.python.org/pypi/feersum_nlu>`_. To install it using pip run:
 
 .. code-block:: sh
 
