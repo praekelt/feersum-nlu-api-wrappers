@@ -34,7 +34,7 @@ information extraction, entity extraction, and text-based language identificatio
 Installing
 **********
 
-Please clone this repo and have a look at the examples. It is recommended that you create a Python virtual environment and then follow one of the install options below to run the examples. The examples were tested with Python 3.5 and 3.6.
+Please have a look at the examples in the repo. It is also recommended that you create a Python virtual environment and then follow one of the install options below to run the examples. The examples were tested with Python 3.5 and 3.6.
 
 Creating a Python Virtual Environment
 =====================================
@@ -58,8 +58,7 @@ If you don't have virtualenv installed first run:
 
 Install Option 1 - Using make
 =============================
-
-To install the dependencies required to run the module's examples run:
+Clone the repo and then to install the dependencies required to run the module's examples run:
 
 .. code-block:: sh
 
@@ -70,13 +69,26 @@ To install the dependencies required to run the module's examples run:
 Install Option 2 - Using setuptools
 ===================================
 
-Alternatively to install the feersum_nlu wrapper module into your Python environment run:
+Alternatively clone the repo and then install the feersum_nlu wrapper module into your Python environment using setuptools:
 
 .. code-block:: sh
 
     $ make requirements
     $ make deps
     $ python setup.py install
+
+The benefit of installing the feersum_nlu module into you Python environment is that you can more easily use it in your own projects.
+
+
+Install Option 3 - Using pip
+============================
+
+The feersum_nlu wrapper module is also available from pip. To install it using pip run:
+
+.. code-block:: sh
+
+    $ pip install feersum_nlu
+    $ pip install jupyter
 
 The benefit of installing the feersum_nlu module into you Python environment is that you can more easily use it in your own projects.
 
