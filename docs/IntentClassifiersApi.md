@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**intent_classifier_get_details_all**](IntentClassifiersApi.md#intent_classifier_get_details_all) | **GET** /intent_classifiers | Get list of loaded intent classifiers.
 [**intent_classifier_get_labels**](IntentClassifiersApi.md#intent_classifier_get_labels) | **GET** /intent_classifiers/{instance_name}/get_labels | Get list of possible labels.
 [**intent_classifier_get_training_samples**](IntentClassifiersApi.md#intent_classifier_get_training_samples) | **GET** /intent_classifiers/{instance_name}/training_samples | Get training samples.
+[**intent_classifier_online_training_samples**](IntentClassifiersApi.md#intent_classifier_online_training_samples) | **POST** /intent_classifiers/{instance_name}/online_training_samples | Train/update the classifier online with the samples provided.
 [**intent_classifier_retrieve**](IntentClassifiersApi.md#intent_classifier_retrieve) | **POST** /intent_classifiers/{instance_name}/retrieve | Classify intent.
 [**intent_classifier_train**](IntentClassifiersApi.md#intent_classifier_train) | **POST** /intent_classifiers/{instance_name}/train | Train the named intent classifier.
 
@@ -428,6 +429,61 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**LabelledTextSampleList**](LabelledTextSampleList.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **intent_classifier_online_training_samples**
+> TotalSamples intent_classifier_online_training_samples(instance_name, labelled_text_sample_list)
+
+Train/update the classifier online with the samples provided.
+
+Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.IntentClassifiersApi()
+instance_name = 'instance_name_example' # str | The name of the model instance.
+labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
+
+try: 
+    # Train/update the classifier online with the samples provided.
+    api_response = api_instance.intent_classifier_online_training_samples(instance_name, labelled_text_sample_list)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling IntentClassifiersApi->intent_classifier_online_training_samples: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | 
+
+### Return type
+
+[**TotalSamples**](TotalSamples.md)
 
 ### Authorization
 

@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers\
     \ for examples of how to use the API."
-  version: "2.0.2"
+  version: "2.0.3"
   title: "FeersumNLU API"
   contact:
     name: "Feersum Engine"
@@ -593,6 +593,35 @@ paths:
         400:
           description: "bad request"
       x-swagger-router-controller: "rest_api.flask_server"
+  /intent_classifiers/{instance_name}/online_training_samples:
+    post:
+      tags:
+      - "intent_classifiers"
+      summary: "Train/update the classifier online with the samples provided."
+      description: "Train/update the classifier online with the samples provided.\
+        \ This operation is more efficient than a full re-train. Returns the classifier's\
+        \ updated number of training samples."
+      operationId: "intent_classifier_online_training_samples"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "labelled_text_sample_list"
+        description: "List of labelled text samples."
+        required: true
+        schema:
+          $ref: "#/definitions/labelled_text_sample_list"
+      responses:
+        200:
+          description: "The total number of samples of this type in the model."
+          schema:
+            $ref: "#/definitions/total_samples"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
   /intent_classifiers/{instance_name}/retrieve:
     post:
       tags:
@@ -823,6 +852,35 @@ paths:
           description: "The model instance detail"
           schema:
             $ref: "#/definitions/instance_detail"
+        400:
+          description: "bad request"
+      x-swagger-router-controller: "rest_api.flask_server"
+  /faq_matchers/{instance_name}/online_training_samples:
+    post:
+      tags:
+      - "faq_matchers"
+      summary: "Train/update the classifier online with the samples provided."
+      description: "Train/update the classifier online with the samples provided.\
+        \ This operation is more efficient than a full re-train. Returns the classifier's\
+        \ updated number of training samples."
+      operationId: "faq_matcher_online_training_samples"
+      parameters:
+      - name: "instance_name"
+        in: "path"
+        description: "The name of the model instance."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "labelled_text_sample_list"
+        description: "List of labelled text samples."
+        required: true
+        schema:
+          $ref: "#/definitions/labelled_text_sample_list"
+      responses:
+        200:
+          description: "The total number of samples of this type in the model."
+          schema:
+            $ref: "#/definitions/total_samples"
         400:
           description: "bad request"
       x-swagger-router-controller: "rest_api.flask_server"
