@@ -15,7 +15,7 @@ The below commands can be run from a bash or similar terminal
 
 .. code-block:: sh
 
-    # === Get an overview of your loaded models using the dashboard endpoint ===
+    # === Get an overview of your loaded models by using the dashboard endpoint ===
     curl -XGET 'https://'"$SERVICE"'/nlu/v2/dashboard' \
     	-H 'Content-Type: application/json' \
     	-H 'Accept: application/json' \
