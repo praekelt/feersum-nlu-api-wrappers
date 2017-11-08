@@ -15,6 +15,15 @@ The below commands can be run from a bash or similar terminal
 
 .. code-block:: sh
 
+    # === Get an overview of your loaded models using the dashboard endpoint ===
+    curl -XGET 'https://'"$SERVICE"'/nlu/v2/dashboard' \
+    	-H 'Content-Type: application/json' \
+    	-H 'Accept: application/json' \
+    	-H 'AUTH_TOKEN: '"$AUTH_TOKEN"
+
+
+.. code-block:: sh
+
     # === Detect some sentiment ===
     curl -XPOST 'https://'"$SERVICE"'/nlu/v2/sentiment_detectors/generic/retrieve' \
     	-H 'Content-Type: application/json' \
