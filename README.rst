@@ -43,7 +43,6 @@ To get started with the Python wrappers install Python 3.5 (or 3.6) and pip. The
 
 .. code-block:: sh
 
-    $ cd python_wrapper/
     $ virtualenv -p /usr/local/bin/python3.5 .pyenv
     $ source .pyenv/bin/activate
     $ pip install pip-tools
