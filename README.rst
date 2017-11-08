@@ -59,7 +59,7 @@ If you don't have virtualenv installed first run:
 Install Option 1 - Using make
 =============================
 
-To install the dependencies required to run the module examples from the python_wrapper folder run:
+To install the dependencies required to run the module's examples run:
 
 .. code-block:: sh
 
@@ -78,14 +78,14 @@ Alternatively to install the feersum_nlu wrapper module into your Python environ
     $ make deps
     $ python setup.py install
 
-The benefit of installing the feersum_nlu module into you Python environment is that you can more easily use it from outside of the python_wrapper folder and in your own projects.
+The benefit of installing the feersum_nlu module into you Python environment is that you can more easily use it in your own projects.
 
 
 Running the Examples
 ====================
-If you use an IDE like PyCharm you can simply open the python_wrapper folder with the IDE.
+If you use an IDE like PyCharm you can simply open the folder you cloned the source to (e.g. feersum-nlu-api-wrappers) with the IDE.
 
-To start executing example notebooks run:
+Or to start executing example notebooks run:
 
 .. code-block:: sh
 
@@ -93,7 +93,7 @@ To start executing example notebooks run:
 
 The notebooks are all in the example_notebooks folder.
 
-Alternatively run the example python scripts in the examples folder e.g.:
+Alternatively run the example python scripts in the examples folder from the terminal e.g.:
 
 .. code-block:: sh
 
