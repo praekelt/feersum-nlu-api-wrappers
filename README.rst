@@ -3,7 +3,7 @@ FeersumNLU API Wrappers
 
 This git repo hosts Python and other language wrappers for the FeersumNLU RESTful HTTP API. FeersumNLU is the natural language understanding component of Feersum Engine `<https://www.feersum.io>`_ .
 
-The HTTP API is designed such that a user may apply multi-lingual Natural Language Understanding (NLU) to their application domain without requiring a deep understanding of NLU theory. The examples in this repo demonstrate commonly required NLU functions and how to access them. There are also some curl examples of direct HTTP access. 
+The HTTP API is designed such that a user may apply multi-lingual Natural Language Understanding (NLU) to their application domain without requiring a deep understanding of NLU theory. The examples in this repo demonstrate commonly required NLU functions and how to access them. There are also some curl examples of direct HTTP access in the examples_curl folder. 
 
 These language wrappers and examples are for version 2.0.2 of the HTTP API. The language wrappers are auto-generated from a Swagger spec of the API available at `<https://nlu.playground.feersum.io:443/nlu/v2/swagger.json>`_
 
