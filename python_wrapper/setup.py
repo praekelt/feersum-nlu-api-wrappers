@@ -26,7 +26,7 @@ import sys
 from setuptools import setup, find_packages
 
 NAME = "feersum_nlu"
-VERSION = "2.02"
+VERSION = "2.0.2"
 
 # To install the library, run the following
 #
@@ -41,9 +41,12 @@ setup(
     name=NAME,
     version=VERSION,
     description="FeersumNLU API",
+    author="Feersum Engine",
     author_email="nlu@feersum.io",
-    url="",
-    keywords=["Swagger", "FeersumNLU API"],
+    url="https://github.com/praekelt/feersum-nlu-api-wrappers",
+    download_url='https://github.com/praekelt/feersum-nlu-api-wrappers/archive/2.0.2.tar.gz',
+    keywords=["Feersum", "NLU", "NLP"],
+    classifiers=[],
     install_requires=REQUIRES,
     packages=find_packages(),
     include_package_data=True,
