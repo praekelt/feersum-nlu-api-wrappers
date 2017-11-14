@@ -19,11 +19,11 @@ feersum_nlu.configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
 
 api_instance = feersum_nlu.FaqMatchersApi()
 
-instance_name = 'new_faq'
+instance_name = 'test_faq_mtchr'
 
-create_details = feersum_nlu.CreateDetails(name=instance_name, desc=None, load_from_store=True)
+create_details = feersum_nlu.CreateDetails(name=instance_name, load_from_store=True)
 
-text_input = feersum_nlu.TextInput("Please help me.")
+text_input = feersum_nlu.TextInput("Where can I get a quote?")
 
 print()
 

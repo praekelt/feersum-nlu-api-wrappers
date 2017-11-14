@@ -62,9 +62,11 @@ word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
                       feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
                       feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul')]
 
-train_details = feersum_nlu.TrainDetails(immediate_mode=True, word_manifold_list=word_manifold_list)
+train_details = feersum_nlu.TrainDetails(immediate_mode=True,
+                                         threshold=0.85,
+                                         word_manifold_list=word_manifold_list)
 
-text_input = feersum_nlu.TextInput("Where can I get a quote")
+text_input = feersum_nlu.TextInput("Where can I get a quote?")
 
 print()
 

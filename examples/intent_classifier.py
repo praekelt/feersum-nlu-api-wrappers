@@ -47,9 +47,11 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would li
                                                                 label="quote"))
 
 # train_details = feersum_nlu.TrainDetails(immediate_mode=True)
-train_details = feersum_nlu.TrainDetails(immediate_mode=True, word_manifold=wm_instance_name)
+train_details = feersum_nlu.TrainDetails(immediate_mode=True,
+                                         threshold=0.85,
+                                         word_manifold=wm_instance_name)
 
-text_input = feersum_nlu.TextInput("How do I get a quote")
+text_input = feersum_nlu.TextInput("How do I get a quote?")
 
 print()
 
