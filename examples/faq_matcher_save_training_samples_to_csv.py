@@ -20,7 +20,7 @@ feersum_nlu.configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
 
 api_instance = feersum_nlu.FaqMatchersApi()
 
-instance_name = 'FNB_FAQ'
+instance_name = 'test_faq_mtchr'
 
 print()
 
