@@ -13,7 +13,7 @@ import sys
 from setuptools import setup, find_packages
 
 NAME = "feersum_nlu"
-VERSION = "2.0.5"
+VERSION = "2.0.6"
 
 # To install the library, run the following
 #
@@ -22,7 +22,7 @@ VERSION = "2.0.5"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
+REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "python-dateutil"]
 
 setup(
     name=NAME,
