@@ -36,11 +36,12 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Spell correct:")
-    api_response = api_instance.word_manifold_spell_correct(instance_name, misspelt_word)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # Spell check is not exposed yet on the server.
+    # print("Spell correct:")
+    # api_response = api_instance.word_manifold_spell_correct(instance_name, misspelt_word)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
 except ApiException as e:
     print("Exception when calling a word manifold operation: %s\n" % e)
