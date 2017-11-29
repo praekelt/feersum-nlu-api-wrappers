@@ -88,7 +88,6 @@ The feersum_nlu wrapper module is also available from the Python Package Index `
 .. code-block:: sh
 
     $ pip install feersum_nlu
-    $ pip install jupyter
 
 The benefit of installing the feersum_nlu module into you Python environment is that you can more easily use it in your own projects.
 
@@ -97,7 +96,13 @@ Running the Examples
 ====================
 If you use an IDE like PyCharm you can simply open the folder you cloned the source to (e.g. feersum-nlu-api-wrappers) with the IDE.
 
-Or to start executing example notebooks run:
+Or to start executing example notebooks install Jupyter with 
+
+.. code-block:: sh
+
+    $ pip install jupyter
+
+and then run:
 
 .. code-block:: sh
 
