@@ -37,7 +37,7 @@ class TestDucklingExtractor(unittest.TestCase):
             feersum_nlu.DucklingEntCreateDetails(name=instance_name, desc="Test duckling extractor.",
                                                  load_from_store=False)
 
-        text_input = feersum_nlu.TextInput("I was 3 weeks pregnant one month ago.")
+        text_input = feersum_nlu.TextInput("5 January 2017 at 15:00.")
 
         print()
 
@@ -69,7 +69,7 @@ class TestDucklingExtractor(unittest.TestCase):
             entity_list = api_response
             if len(entity_list) > 0:
                 entity = entity_list[0]
-                self.assertTrue(entity.get('value', '') == '2017-10-27T00:00:00.000+02:00')
+                self.assertTrue(entity.get('value', '') == '2017-01-05T15:00:00.000+02:00')
             else:
                 self.assertTrue(False)
 
