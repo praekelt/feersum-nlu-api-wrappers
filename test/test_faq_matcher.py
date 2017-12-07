@@ -24,31 +24,20 @@ class TestSentiment(unittest.TestCase):
         print('feersum_nlu_auth_token = ', feersum_nlu_auth_token)
 
         # Configure API key authorization: APIKeyHeader
-        feersum_nlu.configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
+        configuration = feersum_nlu.Configuration()
+        configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
 
-        # feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
-        feersum_nlu.configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
+        # configuration.host = "http://127.0.0.1:8100/nlu/v2"
+        configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
 
-        api_instance = feersum_nlu.FaqMatchersApi()
+        api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 
         instance_name = 'test_faq_mtchr'
 
-        # wm_instance_name = 'feers_wm_eng'
-        # We'll use the built-in manifolds, not the ones defined below!
-        # # === Word manifold to use ===
-        # print("Create the word manifold model:")
-        # wm_api_instance = feersum_nlu.WordManifoldsApi()
-        # wm_create_details = feersum_nlu.CreateDetails(name=wm_instance_name, desc="Test word manifold.",
-        #                                               load_from_store=False, input_file="glove.6B.50d.trimmed.txt")
-        # # wm_create_details = feersum_nlu.CreateDetails(name=wm_instance_name, load_from_store=True)
-        # wm_api_response = wm_api_instance.word_manifold_create(wm_create_details)
-        # print(" type(wm_api_response)", type(wm_api_response))
-        # print(" wm_api_response", wm_api_response)
-        # print()
-        # # === ===
-
-
-        create_details = feersum_nlu.CreateDetails(name=instance_name, desc="Test FAQ matcher.", load_from_store=False)
+        create_details = feersum_nlu.CreateDetails(name=instance_name,
+                                                   desc="Test FAQ matcher.",
+                                                   lid_model_file="lid_za",
+                                                   load_from_store=False)
 
         # The training samples.
         labelled_text_sample_list = []
@@ -62,13 +51,6 @@ class TestSentiment(unittest.TestCase):
         labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Hoe kan ek 'n prys kry?",
                                                                         label="quote"))
 
-        # Use default English manifold.
-        # train_details = feersum_nlu.TrainDetails(immediate_mode=True)
-        # OR
-        # Use specified single manifold; the language defaults to English.
-        # train_details = feersum_nlu.TrainDetails(immediate_mode=True, word_manifold=wm_instance_name)
-        # OR
-        # Use specified list of manifolds for multiple languages.
         word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
                               feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
                               feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul')]

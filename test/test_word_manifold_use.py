@@ -24,12 +24,13 @@ class TestWordManifold(unittest.TestCase):
         print('feersum_nlu_auth_token = ', feersum_nlu_auth_token)
 
         # Configure API key authorization: APIKeyHeader
-        feersum_nlu.configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
+        configuration = feersum_nlu.Configuration()
+        configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
 
-        # feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
-        feersum_nlu.configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
+        # configuration.host = "http://127.0.0.1:8100/nlu/v2"
+        configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
 
-        api_instance = feersum_nlu.WordManifoldsApi()
+        api_instance = feersum_nlu.WordManifoldsApi(feersum_nlu.ApiClient(configuration))
 
         # The already loaded word embedding to use.
         instance_name = 'feers_wm_eng'
