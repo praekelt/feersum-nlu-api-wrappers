@@ -12,18 +12,20 @@ feersum_nlu_auth_token = os.environ.get('FEERSUM_NLU_AUTH_TOKEN', 'YOUR_API_KEY'
 print('feersum_nlu_auth_token = ', feersum_nlu_auth_token)
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
 
-# feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
-feersum_nlu.configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
+# configuration.host = "http://127.0.0.1:8100/nlu/v2"
+configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
 
-api_instance = feersum_nlu.Lr4LanguageRecognisersApi()
+api_instance = feersum_nlu.Lr4LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
 
 instance_name = 'test_lr4'
 
 lr4_create_details = \
-    feersum_nlu.Lr4CreateDetails(name=instance_name, desc="Test LR4 lang ident model.",
-                                 model_file='lid_za')
+    feersum_nlu.Lr4CreateDetails(name=instance_name,
+                                 desc="Test LR4 lang ident model.",
+                                 lid_model_file='lid_za')
 
 text_input = feersum_nlu.TextInput("Isakhiwo sami sebiwe?")
 

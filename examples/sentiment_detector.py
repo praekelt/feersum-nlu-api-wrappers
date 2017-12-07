@@ -12,12 +12,13 @@ feersum_nlu_auth_token = os.environ.get('FEERSUM_NLU_AUTH_TOKEN', 'YOUR_API_KEY'
 print('feersum_nlu_auth_token = ', feersum_nlu_auth_token)
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
 
-# feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
-feersum_nlu.configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
+# configuration.host = "http://127.0.0.1:8100/nlu/v2"
+configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
 
-api_instance = feersum_nlu.SentimentDetectorsApi()
+api_instance = feersum_nlu.SentimentDetectorsApi(feersum_nlu.ApiClient(configuration))
 
 model_instance_name = 'generic'
 text_input = feersum_nlu.TextInput("I am very happy.")  # TextInput | The input text.

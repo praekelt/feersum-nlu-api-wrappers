@@ -1,4 +1,4 @@
-""" Example: Shows how to download and save the training samples of a FAQ matcher. """
+""" Example: Shows how to download and save the training samples of an intent classifier. """
 
 import os
 import urllib3
@@ -19,29 +19,29 @@ configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
 # configuration.host = "http://127.0.0.1:8100/nlu/v2"
 configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
 
-api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-instance_name = 'test_faq_mtchr'
+instance_name = 'test_intent_clsfr'
 
 print()
 
 try:
-    print("Get the training samples of the FAQ matcher:")
-    training_samples = api_instance.faq_matcher_get_training_samples(instance_name)
+    print("Get the training samples of the intent classifier:")
+    training_samples = api_instance.intent_classifier_get_training_samples(instance_name)
     print(" type(training_samples)", type(training_samples))
     print(" training_samples", training_samples)
     print()
 
-    print("Get the details of specific named loaded FAQ matcher:")
-    api_response = api_instance.faq_matcher_get_details(instance_name)
+    print("Get the details of specific named loaded intent classifier:")
+    api_response = api_instance.intent_classifier_get_details(instance_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
 
     # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be available
     # after training.
-    print("Get the labels of named loaded FAQ matcher:")
-    api_response = api_instance.faq_matcher_get_labels(instance_name)
+    print("Get the labels of named loaded intent classifier:")
+    api_response = api_instance.intent_classifier_get_labels(instance_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -62,7 +62,7 @@ try:
                 csv_writer.writerow([label, text])
 
 except ApiException as e:
-    print("Exception when calling an FAQ matcher operation: %s\n" % e)
+    print("Exception when calling an intent classifier operation: %s\n" % e)
 except urllib3.exceptions.MaxRetryError:
     print("Connection MaxRetryError!")
 

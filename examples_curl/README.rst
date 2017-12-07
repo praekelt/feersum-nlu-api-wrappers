@@ -50,7 +50,7 @@ The below commands can be run from a bash or similar terminal
     	-H 'Content-Type: application/json' \
     	-H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
-    	-d '{"desc": "LR4 text lang ID model.", "model_file": "lid_za", "name": "test_model"}' 
+    	-d '{"desc": "LR4 text lang ID model.", "lid_model_file": "lid_za", "name": "test_model"}'
 
     # Detect the language of a piece of text:
     curl -XPOST 'https://'"$SERVICE"'/nlu/v2/lr4_language_recognisers/test_model/retrieve' \

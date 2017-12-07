@@ -14,25 +14,26 @@ Extract dates.
 
 Parses one or more dates from text.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.DateParsersApi()
+api_instance = feersum_nlu.DateParsersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 
-try: 
+try:
     # Extract dates.
     api_response = api_instance.date_parser_retrieve(instance_name, text_input)
     pprint(api_response)

@@ -12,16 +12,19 @@ feersum_nlu_auth_token = os.environ.get('FEERSUM_NLU_AUTH_TOKEN', 'YOUR_API_KEY'
 print('feersum_nlu_auth_token = ', feersum_nlu_auth_token)
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
 
-# feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
-feersum_nlu.configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
+# configuration.host = "http://127.0.0.1:8100/nlu/v2"
+configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
 
-api_instance = feersum_nlu.TextClassifiersApi()
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 
 instance_name = 'test_txt_clsfr'
 
-create_details = feersum_nlu.CreateDetails(name=instance_name, desc="Test text classifier.", load_from_store=False)
+create_details = feersum_nlu.TextClsfrCreateDetails(name=instance_name,
+                                                    desc="Test text classifier.",
+                                                    load_from_store=False)
 
 # The training samples.
 labelled_text_sample_list = []

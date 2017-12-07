@@ -18,24 +18,25 @@ Create a LR4 text language detector.
 
 Create a new LR4 language detector from the pre-trained model name provided. 'lid_za' is currently the only pre-trained model that is available, but it was trained on all 11 languages and is pretty accurate. Returns the detail of the new instance.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.Lr4LanguageRecognisersApi()
+api_instance = feersum_nlu.Lr4LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
 lr4_create_details = feersum_nlu.Lr4CreateDetails() # Lr4CreateDetails | The details of the instance to create.
 
-try: 
+try:
     # Create a LR4 text language detector.
     api_response = api_instance.lr4_language_recogniser_create(lr4_create_details)
     pprint(api_response)
@@ -71,24 +72,25 @@ Get details of named instance.
 
 Get the details of the named LR4 text language detector instance.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.Lr4LanguageRecognisersApi()
+api_instance = feersum_nlu.Lr4LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
-try: 
+try:
     # Get details of named instance.
     api_response = api_instance.lr4_language_recogniser_get_details(instance_name)
     pprint(api_response)
@@ -124,23 +126,24 @@ Get list of loaded LR4 text language detectors.
 
 Get the list of loaded LR4 text language detectors.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.Lr4LanguageRecognisersApi()
+api_instance = feersum_nlu.Lr4LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
 
-try: 
+try:
     # Get list of loaded LR4 text language detectors.
     api_response = api_instance.lr4_language_recogniser_get_details_all()
     pprint(api_response)
@@ -173,24 +176,25 @@ Get list of possible labels.
 
 Returns the classifier's list of possible class labels.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.Lr4LanguageRecognisersApi()
+api_instance = feersum_nlu.Lr4LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
-try: 
+try:
     # Get list of possible labels.
     api_response = api_instance.lr4_language_recogniser_get_labels(instance_name)
     pprint(api_response)
@@ -226,25 +230,26 @@ Recognise the language the text is written in.
 
 Recognise the language the text is written in. Returns the list of scored language codes.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.Lr4LanguageRecognisersApi()
+api_instance = feersum_nlu.Lr4LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 
-try: 
+try:
     # Recognise the language the text is written in.
     api_response = api_instance.lr4_language_recogniser_retrieve(instance_name, text_input)
     pprint(api_response)

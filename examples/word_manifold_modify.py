@@ -12,12 +12,13 @@ feersum_nlu_auth_token = os.environ.get('FEERSUM_NLU_AUTH_TOKEN', 'YOUR_API_KEY'
 print('feersum_nlu_auth_token = ', feersum_nlu_auth_token)
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
 
-# feersum_nlu.configuration.host = "http://127.0.0.1:8100/nlu/v2"
-feersum_nlu.configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
+# configuration.host = "http://127.0.0.1:8100/nlu/v2"
+configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
 
-api_instance = feersum_nlu.WordManifoldsApi()
+api_instance = feersum_nlu.WordManifoldsApi(feersum_nlu.ApiClient(configuration))
 
 instance_name = 'test_wm'
 new_word_list = [{'new_word': 'chatbot', 'similar_to': 'robot'}]  # NewWordList | List of new words.
@@ -25,12 +26,12 @@ new_word_list = [{'new_word': 'chatbot', 'similar_to': 'robot'}]  # NewWordList 
 new_word_list_b = [{'new_word': 'chatbots', 'similar_to': 'robots'},
                    {'new_word': 'shaki', 'similar_to': 'brown'}]  # NewWordList | List of new words.
 
-create_details = feersum_nlu.CreateDetails(name=instance_name,
-                                           desc="Test word manifold.",
-                                           load_from_store=False,
-                                           input_file="glove.6B.50d.trimmed.txt")  # input_file = file present on server
+create_details = feersum_nlu.WmCreateDetails(name=instance_name,
+                                             desc="Test word manifold.",
+                                             word_vectors_file="glove.6B.50d.trimmed.txt",
+                                             load_from_store=False)  # file present on server
 
-# create_details = feersum_nlu.CreateDetails(name=instance_name, load_from_store=True)
+# create_details = feersum_nlu.WmCreateDetails(name=instance_name, load_from_store=True)
 
 print()
 

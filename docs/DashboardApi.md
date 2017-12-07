@@ -14,23 +14,24 @@ Your service dashboard.
 
 Get your list of loaded model instances, the total API hits for each, API version, etc.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.DashboardApi()
+api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
 
-try: 
+try:
     # Your service dashboard.
     api_response = api_instance.dashboard_get_details()
     pprint(api_response)

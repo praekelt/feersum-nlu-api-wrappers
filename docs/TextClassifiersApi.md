@@ -23,25 +23,26 @@ Add training samples.
 
 Add training samples to named text classifier. Returns the classifier's updated number of training samples.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.TextClassifiersApi()
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
 
-try: 
+try:
     # Add training samples.
     api_response = api_instance.text_classifier_add_training_samples(instance_name, labelled_text_sample_list)
     pprint(api_response)
@@ -72,32 +73,33 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_create**
-> InstanceDetail text_classifier_create(create_details)
+> TextClsfrInstanceDetail text_classifier_create(text_clsfr_create_details)
 
 Create a text classifier.
 
 Create a new text classifier or load one from the store. Returns the details of the new or loaded instance.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.TextClassifiersApi()
-create_details = feersum_nlu.CreateDetails() # CreateDetails | The details of the instance to create.
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
+text_clsfr_create_details = feersum_nlu.TextClsfrCreateDetails() # TextClsfrCreateDetails | The details of the instance to create.
 
-try: 
+try:
     # Create a text classifier.
-    api_response = api_instance.text_classifier_create(create_details)
+    api_response = api_instance.text_classifier_create(text_clsfr_create_details)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TextClassifiersApi->text_classifier_create: %s\n" % e)
@@ -107,11 +109,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_details** | [**CreateDetails**](CreateDetails.md)| The details of the instance to create. | 
+ **text_clsfr_create_details** | [**TextClsfrCreateDetails**](TextClsfrCreateDetails.md)| The details of the instance to create. | 
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**TextClsfrInstanceDetail**](TextClsfrInstanceDetail.md)
 
 ### Authorization
 
@@ -131,25 +133,26 @@ Endpoint to aid in the curation of a model instance.
 
 Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.TextClassifiersApi()
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 label_pair = feersum_nlu.ClassLabelPair() # ClassLabelPair | The true label, predicted label and matrix (train/test) to use.
 
-try: 
+try:
     # Endpoint to aid in the curation of a model instance.
     api_response = api_instance.text_classifier_curate(instance_name, label_pair)
     pprint(api_response)
@@ -186,24 +189,25 @@ Delete training samples.
 
 Delete the training samples of the named text classifier. Returns the deleted samples.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.TextClassifiersApi()
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
-try: 
+try:
     # Delete training samples.
     api_response = api_instance.text_classifier_del_training_samples(instance_name)
     pprint(api_response)
@@ -233,30 +237,31 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_get_details**
-> InstanceDetail text_classifier_get_details(instance_name)
+> TextClsfrInstanceDetail text_classifier_get_details(instance_name)
 
 Get details of named instance.
 
 Get the details of the named text classifier instance.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.TextClassifiersApi()
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
-try: 
+try:
     # Get details of named instance.
     api_response = api_instance.text_classifier_get_details(instance_name)
     pprint(api_response)
@@ -272,7 +277,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**TextClsfrInstanceDetail**](TextClsfrInstanceDetail.md)
 
 ### Authorization
 
@@ -286,29 +291,30 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_get_details_all**
-> InstanceDetailList text_classifier_get_details_all()
+> TextClsfrInstanceDetailList text_classifier_get_details_all()
 
 Get list of loaded text classifiers.
 
 Get the list of loaded text classifiers.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.TextClassifiersApi()
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-try: 
+try:
     # Get list of loaded text classifiers.
     api_response = api_instance.text_classifier_get_details_all()
     pprint(api_response)
@@ -321,7 +327,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InstanceDetailList**](InstanceDetailList.md)
+[**TextClsfrInstanceDetailList**](TextClsfrInstanceDetailList.md)
 
 ### Authorization
 
@@ -341,24 +347,25 @@ Get list of possible labels.
 
 Returns the classifier's list of possible class labels.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.TextClassifiersApi()
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
-try: 
+try:
     # Get list of possible labels.
     api_response = api_instance.text_classifier_get_labels(instance_name)
     pprint(api_response)
@@ -394,24 +401,25 @@ Get training samples.
 
 Get the training samples of the named text classifier.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.TextClassifiersApi()
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
-try: 
+try:
     # Get training samples.
     api_response = api_instance.text_classifier_get_training_samples(instance_name)
     pprint(api_response)
@@ -447,25 +455,26 @@ Classify text.
 
 Classifies the text and returns a probability sorted list of classes.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.TextClassifiersApi()
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 
-try: 
+try:
     # Classify text.
     api_response = api_instance.text_classifier_retrieve(instance_name, text_input)
     pprint(api_response)
@@ -496,31 +505,32 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_train**
-> InstanceDetail text_classifier_train(instance_name, train_details)
+> TextClsfrInstanceDetail text_classifier_train(instance_name, train_details)
 
 Train the named text classifier.
 
 Train the named text classifier with the training and testing data already provided. Returns the details of the model instance.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.TextClassifiersApi()
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 train_details = feersum_nlu.TrainDetails() # TrainDetails | The arguments provided to the train operation.
 
-try: 
+try:
     # Train the named text classifier.
     api_response = api_instance.text_classifier_train(instance_name, train_details)
     pprint(api_response)
@@ -537,7 +547,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**TextClsfrInstanceDetail**](TextClsfrInstanceDetail.md)
 
 ### Authorization
 

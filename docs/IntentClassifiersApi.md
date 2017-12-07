@@ -24,25 +24,26 @@ Add training samples.
 
 Add training samples to named intent classifier. Returns the classifier's updated number of training samples.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.IntentClassifiersApi()
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
 
-try: 
+try:
     # Add training samples.
     api_response = api_instance.intent_classifier_add_training_samples(instance_name, labelled_text_sample_list)
     pprint(api_response)
@@ -79,24 +80,25 @@ Create an intent classifier.
 
 Create a new intent classifier or load one from the store. Returns the details of the new or loaded instance.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.IntentClassifiersApi()
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 create_details = feersum_nlu.CreateDetails() # CreateDetails | The details of the instance to create.
 
-try: 
+try:
     # Create an intent classifier.
     api_response = api_instance.intent_classifier_create(create_details)
     pprint(api_response)
@@ -132,25 +134,26 @@ Endpoint to aid in the curation of a model instance.
 
 Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.IntentClassifiersApi()
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 label_pair = feersum_nlu.ClassLabelPair() # ClassLabelPair | The true label, predicted label and matrix (train/test) to use.
 
-try: 
+try:
     # Endpoint to aid in the curation of a model instance.
     api_response = api_instance.intent_classifier_curate(instance_name, label_pair)
     pprint(api_response)
@@ -187,24 +190,25 @@ Delete training samples.
 
 Delete the training samples of the named intent classifier. Returns the deleted samples.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.IntentClassifiersApi()
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
-try: 
+try:
     # Delete training samples.
     api_response = api_instance.intent_classifier_del_training_samples(instance_name)
     pprint(api_response)
@@ -240,24 +244,25 @@ Get details of named instance.
 
 Returns the details of the named intent classifier instance.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.IntentClassifiersApi()
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
-try: 
+try:
     # Get details of named instance.
     api_response = api_instance.intent_classifier_get_details(instance_name)
     pprint(api_response)
@@ -293,23 +298,24 @@ Get list of loaded intent classifiers.
 
 Returns the list of loaded intent classifiers.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.IntentClassifiersApi()
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-try: 
+try:
     # Get list of loaded intent classifiers.
     api_response = api_instance.intent_classifier_get_details_all()
     pprint(api_response)
@@ -342,24 +348,25 @@ Get list of possible labels.
 
 Returns the classifier's list of possible class labels.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.IntentClassifiersApi()
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
-try: 
+try:
     # Get list of possible labels.
     api_response = api_instance.intent_classifier_get_labels(instance_name)
     pprint(api_response)
@@ -395,24 +402,25 @@ Get training samples.
 
 Returns the training samples of the named intent classifier.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.IntentClassifiersApi()
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
-try: 
+try:
     # Get training samples.
     api_response = api_instance.intent_classifier_get_training_samples(instance_name)
     pprint(api_response)
@@ -448,25 +456,26 @@ Train/update the classifier online with the samples provided.
 
 Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.IntentClassifiersApi()
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
 
-try: 
+try:
     # Train/update the classifier online with the samples provided.
     api_response = api_instance.intent_classifier_online_training_samples(instance_name, labelled_text_sample_list)
     pprint(api_response)
@@ -503,25 +512,26 @@ Classify intent.
 
 Classifies the intent and returns a probability sorted list of classes.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.IntentClassifiersApi()
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 
-try: 
+try:
     # Classify intent.
     api_response = api_instance.intent_classifier_retrieve(instance_name, text_input)
     pprint(api_response)
@@ -558,25 +568,26 @@ Train the named intent classifier.
 
 Train the named intent classifier with the training and testing data already provided. Returns the updated instance details.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.IntentClassifiersApi()
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 train_details = feersum_nlu.TrainDetails() # TrainDetails | The arguments provided to the train operation.
 
-try: 
+try:
     # Train the named intent classifier.
     api_response = api_instance.intent_classifier_train(instance_name, train_details)
     pprint(api_response)

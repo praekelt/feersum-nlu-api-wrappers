@@ -17,24 +17,25 @@ Create a regular expression entity extractor.
 
 Create a new regular expression entity extractor or load one from the store.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.RegexEntityExtractorsApi()
+api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 regex_ent_create_details = feersum_nlu.RegexEntCreateDetails() # RegexEntCreateDetails | The details of the instance to create.
 
-try: 
+try:
     # Create a regular expression entity extractor.
     api_response = api_instance.regex_entity_extractor_create(regex_ent_create_details)
     pprint(api_response)
@@ -70,24 +71,25 @@ Get details of named instance.
 
 Get the details of the named regular expression entity extractor instance.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.RegexEntityExtractorsApi()
+api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
-try: 
+try:
     # Get details of named instance.
     api_response = api_instance.regex_entity_extractor_get_details(instance_name)
     pprint(api_response)
@@ -123,23 +125,24 @@ Get list of loaded regular expression entity extractors.
 
 Get the list of loaded regular expression entity extractors.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.RegexEntityExtractorsApi()
+api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 
-try: 
+try:
     # Get list of loaded regular expression entity extractors.
     api_response = api_instance.regex_entity_extractor_get_details_all()
     pprint(api_response)
@@ -172,25 +175,26 @@ Extract information based on the regular expression.
 
 Extract the entities matching the regular expression.
 
-### Example 
+### Example
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: APIKeyHeader
-feersum_nlu.configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# feersum_nlu.configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.RegexEntityExtractorsApi()
+api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 
-try: 
+try:
     # Extract information based on the regular expression.
     api_response = api_instance.regex_entity_extractor_retrieve(instance_name, text_input)
     pprint(api_response)
