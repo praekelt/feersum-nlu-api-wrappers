@@ -1,0 +1,16 @@
+from __future__ import absolute_import
+
+# flake8: noqa
+
+# import apis into api package
+from feersum_nlu.api.dashboard_api import DashboardApi
+from feersum_nlu.api.date_parsers_api import DateParsersApi
+from feersum_nlu.api.duckling_entity_extractors_api import DucklingEntityExtractorsApi
+from feersum_nlu.api.faq_matchers_api import FaqMatchersApi
+from feersum_nlu.api.intent_classifiers_api import IntentClassifiersApi
+from feersum_nlu.api.lr4_language_recognisers_api import Lr4LanguageRecognisersApi
+from feersum_nlu.api.regex_entity_extractors_api import RegexEntityExtractorsApi
+from feersum_nlu.api.sentiment_detectors_api import SentimentDetectorsApi
+from feersum_nlu.api.similarity_entity_extractors_api import SimilarityEntityExtractorsApi
+from feersum_nlu.api.text_classifiers_api import TextClassifiersApi
+from feersum_nlu.api.word_manifolds_api import WordManifoldsApi
