@@ -4,17 +4,76 @@ All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**text_classifier_add_testing_samples**](TextClassifiersApi.md#text_classifier_add_testing_samples) | **POST** /text_classifiers/{instance_name}/testing_samples | Add testing samples.
 [**text_classifier_add_training_samples**](TextClassifiersApi.md#text_classifier_add_training_samples) | **POST** /text_classifiers/{instance_name}/training_samples | Add training samples.
 [**text_classifier_create**](TextClassifiersApi.md#text_classifier_create) | **POST** /text_classifiers | Create a text classifier.
 [**text_classifier_curate**](TextClassifiersApi.md#text_classifier_curate) | **POST** /text_classifiers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
+[**text_classifier_del_testing_samples**](TextClassifiersApi.md#text_classifier_del_testing_samples) | **DELETE** /text_classifiers/{instance_name}/testing_samples | Delete testing samples.
 [**text_classifier_del_training_samples**](TextClassifiersApi.md#text_classifier_del_training_samples) | **DELETE** /text_classifiers/{instance_name}/training_samples | Delete training samples.
 [**text_classifier_get_details**](TextClassifiersApi.md#text_classifier_get_details) | **GET** /text_classifiers/{instance_name} | Get details of named instance.
 [**text_classifier_get_details_all**](TextClassifiersApi.md#text_classifier_get_details_all) | **GET** /text_classifiers | Get list of loaded text classifiers.
 [**text_classifier_get_labels**](TextClassifiersApi.md#text_classifier_get_labels) | **GET** /text_classifiers/{instance_name}/get_labels | Get list of possible labels.
+[**text_classifier_get_testing_samples**](TextClassifiersApi.md#text_classifier_get_testing_samples) | **GET** /text_classifiers/{instance_name}/testing_samples | Get testing samples.
 [**text_classifier_get_training_samples**](TextClassifiersApi.md#text_classifier_get_training_samples) | **GET** /text_classifiers/{instance_name}/training_samples | Get training samples.
 [**text_classifier_retrieve**](TextClassifiersApi.md#text_classifier_retrieve) | **POST** /text_classifiers/{instance_name}/retrieve | Classify text.
 [**text_classifier_train**](TextClassifiersApi.md#text_classifier_train) | **POST** /text_classifiers/{instance_name}/train | Train the named text classifier.
 
+
+# **text_classifier_add_testing_samples**
+> TotalSamples text_classifier_add_testing_samples(instance_name, labelled_text_sample_list)
+
+Add testing samples.
+
+Add testing samples to named text classifier. Returns the classifier's updated number of testing samples.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
+
+try:
+    # Add testing samples.
+    api_response = api_instance.text_classifier_add_testing_samples(instance_name, labelled_text_sample_list)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TextClassifiersApi->text_classifier_add_testing_samples: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | 
+
+### Return type
+
+[**TotalSamples**](TotalSamples.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_add_training_samples**
 > TotalSamples text_classifier_add_training_samples(instance_name, labelled_text_sample_list)
@@ -182,12 +241,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **text_classifier_del_training_samples**
-> LabelledTextSampleList text_classifier_del_training_samples(instance_name)
+# **text_classifier_del_testing_samples**
+> LabelledTextSampleList text_classifier_del_testing_samples(instance_name, labelled_text_sample_list=labelled_text_sample_list)
 
-Delete training samples.
+Delete testing samples.
 
-Delete the training samples of the named text classifier. Returns the deleted samples.
+Delete the listed testing samples of the named text classifier. The list of samples is optional. If no list provided then all samples are deleted. Returns the deleted samples.
 
 ### Example
 ```python
@@ -206,10 +265,67 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples. (optional)
+
+try:
+    # Delete testing samples.
+    api_response = api_instance.text_classifier_del_testing_samples(instance_name, labelled_text_sample_list=labelled_text_sample_list)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TextClassifiersApi->text_classifier_del_testing_samples: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | [optional] 
+
+### Return type
+
+[**LabelledTextSampleList**](LabelledTextSampleList.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **text_classifier_del_training_samples**
+> LabelledTextSampleList text_classifier_del_training_samples(instance_name, labelled_text_sample_list=labelled_text_sample_list)
+
+Delete training samples.
+
+Delete the listed training samples of the named text classifier. The list of samples is optional. If no list provided then all samples are deleted. Returns the deleted samples.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples. (optional)
 
 try:
     # Delete training samples.
-    api_response = api_instance.text_classifier_del_training_samples(instance_name)
+    api_response = api_instance.text_classifier_del_training_samples(instance_name, labelled_text_sample_list=labelled_text_sample_list)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TextClassifiersApi->text_classifier_del_training_samples: %s\n" % e)
@@ -220,6 +336,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | [optional] 
 
 ### Return type
 
@@ -382,6 +499,60 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ClassLabelList**](ClassLabelList.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **text_classifier_get_testing_samples**
+> LabelledTextSampleList text_classifier_get_testing_samples(instance_name)
+
+Get testing samples.
+
+Get the testing samples of the named text classifier.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try:
+    # Get testing samples.
+    api_response = api_instance.text_classifier_get_testing_samples(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TextClassifiersApi->text_classifier_get_testing_samples: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+
+### Return type
+
+[**LabelledTextSampleList**](LabelledTextSampleList.md)
 
 ### Authorization
 

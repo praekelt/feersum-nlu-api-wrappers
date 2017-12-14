@@ -77,11 +77,11 @@ class TestSentiment(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            print("Del the training samples of the intent classifier:")
-            api_response = api_instance.intent_classifier_del_training_samples(instance_name)
-            print(" type(api_response)", type(api_response))
-            print(" api_response", api_response)
-            print()
+            # print("Del the training samples of the intent classifier:")
+            # api_response = api_instance.intent_classifier_del_training_samples(instance_name)
+            # print(" type(api_response)", type(api_response))
+            # print(" api_response", api_response)
+            # print()
 
             print("Add training samples to the intent classifier:")
             api_response = api_instance.intent_classifier_add_training_samples(instance_name, labelled_text_sample_list)

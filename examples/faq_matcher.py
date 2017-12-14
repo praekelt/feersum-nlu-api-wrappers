@@ -22,7 +22,6 @@ api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 
 instance_name = 'test_faq_mtchr'
 
-
 create_details = feersum_nlu.CreateDetails(name=instance_name,
                                            desc="Test FAQ matcher.",
                                            lid_model_file="lid_za",
@@ -31,14 +30,23 @@ create_details = feersum_nlu.CreateDetails(name=instance_name,
 # The training samples.
 labelled_text_sample_list = []
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How do I claim?",
-                                                                label="claim"))
+                                                                label="claim",
+                                                                lang_code="eng"))
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Hoe moet ek eis?",
-                                                                label="claim"))
+                                                                label="claim",
+                                                                lang_code="afr"))
 
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How do I get a quote?",
                                                                 label="quote"))
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Hoe kan ek 'n prys kry?",
                                                                 label="quote"))
+
+labelled_text_sample_delete_list = []
+labelled_text_sample_delete_list.append(feersum_nlu.LabelledTextSample(text="Hoe moet ek eis?",
+                                                                       label="claim",
+                                                                       lang_code="afr"))
+labelled_text_sample_delete_list.append(feersum_nlu.LabelledTextSample(text="Hoe kan ek 'n prys kry?",
+                                                                       label="quote"))
 
 word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
                       feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
@@ -72,7 +80,15 @@ try:
     print()
 
     print("Del the training samples of the FAQ matcher:")
-    api_response = api_instance.faq_matcher_del_training_samples(instance_name)
+    api_response = api_instance.faq_matcher_del_training_samples(instance_name,
+                                                                 labelled_text_sample_list=
+                                                                 labelled_text_sample_delete_list)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Get the training samples of the FAQ matcher:")
+    api_response = api_instance.faq_matcher_get_training_samples(instance_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()

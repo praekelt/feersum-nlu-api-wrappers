@@ -82,11 +82,11 @@ class TestSentiment(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            print("Del the training samples of the FAQ matcher:")
-            api_response = api_instance.faq_matcher_del_training_samples(instance_name)
-            print(" type(api_response)", type(api_response))
-            print(" api_response", api_response)
-            print()
+            # print("Del the training samples of the FAQ matcher:")
+            # api_response = api_instance.faq_matcher_del_training_samples(instance_name)
+            # print(" type(api_response)", type(api_response))
+            # print(" api_response", api_response)
+            # print()
 
             print("Add training samples to the FAQ matcher:")
             api_response = api_instance.faq_matcher_add_training_samples(instance_name, labelled_text_sample_list)

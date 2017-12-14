@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.9
+  version: 2.0.10
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -140,7 +140,7 @@ paths:
       description: Add training samples to named text classifier. Returns the classifier's updated number of training samples.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_required"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -168,7 +168,43 @@ paths:
       summary: Delete training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_del_training_samples
-      description: Delete the training samples of the named text classifier. Returns the deleted samples.
+      description: Delete the listed training samples of the named text classifier. The list of samples is optional. If no list provided then all samples are deleted. Returns the deleted samples.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_optional"
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"        
+        400:
+          description: bad request
+
+########
+## text_classifiers testing samples
+########
+  /text_classifiers/{instance_name}/testing_samples:
+    post:
+      tags:
+      - text_classifiers
+      summary: Add testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_add_testing_samples
+      description: Add testing samples to named text classifier. Returns the classifier's updated number of testing samples.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_required"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"        
+        400:
+          description: bad request
+          
+    get:
+      tags:
+      - text_classifiers
+      summary: Get testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_get_testing_samples
+      description: Get the testing samples of the named text classifier.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
@@ -176,6 +212,23 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"        
         400:
           description: bad request
+
+    delete:
+      tags:
+      - text_classifiers
+      summary: Delete testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_del_testing_samples
+      description: Delete the listed testing samples of the named text classifier. The list of samples is optional. If no list provided then all samples are deleted. Returns the deleted samples.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_optional"
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"        
+        400:
+          description: bad request
+
 ########
 ## text_classifiers train
 ########
@@ -402,7 +455,7 @@ paths:
       description: Add training samples to named intent classifier. Returns the classifier's updated number of training samples.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_required"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -430,7 +483,43 @@ paths:
       summary: Delete training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_del_training_samples
-      description: Delete the training samples of the named intent classifier. Returns the deleted samples.
+      description: Delete the listed training samples of the named intent classifier. The list of samples is optional. If no list provided then all samples are deleted. Returns the deleted samples.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_optional"
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"        
+        400:
+          description: bad request
+          
+########
+## intent_classifiers testing samples
+########
+  /intent_classifiers/{instance_name}/testing_samples:
+    post:
+      tags:
+      - intent_classifiers
+      summary: Add testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
+      operationId: intent_classifier_add_testing_samples
+      description: Add testing samples to named intent classifier. Returns the classifier's updated number of testing samples.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_required"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"        
+        400:
+          description: bad request
+          
+    get:
+      tags:
+      - intent_classifiers
+      summary: Get testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
+      operationId: intent_classifier_get_testing_samples
+      description: Returns the testing samples of the named intent classifier.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
@@ -438,6 +527,23 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"        
         400:
           description: bad request
+
+    delete:
+      tags:
+      - intent_classifiers
+      summary: Delete testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
+      operationId: intent_classifier_del_testing_samples
+      description: Delete the listed testing samples of the named intent classifier. The list of samples is optional. If no list provided then all samples are deleted. Returns the deleted samples.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_optional"
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"        
+        400:
+          description: bad request
+
 ########
 ## intent_classifiers train
 ########
@@ -459,6 +565,26 @@ paths:
           description: bad request
 
 ########
+## intent_classifiers model_params
+########
+  /intent_classifiers/{instance_name}/params:
+    post:
+      tags:
+      - intent_classifiers
+      summary: Set the model parameters of named intent classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
+      operationId: intent_classifier_set_params
+      description: Set the model parameters of named intent classifier.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_model_params"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
+        400:
+          description: bad request
+
+########
 ## intent_classifiers train online
 ########
   /intent_classifiers/{instance_name}/online_training_samples:
@@ -471,7 +597,7 @@ paths:
       description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_required"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -604,7 +730,7 @@ paths:
       description: Add training samples to named faq matcher. Returns the FAQ matcher's updated number of training samples.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_required"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -632,12 +758,64 @@ paths:
       summary: Delete training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_del_training_samples
-      description: Delete the training samples of the named FAQ matcher. Returns the deleted samples.
+      description: Delete the listed training samples of the named FAQ matcher. The list of samples is optional. If no list provided then all samples are deleted. Returns the deleted samples.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_optional"
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"        
+        400:
+          description: bad request
+          
+########
+## faq_matchers testing samples
+########
+  /faq_matchers/{instance_name}/testing_samples:
+    post:
+      tags:
+      - faq_matchers
+      summary: Add testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_add_testing_samples
+      description: Add testing samples to named faq matcher. Returns the FAQ matcher's updated number of testing samples.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_required"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"        
+        400:
+          description: bad request
+          
+    get:
+      tags:
+      - faq_matchers
+      summary: Get testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_get_testing_samples
+      description: Returns the testing samples of the named faq matcher.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
+        400:
+          description: bad request
+
+    delete:
+      tags:
+      - faq_matchers
+      summary: Delete testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_del_testing_samples
+      description: Delete the listed testing samples of the named FAQ matcher. The list of samples is optional. If no list provided then all samples are deleted. Returns the deleted samples.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_optional"
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"   
         400:
           description: bad request
           
@@ -662,6 +840,26 @@ paths:
           description: bad request
 
 ########
+## faq_matchers model_params
+########
+  /faq_matchers/{instance_name}/params:
+    post:
+      tags:
+      - faq_matchers
+      summary: Set the model parameters of named FAQ matcher.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_set_params
+      description: Set the model parameters of FAQ matcher.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_model_params"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
+        400:
+          description: bad request
+
+########
 ## faq_matchers train online
 ########
   /faq_matchers/{instance_name}/online_training_samples:
@@ -674,7 +872,7 @@ paths:
       description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - $ref: "#/parameters/body_param_labelled_text_sample_list_required"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -1187,11 +1385,19 @@ parameters:
     schema:
       $ref: "#/definitions/lr4_create_details"
           
-  body_param_labelled_text_sample_list:
+  body_param_labelled_text_sample_list_required:
     in: body
     name: labelled_text_sample_list
     description: List of labelled text samples.
     required: true
+    schema:
+      $ref: "#/definitions/labelled_text_sample_list"
+      
+  body_param_labelled_text_sample_list_optional:
+    in: body
+    name: labelled_text_sample_list
+    description: List of labelled text samples.
+    required: false
     schema:
       $ref: "#/definitions/labelled_text_sample_list"
     
@@ -1203,6 +1409,14 @@ parameters:
     schema:
       $ref: "#/definitions/train_details"
           
+  body_param_model_params:        
+    in: body
+    name: model_params
+    description: The model parameters.
+    required: true
+    schema:
+      $ref: "#/definitions/model_params"
+
   body_param_text_input:
     in: body
     name: text_input
@@ -1820,6 +2034,14 @@ definitions:
       label:
         type: string
         example: 'greeting'
+      lang_code:
+        description: A 3 character ISO 639-3 language code - eng, afr, nbl, xho, zul, ssw, nso, sot, tsn, ven, tso.
+        type: string
+        example: 'eng'
+      comment:
+        description: A string note such as the exact answer text from a helpdesk or any other important facts about the text.
+        type: string
+        example: "Greeting with speaker's name."
 
   labelled_text_sample_list:
     description: List of labelled text samples.
@@ -1869,6 +2091,17 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/labeled_word_manifold"
+
+  model_params:
+    description: The model parameters.
+    type: object
+#    required:
+#      - immediate_mode
+    properties:
+      threshold:
+        description: There is typically some model dependent threshold to be set upon training which is possibly mutable post training. This is that threshold.
+        type: number
+        example: 0.85
 
   total_samples:
     description: The total number of samples of this type now loaded into the model.

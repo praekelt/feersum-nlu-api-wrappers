@@ -58,11 +58,11 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Del the training samples of the text classifier:")
-    api_response = api_instance.text_classifier_del_training_samples(instance_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+#    print("Del the training samples of the text classifier:")
+#    api_response = api_instance.text_classifier_del_training_samples(instance_name)
+#    print(" type(api_response)", type(api_response))
+#    print(" api_response", api_response)
+#    print()
 
     print("Add training samples to the text classifier:")
     api_response = api_instance.text_classifier_add_training_samples(instance_name, labelled_text_sample_list)

@@ -4,18 +4,78 @@ All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**faq_matcher_add_testing_samples**](FaqMatchersApi.md#faq_matcher_add_testing_samples) | **POST** /faq_matchers/{instance_name}/testing_samples | Add testing samples.
 [**faq_matcher_add_training_samples**](FaqMatchersApi.md#faq_matcher_add_training_samples) | **POST** /faq_matchers/{instance_name}/training_samples | Add training samples.
 [**faq_matcher_create**](FaqMatchersApi.md#faq_matcher_create) | **POST** /faq_matchers | Create an FAQ matcher.
 [**faq_matcher_curate**](FaqMatchersApi.md#faq_matcher_curate) | **POST** /faq_matchers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
+[**faq_matcher_del_testing_samples**](FaqMatchersApi.md#faq_matcher_del_testing_samples) | **DELETE** /faq_matchers/{instance_name}/testing_samples | Delete testing samples.
 [**faq_matcher_del_training_samples**](FaqMatchersApi.md#faq_matcher_del_training_samples) | **DELETE** /faq_matchers/{instance_name}/training_samples | Delete training samples.
 [**faq_matcher_get_details**](FaqMatchersApi.md#faq_matcher_get_details) | **GET** /faq_matchers/{instance_name} | Get details of named instance.
 [**faq_matcher_get_details_all**](FaqMatchersApi.md#faq_matcher_get_details_all) | **GET** /faq_matchers | Get list of loaded FAQ matchers.
 [**faq_matcher_get_labels**](FaqMatchersApi.md#faq_matcher_get_labels) | **GET** /faq_matchers/{instance_name}/get_labels | Get list of possible labels.
+[**faq_matcher_get_testing_samples**](FaqMatchersApi.md#faq_matcher_get_testing_samples) | **GET** /faq_matchers/{instance_name}/testing_samples | Get testing samples.
 [**faq_matcher_get_training_samples**](FaqMatchersApi.md#faq_matcher_get_training_samples) | **GET** /faq_matchers/{instance_name}/training_samples | Get training samples.
 [**faq_matcher_online_training_samples**](FaqMatchersApi.md#faq_matcher_online_training_samples) | **POST** /faq_matchers/{instance_name}/online_training_samples | Train/update the classifier online with the samples provided.
 [**faq_matcher_retrieve**](FaqMatchersApi.md#faq_matcher_retrieve) | **POST** /faq_matchers/{instance_name}/retrieve | Match retrieve and FAQ.
+[**faq_matcher_set_params**](FaqMatchersApi.md#faq_matcher_set_params) | **POST** /faq_matchers/{instance_name}/params | Set the model parameters of named FAQ matcher.
 [**faq_matcher_train**](FaqMatchersApi.md#faq_matcher_train) | **POST** /faq_matchers/{instance_name}/train | Train the named FAQ matcher.
 
+
+# **faq_matcher_add_testing_samples**
+> TotalSamples faq_matcher_add_testing_samples(instance_name, labelled_text_sample_list)
+
+Add testing samples.
+
+Add testing samples to named faq matcher. Returns the FAQ matcher's updated number of testing samples.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
+
+try:
+    # Add testing samples.
+    api_response = api_instance.faq_matcher_add_testing_samples(instance_name, labelled_text_sample_list)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling FaqMatchersApi->faq_matcher_add_testing_samples: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | 
+
+### Return type
+
+[**TotalSamples**](TotalSamples.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_add_training_samples**
 > TotalSamples faq_matcher_add_training_samples(instance_name, labelled_text_sample_list)
@@ -183,12 +243,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **faq_matcher_del_training_samples**
-> LabelledTextSampleList faq_matcher_del_training_samples(instance_name)
+# **faq_matcher_del_testing_samples**
+> LabelledTextSampleList faq_matcher_del_testing_samples(instance_name, labelled_text_sample_list=labelled_text_sample_list)
 
-Delete training samples.
+Delete testing samples.
 
-Delete the training samples of the named FAQ matcher. Returns the deleted samples.
+Delete the listed testing samples of the named FAQ matcher. The list of samples is optional. If no list provided then all samples are deleted. Returns the deleted samples.
 
 ### Example
 ```python
@@ -207,10 +267,67 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples. (optional)
+
+try:
+    # Delete testing samples.
+    api_response = api_instance.faq_matcher_del_testing_samples(instance_name, labelled_text_sample_list=labelled_text_sample_list)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling FaqMatchersApi->faq_matcher_del_testing_samples: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | [optional] 
+
+### Return type
+
+[**LabelledTextSampleList**](LabelledTextSampleList.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **faq_matcher_del_training_samples**
+> LabelledTextSampleList faq_matcher_del_training_samples(instance_name, labelled_text_sample_list=labelled_text_sample_list)
+
+Delete training samples.
+
+Delete the listed training samples of the named FAQ matcher. The list of samples is optional. If no list provided then all samples are deleted. Returns the deleted samples.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples. (optional)
 
 try:
     # Delete training samples.
-    api_response = api_instance.faq_matcher_del_training_samples(instance_name)
+    api_response = api_instance.faq_matcher_del_training_samples(instance_name, labelled_text_sample_list=labelled_text_sample_list)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_del_training_samples: %s\n" % e)
@@ -221,6 +338,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | [optional] 
 
 ### Return type
 
@@ -395,6 +513,60 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **faq_matcher_get_testing_samples**
+> LabelledTextSampleList faq_matcher_get_testing_samples(instance_name)
+
+Get testing samples.
+
+Returns the testing samples of the named faq matcher.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try:
+    # Get testing samples.
+    api_response = api_instance.faq_matcher_get_testing_samples(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling FaqMatchersApi->faq_matcher_get_testing_samples: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+
+### Return type
+
+[**LabelledTextSampleList**](LabelledTextSampleList.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **faq_matcher_get_training_samples**
 > LabelledTextSampleList faq_matcher_get_training_samples(instance_name)
 
@@ -549,6 +721,62 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ScoredLabelList**](ScoredLabelList.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **faq_matcher_set_params**
+> InstanceDetail faq_matcher_set_params(instance_name, model_params)
+
+Set the model parameters of named FAQ matcher.
+
+Set the model parameters of FAQ matcher.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+model_params = feersum_nlu.ModelParams() # ModelParams | The model parameters.
+
+try:
+    # Set the model parameters of named FAQ matcher.
+    api_response = api_instance.faq_matcher_set_params(instance_name, model_params)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling FaqMatchersApi->faq_matcher_set_params: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
+
+### Return type
+
+[**InstanceDetail**](InstanceDetail.md)
 
 ### Authorization
 
