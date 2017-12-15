@@ -125,7 +125,7 @@ class DucklingEntityExtractorsApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/duckling_entity_extractors', 'POST',
@@ -224,7 +224,7 @@ class DucklingEntityExtractorsApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/duckling_entity_extractors/{instance_name}', 'GET',
@@ -315,7 +315,7 @@ class DucklingEntityExtractorsApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/duckling_entity_extractors', 'GET',
@@ -422,7 +422,7 @@ class DucklingEntityExtractorsApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/duckling_entity_extractors/{instance_name}/retrieve', 'POST',

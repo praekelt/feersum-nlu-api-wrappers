@@ -239,6 +239,13 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
                 {
                     'type': 'api_key',
                     'in': 'header',
+                    'key': 'X-Auth-Token',
+                    'value': self.get_api_key_with_prefix('X-Auth-Token')
+                },
+            'APIKeyHeader_old':
+                {
+                    'type': 'api_key',
+                    'in': 'header',
                     'key': 'AUTH_TOKEN',
                     'value': self.get_api_key_with_prefix('AUTH_TOKEN')
                 },

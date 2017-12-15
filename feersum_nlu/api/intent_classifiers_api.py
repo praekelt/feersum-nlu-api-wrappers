@@ -133,7 +133,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers/{instance_name}/testing_samples', 'POST',
@@ -240,7 +240,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers/{instance_name}/training_samples', 'POST',
@@ -339,7 +339,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers', 'POST',
@@ -446,7 +446,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers/{instance_name}/curate', 'POST',
@@ -549,7 +549,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers/{instance_name}/testing_samples', 'DELETE',
@@ -652,7 +652,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers/{instance_name}/training_samples', 'DELETE',
@@ -751,7 +751,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers/{instance_name}', 'GET',
@@ -842,7 +842,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers', 'GET',
@@ -941,7 +941,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers/{instance_name}/get_labels', 'GET',
@@ -1040,7 +1040,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers/{instance_name}/testing_samples', 'GET',
@@ -1139,7 +1139,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers/{instance_name}/training_samples', 'GET',
@@ -1246,7 +1246,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers/{instance_name}/online_training_samples', 'POST',
@@ -1353,7 +1353,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers/{instance_name}/retrieve', 'POST',
@@ -1460,7 +1460,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers/{instance_name}/params', 'POST',
@@ -1567,7 +1567,7 @@ class IntentClassifiersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/intent_classifiers/{instance_name}/train', 'POST',

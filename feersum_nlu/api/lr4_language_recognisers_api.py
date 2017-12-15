@@ -125,7 +125,7 @@ class Lr4LanguageRecognisersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/lr4_language_recognisers', 'POST',
@@ -224,7 +224,7 @@ class Lr4LanguageRecognisersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/lr4_language_recognisers/{instance_name}', 'GET',
@@ -315,7 +315,7 @@ class Lr4LanguageRecognisersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/lr4_language_recognisers', 'GET',
@@ -414,7 +414,7 @@ class Lr4LanguageRecognisersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/lr4_language_recognisers/{instance_name}/get_labels', 'GET',
@@ -521,7 +521,7 @@ class Lr4LanguageRecognisersApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/lr4_language_recognisers/{instance_name}/retrieve', 'POST',

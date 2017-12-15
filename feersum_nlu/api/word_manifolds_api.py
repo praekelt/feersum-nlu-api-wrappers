@@ -133,7 +133,7 @@ class WordManifoldsApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/word_manifolds/{instance_name}/vocab', 'POST',
@@ -232,7 +232,7 @@ class WordManifoldsApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/word_manifolds', 'POST',
@@ -339,7 +339,7 @@ class WordManifoldsApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/word_manifolds/{instance_name}/similar_words', 'POST',
@@ -446,7 +446,7 @@ class WordManifoldsApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['APIKeyHeader']  # noqa: E501
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
             '/word_manifolds/{instance_name}/spell_correct', 'POST',

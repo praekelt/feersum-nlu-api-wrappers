@@ -505,11 +505,14 @@ class ApiClient(object):
 
         for auth in auth_settings:
             auth_setting = self.configuration.auth_settings().get(auth)
+
             if auth_setting:
                 if not auth_setting['value']:
                     continue
                 elif auth_setting['in'] == 'header':
                     headers[auth_setting['key']] = auth_setting['value']
+                    print("headers =", headers)
+
                 elif auth_setting['in'] == 'query':
                     querys.append((auth_setting['key'], auth_setting['value']))
                 else:

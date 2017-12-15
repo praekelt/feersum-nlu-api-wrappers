@@ -23,11 +23,17 @@ produces:
   
 # Global security (applies to all operations):
 securityDefinitions:
-   APIKeyHeader:
+   APIKeyHeader_old:
      type: apiKey
      in: header
      name: AUTH_TOKEN
+   APIKeyHeader:
+     type: apiKey
+     in: header
+     name: X-Auth-Token
+
 security:
+- APIKeyHeader_old: []
 - APIKeyHeader: []
 
 tags:
