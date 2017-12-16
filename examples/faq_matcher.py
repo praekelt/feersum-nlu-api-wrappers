@@ -13,7 +13,8 @@ print('feersum_nlu_auth_token = ', feersum_nlu_auth_token)
 
 # Configure API key authorization: APIKeyHeader
 configuration = feersum_nlu.Configuration()
-configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
+# configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
+configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative auth key header!
 
 # configuration.host = "http://127.0.0.1:8100/nlu/v2"
 configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
@@ -80,6 +81,7 @@ try:
     print()
 
     print("Del the training samples of the FAQ matcher:")
+    # api_response = api_instance.faq_matcher_del_training_samples_all(instance_name)
     api_response = api_instance.faq_matcher_del_training_samples(instance_name,
                                                                  labelled_text_sample_list=
                                                                  labelled_text_sample_delete_list)
