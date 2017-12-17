@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.13
+  version: 2.0.14
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -1720,16 +1720,27 @@ definitions:
         description: The average F-score of the model as measured on the training set. 
         type: number
         example: 1.0
-      training_stamp:
-        description: The time when the training operation concluded.
-        type: string
-        example: '2017-10-26 10:42:01.589979'
       training_cm:
         description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      testing_accuracy:
+        description: The accuracy of the model as measured on the testing set. 
+        type: number
+        example: 1.0
+      testing_f1:
+        description: The average F-score of the model as measured on the testing set. 
+        type: number
+        example: 1.0
+      testing_cm:
+        description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
       cm_labels:
         description: A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer.
         type: object
+      training_stamp:
+        description: The time when the training operation concluded.
+        type: string
+        example: '2017-10-26 10:42:01.589979'
 
   text_clsfr_instance_detail_list:
     description: A list of models' instance details.
@@ -1794,16 +1805,27 @@ definitions:
         description: The average F-score of the model as measured on the training set. 
         type: number
         example: 1.0
-      training_stamp:
-        description: The time when the training operation concluded.
-        type: string
-        example: '2017-10-26 10:42:01.589979'
       training_cm:
         description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      testing_accuracy:
+        description: The accuracy of the model as measured on the testing set. 
+        type: number
+        example: 1.0
+      testing_f1:
+        description: The average F-score of the model as measured on the testing set. 
+        type: number
+        example: 1.0
+      testing_cm:
+        description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
       cm_labels:
         description: A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer.
         type: object
+      training_stamp:
+        description: The time when the training operation concluded.
+        type: string
+        example: '2017-10-26 10:42:01.589979'
       word_manifold_list:
         description: The list of labelled word manifolds used for training.
         type: array

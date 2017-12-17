@@ -10,14 +10,14 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 
 
-class TestSentiment(unittest.TestCase):
+class TestFAQMatcher(unittest.TestCase):
     def setUp(self):
         pass
 
     def tearDown(self):
         pass
 
-    def test_sentiment(self):
+    def test_faq_matcher(self):
         # Try to get the API key from your OS environment, else use 'YOUR_API_KEY' as the default value in the code below.
         # You may use any environment variable you want, it doesn't have to be 'FEERSUM_NLU_AUTH_TOKEN'.
         feersum_nlu_auth_token = os.environ.get('FEERSUM_NLU_AUTH_TOKEN', 'YOUR_API_KEY')
