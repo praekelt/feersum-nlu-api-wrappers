@@ -1,6 +1,7 @@
 #!/bin/bash
 
-SERVICE="nlu.playground.feersum.io:443"
+# SERVICE="http://127.0.0.1:8100"
+SERVICE="https://nlu.playground.feersum.io:443"
 
 AUTH_TOKEN="YOUR_API_KEY"
 MODEL_NAME="medium_faq_mtchr"
@@ -28,18 +29,20 @@ A3Q4="Help, ek het my kar gestamp"
 #===
 #create FAQ
 
-curl -XPOST -is 'https://'"$SERVICE"'/nlu/v2/faq_matchers' \
+curl -XPOST -is "$SERVICE"'/nlu/v2/faq_matchers' \
     -H "AUTH_TOKEN: $AUTH_TOKEN" \
-    -H "accept: application/json" -H "content-type: application/json" \
+    -H "accept: application/json" \
+    -H "content-type: application/json" \
     -d '{"name":"'"$MODEL_NAME"'", "desc":"Test FAQ matcher.", "load_from_store": false}'
 
 
 #===
 # Submit training data.
 
-curl -XPOST -is 'https://'"$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/training_samples' \
+curl -XPOST -is "$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/training_samples' \
     -H "AUTH_TOKEN: $AUTH_TOKEN" \
-    -H "accept: application/json" -H "content-type: application/json" \
+    -H "accept: application/json" \
+    -H "content-type: application/json" \
     -d '['\
 '{"text":"'"$A1Q1"'", "label":"'"$A1"'"},'\
 '{"text":"'"$A1Q2"'", "label":"'"$A1"'"},'\
@@ -59,9 +62,10 @@ curl -XPOST -is 'https://'"$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/traini
 #===
 # Train
 # - the 'threshold' parameter is useful to filter out weak matches. It is usually set to 0.85.
-curl -XPOST -is 'https://'"$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/train' \
+curl -XPOST -is "$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/train' \
     -H "AUTH_TOKEN: $AUTH_TOKEN" \
-    -H "accept: application/json" -H "content-type: application/json" \
+    -H "accept: application/json" \
+    -H "content-type: application/json" \
     -d '{"immediate_mode": true, "threshold": 1.0, "word_manifold_list": [{"label": "eng", "word_manifold": "feers_wm_eng"}, {"label": "afr", "word_manifold": "feers_wm_afr"}]}'
 
 
@@ -69,14 +73,16 @@ curl -XPOST -is 'https://'"$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/train'
 #Retrieve/test
 
 # - Demonstrate a weak match of petrol to engine.
-curl -XPOST -is 'https://'"$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/retrieve' \
+curl -XPOST -is "$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/retrieve' \
     -H "AUTH_TOKEN: $AUTH_TOKEN" \
-    -H "accept: application/json" -H "content-type: application/json" \
+    -H "accept: application/json" \
+    -H "content-type: application/json" \
     -d '{"text": "I think I need petrol?"}'
 
 
 # - Demonstrate a verb to noun match of verongeluk to ongeluk.
-curl -XPOST -is 'https://'"$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/retrieve' \
+curl -XPOST -is "$SERVICE"'/nlu/v2/faq_matchers/'"$MODEL_NAME"'/retrieve' \
     -H "AUTH_TOKEN: $AUTH_TOKEN" \
-    -H "accept: application/json" -H "content-type: application/json" \
+    -H "accept: application/json" \
+    -H "content-type: application/json" \
     -d '{"text": "Ek het my kar verongeluk?"}'

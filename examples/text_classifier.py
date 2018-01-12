@@ -74,6 +74,15 @@ try:
     print(" api_response", api_response)
     print()
 
+    print("Del testing samples of the text classifier:")
+    api_response = api_instance.text_classifier_del_testing_samples_all(instance_name)
+    # api_response = api_instance.text_classifier_del_testing_samples(instance_name,
+    #                                                             labelled_text_sample_list=
+    #                                                             labelled_text_sample_testing_list)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
     print("Train the text classifier:")
     api_response = api_instance.text_classifier_train(instance_name, train_details)
     print(" type(api_response)", type(api_response))

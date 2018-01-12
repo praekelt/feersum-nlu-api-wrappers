@@ -13,7 +13,7 @@ import sys
 from setuptools import setup, find_packages
 
 NAME = "feersum_nlu"
-VERSION = "2.0.14"
+VERSION = "2.0.15"
 
 # To install the library, run the following
 #

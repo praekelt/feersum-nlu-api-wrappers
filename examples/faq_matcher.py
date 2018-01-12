@@ -93,7 +93,7 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Del the training samples of the FAQ matcher:")
+    print("Del training samples of the FAQ matcher:")
     # api_response = api_instance.faq_matcher_del_training_samples_all(instance_name)
     api_response = api_instance.faq_matcher_del_training_samples(instance_name,
                                                                  labelled_text_sample_list=
@@ -119,6 +119,15 @@ try:
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
+
+    # print("Del testing samples of the FAQ matcher:")
+    # api_response = api_instance.faq_matcher_del_testing_samples_all(instance_name)
+    # # api_response = api_instance.faq_matcher_del_testing_samples(instance_name,
+    # #                                                             labelled_text_sample_list=
+    # #                                                             labelled_text_sample_testing_list)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
     print("Train the FAQ matcher:")
     api_response = api_instance.faq_matcher_train(instance_name, train_details)
