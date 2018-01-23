@@ -1,23 +1,18 @@
 """ Example: Shows how the Duckling entity extractor may be used. """
 
-import os
 import urllib3
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
-
-# Try to get the API key from your OS environment, else use 'YOUR_API_KEY' as the default value in the code below.
-# You may use any environment variable you want, it doesn't have to be 'FEERSUM_NLU_AUTH_TOKEN'.
-feersum_nlu_auth_token = os.environ.get('FEERSUM_NLU_AUTH_TOKEN', 'YOUR_API_KEY')
-print('feersum_nlu_auth_token = ', feersum_nlu_auth_token)
+from examples import feersumnlu_host, feersum_nlu_auth_token
 
 # Configure API key authorization: APIKeyHeader
 configuration = feersum_nlu.Configuration()
+
 # configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
 configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative auth key header!
 
-# configuration.host = "http://127.0.0.1:8100/nlu/v2"
-configuration.host = "https://nlu.playground.feersum.io:443/nlu/v2"
+configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 
@@ -26,9 +21,10 @@ instance_name = 'test_duckling_extr'
 duckling_ent_create_details = \
     feersum_nlu.DucklingEntCreateDetails(name=instance_name,
                                          desc="Test duckling extractor.",
+                                         reference_time="2017-01-20 0:00+01:00",
                                          load_from_store=False)
 
-text_input = feersum_nlu.TextInput("I am 16 weeks and 1 day pregnant today.")
+text_input = feersum_nlu.TextInput("I am 16 weeks and 1 day pregnant today at 15:00.")
 
 print()
 
@@ -56,6 +52,13 @@ try:
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
+
+    print("Delete named loaded entity extractor:")
+    api_response = api_instance.duckling_entity_extractor_del(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
 except ApiException as e:
     print("Exception when calling a entity extractor operation: %s\n" % e)
 except urllib3.exceptions.MaxRetryError:

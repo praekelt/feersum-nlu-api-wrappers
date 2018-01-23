@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**intent_classifier_add_training_samples**](IntentClassifiersApi.md#intent_classifier_add_training_samples) | **POST** /intent_classifiers/{instance_name}/training_samples | Add training samples.
 [**intent_classifier_create**](IntentClassifiersApi.md#intent_classifier_create) | **POST** /intent_classifiers | Create an intent classifier.
 [**intent_classifier_curate**](IntentClassifiersApi.md#intent_classifier_curate) | **POST** /intent_classifiers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
+[**intent_classifier_del**](IntentClassifiersApi.md#intent_classifier_del) | **DELETE** /intent_classifiers/{instance_name} | Delete named instance.
 [**intent_classifier_del_testing_samples**](IntentClassifiersApi.md#intent_classifier_del_testing_samples) | **DELETE** /intent_classifiers/{instance_name}/testing_samples | Delete testing samples.
 [**intent_classifier_del_testing_samples_all**](IntentClassifiersApi.md#intent_classifier_del_testing_samples_all) | **DELETE** /intent_classifiers/{instance_name}/testing_samples_all | Delete all testing samples.
 [**intent_classifier_del_training_samples**](IntentClassifiersApi.md#intent_classifier_del_training_samples) | **DELETE** /intent_classifiers/{instance_name}/training_samples | Delete training samples.
@@ -253,6 +254,65 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**LabelledTextSampleList**](LabelledTextSampleList.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **intent_classifier_del**
+> InstanceDetail intent_classifier_del(instance_name)
+
+Delete named instance.
+
+Delete and return the details of the named intent classifier instance.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try:
+    # Delete named instance.
+    api_response = api_instance.intent_classifier_del(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling IntentClassifiersApi->intent_classifier_del: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+
+### Return type
+
+[**InstanceDetail**](InstanceDetail.md)
 
 ### Authorization
 

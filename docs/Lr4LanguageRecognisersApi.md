@@ -5,6 +5,7 @@ All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**lr4_language_recogniser_create**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_create) | **POST** /lr4_language_recognisers | Create a LR4 text language detector.
+[**lr4_language_recogniser_del**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_del) | **DELETE** /lr4_language_recognisers/{instance_name} | Delete named instance.
 [**lr4_language_recogniser_get_details**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_get_details) | **GET** /lr4_language_recognisers/{instance_name} | Get details of named instance.
 [**lr4_language_recogniser_get_details_all**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_get_details_all) | **GET** /lr4_language_recognisers | Get list of loaded LR4 text language detectors.
 [**lr4_language_recogniser_get_labels**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_get_labels) | **GET** /lr4_language_recognisers/{instance_name}/get_labels | Get list of possible labels.
@@ -54,6 +55,65 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **lr4_create_details** | [**Lr4CreateDetails**](Lr4CreateDetails.md)| The details of the instance to create. | 
+
+### Return type
+
+[**Lr4InstanceDetail**](Lr4InstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **lr4_language_recogniser_del**
+> Lr4InstanceDetail lr4_language_recogniser_del(instance_name)
+
+Delete named instance.
+
+Delete and return the details of the named LR4 text language detector instance.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.Lr4LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try:
+    # Delete named instance.
+    api_response = api_instance.lr4_language_recogniser_del(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling Lr4LanguageRecognisersApi->lr4_language_recogniser_del: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
 
 ### Return type
 

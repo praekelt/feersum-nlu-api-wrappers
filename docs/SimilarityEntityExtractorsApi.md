@@ -5,6 +5,7 @@ All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**similarity_entity_extractor_create**](SimilarityEntityExtractorsApi.md#similarity_entity_extractor_create) | **POST** /similarity_entity_extractors | Create a word similarity entity extractor.
+[**similarity_entity_extractor_del**](SimilarityEntityExtractorsApi.md#similarity_entity_extractor_del) | **DELETE** /similarity_entity_extractors/{instance_name} | Delete named instance.
 [**similarity_entity_extractor_get_details**](SimilarityEntityExtractorsApi.md#similarity_entity_extractor_get_details) | **GET** /similarity_entity_extractors/{instance_name} | Get details of named instance.
 [**similarity_entity_extractor_get_details_all**](SimilarityEntityExtractorsApi.md#similarity_entity_extractor_get_details_all) | **GET** /similarity_entity_extractors | Get list of loaded similarity entity extractors.
 [**similarity_entity_extractor_retrieve**](SimilarityEntityExtractorsApi.md#similarity_entity_extractor_retrieve) | **POST** /similarity_entity_extractors/{instance_name}/retrieve | Extract information based on word similarity.
@@ -53,6 +54,65 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **similarity_ent_create_details** | [**SimilarityEntCreateDetails**](SimilarityEntCreateDetails.md)| The details of the instance to create. | 
+
+### Return type
+
+[**SimilarityInstanceDetail**](SimilarityInstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **similarity_entity_extractor_del**
+> SimilarityInstanceDetail similarity_entity_extractor_del(instance_name)
+
+Delete named instance.
+
+Delete and return the details of the named similarity entity extractor instance.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.SimilarityEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try:
+    # Delete named instance.
+    api_response = api_instance.similarity_entity_extractor_del(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling SimilarityEntityExtractorsApi->similarity_entity_extractor_del: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
 
 ### Return type
 

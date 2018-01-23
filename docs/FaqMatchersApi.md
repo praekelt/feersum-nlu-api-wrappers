@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**faq_matcher_add_training_samples**](FaqMatchersApi.md#faq_matcher_add_training_samples) | **POST** /faq_matchers/{instance_name}/training_samples | Add training samples.
 [**faq_matcher_create**](FaqMatchersApi.md#faq_matcher_create) | **POST** /faq_matchers | Create an FAQ matcher.
 [**faq_matcher_curate**](FaqMatchersApi.md#faq_matcher_curate) | **POST** /faq_matchers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
+[**faq_matcher_del**](FaqMatchersApi.md#faq_matcher_del) | **DELETE** /faq_matchers/{instance_name} | Delete named instance.
 [**faq_matcher_del_testing_samples**](FaqMatchersApi.md#faq_matcher_del_testing_samples) | **DELETE** /faq_matchers/{instance_name}/testing_samples | Delete testing samples.
 [**faq_matcher_del_testing_samples_all**](FaqMatchersApi.md#faq_matcher_del_testing_samples_all) | **DELETE** /faq_matchers/{instance_name}/testing_samples_all | Delete all testing samples.
 [**faq_matcher_del_training_samples**](FaqMatchersApi.md#faq_matcher_del_training_samples) | **DELETE** /faq_matchers/{instance_name}/training_samples | Delete training samples.
@@ -253,6 +254,65 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**LabelledTextSampleList**](LabelledTextSampleList.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **faq_matcher_del**
+> InstanceDetail faq_matcher_del(instance_name)
+
+Delete named instance.
+
+Delete and return the details of the named FAQ matcher instance.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try:
+    # Delete named instance.
+    api_response = api_instance.faq_matcher_del(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling FaqMatchersApi->faq_matcher_del: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+
+### Return type
+
+[**InstanceDetail**](InstanceDetail.md)
 
 ### Authorization
 

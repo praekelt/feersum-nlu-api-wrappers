@@ -1,11 +1,9 @@
-import os
 import time
 import requests
 import json
 import concurrent.futures
 
-feersum_nlu_auth_token = os.environ.get('FEERSUM_NLU_AUTH_TOKEN', 'YOUR_API_KEY')
-print('feersum_nlu_auth_token = ', feersum_nlu_auth_token)
+from examples import feersum_nlu_auth_token
 
 host = "http://127.0.0.1:8100"
 # host = "https://nlu.playground.feersum.io:443"

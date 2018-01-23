@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**text_classifier_add_training_samples**](TextClassifiersApi.md#text_classifier_add_training_samples) | **POST** /text_classifiers/{instance_name}/training_samples | Add training samples.
 [**text_classifier_create**](TextClassifiersApi.md#text_classifier_create) | **POST** /text_classifiers | Create a text classifier.
 [**text_classifier_curate**](TextClassifiersApi.md#text_classifier_curate) | **POST** /text_classifiers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
+[**text_classifier_del**](TextClassifiersApi.md#text_classifier_del) | **DELETE** /text_classifiers/{instance_name} | Delete named instance.
 [**text_classifier_del_testing_samples**](TextClassifiersApi.md#text_classifier_del_testing_samples) | **DELETE** /text_classifiers/{instance_name}/testing_samples | Delete testing samples.
 [**text_classifier_del_testing_samples_all**](TextClassifiersApi.md#text_classifier_del_testing_samples_all) | **DELETE** /text_classifiers/{instance_name}/testing_samples_all | Delete testing samples.
 [**text_classifier_del_training_samples**](TextClassifiersApi.md#text_classifier_del_training_samples) | **DELETE** /text_classifiers/{instance_name}/training_samples | Delete training samples.
@@ -251,6 +252,65 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**LabelledTextSampleList**](LabelledTextSampleList.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **text_classifier_del**
+> TextClsfrInstanceDetail text_classifier_del(instance_name)
+
+Delete named instance.
+
+Delete and return the details of the named text classifier instance.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try:
+    # Delete named instance.
+    api_response = api_instance.text_classifier_del(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TextClassifiersApi->text_classifier_del: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+
+### Return type
+
+[**TextClsfrInstanceDetail**](TextClsfrInstanceDetail.md)
 
 ### Authorization
 
