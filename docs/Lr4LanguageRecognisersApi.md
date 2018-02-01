@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**lr4_language_recogniser_get_details_all**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_get_details_all) | **GET** /lr4_language_recognisers | Get list of loaded LR4 text language detectors.
 [**lr4_language_recogniser_get_labels**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_get_labels) | **GET** /lr4_language_recognisers/{instance_name}/get_labels | Get list of possible labels.
 [**lr4_language_recogniser_retrieve**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_retrieve) | **POST** /lr4_language_recognisers/{instance_name}/retrieve | Recognise the language the text is written in.
+[**lr4_language_recogniser_set_params**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_set_params) | **POST** /lr4_language_recognisers/{instance_name}/params | Set the model parameters of named lr4 language recogniser.
 
 
 # **lr4_language_recogniser_create**
@@ -352,6 +353,67 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ScoredLabelList**](ScoredLabelList.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **lr4_language_recogniser_set_params**
+> InstanceDetail lr4_language_recogniser_set_params(instance_name, model_params)
+
+Set the model parameters of named lr4 language recogniser.
+
+Set the model parameters of named lr4 language recogniser.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.Lr4LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+model_params = feersum_nlu.ModelParams() # ModelParams | The model parameters.
+
+try:
+    # Set the model parameters of named lr4 language recogniser.
+    api_response = api_instance.lr4_language_recogniser_set_params(instance_name, model_params)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling Lr4LanguageRecognisersApi->lr4_language_recogniser_set_params: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
+
+### Return type
+
+[**InstanceDetail**](InstanceDetail.md)
 
 ### Authorization
 

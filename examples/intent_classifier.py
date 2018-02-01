@@ -24,6 +24,7 @@ word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng')]
 
 create_details = feersum_nlu.CreateDetails(name=instance_name,
                                            desc="Test intent classifier.",
+                                           long_name=instance_name,
                                            lid_model_file="lid_za",
                                            load_from_store=False)
 
@@ -116,6 +117,14 @@ try:
     # Use the same labels as returned in the confusion matrix.
     label_pair = feersum_nlu.ClassLabelPair(matrix_name='train', true_label='1', predicted_label='1')
     api_response = api_instance.intent_classifier_curate(instance_name, label_pair)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Update the model details:")
+    model_params = feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test intent classifier.",
+                                           long_name='Test Intent Classifier')
+    api_response = api_instance.intent_classifier_set_params(instance_name, model_params)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()

@@ -1,5 +1,4 @@
 certifi
 six
 python_dateutil
-setuptools
 urllib3

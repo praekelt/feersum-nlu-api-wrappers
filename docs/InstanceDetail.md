@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | The sluggy-url-friendly-name of the instance. | 
 **id** | **str** | The unique id of a specific version of the model instance. | 
+**long_name** | **str** | The human-friendly-name of the instance. | [optional] 
 **desc** | **str** | The longer existential description of this instance&#39;s purpose in life. | [optional] 
 **training_accuracy** | **float** | The accuracy of the model as measured on the training set. | [optional] 
 **training_f1** | **float** | The average F-score of the model as measured on the training set. | [optional] 

@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**regex_entity_extractor_get_details**](RegexEntityExtractorsApi.md#regex_entity_extractor_get_details) | **GET** /regex_entity_extractors/{instance_name} | Get details of named instance.
 [**regex_entity_extractor_get_details_all**](RegexEntityExtractorsApi.md#regex_entity_extractor_get_details_all) | **GET** /regex_entity_extractors | Get list of loaded regular expression entity extractors.
 [**regex_entity_extractor_retrieve**](RegexEntityExtractorsApi.md#regex_entity_extractor_retrieve) | **POST** /regex_entity_extractors/{instance_name}/retrieve | Extract information based on the regular expression.
+[**regex_entity_extractor_set_params**](RegexEntityExtractorsApi.md#regex_entity_extractor_set_params) | **POST** /regex_entity_extractors/{instance_name}/params | Set the model parameters of named regex entity extractor.
 
 
 # **regex_entity_extractor_create**
@@ -292,6 +293,67 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**EntityList**](EntityList.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **regex_entity_extractor_set_params**
+> InstanceDetail regex_entity_extractor_set_params(instance_name, model_params)
+
+Set the model parameters of named regex entity extractor.
+
+Set the model parameters of named regex entity extractor.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+model_params = feersum_nlu.ModelParams() # ModelParams | The model parameters.
+
+try:
+    # Set the model parameters of named regex entity extractor.
+    api_response = api_instance.regex_entity_extractor_set_params(instance_name, model_params)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling RegexEntityExtractorsApi->regex_entity_extractor_set_params: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
+
+### Return type
+
+[**InstanceDetail**](InstanceDetail.md)
 
 ### Authorization
 

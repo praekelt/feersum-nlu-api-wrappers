@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | The sluggy-url-friendly-name of the instance. | 
+**long_name** | **str** | The human-friendly-name of the instance. | [optional] 
 **desc** | **str** | The longer existential description of this instance&#39;s purpose in life. | [optional] 
 **peak_api_hit_rate** | **float** | The peak api hit rate (hits/s) over the last couple of window periods. A window period is in the order of 5 minutes. | [optional] 
 **model_type** | **str** | The type of this model. | 

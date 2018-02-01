@@ -1,6 +1,7 @@
 """ Example: Shows how to create, train and use an FAQ matcher. """
 
 import urllib3
+import time
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
@@ -20,6 +21,7 @@ instance_name = 'test_faq_mtchr'
 
 create_details = feersum_nlu.CreateDetails(name=instance_name,
                                            desc="Test FAQ matcher.",
+                                           long_name="Loong Name",
                                            lid_model_file="lid_za",
                                            load_from_store=False)
 
@@ -130,6 +132,8 @@ try:
     print(" api_response", api_response)
     print()
 
+    # time.sleep(10.0)
+
     print("Get the details of all loaded FAQ matcher:")
     api_response = api_instance.faq_matcher_get_details_all()
     print(" type(api_response)", type(api_response))
@@ -178,8 +182,8 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Reduce the threshold:")
-    model_params = feersum_nlu.ModelParams(threshold=0.9)
+    print("Update the parameters:")
+    model_params = feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test FAQ matcher.", long_name="Loooong name.")
     api_response = api_instance.faq_matcher_set_params(instance_name, model_params)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)

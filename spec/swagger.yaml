@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.16
+  version: 2.0.18
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -149,6 +149,7 @@ paths:
           $ref: "#/responses/text_clsfr_instance_detail"
         400:
           description: bad request
+         
 ########
 ## text_classifiers training samples
 ########
@@ -300,6 +301,26 @@ paths:
       responses:
         200:
           $ref: "#/responses/text_clsfr_instance_detail"
+        400:
+          description: bad request
+
+########
+## text_classifiers model_params
+########
+  /text_classifiers/{instance_name}/params:
+    post:
+      tags:
+      - text_classifiers
+      summary: Set the model parameters of named text classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_set_params
+      description: Set the model parameters of named text classifier.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_model_params"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
         400:
           description: bad request
 
@@ -1202,6 +1223,26 @@ paths:
           description: bad request
 
 ########
+## regex_entity_extractors model_params
+########
+  /regex_entity_extractors/{instance_name}/params:
+    post:
+      tags:
+      - regex_entity_extractors
+      summary: Set the model parameters of named regex entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: regex_entity_extractor_set_params
+      description: Set the model parameters of named regex entity extractor.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_model_params"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
+        400:
+          description: bad request
+
+########
 ## regex_entity_extractors retrieve
 ########
   /regex_entity_extractors/{instance_name}/retrieve:
@@ -1286,6 +1327,26 @@ paths:
       responses:
         200:
           $ref: "#/responses/person_name_instance_detail"
+        400:
+          description: bad request
+
+########
+## person_name_entity_extractors model_params
+########
+  /person_name_entity_extractors/{instance_name}/params:
+    post:
+      tags:
+      - person_name_entity_extractors
+      summary: Set the model parameters of named person name entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
+      operationId: person_name_entity_extractor_set_params
+      description: Set the model parameters of named person name entity extractor.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_model_params"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
         400:
           description: bad request
 
@@ -1378,6 +1439,26 @@ paths:
           description: bad request
 
 ########
+## duckling_entity_extractors model_params
+########
+  /duckling_entity_extractors/{instance_name}/params:
+    post:
+      tags:
+      - duckling_entity_extractors
+      summary: Set the model parameters of named duckling entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.duckling_entity_extractors_controller
+      operationId: duckling_entity_extractor_set_params
+      description: Set the model parameters of named duckling entity extractor.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_model_params"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
+        400:
+          description: bad request
+
+########
 ## duckling_entity_extractors retrieve
 ########
   /duckling_entity_extractors/{instance_name}/retrieve:
@@ -1462,6 +1543,26 @@ paths:
       responses:
         200:
           $ref: "#/responses/similarity_instance_detail"
+        400:
+          description: bad request
+
+########
+## similarity_entity_extractors model_params
+########
+  /similarity_entity_extractors/{instance_name}/params:
+    post:
+      tags:
+      - similarity_entity_extractors
+      summary: Set the model parameters of named similarity entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.similarity_entity_extractors_controller
+      operationId: similarity_entity_extractor_set_params
+      description: Set the model parameters of named similarity entity extractor.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_model_params"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
         400:
           description: bad request
 
@@ -1551,6 +1652,26 @@ paths:
       responses:
         200:
           $ref: "#/responses/lr4_instance_detail"
+        400:
+          description: bad request
+
+########
+## lr4_language_recognisers model_params
+########
+  /lr4_language_recognisers/{instance_name}/params:
+    post:
+      tags:
+      - lr4_language_recognisers
+      summary: Set the model parameters of named lr4 language recogniser.
+      x-swagger-router-controller: rest_api.flask_server.controllers.lr4_language_recognisers_controller
+      operationId: lr4_language_recogniser_set_params
+      description: Set the model parameters of named lr4 language recogniser.
+      parameters:
+      - $ref: "#/parameters/path_param_instance_name"
+      - $ref: "#/parameters/body_param_model_params"
+      responses:
+        200:
+          $ref: "#/responses/instance_detail"
         400:
           description: bad request
 
@@ -1868,6 +1989,10 @@ definitions:
         description: The sluggy-url-friendly-name of the instance. 
         type: string
         example: example_instance
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -1923,6 +2048,10 @@ definitions:
         description: The unique id of a specific version of the model instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -1978,6 +2107,10 @@ definitions:
         description: The unique id of a specific version of the model instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2008,6 +2141,10 @@ definitions:
         description: The unique id of a specific version of the model instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2073,6 +2210,10 @@ definitions:
         description: The unique id of a specific version of the model instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2103,6 +2244,10 @@ definitions:
         description: The unique id of a specific version of the model instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2129,6 +2274,10 @@ definitions:
         description: The unique id of a specific version of the model instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2158,6 +2307,10 @@ definitions:
         description: The unique id of a specific version of the model instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2199,6 +2352,10 @@ definitions:
         description: The unique id of a specific version of the model instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2225,6 +2382,10 @@ definitions:
         description: The sluggy-url-friendly-name of the instance. 
         type: string
         example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2245,6 +2406,10 @@ definitions:
         description: The sluggy-url-friendly-name of the instance. 
         type: string
         example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2269,6 +2434,10 @@ definitions:
         description: The sluggy-url-friendly-name of the instance. 
         type: string
         example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2293,6 +2462,10 @@ definitions:
         description: The sluggy-url-friendly-name of the instance to create. 
         type: string
         example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2317,6 +2490,10 @@ definitions:
         description: The sluggy-url-friendly-name of the instance to create. 
         type: string
         example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2337,6 +2514,10 @@ definitions:
         description: The sluggy-url-friendly-name of the instance to create. 
         type: string
         example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2362,6 +2543,10 @@ definitions:
         description: The sluggy-url-friendly-name of the instance to create. 
         type: string
         example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2394,6 +2579,10 @@ definitions:
         description: The sluggy-url-friendly-name of the instance to create. 
         type: string
         example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance. 
+        type: string
+        example: The example instance.
       desc:
         description: The longer existential description of this instance's purpose in life.
         type: string
@@ -2402,6 +2591,10 @@ definitions:
         description: The pre-trained LID model to load.
         type: string
         example: 'lid_za'
+      load_from_store:
+        description: Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified.
+        type: boolean
+        example: False
 
   labelled_text_sample:
     description: Labelled text sample.
@@ -2476,13 +2669,17 @@ definitions:
           $ref: "#/definitions/labeled_word_manifold"
 
   model_params:
-    description: The model parameters.
+    description: The model parameters. Dict of parameters like name, long_name, desc, threshold ...
     type: object
     properties:
+      name:
+        type: string
+      long_name:
+        type: string
+      desc:
+        type: string
       threshold:
-        description: There is typically some model dependent threshold to be set upon training which is possibly mutable post training. This is that threshold.
         type: number
-        example: 0.85
 
   total_samples:
     description: The total number of samples of this type now loaded into the model.

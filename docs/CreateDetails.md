@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | The sluggy-url-friendly-name of the instance. | 
+**long_name** | **str** | The human-friendly-name of the instance. | [optional] 
 **desc** | **str** | The longer existential description of this instance&#39;s purpose in life. | [optional] 
 **lid_model_file** | **str** | The pre-trained LID model to load. | [optional] 
 **load_from_store** | **bool** | Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified. | 

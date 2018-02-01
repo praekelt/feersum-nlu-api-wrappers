@@ -4,7 +4,7 @@ import urllib3
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
-from test import feersumnlu_host, feersum_nlu_auth_token
+from examples import feersumnlu_host, feersum_nlu_auth_token
 
 # Configure API key authorization: APIKeyHeader
 configuration = feersum_nlu.Configuration()
