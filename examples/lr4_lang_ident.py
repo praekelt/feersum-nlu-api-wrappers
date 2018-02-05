@@ -21,6 +21,7 @@ instance_name = 'test_lr4'
 lr4_create_details = \
     feersum_nlu.Lr4CreateDetails(name=instance_name,
                                  desc="Test LR4 lang ident model.",
+                                 long_name="Test LR4",
                                  lid_model_file='lid_za')
 
 text_input = feersum_nlu.TextInput("Isakhiwo sami sebiwe?")
