@@ -1,4 +1,4 @@
-# SimilarityEntCreateDetails
+# SimWordEntCreateDetails
 
 ## Properties
 Name | Type | Description | Notes

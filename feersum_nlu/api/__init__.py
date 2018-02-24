@@ -12,6 +12,6 @@ from feersum_nlu.api.lr4_language_recognisers_api import Lr4LanguageRecognisersA
 from feersum_nlu.api.person_name_entity_extractors_api import PersonNameEntityExtractorsApi
 from feersum_nlu.api.regex_entity_extractors_api import RegexEntityExtractorsApi
 from feersum_nlu.api.sentiment_detectors_api import SentimentDetectorsApi
-from feersum_nlu.api.similarity_entity_extractors_api import SimilarityEntityExtractorsApi
+from feersum_nlu.api.sim_word_entity_extractors_api import SimWordEntityExtractorsApi
 from feersum_nlu.api.text_classifiers_api import TextClassifiersApi
 from feersum_nlu.api.word_manifolds_api import WordManifoldsApi

@@ -114,8 +114,14 @@ try:
 
     print("Classify text:")
     api_response = api_instance.text_classifier_retrieve(instance_name, text_input)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
+    print(" type(api_response) =", type(api_response))
+    print(" api_response =", api_response)
+
+    if len(api_response) > 0:
+        print(" type(api_response[0]) =", type(api_response[0]))
+        print(" type(api_response[0].label) =", type(api_response[0].label))
+        print(" type(api_response[0].probability) =", type(api_response[0].probability))
+
     print()
 except ApiException as e:
     print("Exception when calling a text classifier operation: %s\n" % e)

@@ -32,7 +32,6 @@ class TestIntentClassifier(unittest.TestCase):
 
         word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng')]
 
-
         create_details = feersum_nlu.CreateDetails(name=instance_name,
                                                    desc="Test intent classifier.",
                                                    lid_model_file="lid_za",
@@ -46,8 +45,7 @@ class TestIntentClassifier(unittest.TestCase):
                                                                         label="quote"))
 
         # train_details = feersum_nlu.TrainDetails(immediate_mode=True)
-        train_details = feersum_nlu.TrainDetails(immediate_mode=True,
-                                                 threshold=0.85,
+        train_details = feersum_nlu.TrainDetails(threshold=0.85,
                                                  word_manifold_list=word_manifold_list)
 
         text_input = feersum_nlu.TextInput("How do I get a quote?")

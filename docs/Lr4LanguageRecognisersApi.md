@@ -191,7 +191,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **lr4_language_recogniser_get_details_all**
-> Lr4InstanceDetailList lr4_language_recogniser_get_details_all()
+> list[Lr4InstanceDetail] lr4_language_recogniser_get_details_all()
 
 Get list of loaded LR4 text language detectors.
 
@@ -232,7 +232,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Lr4InstanceDetailList**](Lr4InstanceDetailList.md)
+[**list[Lr4InstanceDetail]**](Lr4InstanceDetail.md)
 
 ### Authorization
 
@@ -246,7 +246,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **lr4_language_recogniser_get_labels**
-> ClassLabelList lr4_language_recogniser_get_labels(instance_name)
+> list[ClassLabel] lr4_language_recogniser_get_labels(instance_name)
 
 Get list of possible labels.
 
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ClassLabelList**](ClassLabelList.md)
+[**list[ClassLabel]**](ClassLabel.md)
 
 ### Authorization
 
@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **lr4_language_recogniser_retrieve**
-> ScoredLabelList lr4_language_recogniser_retrieve(instance_name, text_input)
+> list[ScoredLabel] lr4_language_recogniser_retrieve(instance_name, text_input)
 
 Recognise the language the text is written in.
 
@@ -352,7 +352,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ScoredLabelList**](ScoredLabelList.md)
+[**list[ScoredLabel]**](ScoredLabel.md)
 
 ### Authorization
 

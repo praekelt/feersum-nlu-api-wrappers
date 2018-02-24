@@ -39,7 +39,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.WordManifoldsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-new_word_list = feersum_nlu.NewWordList() # NewWordList | List of new words.
+new_word_list = [feersum_nlu.NewWord()] # list[NewWord] | List of new words.
 
 try:
     # Add new words.
@@ -54,7 +54,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **new_word_list** | [**NewWordList**](NewWordList.md)| List of new words. | 
+ **new_word_list** | [**list[NewWord]**](NewWord.md)| List of new words. | 
 
 ### Return type
 
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **word_manifold_get_similar_words**
-> WordAndDistanceList word_manifold_get_similar_words(instance_name, word_and_threshold)
+> list[WordAndDistance] word_manifold_get_similar_words(instance_name, word_and_threshold)
 
 Find similar words.
 
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**WordAndDistanceList**](WordAndDistanceList.md)
+[**list[WordAndDistance]**](WordAndDistance.md)
 
 ### Authorization
 
@@ -192,7 +192,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **word_manifold_spell_correct**
-> WordAndDistanceList word_manifold_spell_correct(instance_name, text_input)
+> list[WordAndDistance] word_manifold_spell_correct(instance_name, text_input)
 
 Spell correct a word.
 
@@ -239,7 +239,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**WordAndDistanceList**](WordAndDistanceList.md)
+[**list[WordAndDistance]**](WordAndDistance.md)
 
 ### Authorization
 

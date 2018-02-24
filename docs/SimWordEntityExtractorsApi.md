@@ -1,23 +1,23 @@
-# feersum_nlu.DucklingEntityExtractorsApi
+# feersum_nlu.SimWordEntityExtractorsApi
 
 All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**duckling_entity_extractor_create**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_create) | **POST** /duckling_entity_extractors | Create a duckling entity extractor.
-[**duckling_entity_extractor_del**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_del) | **DELETE** /duckling_entity_extractors/{instance_name} | Delete named instance.
-[**duckling_entity_extractor_get_details**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_details) | **GET** /duckling_entity_extractors/{instance_name} | Get details of named instance.
-[**duckling_entity_extractor_get_details_all**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_details_all) | **GET** /duckling_entity_extractors | Get list of loaded regular expression entity extractors.
-[**duckling_entity_extractor_retrieve**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_retrieve) | **POST** /duckling_entity_extractors/{instance_name}/retrieve | Extract information based on the regular expression.
-[**duckling_entity_extractor_set_params**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_set_params) | **POST** /duckling_entity_extractors/{instance_name}/params | Set the model parameters of named duckling entity extractor.
+[**sim_word_entity_extractor_create**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_create) | **POST** /sim_word_entity_extractors | Create a word similarity entity extractor.
+[**sim_word_entity_extractor_del**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_del) | **DELETE** /sim_word_entity_extractors/{instance_name} | Delete named instance.
+[**sim_word_entity_extractor_get_details**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_get_details) | **GET** /sim_word_entity_extractors/{instance_name} | Get details of named instance.
+[**sim_word_entity_extractor_get_details_all**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_get_details_all) | **GET** /sim_word_entity_extractors | Get list of loaded similarity entity extractors.
+[**sim_word_entity_extractor_retrieve**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_retrieve) | **POST** /sim_word_entity_extractors/{instance_name}/retrieve | Extract information based on word similarity.
+[**sim_word_entity_extractor_set_params**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_set_params) | **POST** /sim_word_entity_extractors/{instance_name}/params | Set the model parameters of named similarity entity extractor.
 
 
-# **duckling_entity_extractor_create**
-> DucklingInstanceDetail duckling_entity_extractor_create(duckling_ent_create_details)
+# **sim_word_entity_extractor_create**
+> SimWordInstanceDetail sim_word_entity_extractor_create(sim_word_ent_create_details)
 
-Create a duckling entity extractor.
+Create a word similarity entity extractor.
 
-Create a new duckling entity extractor or load one from the store.
+Create a new word similarity entity extractor or load one from the store.
 
 ### Example
 ```python
@@ -39,26 +39,26 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-duckling_ent_create_details = feersum_nlu.DucklingEntCreateDetails() # DucklingEntCreateDetails | The details of the instance to create.
+api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+sim_word_ent_create_details = feersum_nlu.SimWordEntCreateDetails() # SimWordEntCreateDetails | The details of the instance to create.
 
 try:
-    # Create a duckling entity extractor.
-    api_response = api_instance.duckling_entity_extractor_create(duckling_ent_create_details)
+    # Create a word similarity entity extractor.
+    api_response = api_instance.sim_word_entity_extractor_create(sim_word_ent_create_details)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling DucklingEntityExtractorsApi->duckling_entity_extractor_create: %s\n" % e)
+    print("Exception when calling SimWordEntityExtractorsApi->sim_word_entity_extractor_create: %s\n" % e)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **duckling_ent_create_details** | [**DucklingEntCreateDetails**](DucklingEntCreateDetails.md)| The details of the instance to create. | 
+ **sim_word_ent_create_details** | [**SimWordEntCreateDetails**](SimWordEntCreateDetails.md)| The details of the instance to create. | 
 
 ### Return type
 
-[**DucklingInstanceDetail**](DucklingInstanceDetail.md)
+[**SimWordInstanceDetail**](SimWordInstanceDetail.md)
 
 ### Authorization
 
@@ -71,12 +71,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **duckling_entity_extractor_del**
-> DucklingInstanceDetail duckling_entity_extractor_del(instance_name)
+# **sim_word_entity_extractor_del**
+> SimWordInstanceDetail sim_word_entity_extractor_del(instance_name)
 
 Delete named instance.
 
-Delete and return the details of the named duckling entity extractor instance.
+Delete and return the details of the named similarity entity extractor instance.
 
 ### Example
 ```python
@@ -98,15 +98,15 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
 try:
     # Delete named instance.
-    api_response = api_instance.duckling_entity_extractor_del(instance_name)
+    api_response = api_instance.sim_word_entity_extractor_del(instance_name)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling DucklingEntityExtractorsApi->duckling_entity_extractor_del: %s\n" % e)
+    print("Exception when calling SimWordEntityExtractorsApi->sim_word_entity_extractor_del: %s\n" % e)
 ```
 
 ### Parameters
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DucklingInstanceDetail**](DucklingInstanceDetail.md)
+[**SimWordInstanceDetail**](SimWordInstanceDetail.md)
 
 ### Authorization
 
@@ -130,12 +130,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **duckling_entity_extractor_get_details**
-> DucklingInstanceDetail duckling_entity_extractor_get_details(instance_name)
+# **sim_word_entity_extractor_get_details**
+> SimWordInstanceDetail sim_word_entity_extractor_get_details(instance_name)
 
 Get details of named instance.
 
-Get the details of the named duckling entity extractor instance.
+Get the details of the named similarity entity extractor instance.
 
 ### Example
 ```python
@@ -157,15 +157,15 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 
 try:
     # Get details of named instance.
-    api_response = api_instance.duckling_entity_extractor_get_details(instance_name)
+    api_response = api_instance.sim_word_entity_extractor_get_details(instance_name)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling DucklingEntityExtractorsApi->duckling_entity_extractor_get_details: %s\n" % e)
+    print("Exception when calling SimWordEntityExtractorsApi->sim_word_entity_extractor_get_details: %s\n" % e)
 ```
 
 ### Parameters
@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DucklingInstanceDetail**](DucklingInstanceDetail.md)
+[**SimWordInstanceDetail**](SimWordInstanceDetail.md)
 
 ### Authorization
 
@@ -189,12 +189,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **duckling_entity_extractor_get_details_all**
-> list[DucklingInstanceDetail] duckling_entity_extractor_get_details_all()
+# **sim_word_entity_extractor_get_details_all**
+> list[SimWordInstanceDetail] sim_word_entity_extractor_get_details_all()
 
-Get list of loaded regular expression entity extractors.
+Get list of loaded similarity entity extractors.
 
-Get the list of loaded duckling entity extractors.
+Get the list of loaded similarity entity extractors.
 
 ### Example
 ```python
@@ -216,14 +216,14 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 
 try:
-    # Get list of loaded regular expression entity extractors.
-    api_response = api_instance.duckling_entity_extractor_get_details_all()
+    # Get list of loaded similarity entity extractors.
+    api_response = api_instance.sim_word_entity_extractor_get_details_all()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling DucklingEntityExtractorsApi->duckling_entity_extractor_get_details_all: %s\n" % e)
+    print("Exception when calling SimWordEntityExtractorsApi->sim_word_entity_extractor_get_details_all: %s\n" % e)
 ```
 
 ### Parameters
@@ -231,7 +231,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**list[DucklingInstanceDetail]**](DucklingInstanceDetail.md)
+[**list[SimWordInstanceDetail]**](SimWordInstanceDetail.md)
 
 ### Authorization
 
@@ -244,12 +244,12 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **duckling_entity_extractor_retrieve**
-> list[Entity] duckling_entity_extractor_retrieve(instance_name, text_input)
+# **sim_word_entity_extractor_retrieve**
+> list[Entity] sim_word_entity_extractor_retrieve(instance_name, text_input)
 
-Extract information based on the regular expression.
+Extract information based on word similarity.
 
-Extract the entities parsed by duckling.
+Extract the word entities that are similar to the list of words used to create this model instance.
 
 ### Example
 ```python
@@ -271,16 +271,16 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 
 try:
-    # Extract information based on the regular expression.
-    api_response = api_instance.duckling_entity_extractor_retrieve(instance_name, text_input)
+    # Extract information based on word similarity.
+    api_response = api_instance.sim_word_entity_extractor_retrieve(instance_name, text_input)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling DucklingEntityExtractorsApi->duckling_entity_extractor_retrieve: %s\n" % e)
+    print("Exception when calling SimWordEntityExtractorsApi->sim_word_entity_extractor_retrieve: %s\n" % e)
 ```
 
 ### Parameters
@@ -305,12 +305,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **duckling_entity_extractor_set_params**
-> InstanceDetail duckling_entity_extractor_set_params(instance_name, model_params)
+# **sim_word_entity_extractor_set_params**
+> InstanceDetail sim_word_entity_extractor_set_params(instance_name, model_params)
 
-Set the model parameters of named duckling entity extractor.
+Set the model parameters of named similarity entity extractor.
 
-Set the model parameters of named duckling entity extractor.
+Set the model parameters of named similarity entity extractor.
 
 ### Example
 ```python
@@ -332,16 +332,16 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 model_params = feersum_nlu.ModelParams() # ModelParams | The model parameters.
 
 try:
-    # Set the model parameters of named duckling entity extractor.
-    api_response = api_instance.duckling_entity_extractor_set_params(instance_name, model_params)
+    # Set the model parameters of named similarity entity extractor.
+    api_response = api_instance.sim_word_entity_extractor_set_params(instance_name, model_params)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling DucklingEntityExtractorsApi->duckling_entity_extractor_set_params: %s\n" % e)
+    print("Exception when calling SimWordEntityExtractorsApi->sim_word_entity_extractor_set_params: %s\n" % e)
 ```
 
 ### Parameters

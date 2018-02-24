@@ -51,8 +51,7 @@ class TestFAQMatcher(unittest.TestCase):
                               feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
                               feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul')]
 
-        train_details = feersum_nlu.TrainDetails(immediate_mode=True,
-                                                 threshold=0.85,
+        train_details = feersum_nlu.TrainDetails(threshold=0.85,
                                                  word_manifold_list=word_manifold_list)
 
         text_input = feersum_nlu.TextInput("Where can I get a quote?")
@@ -108,8 +107,8 @@ class TestFAQMatcher(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be available
-            # after training.
+            # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be
+            # available after training.
             print("Get the labels of named loaded FAQ matcher:")
             api_response = api_instance.faq_matcher_get_labels(instance_name)
             print(" type(api_response)", type(api_response))

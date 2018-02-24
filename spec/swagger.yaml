@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.18
+  version: 2.0.20
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -59,7 +59,7 @@ tags:
   description: Interface to your person_name entity extractor instances. 
 - name: duckling_entity_extractors
   description: Interface to your duckling entity extractor instances. Duckling is an open source component that supports the extraction of dates, durations and intervals. It does support things like distances, volumes, etc., but these are not exposed at the moment.
-- name: similarity_entity_extractors
+- name: sim_word_entity_extractors
   description: Interface to your word similarity entity extractor instances. A word embedding is used to find similar words.
 
 paths:
@@ -340,7 +340,7 @@ paths:
       - $ref: "#/parameters/body_param_text_input"
       responses:
         200:
-          $ref: "#/responses/scored_labels"
+          $ref: "#/responses/scored_label_list"
         400:
           description: bad request
 
@@ -646,7 +646,7 @@ paths:
       - $ref: "#/parameters/body_param_labelled_text_sample_list"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"     
         400:
           description: bad request
 
@@ -742,7 +742,7 @@ paths:
       - $ref: "#/parameters/body_param_text_input"
       responses:
         200:
-          $ref: "#/responses/scored_labels"
+          $ref: "#/responses/scored_label_list"
         400:
           description: bad request
 
@@ -1064,7 +1064,7 @@ paths:
       - $ref: "#/parameters/body_param_text_input"
       responses:
         200:
-          $ref: "#/responses/scored_labels"
+          $ref: "#/responses/scored_label_list"
         400:
           description: bad request
 
@@ -1230,7 +1230,7 @@ paths:
       tags:
       - regex_entity_extractors
       summary: Set the model parameters of named regex entity extractor.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      x-swagger-router-controller: rest_api.flask_server.controllers.regex_entity_extractors_controller
       operationId: regex_entity_extractor_set_params
       description: Set the model parameters of named regex entity extractor.
       parameters:
@@ -1481,81 +1481,81 @@ paths:
 ###################################
 ###################################
 ########
-## similarity_entity_extractors root
+## sim_word_entity_extractors root
 ########
-  /similarity_entity_extractors:
+  /sim_word_entity_extractors:
     post:
       tags:
-      - similarity_entity_extractors
+      - sim_word_entity_extractors
       summary: Create a word similarity entity extractor.
-      x-swagger-router-controller: rest_api.flask_server.controllers.similarity_entity_extractors_controller
-      operationId: similarity_entity_extractor_create
+      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
+      operationId: sim_word_entity_extractor_create
       description: Create a new word similarity entity extractor or load one from the store.
       parameters:
-      - $ref: "#/parameters/body_param_similarity_ent_create_details"
+      - $ref: "#/parameters/body_param_sim_word_ent_create_details"
       responses:
         200:
-          $ref: "#/responses/similarity_instance_detail"
+          $ref: "#/responses/sim_word_instance_detail"
         400:
           description: bad request
           
     get:
       tags:
-      - similarity_entity_extractors
+      - sim_word_entity_extractors
       summary: Get list of loaded similarity entity extractors.
-      x-swagger-router-controller: rest_api.flask_server.controllers.similarity_entity_extractors_controller
-      operationId: similarity_entity_extractor_get_details_all
+      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
+      operationId: sim_word_entity_extractor_get_details_all
       description: Get the list of loaded similarity entity extractors.
       responses:
         200:
-          $ref: "#/responses/similarity_instance_detail_list"
+          $ref: "#/responses/sim_word_instance_detail_list"
         400:
           description: bad request
 
 ########
-## similarity_entity_extractors Get details of named instance
+## sim_word_entity_extractors Get details of named instance
 ########
-  /similarity_entity_extractors/{instance_name}:
+  /sim_word_entity_extractors/{instance_name}:
     get:
       tags:
-      - similarity_entity_extractors
+      - sim_word_entity_extractors
       summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.similarity_entity_extractors_controller
-      operationId: similarity_entity_extractor_get_details
+      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
+      operationId: sim_word_entity_extractor_get_details
       description: Get the details of the named similarity entity extractor instance.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
         200:
-          $ref: "#/responses/similarity_instance_detail"
+          $ref: "#/responses/sim_word_instance_detail"
         400:
           description: bad request
 
     delete:
       tags:
-      - similarity_entity_extractors
+      - sim_word_entity_extractors
       summary: Delete named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.similarity_entity_extractors_controller
-      operationId: similarity_entity_extractor_del
+      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
+      operationId: sim_word_entity_extractor_del
       description: Delete and return the details of the named similarity entity extractor instance.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
       responses:
         200:
-          $ref: "#/responses/similarity_instance_detail"
+          $ref: "#/responses/sim_word_instance_detail"
         400:
           description: bad request
 
 ########
-## similarity_entity_extractors model_params
+## sim_word_entity_extractors model_params
 ########
-  /similarity_entity_extractors/{instance_name}/params:
+  /sim_word_entity_extractors/{instance_name}/params:
     post:
       tags:
-      - similarity_entity_extractors
+      - sim_word_entity_extractors
       summary: Set the model parameters of named similarity entity extractor.
-      x-swagger-router-controller: rest_api.flask_server.controllers.similarity_entity_extractors_controller
-      operationId: similarity_entity_extractor_set_params
+      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
+      operationId: sim_word_entity_extractor_set_params
       description: Set the model parameters of named similarity entity extractor.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
@@ -1567,15 +1567,15 @@ paths:
           description: bad request
 
 ########
-## similarity_entity_extractors retrieve
+## sim_word_entity_extractors retrieve
 ########
-  /similarity_entity_extractors/{instance_name}/retrieve:
+  /sim_word_entity_extractors/{instance_name}/retrieve:
     post:
       tags:
-      - similarity_entity_extractors
+      - sim_word_entity_extractors
       summary: Extract information based on word similarity.
-      x-swagger-router-controller: rest_api.flask_server.controllers.similarity_entity_extractors_controller
-      operationId: similarity_entity_extractor_retrieve
+      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
+      operationId: sim_word_entity_extractor_retrieve
       description: Extract the word entities that are similar to the list of words used to create this model instance.
       parameters:
       - $ref: "#/parameters/path_param_instance_name"
@@ -1691,7 +1691,7 @@ paths:
       - $ref: "#/parameters/body_param_text_input"
       responses:
         200:
-          $ref: "#/responses/scored_labels"
+          $ref: "#/responses/scored_label_list"
         400:
           description: bad request
 
@@ -1731,7 +1731,9 @@ parameters:
     description: List of new words.
     required: true
     schema:
-      $ref: "#/definitions/new_word_list"
+      type: array
+      items:
+        $ref: "#/definitions/new_word"
           
   body_param_text_clsfr_create_details:
     in: body
@@ -1797,13 +1799,13 @@ parameters:
     schema:
       $ref: "#/definitions/duckling_ent_create_details"
 
-  body_param_similarity_ent_create_details:
+  body_param_sim_word_ent_create_details:
     in: body
-    name: similarity_ent_create_details
+    name: sim_word_ent_create_details
     description: The details of the instance to create.
     required: true
     schema:
-      $ref: "#/definitions/similarity_ent_create_details"
+      $ref: "#/definitions/sim_word_ent_create_details"
 
   body_param_lr4_create_details:
     in: body
@@ -1819,8 +1821,10 @@ parameters:
     description: List of labelled text samples.
     required: true
     schema:
-      $ref: "#/definitions/labelled_text_sample_list"
-      
+      type: array
+      items:
+        $ref: "#/definitions/labelled_text_sample"
+
   body_param_train_details:        
     in: body
     name: train_details
@@ -1862,8 +1866,10 @@ responses:
   text_clsfr_instance_detail_list:
     description: A list of models' instance details
     schema:
-      $ref: "#/definitions/text_clsfr_instance_detail_list"
-      
+      type: array
+      items:
+        $ref: "#/definitions/text_clsfr_instance_detail"
+
   wm_instance_detail:
     description: The model instance detail
     schema:
@@ -1872,8 +1878,10 @@ responses:
   wm_instance_detail_list:
     description: A list of models' instance details
     schema:
-      $ref: "#/definitions/wm_instance_detail_list"
-      
+      type: array
+      items:
+        $ref: "#/definitions/wm_instance_detail"
+
   instance_detail:
     description: The model instance detail
     schema:
@@ -1882,8 +1890,10 @@ responses:
   instance_detail_list:
     description: A list of models' instance details
     schema:
-      $ref: "#/definitions/instance_detail_list"
-      
+      type: array
+      items:
+        $ref: "#/definitions/instance_detail"
+
   regex_instance_detail:
     description: The model instance detail
     schema:
@@ -1892,8 +1902,10 @@ responses:
   regex_instance_detail_list:
     description: A list of models' instance details
     schema:
-      $ref: "#/definitions/regex_instance_detail_list"
-      
+      type: array
+      items:
+        $ref: "#/definitions/regex_instance_detail"
+
   person_name_instance_detail:
     description: The model instance detail
     schema:
@@ -1902,8 +1914,10 @@ responses:
   person_name_instance_detail_list:
     description: A list of models' instance details
     schema:
-      $ref: "#/definitions/person_name_instance_detail_list"
-      
+      type: array
+      items:
+        $ref: "#/definitions/person_name_instance_detail"
+
   duckling_instance_detail:
     description: The model instance detail
     schema:
@@ -1912,18 +1926,22 @@ responses:
   duckling_instance_detail_list:
     description: A list of models' instance details
     schema:
-      $ref: "#/definitions/duckling_instance_detail_list"
-      
-  similarity_instance_detail:
+      type: array
+      items:
+        $ref: "#/definitions/duckling_instance_detail"
+
+  sim_word_instance_detail:
     description: The model instance detail
     schema:
-      $ref: "#/definitions/similarity_instance_detail"
+      $ref: "#/definitions/sim_word_instance_detail"
       
-  similarity_instance_detail_list:
+  sim_word_instance_detail_list:
     description: A list of models' instance details
     schema:
-      $ref: "#/definitions/similarity_instance_detail_list"
-      
+      type: array
+      items:
+        $ref: "#/definitions/sim_word_instance_detail"
+
   lr4_instance_detail:
     description: The model instance detail
     schema:
@@ -1932,7 +1950,9 @@ responses:
   lr4_instance_detail_list:
     description: A list of models' instance details
     schema:
-      $ref: "#/definitions/lr4_instance_detail_list"
+      type: array
+      items:
+        $ref: "#/definitions/lr4_instance_detail"
 
   total_samples:
     description: The total number of samples of this type in the model.
@@ -1942,32 +1962,44 @@ responses:
   labelled_text_sample_list:
     description: The list of labeled text samples.
     schema:
-      $ref: "#/definitions/labelled_text_sample_list"
-      
+      type: array
+      items:
+        $ref: "#/definitions/labelled_text_sample"
+
   word_and_distance_list:
     description: A list of words with distances.
     schema:
-      $ref: "#/definitions/word_and_distance_list"
+      type: array
+      items:
+        $ref: "#/definitions/word_and_distance"
 
-  scored_labels:
+  scored_label_list:
     description: The list of scored and sorted labels.
     schema:
-      $ref: "#/definitions/scored_label_list"
+      type: array
+      items:
+        $ref: "#/definitions/scored_label"
 
   labels:
     description: The list of possible labels.
     schema:
-      $ref: "#/definitions/class_label_list"
+      type: array
+      items:
+        $ref: "#/definitions/class_label"
 
   entity_list:
     description: The list of extracted entities.
     schema:
-      $ref: "#/definitions/entity_list"
+      type: array
+      items:
+        $ref: "#/definitions/entity"
 
   date_list:                  
     description: The list of structured dates.
     schema:
-      $ref: "#/definitions/date_list"
+      type: array
+      items:
+        $ref: "#/definitions/date"
 
   sentiment:                  
     description: The coarse sentiment.
@@ -1997,14 +2029,14 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: This is an example of this type of model.
-      peak_api_hit_rate:
-        description: The peak api hit rate (hits/s) over the last couple of window periods. A window period is in the order of 5 minutes.
-        type: number
-        example: 0.5
       model_type:
         description: The type of this model.
         type: string
         example: faq_matcher
+      trashed:
+        description: Whether or not this model has been deleted. Deleted models need to be loaded to be used again.
+        type: boolean
+        example: False
 
   dashboard_detail:
     description: Your dashboard content.
@@ -2012,7 +2044,6 @@ definitions:
     required:
     - api_version
     - service_name
-    - peak_api_hit_rate
     - model_list
     properties:
       api_version:
@@ -2023,10 +2054,6 @@ definitions:
         description: The details of this service.
         type: string
         example: FeersumNLU playground.
-      peak_api_hit_rate:
-        description: The peak api hit rate (hits/s) over the last couple of window periods. A window period is in the order of 5 minutes.
-        type: number
-        example: 0.5
       model_list:
         description: A list of models' instance details.
         type: array
@@ -2086,12 +2113,6 @@ definitions:
         type: string
         example: '2017-10-26 10:42:01.589979'
 
-  text_clsfr_instance_detail_list:
-    description: A list of models' instance details.
-    type: array
-    items:
-      $ref: "#/definitions/text_clsfr_instance_detail"
-      
   wm_instance_detail:
     description: The model instance detail.
     type: object
@@ -2119,12 +2140,6 @@ definitions:
         description: The input file on the server (if any) to use. 
         type: string
         example: 'glove_za_eng.txt'
-
-  wm_instance_detail_list:
-    description: A list of models' instance details.
-    type: array
-    items:
-      $ref: "#/definitions/wm_instance_detail"
 
   instance_detail:
     description: The model instance detail.
@@ -2188,12 +2203,6 @@ definitions:
         type: number
         example: 0.85
 
-  instance_detail_list:
-    description: A list of models' instance details.
-    type: array
-    items:
-      $ref: "#/definitions/instance_detail"
-
   regex_instance_detail:
     description: The model instance detail.
     type: object
@@ -2223,12 +2232,6 @@ definitions:
         type: string
         example: '(?P<license>([A-Z]{3}[ ]?[0-9]{3}[ ]?(GP|NW|MP|EC|L|NC|NW)))'
 
-  regex_instance_detail_list:
-    description: A list of models' instance details.
-    type: array
-    items:
-      $ref: "#/definitions/regex_instance_detail"
-      
   person_name_instance_detail:
     description: The model instance detail.
     type: object
@@ -2252,12 +2255,6 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'An example of this type of model.'
-
-  person_name_instance_detail_list:
-    description: A list of models' instance details.
-    type: array
-    items:
-      $ref: "#/definitions/person_name_instance_detail"
 
   duckling_instance_detail:
     description: The model instance detail.
@@ -2283,13 +2280,7 @@ definitions:
         type: string
         example: 'An example of this type of model.'
 
-  duckling_instance_detail_list:
-    description: A list of models' instance details.
-    type: array
-    items:
-      $ref: "#/definitions/duckling_instance_detail"
-
-  similarity_instance_detail:
+  sim_word_instance_detail:
     description: The model instance detail.
     type: object
     required:
@@ -2330,12 +2321,6 @@ definitions:
         type: string
         example: 'feers_wm_eng'
 
-  similarity_instance_detail_list:
-    description: A list of models' instance details.
-    type: array
-    items:
-      $ref: "#/definitions/similarity_instance_detail"
-
   lr4_instance_detail:
     description: The model instance detail.
     type: object
@@ -2364,12 +2349,6 @@ definitions:
         description: The pre-trained model this instance was created from.
         type: string
         example: 'lid_za'
-
-  lr4_instance_detail_list:
-    description: A list of models' instance details.
-    type: array
-    items:
-      $ref: "#/definitions/lr4_instance_detail"
 
   text_clsfr_create_details:
     description: The details of the model instance to create.
@@ -2532,7 +2511,7 @@ definitions:
         type: boolean
         example: False
 
-  similarity_ent_create_details:
+  sim_word_ent_create_details:
     description: The details of the model instance to create.
     type: object
     required:
@@ -2573,7 +2552,7 @@ definitions:
     type: object
     required:
     - name
-    - lid_model_file
+    - load_from_store
     properties:
       name:
         description: The sluggy-url-friendly-name of the instance to create. 
@@ -2618,13 +2597,6 @@ definitions:
         type: string
         example: "Greeting with speaker's name."
 
-  labelled_text_sample_list:
-    description: List of labelled text samples.
-    type: array
-    default: []
-    items:
-      $ref: "#/definitions/labelled_text_sample"
-
   labeled_word_manifold:  
     description: A labelled (e.g. lang_code labelled) word manifold instance.
     type: object
@@ -2644,13 +2616,7 @@ definitions:
   train_details:
     description: The parameters provided to the train operation.
     type: object
-    required:
-      - immediate_mode
     properties:
-      immediate_mode:
-        description: Causes the API call to be blocking and return only once training is complete. Forced to true in the current implementation.
-        type: boolean
-        example: True
       threshold:
         description: There is typically some model dependent threshold to be set upon training which is possibly mutable post training. This is that threshold.
         type: number
@@ -2743,28 +2709,10 @@ definitions:
         type: number
         example: 0.95
 
-  scored_label_list:  
-    description: A list of scored and sorted class labels.
-    type: array
-    items:
-      $ref: "#/definitions/scored_label"
-      
-  word_and_distance_list:  
-    description: A list of words with distances.
-    type: array
-    items:
-      $ref: "#/definitions/word_and_distance"
-
   class_label:  
     description: A class label.
     type: string
     example: 'greeting'
-
-  class_label_list:  
-    description: A list of possible class labels.
-    type: array
-    items:
-      $ref: "#/definitions/class_label"
 
   class_label_pair:
     description: The ground truth label, predicted label and matrix (train/test) to use.
@@ -2800,12 +2748,6 @@ definitions:
         enum: [second, minute, hour, day, week, month, year]
         example: month
 
-  date_list:   
-    description: A list of structured date-time strings.
-    type: array
-    items:
-      $ref: "#/definitions/date"
-      
   new_word:
     description: A new word similar to an existing word.
     type: object
@@ -2820,21 +2762,9 @@ definitions:
         type: string
         example: 'workwear'
 
-  new_word_list:   
-    description: A list of new words.
-    type: array
-    items:
-      $ref: "#/definitions/new_word"
-
   entity:
     description: An entity.
     type: object
-
-  entity_list:   
-    description: A list of entities.
-    type: array
-    items:
-      $ref: "#/definitions/entity"
 
   sentiment:   
     description: A sentiment value that may range from -1.0 (very UNhappy) to 1.0 (very happy).
