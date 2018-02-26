@@ -58,7 +58,8 @@ class TestLID(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be available
+            # Get the classifier's possible labels. Might be inferred from the training data,
+            # but guaranteed to be available
             # after training.
             print("Get the labels of named loaded lr4 instance:")
             api_response = api_instance.lr4_language_recogniser_get_labels(instance_name)

@@ -2,6 +2,8 @@
 
 from __future__ import absolute_import
 
+from typing import List
+
 import urllib3
 import unittest
 

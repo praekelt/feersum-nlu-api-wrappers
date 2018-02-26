@@ -29,7 +29,7 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would li
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to get a quote",
                                                                 label="quote"))
 
-train_details = feersum_nlu.TrainDetails(immediate_mode=True)
+train_details = feersum_nlu.TrainDetails()
 
 text_input = feersum_nlu.TextInput("I would please like to fill in a claim form.")
 
@@ -114,14 +114,8 @@ try:
 
     print("Classify text:")
     api_response = api_instance.text_classifier_retrieve(instance_name, text_input)
-    print(" type(api_response) =", type(api_response))
-    print(" api_response =", api_response)
-
-    if len(api_response) > 0:
-        print(" type(api_response[0]) =", type(api_response[0]))
-        print(" type(api_response[0].label) =", type(api_response[0].label))
-        print(" type(api_response[0].probability) =", type(api_response[0].probability))
-
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
     print()
 except ApiException as e:
     print("Exception when calling a text classifier operation: %s\n" % e)
