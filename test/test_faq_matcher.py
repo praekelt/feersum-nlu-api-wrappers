@@ -95,11 +95,11 @@ class TestFAQMatcher(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            print("Get the details of all loaded FAQ matcher:")
-            api_response = api_instance.faq_matcher_get_details_all()
-            print(" type(api_response)", type(api_response))
-            print(" api_response", api_response)
-            print()
+            # print("Get the details of all loaded FAQ matcher:")
+            # api_response = api_instance.faq_matcher_get_details_all()
+            # print(" type(api_response)", type(api_response))
+            # print(" api_response", api_response)
+            # print()
 
             print("Get the details of specific named loaded FAQ matcher:")
             api_response = api_instance.faq_matcher_get_details(instance_name)
@@ -132,7 +132,7 @@ class TestFAQMatcher(unittest.TestCase):
             scored_label_list = api_response
             if len(scored_label_list) > 0:
                 scored_label = scored_label_list[0]
-                self.assertTrue(scored_label.get('label', '') == 'quote')
+                self.assertTrue(scored_label.label == 'quote')
             else:
                 self.assertTrue(False)
 

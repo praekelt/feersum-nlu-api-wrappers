@@ -92,11 +92,11 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Get the details of all loaded intent classifiers:")
-    api_response = api_instance.intent_classifier_get_details_all()
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # print("Get the details of all loaded intent classifiers:")
+    # api_response = api_instance.intent_classifier_get_details_all()
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
     print("Get the details of specific named loaded intent classifiers:")
     api_response = api_instance.intent_classifier_get_details(instance_name)

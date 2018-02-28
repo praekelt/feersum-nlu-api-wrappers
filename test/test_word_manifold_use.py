@@ -48,7 +48,7 @@ class TestWordManifold(unittest.TestCase):
 
             similar_words = []  # type: List[str]
             for word_dict in api_response:
-                word = word_dict.get('word')
+                word = word_dict.word
                 if word is not None:
                     similar_words.append(word)
 
