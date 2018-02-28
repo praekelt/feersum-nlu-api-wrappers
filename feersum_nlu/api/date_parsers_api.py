@@ -56,7 +56,7 @@ class DateParsersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param TextInput text_input: The input text. (required)
-        :return: list[date]
+        :return: list[DateEntity]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -79,7 +79,7 @@ class DateParsersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param TextInput text_input: The input text. (required)
-        :return: list[date]
+        :return: list[DateEntity]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -143,7 +143,7 @@ class DateParsersApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='list[date]',  # noqa: E501
+            response_type='list[DateEntity]',  # noqa: E501
             auth_settings=auth_settings,
             async=params.get('async'),
             _return_http_data_only=params.get('_return_http_data_only'),

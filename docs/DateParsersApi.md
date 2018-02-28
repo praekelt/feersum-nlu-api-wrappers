@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **date_parser_retrieve**
-> list[date] date_parser_retrieve(instance_name, text_input)
+> list[DateEntity] date_parser_retrieve(instance_name, text_input)
 
 Extract dates.
 
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**list[date]**
+[**list[DateEntity]**](DateEntity.md)
 
 ### Authorization
 

@@ -31,7 +31,7 @@ from feersum_nlu.models.class_label_pair import ClassLabelPair
 from feersum_nlu.models.create_details import CreateDetails
 from feersum_nlu.models.dashboard_detail import DashboardDetail
 from feersum_nlu.models.dashboard_model_detail import DashboardModelDetail
-from feersum_nlu.models.date import Date
+from feersum_nlu.models.date_entity import DateEntity
 from feersum_nlu.models.duckling_ent_create_details import DucklingEntCreateDetails
 from feersum_nlu.models.duckling_instance_detail import DucklingInstanceDetail
 from feersum_nlu.models.entity import Entity

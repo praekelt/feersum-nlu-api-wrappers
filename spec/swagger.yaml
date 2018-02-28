@@ -1126,7 +1126,7 @@ paths:
       - $ref: "#/parameters/body_param_text_input"
       responses:
         200:
-          $ref: "#/responses/date_list"
+          $ref: "#/responses/date_entity_list"
         400:
           description: bad request
 
@@ -1994,12 +1994,12 @@ responses:
       items:
         $ref: "#/definitions/entity"
 
-  date_list:                  
+  date_entity_list:                  
     description: The list of structured dates.
     schema:
       type: array
       items:
-        $ref: "#/definitions/date"
+        $ref: "#/definitions/date_entity"
 
   sentiment:                  
     description: The coarse sentiment.
@@ -2733,14 +2733,14 @@ definitions:
         type: string
         example: 'train'
 
-  date:
+  date_entity:
     description: A structured date-time string with a best guess on the specificity/granularity (i.e. hour, day, month)
     type: object
     required:
-    - date
+    - value
     - granularity
     properties:
-      date:
+      value:
         type: string
         example: '1981-06-01T00:00:00.000+02:00'
       granularity:
