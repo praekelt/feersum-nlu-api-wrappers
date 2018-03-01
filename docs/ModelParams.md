@@ -3,7 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | [optional] 
 **long_name** | **str** |  | [optional] 
 **desc** | **str** |  | [optional] 
 **threshold** | **float** |  | [optional] 

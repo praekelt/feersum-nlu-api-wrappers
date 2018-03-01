@@ -2638,8 +2638,6 @@ definitions:
     description: The model parameters. Dict of parameters like name, long_name, desc, threshold ...
     type: object
     properties:
-      name:
-        type: string
       long_name:
         type: string
       desc:

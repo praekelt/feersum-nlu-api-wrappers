@@ -42,57 +42,31 @@ class ModelParams(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'name': 'str',
         'long_name': 'str',
         'desc': 'str',
         'threshold': 'float'
     }
 
     attribute_map = {
-        'name': 'name',
         'long_name': 'long_name',
         'desc': 'desc',
         'threshold': 'threshold'
     }
 
-    def __init__(self, name=None, long_name=None, desc=None, threshold=None):  # noqa: E501
+    def __init__(self, long_name=None, desc=None, threshold=None):  # noqa: E501
         """ModelParams - a model defined in Swagger"""  # noqa: E501
 
-        self._name = None
         self._long_name = None
         self._desc = None
         self._threshold = None
         self.discriminator = None
 
-        if name is not None:
-            self.name = name
         if long_name is not None:
             self.long_name = long_name
         if desc is not None:
             self.desc = desc
         if threshold is not None:
             self.threshold = threshold
-
-    @property
-    def name(self):
-        """Gets the name of this ModelParams.  # noqa: E501
-
-
-        :return: The name of this ModelParams.  # noqa: E501
-        :rtype: str
-        """
-        return self._name
-
-    @name.setter
-    def name(self, name):
-        """Sets the name of this ModelParams.
-
-
-        :param name: The name of this ModelParams.  # noqa: E501
-        :type: str
-        """
-
-        self._name = name
 
     @property
     def long_name(self):
