@@ -52,7 +52,7 @@ The below commands can be run from a bash or similar terminal
     	-H 'Content-Type: application/json' \
     	-H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
-    	-d '{"desc": "LR4 text lang ID model.", "lid_model_file": "lid_za", "name": "test_model"}'
+    	-d '{"desc": "LR4 text lang ID model.", "lid_model_file": "lid_za", "name": "test_model", "load_from_store": false}'
 
     # Detect the language of a piece of text:
     curl -XPOST "$SERVICE"'/nlu/v2/lr4_language_recognisers/test_model/retrieve' \
@@ -113,7 +113,7 @@ The below commands can be run from a bash or similar terminal
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
-        -d '{"immediate_mode": true}' 
+        -d '{}'
 
     # Make predictions using the model:
     curl -XPOST "$SERVICE"'/nlu/v2/text_classifiers/txt_clsfr_ex_1/retrieve' \
@@ -182,7 +182,7 @@ The below commands can be run from a bash or similar terminal
         -H 'Content-Type: application/json' \
         -H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
-        -d '{"immediate_mode": true}' 
+        -d '{}'
 
     # Make predictions using the model:
     curl -XPOST "$SERVICE"'/nlu/v2/intent_classifiers/intent_clsfr_ex_1/retrieve' \

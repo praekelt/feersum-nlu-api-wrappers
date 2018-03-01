@@ -1,6 +1,18 @@
 Changelog
 *********
 
+Version 2.0.20
+==============
+- Changed name of similar_entity_extractor to sim_word_entity_extractor.
+
+- Removed the api hit counts from the dashboard.
+
+- Added a 'trashed' flag to each model in the dashboard.
+
+- The spec and Python API wrapper have been updated to rather return a lists of python objects as opposed to lists of
+  json objects.
+
+
 Version 2.0.18
 ==============
 - Added a 'long_name' attribute to all models. May be used as a 'pretty' formatted model name while the previous model

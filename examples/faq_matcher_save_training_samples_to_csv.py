@@ -51,8 +51,8 @@ try:
                                 quoting=csv.QUOTE_MINIMAL)
 
         for sample in training_samples:
-            label = sample.get('label')
-            text = sample.get('text')
+            label = sample.label
+            text = sample.text
 
             if (label is not None) and (text is not None):
                 csv_writer.writerow([label, text])

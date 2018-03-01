@@ -1,7 +1,6 @@
 """ Example: Shows how to create, train and use an FAQ matcher. """
 
 import urllib3
-import time
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
@@ -63,8 +62,7 @@ word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
                       feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
                       feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul')]
 
-train_details = feersum_nlu.TrainDetails(immediate_mode=True,
-                                         threshold=10.0,
+train_details = feersum_nlu.TrainDetails(threshold=10.0,
                                          word_manifold_list=word_manifold_list)
 
 text_input = feersum_nlu.TextInput("Waar kan ek 'n eis insit?")
@@ -92,9 +90,9 @@ try:
 
     print("Del training samples of the FAQ matcher:")
     # api_response = api_instance.faq_matcher_del_training_samples_all(instance_name)
-    api_response = api_instance.faq_matcher_del_training_samples(instance_name,
-                                                                 labelled_text_sample_list=
-                                                                 labelled_text_sample_delete_list)
+    api_response = \
+        api_instance.faq_matcher_del_training_samples(instance_name,
+                                                      labelled_text_sample_list=labelled_text_sample_delete_list)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -134,11 +132,11 @@ try:
 
     # time.sleep(10.0)
 
-    print("Get the details of all loaded FAQ matcher:")
-    api_response = api_instance.faq_matcher_get_details_all()
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # print("Get the details of all loaded FAQ matcher:")
+    # api_response = api_instance.faq_matcher_get_details_all()
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
     print("Get the details of specific named loaded FAQ matcher:")
     api_response = api_instance.faq_matcher_get_details(instance_name)
@@ -195,11 +193,11 @@ try:
     print(" api_response", api_response)
     print()
 
-    # print("Delete specific named loaded FAQ matcher:")
-    # api_response = api_instance.faq_matcher_del(instance_name)
-    # print(" type(api_response)", type(api_response))
-    # print(" api_response", api_response)
-    # print()
+    print("Delete specific named loaded FAQ matcher:")
+    api_response = api_instance.faq_matcher_del(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
 
 except ApiException as e:
     print("Exception when calling an FAQ matcher operation: %s\n" % e)

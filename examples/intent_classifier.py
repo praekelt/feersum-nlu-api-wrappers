@@ -36,8 +36,7 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would li
                                                                 label="quote"))
 
 # train_details = feersum_nlu.TrainDetails(immediate_mode=True)
-train_details = feersum_nlu.TrainDetails(immediate_mode=True,
-                                         threshold=0.85,
+train_details = feersum_nlu.TrainDetails(threshold=0.85,
                                          word_manifold_list=word_manifold_list)
 
 text_input = feersum_nlu.TextInput("How do I get a quote?")
@@ -93,11 +92,11 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Get the details of all loaded intent classifiers:")
-    api_response = api_instance.intent_classifier_get_details_all()
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # print("Get the details of all loaded intent classifiers:")
+    # api_response = api_instance.intent_classifier_get_details_all()
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
     print("Get the details of specific named loaded intent classifiers:")
     api_response = api_instance.intent_classifier_get_details(instance_name)
