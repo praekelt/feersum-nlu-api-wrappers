@@ -49,7 +49,7 @@ try:
                 json_dict = instance_detail.to_dict()
                 # print(json_dict)
 
-                filename = model.name + "_" + model.model_type
+                filename = model.name + "_" + feersum_nlu_auth_token + "." + model.model_type
 
                 with open(filename + ".json", "w") as json_file:
                     json.dump(json_dict, json_file, sort_keys=True, indent=4)
