@@ -12,9 +12,9 @@ deps:
 	@pip-sync requirements.txt
 
 update_spec:
-	@swagger-codegen generate -i spec/swagger.yaml -l python -c spec/swagger_codegen-python_config.json -o spec/build
+	@swagger-codegen generate -i swagger/swagger.yaml -l python -c swagger/swagger_codegen-python_config.json -o swagger/build
 	rm -rf docs
 	rm -rf feersum_nlu
-	cp -a spec/build/docs .
-	cp -a spec/build/feersum_nlu .
+	cp -a swagger/build/docs .
+	cp -a swagger/build/feersum_nlu .
 
