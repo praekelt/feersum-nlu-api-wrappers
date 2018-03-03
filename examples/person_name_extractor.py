@@ -60,5 +60,5 @@ try:
 
 except ApiException as e:
     print("Exception when calling a entity extractor operation: %s\n" % e)
-except urllib3.exceptions.MaxRetryError:
-    print("Connection MaxRetryError!")
+except urllib3.exceptions.HTTPError as e:
+    print("Connection HTTPError! %s\n" % e)

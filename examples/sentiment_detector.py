@@ -29,5 +29,5 @@ try:
     print()
 except ApiException as e:
     print("Exception when calling SentimentDetectorsApi->sentiment_detector_retrieve: %s\n" % e)
-except urllib3.exceptions.MaxRetryError:
-    print("Connection MaxRetryError!")
+except urllib3.exceptions.HTTPError as e:
+    print("Connection HTTPError! %s\n" % e)

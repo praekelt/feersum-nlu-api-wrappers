@@ -26,5 +26,5 @@ try:
     print()
 except ApiException as e:
     print("Exception when calling DashboardApi->dashboard_get_details: %s\n" % e)
-except urllib3.exceptions.MaxRetryError:
-    print("Connection MaxRetryError!")
+except urllib3.exceptions.HTTPError as e:
+    print("Connection HTTPError! %s\n" % e)

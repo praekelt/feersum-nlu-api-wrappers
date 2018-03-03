@@ -96,7 +96,13 @@ paths:
       operationId: text_classifier_create
       description: Create a new text classifier or load one from the store. Returns the details of the new or loaded instance.
       parameters:
-      - $ref: "#/parameters/body_param_text_clsfr_create_details"
+      - in: body
+        name: text_clsfr_create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/text_clsfr_create_details"
+
       responses:
         200:
           $ref: "#/responses/text_clsfr_instance_detail"
@@ -128,7 +134,11 @@ paths:
       operationId: text_classifier_get_details
       description: Get the details of the named text classifier instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/text_clsfr_instance_detail"
@@ -143,7 +153,11 @@ paths:
       operationId: text_classifier_del
       description: Delete and return the details of the named text classifier instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/text_clsfr_instance_detail"
@@ -162,8 +176,19 @@ paths:
       operationId: text_classifier_add_training_samples
       description: Add training samples to named text classifier. Returns the classifier's updated number of training samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -178,7 +203,11 @@ paths:
       operationId: text_classifier_get_training_samples
       description: Get the training samples of the named text classifier.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -193,8 +222,19 @@ paths:
       operationId: text_classifier_del_training_samples
       description: Delete the listed training samples of the named text classifier. Returns the deleted samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -210,7 +250,11 @@ paths:
       operationId: text_classifier_del_training_samples_all
       description: Delete all training samples of the named text classifier. Returns the deleted samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -229,8 +273,19 @@ paths:
       operationId: text_classifier_add_testing_samples
       description: Add testing samples to named text classifier. Returns the classifier's updated number of testing samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -245,7 +300,11 @@ paths:
       operationId: text_classifier_get_testing_samples
       description: Get the testing samples of the named text classifier.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -260,8 +319,19 @@ paths:
       operationId: text_classifier_del_testing_samples
       description: Delete the listed testing samples of the named text classifier. Returns the deleted samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -277,7 +347,11 @@ paths:
       operationId: text_classifier_del_testing_samples_all
       description: Delete all testing samples of the named text classifier. Returns the deleted samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -296,8 +370,17 @@ paths:
       operationId: text_classifier_train
       description: Train the named text classifier with the training and testing data already provided. Returns the details of the model instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_train_details"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: train_details
+        description: The arguments provided to the train operation.
+        required: true
+        schema:
+          $ref: "#/definitions/train_details"
       responses:
         200:
           $ref: "#/responses/text_clsfr_instance_detail"
@@ -316,8 +399,17 @@ paths:
       operationId: text_classifier_set_params
       description: Set the model parameters of named text classifier.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_model_params"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -336,8 +428,17 @@ paths:
       operationId: text_classifier_retrieve
       description: Classifies the text and returns a probability sorted list of classes.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
           $ref: "#/responses/scored_label_list"
@@ -356,7 +457,11 @@ paths:
       operationId: text_classifier_get_labels
       description: Returns the classifier's list of possible class labels.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labels"
@@ -375,8 +480,17 @@ paths:
       operationId: text_classifier_curate
       description: Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_label_pair"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: label_pair
+        description: The true label, predicted label and matrix (train/test) to use.
+        required: true
+        schema:
+          $ref: "#/definitions/class_label_pair"
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list" 
@@ -397,7 +511,12 @@ paths:
       operationId: word_manifold_create
       description: Create a new word manifold model using an input file or load a model from the store. Warning! - These models are quite big and each takes a few seconds to load/create. Returns the details of the new or loaded instance.
       parameters:
-      - $ref: "#/parameters/body_param_wm_create_details"
+      - in: body
+        name: wm_create_details
+        description: The details of the word manifold instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/wm_create_details"
       responses:
         200:
           $ref: "#/responses/wm_instance_detail"
@@ -416,8 +535,19 @@ paths:
       operationId: word_manifold_add_similar_words
       description: Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold to the store it could take a few seconds to complete. Returns the details of the updated instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_new_word_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: new_word_list
+        description: List of new words.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/new_word"
       responses:
         200:
           $ref: "#/responses/wm_instance_detail"
@@ -436,8 +566,17 @@ paths:
       operationId: word_manifold_get_similar_words
       description: Returns words from the manifold that are similar to the parameter word.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_word_and_threshold"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: word_and_threshold
+        description: A word token and an accompanying threshold.
+        required: true
+        schema:
+          $ref: "#/definitions/word_and_threshold"
       responses:
         200:
           $ref: "#/responses/word_and_distance_list"
@@ -456,8 +595,17 @@ paths:
       operationId: word_manifold_spell_correct
       description: Spell correct a word replacing it with the most likely word from the manifold. Returns one or more scored candidate words.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
           $ref: "#/responses/word_and_distance_list"
@@ -478,7 +626,12 @@ paths:
       operationId: intent_classifier_create
       description: Create a new intent classifier or load one from the store. Returns the details of the new or loaded instance.
       parameters:
-      - $ref: "#/parameters/body_param_create_details"
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/create_details"
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -510,7 +663,11 @@ paths:
       operationId: intent_classifier_get_details
       description: Returns the details of the named intent classifier instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -525,7 +682,11 @@ paths:
       operationId: intent_classifier_del  
       description: Delete and return the details of the named intent classifier instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -544,8 +705,19 @@ paths:
       operationId: intent_classifier_add_training_samples
       description: Add training samples to named intent classifier. Returns the classifier's updated number of training samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -560,7 +732,11 @@ paths:
       operationId: intent_classifier_get_training_samples
       description: Returns the training samples of the named intent classifier.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -575,8 +751,19 @@ paths:
       operationId: intent_classifier_del_training_samples
       description: Delete the listed training samples of the named intent classifier. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -592,7 +779,11 @@ paths:
       operationId: intent_classifier_del_training_samples_all
       description: Delete the listed training samples of the named intent classifier. Returns the deleted samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -611,8 +802,19 @@ paths:
       operationId: intent_classifier_add_testing_samples
       description: Add testing samples to named intent classifier. Returns the classifier's updated number of testing samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -627,7 +829,11 @@ paths:
       operationId: intent_classifier_get_testing_samples
       description: Returns the testing samples of the named intent classifier.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -642,8 +848,19 @@ paths:
       operationId: intent_classifier_del_testing_samples
       description: Delete the listed testing samples of the named intent classifier. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"     
@@ -659,7 +876,11 @@ paths:
       operationId: intent_classifier_del_testing_samples_all
       description: Delete all testing samples of the named intent classifier. Returns the deleted samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -678,8 +899,17 @@ paths:
       operationId: intent_classifier_train
       description: Train the named intent classifier with the training and testing data already provided. Returns the updated instance details.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_train_details"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: train_details
+        description: The arguments provided to the train operation.
+        required: true
+        schema:
+          $ref: "#/definitions/train_details"
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -698,8 +928,17 @@ paths:
       operationId: intent_classifier_set_params
       description: Set the model parameters of named intent classifier.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_model_params"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -718,8 +957,19 @@ paths:
       operationId: intent_classifier_online_training_samples
       description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -738,8 +988,17 @@ paths:
       operationId: intent_classifier_retrieve
       description: Classifies the intent and returns a probability sorted list of classes.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
           $ref: "#/responses/scored_label_list"
@@ -758,7 +1017,11 @@ paths:
       operationId: intent_classifier_get_labels
       description: Returns the classifier's list of possible class labels.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labels"
@@ -777,8 +1040,17 @@ paths:
       operationId: intent_classifier_curate
       description: Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_label_pair"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: label_pair
+        description: The true label, predicted label and matrix (train/test) to use.
+        required: true
+        schema:
+          $ref: "#/definitions/class_label_pair"
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list" 
@@ -800,7 +1072,12 @@ paths:
       operationId: faq_matcher_create
       description: Create a new faq matcher or load one from the store. Returns the details of the new or loaded instance.
       parameters:
-      - $ref: "#/parameters/body_param_create_details"
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/create_details"
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -832,7 +1109,11 @@ paths:
       operationId: faq_matcher_get_details
       description: Get the details of the named FAQ matcher instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -847,7 +1128,11 @@ paths:
       operationId: faq_matcher_del
       description: Delete and return the details of the named FAQ matcher instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -866,8 +1151,19 @@ paths:
       operationId: faq_matcher_add_training_samples
       description: Add training samples to named faq matcher. Returns the FAQ matcher's updated number of training samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -882,7 +1178,11 @@ paths:
       operationId: faq_matcher_get_training_samples
       description: Returns the training samples of the named faq matcher.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -897,8 +1197,19 @@ paths:
       operationId: faq_matcher_del_training_samples
       description: Delete the listed training samples of the named FAQ matcher. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -914,7 +1225,11 @@ paths:
       operationId: faq_matcher_del_training_samples_all
       description: Delete all training samples of the named FAQ matcher. Returns the deleted samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -933,8 +1248,19 @@ paths:
       operationId: faq_matcher_add_testing_samples
       description: Add testing samples to named faq matcher. Returns the FAQ matcher's updated number of testing samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -949,7 +1275,11 @@ paths:
       operationId: faq_matcher_get_testing_samples
       description: Returns the testing samples of the named faq matcher.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"        
@@ -964,8 +1294,19 @@ paths:
       operationId: faq_matcher_del_testing_samples
       description: Delete the listed testing samples of the named FAQ matcher. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"   
@@ -981,7 +1322,11 @@ paths:
       operationId: faq_matcher_del_testing_samples_all
       description: Delete all testing samples of the named FAQ matcher. Returns the deleted samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"   
@@ -1000,8 +1345,17 @@ paths:
       operationId: faq_matcher_train
       description: Train the named FAQ matcher with the training and testing data already provided. Returns the updated instance detail.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_train_details"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: train_details
+        description: The arguments provided to the train operation.
+        required: true
+        schema:
+          $ref: "#/definitions/train_details"
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -1020,8 +1374,17 @@ paths:
       operationId: faq_matcher_set_params
       description: Set the model parameters of FAQ matcher.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_model_params"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -1040,8 +1403,19 @@ paths:
       operationId: faq_matcher_online_training_samples
       description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_labelled_text_sample_list"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
           $ref: "#/responses/total_samples"        
@@ -1060,8 +1434,17 @@ paths:
       operationId: faq_matcher_retrieve
       description: Matchers the FAQ and returns a probability sorted list of answer labels.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
           $ref: "#/responses/scored_label_list"
@@ -1080,7 +1463,11 @@ paths:
       operationId: faq_matcher_get_labels
       description: Returns the classifier's list of possible class labels.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labels"
@@ -1099,8 +1486,17 @@ paths:
       operationId: faq_matcher_curate
       description: Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_label_pair"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: label_pair
+        description: The true label, predicted label and matrix (train/test) to use.
+        required: true
+        schema:
+          $ref: "#/definitions/class_label_pair"
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list" 
@@ -1122,8 +1518,17 @@ paths:
       operationId: date_parser_retrieve
       description: Parses one or more dates from text.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
           $ref: "#/responses/date_entity_list"
@@ -1145,8 +1550,17 @@ paths:
       operationId: sentiment_detector_retrieve
       description: Detect the general sentiment in the input text.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
           $ref: "#/responses/sentiment"
@@ -1168,7 +1582,12 @@ paths:
       operationId: regex_entity_extractor_create
       description: Create a new regular expression entity extractor or load one from the store.
       parameters:
-      - $ref: "#/parameters/body_param_regex_ent_create_details"
+      - in: body
+        name: regex_ent_create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/regex_ent_create_details"
       responses:
         200:
           $ref: "#/responses/regex_instance_detail"
@@ -1200,7 +1619,11 @@ paths:
       operationId: regex_entity_extractor_get_details
       description: Get the details of the named regular expression entity extractor instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/regex_instance_detail"
@@ -1215,7 +1638,11 @@ paths:
       operationId: regex_entity_extractor_del
       description: Delete and get the details of the named regular expression entity extractor instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/regex_instance_detail"
@@ -1234,8 +1661,17 @@ paths:
       operationId: regex_entity_extractor_set_params
       description: Set the model parameters of named regex entity extractor.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_model_params"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -1254,8 +1690,17 @@ paths:
       operationId: regex_entity_extractor_retrieve
       description: Extract the entities matching the regular expression.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
           $ref: "#/responses/entity_list"
@@ -1276,7 +1721,12 @@ paths:
       operationId: person_name_entity_extractor_create
       description: Create a new person_name entity extractor or load one from the store.
       parameters:
-      - $ref: "#/parameters/body_param_person_name_ent_create_details"
+      - in: body
+        name: person_name_ent_create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/person_name_ent_create_details"
       responses:
         200:
           $ref: "#/responses/person_name_instance_detail"
@@ -1308,7 +1758,11 @@ paths:
       operationId: person_name_entity_extractor_get_details
       description: Get the details of the named person_name entity extractor instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/person_name_instance_detail"
@@ -1323,7 +1777,11 @@ paths:
       operationId: person_name_entity_extractor_del
       description: Delete and return the details of the named person_name entity extractor instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/person_name_instance_detail"
@@ -1342,8 +1800,17 @@ paths:
       operationId: person_name_entity_extractor_set_params
       description: Set the model parameters of named person name entity extractor.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_model_params"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -1362,8 +1829,17 @@ paths:
       operationId: person_name_entity_extractor_retrieve
       description: Extract the entities parsed by person_name.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
           $ref: "#/responses/entity_list"
@@ -1384,7 +1860,12 @@ paths:
       operationId: duckling_entity_extractor_create
       description: Create a new duckling entity extractor or load one from the store.
       parameters:
-      - $ref: "#/parameters/body_param_duckling_ent_create_details"
+      - in: body
+        name: duckling_ent_create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/duckling_ent_create_details"
       responses:
         200:
           $ref: "#/responses/duckling_instance_detail"
@@ -1416,7 +1897,11 @@ paths:
       operationId: duckling_entity_extractor_get_details
       description: Get the details of the named duckling entity extractor instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/duckling_instance_detail"
@@ -1431,7 +1916,11 @@ paths:
       operationId: duckling_entity_extractor_del
       description: Delete and return the details of the named duckling entity extractor instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/duckling_instance_detail"
@@ -1450,8 +1939,17 @@ paths:
       operationId: duckling_entity_extractor_set_params
       description: Set the model parameters of named duckling entity extractor.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_model_params"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -1470,8 +1968,17 @@ paths:
       operationId: duckling_entity_extractor_retrieve
       description: Extract the entities parsed by duckling.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
           $ref: "#/responses/entity_list"
@@ -1492,7 +1999,12 @@ paths:
       operationId: sim_word_entity_extractor_create
       description: Create a new word similarity entity extractor or load one from the store.
       parameters:
-      - $ref: "#/parameters/body_param_sim_word_ent_create_details"
+      - in: body
+        name: sim_word_ent_create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/sim_word_ent_create_details"
       responses:
         200:
           $ref: "#/responses/sim_word_instance_detail"
@@ -1524,7 +2036,11 @@ paths:
       operationId: sim_word_entity_extractor_get_details
       description: Get the details of the named similarity entity extractor instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/sim_word_instance_detail"
@@ -1539,7 +2055,11 @@ paths:
       operationId: sim_word_entity_extractor_del
       description: Delete and return the details of the named similarity entity extractor instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/sim_word_instance_detail"
@@ -1558,8 +2078,17 @@ paths:
       operationId: sim_word_entity_extractor_set_params
       description: Set the model parameters of named similarity entity extractor.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_model_params"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -1578,8 +2107,17 @@ paths:
       operationId: sim_word_entity_extractor_retrieve
       description: Extract the word entities that are similar to the list of words used to create this model instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
           $ref: "#/responses/entity_list"
@@ -1601,7 +2139,12 @@ paths:
       operationId: lr4_language_recogniser_create
       description: Create a new LR4 language detector from the pre-trained model name provided. 'lid_za' is currently the only pre-trained model that is available, but it was trained on all 11 languages and is pretty accurate. Returns the detail of the new instance.
       parameters:
-      - $ref: "#/parameters/body_param_lr4_create_details"
+      - in: body
+        name: lr4_create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/lr4_create_details"
       responses:
         200:
           $ref: "#/responses/lr4_instance_detail"
@@ -1633,7 +2176,11 @@ paths:
       operationId: lr4_language_recogniser_get_details
       description: Get the details of the named LR4 text language detector instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/lr4_instance_detail"
@@ -1648,7 +2195,11 @@ paths:
       operationId: lr4_language_recogniser_del
       description: Delete and return the details of the named LR4 text language detector instance.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/lr4_instance_detail"
@@ -1667,8 +2218,17 @@ paths:
       operationId: lr4_language_recogniser_set_params
       description: Set the model parameters of named lr4 language recogniser.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_model_params"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
       responses:
         200:
           $ref: "#/responses/instance_detail"
@@ -1687,8 +2247,17 @@ paths:
       operationId: lr4_language_recogniser_retrieve
       description: Recognise the language the text is written in. Returns the list of scored language codes.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
-      - $ref: "#/parameters/body_param_text_input"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
       responses:
         200:
           $ref: "#/responses/scored_label_list"
@@ -1707,147 +2276,16 @@ paths:
       operationId: lr4_language_recogniser_get_labels
       description: Returns the classifier's list of possible class labels.
       parameters:
-      - $ref: "#/parameters/path_param_instance_name"
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/labels"
         400:
           description: bad request
-
-###################################
-# Descriptions of common parameters
-###################################
-parameters:
-  path_param_instance_name:
-    in: path
-    name: instance_name
-    description: The name of the model instance.
-    required: true
-    type: string
-
-  body_param_new_word_list:
-    in: body
-    name: new_word_list
-    description: List of new words.
-    required: true
-    schema:
-      type: array
-      items:
-        $ref: "#/definitions/new_word"
-          
-  body_param_text_clsfr_create_details:
-    in: body
-    name: text_clsfr_create_details
-    description: The details of the instance to create.
-    required: true
-    schema:
-      $ref: "#/definitions/text_clsfr_create_details"
-          
-  body_param_create_details:
-    in: body
-    name: create_details
-    description: The details of the instance to create.
-    required: true
-    schema:
-      $ref: "#/definitions/create_details"
-          
-  body_param_wm_create_details:
-    in: body
-    name: wm_create_details
-    description: The details of the word manifold instance to create.
-    required: true
-    schema:
-      $ref: "#/definitions/wm_create_details"
-          
-  body_param_label_pair:
-    in: body
-    name: label_pair
-    description: The true label, predicted label and matrix (train/test) to use.
-    required: true
-    schema:
-      $ref: "#/definitions/class_label_pair"
-
-  body_param_word_and_threshold:
-    in: body
-    name: word_and_threshold
-    description: A word token and an accompanying threshold.
-    required: true
-    schema:
-      $ref: "#/definitions/word_and_threshold"
-
-  body_param_regex_ent_create_details:
-    in: body
-    name: regex_ent_create_details
-    description: The details of the instance to create.
-    required: true
-    schema:
-      $ref: "#/definitions/regex_ent_create_details"
-          
-  body_param_person_name_ent_create_details:
-    in: body
-    name: person_name_ent_create_details
-    description: The details of the instance to create.
-    required: true
-    schema:
-      $ref: "#/definitions/person_name_ent_create_details"
-
-  body_param_duckling_ent_create_details:
-    in: body
-    name: duckling_ent_create_details
-    description: The details of the instance to create.
-    required: true
-    schema:
-      $ref: "#/definitions/duckling_ent_create_details"
-
-  body_param_sim_word_ent_create_details:
-    in: body
-    name: sim_word_ent_create_details
-    description: The details of the instance to create.
-    required: true
-    schema:
-      $ref: "#/definitions/sim_word_ent_create_details"
-
-  body_param_lr4_create_details:
-    in: body
-    name: lr4_create_details
-    description: The details of the instance to create.
-    required: true
-    schema:
-      $ref: "#/definitions/lr4_create_details"
-          
-  body_param_labelled_text_sample_list:
-    in: body
-    name: labelled_text_sample_list
-    description: List of labelled text samples.
-    required: true
-    schema:
-      type: array
-      items:
-        $ref: "#/definitions/labelled_text_sample"
-
-  body_param_train_details:        
-    in: body
-    name: train_details
-    description: The arguments provided to the train operation.
-    required: true
-    schema:
-      $ref: "#/definitions/train_details"
-          
-  body_param_model_params:        
-    in: body
-    name: model_params
-    description: The model parameters.
-    required: true
-    schema:
-      $ref: "#/definitions/model_params"
-
-  body_param_text_input:
-    in: body
-    name: text_input
-    description: The input text.
-    required: true
-    schema:
-      $ref: "#/definitions/text_input"
 
 ##################################
 # Descriptions of common responses
