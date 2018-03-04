@@ -47,7 +47,6 @@ try:
 
             if instance_detail is not None:
                 json_dict = instance_detail.to_dict()
-                # print(json_dict)
 
                 filename = model.name + "_" + feersum_nlu_auth_token + "." + model.model_type
 
