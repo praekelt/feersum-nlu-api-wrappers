@@ -7,14 +7,13 @@ Version 2.0.20
 
 - Removed the api hit counts from the dashboard.
 
-- Added a 'trashed' flag to each model in the dashboard.
+- Added a trashed flag to each model in the dashboard.
 
-- The spec and Python API wrapper have been updated to rather return a lists of python objects as opposed to lists of
-  json objects.
+- Removed the immediate_mode arguments in the train operations.
+
+- The spec and Python API wrapper have been updated to rather return lists of python objects as opposed to lists of json objects.
 
 - Changes to LR4 to have a load from store that works like all of the other names.
-
-- iso time format.
 
 
 Version 2.0.18
