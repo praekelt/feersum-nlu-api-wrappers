@@ -53,7 +53,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
+labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 
 try:
     # Add testing samples.
@@ -68,7 +68,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | 
+ **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
 
 ### Return type
 
@@ -114,7 +114,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
+labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 
 try:
     # Add training samples.
@@ -129,7 +129,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | 
+ **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
 
 ### Return type
 
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_curate**
-> LabelledTextSampleList faq_matcher_curate(instance_name, label_pair)
+> list[LabelledTextSample] faq_matcher_curate(instance_name, label_pair)
 
 Endpoint to aid in the curation of a model instance.
 
@@ -253,7 +253,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -326,7 +326,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_del_testing_samples**
-> LabelledTextSampleList faq_matcher_del_testing_samples(instance_name, labelled_text_sample_list)
+> list[LabelledTextSample] faq_matcher_del_testing_samples(instance_name, labelled_text_sample_list)
 
 Delete testing samples.
 
@@ -354,7 +354,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
+labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 
 try:
     # Delete testing samples.
@@ -369,11 +369,11 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | 
+ **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -387,7 +387,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_del_testing_samples_all**
-> LabelledTextSampleList faq_matcher_del_testing_samples_all(instance_name)
+> list[LabelledTextSample] faq_matcher_del_testing_samples_all(instance_name)
 
 Delete all testing samples.
 
@@ -432,7 +432,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -446,7 +446,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_del_training_samples**
-> LabelledTextSampleList faq_matcher_del_training_samples(instance_name, labelled_text_sample_list)
+> list[LabelledTextSample] faq_matcher_del_training_samples(instance_name, labelled_text_sample_list)
 
 Delete training samples.
 
@@ -474,7 +474,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
+labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 
 try:
     # Delete training samples.
@@ -489,11 +489,11 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | 
+ **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -507,7 +507,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_del_training_samples_all**
-> LabelledTextSampleList faq_matcher_del_training_samples_all(instance_name)
+> list[LabelledTextSample] faq_matcher_del_training_samples_all(instance_name)
 
 Delete all training samples.
 
@@ -552,7 +552,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -625,7 +625,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_get_details_all**
-> InstanceDetailList faq_matcher_get_details_all()
+> list[InstanceDetail] faq_matcher_get_details_all()
 
 Get list of loaded FAQ matchers.
 
@@ -666,7 +666,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InstanceDetailList**](InstanceDetailList.md)
+[**list[InstanceDetail]**](InstanceDetail.md)
 
 ### Authorization
 
@@ -680,7 +680,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_get_labels**
-> ClassLabelList faq_matcher_get_labels(instance_name)
+> list[ClassLabel] faq_matcher_get_labels(instance_name)
 
 Get list of possible labels.
 
@@ -725,7 +725,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ClassLabelList**](ClassLabelList.md)
+[**list[ClassLabel]**](ClassLabel.md)
 
 ### Authorization
 
@@ -739,7 +739,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_get_testing_samples**
-> LabelledTextSampleList faq_matcher_get_testing_samples(instance_name)
+> list[LabelledTextSample] faq_matcher_get_testing_samples(instance_name)
 
 Get testing samples.
 
@@ -784,7 +784,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -798,7 +798,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_get_training_samples**
-> LabelledTextSampleList faq_matcher_get_training_samples(instance_name)
+> list[LabelledTextSample] faq_matcher_get_training_samples(instance_name)
 
 Get training samples.
 
@@ -843,7 +843,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -885,7 +885,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
+labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 
 try:
     # Train/update the classifier online with the samples provided.
@@ -900,7 +900,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | 
+ **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
 
 ### Return type
 
@@ -918,7 +918,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_retrieve**
-> ScoredLabelList faq_matcher_retrieve(instance_name, text_input)
+> list[ScoredLabel] faq_matcher_retrieve(instance_name, text_input)
 
 Match retrieve and FAQ.
 
@@ -965,7 +965,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ScoredLabelList**](ScoredLabelList.md)
+[**list[ScoredLabel]**](ScoredLabel.md)
 
 ### Authorization
 

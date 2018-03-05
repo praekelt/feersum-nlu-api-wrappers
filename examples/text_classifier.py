@@ -29,7 +29,7 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would li
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to get a quote",
                                                                 label="quote"))
 
-train_details = feersum_nlu.TrainDetails(immediate_mode=True)
+train_details = feersum_nlu.TrainDetails()
 
 text_input = feersum_nlu.TextInput("I would please like to fill in a claim form.")
 
@@ -84,11 +84,11 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Get the details of all loaded text classifiers:")
-    api_response = api_instance.text_classifier_get_details_all()
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # print("Get the details of all loaded text classifiers:")
+    # api_response = api_instance.text_classifier_get_details_all()
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
     print("Get the details of specific named loaded text classifiers:")
     api_response = api_instance.text_classifier_get_details(instance_name)
@@ -119,5 +119,5 @@ try:
     print()
 except ApiException as e:
     print("Exception when calling a text classifier operation: %s\n" % e)
-except urllib3.exceptions.MaxRetryError:
-    print("Connection MaxRetryError!")
+except urllib3.exceptions.HTTPError as e:
+    print("Connection HTTPError! %s\n" % e)

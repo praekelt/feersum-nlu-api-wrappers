@@ -32,7 +32,6 @@ class TestIntentClassifier(unittest.TestCase):
 
         word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng')]
 
-
         create_details = feersum_nlu.CreateDetails(name=instance_name,
                                                    desc="Test intent classifier.",
                                                    lid_model_file="lid_za",
@@ -45,9 +44,7 @@ class TestIntentClassifier(unittest.TestCase):
         labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to get a quote",
                                                                         label="quote"))
 
-        # train_details = feersum_nlu.TrainDetails(immediate_mode=True)
-        train_details = feersum_nlu.TrainDetails(immediate_mode=True,
-                                                 threshold=0.85,
+        train_details = feersum_nlu.TrainDetails(threshold=0.85,
                                                  word_manifold_list=word_manifold_list)
 
         text_input = feersum_nlu.TextInput("How do I get a quote?")
@@ -91,11 +88,11 @@ class TestIntentClassifier(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            print("Get the details of all loaded intent classifiers:")
-            api_response = api_instance.intent_classifier_get_details_all()
-            print(" type(api_response)", type(api_response))
-            print(" api_response", api_response)
-            print()
+            # print("Get the details of all loaded intent classifiers:")
+            # api_response = api_instance.intent_classifier_get_details_all()
+            # print(" type(api_response)", type(api_response))
+            # print(" api_response", api_response)
+            # print()
 
             print("Get the details of specific named loaded intent classifiers:")
             api_response = api_instance.intent_classifier_get_details(instance_name)
@@ -103,8 +100,8 @@ class TestIntentClassifier(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be available
-            # after training.
+            # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be
+            # available after training.
             print("Get the labels of named loaded intent classifiers:")
             api_response = api_instance.intent_classifier_get_labels(instance_name)
             print(" type(api_response)", type(api_response))
@@ -128,7 +125,7 @@ class TestIntentClassifier(unittest.TestCase):
             scored_label_list = api_response
             if len(scored_label_list) > 0:
                 scored_label = scored_label_list[0]
-                self.assertTrue(scored_label.get('label', '') == 'quote')
+                self.assertTrue(scored_label.label == 'quote')
             else:
                 self.assertTrue(False)
 

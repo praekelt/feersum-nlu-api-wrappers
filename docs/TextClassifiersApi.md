@@ -52,7 +52,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
+labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 
 try:
     # Add testing samples.
@@ -67,7 +67,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | 
+ **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
 
 ### Return type
 
@@ -113,7 +113,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
+labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 
 try:
     # Add training samples.
@@ -128,7 +128,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | 
+ **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
 
 ### Return type
 
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_curate**
-> LabelledTextSampleList text_classifier_curate(instance_name, label_pair)
+> list[LabelledTextSample] text_classifier_curate(instance_name, label_pair)
 
 Endpoint to aid in the curation of a model instance.
 
@@ -252,7 +252,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -325,7 +325,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_del_testing_samples**
-> LabelledTextSampleList text_classifier_del_testing_samples(instance_name, labelled_text_sample_list)
+> list[LabelledTextSample] text_classifier_del_testing_samples(instance_name, labelled_text_sample_list)
 
 Delete testing samples.
 
@@ -353,7 +353,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
+labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 
 try:
     # Delete testing samples.
@@ -368,11 +368,11 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | 
+ **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -386,7 +386,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_del_testing_samples_all**
-> LabelledTextSampleList text_classifier_del_testing_samples_all(instance_name)
+> list[LabelledTextSample] text_classifier_del_testing_samples_all(instance_name)
 
 Delete testing samples.
 
@@ -431,7 +431,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -445,7 +445,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_del_training_samples**
-> LabelledTextSampleList text_classifier_del_training_samples(instance_name, labelled_text_sample_list)
+> list[LabelledTextSample] text_classifier_del_training_samples(instance_name, labelled_text_sample_list)
 
 Delete training samples.
 
@@ -473,7 +473,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-labelled_text_sample_list = feersum_nlu.LabelledTextSampleList() # LabelledTextSampleList | List of labelled text samples.
+labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 
 try:
     # Delete training samples.
@@ -488,11 +488,11 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **labelled_text_sample_list** | [**LabelledTextSampleList**](LabelledTextSampleList.md)| List of labelled text samples. | 
+ **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -506,7 +506,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_del_training_samples_all**
-> LabelledTextSampleList text_classifier_del_training_samples_all(instance_name)
+> list[LabelledTextSample] text_classifier_del_training_samples_all(instance_name)
 
 Delete all training samples.
 
@@ -551,7 +551,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -624,7 +624,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_get_details_all**
-> TextClsfrInstanceDetailList text_classifier_get_details_all()
+> list[TextClsfrInstanceDetail] text_classifier_get_details_all()
 
 Get list of loaded text classifiers.
 
@@ -665,7 +665,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**TextClsfrInstanceDetailList**](TextClsfrInstanceDetailList.md)
+[**list[TextClsfrInstanceDetail]**](TextClsfrInstanceDetail.md)
 
 ### Authorization
 
@@ -679,7 +679,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_get_labels**
-> ClassLabelList text_classifier_get_labels(instance_name)
+> list[ClassLabel] text_classifier_get_labels(instance_name)
 
 Get list of possible labels.
 
@@ -724,7 +724,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ClassLabelList**](ClassLabelList.md)
+[**list[ClassLabel]**](ClassLabel.md)
 
 ### Authorization
 
@@ -738,7 +738,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_get_testing_samples**
-> LabelledTextSampleList text_classifier_get_testing_samples(instance_name)
+> list[LabelledTextSample] text_classifier_get_testing_samples(instance_name)
 
 Get testing samples.
 
@@ -783,7 +783,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -797,7 +797,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_get_training_samples**
-> LabelledTextSampleList text_classifier_get_training_samples(instance_name)
+> list[LabelledTextSample] text_classifier_get_training_samples(instance_name)
 
 Get training samples.
 
@@ -842,7 +842,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LabelledTextSampleList**](LabelledTextSampleList.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -856,7 +856,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_retrieve**
-> ScoredLabelList text_classifier_retrieve(instance_name, text_input)
+> list[ScoredLabel] text_classifier_retrieve(instance_name, text_input)
 
 Classify text.
 
@@ -903,7 +903,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ScoredLabelList**](ScoredLabelList.md)
+[**list[ScoredLabel]**](ScoredLabel.md)
 
 ### Authorization
 

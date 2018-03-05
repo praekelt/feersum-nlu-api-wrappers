@@ -190,7 +190,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **duckling_entity_extractor_get_details_all**
-> DucklingInstanceDetailList duckling_entity_extractor_get_details_all()
+> list[DucklingInstanceDetail] duckling_entity_extractor_get_details_all()
 
 Get list of loaded regular expression entity extractors.
 
@@ -231,7 +231,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**DucklingInstanceDetailList**](DucklingInstanceDetailList.md)
+[**list[DucklingInstanceDetail]**](DucklingInstanceDetail.md)
 
 ### Authorization
 
@@ -245,7 +245,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **duckling_entity_extractor_retrieve**
-> EntityList duckling_entity_extractor_retrieve(instance_name, text_input)
+> list[Entity] duckling_entity_extractor_retrieve(instance_name, text_input)
 
 Extract information based on the regular expression.
 
@@ -292,7 +292,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EntityList**](EntityList.md)
+[**list[Entity]**](Entity.md)
 
 ### Authorization
 

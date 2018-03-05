@@ -51,15 +51,15 @@ try:
                                 quoting=csv.QUOTE_MINIMAL)
 
         for sample in training_samples:
-            label = sample.get('label')
-            text = sample.get('text')
+            label = sample.label
+            text = sample.text
 
             if (label is not None) and (text is not None):
                 csv_writer.writerow([label, text])
 
 except ApiException as e:
     print("Exception when calling an FAQ matcher operation: %s\n" % e, flush=True)
-except urllib3.exceptions.MaxRetryError:
-    print("Connection MaxRetryError!", flush=True)
+except urllib3.exceptions.HTTPError as e:
+    print("Connection HTTPError! %s\n" % e)
 
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# SERVICE="http://127.0.0.1:8100"
-SERVICE="https://nlu.playground.feersum.io:443"
+SERVICE="http://127.0.0.1:8100"
+# SERVICE="https://nlu.playground.feersum.io:443"
 
 AUTH_TOKEN="YOUR_API_KEY"
 MODEL_NAME="medium_faq_mtchr"

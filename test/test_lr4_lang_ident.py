@@ -33,7 +33,8 @@ class TestLID(unittest.TestCase):
         lr4_create_details = \
             feersum_nlu.Lr4CreateDetails(name=instance_name,
                                          desc="Test LR4 lang ident model.",
-                                         lid_model_file='lid_za')
+                                         lid_model_file='lid_za',
+                                         load_from_store=False)
 
         text_input = feersum_nlu.TextInput("Isakhiwo sami sebiwe?")
 
@@ -46,11 +47,11 @@ class TestLID(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            print("Get the details of all loaded lr4 instances:")
-            api_response = api_instance.lr4_language_recogniser_get_details_all()
-            print(" type(api_response)", type(api_response))
-            print(" api_response", api_response)
-            print()
+            # print("Get the details of all loaded lr4 instances:")
+            # api_response = api_instance.lr4_language_recogniser_get_details_all()
+            # print(" type(api_response)", type(api_response))
+            # print(" api_response", api_response)
+            # print()
 
             print("Get the details of specific named loaded lr4 instance:")
             api_response = api_instance.lr4_language_recogniser_get_details(instance_name)
@@ -58,7 +59,8 @@ class TestLID(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be available
+            # Get the classifier's possible labels. Might be inferred from the training data,
+            # but guaranteed to be available
             # after training.
             print("Get the labels of named loaded lr4 instance:")
             api_response = api_instance.lr4_language_recogniser_get_labels(instance_name)
@@ -75,7 +77,7 @@ class TestLID(unittest.TestCase):
             scored_label_list = api_response
             if len(scored_label_list) > 0:
                 scored_label = scored_label_list[0]
-                self.assertTrue(scored_label.get('label', '') == 'zul')
+                self.assertTrue(scored_label.label == 'zul')
             else:
                 self.assertTrue(False)
 
