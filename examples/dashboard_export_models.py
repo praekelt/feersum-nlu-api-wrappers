@@ -39,7 +39,7 @@ try:
             elif model.model_type == 'regex_entity_extractor':
                 api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
                 instance_detail = api_instance.regex_entity_extractor_get_details(model.name)
-            elif model.model_type == 'similarity_entity_extractor':
+            elif model.model_type == 'sim_word_entity_extractor':
                 api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
                 instance_detail = api_instance.sim_word_entity_extractor_get_details(model.name)
             else:

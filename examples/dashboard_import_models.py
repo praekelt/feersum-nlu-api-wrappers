@@ -195,7 +195,7 @@ for model_name, model_type in model_list:
                 print("  Get the details of the imported model ... ", flush=True)
                 api_response = api_instance.regex_entity_extractor_get_details(model_name)
                 print("   api_response", api_response)
-            elif model_type == 'similarity_entity_extractor':
+            elif model_type == 'sim_word_entity_extractor':
                 similar_words = json_model.get('similar_words')
                 sim_word_threshold = json_model.get('threshold')
                 word_manifold = json_model.get('word_manifold')
