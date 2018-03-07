@@ -30,38 +30,27 @@ labelled_text_sample_list = []
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How claim?",
                                                                 label="claim",
                                                                 lang_code="eng"))
-labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Hoe eis?",
-                                                                label="claim",
-                                                                lang_code="afr"))
 
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How quote?",
-                                                                label="quote"))
-labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Hoe prys?",
                                                                 label="quote"))
 
 labelled_text_sample_delete_list = []
 labelled_text_sample_delete_list.append(feersum_nlu.LabelledTextSample(text="Hoe eis?",
                                                                        label="claim",
                                                                        lang_code="afr"))
-labelled_text_sample_delete_list.append(feersum_nlu.LabelledTextSample(text="Hoe prys?",
-                                                                       label="quote"))
 
 labelled_text_sample_testing_list = []
 labelled_text_sample_testing_list.append(feersum_nlu.LabelledTextSample(text="Where do I claim?",
                                                                         label="claim",
                                                                         lang_code="eng"))
-labelled_text_sample_testing_list.append(feersum_nlu.LabelledTextSample(text="Waar moet ek eis?",
-                                                                        label="claim",
-                                                                        lang_code="afr"))
 
 labelled_text_sample_testing_list.append(feersum_nlu.LabelledTextSample(text="Can I put in a claim?",
                                                                         label="quote"))  # text actually on 'claim'.
-labelled_text_sample_testing_list.append(feersum_nlu.LabelledTextSample(text="Waar kan ek 'n prys kry?",
-                                                                        label="quote"))
 
-word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
-                      feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
-                      feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul')]
+# word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
+#                       feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
+#                       feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul')]
+word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'glove6B50D_trimmed')]
 # The playground's pre-loaded embeddings include:
 # "feers_wm_afr", "feers_wm_eng", "feers_wm_nbl", "feers_wm_xho",
 # "feers_wm_zul", "feers_wm_ssw", "feers_wm_nso", "feers_wm_sot",
@@ -71,7 +60,7 @@ word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
 train_details = feersum_nlu.TrainDetails(threshold=10.0,
                                          word_manifold_list=word_manifold_list)
 
-text_input = feersum_nlu.TextInput("Waar kan ek 'n eis insit?")
+text_input = feersum_nlu.TextInput("Where do I claim?")
 
 print()
 
@@ -136,6 +125,7 @@ try:
     print(" api_response", api_response)
     print()
 
+    print("Waiting for training...", flush=True)
     time.sleep(20.0)
 
     # print("Get the details of all loaded FAQ matcher:")
