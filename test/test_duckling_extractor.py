@@ -67,7 +67,8 @@ class TestDucklingExtractor(unittest.TestCase):
             entity_list = api_response
             if len(entity_list) > 0:
                 entity = entity_list[0]
-                self.assertTrue(entity.get('value', '') == '2017-01-05T15:00:00.000+02:00')
+                self.assertTrue((entity.get('value', '') == '2017-01-05T15:00:00.000+02:00') or
+                                (entity.get('value', '') == '2017-01-05T15:00:00.000Z'))
             else:
                 self.assertTrue(False)
 

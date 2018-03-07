@@ -5,6 +5,7 @@ import concurrent.futures
 
 from examples import feersum_nlu_auth_token
 
+# host = "http://127.0.0.1:8080/nlu/v2"
 host = "http://127.0.0.1:8100"
 # host = "https://nlu.playground.feersum.io:443"
 
@@ -37,12 +38,12 @@ def test_rest(service, timeout):
     # return response_status
 
 
-num_requests = 10
+num_requests = 500
 
 start_time = time.time()
 
 # We can use a with statement to ensure threads are cleaned up promptly
-with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
     future_to_response_dict = {}
 
     for id in range(num_requests):

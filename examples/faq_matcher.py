@@ -1,6 +1,7 @@
 """ Example: Shows how to create, train and use an FAQ matcher. """
 
 import urllib3
+import time
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
@@ -61,6 +62,11 @@ labelled_text_sample_testing_list.append(feersum_nlu.LabelledTextSample(text="Wa
 word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
                       feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
                       feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul')]
+# The playground's pre-loaded embeddings include:
+# "feers_wm_afr", "feers_wm_eng", "feers_wm_nbl", "feers_wm_xho",
+# "feers_wm_zul", "feers_wm_ssw", "feers_wm_nso", "feers_wm_sot",
+# "feers_wm_tsn", "feers_wm_ven", "feers_wm_tso"
+# and "glove6B50D_trimmed"
 
 train_details = feersum_nlu.TrainDetails(threshold=10.0,
                                          word_manifold_list=word_manifold_list)
@@ -130,7 +136,7 @@ try:
     print(" api_response", api_response)
     print()
 
-    # time.sleep(10.0)
+    time.sleep(20.0)
 
     # print("Get the details of all loaded FAQ matcher:")
     # api_response = api_instance.faq_matcher_get_details_all()

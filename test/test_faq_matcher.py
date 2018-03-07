@@ -50,6 +50,11 @@ class TestFAQMatcher(unittest.TestCase):
         word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
                               feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
                               feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul')]
+        # The playground's pre-loaded embeddings include:
+        # "feers_wm_afr", "feers_wm_eng", "feers_wm_nbl", "feers_wm_xho",
+        # "feers_wm_zul", "feers_wm_ssw", "feers_wm_nso", "feers_wm_sot",
+        # "feers_wm_tsn", "feers_wm_ven", "feers_wm_tso"
+        # and "glove6B50D_trimmed"
 
         train_details = feersum_nlu.TrainDetails(threshold=0.85,
                                                  word_manifold_list=word_manifold_list)
