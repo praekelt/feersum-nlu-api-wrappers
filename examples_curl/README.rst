@@ -132,7 +132,6 @@ The below commands can be run from a bash or similar terminal
 .. code-block:: sh
 
     # === Do intent classification ===
-    # See medium_build_your_own_faq.sh
 
     # Create the model:
     curl -XPOST "$SERVICE"'/nlu/v2/intent_classifiers' \

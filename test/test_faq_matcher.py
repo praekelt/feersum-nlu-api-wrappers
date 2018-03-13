@@ -3,6 +3,8 @@
 from __future__ import absolute_import
 
 import urllib3
+import time
+
 import unittest
 
 import feersum_nlu
@@ -99,6 +101,9 @@ class TestFAQMatcher(unittest.TestCase):
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
+
+            print("Waiting for training...", flush=True)
+            time.sleep(20.0)
 
             # print("Get the details of all loaded FAQ matcher:")
             # api_response = api_instance.faq_matcher_get_details_all()

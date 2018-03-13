@@ -136,6 +136,7 @@ try:
     print(" api_response", api_response)
     print()
 
+    print("Waiting for training...", flush=True)
     time.sleep(20.0)
 
     # print("Get the details of all loaded FAQ matcher:")
