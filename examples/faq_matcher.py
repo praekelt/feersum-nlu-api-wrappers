@@ -59,6 +59,12 @@ labelled_text_sample_testing_list.append(feersum_nlu.LabelledTextSample(text="Ca
 labelled_text_sample_testing_list.append(feersum_nlu.LabelledTextSample(text="Waar kan ek 'n prys kry?",
                                                                         label="quote"))
 
+additional_labelled_text_sample_list = []
+additional_labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How much does a quote cost?",
+                                                                           label="quote"))
+additional_labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How long does a claim take?",
+                                                                           label="claim"))
+
 word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
                       feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
                       feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul')]
@@ -71,7 +77,8 @@ word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
 train_details = feersum_nlu.TrainDetails(threshold=10.0,
                                          word_manifold_list=word_manifold_list)
 
-text_input = feersum_nlu.TextInput("Waar kan ek 'n eis insit?")
+text_input_0 = feersum_nlu.TextInput("Waar kan ek 'n eis insit?")
+text_input_1 = feersum_nlu.TextInput("How long does a claim take?")
 
 print()
 
@@ -182,7 +189,7 @@ try:
     print()
 
     print("Match a question:")
-    api_response = api_instance.faq_matcher_retrieve(instance_name, text_input)
+    api_response = api_instance.faq_matcher_retrieve(instance_name, text_input_0)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -195,7 +202,22 @@ try:
     print()
 
     print("Match a question:")
-    api_response = api_instance.faq_matcher_retrieve(instance_name, text_input)
+    api_response = api_instance.faq_matcher_retrieve(instance_name, text_input_1)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    # Make the model smarter by providing more training example and training online.
+    # Note: The training happens automatically after online samples provided.
+    print("Add online training samples to the FAQ matcher:")
+    api_response = api_instance.faq_matcher_online_training_samples(instance_name,
+                                                                    additional_labelled_text_sample_list)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Match a question:")
+    api_response = api_instance.faq_matcher_retrieve(instance_name, text_input_1)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
