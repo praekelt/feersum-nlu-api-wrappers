@@ -1,6 +1,11 @@
 Changelog
 *********
 
+Version 2.0.21
+==============
+- Demonstration of async training.
+- Online training examples.
+
 Version 2.0.20
 ==============
 - Changed name of similar_entity_extractor to sim_word_entity_extractor.

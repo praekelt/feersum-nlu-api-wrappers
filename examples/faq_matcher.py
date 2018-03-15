@@ -74,9 +74,6 @@ word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
 # "feers_wm_tsn", "feers_wm_ven", "feers_wm_tso"
 # and "glove6B50D_trimmed"
 
-train_details = feersum_nlu.TrainDetails(threshold=10.0,
-                                         word_manifold_list=word_manifold_list)
-
 text_input_0 = feersum_nlu.TextInput("Waar kan ek 'n eis insit?")
 text_input_1 = feersum_nlu.TextInput("How long does a claim take?")
 
@@ -137,14 +134,38 @@ try:
     # print(" api_response", api_response)
     # print()
 
+    immediate_mode = False  # Set to True to do a blocking train operation.
+
+    train_details = feersum_nlu.TrainDetails(threshold=10.0,
+                                             word_manifold_list=word_manifold_list,
+                                             immediate_mode=immediate_mode)
+
     print("Train the FAQ matcher:")
-    api_response = api_instance.faq_matcher_train(instance_name, train_details)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
+    instance_detail = api_instance.faq_matcher_train(instance_name, train_details)
+    print(" type(api_response)", type(instance_detail))
+    print(" api_response", instance_detail)
     print()
 
-    print("Waiting for training...", flush=True)
-    time.sleep(20.0)
+    # TRAINING:
+    # If timestamp begins with 'ASYNC...' the the training is running in the background and you need to poll until the
+    # model ID has updated.
+    # if timestamp doesn't begin with ASYNC then the training has completed synchronously and you may continue.
+    # In the near future webhooks will be supported to let you know when async
+
+    if instance_detail.training_stamp.startswith('ASYNC'):
+        # Background training in progress. We'll poll and wait it to complete.
+        print("Background training in progress...", flush=True, end='')
+        previous_id = instance_detail.id
+
+        while True:
+            print('.', end='', flush=True)
+            time.sleep(1)
+            inst_det = api_instance.faq_matcher_get_details(instance_name)
+            if inst_det.id != previous_id:
+                break  # break from while-loop when ID updated which indicates training done.
+
+        print('Done.')
+        print()
 
     # print("Get the details of all loaded FAQ matcher:")
     # api_response = api_instance.faq_matcher_get_details_all()

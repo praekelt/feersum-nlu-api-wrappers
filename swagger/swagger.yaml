@@ -3059,6 +3059,10 @@ definitions:
         description: There is typically some model dependent threshold to be set upon training which is possibly mutable post training. This is that threshold.
         type: number
         example: 0.85
+      immediate_mode:
+        description: Set immediate_mode to True to do synchronous/blocking training. Might be forced to False in production.
+        type: boolean
+        example: False
       word_manifold:
         description: |
           The word manifold instance to use for training and later inference. 

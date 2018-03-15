@@ -34,26 +34,31 @@ class TrainDetails(object):
     """
     swagger_types = {
         'threshold': 'float',
+        'immediate_mode': 'bool',
         'word_manifold': 'str',
         'word_manifold_list': 'list[LabeledWordManifold]'
     }
 
     attribute_map = {
         'threshold': 'threshold',
+        'immediate_mode': 'immediate_mode',
         'word_manifold': 'word_manifold',
         'word_manifold_list': 'word_manifold_list'
     }
 
-    def __init__(self, threshold=None, word_manifold=None, word_manifold_list=None):  # noqa: E501
+    def __init__(self, threshold=None, immediate_mode=None, word_manifold=None, word_manifold_list=None):  # noqa: E501
         """TrainDetails - a model defined in Swagger"""  # noqa: E501
 
         self._threshold = None
+        self._immediate_mode = None
         self._word_manifold = None
         self._word_manifold_list = None
         self.discriminator = None
 
         if threshold is not None:
             self.threshold = threshold
+        if immediate_mode is not None:
+            self.immediate_mode = immediate_mode
         if word_manifold is not None:
             self.word_manifold = word_manifold
         if word_manifold_list is not None:
@@ -81,6 +86,29 @@ class TrainDetails(object):
         """
 
         self._threshold = threshold
+
+    @property
+    def immediate_mode(self):
+        """Gets the immediate_mode of this TrainDetails.  # noqa: E501
+
+        Set immediate_mode to True to do synchronous/blocking training. Might be forced to False in production.  # noqa: E501
+
+        :return: The immediate_mode of this TrainDetails.  # noqa: E501
+        :rtype: bool
+        """
+        return self._immediate_mode
+
+    @immediate_mode.setter
+    def immediate_mode(self, immediate_mode):
+        """Sets the immediate_mode of this TrainDetails.
+
+        Set immediate_mode to True to do synchronous/blocking training. Might be forced to False in production.  # noqa: E501
+
+        :param immediate_mode: The immediate_mode of this TrainDetails.  # noqa: E501
+        :type: bool
+        """
+
+        self._immediate_mode = immediate_mode
 
     @property
     def word_manifold(self):
