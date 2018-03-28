@@ -47,11 +47,11 @@ class TestLID(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            # print("Get the details of all loaded lr4 instances:")
-            # api_response = api_instance.lr4_language_recogniser_get_details_all()
-            # print(" type(api_response)", type(api_response))
-            # print(" api_response", api_response)
-            # print()
+            print("Get the details of all loaded lr4 instances:")
+            api_response = api_instance.lr4_language_recogniser_get_details_all()
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
 
             print("Get the details of specific named loaded lr4 instance:")
             api_response = api_instance.lr4_language_recogniser_get_details(instance_name)

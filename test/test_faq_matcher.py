@@ -65,7 +65,8 @@ class TestFAQMatcher(unittest.TestCase):
         # and "glove6B50D_trimmed"
 
         train_details = feersum_nlu.TrainDetails(threshold=0.85,
-                                                 word_manifold_list=word_manifold_list)
+                                                 word_manifold_list=word_manifold_list,
+                                                 immediate_mode=True)
 
         text_input_0 = feersum_nlu.TextInput("Where can I get a quote?")
         text_input_1 = feersum_nlu.TextInput("How long does a claim take?")
@@ -112,11 +113,11 @@ class TestFAQMatcher(unittest.TestCase):
             print("Waiting for training...", flush=True)
             time.sleep(20.0)
 
-            # print("Get the details of all loaded FAQ matcher:")
-            # api_response = api_instance.faq_matcher_get_details_all()
-            # print(" type(api_response)", type(api_response))
-            # print(" api_response", api_response)
-            # print()
+            print("Get the details of all loaded FAQ matchers:")
+            api_response = api_instance.faq_matcher_get_details_all()
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
 
             print("Get the details of specific named loaded FAQ matcher:")
             api_response = api_instance.faq_matcher_get_details(instance_name)

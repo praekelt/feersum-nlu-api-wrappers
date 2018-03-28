@@ -134,7 +134,7 @@ try:
     # print(" api_response", api_response)
     # print()
 
-    immediate_mode = False  # Set to True to do a blocking train operation.
+    immediate_mode = True  # Set to True to do a blocking train operation.
 
     train_details = feersum_nlu.TrainDetails(threshold=10.0,
                                              word_manifold_list=word_manifold_list,
@@ -153,7 +153,7 @@ try:
     # In the near future webhooks will be supported to let you know when async
 
     if instance_detail.training_stamp.startswith('ASYNC'):
-        # Background training in progress. We'll poll and wait it to complete.
+        # Background training in progress. We'll poll and wait for it to complete.
         print("Background training in progress...", flush=True, end='')
         previous_id = instance_detail.id
 
@@ -162,16 +162,17 @@ try:
             time.sleep(1)
             inst_det = api_instance.faq_matcher_get_details(instance_name)
             if inst_det.id != previous_id:
+                # ToDo: Stop if details indicate that training failed.
                 break  # break from while-loop when ID updated which indicates training done.
 
         print('Done.')
         print()
 
-    # print("Get the details of all loaded FAQ matcher:")
-    # api_response = api_instance.faq_matcher_get_details_all()
-    # print(" type(api_response)", type(api_response))
-    # print(" api_response", api_response)
-    # print()
+    print("Get the details of all loaded FAQ matchers:")
+    api_response = api_instance.faq_matcher_get_details_all()
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
 
     print("Get the details of specific named loaded FAQ matcher:")
     api_response = api_instance.faq_matcher_get_details(instance_name)

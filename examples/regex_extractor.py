@@ -46,11 +46,11 @@ try:
     print(" api_response", api_response)
     print()
 
-    # print("Get the details of all loaded entity extractors:")
-    # api_response = api_instance.regex_entity_extractor_get_details_all()
-    # print(" type(api_response)", type(api_response))
-    # print(" api_response", api_response)
-    # print()
+    print("Get the details of all loaded entity extractors:")
+    api_response = api_instance.regex_entity_extractor_get_details_all()
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
 
     print("Get the details of specific named loaded entity extractor:")
     api_response = api_instance.regex_entity_extractor_get_details(instance_name)

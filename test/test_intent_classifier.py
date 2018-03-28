@@ -50,7 +50,8 @@ class TestIntentClassifier(unittest.TestCase):
                                                                         label="quote"))
 
         train_details = feersum_nlu.TrainDetails(threshold=0.85,
-                                                 word_manifold_list=word_manifold_list)
+                                                 word_manifold_list=word_manifold_list,
+                                                 immediate_mode=True)
 
         text_input = feersum_nlu.TextInput("How do I get a quote?")
 
@@ -93,11 +94,11 @@ class TestIntentClassifier(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            # print("Get the details of all loaded intent classifiers:")
-            # api_response = api_instance.intent_classifier_get_details_all()
-            # print(" type(api_response)", type(api_response))
-            # print(" api_response", api_response)
-            # print()
+            print("Get the details of all loaded intent classifiers:")
+            api_response = api_instance.intent_classifier_get_details_all()
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
 
             print("Get the details of specific named loaded intent classifiers:")
             api_response = api_instance.intent_classifier_get_details(instance_name)

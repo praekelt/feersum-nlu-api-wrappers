@@ -18,6 +18,9 @@ api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuratio
 
 instance_name = 'test_txt_clsfr'
 
+
+# ToDo: Rename e.g. TextClsfrCreateDetails to TextClassifierCreateDetails ...
+
 create_details = feersum_nlu.TextClsfrCreateDetails(name=instance_name,
                                                     desc="Test text classifier.",
                                                     load_from_store=False)
@@ -29,7 +32,7 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would li
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to get a quote",
                                                                 label="quote"))
 
-train_details = feersum_nlu.TrainDetails()
+train_details = feersum_nlu.TrainDetails(immediate_mode=True)
 
 text_input = feersum_nlu.TextInput("I would please like to fill in a claim form.")
 
@@ -84,11 +87,11 @@ try:
     print(" api_response", api_response)
     print()
 
-    # print("Get the details of all loaded text classifiers:")
-    # api_response = api_instance.text_classifier_get_details_all()
-    # print(" type(api_response)", type(api_response))
-    # print(" api_response", api_response)
-    # print()
+    print("Get the details of all loaded text classifiers:")
+    api_response = api_instance.text_classifier_get_details_all()
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
 
     print("Get the details of specific named loaded text classifiers:")
     api_response = api_instance.text_classifier_get_details(instance_name)
