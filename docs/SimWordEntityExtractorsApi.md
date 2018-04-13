@@ -13,11 +13,11 @@ Method | HTTP request | Description
 
 
 # **sim_word_entity_extractor_create**
-> SimWordInstanceDetail sim_word_entity_extractor_create(sim_word_ent_create_details)
+> SimWordEntityExtractorInstanceDetail sim_word_entity_extractor_create(create_details)
 
 Create a word similarity entity extractor.
 
-Create a new word similarity entity extractor or load one from the store.
+Create a new word similarity entity extractor or reload one from the trash.
 
 ### Example
 ```python
@@ -40,11 +40,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-sim_word_ent_create_details = feersum_nlu.SimWordEntCreateDetails() # SimWordEntCreateDetails | The details of the instance to create.
+create_details = feersum_nlu.SimWordEntityExtractorCreateDetails() # SimWordEntityExtractorCreateDetails | The details of the instance to create.
 
 try:
     # Create a word similarity entity extractor.
-    api_response = api_instance.sim_word_entity_extractor_create(sim_word_ent_create_details)
+    api_response = api_instance.sim_word_entity_extractor_create(create_details)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling SimWordEntityExtractorsApi->sim_word_entity_extractor_create: %s\n" % e)
@@ -54,11 +54,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sim_word_ent_create_details** | [**SimWordEntCreateDetails**](SimWordEntCreateDetails.md)| The details of the instance to create. | 
+ **create_details** | [**SimWordEntityExtractorCreateDetails**](SimWordEntityExtractorCreateDetails.md)| The details of the instance to create. | 
 
 ### Return type
 
-[**SimWordInstanceDetail**](SimWordInstanceDetail.md)
+[**SimWordEntityExtractorInstanceDetail**](SimWordEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -72,11 +72,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **sim_word_entity_extractor_del**
-> SimWordInstanceDetail sim_word_entity_extractor_del(instance_name)
+> SimWordEntityExtractorInstanceDetail sim_word_entity_extractor_del(instance_name)
 
 Delete named instance.
 
-Delete and return the details of the named similarity entity extractor instance.
+Delete and return the details of the named similarity entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
 
 ### Example
 ```python
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SimWordInstanceDetail**](SimWordInstanceDetail.md)
+[**SimWordEntityExtractorInstanceDetail**](SimWordEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **sim_word_entity_extractor_get_details**
-> SimWordInstanceDetail sim_word_entity_extractor_get_details(instance_name)
+> SimWordEntityExtractorInstanceDetail sim_word_entity_extractor_get_details(instance_name)
 
 Get details of named instance.
 
@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SimWordInstanceDetail**](SimWordInstanceDetail.md)
+[**SimWordEntityExtractorInstanceDetail**](SimWordEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -190,7 +190,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **sim_word_entity_extractor_get_details_all**
-> list[SimWordInstanceDetail] sim_word_entity_extractor_get_details_all()
+> list[SimWordEntityExtractorInstanceDetail] sim_word_entity_extractor_get_details_all()
 
 Get list of loaded similarity entity extractors.
 
@@ -231,7 +231,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**list[SimWordInstanceDetail]**](SimWordInstanceDetail.md)
+[**list[SimWordEntityExtractorInstanceDetail]**](SimWordEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **sim_word_entity_extractor_set_params**
-> InstanceDetail sim_word_entity_extractor_set_params(instance_name, model_params)
+> SimWordEntityExtractorInstanceDetail sim_word_entity_extractor_set_params(instance_name, model_params)
 
 Set the model parameters of named similarity entity extractor.
 
@@ -353,7 +353,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**SimWordEntityExtractorInstanceDetail**](SimWordEntityExtractorInstanceDetail.md)
 
 ### Authorization
 

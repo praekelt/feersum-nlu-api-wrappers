@@ -48,14 +48,14 @@ The below commands can be run from a bash or similar terminal
 
     # === Do text language identification ===
     # Create the model:
-    curl -XPOST "$SERVICE"'/nlu/v2/lr4_language_recognisers' \
+    curl -XPOST "$SERVICE"'/nlu/v2/language_recognisers' \
     	-H 'Content-Type: application/json' \
     	-H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
     	-d '{"desc": "LR4 text lang ID model.", "lid_model_file": "lid_za", "name": "test_model", "load_from_store": false}'
 
     # Detect the language of a piece of text:
-    curl -XPOST "$SERVICE"'/nlu/v2/lr4_language_recognisers/test_model/retrieve' \
+    curl -XPOST "$SERVICE"'/nlu/v2/language_recognisers/test_model/retrieve' \
     	-H 'Content-Type: application/json' \
     	-H 'Accept: application/json' \
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \

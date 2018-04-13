@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.20
+  version: 2.0.22
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -47,8 +47,8 @@ tags:
   description: The interface to your intent classifier model instances. An intent classifier is typically used to classify a user's utterance into a predefined action or intent category. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier. To use a model of this type, first create one, provide training samples and train it up. Inference/predictions may then be made using the retrieve endpoint.
 - name: faq_matchers
   description: Interface to your FAQ matcher/classifier model instances. An FAQ matcher is used to match a user's question to a list of predefined FAQs. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier. To use a model of this type, first create one, provide training samples and train it up. Inference/predictions may then be made using the retrieve endpoint.
-- name: lr4_language_recognisers
-  description: The interface to your LR4 language recogniser model instances. LR4 loads pre-trained language recogniser models trained over a set of languages. An 'lid_za' model is available that was trained on all 11 South African languages.
+- name: language_recognisers
+  description: The interface to your language recogniser model instances. It loads pre-trained language recogniser models trained over a set of languages. An 'lid_za' model is available that was trained on all 11 South African languages.
 - name: date_parsers
   description: The interface to your date parser model instances. Only one instance is supported and preloaded at the moment. Use the name 'generic' to call this instance. Also see the duckling entity extractor which includes durations and intervals.
 - name: sentiment_detectors
@@ -94,18 +94,18 @@ paths:
       summary: Create a text classifier.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_create
-      description: Create a new text classifier or load one from the store. Returns the details of the new or loaded instance.
+      description: Create a new text classifier or reload one from the trash. Returns the details of the new or loaded instance.
       parameters:
       - in: body
-        name: text_clsfr_create_details
+        name: create_details
         description: The details of the instance to create.
         required: true
         schema:
-          $ref: "#/definitions/text_clsfr_create_details"
+          $ref: "#/definitions/text_classifier_create_details"
 
       responses:
         200:
-          $ref: "#/responses/text_clsfr_instance_detail"
+          $ref: "#/responses/text_classifier_instance_detail"
         400:
           description: bad request
           
@@ -118,7 +118,7 @@ paths:
       description: Get the list of loaded text classifiers.
       responses:
         200:
-          $ref: "#/responses/text_clsfr_instance_detail_list"
+          $ref: "#/responses/text_classifier_instance_detail_list"
         400:
           description: bad request
 
@@ -141,7 +141,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/text_clsfr_instance_detail"
+          $ref: "#/responses/text_classifier_instance_detail"
         400:
           description: bad request
 
@@ -151,7 +151,7 @@ paths:
       summary: Delete named instance.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_del
-      description: Delete and return the details of the named text classifier instance.
+      description: Delete and return the details of the named text classifier instance. Deleted models can be reloaded from the trash with the create operation.
       parameters:
       - in: path
         name: instance_name
@@ -160,7 +160,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/text_clsfr_instance_detail"
+          $ref: "#/responses/text_classifier_instance_detail"
         400:
           description: bad request
          
@@ -383,7 +383,7 @@ paths:
           $ref: "#/definitions/train_details"
       responses:
         200:
-          $ref: "#/responses/text_clsfr_instance_detail"
+          $ref: "#/responses/text_classifier_instance_detail"
         400:
           description: bad request
 
@@ -412,7 +412,7 @@ paths:
           $ref: "#/definitions/model_params"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/text_classifier_instance_detail"
         400:
           description: bad request
 
@@ -509,17 +509,17 @@ paths:
       summary: Create a word manifold model.
       x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
       operationId: word_manifold_create
-      description: Create a new word manifold model using an input file or load a model from the store. Warning! - These models are quite big and each takes a few seconds to load/create. Returns the details of the new or loaded instance.
+      description: Create a new word manifold model using an input file or reload one from the trash. Warning! - These models are quite big and each takes a few seconds to load/create. Returns the details of the new or loaded instance.
       parameters:
       - in: body
-        name: wm_create_details
+        name: create_details
         description: The details of the word manifold instance to create.
         required: true
         schema:
-          $ref: "#/definitions/wm_create_details"
+          $ref: "#/definitions/word_manifold_create_details"
       responses:
         200:
-          $ref: "#/responses/wm_instance_detail"
+          $ref: "#/responses/word_manifold_instance_detail"
         400:
           description: bad request
           
@@ -550,7 +550,7 @@ paths:
             $ref: "#/definitions/new_word"
       responses:
         200:
-          $ref: "#/responses/wm_instance_detail"
+          $ref: "#/responses/word_manifold_instance_detail"
         400:
           description: bad request
           
@@ -624,17 +624,17 @@ paths:
       summary: Create an intent classifier.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_create
-      description: Create a new intent classifier or load one from the store. Returns the details of the new or loaded instance.
+      description: Create a new intent classifier or reload one from the trash. Returns the details of the new or loaded instance.
       parameters:
       - in: body
         name: create_details
         description: The details of the instance to create.
         required: true
         schema:
-          $ref: "#/definitions/create_details"
+          $ref: "#/definitions/intent_classifier_create_details"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/intent_classifier_instance_detail"
         400:
           description: bad request
           
@@ -647,7 +647,7 @@ paths:
       description: Returns the list of loaded intent classifiers.
       responses:
         200:
-          $ref: "#/responses/instance_detail_list"
+          $ref: "#/responses/intent_classifier_instance_detail_list"
         400:
           description: bad request
 
@@ -670,7 +670,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/intent_classifier_instance_detail"
         400:
           description: bad request
 
@@ -680,7 +680,7 @@ paths:
       summary: Delete named instance.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_del  
-      description: Delete and return the details of the named intent classifier instance.
+      description: Delete and return the details of the named intent classifier instance. Deleted models can be reloaded from the trash with the create operation.
       parameters:
       - in: path
         name: instance_name
@@ -689,7 +689,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/intent_classifier_instance_detail"
         400:
           description: bad request
 
@@ -912,7 +912,7 @@ paths:
           $ref: "#/definitions/train_details"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/intent_classifier_instance_detail"
         400:
           description: bad request
 
@@ -941,7 +941,7 @@ paths:
           $ref: "#/definitions/model_params"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/intent_classifier_instance_detail"
         400:
           description: bad request
 
@@ -1070,17 +1070,17 @@ paths:
       summary: Create an FAQ matcher.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_create
-      description: Create a new faq matcher or load one from the store. Returns the details of the new or loaded instance.
+      description: Create a new faq matcher or reload one from the trash. Returns the details of the new or loaded instance.
       parameters:
       - in: body
         name: create_details
         description: The details of the instance to create.
         required: true
         schema:
-          $ref: "#/definitions/create_details"
+          $ref: "#/definitions/faq_matcher_create_details"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/faq_matcher_instance_detail"
         400:
           description: bad request
           
@@ -1093,7 +1093,7 @@ paths:
       description: Returns the list of loaded faq matchers.
       responses:
         200:
-          $ref: "#/responses/instance_detail_list"
+          $ref: "#/responses/faq_matcher_instance_detail_list"
         400:
           description: bad request
 
@@ -1116,7 +1116,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/faq_matcher_instance_detail"
         400:
           description: bad request
 
@@ -1126,7 +1126,7 @@ paths:
       summary: Delete named instance.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_del
-      description: Delete and return the details of the named FAQ matcher instance.
+      description: Delete and return the details of the named FAQ matcher instance. Deleted models can be reloaded from the trash with the create operation.
       parameters:
       - in: path
         name: instance_name
@@ -1135,7 +1135,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/faq_matcher_instance_detail"
         400:
           description: bad request
 
@@ -1358,7 +1358,7 @@ paths:
           $ref: "#/definitions/train_details"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/faq_matcher_instance_detail"
         400:
           description: bad request
 
@@ -1387,7 +1387,7 @@ paths:
           $ref: "#/definitions/model_params"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/faq_matcher_instance_detail"
         400:
           description: bad request
 
@@ -1580,17 +1580,17 @@ paths:
       summary: Create a regular expression entity extractor.
       x-swagger-router-controller: rest_api.flask_server.controllers.regex_entity_extractors_controller
       operationId: regex_entity_extractor_create
-      description: Create a new regular expression entity extractor or load one from the store.
+      description: Create a new regular expression entity extractor or reload one from the trash.
       parameters:
       - in: body
-        name: regex_ent_create_details
+        name: create_details
         description: The details of the instance to create.
         required: true
         schema:
-          $ref: "#/definitions/regex_ent_create_details"
+          $ref: "#/definitions/regex_entity_extractor_create_details"
       responses:
         200:
-          $ref: "#/responses/regex_instance_detail"
+          $ref: "#/responses/regex_entity_extractor_instance_detail"
         400:
           description: bad request
           
@@ -1603,7 +1603,7 @@ paths:
       description: Get the list of loaded regular expression entity extractors.
       responses:
         200:
-          $ref: "#/responses/regex_instance_detail_list"
+          $ref: "#/responses/regex_entity_extractor_instance_detail_list"
         400:
           description: bad request
 
@@ -1626,7 +1626,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/regex_instance_detail"
+          $ref: "#/responses/regex_entity_extractor_instance_detail"
         400:
           description: bad request
 
@@ -1636,7 +1636,7 @@ paths:
       summary: Delete named instance.
       x-swagger-router-controller: rest_api.flask_server.controllers.regex_entity_extractors_controller
       operationId: regex_entity_extractor_del
-      description: Delete and get the details of the named regular expression entity extractor instance.
+      description: Delete and get the details of the named regular expression entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
       parameters:
       - in: path
         name: instance_name
@@ -1645,7 +1645,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/regex_instance_detail"
+          $ref: "#/responses/regex_entity_extractor_instance_detail"
         400:
           description: bad request
 
@@ -1674,7 +1674,7 @@ paths:
           $ref: "#/definitions/model_params"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/regex_entity_extractor_instance_detail"
         400:
           description: bad request
 
@@ -1719,17 +1719,17 @@ paths:
       summary: Create a person_name entity extractor.
       x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
       operationId: person_name_entity_extractor_create
-      description: Create a new person_name entity extractor or load one from the store.
+      description: Create a new person_name entity extractor or reload one from the trash.
       parameters:
       - in: body
-        name: person_name_ent_create_details
+        name: create_details
         description: The details of the instance to create.
         required: true
         schema:
-          $ref: "#/definitions/person_name_ent_create_details"
+          $ref: "#/definitions/person_name_entity_extractor_create_details"
       responses:
         200:
-          $ref: "#/responses/person_name_instance_detail"
+          $ref: "#/responses/person_name_entity_extractor_instance_detail"
         400:
           description: bad request
           
@@ -1742,7 +1742,7 @@ paths:
       description: Get the list of loaded person_name entity extractors.
       responses:
         200:
-          $ref: "#/responses/person_name_instance_detail_list"
+          $ref: "#/responses/person_name_entity_extractor_instance_detail_list"
         400:
           description: bad request
 
@@ -1765,7 +1765,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/person_name_instance_detail"
+          $ref: "#/responses/person_name_entity_extractor_instance_detail"
         400:
           description: bad request
 
@@ -1775,7 +1775,7 @@ paths:
       summary: Delete named instance.
       x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
       operationId: person_name_entity_extractor_del
-      description: Delete and return the details of the named person_name entity extractor instance.
+      description: Delete and return the details of the named person_name entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
       parameters:
       - in: path
         name: instance_name
@@ -1784,7 +1784,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/person_name_instance_detail"
+          $ref: "#/responses/person_name_entity_extractor_instance_detail"
         400:
           description: bad request
 
@@ -1813,7 +1813,7 @@ paths:
           $ref: "#/definitions/model_params"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/person_name_entity_extractor_instance_detail"
         400:
           description: bad request
 
@@ -1858,17 +1858,17 @@ paths:
       summary: Create a duckling entity extractor.
       x-swagger-router-controller: rest_api.flask_server.controllers.duckling_entity_extractors_controller
       operationId: duckling_entity_extractor_create
-      description: Create a new duckling entity extractor or load one from the store.
+      description: Create a new duckling entity extractor or reload one from the trash.
       parameters:
       - in: body
-        name: duckling_ent_create_details
+        name: create_details
         description: The details of the instance to create.
         required: true
         schema:
-          $ref: "#/definitions/duckling_ent_create_details"
+          $ref: "#/definitions/duckling_entity_extractor_create_details"
       responses:
         200:
-          $ref: "#/responses/duckling_instance_detail"
+          $ref: "#/responses/duckling_entity_extractor_instance_detail"
         400:
           description: bad request
           
@@ -1881,7 +1881,7 @@ paths:
       description: Get the list of loaded duckling entity extractors.
       responses:
         200:
-          $ref: "#/responses/duckling_instance_detail_list"
+          $ref: "#/responses/duckling_entity_extractor_instance_detail_list"
         400:
           description: bad request
 
@@ -1904,7 +1904,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/duckling_instance_detail"
+          $ref: "#/responses/duckling_entity_extractor_instance_detail"
         400:
           description: bad request
 
@@ -1914,7 +1914,7 @@ paths:
       summary: Delete named instance.
       x-swagger-router-controller: rest_api.flask_server.controllers.duckling_entity_extractors_controller
       operationId: duckling_entity_extractor_del
-      description: Delete and return the details of the named duckling entity extractor instance.
+      description: Delete and return the details of the named duckling entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
       parameters:
       - in: path
         name: instance_name
@@ -1923,7 +1923,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/duckling_instance_detail"
+          $ref: "#/responses/duckling_entity_extractor_instance_detail"
         400:
           description: bad request
 
@@ -1952,7 +1952,7 @@ paths:
           $ref: "#/definitions/model_params"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/duckling_entity_extractor_instance_detail"
         400:
           description: bad request
 
@@ -1997,17 +1997,17 @@ paths:
       summary: Create a word similarity entity extractor.
       x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
       operationId: sim_word_entity_extractor_create
-      description: Create a new word similarity entity extractor or load one from the store.
+      description: Create a new word similarity entity extractor or reload one from the trash.
       parameters:
       - in: body
-        name: sim_word_ent_create_details
+        name: create_details
         description: The details of the instance to create.
         required: true
         schema:
-          $ref: "#/definitions/sim_word_ent_create_details"
+          $ref: "#/definitions/sim_word_entity_extractor_create_details"
       responses:
         200:
-          $ref: "#/responses/sim_word_instance_detail"
+          $ref: "#/responses/sim_word_entity_extractor_instance_detail"
         400:
           description: bad request
           
@@ -2020,7 +2020,7 @@ paths:
       description: Get the list of loaded similarity entity extractors.
       responses:
         200:
-          $ref: "#/responses/sim_word_instance_detail_list"
+          $ref: "#/responses/sim_word_entity_extractor_instance_detail_list"
         400:
           description: bad request
 
@@ -2043,7 +2043,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/sim_word_instance_detail"
+          $ref: "#/responses/sim_word_entity_extractor_instance_detail"
         400:
           description: bad request
 
@@ -2053,7 +2053,7 @@ paths:
       summary: Delete named instance.
       x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
       operationId: sim_word_entity_extractor_del
-      description: Delete and return the details of the named similarity entity extractor instance.
+      description: Delete and return the details of the named similarity entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
       parameters:
       - in: path
         name: instance_name
@@ -2062,7 +2062,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/sim_word_instance_detail"
+          $ref: "#/responses/sim_word_entity_extractor_instance_detail"
         400:
           description: bad request
 
@@ -2091,7 +2091,7 @@ paths:
           $ref: "#/definitions/model_params"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/sim_word_entity_extractor_instance_detail"
         400:
           description: bad request
 
@@ -2128,53 +2128,53 @@ paths:
 ###################################
 ###################################
 ########
-## lr4_language_recognisers root
+## language_recognisers root
 ########
-  /lr4_language_recognisers:
+  /language_recognisers:
     post:
       tags:
-      - lr4_language_recognisers
-      summary: Create a LR4 text language detector.
-      x-swagger-router-controller: rest_api.flask_server.controllers.lr4_language_recognisers_controller
-      operationId: lr4_language_recogniser_create
-      description: Create a new LR4 language detector from the pre-trained model name provided. 'lid_za' is currently the only pre-trained model that is available, but it was trained on all 11 languages and is pretty accurate. Returns the detail of the new instance.
+      - language_recognisers
+      summary: Create a text language detector.
+      x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
+      operationId: language_recogniser_create
+      description: Create  new language detector from the pre-trained model name provided. 'lid_za' is currently the only pre-trained model that is available, but it was trained on all 11 languages and is pretty accurate. Returns the detail of the new instance.
       parameters:
       - in: body
-        name: lr4_create_details
+        name: create_details
         description: The details of the instance to create.
         required: true
         schema:
-          $ref: "#/definitions/lr4_create_details"
+          $ref: "#/definitions/language_recogniser_create_details"
       responses:
         200:
-          $ref: "#/responses/lr4_instance_detail"
+          $ref: "#/responses/language_recogniser_instance_detail"
         400:
           description: bad request
           
     get:
       tags:
-      - lr4_language_recognisers
-      summary: Get list of loaded LR4 text language detectors.
-      x-swagger-router-controller: rest_api.flask_server.controllers.lr4_language_recognisers_controller
-      operationId: lr4_language_recogniser_get_details_all
-      description: Get the list of loaded LR4 text language detectors.
+      - language_recognisers
+      summary: Get list of loaded text language detectors.
+      x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
+      operationId: language_recogniser_get_details_all
+      description: Get the list of loaded text language detectors.
       responses:
         200:
-          $ref: "#/responses/lr4_instance_detail_list"
+          $ref: "#/responses/language_recogniser_instance_detail_list"
         400:
           description: bad request
 
 ########
-## lr4_language_recognisers Get details of named instance
+## language_recognisers Get details of named instance
 ########
-  /lr4_language_recognisers/{instance_name}:
+  /language_recognisers/{instance_name}:
     get:
       tags:
-      - lr4_language_recognisers
+      - language_recognisers
       summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.lr4_language_recognisers_controller
-      operationId: lr4_language_recogniser_get_details
-      description: Get the details of the named LR4 text language detector instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
+      operationId: language_recogniser_get_details
+      description: Get the details of the named text language detector instance.
       parameters:
       - in: path
         name: instance_name
@@ -2183,17 +2183,17 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/lr4_instance_detail"
+          $ref: "#/responses/language_recogniser_instance_detail"
         400:
           description: bad request
 
     delete:
       tags:
-      - lr4_language_recognisers
+      - language_recognisers
       summary: Delete named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.lr4_language_recognisers_controller
-      operationId: lr4_language_recogniser_del
-      description: Delete and return the details of the named LR4 text language detector instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
+      operationId: language_recogniser_del
+      description: Delete and return the details of the named text language detector instance. Deleted models can be reloaded from the trash with the create operation.
       parameters:
       - in: path
         name: instance_name
@@ -2202,21 +2202,21 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/lr4_instance_detail"
+          $ref: "#/responses/language_recogniser_instance_detail"
         400:
           description: bad request
 
 ########
-## lr4_language_recognisers model_params
+## language_recognisers model_params
 ########
-  /lr4_language_recognisers/{instance_name}/params:
+  /language_recognisers/{instance_name}/params:
     post:
       tags:
-      - lr4_language_recognisers
-      summary: Set the model parameters of named lr4 language recogniser.
-      x-swagger-router-controller: rest_api.flask_server.controllers.lr4_language_recognisers_controller
-      operationId: lr4_language_recogniser_set_params
-      description: Set the model parameters of named lr4 language recogniser.
+      - language_recognisers
+      summary: Set the model parameters of named language recogniser.
+      x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
+      operationId: language_recogniser_set_params
+      description: Set the model parameters of named language recogniser.
       parameters:
       - in: path
         name: instance_name
@@ -2231,20 +2231,20 @@ paths:
           $ref: "#/definitions/model_params"
       responses:
         200:
-          $ref: "#/responses/instance_detail"
+          $ref: "#/responses/language_recogniser_instance_detail"
         400:
           description: bad request
 
 ########
-## lr4_language_recognisers retrieve
+## language_recognisers retrieve
 ########
-  /lr4_language_recognisers/{instance_name}/retrieve:
+  /language_recognisers/{instance_name}/retrieve:
     post:
       tags:
-      - lr4_language_recognisers
+      - language_recognisers
       summary: Recognise the language the text is written in.
-      x-swagger-router-controller: rest_api.flask_server.controllers.lr4_language_recognisers_controller
-      operationId: lr4_language_recogniser_retrieve
+      x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
+      operationId: language_recogniser_retrieve
       description: Recognise the language the text is written in. Returns the list of scored language codes.
       parameters:
       - in: path
@@ -2265,15 +2265,15 @@ paths:
           description: bad request
 
 ########
-## lr4_language_recognisers get list of class labels
+## language_recognisers get list of class labels
 ########
-  /lr4_language_recognisers/{instance_name}/get_labels:
+  /language_recognisers/{instance_name}/get_labels:
     get:
       tags:
-      - lr4_language_recognisers
+      - language_recognisers
       summary: Get list of possible labels.
-      x-swagger-router-controller: rest_api.flask_server.controllers.lr4_language_recognisers_controller
-      operationId: lr4_language_recogniser_get_labels
+      x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
+      operationId: language_recogniser_get_labels
       description: Returns the classifier's list of possible class labels.
       parameters:
       - in: path
@@ -2296,101 +2296,113 @@ responses:
     schema:
       $ref: "#/definitions/dashboard_detail"
       
-  text_clsfr_instance_detail:
+  text_classifier_instance_detail:
     description: The model instance detail
     schema:
-      $ref: "#/definitions/text_clsfr_instance_detail"
-      
-  text_clsfr_instance_detail_list:
-    description: A list of models' instance details
-    schema:
-      type: array
-      items:
-        $ref: "#/definitions/text_clsfr_instance_detail"
+      $ref: "#/definitions/text_classifier_instance_detail"
 
-  wm_instance_detail:
-    description: The model instance detail
-    schema:
-      $ref: "#/definitions/wm_instance_detail"
-      
-  wm_instance_detail_list:
+  text_classifier_instance_detail_list:
     description: A list of models' instance details
     schema:
       type: array
       items:
-        $ref: "#/definitions/wm_instance_detail"
+        $ref: "#/definitions/text_classifier_instance_detail"
 
-  instance_detail:
+  word_manifold_instance_detail:
     description: The model instance detail
     schema:
-      $ref: "#/definitions/instance_detail"
+      $ref: "#/definitions/word_manifold_instance_detail"
       
-  instance_detail_list:
+  word_manifold_instance_detail_list:
     description: A list of models' instance details
     schema:
       type: array
       items:
-        $ref: "#/definitions/instance_detail"
+        $ref: "#/definitions/word_manifold_instance_detail"
 
-  regex_instance_detail:
+  faq_matcher_instance_detail:
     description: The model instance detail
     schema:
-      $ref: "#/definitions/regex_instance_detail"
+      $ref: "#/definitions/faq_matcher_instance_detail"
       
-  regex_instance_detail_list:
+  faq_matcher_instance_detail_list:
     description: A list of models' instance details
     schema:
       type: array
       items:
-        $ref: "#/definitions/regex_instance_detail"
+        $ref: "#/definitions/faq_matcher_instance_detail"
 
-  person_name_instance_detail:
+  intent_classifier_instance_detail:
     description: The model instance detail
     schema:
-      $ref: "#/definitions/person_name_instance_detail"
-      
-  person_name_instance_detail_list:
-    description: A list of models' instance details
-    schema:
-      type: array
-      items:
-        $ref: "#/definitions/person_name_instance_detail"
+      $ref: "#/definitions/intent_classifier_instance_detail"
 
-  duckling_instance_detail:
-    description: The model instance detail
-    schema:
-      $ref: "#/definitions/duckling_instance_detail"
-      
-  duckling_instance_detail_list:
+  intent_classifier_instance_detail_list:
     description: A list of models' instance details
     schema:
       type: array
       items:
-        $ref: "#/definitions/duckling_instance_detail"
+        $ref: "#/definitions/intent_classifier_instance_detail"
 
-  sim_word_instance_detail:
+  regex_entity_extractor_instance_detail:
     description: The model instance detail
     schema:
-      $ref: "#/definitions/sim_word_instance_detail"
+      $ref: "#/definitions/regex_entity_extractor_instance_detail"
       
-  sim_word_instance_detail_list:
+  regex_entity_extractor_instance_detail_list:
     description: A list of models' instance details
     schema:
       type: array
       items:
-        $ref: "#/definitions/sim_word_instance_detail"
+        $ref: "#/definitions/regex_entity_extractor_instance_detail"
 
-  lr4_instance_detail:
+  person_name_entity_extractor_instance_detail:
     description: The model instance detail
     schema:
-      $ref: "#/definitions/lr4_instance_detail"
+      $ref: "#/definitions/person_name_entity_extractor_instance_detail"
       
-  lr4_instance_detail_list:
+  person_name_entity_extractor_instance_detail_list:
     description: A list of models' instance details
     schema:
       type: array
       items:
-        $ref: "#/definitions/lr4_instance_detail"
+        $ref: "#/definitions/person_name_entity_extractor_instance_detail"
+
+  duckling_entity_extractor_instance_detail:
+    description: The model instance detail
+    schema:
+      $ref: "#/definitions/duckling_entity_extractor_instance_detail"
+      
+  duckling_entity_extractor_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/duckling_entity_extractor_instance_detail"
+
+  sim_word_entity_extractor_instance_detail:
+    description: The model instance detail
+    schema:
+      $ref: "#/definitions/sim_word_entity_extractor_instance_detail"
+      
+  sim_word_entity_extractor_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/sim_word_entity_extractor_instance_detail"
+
+  language_recogniser_instance_detail:
+    description: The model instance detail
+    schema:
+      $ref: "#/definitions/language_recogniser_instance_detail"
+      
+  language_recogniser_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/language_recogniser_instance_detail"
 
   total_samples:
     description: The total number of samples of this type in the model.
@@ -2498,7 +2510,7 @@ definitions:
         items:
           $ref: "#/definitions/dashboard_model_detail"
 
-  text_clsfr_instance_detail:
+  text_classifier_instance_detail:
     description: The model instance detail.
     type: object
     required:
@@ -2551,7 +2563,7 @@ definitions:
         type: string
         example: '2017-10-26 10:42:01.589979'
 
-  wm_instance_detail:
+  word_manifold_instance_detail:
     description: The model instance detail.
     type: object
     required:
@@ -2579,7 +2591,7 @@ definitions:
         type: string
         example: 'glove_za_eng.txt'
 
-  instance_detail:
+  faq_matcher_instance_detail:
     description: The model instance detail.
     type: object
     required:
@@ -2587,7 +2599,7 @@ definitions:
     - id
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance. 
+        description: The sluggy-url-friendly-name of the instance.
         type: string
         example: 'example_instance'
       id:
@@ -2595,7 +2607,7 @@ definitions:
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -2603,22 +2615,22 @@ definitions:
         type: string
         example: 'This is an example of this type of model.'
       training_accuracy:
-        description: The accuracy of the model as measured on the training set. 
+        description: The accuracy of the model as measured on the training set.
         type: number
         example: 1.0
       training_f1:
-        description: The average F-score of the model as measured on the training set. 
+        description: The average F-score of the model as measured on the training set.
         type: number
         example: 1.0
       training_cm:
         description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
       testing_accuracy:
-        description: The accuracy of the model as measured on the testing set. 
+        description: The accuracy of the model as measured on the testing set.
         type: number
         example: 1.0
       testing_f1:
-        description: The average F-score of the model as measured on the testing set. 
+        description: The average F-score of the model as measured on the testing set.
         type: number
         example: 1.0
       testing_cm:
@@ -2641,7 +2653,69 @@ definitions:
         type: number
         example: 0.85
 
-  regex_instance_detail:
+  intent_classifier_instance_detail:
+    description: The model instance detail.
+    type: object
+    required:
+    - name
+    - id
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      id:
+        description: The unique id of a specific version of the model instance.
+        type: string
+        example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'This is an example of this type of model.'
+      training_accuracy:
+        description: The accuracy of the model as measured on the training set.
+        type: number
+        example: 1.0
+      training_f1:
+        description: The average F-score of the model as measured on the training set.
+        type: number
+        example: 1.0
+      training_cm:
+        description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      testing_accuracy:
+        description: The accuracy of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      testing_f1:
+        description: The average F-score of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      testing_cm:
+        description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      cm_labels:
+        description: A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer.
+        type: object
+      training_stamp:
+        description: The time when the training operation concluded.
+        type: string
+        example: '2017-10-26 10:42:01.589979'
+      word_manifold_list:
+        description: The list of labelled word manifolds used for training.
+        type: array
+        items:
+          $ref: "#/definitions/labeled_word_manifold"
+      threshold:
+        description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
+        type: number
+        example: 0.85
+
+  regex_entity_extractor_instance_detail:
     description: The model instance detail.
     type: object
     required:
@@ -2670,7 +2744,7 @@ definitions:
         type: string
         example: '(?P<license>([A-Z]{3}[ ]?[0-9]{3}[ ]?(GP|NW|MP|EC|L|NC|NW)))'
 
-  person_name_instance_detail:
+  person_name_entity_extractor_instance_detail:
     description: The model instance detail.
     type: object
     required:
@@ -2694,7 +2768,7 @@ definitions:
         type: string
         example: 'An example of this type of model.'
 
-  duckling_instance_detail:
+  duckling_entity_extractor_instance_detail:
     description: The model instance detail.
     type: object
     required:
@@ -2718,7 +2792,7 @@ definitions:
         type: string
         example: 'An example of this type of model.'
 
-  sim_word_instance_detail:
+  sim_word_entity_extractor_instance_detail:
     description: The model instance detail.
     type: object
     required:
@@ -2759,7 +2833,7 @@ definitions:
         type: string
         example: 'feers_wm_eng'
 
-  lr4_instance_detail:
+  language_recogniser_instance_detail:
     description: The model instance detail.
     type: object
     required:
@@ -2788,7 +2862,7 @@ definitions:
         type: string
         example: 'lid_za'
 
-  text_clsfr_create_details:
+  text_classifier_create_details:
     description: The details of the model instance to create.
     type: object
     required:
@@ -2796,11 +2870,11 @@ definitions:
     - load_from_store
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance. 
+        description: The sluggy-url-friendly-name of the instance.
         type: string
         example: 'example_instance'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -2808,11 +2882,11 @@ definitions:
         type: string
         example: 'An example of this type of model.'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
-        
-  create_details:
+
+  faq_matcher_create_details:
     description: The details of the model instance to create.
     type: object
     required:
@@ -2836,11 +2910,39 @@ definitions:
         type: string
         example: 'lid_za'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
         
-  wm_create_details:
+  intent_classifier_create_details:
+    description: The details of the model instance to create.
+    type: object
+    required:
+    - name
+    - load_from_store
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'An example of this type of model.'
+      lid_model_file:
+        description: The pre-trained LID model to load.
+        type: string
+        example: 'lid_za'
+      load_from_store:
+        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        type: boolean
+        example: False
+
+  word_manifold_create_details:
     description: The details of the model instance to create.
     type: object
     required:
@@ -2860,7 +2962,7 @@ definitions:
         type: string
         example: 'An example of this type of model.'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       word_vectors_file:
@@ -2868,7 +2970,7 @@ definitions:
         type: string
         example: 'glove_za_eng.txt'
 
-  regex_ent_create_details:
+  regex_entity_extractor_create_details:
     description: The details of the model instance to create.
     type: object
     required:
@@ -2892,11 +2994,11 @@ definitions:
         type: string
         example: '(?P<license>([A-Z]{3}[ ]?[0-9]{3}[ ]?(GP|NW|MP|EC|L|NC|NW)))'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
 
-  person_name_ent_create_details:
+  person_name_entity_extractor_create_details:
     description: The details of the model instance to create.
     type: object
     required:
@@ -2916,11 +3018,11 @@ definitions:
         type: string
         example: 'This is an example of this type of model.'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
 
-  duckling_ent_create_details:
+  duckling_entity_extractor_create_details:
     description: The details of the model instance to create.
     type: object
     required:
@@ -2945,11 +3047,11 @@ definitions:
         default: ''
         example: '2017-12-10'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
 
-  sim_word_ent_create_details:
+  sim_word_entity_extractor_create_details:
     description: The details of the model instance to create.
     type: object
     required:
@@ -2981,11 +3083,11 @@ definitions:
         type: string
         example: 'feers_wm_eng'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
 
-  lr4_create_details:
+  language_recogniser_create_details:
     description: The details of the model instance to create.
     type: object
     required:
@@ -3009,7 +3111,7 @@ definitions:
         type: string
         example: 'lid_za'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the model store. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
 

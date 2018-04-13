@@ -29,10 +29,10 @@ regex_str = (r"(?P<license>"
              r"([A-Z]{2}[ ]?[0-9]{2}[ ]?[A-Z]{2}[ ]?(GP|NW|MP|EC|L|NC|NW)))")
 
 regex_ent_create_details = \
-    feersum_nlu.RegexEntCreateDetails(name=instance_name,
-                                      desc="Test regex extractor.",
-                                      regex=regex_str,
-                                      load_from_store=False)
+    feersum_nlu.RegexEntityExtractorCreateDetails(name=instance_name,
+                                                  desc="Test regex extractor.",
+                                                  regex=regex_str,
+                                                  load_from_store=False)
 
 # text_input = feersum_nlu.TextInput("My car has license number JMS 007 GP.")
 text_input = feersum_nlu.TextInput("My car is a 2007 Jeep Wrangler with plate ZNX 450 GP")

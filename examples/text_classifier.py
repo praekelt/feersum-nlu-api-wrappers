@@ -18,12 +18,9 @@ api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuratio
 
 instance_name = 'test_txt_clsfr'
 
-
-# ToDo: Rename e.g. TextClsfrCreateDetails to TextClassifierCreateDetails ...
-
-create_details = feersum_nlu.TextClsfrCreateDetails(name=instance_name,
-                                                    desc="Test text classifier.",
-                                                    load_from_store=False)
+create_details = feersum_nlu.TextClassifierCreateDetails(name=instance_name,
+                                                         desc="Test text classifier.",
+                                                         load_from_store=False)
 
 # The training samples.
 labelled_text_sample_list = []

@@ -14,61 +14,61 @@ configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative au
 
 configuration.host = feersumnlu_host
 
-api_instance = feersum_nlu.Lr4LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
 
-instance_name = 'test_lr4'
+instance_name = 'test_language_recogniser'
 
-lr4_create_details = \
-    feersum_nlu.Lr4CreateDetails(name=instance_name,
-                                 desc="Test LR4 lang ident model.",
-                                 long_name="Test LR4",
-                                 lid_model_file='lid_za',
-                                 load_from_store=False)
+language_recogniser_create_details = \
+    feersum_nlu.LanguageRecogniserCreateDetails(name=instance_name,
+                                                desc="Test lang ident model.",
+                                                long_name="Test language recogniser.",
+                                                lid_model_file='lid_za',
+                                                load_from_store=False)
 
 text_input = feersum_nlu.TextInput("Isakhiwo sami sebiwe?")
 
 print()
 
 try:
-    print("Create the lr4 instance:")
-    api_response = api_instance.lr4_language_recogniser_create(lr4_create_details)
+    print("Create the language recogniser instance:")
+    api_response = api_instance.language_recogniser_create(language_recogniser_create_details)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
 
-    print("Get the details of all loaded lr4 instances:")
-    api_response = api_instance.lr4_language_recogniser_get_details_all()
+    print("Get the details of all loaded language recogniser instances:")
+    api_response = api_instance.language_recogniser_get_details_all()
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
 
-    print("Get the details of specific named loaded lr4 instance:")
-    api_response = api_instance.lr4_language_recogniser_get_details(instance_name)
+    print("Get the details of specific named loaded language recogniser instance:")
+    api_response = api_instance.language_recogniser_get_details(instance_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
 
     # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be available
     # after training.
-    print("Get the labels of named loaded lr4 instance:")
-    api_response = api_instance.lr4_language_recogniser_get_labels(instance_name)
+    print("Get the labels of named loaded language recogniser instance:")
+    api_response = api_instance.language_recogniser_get_labels(instance_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
 
     print("Identify the language of the text:")
-    api_response = api_instance.lr4_language_recogniser_retrieve(instance_name, text_input)
+    api_response = api_instance.language_recogniser_retrieve(instance_name, text_input)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
 
-    print("Delete specific named loaded lr4 instance:")
-    api_response = api_instance.lr4_language_recogniser_get_details(instance_name)
+    print("Delete specific named loaded language recogniser instance:")
+    api_response = api_instance.language_recogniser_get_details(instance_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
 
 except ApiException as e:
-    print("Exception when calling an lr4 operation: %s\n" % e)
+    print("Exception when calling an language recogniser operation: %s\n" % e)
 except urllib3.exceptions.HTTPError as e:
     print("Connection HTTPError! %s\n" % e)

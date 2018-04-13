@@ -32,10 +32,10 @@ class TestFAQMatcher(unittest.TestCase):
 
         instance_name = 'test_faq_mtchr'
 
-        create_details = feersum_nlu.CreateDetails(name=instance_name,
-                                                   desc="Test FAQ matcher.",
-                                                   lid_model_file="lid_za",
-                                                   load_from_store=False)
+        create_details = feersum_nlu.FaqMatcherCreateDetails(name=instance_name,
+                                                             desc="Test FAQ matcher.",
+                                                             lid_model_file="lid_za",
+                                                             load_from_store=False)
 
         # The training samples.
         labelled_text_sample_list = []

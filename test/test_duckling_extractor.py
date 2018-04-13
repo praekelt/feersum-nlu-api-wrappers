@@ -31,9 +31,9 @@ class TestDucklingExtractor(unittest.TestCase):
         instance_name = 'test_duckling_extr'
 
         duckling_ent_create_details = \
-            feersum_nlu.DucklingEntCreateDetails(name=instance_name,
-                                                 desc="Test duckling extractor.",
-                                                 load_from_store=False)
+            feersum_nlu.DucklingEntityExtractorCreateDetails(name=instance_name,
+                                                             desc="Test duckling extractor.",
+                                                             load_from_store=False)
 
         text_input = feersum_nlu.TextInput("5 January 2017 at 15:00.")
 

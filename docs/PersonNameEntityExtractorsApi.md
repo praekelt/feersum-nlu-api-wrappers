@@ -13,11 +13,11 @@ Method | HTTP request | Description
 
 
 # **person_name_entity_extractor_create**
-> PersonNameInstanceDetail person_name_entity_extractor_create(person_name_ent_create_details)
+> PersonNameEntityExtractorInstanceDetail person_name_entity_extractor_create(create_details)
 
 Create a person_name entity extractor.
 
-Create a new person_name entity extractor or load one from the store.
+Create a new person_name entity extractor or reload one from the trash.
 
 ### Example
 ```python
@@ -40,11 +40,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.PersonNameEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-person_name_ent_create_details = feersum_nlu.PersonNameEntCreateDetails() # PersonNameEntCreateDetails | The details of the instance to create.
+create_details = feersum_nlu.PersonNameEntityExtractorCreateDetails() # PersonNameEntityExtractorCreateDetails | The details of the instance to create.
 
 try:
     # Create a person_name entity extractor.
-    api_response = api_instance.person_name_entity_extractor_create(person_name_ent_create_details)
+    api_response = api_instance.person_name_entity_extractor_create(create_details)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PersonNameEntityExtractorsApi->person_name_entity_extractor_create: %s\n" % e)
@@ -54,11 +54,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **person_name_ent_create_details** | [**PersonNameEntCreateDetails**](PersonNameEntCreateDetails.md)| The details of the instance to create. | 
+ **create_details** | [**PersonNameEntityExtractorCreateDetails**](PersonNameEntityExtractorCreateDetails.md)| The details of the instance to create. | 
 
 ### Return type
 
-[**PersonNameInstanceDetail**](PersonNameInstanceDetail.md)
+[**PersonNameEntityExtractorInstanceDetail**](PersonNameEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -72,11 +72,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **person_name_entity_extractor_del**
-> PersonNameInstanceDetail person_name_entity_extractor_del(instance_name)
+> PersonNameEntityExtractorInstanceDetail person_name_entity_extractor_del(instance_name)
 
 Delete named instance.
 
-Delete and return the details of the named person_name entity extractor instance.
+Delete and return the details of the named person_name entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
 
 ### Example
 ```python
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PersonNameInstanceDetail**](PersonNameInstanceDetail.md)
+[**PersonNameEntityExtractorInstanceDetail**](PersonNameEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **person_name_entity_extractor_get_details**
-> PersonNameInstanceDetail person_name_entity_extractor_get_details(instance_name)
+> PersonNameEntityExtractorInstanceDetail person_name_entity_extractor_get_details(instance_name)
 
 Get details of named instance.
 
@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PersonNameInstanceDetail**](PersonNameInstanceDetail.md)
+[**PersonNameEntityExtractorInstanceDetail**](PersonNameEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -190,7 +190,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **person_name_entity_extractor_get_details_all**
-> list[PersonNameInstanceDetail] person_name_entity_extractor_get_details_all()
+> list[PersonNameEntityExtractorInstanceDetail] person_name_entity_extractor_get_details_all()
 
 Get list of loaded regular expression entity extractors.
 
@@ -231,7 +231,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**list[PersonNameInstanceDetail]**](PersonNameInstanceDetail.md)
+[**list[PersonNameEntityExtractorInstanceDetail]**](PersonNameEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **person_name_entity_extractor_set_params**
-> InstanceDetail person_name_entity_extractor_set_params(instance_name, model_params)
+> PersonNameEntityExtractorInstanceDetail person_name_entity_extractor_set_params(instance_name, model_params)
 
 Set the model parameters of named person name entity extractor.
 
@@ -353,7 +353,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**PersonNameEntityExtractorInstanceDetail**](PersonNameEntityExtractorInstanceDetail.md)
 
 ### Authorization
 

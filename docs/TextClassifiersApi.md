@@ -146,11 +146,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_create**
-> TextClsfrInstanceDetail text_classifier_create(text_clsfr_create_details)
+> TextClassifierInstanceDetail text_classifier_create(create_details)
 
 Create a text classifier.
 
-Create a new text classifier or load one from the store. Returns the details of the new or loaded instance.
+Create a new text classifier or reload one from the trash. Returns the details of the new or loaded instance.
 
 ### Example
 ```python
@@ -173,11 +173,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
-text_clsfr_create_details = feersum_nlu.TextClsfrCreateDetails() # TextClsfrCreateDetails | The details of the instance to create.
+create_details = feersum_nlu.TextClassifierCreateDetails() # TextClassifierCreateDetails | The details of the instance to create.
 
 try:
     # Create a text classifier.
-    api_response = api_instance.text_classifier_create(text_clsfr_create_details)
+    api_response = api_instance.text_classifier_create(create_details)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TextClassifiersApi->text_classifier_create: %s\n" % e)
@@ -187,11 +187,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text_clsfr_create_details** | [**TextClsfrCreateDetails**](TextClsfrCreateDetails.md)| The details of the instance to create. | 
+ **create_details** | [**TextClassifierCreateDetails**](TextClassifierCreateDetails.md)| The details of the instance to create. | 
 
 ### Return type
 
-[**TextClsfrInstanceDetail**](TextClsfrInstanceDetail.md)
+[**TextClassifierInstanceDetail**](TextClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -266,11 +266,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_del**
-> TextClsfrInstanceDetail text_classifier_del(instance_name)
+> TextClassifierInstanceDetail text_classifier_del(instance_name)
 
 Delete named instance.
 
-Delete and return the details of the named text classifier instance.
+Delete and return the details of the named text classifier instance. Deleted models can be reloaded from the trash with the create operation.
 
 ### Example
 ```python
@@ -311,7 +311,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TextClsfrInstanceDetail**](TextClsfrInstanceDetail.md)
+[**TextClassifierInstanceDetail**](TextClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -565,7 +565,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_get_details**
-> TextClsfrInstanceDetail text_classifier_get_details(instance_name)
+> TextClassifierInstanceDetail text_classifier_get_details(instance_name)
 
 Get details of named instance.
 
@@ -610,7 +610,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TextClsfrInstanceDetail**](TextClsfrInstanceDetail.md)
+[**TextClassifierInstanceDetail**](TextClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -624,7 +624,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_get_details_all**
-> list[TextClsfrInstanceDetail] text_classifier_get_details_all()
+> list[TextClassifierInstanceDetail] text_classifier_get_details_all()
 
 Get list of loaded text classifiers.
 
@@ -665,7 +665,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**list[TextClsfrInstanceDetail]**](TextClsfrInstanceDetail.md)
+[**list[TextClassifierInstanceDetail]**](TextClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -917,7 +917,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_set_params**
-> InstanceDetail text_classifier_set_params(instance_name, model_params)
+> TextClassifierInstanceDetail text_classifier_set_params(instance_name, model_params)
 
 Set the model parameters of named text classifier.
 
@@ -964,7 +964,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**TextClassifierInstanceDetail**](TextClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -978,7 +978,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_train**
-> TextClsfrInstanceDetail text_classifier_train(instance_name, train_details)
+> TextClassifierInstanceDetail text_classifier_train(instance_name, train_details)
 
 Train the named text classifier.
 
@@ -1025,7 +1025,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TextClsfrInstanceDetail**](TextClsfrInstanceDetail.md)
+[**TextClassifierInstanceDetail**](TextClassifierInstanceDetail.md)
 
 ### Authorization
 

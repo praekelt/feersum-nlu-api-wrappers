@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **word_manifold_add_similar_words**
-> WmInstanceDetail word_manifold_add_similar_words(instance_name, new_word_list)
+> WordManifoldInstanceDetail word_manifold_add_similar_words(instance_name, new_word_list)
 
 Add new words.
 
@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**WmInstanceDetail**](WmInstanceDetail.md)
+[**WordManifoldInstanceDetail**](WordManifoldInstanceDetail.md)
 
 ### Authorization
 
@@ -72,11 +72,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **word_manifold_create**
-> WmInstanceDetail word_manifold_create(wm_create_details)
+> WordManifoldInstanceDetail word_manifold_create(create_details)
 
 Create a word manifold model.
 
-Create a new word manifold model using an input file or load a model from the store. Warning! - These models are quite big and each takes a few seconds to load/create. Returns the details of the new or loaded instance.
+Create a new word manifold model using an input file or reload one from the trash. Warning! - These models are quite big and each takes a few seconds to load/create. Returns the details of the new or loaded instance.
 
 ### Example
 ```python
@@ -99,11 +99,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.WordManifoldsApi(feersum_nlu.ApiClient(configuration))
-wm_create_details = feersum_nlu.WmCreateDetails() # WmCreateDetails | The details of the word manifold instance to create.
+create_details = feersum_nlu.WordManifoldCreateDetails() # WordManifoldCreateDetails | The details of the word manifold instance to create.
 
 try:
     # Create a word manifold model.
-    api_response = api_instance.word_manifold_create(wm_create_details)
+    api_response = api_instance.word_manifold_create(create_details)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling WordManifoldsApi->word_manifold_create: %s\n" % e)
@@ -113,11 +113,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **wm_create_details** | [**WmCreateDetails**](WmCreateDetails.md)| The details of the word manifold instance to create. | 
+ **create_details** | [**WordManifoldCreateDetails**](WordManifoldCreateDetails.md)| The details of the word manifold instance to create. | 
 
 ### Return type
 
-[**WmInstanceDetail**](WmInstanceDetail.md)
+[**WordManifoldInstanceDetail**](WordManifoldInstanceDetail.md)
 
 ### Authorization
 

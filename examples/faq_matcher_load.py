@@ -18,8 +18,8 @@ api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 
 instance_name = 'test_faq_mtchr'
 
-create_details = feersum_nlu.CreateDetails(name=instance_name,
-                                           load_from_store=True)
+create_details = feersum_nlu.FaqMatcherCreateDetails(name=instance_name,
+                                                     load_from_store=True)
 
 text_input = feersum_nlu.TextInput("Where can I get a quote?")
 

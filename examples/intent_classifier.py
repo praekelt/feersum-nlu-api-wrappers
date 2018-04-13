@@ -25,11 +25,11 @@ word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng')]
 # "feers_wm_tsn", "feers_wm_ven", "feers_wm_tso"
 # and "glove6B50D_trimmed"
 
-create_details = feersum_nlu.CreateDetails(name=instance_name,
-                                           desc="Test intent classifier.",
-                                           long_name=instance_name,
-                                           lid_model_file="lid_za",
-                                           load_from_store=False)
+create_details = feersum_nlu.IntentClassifierCreateDetails(name=instance_name,
+                                                           desc="Test intent classifier.",
+                                                           long_name=instance_name,
+                                                           lid_model_file="lid_za",
+                                                           load_from_store=False)
 
 # The training samples.
 labelled_text_sample_list = []

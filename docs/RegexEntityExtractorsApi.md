@@ -13,11 +13,11 @@ Method | HTTP request | Description
 
 
 # **regex_entity_extractor_create**
-> RegexInstanceDetail regex_entity_extractor_create(regex_ent_create_details)
+> RegexEntityExtractorInstanceDetail regex_entity_extractor_create(create_details)
 
 Create a regular expression entity extractor.
 
-Create a new regular expression entity extractor or load one from the store.
+Create a new regular expression entity extractor or reload one from the trash.
 
 ### Example
 ```python
@@ -40,11 +40,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-regex_ent_create_details = feersum_nlu.RegexEntCreateDetails() # RegexEntCreateDetails | The details of the instance to create.
+create_details = feersum_nlu.RegexEntityExtractorCreateDetails() # RegexEntityExtractorCreateDetails | The details of the instance to create.
 
 try:
     # Create a regular expression entity extractor.
-    api_response = api_instance.regex_entity_extractor_create(regex_ent_create_details)
+    api_response = api_instance.regex_entity_extractor_create(create_details)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling RegexEntityExtractorsApi->regex_entity_extractor_create: %s\n" % e)
@@ -54,11 +54,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **regex_ent_create_details** | [**RegexEntCreateDetails**](RegexEntCreateDetails.md)| The details of the instance to create. | 
+ **create_details** | [**RegexEntityExtractorCreateDetails**](RegexEntityExtractorCreateDetails.md)| The details of the instance to create. | 
 
 ### Return type
 
-[**RegexInstanceDetail**](RegexInstanceDetail.md)
+[**RegexEntityExtractorInstanceDetail**](RegexEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -72,11 +72,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **regex_entity_extractor_del**
-> RegexInstanceDetail regex_entity_extractor_del(instance_name)
+> RegexEntityExtractorInstanceDetail regex_entity_extractor_del(instance_name)
 
 Delete named instance.
 
-Delete and get the details of the named regular expression entity extractor instance.
+Delete and get the details of the named regular expression entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
 
 ### Example
 ```python
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RegexInstanceDetail**](RegexInstanceDetail.md)
+[**RegexEntityExtractorInstanceDetail**](RegexEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **regex_entity_extractor_get_details**
-> RegexInstanceDetail regex_entity_extractor_get_details(instance_name)
+> RegexEntityExtractorInstanceDetail regex_entity_extractor_get_details(instance_name)
 
 Get details of named instance.
 
@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RegexInstanceDetail**](RegexInstanceDetail.md)
+[**RegexEntityExtractorInstanceDetail**](RegexEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -190,7 +190,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **regex_entity_extractor_get_details_all**
-> list[RegexInstanceDetail] regex_entity_extractor_get_details_all()
+> list[RegexEntityExtractorInstanceDetail] regex_entity_extractor_get_details_all()
 
 Get list of loaded regular expression entity extractors.
 
@@ -231,7 +231,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**list[RegexInstanceDetail]**](RegexInstanceDetail.md)
+[**list[RegexEntityExtractorInstanceDetail]**](RegexEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **regex_entity_extractor_set_params**
-> InstanceDetail regex_entity_extractor_set_params(instance_name, model_params)
+> RegexEntityExtractorInstanceDetail regex_entity_extractor_set_params(instance_name, model_params)
 
 Set the model parameters of named regex entity extractor.
 
@@ -353,7 +353,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**RegexEntityExtractorInstanceDetail**](RegexEntityExtractorInstanceDetail.md)
 
 ### Authorization
 

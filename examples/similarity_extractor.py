@@ -19,12 +19,13 @@ api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(conf
 instance_name = 'test_similarity_extr'
 
 similarity_ent_create_details = \
-    feersum_nlu.SimWordEntCreateDetails(name=instance_name,
-                                        desc="Test similarity extractor.",
-                                        similar_words=["red", "green", "blue"],
-                                        threshold=0.5,
-                                        word_manifold="feers_wm_eng",  # This is one of the built-in word embeddings.
-                                        load_from_store=False)
+    feersum_nlu.SimWordEntityExtractorCreateDetails(name=instance_name,
+                                                    desc="Test similarity extractor.",
+                                                    similar_words=["red", "green", "blue"],
+                                                    threshold=0.5,
+                                                    word_manifold="feers_wm_eng",
+                                                    # This is one of the built-in word embeddings.
+                                                    load_from_store=False)
 
 text_input = feersum_nlu.TextInput("I have an orange car.")
 

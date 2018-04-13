@@ -106,10 +106,10 @@ for model_name, model_type in model_list:
             # === ===
 
             if model_type == 'text_classifier':
-                create_details = feersum_nlu.TextClsfrCreateDetails(name=model_name,
-                                                                    desc=desc,
-                                                                    long_name=long_name,
-                                                                    load_from_store=False)
+                create_details = feersum_nlu.TextClassifierCreateDetails(name=model_name,
+                                                                         desc=desc,
+                                                                         long_name=long_name,
+                                                                         load_from_store=False)
 
                 api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 
@@ -129,11 +129,11 @@ for model_name, model_type in model_list:
                 api_response = api_instance.text_classifier_get_details(model_name)
                 print("   api_response", api_response)
             elif model_type == 'intent_classifier':
-                create_details = feersum_nlu.CreateDetails(name=model_name,
-                                                           desc=desc,
-                                                           long_name=long_name,
-                                                           lid_model_file="lid_za",
-                                                           load_from_store=False)
+                create_details = feersum_nlu.IntentClassifierCreateDetails(name=model_name,
+                                                                           desc=desc,
+                                                                           long_name=long_name,
+                                                                           lid_model_file="lid_za",
+                                                                           load_from_store=False)
 
                 api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 
@@ -153,11 +153,11 @@ for model_name, model_type in model_list:
                 api_response = api_instance.intent_classifier_get_details(model_name)
                 print("   api_response", api_response)
             elif model_type == 'faq_matcher':
-                create_details = feersum_nlu.CreateDetails(name=model_name,
-                                                           desc=desc,
-                                                           long_name=long_name,
-                                                           lid_model_file="lid_za",
-                                                           load_from_store=False)
+                create_details = feersum_nlu.FaqMatcherCreateDetails(name=model_name,
+                                                                     desc=desc,
+                                                                     long_name=long_name,
+                                                                     lid_model_file="lid_za",
+                                                                     load_from_store=False)
 
                 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 
@@ -179,11 +179,11 @@ for model_name, model_type in model_list:
             elif model_type == 'regex_entity_extractor':
                 regex = json_model.get('regex')
 
-                create_details = feersum_nlu.RegexEntCreateDetails(name=model_name,
-                                                                   desc=desc,
-                                                                   long_name=long_name,
-                                                                   regex=regex,
-                                                                   load_from_store=False)
+                create_details = feersum_nlu.RegexEntityExtractorCreateDetails(name=model_name,
+                                                                               desc=desc,
+                                                                               long_name=long_name,
+                                                                               regex=regex,
+                                                                               load_from_store=False)
 
                 api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 
@@ -200,13 +200,13 @@ for model_name, model_type in model_list:
                 sim_word_threshold = json_model.get('threshold')
                 word_manifold = json_model.get('word_manifold')
 
-                create_details = feersum_nlu.SimWordEntCreateDetails(name=model_name,
-                                                                     desc=desc,
-                                                                     long_name=long_name,
-                                                                     similar_words=similar_words,
-                                                                     threshold=sim_word_threshold,
-                                                                     word_manifold=word_manifold,
-                                                                     load_from_store=False)
+                create_details = feersum_nlu.SimWordEntityExtractorCreateDetails(name=model_name,
+                                                                                 desc=desc,
+                                                                                 long_name=long_name,
+                                                                                 similar_words=similar_words,
+                                                                                 threshold=sim_word_threshold,
+                                                                                 word_manifold=word_manifold,
+                                                                                 load_from_store=False)
 
                 api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 

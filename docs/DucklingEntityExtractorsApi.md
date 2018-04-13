@@ -13,11 +13,11 @@ Method | HTTP request | Description
 
 
 # **duckling_entity_extractor_create**
-> DucklingInstanceDetail duckling_entity_extractor_create(duckling_ent_create_details)
+> DucklingEntityExtractorInstanceDetail duckling_entity_extractor_create(create_details)
 
 Create a duckling entity extractor.
 
-Create a new duckling entity extractor or load one from the store.
+Create a new duckling entity extractor or reload one from the trash.
 
 ### Example
 ```python
@@ -40,11 +40,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-duckling_ent_create_details = feersum_nlu.DucklingEntCreateDetails() # DucklingEntCreateDetails | The details of the instance to create.
+create_details = feersum_nlu.DucklingEntityExtractorCreateDetails() # DucklingEntityExtractorCreateDetails | The details of the instance to create.
 
 try:
     # Create a duckling entity extractor.
-    api_response = api_instance.duckling_entity_extractor_create(duckling_ent_create_details)
+    api_response = api_instance.duckling_entity_extractor_create(create_details)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DucklingEntityExtractorsApi->duckling_entity_extractor_create: %s\n" % e)
@@ -54,11 +54,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **duckling_ent_create_details** | [**DucklingEntCreateDetails**](DucklingEntCreateDetails.md)| The details of the instance to create. | 
+ **create_details** | [**DucklingEntityExtractorCreateDetails**](DucklingEntityExtractorCreateDetails.md)| The details of the instance to create. | 
 
 ### Return type
 
-[**DucklingInstanceDetail**](DucklingInstanceDetail.md)
+[**DucklingEntityExtractorInstanceDetail**](DucklingEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -72,11 +72,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **duckling_entity_extractor_del**
-> DucklingInstanceDetail duckling_entity_extractor_del(instance_name)
+> DucklingEntityExtractorInstanceDetail duckling_entity_extractor_del(instance_name)
 
 Delete named instance.
 
-Delete and return the details of the named duckling entity extractor instance.
+Delete and return the details of the named duckling entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
 
 ### Example
 ```python
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DucklingInstanceDetail**](DucklingInstanceDetail.md)
+[**DucklingEntityExtractorInstanceDetail**](DucklingEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **duckling_entity_extractor_get_details**
-> DucklingInstanceDetail duckling_entity_extractor_get_details(instance_name)
+> DucklingEntityExtractorInstanceDetail duckling_entity_extractor_get_details(instance_name)
 
 Get details of named instance.
 
@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DucklingInstanceDetail**](DucklingInstanceDetail.md)
+[**DucklingEntityExtractorInstanceDetail**](DucklingEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -190,7 +190,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **duckling_entity_extractor_get_details_all**
-> list[DucklingInstanceDetail] duckling_entity_extractor_get_details_all()
+> list[DucklingEntityExtractorInstanceDetail] duckling_entity_extractor_get_details_all()
 
 Get list of loaded regular expression entity extractors.
 
@@ -231,7 +231,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**list[DucklingInstanceDetail]**](DucklingInstanceDetail.md)
+[**list[DucklingEntityExtractorInstanceDetail]**](DucklingEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **duckling_entity_extractor_set_params**
-> InstanceDetail duckling_entity_extractor_set_params(instance_name, model_params)
+> DucklingEntityExtractorInstanceDetail duckling_entity_extractor_set_params(instance_name, model_params)
 
 Set the model parameters of named duckling entity extractor.
 
@@ -353,7 +353,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**DucklingEntityExtractorInstanceDetail**](DucklingEntityExtractorInstanceDetail.md)
 
 ### Authorization
 
