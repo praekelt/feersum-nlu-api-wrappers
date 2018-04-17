@@ -3,6 +3,7 @@ Changelog
 
 Version 2.0.22
 ==============
+Name changes to make the Python API more consistent and friendlier towards code generation:
 - text_clsfr_create_details renamed to text_classifier_create_details
 - text_clsfr_instance_detail renamed to text_classifier_instance_detail
 - wm_create_details renamed to word_manifold_create_details
@@ -25,8 +26,9 @@ Version 2.0.22
 
 Version 2.0.21
 ==============
-- Demonstration of async training.
-- Online training examples.
+- Examples of async training.
+
+- Examples of online training.
 
 Version 2.0.20
 ==============
@@ -45,7 +47,7 @@ Version 2.0.20
 
 Version 2.0.18
 ==============
-- Added a 'long_name' attribute to all models. May be used as a 'pretty' formatted model name while the previous model
+- Added a 'long_name' attribute to all models. May be used as a 'pretty' formatted model name while the existing model
   name is really a slug used in urls, etc.
 
 - Addition of params end point to all models.  Used to update and get model attributes like desc, long_name and threshold.
