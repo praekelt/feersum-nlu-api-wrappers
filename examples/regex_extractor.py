@@ -24,6 +24,7 @@ instance_name = 'test_regex_extr'
 # regex_str = r"(?P<year>[0-9]{4})[.,\s]+(?P<make>" + vehicle_make_reg_ex + r")[.,\s]+(?P<model>\w+)"
 # regex_str = r"(?P<make>" + vehicle_make_reg_ex + r")[.,\s]+(?P<model>\w+)[.,\s]+[.,\s\w]*?(?P<year>[0-9]{4})"
 
+# regex_str = r"(?P<machine_id>(\b[0-9]{8}\b))"
 regex_str = (r"(?P<license>"
              r"([A-Z]{3}[ ]?[0-9]{3}[ ]?(GP|NW|MP|EC|L|NC|NW))|"
              r"([A-Z]{2}[ ]?[0-9]{2}[ ]?[A-Z]{2}[ ]?(GP|NW|MP|EC|L|NC|NW)))")
