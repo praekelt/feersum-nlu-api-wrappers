@@ -19,11 +19,11 @@ api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 
 instance_name = 'test_faq_mtchr'
 
-create_details = feersum_nlu.FaqMatcherCreateDetails(name=instance_name,
-                                                     desc="Test FAQ matcher.",
-                                                     long_name="Loong Name",
-                                                     lid_model_file="lid_za",
-                                                     load_from_store=False)
+create_details = feersum_nlu.CreateDetails(name=instance_name,
+                                           desc="Test FAQ matcher.",
+                                           long_name="The optional more descriptive name.",
+                                           lid_model_file="lid_za",
+                                           load_from_store=False)
 
 # The training samples.
 labelled_text_sample_list = []
@@ -217,7 +217,7 @@ try:
     print()
 
     print("Update the parameters:")
-    model_params = feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test FAQ matcher.", long_name="Loooong name.")
+    model_params = feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test FAQ matcher.", long_name="A longer name.")
     api_response = api_instance.faq_matcher_set_params(instance_name, model_params)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
