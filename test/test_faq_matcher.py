@@ -3,6 +3,8 @@
 from __future__ import absolute_import
 
 import urllib3
+import time
+
 import unittest
 
 import feersum_nlu
@@ -30,10 +32,10 @@ class TestFAQMatcher(unittest.TestCase):
 
         instance_name = 'test_faq_mtchr'
 
-        create_details = feersum_nlu.CreateDetails(name=instance_name,
-                                                   desc="Test FAQ matcher.",
-                                                   lid_model_file="lid_za",
-                                                   load_from_store=False)
+        create_details = feersum_nlu.FaqMatcherCreateDetails(name=instance_name,
+                                                             desc="Test FAQ matcher.",
+                                                             lid_model_file="lid_za",
+                                                             load_from_store=False)
 
         # The training samples.
         labelled_text_sample_list = []
@@ -47,14 +49,27 @@ class TestFAQMatcher(unittest.TestCase):
         labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Hoe kan ek 'n prys kry?",
                                                                         label="quote"))
 
+        additional_labelled_text_sample_list = []
+        additional_labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How much does a quote cost?",
+                                                                                   label="quote"))
+        additional_labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How long does a claim take?",
+                                                                                   label="claim"))
+
         word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
                               feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
                               feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul')]
+        # The playground's pre-loaded embeddings include:
+        # "feers_wm_afr", "feers_wm_eng", "feers_wm_nbl", "feers_wm_xho",
+        # "feers_wm_zul", "feers_wm_ssw", "feers_wm_nso", "feers_wm_sot",
+        # "feers_wm_tsn", "feers_wm_ven", "feers_wm_tso"
+        # and "glove6B50D_trimmed"
 
         train_details = feersum_nlu.TrainDetails(threshold=0.85,
-                                                 word_manifold_list=word_manifold_list)
+                                                 word_manifold_list=word_manifold_list,
+                                                 immediate_mode=True)
 
-        text_input = feersum_nlu.TextInput("Where can I get a quote?")
+        text_input_0 = feersum_nlu.TextInput("Where can I get a quote?")
+        text_input_1 = feersum_nlu.TextInput("How long does a claim take?")
 
         print()
 
@@ -95,11 +110,14 @@ class TestFAQMatcher(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            # print("Get the details of all loaded FAQ matcher:")
-            # api_response = api_instance.faq_matcher_get_details_all()
-            # print(" type(api_response)", type(api_response))
-            # print(" api_response", api_response)
-            # print()
+            print("Waiting for training...", flush=True)
+            time.sleep(20.0)
+
+            print("Get the details of all loaded FAQ matchers:")
+            api_response = api_instance.faq_matcher_get_details_all()
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
 
             print("Get the details of specific named loaded FAQ matcher:")
             api_response = api_instance.faq_matcher_get_details(instance_name)
@@ -124,7 +142,7 @@ class TestFAQMatcher(unittest.TestCase):
             print()
 
             print("Match a question:")
-            api_response = api_instance.faq_matcher_retrieve(instance_name, text_input)
+            api_response = api_instance.faq_matcher_retrieve(instance_name, text_input_0)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
@@ -133,6 +151,28 @@ class TestFAQMatcher(unittest.TestCase):
             if len(scored_label_list) > 0:
                 scored_label = scored_label_list[0]
                 self.assertTrue(scored_label.label == 'quote')
+            else:
+                self.assertTrue(False)
+
+            # Make the model smarter by providing more training example and training online.
+            # Note: The training happens automatically after online samples provided.
+            print("Add online training samples to the FAQ matcher:")
+            api_response = api_instance.faq_matcher_online_training_samples(instance_name,
+                                                                            additional_labelled_text_sample_list)
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
+
+            print("Match a question:")
+            api_response = api_instance.faq_matcher_retrieve(instance_name, text_input_1)
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
+
+            scored_label_list = api_response
+            if len(scored_label_list) > 0:
+                scored_label = scored_label_list[0]
+                self.assertTrue(scored_label.label == 'claim')
             else:
                 self.assertTrue(False)
 

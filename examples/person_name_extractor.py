@@ -19,9 +19,9 @@ api_instance = feersum_nlu.PersonNameEntityExtractorsApi(feersum_nlu.ApiClient(c
 instance_name = 'test_person_name_extr'
 
 person_name_ent_create_details = \
-    feersum_nlu.PersonNameEntCreateDetails(name=instance_name,
-                                           desc="Test person_name extractor.",
-                                           load_from_store=False)
+    feersum_nlu.PersonNameEntityExtractorCreateDetails(name=instance_name,
+                                                       desc="Test person_name extractor.",
+                                                       load_from_store=False)
 
 text_input = feersum_nlu.TextInput("My name is not John Doe.")
 
@@ -34,11 +34,11 @@ try:
     print(" api_response", api_response)
     print()
 
-    # print("Get the details of all loaded entity extractors:")
-    # api_response = api_instance.person_name_entity_extractor_get_details_all()
-    # print(" type(api_response)", type(api_response))
-    # print(" api_response", api_response)
-    # print()
+    print("Get the details of all loaded entity extractors:")
+    api_response = api_instance.person_name_entity_extractor_get_details_all()
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
 
     print("Get the details of specific named loaded entity extractor:")
     api_response = api_instance.person_name_entity_extractor_get_details(instance_name)

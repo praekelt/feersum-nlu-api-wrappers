@@ -26,15 +26,15 @@ class TestLID(unittest.TestCase):
 
         configuration.host = feersumnlu_host
 
-        api_instance = feersum_nlu.Lr4LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
+        api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
 
         instance_name = 'test_lr4'
 
-        lr4_create_details = \
-            feersum_nlu.Lr4CreateDetails(name=instance_name,
-                                         desc="Test LR4 lang ident model.",
-                                         lid_model_file='lid_za',
-                                         load_from_store=False)
+        create_details = \
+            feersum_nlu.LanguageRecogniserCreateDetails(name=instance_name,
+                                                        desc="Test LR4 lang ident model.",
+                                                        lid_model_file='lid_za',
+                                                        load_from_store=False)
 
         text_input = feersum_nlu.TextInput("Isakhiwo sami sebiwe?")
 
@@ -42,19 +42,19 @@ class TestLID(unittest.TestCase):
 
         try:
             print("Create the lr4 instance:")
-            api_response = api_instance.lr4_language_recogniser_create(lr4_create_details)
+            api_response = api_instance.language_recogniser_create(create_details)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
-            # print("Get the details of all loaded lr4 instances:")
-            # api_response = api_instance.lr4_language_recogniser_get_details_all()
-            # print(" type(api_response)", type(api_response))
-            # print(" api_response", api_response)
-            # print()
+            print("Get the details of all loaded lr4 instances:")
+            api_response = api_instance.language_recogniser_get_details_all()
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
 
             print("Get the details of specific named loaded lr4 instance:")
-            api_response = api_instance.lr4_language_recogniser_get_details(instance_name)
+            api_response = api_instance.language_recogniser_get_details(instance_name)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
@@ -63,13 +63,13 @@ class TestLID(unittest.TestCase):
             # but guaranteed to be available
             # after training.
             print("Get the labels of named loaded lr4 instance:")
-            api_response = api_instance.lr4_language_recogniser_get_labels(instance_name)
+            api_response = api_instance.language_recogniser_get_labels(instance_name)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Identify the language of the text:")
-            api_response = api_instance.lr4_language_recogniser_retrieve(instance_name, text_input)
+            api_response = api_instance.language_recogniser_retrieve(instance_name, text_input)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
@@ -82,7 +82,7 @@ class TestLID(unittest.TestCase):
                 self.assertTrue(False)
 
             print("Delete specific named loaded lr4 instance:")
-            api_response = api_instance.lr4_language_recogniser_get_details(instance_name)
+            api_response = api_instance.language_recogniser_get_details(instance_name)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()

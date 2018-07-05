@@ -31,9 +31,9 @@ class TestDucklingExtractor(unittest.TestCase):
         instance_name = 'test_duckling_extr'
 
         duckling_ent_create_details = \
-            feersum_nlu.DucklingEntCreateDetails(name=instance_name,
-                                                 desc="Test duckling extractor.",
-                                                 load_from_store=False)
+            feersum_nlu.DucklingEntityExtractorCreateDetails(name=instance_name,
+                                                             desc="Test duckling extractor.",
+                                                             load_from_store=False)
 
         text_input = feersum_nlu.TextInput("5 January 2017 at 15:00.")
 
@@ -46,11 +46,11 @@ class TestDucklingExtractor(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            # print("Get the details of all loaded entity extractors:")
-            # api_response = api_instance.duckling_entity_extractor_get_details_all()
-            # print(" type(api_response)", type(api_response))
-            # print(" api_response", api_response)
-            # print()
+            print("Get the details of all loaded entity extractors:")
+            api_response = api_instance.duckling_entity_extractor_get_details_all()
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
 
             print("Get the details of specific named loaded entity extractor:")
             api_response = api_instance.duckling_entity_extractor_get_details(instance_name)
@@ -67,7 +67,8 @@ class TestDucklingExtractor(unittest.TestCase):
             entity_list = api_response
             if len(entity_list) > 0:
                 entity = entity_list[0]
-                self.assertTrue(entity.get('value', '') == '2017-01-05T15:00:00.000+02:00')
+                self.assertTrue((entity.get('value', '') == '2017-01-05T15:00:00.000+02:00') or
+                                (entity.get('value', '') == '2017-01-05T15:00:00.000Z'))
             else:
                 self.assertTrue(False)
 

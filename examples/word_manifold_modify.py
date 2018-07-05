@@ -22,10 +22,10 @@ new_word_list = [{'new_word': 'chatbot', 'similar_to': 'robot'}]  # NewWordList 
 new_word_list_b = [{'new_word': 'chatbots', 'similar_to': 'robots'},
                    {'new_word': 'shaki', 'similar_to': 'brown'}]  # NewWordList | List of new words.
 
-create_details = feersum_nlu.WmCreateDetails(name=instance_name,
-                                             desc="Test word manifold.",
-                                             word_vectors_file="glove.6B.50d.trimmed.txt",
-                                             load_from_store=False)  # file present on server
+create_details = feersum_nlu.WordManifoldCreateDetails(name=instance_name,
+                                                       desc="Test word manifold.",
+                                                       word_vectors_file="glove.6B.50d.trimmed.txt",
+                                                       load_from_store=False)  # file present on server
 
 # create_details = feersum_nlu.WmCreateDetails(name=instance_name, load_from_store=True)
 

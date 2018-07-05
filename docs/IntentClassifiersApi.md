@@ -147,11 +147,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **intent_classifier_create**
-> InstanceDetail intent_classifier_create(create_details)
+> IntentClassifierInstanceDetail intent_classifier_create(create_details)
 
 Create an intent classifier.
 
-Create a new intent classifier or load one from the store. Returns the details of the new or loaded instance.
+Create a new intent classifier or reload one from the trash. Returns the details of the new or loaded instance.
 
 ### Example
 ```python
@@ -174,7 +174,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
-create_details = feersum_nlu.CreateDetails() # CreateDetails | The details of the instance to create.
+create_details = feersum_nlu.IntentClassifierCreateDetails() # IntentClassifierCreateDetails | The details of the instance to create.
 
 try:
     # Create an intent classifier.
@@ -188,11 +188,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_details** | [**CreateDetails**](CreateDetails.md)| The details of the instance to create. | 
+ **create_details** | [**IntentClassifierCreateDetails**](IntentClassifierCreateDetails.md)| The details of the instance to create. | 
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**IntentClassifierInstanceDetail**](IntentClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -267,11 +267,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **intent_classifier_del**
-> InstanceDetail intent_classifier_del(instance_name)
+> IntentClassifierInstanceDetail intent_classifier_del(instance_name)
 
 Delete named instance.
 
-Delete and return the details of the named intent classifier instance.
+Delete and return the details of the named intent classifier instance. Deleted models can be reloaded from the trash with the create operation.
 
 ### Example
 ```python
@@ -312,7 +312,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**IntentClassifierInstanceDetail**](IntentClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -566,7 +566,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **intent_classifier_get_details**
-> InstanceDetail intent_classifier_get_details(instance_name)
+> IntentClassifierInstanceDetail intent_classifier_get_details(instance_name)
 
 Get details of named instance.
 
@@ -611,7 +611,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**IntentClassifierInstanceDetail**](IntentClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -625,7 +625,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **intent_classifier_get_details_all**
-> list[InstanceDetail] intent_classifier_get_details_all()
+> list[IntentClassifierInstanceDetail] intent_classifier_get_details_all()
 
 Get list of loaded intent classifiers.
 
@@ -666,7 +666,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**list[InstanceDetail]**](InstanceDetail.md)
+[**list[IntentClassifierInstanceDetail]**](IntentClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -979,7 +979,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **intent_classifier_set_params**
-> InstanceDetail intent_classifier_set_params(instance_name, model_params)
+> IntentClassifierInstanceDetail intent_classifier_set_params(instance_name, model_params)
 
 Set the model parameters of named intent classifier.
 
@@ -1026,7 +1026,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**IntentClassifierInstanceDetail**](IntentClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -1040,7 +1040,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **intent_classifier_train**
-> InstanceDetail intent_classifier_train(instance_name, train_details)
+> IntentClassifierInstanceDetail intent_classifier_train(instance_name, train_details)
 
 Train the named intent classifier.
 
@@ -1087,7 +1087,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**IntentClassifierInstanceDetail**](IntentClassifierInstanceDetail.md)
 
 ### Authorization
 

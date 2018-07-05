@@ -22,6 +22,7 @@ instance_name = 'feers_wm_eng'
 # "feers_wm_afr", "feers_wm_eng", "feers_wm_nbl", "feers_wm_xho",
 # "feers_wm_zul", "feers_wm_ssw", "feers_wm_nso", "feers_wm_sot",
 # "feers_wm_tsn", "feers_wm_ven", "feers_wm_tso"
+# and "glove6B50D_trimmed"
 
 word_and_threshold = feersum_nlu.WordAndThreshold('cat', 0.65)
 misspelt_word = feersum_nlu.TextInput('hospitle')

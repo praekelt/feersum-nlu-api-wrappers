@@ -147,11 +147,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_create**
-> InstanceDetail faq_matcher_create(create_details)
+> FaqMatcherInstanceDetail faq_matcher_create(create_details)
 
 Create an FAQ matcher.
 
-Create a new faq matcher or load one from the store. Returns the details of the new or loaded instance.
+Create a new faq matcher or reload one from the trash. Returns the details of the new or loaded instance.
 
 ### Example
 ```python
@@ -174,7 +174,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
-create_details = feersum_nlu.CreateDetails() # CreateDetails | The details of the instance to create.
+create_details = feersum_nlu.FaqMatcherCreateDetails() # FaqMatcherCreateDetails | The details of the instance to create.
 
 try:
     # Create an FAQ matcher.
@@ -188,11 +188,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_details** | [**CreateDetails**](CreateDetails.md)| The details of the instance to create. | 
+ **create_details** | [**FaqMatcherCreateDetails**](FaqMatcherCreateDetails.md)| The details of the instance to create. | 
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**FaqMatcherInstanceDetail**](FaqMatcherInstanceDetail.md)
 
 ### Authorization
 
@@ -267,11 +267,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_del**
-> InstanceDetail faq_matcher_del(instance_name)
+> FaqMatcherInstanceDetail faq_matcher_del(instance_name)
 
 Delete named instance.
 
-Delete and return the details of the named FAQ matcher instance.
+Delete and return the details of the named FAQ matcher instance. Deleted models can be reloaded from the trash with the create operation.
 
 ### Example
 ```python
@@ -312,7 +312,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**FaqMatcherInstanceDetail**](FaqMatcherInstanceDetail.md)
 
 ### Authorization
 
@@ -566,7 +566,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_get_details**
-> InstanceDetail faq_matcher_get_details(instance_name)
+> FaqMatcherInstanceDetail faq_matcher_get_details(instance_name)
 
 Get details of named instance.
 
@@ -611,7 +611,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**FaqMatcherInstanceDetail**](FaqMatcherInstanceDetail.md)
 
 ### Authorization
 
@@ -625,7 +625,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_get_details_all**
-> list[InstanceDetail] faq_matcher_get_details_all()
+> list[FaqMatcherInstanceDetail] faq_matcher_get_details_all()
 
 Get list of loaded FAQ matchers.
 
@@ -666,7 +666,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**list[InstanceDetail]**](InstanceDetail.md)
+[**list[FaqMatcherInstanceDetail]**](FaqMatcherInstanceDetail.md)
 
 ### Authorization
 
@@ -979,7 +979,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_set_params**
-> InstanceDetail faq_matcher_set_params(instance_name, model_params)
+> FaqMatcherInstanceDetail faq_matcher_set_params(instance_name, model_params)
 
 Set the model parameters of named FAQ matcher.
 
@@ -1026,7 +1026,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**FaqMatcherInstanceDetail**](FaqMatcherInstanceDetail.md)
 
 ### Authorization
 
@@ -1040,7 +1040,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_train**
-> InstanceDetail faq_matcher_train(instance_name, train_details)
+> FaqMatcherInstanceDetail faq_matcher_train(instance_name, train_details)
 
 Train the named FAQ matcher.
 
@@ -1087,7 +1087,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceDetail**](InstanceDetail.md)
+[**FaqMatcherInstanceDetail**](FaqMatcherInstanceDetail.md)
 
 ### Authorization
 

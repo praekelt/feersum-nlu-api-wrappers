@@ -18,15 +18,18 @@ api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configurat
 
 instance_name = 'test_intent_clsfr'
 
-
 word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng')]
+# The playground's pre-loaded embeddings include:
+# "feers_wm_afr", "feers_wm_eng", "feers_wm_nbl", "feers_wm_xho",
+# "feers_wm_zul", "feers_wm_ssw", "feers_wm_nso", "feers_wm_sot",
+# "feers_wm_tsn", "feers_wm_ven", "feers_wm_tso"
+# and "glove6B50D_trimmed"
 
-
-create_details = feersum_nlu.CreateDetails(name=instance_name,
-                                           desc="Test intent classifier.",
-                                           long_name=instance_name,
-                                           lid_model_file="lid_za",
-                                           load_from_store=False)
+create_details = feersum_nlu.IntentClassifierCreateDetails(name=instance_name,
+                                                           desc="Test intent classifier.",
+                                                           long_name=instance_name,
+                                                           lid_model_file="lid_za",
+                                                           load_from_store=False)
 
 # The training samples.
 labelled_text_sample_list = []
@@ -37,7 +40,8 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would li
 
 # train_details = feersum_nlu.TrainDetails(immediate_mode=True)
 train_details = feersum_nlu.TrainDetails(threshold=0.85,
-                                         word_manifold_list=word_manifold_list)
+                                         word_manifold_list=word_manifold_list,
+                                         immediate_mode=True)
 
 text_input = feersum_nlu.TextInput("How do I get a quote?")
 
@@ -92,11 +96,11 @@ try:
     print(" api_response", api_response)
     print()
 
-    # print("Get the details of all loaded intent classifiers:")
-    # api_response = api_instance.intent_classifier_get_details_all()
-    # print(" type(api_response)", type(api_response))
-    # print(" api_response", api_response)
-    # print()
+    print("Get the details of all loaded intent classifiers:")
+    api_response = api_instance.intent_classifier_get_details_all()
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
 
     print("Get the details of specific named loaded intent classifiers:")
     api_response = api_instance.intent_classifier_get_details(instance_name)
