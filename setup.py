@@ -13,7 +13,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "feersum_nlu"
-VERSION = "2.0.22.dev0"
+VERSION = "2.0.22"
 
 # To install the library, run the following
 #
