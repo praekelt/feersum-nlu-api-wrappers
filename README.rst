@@ -15,7 +15,8 @@ These language wrappers and examples are for version 2.0.22 of the HTTP API. The
 from a Swagger spec of the API available at `<https://nlu.playground.feersum.io:443/nlu/v2/swagger.json>`_
 
 
-(Note: This repo is currently being updated with more examples)
+(Note: This repo is currently being updated with more examples. You may subscribe to update notifications
+at `<https://libraries.io/pypi/feersum_nlu>`_ )
 
 Overview
 ********
