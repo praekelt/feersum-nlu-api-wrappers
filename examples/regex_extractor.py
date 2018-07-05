@@ -20,7 +20,7 @@ instance_name = 'test_regex_extr'
 
 # Try both the year, make and model  &  the make, model, year regular expressions below.
 # ToDo: Jeep Grand Cherokee !!!
-# vehicle_make_reg_ex = "(Suzuki|Honda|Ford|VW|Jeep|Toyota|Fiat|Porsche|Nissan|Chev|Chevrolet|Datsun|Mitsubishi|Subaru)"
+vehicle_make_reg_ex = "(Suzuki|Honda|Ford|VW|Jeep|Toyota|Fiat|Porsche|Nissan|Chev|Chevrolet|Datsun|Mitsubishi|Subaru)"
 # regex_str = r"(?P<year>[0-9]{4})[.,\s]+(?P<make>" + vehicle_make_reg_ex + r")[.,\s]+(?P<model>\w+)"
 # regex_str = r"(?P<make>" + vehicle_make_reg_ex + r")[.,\s]+(?P<model>\w+)[.,\s]+[.,\s\w]*?(?P<year>[0-9]{4})"
 

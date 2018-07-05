@@ -20,7 +20,7 @@ instance_name = 'test_faq_mtchr'
 
 create_details = feersum_nlu.CreateDetails(name=instance_name,
                                            desc="Test FAQ matcher.",
-                                           long_name="Loong Name",
+                                           long_name="The optional more descriptive name.",
                                            lid_model_file="lid_za",
                                            load_from_store=False)
 
@@ -181,7 +181,7 @@ try:
     print()
 
     print("Update the parameters:")
-    model_params = feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test FAQ matcher.", long_name="Loooong name.")
+    model_params = feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test FAQ matcher.", long_name="A longer name.")
     api_response = api_instance.faq_matcher_set_params(instance_name, model_params)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
