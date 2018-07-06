@@ -28,7 +28,7 @@ setup(
     name=NAME,
     version=VERSION,
     description="FeersumNLU API",
-    long_description = open("README.rst", "r").read() + open("CHANGELOG.rst", "r").read(),
+    long_description = open("README.rst", "r").read() + "\n\n" + open("CHANGELOG.rst", "r").read(),
     author="Feersum Engine",
     author_email="nlu@feersum.io",
     url="https://github.com/praekelt/feersum-nlu-api-wrappers",

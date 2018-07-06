@@ -160,3 +160,5 @@ To generate a PHP wrapper, for example, change the generate command to something
 .. code-block:: sh
 
     $ swagger-codegen generate -i swagger/swagger.yaml -l php -c swagger/swagger_codegen-python_config.json -o swagger/build_php
+
+
