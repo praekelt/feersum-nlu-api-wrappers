@@ -4,6 +4,7 @@ FeersumNLU API Wrappers
 .. image:: https://badge.fury.io/py/feersum_nlu.svg
     :target: https://badge.fury.io/py/feersum_nlu
 
+
 This git repo hosts Python and other language wrappers for the FeersumNLU RESTful HTTP API. FeersumNLU is the natural
 language understanding component of Feersum Engine `<https://www.feersum.io>`_ .
 
@@ -160,3 +161,5 @@ To generate a PHP wrapper, for example, change the generate command to something
 .. code-block:: sh
 
     $ swagger-codegen generate -i swagger/swagger.yaml -l php -c swagger/swagger_codegen-python_config.json -o swagger/build_php
+
+
