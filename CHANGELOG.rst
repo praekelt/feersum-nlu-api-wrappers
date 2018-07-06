@@ -72,8 +72,7 @@ Version 2.0.20
 Version 2.0.18
 ==============
 
-- Added a 'long_name' attribute to all models. May be used as a 'pretty' formatted model name while the existing model
-  name is really a slug used in urls, etc.
+- Added a 'long_name' attribute to all models. May be used as a 'pretty' formatted model name while the existing model name is really a slug used in urls, etc.
 
 - Addition of params end point to all models.  Used to update and get model attributes like desc, long_name and threshold.
 
