@@ -2312,7 +2312,7 @@ responses:
     description: The model instance detail
     schema:
       $ref: "#/definitions/word_manifold_instance_detail"
-      
+
   word_manifold_instance_detail_list:
     description: A list of models' instance details
     schema:
@@ -2324,7 +2324,7 @@ responses:
     description: The model instance detail
     schema:
       $ref: "#/definitions/faq_matcher_instance_detail"
-      
+
   faq_matcher_instance_detail_list:
     description: A list of models' instance details
     schema:
@@ -2348,7 +2348,7 @@ responses:
     description: The model instance detail
     schema:
       $ref: "#/definitions/regex_entity_extractor_instance_detail"
-      
+
   regex_entity_extractor_instance_detail_list:
     description: A list of models' instance details
     schema:
@@ -2360,7 +2360,7 @@ responses:
     description: The model instance detail
     schema:
       $ref: "#/definitions/person_name_entity_extractor_instance_detail"
-      
+
   person_name_entity_extractor_instance_detail_list:
     description: A list of models' instance details
     schema:
@@ -2372,7 +2372,7 @@ responses:
     description: The model instance detail
     schema:
       $ref: "#/definitions/duckling_entity_extractor_instance_detail"
-      
+
   duckling_entity_extractor_instance_detail_list:
     description: A list of models' instance details
     schema:
@@ -2384,7 +2384,7 @@ responses:
     description: The model instance detail
     schema:
       $ref: "#/definitions/sim_word_entity_extractor_instance_detail"
-      
+
   sim_word_entity_extractor_instance_detail_list:
     description: A list of models' instance details
     schema:
@@ -2396,7 +2396,7 @@ responses:
     description: The model instance detail
     schema:
       $ref: "#/definitions/language_recogniser_instance_detail"
-      
+
   language_recogniser_instance_detail_list:
     description: A list of models' instance details
     schema:
@@ -2444,14 +2444,14 @@ responses:
       items:
         $ref: "#/definitions/entity"
 
-  date_entity_list:                  
+  date_entity_list:
     description: The list of structured dates.
     schema:
       type: array
       items:
         $ref: "#/definitions/date_entity"
 
-  sentiment:                  
+  sentiment:
     description: The coarse sentiment.
     schema:
       $ref: "#/definitions/sentiment"
@@ -2468,11 +2468,11 @@ definitions:
     - model_type
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance. 
+        description: The sluggy-url-friendly-name of the instance.
         type: string
         example: example_instance
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -2518,7 +2518,7 @@ definitions:
     - id
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance. 
+        description: The sluggy-url-friendly-name of the instance.
         type: string
         example: 'example_instance'
       id:
@@ -2526,7 +2526,7 @@ definitions:
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -2534,22 +2534,22 @@ definitions:
         type: string
         example: 'This is an example of this type of model.'
       training_accuracy:
-        description: The accuracy of the model as measured on the training set. 
+        description: The accuracy of the model as measured on the training set.
         type: number
         example: 1.0
       training_f1:
-        description: The average F-score of the model as measured on the training set. 
+        description: The average F-score of the model as measured on the training set.
         type: number
         example: 1.0
       training_cm:
         description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
       testing_accuracy:
-        description: The accuracy of the model as measured on the testing set. 
+        description: The accuracy of the model as measured on the testing set.
         type: number
         example: 1.0
       testing_f1:
-        description: The average F-score of the model as measured on the testing set. 
+        description: The average F-score of the model as measured on the testing set.
         type: number
         example: 1.0
       testing_cm:
@@ -2571,7 +2571,7 @@ definitions:
     - id
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance. 
+        description: The sluggy-url-friendly-name of the instance.
         type: string
         example: 'example_instance'
       id:
@@ -2579,7 +2579,7 @@ definitions:
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -2587,7 +2587,7 @@ definitions:
         type: string
         example: 'This is an example of this type of model.'
       word_vectors_file:
-        description: The input file on the server (if any) to use. 
+        description: The input file on the server (if any) to use.
         type: string
         example: 'glove_za_eng.txt'
 
@@ -2724,7 +2724,7 @@ definitions:
     - regex
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance. 
+        description: The sluggy-url-friendly-name of the instance.
         type: string
         example: 'example_instance'
       id:
@@ -2732,7 +2732,7 @@ definitions:
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -2752,7 +2752,7 @@ definitions:
     - id
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance. 
+        description: The sluggy-url-friendly-name of the instance.
         type: string
         example: 'example_instance'
       id:
@@ -2760,7 +2760,7 @@ definitions:
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -2776,7 +2776,7 @@ definitions:
     - id
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance. 
+        description: The sluggy-url-friendly-name of the instance.
         type: string
         example: 'example_instance'
       id:
@@ -2784,7 +2784,7 @@ definitions:
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -2803,7 +2803,7 @@ definitions:
     - word_manifold
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance. 
+        description: The sluggy-url-friendly-name of the instance.
         type: string
         example: 'example_instance'
       id:
@@ -2811,7 +2811,7 @@ definitions:
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -2842,7 +2842,7 @@ definitions:
     - lid_model_file
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance. 
+        description: The sluggy-url-friendly-name of the instance.
         type: string
         example: 'example_instance'
       id:
@@ -2850,7 +2850,7 @@ definitions:
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -2894,11 +2894,11 @@ definitions:
     - load_from_store
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance. 
+        description: The sluggy-url-friendly-name of the instance.
         type: string
         example: 'example_instance'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -2913,7 +2913,7 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
-        
+
   intent_classifier_create_details:
     description: The details of the model instance to create.
     type: object
@@ -2950,11 +2950,11 @@ definitions:
     - load_from_store
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance. 
+        description: The sluggy-url-friendly-name of the instance.
         type: string
         example: 'example_instance'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -2966,7 +2966,7 @@ definitions:
         type: boolean
         example: False
       word_vectors_file:
-        description: The input file on the server (if any) to use. 
+        description: The input file on the server (if any) to use.
         type: string
         example: 'glove_za_eng.txt'
 
@@ -2978,11 +2978,11 @@ definitions:
     - load_from_store
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance to create. 
+        description: The sluggy-url-friendly-name of the instance to create.
         type: string
         example: 'example_instance'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -3006,11 +3006,11 @@ definitions:
     - load_from_store
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance to create. 
+        description: The sluggy-url-friendly-name of the instance to create.
         type: string
         example: 'example_instance'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -3030,11 +3030,11 @@ definitions:
     - load_from_store
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance to create. 
+        description: The sluggy-url-friendly-name of the instance to create.
         type: string
         example: 'example_instance'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -3059,11 +3059,11 @@ definitions:
     - load_from_store
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance to create. 
+        description: The sluggy-url-friendly-name of the instance to create.
         type: string
         example: 'example_instance'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -3095,11 +3095,11 @@ definitions:
     - load_from_store
     properties:
       name:
-        description: The sluggy-url-friendly-name of the instance to create. 
+        description: The sluggy-url-friendly-name of the instance to create.
         type: string
         example: 'example_instance'
       long_name:
-        description: The human-friendly-name of the instance. 
+        description: The human-friendly-name of the instance.
         type: string
         example: The example instance.
       desc:
@@ -3137,7 +3137,7 @@ definitions:
         type: string
         example: "Greeting with speaker's name."
 
-  labeled_word_manifold:  
+  labeled_word_manifold:
     description: A labelled (e.g. lang_code labelled) word manifold instance.
     type: object
     required:
@@ -3167,8 +3167,8 @@ definitions:
         example: False
       word_manifold:
         description: |
-          The word manifold instance to use for training and later inference. 
-          
+          The word manifold instance to use for training and later inference.
+
           Rather use the word_manifold_list for supplying a language labelled list of word manifold instances to use in a multi-language system.
         type: string
         example: 'feers_wm_eng'
@@ -3199,7 +3199,7 @@ definitions:
         type: integer
         example: 4
 
-  text_input:     
+  text_input:
     description: The text input to be classified, matched or parsed.
     type: object
     required:
@@ -3209,7 +3209,7 @@ definitions:
         type: string
         example: 'Hi, you may call me Tom.'
 
-  word_and_threshold:  
+  word_and_threshold:
     description: A word and a threshold.
     type: object
     required:
@@ -3223,7 +3223,7 @@ definitions:
         type: number
         example: 0.75
 
-  word_and_distance:  
+  word_and_distance:
     description: A word and a distance.
     type: object
     required:
@@ -3237,7 +3237,7 @@ definitions:
         type: number
         example: 0.75
 
-  scored_label:  
+  scored_label:
     description: A class label with an associated probablity.
     type: object
     required:
@@ -3251,7 +3251,7 @@ definitions:
         type: number
         example: 0.95
 
-  class_label:  
+  class_label:
     description: A class label.
     type: string
     example: 'greeting'
@@ -3308,7 +3308,25 @@ definitions:
     description: An entity.
     type: object
 
-  sentiment:   
+  sentiment_detail:
+    description: A sentiment value for text from index with length len. Value may range from -1.0 (very UNhappy) to 1.0 (very happy).
+    type: object
+    required:
+    - value
+    - index
+    - len
+    properties:
+      value:
+        type: number
+        example: 0.54
+      index:
+        type: number
+        example: 0
+      len:
+        type: number
+        example: 20
+
+  sentiment:
     description: A sentiment value that may range from -1.0 (very UNhappy) to 1.0 (very happy).
     type: object
     required:
@@ -3317,3 +3335,8 @@ definitions:
       value:
         type: number
         example: 0.54
+      detail_list:
+        description: A list with detailed sentiments on parts of the text..
+        type: array
+        items:
+          $ref: "#/definitions/sentiment_detail"
