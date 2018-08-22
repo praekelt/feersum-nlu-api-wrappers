@@ -3309,7 +3309,7 @@ definitions:
     type: object
 
   sentiment_detail:
-    description: A sentiment value for text from index with length len. Value may range from -1.0 (very UNhappy) to 1.0 (very happy).
+    description: A sentiment value for text from index with length len. Value may range from -1.0 (very unhappy) to 1.0 (very happy).
     type: object
     required:
     - value
@@ -3327,7 +3327,7 @@ definitions:
         example: 20
 
   sentiment:
-    description: A sentiment value that may range from -1.0 (very UNhappy) to 1.0 (very happy).
+    description: A sentiment value that may range from -1.0 (very unhappy) to 1.0 (very happy).
     type: object
     required:
     - value
