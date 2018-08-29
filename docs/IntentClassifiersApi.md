@@ -1,6 +1,6 @@
 # feersum_nlu.IntentClassifiersApi
 
-All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.dev.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -22,6 +22,7 @@ Method | HTTP request | Description
 [**intent_classifier_retrieve**](IntentClassifiersApi.md#intent_classifier_retrieve) | **POST** /intent_classifiers/{instance_name}/retrieve | Classify intent.
 [**intent_classifier_set_params**](IntentClassifiersApi.md#intent_classifier_set_params) | **POST** /intent_classifiers/{instance_name}/params | Set the model parameters of named intent classifier.
 [**intent_classifier_train**](IntentClassifiersApi.md#intent_classifier_train) | **POST** /intent_classifiers/{instance_name}/train | Train the named intent classifier.
+[**intent_classifier_vaporise**](IntentClassifiersApi.md#intent_classifier_vaporise) | **POST** /intent_classifiers/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **intent_classifier_add_testing_samples**
@@ -1084,6 +1085,65 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **train_details** | [**TrainDetails**](TrainDetails.md)| The arguments provided to the train operation. | 
+
+### Return type
+
+[**IntentClassifierInstanceDetail**](IntentClassifierInstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **intent_classifier_vaporise**
+> IntentClassifierInstanceDetail intent_classifier_vaporise(instance_name)
+
+Vaporise the named model.
+
+Permanently vaporises a model even if not trashed.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try:
+    # Vaporise the named model.
+    api_response = api_instance.intent_classifier_vaporise(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling IntentClassifiersApi->intent_classifier_vaporise: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
 
 ### Return type
 

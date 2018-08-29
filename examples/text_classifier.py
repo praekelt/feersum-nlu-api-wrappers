@@ -117,6 +117,18 @@ try:
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
+
+    print("Delete named loaded text classifier:")
+    api_response = api_instance.text_classifier_del(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Vaporise named loaded text classifier:")
+    api_response = api_instance.text_classifier_vaporise(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
 except ApiException as e:
     print("Exception when calling a text classifier operation: %s\n" % e)
 except urllib3.exceptions.HTTPError as e:

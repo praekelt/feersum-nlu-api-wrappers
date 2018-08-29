@@ -9,7 +9,7 @@ info:
     url: https://www.feersum.io
     email: nlu@feersum.io
 
-host: nlu.playground.feersum.io:443
+host: nlu.dev.feersum.io:443
 
 basePath: /nlu/v2
 
@@ -20,7 +20,7 @@ consumes:
 - application/json
 produces:
 - application/json
-  
+
 # Global security (applies to all operations):
 securityDefinitions:
    APIKeyHeader_old:
@@ -40,7 +40,7 @@ tags:
 - name: dashboard
   description: A service endpoint to get your list of loaded model instances, the total API hits for each, API version, etc. This end-point my also be used to test if your service is available.
 - name: text_classifiers
-  description: The interface to your Naive Bayes text classifier model instances. A Naive Bayes text classifier model is useful for things like classifying phrases into predefined action or intent categories and may be trained by providing a number of example labeled phrases. Only whole word text features are exposed at the moment. To use a model of this type, first create one, provide training samples and train it up. Inference/predictions may then be made using the retrieve endpoint. 
+  description: The interface to your Naive Bayes text classifier model instances. A Naive Bayes text classifier model is useful for things like classifying phrases into predefined action or intent categories and may be trained by providing a number of example labeled phrases. Only whole word text features are exposed at the moment. To use a model of this type, first create one, provide training samples and train it up. Inference/predictions may then be made using the retrieve endpoint.
 - name: word_manifolds
   description: The interface to your word embedding model instances. Word embeddings are the language models used by the intent classifier, FAQ matcher as well as some entity extraction and language identification models. Note that the service is pre-loaded with default word embeddings which should be sufficient for most use cases.
 - name: intent_classifiers
@@ -56,7 +56,7 @@ tags:
 - name: regex_entity_extractors
   description: Interface to your regular expression entity extractor instances.
 - name: person_name_entity_extractors
-  description: Interface to your person_name entity extractor instances. 
+  description: Interface to your person_name entity extractor instances.
 - name: duckling_entity_extractors
   description: Interface to your duckling entity extractor instances. Duckling is an open source component that supports the extraction of dates, durations and intervals. It does support things like distances, volumes, etc., but these are not exposed at the moment.
 - name: sim_word_entity_extractors
@@ -108,7 +108,7 @@ paths:
           $ref: "#/responses/text_classifier_instance_detail"
         400:
           description: bad request
-          
+
     get:
       tags:
       - text_classifiers
@@ -163,7 +163,7 @@ paths:
           $ref: "#/responses/text_classifier_instance_detail"
         400:
           description: bad request
-         
+
 ########
 ## text_classifiers training samples
 ########
@@ -191,10 +191,10 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"        
+          $ref: "#/responses/total_samples"
         400:
           description: bad request
-          
+
     get:
       tags:
       - text_classifiers
@@ -210,7 +210,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -237,10 +237,10 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
-          
+
   /text_classifiers/{instance_name}/training_samples_all:
     delete:
       tags:
@@ -257,7 +257,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -288,10 +288,10 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"        
+          $ref: "#/responses/total_samples"
         400:
           description: bad request
-          
+
     get:
       tags:
       - text_classifiers
@@ -307,7 +307,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -334,10 +334,10 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
-          
+
   /text_classifiers/{instance_name}/testing_samples_all:
     delete:
       tags:
@@ -354,7 +354,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -446,6 +446,29 @@ paths:
           description: bad request
 
 ########
+## text_classifiers vaporise
+########
+  /text_classifiers/{instance_name}/vaporise:
+    post:
+      tags:
+      - text_classifiers
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/text_classifier_instance_detail"
+        400:
+          description: bad request
+
+########
 ## text_classifiers get list of class labels
 ########
   /text_classifiers/{instance_name}/get_labels:
@@ -493,7 +516,7 @@ paths:
           $ref: "#/definitions/class_label_pair"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list" 
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -522,7 +545,72 @@ paths:
           $ref: "#/responses/word_manifold_instance_detail"
         400:
           description: bad request
-          
+
+########
+## word_manifolds Get details of named instance
+########
+  /word_manifolds/{instance_name}:
+    get:
+      tags:
+      - word_manifolds
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+      operationId: word_manifold_get_details
+      description: Get the details of the named word manifold instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/word_manifold_instance_detail"
+        400:
+          description: bad request
+
+    delete:
+      tags:
+      - word_manifolds
+      summary: Delete named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+      operationId: word_manifold_del
+      description: Delete and return the details of the word manifold instance. Deleted models can be reloaded from the trash with the create operation.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/word_manifold_instance_detail"
+        400:
+          description: bad request
+
+########
+## word_manifolds vaporise
+########
+  /word_manifolds/{instance_name}/vaporise:
+    post:
+      tags:
+      - word_manifolds
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+      operationId: word_manifold_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/word_manifold_instance_detail"
+        400:
+          description: bad request
+
 ########
 ## word_manifolds vocab
 ########
@@ -530,7 +618,7 @@ paths:
     post:
       tags:
       - word_manifolds
-      summary: Add new words. 
+      summary: Add new words.
       x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
       operationId: word_manifold_add_similar_words
       description: Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold to the store it could take a few seconds to complete. Returns the details of the updated instance.
@@ -553,7 +641,7 @@ paths:
           $ref: "#/responses/word_manifold_instance_detail"
         400:
           description: bad request
-          
+
 ########
 ## word_manifolds similar_words
 ########
@@ -561,7 +649,7 @@ paths:
     post:
       tags:
       - word_manifolds
-      summary: Find similar words. 
+      summary: Find similar words.
       x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
       operationId: word_manifold_get_similar_words
       description: Returns words from the manifold that are similar to the parameter word.
@@ -590,7 +678,7 @@ paths:
     post:
       tags:
       - word_manifolds
-      summary: Spell correct a word. 
+      summary: Spell correct a word.
       x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
       operationId: word_manifold_spell_correct
       description: Spell correct a word replacing it with the most likely word from the manifold. Returns one or more scored candidate words.
@@ -637,7 +725,7 @@ paths:
           $ref: "#/responses/intent_classifier_instance_detail"
         400:
           description: bad request
-          
+
     get:
       tags:
       - intent_classifiers
@@ -679,7 +767,7 @@ paths:
       - intent_classifiers
       summary: Delete named instance.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
-      operationId: intent_classifier_del  
+      operationId: intent_classifier_del
       description: Delete and return the details of the named intent classifier instance. Deleted models can be reloaded from the trash with the create operation.
       parameters:
       - in: path
@@ -720,10 +808,10 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"        
+          $ref: "#/responses/total_samples"
         400:
           description: bad request
-          
+
     get:
       tags:
       - intent_classifiers
@@ -739,7 +827,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -766,10 +854,10 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
-          
+
   /intent_classifiers/{instance_name}/training_samples_all:
     delete:
       tags:
@@ -786,10 +874,10 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
-          
+
 ########
 ## intent_classifiers testing samples
 ########
@@ -817,10 +905,10 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"        
+          $ref: "#/responses/total_samples"
         400:
           description: bad request
-          
+
     get:
       tags:
       - intent_classifiers
@@ -836,7 +924,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -863,7 +951,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"     
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -883,7 +971,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -972,7 +1060,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"        
+          $ref: "#/responses/total_samples"
         400:
           description: bad request
 
@@ -1002,6 +1090,29 @@ paths:
       responses:
         200:
           $ref: "#/responses/scored_label_list"
+        400:
+          description: bad request
+
+########
+## intent_classifiers vaporise
+########
+  /intent_classifiers/{instance_name}/vaporise:
+    post:
+      tags:
+      - intent_classifiers
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
+      operationId: intent_classifier_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/intent_classifier_instance_detail"
         400:
           description: bad request
 
@@ -1053,7 +1164,7 @@ paths:
           $ref: "#/definitions/class_label_pair"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list" 
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -1083,7 +1194,7 @@ paths:
           $ref: "#/responses/faq_matcher_instance_detail"
         400:
           description: bad request
-          
+
     get:
       tags:
       - faq_matchers
@@ -1166,10 +1277,10 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"        
+          $ref: "#/responses/total_samples"
         400:
           description: bad request
-          
+
     get:
       tags:
       - faq_matchers
@@ -1185,7 +1296,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -1212,10 +1323,10 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
-          
+
   /faq_matchers/{instance_name}/training_samples_all:
     delete:
       tags:
@@ -1232,7 +1343,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -1263,10 +1374,10 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"        
+          $ref: "#/responses/total_samples"
         400:
           description: bad request
-          
+
     get:
       tags:
       - faq_matchers
@@ -1282,7 +1393,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"        
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -1309,10 +1420,10 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"   
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
-          
+
   /faq_matchers/{instance_name}/testing_samples_all:
     delete:
       tags:
@@ -1329,10 +1440,10 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list"   
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
-          
+
 ########
 ## faq_matchers train
 ########
@@ -1418,10 +1529,10 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"        
+          $ref: "#/responses/total_samples"
         400:
           description: bad request
-          
+
 ########
 ## faq_matchers retrieve
 ########
@@ -1448,6 +1559,29 @@ paths:
       responses:
         200:
           $ref: "#/responses/scored_label_list"
+        400:
+          description: bad request
+
+########
+## faq_matchers vaporise
+########
+  /faq_matchers/{instance_name}/vaporise:
+    post:
+      tags:
+      - faq_matchers
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/faq_matcher_instance_detail"
         400:
           description: bad request
 
@@ -1499,7 +1633,7 @@ paths:
           $ref: "#/definitions/class_label_pair"
       responses:
         200:
-          $ref: "#/responses/labelled_text_sample_list" 
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
 
@@ -1566,7 +1700,7 @@ paths:
           $ref: "#/responses/sentiment"
         400:
           description: bad request
-       
+
 
 ###################################
 ###################################
@@ -1593,7 +1727,7 @@ paths:
           $ref: "#/responses/regex_entity_extractor_instance_detail"
         400:
           description: bad request
-          
+
     get:
       tags:
       - regex_entity_extractors
@@ -1707,6 +1841,29 @@ paths:
         400:
           description: bad request
 
+########
+## regex_entity_extractors vaporise
+########
+  /regex_entity_extractors/{instance_name}/vaporise:
+    post:
+      tags:
+      - regex_entity_extractors
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.regex_entity_extractors_controller
+      operationId: regex_entity_extractor_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/regex_entity_extractor_instance_detail"
+        400:
+          description: bad request
+
 ###################################
 ###################################
 ########
@@ -1732,7 +1889,7 @@ paths:
           $ref: "#/responses/person_name_entity_extractor_instance_detail"
         400:
           description: bad request
-          
+
     get:
       tags:
       - person_name_entity_extractors
@@ -1846,6 +2003,29 @@ paths:
         400:
           description: bad request
 
+########
+## person_name_entity_extractors vaporise
+########
+  /person_name_entity_extractors/{instance_name}/vaporise:
+    post:
+      tags:
+      - person_name_entity_extractors
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
+      operationId: person_name_entity_extractor_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/person_name_entity_extractor_instance_detail"
+        400:
+          description: bad request
+
 ###################################
 ###################################
 ########
@@ -1871,7 +2051,7 @@ paths:
           $ref: "#/responses/duckling_entity_extractor_instance_detail"
         400:
           description: bad request
-          
+
     get:
       tags:
       - duckling_entity_extractors
@@ -1985,6 +2165,29 @@ paths:
         400:
           description: bad request
 
+########
+## duckling_entity_extractors vaporise
+########
+  /duckling_entity_extractors/{instance_name}/vaporise:
+    post:
+      tags:
+      - duckling_entity_extractors
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.duckling_entity_extractors_controller
+      operationId: duckling_entity_extractor_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/duckling_entity_extractor_instance_detail"
+        400:
+          description: bad request
+
 ###################################
 ###################################
 ########
@@ -2010,7 +2213,7 @@ paths:
           $ref: "#/responses/sim_word_entity_extractor_instance_detail"
         400:
           description: bad request
-          
+
     get:
       tags:
       - sim_word_entity_extractors
@@ -2124,6 +2327,28 @@ paths:
         400:
           description: bad request
 
+########
+## sim_word_entity_extractors vaporise
+########
+  /sim_word_entity_extractors/{instance_name}/vaporise:
+    post:
+      tags:
+      - sim_word_entity_extractors
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
+      operationId: sim_word_entity_extractor_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/sim_word_entity_extractor_instance_detail"
+        400:
+          description: bad request
 
 ###################################
 ###################################
@@ -2150,7 +2375,7 @@ paths:
           $ref: "#/responses/language_recogniser_instance_detail"
         400:
           description: bad request
-          
+
     get:
       tags:
       - language_recognisers
@@ -2265,6 +2490,29 @@ paths:
           description: bad request
 
 ########
+## language_recognisers vaporise
+########
+  /language_recognisers/{instance_name}/vaporise:
+    post:
+      tags:
+      - language_recognisers
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
+      operationId: language_recogniser_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/language_recogniser_instance_detail"
+        400:
+          description: bad request
+
+########
 ## language_recognisers get list of class labels
 ########
   /language_recognisers/{instance_name}/get_labels:
@@ -2295,7 +2543,7 @@ responses:
     description: Your dashboard content.
     schema:
       $ref: "#/definitions/dashboard_detail"
-      
+
   text_classifier_instance_detail:
     description: The model instance detail
     schema:
@@ -3206,8 +3454,13 @@ definitions:
     - text
     properties:
       text:
+        description: The text input to be classified, matched or parsed.
         type: string
         example: 'Hi, you may call me Tom.'
+      lang_code:
+        description: An optional ISO 639-3 language code hint - eng, afr, nbl, xho, zul, ssw, nso, sot, tsn, ven, tso.
+        type: string
+        example: 'eng'
 
   word_and_threshold:
     description: A word and a threshold.

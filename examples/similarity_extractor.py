@@ -56,6 +56,18 @@ try:
     print(" api_response", api_response)
     print()
 
+    print("Delete named loaded entity extractor:")
+    api_response = api_instance.sim_word_entity_extractor_del(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Vaporise named loaded entity extractor:")
+    api_response = api_instance.sim_word_entity_extractor_vaporise(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
 except ApiException as e:
     print("Exception when calling a entity extractor operation: %s\n" % e)
 except urllib3.exceptions.HTTPError as e:

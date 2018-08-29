@@ -82,7 +82,13 @@ class TestLID(unittest.TestCase):
                 self.assertTrue(False)
 
             print("Delete specific named loaded lr4 instance:")
-            api_response = api_instance.language_recogniser_get_details(instance_name)
+            api_response = api_instance.language_recogniser_del(instance_name)
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
+
+            print("Vaporise specific named loaded lr4 instance:")
+            api_response = api_instance.language_recogniser_vaporise(instance_name)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()

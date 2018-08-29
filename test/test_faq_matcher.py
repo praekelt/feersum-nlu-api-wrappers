@@ -176,8 +176,14 @@ class TestFAQMatcher(unittest.TestCase):
             else:
                 self.assertTrue(False)
 
-            print("Delete specific named loaded FAQ matcher:")
-            api_response = api_instance.faq_matcher_del(instance_name)
+            # print("Delete specific named loaded FAQ matcher:")
+            # api_response = api_instance.faq_matcher_del(instance_name)
+            # print(" type(api_response)", type(api_response))
+            # print(" api_response", api_response)
+            # print()
+
+            print("Vaporise specific named loaded FAQ matcher:")
+            api_response = api_instance.faq_matcher_vaporise(instance_name)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()

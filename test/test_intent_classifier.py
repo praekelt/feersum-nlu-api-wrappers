@@ -141,6 +141,12 @@ class TestIntentClassifier(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
+            print("Vaporise specific named loaded intent classifiers:")
+            api_response = api_instance.intent_classifier_vaporise(instance_name)
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
+
         except ApiException as e:
             print("Exception when calling an intent classifier operation: %s\n" % e)
             self.assertTrue(False)

@@ -1,6 +1,6 @@
 # feersum_nlu.PersonNameEntityExtractorsApi
 
-All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.dev.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**person_name_entity_extractor_get_details_all**](PersonNameEntityExtractorsApi.md#person_name_entity_extractor_get_details_all) | **GET** /person_name_entity_extractors | Get list of loaded regular expression entity extractors.
 [**person_name_entity_extractor_retrieve**](PersonNameEntityExtractorsApi.md#person_name_entity_extractor_retrieve) | **POST** /person_name_entity_extractors/{instance_name}/retrieve | Extract information based on the regular expression.
 [**person_name_entity_extractor_set_params**](PersonNameEntityExtractorsApi.md#person_name_entity_extractor_set_params) | **POST** /person_name_entity_extractors/{instance_name}/params | Set the model parameters of named person name entity extractor.
+[**person_name_entity_extractor_vaporise**](PersonNameEntityExtractorsApi.md#person_name_entity_extractor_vaporise) | **POST** /person_name_entity_extractors/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **person_name_entity_extractor_create**
@@ -350,6 +351,65 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
+
+### Return type
+
+[**PersonNameEntityExtractorInstanceDetail**](PersonNameEntityExtractorInstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **person_name_entity_extractor_vaporise**
+> PersonNameEntityExtractorInstanceDetail person_name_entity_extractor_vaporise(instance_name)
+
+Vaporise the named model.
+
+Permanently vaporises a model even if not trashed.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.PersonNameEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try:
+    # Vaporise the named model.
+    api_response = api_instance.person_name_entity_extractor_vaporise(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PersonNameEntityExtractorsApi->person_name_entity_extractor_vaporise: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
 
 ### Return type
 

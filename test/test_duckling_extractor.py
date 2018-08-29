@@ -72,8 +72,14 @@ class TestDucklingExtractor(unittest.TestCase):
             else:
                 self.assertTrue(False)
 
-            print("Delete named loaded entity extractor:")
-            api_response = api_instance.duckling_entity_extractor_del(instance_name)
+            # print("Delete named loaded entity extractor:")
+            # api_response = api_instance.duckling_entity_extractor_del(instance_name)
+            # print(" type(api_response)", type(api_response))
+            # print(" api_response", api_response)
+            # print()
+
+            print("Vaporise named loaded entity extractor:")
+            api_response = api_instance.duckling_entity_extractor_vaporise(instance_name)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()

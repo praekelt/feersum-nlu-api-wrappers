@@ -31,25 +31,31 @@ class TextInput(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'text': 'str'
+        'text': 'str',
+        'lang_code': 'str'
     }
 
     attribute_map = {
-        'text': 'text'
+        'text': 'text',
+        'lang_code': 'lang_code'
     }
 
-    def __init__(self, text=None):  # noqa: E501
+    def __init__(self, text=None, lang_code=None):  # noqa: E501
         """TextInput - a model defined in Swagger"""  # noqa: E501
 
         self._text = None
+        self._lang_code = None
         self.discriminator = None
 
         self.text = text
+        if lang_code is not None:
+            self.lang_code = lang_code
 
     @property
     def text(self):
         """Gets the text of this TextInput.  # noqa: E501
 
+        The text input to be classified, matched or parsed.  # noqa: E501
 
         :return: The text of this TextInput.  # noqa: E501
         :rtype: str
@@ -60,6 +66,7 @@ class TextInput(object):
     def text(self, text):
         """Sets the text of this TextInput.
 
+        The text input to be classified, matched or parsed.  # noqa: E501
 
         :param text: The text of this TextInput.  # noqa: E501
         :type: str
@@ -68,6 +75,29 @@ class TextInput(object):
             raise ValueError("Invalid value for `text`, must not be `None`")  # noqa: E501
 
         self._text = text
+
+    @property
+    def lang_code(self):
+        """Gets the lang_code of this TextInput.  # noqa: E501
+
+        An optional ISO 639-3 language code hint - eng, afr, nbl, xho, zul, ssw, nso, sot, tsn, ven, tso.  # noqa: E501
+
+        :return: The lang_code of this TextInput.  # noqa: E501
+        :rtype: str
+        """
+        return self._lang_code
+
+    @lang_code.setter
+    def lang_code(self, lang_code):
+        """Sets the lang_code of this TextInput.
+
+        An optional ISO 639-3 language code hint - eng, afr, nbl, xho, zul, ssw, nso, sot, tsn, ven, tso.  # noqa: E501
+
+        :param lang_code: The lang_code of this TextInput.  # noqa: E501
+        :type: str
+        """
+
+        self._lang_code = lang_code
 
     def to_dict(self):
         """Returns the model properties as a dict"""
