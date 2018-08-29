@@ -1,6 +1,6 @@
 # feersum_nlu.FaqMatchersApi
 
-All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.dev.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -22,6 +22,7 @@ Method | HTTP request | Description
 [**faq_matcher_retrieve**](FaqMatchersApi.md#faq_matcher_retrieve) | **POST** /faq_matchers/{instance_name}/retrieve | Match retrieve and FAQ.
 [**faq_matcher_set_params**](FaqMatchersApi.md#faq_matcher_set_params) | **POST** /faq_matchers/{instance_name}/params | Set the model parameters of named FAQ matcher.
 [**faq_matcher_train**](FaqMatchersApi.md#faq_matcher_train) | **POST** /faq_matchers/{instance_name}/train | Train the named FAQ matcher.
+[**faq_matcher_vaporise**](FaqMatchersApi.md#faq_matcher_vaporise) | **POST** /faq_matchers/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **faq_matcher_add_testing_samples**
@@ -1084,6 +1085,65 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **train_details** | [**TrainDetails**](TrainDetails.md)| The arguments provided to the train operation. | 
+
+### Return type
+
+[**FaqMatcherInstanceDetail**](FaqMatcherInstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **faq_matcher_vaporise**
+> FaqMatcherInstanceDetail faq_matcher_vaporise(instance_name)
+
+Vaporise the named model.
+
+Permanently vaporises a model even if not trashed.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try:
+    # Vaporise the named model.
+    api_response = api_instance.faq_matcher_vaporise(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling FaqMatchersApi->faq_matcher_vaporise: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
 
 ### Return type
 

@@ -29,7 +29,7 @@ class TestSentiment(unittest.TestCase):
         api_instance = feersum_nlu.SentimentDetectorsApi(feersum_nlu.ApiClient(configuration))
 
         model_instance_name = 'generic'
-        text_input = feersum_nlu.TextInput("I am very happy.")  # TextInput | The input text.
+        text_input = feersum_nlu.TextInput("I am very happy. Why are you unhappy?")  # TextInput | The input text.
 
         print()
 
@@ -40,7 +40,7 @@ class TestSentiment(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            self.assertTrue(0.5 < api_response.value < 0.75)
+            self.assertTrue(0.25 < api_response.value < 0.35)
 
         except ApiException as e:
             print("Exception when calling SentimentDetectorsApi->sentiment_detector_retrieve: %s\n" % e)

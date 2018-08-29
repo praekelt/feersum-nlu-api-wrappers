@@ -1,6 +1,6 @@
 # feersum_nlu.TextClassifiersApi
 
-All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.dev.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -21,6 +21,7 @@ Method | HTTP request | Description
 [**text_classifier_retrieve**](TextClassifiersApi.md#text_classifier_retrieve) | **POST** /text_classifiers/{instance_name}/retrieve | Classify text.
 [**text_classifier_set_params**](TextClassifiersApi.md#text_classifier_set_params) | **POST** /text_classifiers/{instance_name}/params | Set the model parameters of named text classifier.
 [**text_classifier_train**](TextClassifiersApi.md#text_classifier_train) | **POST** /text_classifiers/{instance_name}/train | Train the named text classifier.
+[**text_classifier_vaporise**](TextClassifiersApi.md#text_classifier_vaporise) | **POST** /text_classifiers/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **text_classifier_add_testing_samples**
@@ -1022,6 +1023,65 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **train_details** | [**TrainDetails**](TrainDetails.md)| The arguments provided to the train operation. | 
+
+### Return type
+
+[**TextClassifierInstanceDetail**](TextClassifierInstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **text_classifier_vaporise**
+> TextClassifierInstanceDetail text_classifier_vaporise(instance_name)
+
+Vaporise the named model.
+
+Permanently vaporises a model even if not trashed.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try:
+    # Vaporise the named model.
+    api_response = api_instance.text_classifier_vaporise(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TextClassifiersApi->text_classifier_vaporise: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
 
 ### Return type
 

@@ -114,7 +114,7 @@ class TrainDetails(object):
     def word_manifold(self):
         """Gets the word_manifold of this TrainDetails.  # noqa: E501
 
-        The word manifold instance to use for training and later inference.   Rather use the word_manifold_list for supplying a language labelled list of word manifold instances to use in a multi-language system.   # noqa: E501
+        The word manifold instance to use for training and later inference.  Rather use the word_manifold_list for supplying a language labelled list of word manifold instances to use in a multi-language system.   # noqa: E501
 
         :return: The word_manifold of this TrainDetails.  # noqa: E501
         :rtype: str
@@ -125,7 +125,7 @@ class TrainDetails(object):
     def word_manifold(self, word_manifold):
         """Sets the word_manifold of this TrainDetails.
 
-        The word manifold instance to use for training and later inference.   Rather use the word_manifold_list for supplying a language labelled list of word manifold instances to use in a multi-language system.   # noqa: E501
+        The word manifold instance to use for training and later inference.  Rather use the word_manifold_list for supplying a language labelled list of word manifold instances to use in a multi-language system.   # noqa: E501
 
         :param word_manifold: The word_manifold of this TrainDetails.  # noqa: E501
         :type: str

@@ -47,7 +47,7 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
     def __init__(self):
         """Constructor"""
         # Default Base url
-        self.host = "https://nlu.playground.feersum.io:443/nlu/v2"
+        self.host = "https://nlu.dev.feersum.io:443/nlu/v2"
         # Temp file folder for downloading files
         self.temp_folder_path = None
 

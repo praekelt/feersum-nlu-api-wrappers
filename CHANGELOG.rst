@@ -1,6 +1,22 @@
 Changelog
 *********
 
+Version 2.0.23
+==============
+
+Added multi-part sentiment:
+
+- The sentiment end-point use to return object {"value": 0.54}.
+
+- Now it returns object {"detail_list": [{"index": 0,"len": 20,"value": 0.54}],"value": 0.54}.
+
+- See class 'feersum_nlu.models.sentiment.Sentiment'
+
+Added the vaporise endpoint to permanently delete a model instance whether it is trashed or not.
+
+Added a lang_code hint to the retrieve/inference and data endpoints.
+
+
 Version 2.0.22
 ==============
 
