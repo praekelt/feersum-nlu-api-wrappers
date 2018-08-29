@@ -2,14 +2,14 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.22
+  version: 2.0.23
   title: FeersumNLU API
   contact:
     name: Feersum Engine
     url: https://www.feersum.io
     email: nlu@feersum.io
 
-host: nlu.dev.feersum.io:443
+host: nlu.playground.feersum.io:443
 
 basePath: /nlu/v2
 
