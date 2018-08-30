@@ -15,6 +15,7 @@ configuration = feersum_nlu.Configuration()
 configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative auth key header!
 
 configuration.host = feersumnlu_host
+print(configuration.host)
 
 api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
 
@@ -24,9 +25,14 @@ try:
     print("Save dashboard models to disk...", end='', flush=True)
     dashboard_detail = api_instance.dashboard_get_details()  # type: feersum_nlu.models.dashboard_detail.DashboardDetail
 
+    print(" type(api_response)", type(dashboard_detail))
+    print(" api_response", dashboard_detail)
+    print()
+
     for model in dashboard_detail.model_list:
         print(".", end='', flush=True)
-        if not model.trashed:
+
+        if not model.trashed and model.name != "":
             if model.model_type == 'text_classifier':
                 api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
                 instance_detail = api_instance.text_classifier_get_details(model.name)
@@ -48,7 +54,7 @@ try:
             if instance_detail is not None:
                 json_dict = instance_detail.to_dict()
 
-                filename = model.name + "_" + feersum_nlu_auth_token + "." + model.model_type
+                filename = "exported_models/" + model.name + "_" + feersum_nlu_auth_token + "." + model.model_type
 
                 with open(filename + ".json", "w") as json_file:
                     json.dump(json_dict, json_file, sort_keys=True, indent=4)
