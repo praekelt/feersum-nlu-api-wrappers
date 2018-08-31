@@ -250,11 +250,11 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Vaporise specific named loaded FAQ matcher:")
-    api_response = api_instance.faq_matcher_vaporise(instance_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # print("Vaporise specific named loaded FAQ matcher:")
+    # api_response = api_instance.faq_matcher_vaporise(instance_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
 except ApiException as e:
     print("Exception when calling an FAQ matcher operation: %s\n" % e)
