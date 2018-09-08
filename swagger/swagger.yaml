@@ -2,14 +2,14 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.22
+  version: 2.0.23
   title: FeersumNLU API
   contact:
     name: Feersum Engine
     url: https://www.feersum.io
     email: nlu@feersum.io
 
-host: nlu.dev.feersum.io:443
+host: nlu.playground.feersum.io:443
 
 basePath: /nlu/v2
 
@@ -38,29 +38,30 @@ security:
 
 tags:
 - name: dashboard
-  description: A service endpoint to get your list of loaded model instances, the total API hits for each, API version, etc. This end-point my also be used to test if your service is available.
+  description: A service endpoint to get your list of loaded model instances.
+  #This end-point my also be used to test if your service is available.
 - name: text_classifiers
-  description: The interface to your Naive Bayes text classifier model instances. A Naive Bayes text classifier model is useful for things like classifying phrases into predefined action or intent categories and may be trained by providing a number of example labeled phrases. Only whole word text features are exposed at the moment. To use a model of this type, first create one, provide training samples and train it up. Inference/predictions may then be made using the retrieve endpoint.
+  description: The API to your Naive Bayes text classifier instances useful for things like classifying phrases into predefined action or intent categories.
 - name: word_manifolds
-  description: The interface to your word embedding model instances. Word embeddings are the language models used by the intent classifier, FAQ matcher as well as some entity extraction and language identification models. Note that the service is pre-loaded with default word embeddings which should be sufficient for most use cases.
+  description: The API to your word embedding model instances. The service is pre-loaded with default word embeddings sufficient for most use cases.
 - name: intent_classifiers
-  description: The interface to your intent classifier model instances. An intent classifier is typically used to classify a user's utterance into a predefined action or intent category. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier. To use a model of this type, first create one, provide training samples and train it up. Inference/predictions may then be made using the retrieve endpoint.
+  description: The API to your intent classifier model instances used to classify a user's utterance into a predefined action or intent category.
 - name: faq_matchers
-  description: Interface to your FAQ matcher/classifier model instances. An FAQ matcher is used to match a user's question to a list of predefined FAQs. Because it makes use of a word embedding language model and also matches text based on word similarity it would typically perform better than the Naive Bayes text classifier. To use a model of this type, first create one, provide training samples and train it up. Inference/predictions may then be made using the retrieve endpoint.
+  description: The API to your FAQ matcher/classifier model instances useful to match a user's question to a list of predefined FAQs.
 - name: language_recognisers
-  description: The interface to your language recogniser model instances. It loads pre-trained language recogniser models trained over a set of languages. An 'lid_za' model is available that was trained on all 11 South African languages.
+  description: The API to your language recogniser model instances. An 'lid_za' input model file is available and trained on all 11 South African languages.
 - name: date_parsers
-  description: The interface to your date parser model instances. Only one instance is supported and preloaded at the moment. Use the name 'generic' to call this instance. Also see the duckling entity extractor which includes durations and intervals.
+  description: The API to a pre-configured 'generic' date parser.
 - name: sentiment_detectors
-  description: Interface to your sentiment detector model instances. Only one instance is supported and preloaded at the moment. Use the name 'generic' to call this instance.
+  description: The API to a pre-configured 'generic' sentiment detector.
 - name: regex_entity_extractors
-  description: Interface to your regular expression entity extractor instances.
+  description: The API to your regular expression entity extractor instances.
 - name: person_name_entity_extractors
-  description: Interface to your person_name entity extractor instances.
+  description: The API to your person_name entity extractor instances.
 - name: duckling_entity_extractors
-  description: Interface to your duckling entity extractor instances. Duckling is an open source component that supports the extraction of dates, durations and intervals. It does support things like distances, volumes, etc., but these are not exposed at the moment.
+  description: The API to your duckling entity extractor instances for things like distances, volumes, etc.
 - name: sim_word_entity_extractors
-  description: Interface to your word similarity entity extractor instances. A word embedding is used to find similar words.
+  description: The API to your similar/related words entity extractor instances.
 
 paths:
 ###################################

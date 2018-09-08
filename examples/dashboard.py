@@ -13,6 +13,7 @@ configuration = feersum_nlu.Configuration()
 configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative auth key header!
 
 configuration.host = feersumnlu_host
+print(configuration.host)
 
 api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
 
