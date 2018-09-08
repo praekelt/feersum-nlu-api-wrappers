@@ -21,13 +21,15 @@ instance_name = 'sim-word-extractor-test'
 similarity_ent_create_details = \
     feersum_nlu.SimWordEntityExtractorCreateDetails(name=instance_name,
                                                     desc="Test similarity extractor.",
-                                                    similar_words=["red", "green", "blue", "bang-bang orange", "John Smith"],
-                                                    threshold=0.5,
+                                                    similar_words=["red", "green", "blue", "purple",
+                                                                   "white", "black", "grey"],
+                                                    threshold=0.6,
                                                     word_manifold="feers_wm_eng",
                                                     # This is one of the built-in word embeddings.
                                                     load_from_store=False)
 
-text_input = feersum_nlu.TextInput("I have a bang-bang orange car for John Smith.")
+text_input = feersum_nlu.TextInput("I have an orange car with pink stripes.")
+#    api_response [{'entity': 'orange', 'similarity': 0.6299035873841149}, {'entity': 'pink', 'similarity': 0.690814436389662}]
 
 print()
 
