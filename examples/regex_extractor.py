@@ -35,8 +35,10 @@ regex_ent_create_details = \
                                                   regex=regex_str,
                                                   load_from_store=False)
 
-# text_input = feersum_nlu.TextInput("My car has license number JMS 007 GP.")
-text_input = feersum_nlu.TextInput("My car is a 2007 Jeep Wrangler with plate ZNX 450 GP")
+text_input = feersum_nlu.TextInput("My car has license number JMS 007 GP.")
+#    api_response [{'_all_groups': 'JMS 007 GP', 'license': 'JMS 007 GP'}]
+# text_input = feersum_nlu.TextInput("My car is a 2007 Jeep Wrangler with plate AB 34 EF GP")
+#    api_response [{'_all_groups': 'AB 34 EF GP', 'license': 'AB 34 EF GP'}]
 
 print()
 
