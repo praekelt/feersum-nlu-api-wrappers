@@ -24,14 +24,37 @@ create_details = feersum_nlu.TextClassifierCreateDetails(name=instance_name,
 
 # The training samples.
 labelled_text_sample_list = []
-labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to fill in a claim form",
-                                                                label="claim"))
-labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to get a quote",
-                                                                label="quote"))
+
+labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(
+    text="I would like to fill in a claim form",
+    label="claim"))
+labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(
+    text="I had an accident?",
+    label="claim"))
+labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(
+    text="My wheel was damaged?",
+    label="claim"))
+
+labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(
+    text="I would like to get a quote",
+    label="quote"))
+labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(
+    text="Is it expensive?",
+    label="quote"))
+labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(
+    text="How much does it cost?",
+    label="quote"))
 
 train_details = feersum_nlu.TrainDetails(immediate_mode=True)
 
-text_input = feersum_nlu.TextInput("I would please like to fill in a claim form.")
+# text_input = feersum_nlu.TextInput("I would please like to fill in a claim form.")  # claim
+#   [{'label': 'claim', 'probability': 0.9409714994212784}, {'label': 'quote', 'probability': 0.05902850057872078}]
+# text_input = feersum_nlu.TextInput("How long does it take to get a quote?")  # quote
+#   [{'label': 'quote', 'probability': 0.9857254551692076}, {'label': 'claim', 'probability': 0.014274544830793929}]
+# text_input = feersum_nlu.TextInput("My wheel needs to be replaced?")  # claim
+#   [{'label': 'claim', 'probability': 0.7693145563000179}, {'label': 'quote', 'probability': 0.2306854436999817}]
+text_input = feersum_nlu.TextInput("Is it expensive to get insurance?")  # quote
+#   [{'label': 'quote', 'probability': 0.9692558260098282}, {'label': 'claim', 'probability': 0.030744173990171327}]
 
 print()
 
