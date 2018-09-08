@@ -24,6 +24,7 @@ similarity_ent_create_details = \
                                                     similar_words=["red", "green", "blue", "purple",
                                                                    "white", "black", "grey"],
                                                     threshold=0.6,
+                                                    # (0.0-1.0] - lower vals result in more false positives.
                                                     word_manifold="feers_wm_eng",
                                                     # This is one of the built-in word embeddings.
                                                     load_from_store=False)
