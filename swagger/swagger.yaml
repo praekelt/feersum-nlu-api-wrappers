@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.23
+  version: 2.0.24
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -414,6 +414,25 @@ paths:
       responses:
         200:
           $ref: "#/responses/text_classifier_instance_detail"
+        400:
+          description: bad request
+
+    get:
+      tags:
+      - text_classifiers
+      summary: Get the editable model parameters of named text classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_get_params
+      description: Get the editable model parameters of named text classifier.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
         400:
           description: bad request
 
@@ -1034,6 +1053,25 @@ paths:
         400:
           description: bad request
 
+    get:
+      tags:
+      - intent_classifiers
+      summary: Get the editable model parameters of named intent classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
+      operationId: intent_classifier_get_params
+      description: Get the editable model parameters of named intent classifier.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+
 ########
 ## intent_classifiers train online
 ########
@@ -1503,6 +1541,25 @@ paths:
         400:
           description: bad request
 
+    get:
+      tags:
+      - faq_matchers
+      summary: Get the editable model parameters of named FAQ matcher.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_get_params
+      description: Get the editable model parameters of FAQ matcher.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+
 ########
 ## faq_matchers train online
 ########
@@ -1813,6 +1870,25 @@ paths:
         400:
           description: bad request
 
+    get:
+      tags:
+      - regex_entity_extractors
+      summary: Get the editable model parameters of named regex entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.regex_entity_extractors_controller
+      operationId: regex_entity_extractor_get_params
+      description: Get the editable model parameters of named regex entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+
 ########
 ## regex_entity_extractors retrieve
 ########
@@ -1972,6 +2048,25 @@ paths:
       responses:
         200:
           $ref: "#/responses/person_name_entity_extractor_instance_detail"
+        400:
+          description: bad request
+
+    get:
+      tags:
+      - person_name_entity_extractors
+      summary: Get the editable model parameters of named person name entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
+      operationId: person_name_entity_extractor_get_params
+      description: Get the editable model parameters of named person name entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
         400:
           description: bad request
 
@@ -2137,6 +2232,25 @@ paths:
         400:
           description: bad request
 
+    get:
+      tags:
+      - duckling_entity_extractors
+      summary: Get the editable model parameters of named duckling entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.duckling_entity_extractors_controller
+      operationId: duckling_entity_extractor_get_params
+      description: Get the editable model parameters of named duckling entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+
 ########
 ## duckling_entity_extractors retrieve
 ########
@@ -2296,6 +2410,25 @@ paths:
       responses:
         200:
           $ref: "#/responses/sim_word_entity_extractor_instance_detail"
+        400:
+          description: bad request
+
+    get:
+      tags:
+      - sim_word_entity_extractors
+      summary: Get the editable model parameters of named similarity entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
+      operationId: sim_word_entity_extractor_get_params
+      description: Get the editable model parameters of named similarity entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
         400:
           description: bad request
 
@@ -2461,6 +2594,25 @@ paths:
         400:
           description: bad request
 
+    get:
+      tags:
+      - language_recognisers
+      summary: Get the editable model parameters of named language recogniser.
+      x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
+      operationId: language_recogniser_get_params
+      description: Get the editable model parameters of named language recogniser.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+
 ########
 ## language_recognisers retrieve
 ########
@@ -2544,6 +2696,11 @@ responses:
     description: Your dashboard content.
     schema:
       $ref: "#/definitions/dashboard_detail"
+
+  model_params:
+    description: The model parameters.
+    schema:
+      $ref: "#/definitions/model_params"
 
   text_classifier_instance_detail:
     description: The model instance detail

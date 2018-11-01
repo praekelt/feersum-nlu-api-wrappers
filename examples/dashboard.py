@@ -21,10 +21,22 @@ print()
 
 try:
     print("Get dashboard content:")
-    api_response = api_instance.dashboard_get_details()
+    api_response, api_response_code, api_response_header = api_instance.dashboard_get_details_with_http_info()
+
+    # Note: The _with_http_info function also returns the api_response_header!
+    #       The header contains response headers like X-Rate-Limit-Remain.
+
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
+    print(" type(api_response_code)", type(api_response_code))
+    print(" api_response_code", api_response_code)
+    print(" type(api_response_header)", type(api_response_header))
+    print(" api_response_header", api_response_header)
+    print(" calls made in this cycle =", api_response_header.get("X-Rate-Limit-Used"))
+    print(" calls remaining in this cycle (None means no limit) =", api_response_header.get("X-Rate-Limit-Remain"))
+
     print()
+
 except ApiException as e:
     print("Exception when calling DashboardApi->dashboard_get_details: %s\n" % e)
 except urllib3.exceptions.HTTPError as e:

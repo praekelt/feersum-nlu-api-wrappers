@@ -100,9 +100,9 @@ try:
 
     print("Del training samples of the FAQ matcher:")
     # api_response = api_instance.faq_matcher_del_training_samples_all(instance_name)
-    api_response = api_instance.faq_matcher_del_training_samples(instance_name,
-                                                                 labelled_text_sample_list=
-                                                                 labelled_text_sample_delete_list)
+    api_response = \
+        api_instance.faq_matcher_del_training_samples(instance_name,
+                                                      labelled_text_sample_list=labelled_text_sample_delete_list)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -216,8 +216,15 @@ try:
     print(" api_response", api_response)
     print()
 
+    print("Get the parameters:")
+    api_response = api_instance.faq_matcher_get_params(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
     print("Update the parameters:")
-    model_params = feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test FAQ matcher.", long_name="A longer name.")
+    model_params = \
+        feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test FAQ matcher.", long_name="A longer name.")
     api_response = api_instance.faq_matcher_set_params(instance_name, model_params)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)

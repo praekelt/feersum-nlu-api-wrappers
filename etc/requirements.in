@@ -1,3 +1,11 @@
+mypy
+pylint
+flake8
+coverage
+coveralls
+docutils
+psycopg2
+pygments
 certifi
 six
 python_dateutil

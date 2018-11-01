@@ -24,12 +24,14 @@ similarity_ent_create_details = \
                                                     similar_words=["red", "green", "blue", "purple",
                                                                    "white", "black", "grey"],
                                                     threshold=0.6,
+                                                    # (0.0-1.0] - lower vals result in more false positives.
                                                     word_manifold="feers_wm_eng",
                                                     # This is one of the built-in word embeddings.
                                                     load_from_store=False)
 
 text_input = feersum_nlu.TextInput("I have an orange car with pink stripes.")
-#    api_response [{'entity': 'orange', 'similarity': 0.6299035873841149}, {'entity': 'pink', 'similarity': 0.690814436389662}]
+# api_response [{'entity': 'orange', 'similarity': 0.6299035873841149},
+#               {'entity': 'pink', 'similarity': 0.690814436389662}]
 
 print()
 
