@@ -32,8 +32,7 @@ try:
     print(" api_response_code", api_response_code)
     print(" type(api_response_header)", type(api_response_header))
     print(" api_response_header", api_response_header)
-    print(" calls made in this cycle =", api_response_header.get("X-Rate-Limit-Used"))
-    print(" calls remaining in this cycle (None means no limit) =", api_response_header.get("X-Rate-Limit-Remain"))
+    print(" calls remaining in this cycle ('-1' means no limit) =", api_response_header.get("X-RateLimit-Remaining"))
 
     print()
 
