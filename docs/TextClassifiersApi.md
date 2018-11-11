@@ -1,6 +1,6 @@
 # feersum_nlu.TextClassifiersApi
 
-All URIs are relative to *https://nlu.dev.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**text_classifier_get_details**](TextClassifiersApi.md#text_classifier_get_details) | **GET** /text_classifiers/{instance_name} | Get details of named instance.
 [**text_classifier_get_details_all**](TextClassifiersApi.md#text_classifier_get_details_all) | **GET** /text_classifiers | Get list of loaded text classifiers.
 [**text_classifier_get_labels**](TextClassifiersApi.md#text_classifier_get_labels) | **GET** /text_classifiers/{instance_name}/get_labels | Get list of possible labels.
+[**text_classifier_get_params**](TextClassifiersApi.md#text_classifier_get_params) | **GET** /text_classifiers/{instance_name}/params | Get the editable model parameters of named text classifier.
 [**text_classifier_get_testing_samples**](TextClassifiersApi.md#text_classifier_get_testing_samples) | **GET** /text_classifiers/{instance_name}/testing_samples | Get testing samples.
 [**text_classifier_get_training_samples**](TextClassifiersApi.md#text_classifier_get_training_samples) | **GET** /text_classifiers/{instance_name}/training_samples | Get training samples.
 [**text_classifier_retrieve**](TextClassifiersApi.md#text_classifier_retrieve) | **POST** /text_classifiers/{instance_name}/retrieve | Classify text.
@@ -726,6 +727,65 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**list[ClassLabel]**](ClassLabel.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **text_classifier_get_params**
+> ModelParams text_classifier_get_params(instance_name)
+
+Get the editable model parameters of named text classifier.
+
+Get the editable model parameters of named text classifier.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try:
+    # Get the editable model parameters of named text classifier.
+    api_response = api_instance.text_classifier_get_params(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TextClassifiersApi->text_classifier_get_params: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+
+### Return type
+
+[**ModelParams**](ModelParams.md)
 
 ### Authorization
 

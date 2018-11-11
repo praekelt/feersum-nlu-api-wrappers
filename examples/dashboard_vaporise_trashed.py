@@ -1,8 +1,6 @@
 """ Example: Shows how to get info about the service using the Dashboard endpoint.  """
 
-import json
 import urllib3
-import csv
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException

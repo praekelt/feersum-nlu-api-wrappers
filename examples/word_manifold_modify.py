@@ -16,7 +16,7 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.WordManifoldsApi(feersum_nlu.ApiClient(configuration))
 
-instance_name = 'test_wm'
+instance_name = 'feers_wm_eng'
 new_word_list = [{'new_word': 'chatbot', 'similar_to': 'robot'}]  # NewWordList | List of new words.
 
 new_word_list_b = [{'new_word': 'chatbots', 'similar_to': 'robots'},
@@ -32,11 +32,11 @@ create_details = feersum_nlu.WordManifoldCreateDetails(name=instance_name,
 print()
 
 try:
-    print("Create the word manifold model:")
-    api_response = api_instance.word_manifold_create(create_details)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # print("Create the word manifold model:")
+    # api_response = api_instance.word_manifold_create(create_details)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
     print("Add some new words to the manifold and save the updated version:")
     api_response = api_instance.word_manifold_add_similar_words(instance_name, new_word_list)

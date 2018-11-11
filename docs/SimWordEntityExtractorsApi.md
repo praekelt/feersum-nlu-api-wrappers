@@ -1,6 +1,6 @@
 # feersum_nlu.SimWordEntityExtractorsApi
 
-All URIs are relative to *https://nlu.dev.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**sim_word_entity_extractor_del**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_del) | **DELETE** /sim_word_entity_extractors/{instance_name} | Delete named instance.
 [**sim_word_entity_extractor_get_details**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_get_details) | **GET** /sim_word_entity_extractors/{instance_name} | Get details of named instance.
 [**sim_word_entity_extractor_get_details_all**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_get_details_all) | **GET** /sim_word_entity_extractors | Get list of loaded similarity entity extractors.
+[**sim_word_entity_extractor_get_params**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_get_params) | **GET** /sim_word_entity_extractors/{instance_name}/params | Get the editable model parameters of named similarity entity extractor.
 [**sim_word_entity_extractor_retrieve**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_retrieve) | **POST** /sim_word_entity_extractors/{instance_name}/retrieve | Extract information based on word similarity.
 [**sim_word_entity_extractor_set_params**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_set_params) | **POST** /sim_word_entity_extractors/{instance_name}/params | Set the model parameters of named similarity entity extractor.
 [**sim_word_entity_extractor_vaporise**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_vaporise) | **POST** /sim_word_entity_extractors/{instance_name}/vaporise | Vaporise the named model.
@@ -233,6 +234,65 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**list[SimWordEntityExtractorInstanceDetail]**](SimWordEntityExtractorInstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **sim_word_entity_extractor_get_params**
+> ModelParams sim_word_entity_extractor_get_params(instance_name)
+
+Get the editable model parameters of named similarity entity extractor.
+
+Get the editable model parameters of named similarity entity extractor.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+
+try:
+    # Get the editable model parameters of named similarity entity extractor.
+    api_response = api_instance.sim_word_entity_extractor_get_params(instance_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling SimWordEntityExtractorsApi->sim_word_entity_extractor_get_params: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+
+### Return type
+
+[**ModelParams**](ModelParams.md)
 
 ### Authorization
 

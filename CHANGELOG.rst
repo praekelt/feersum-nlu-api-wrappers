@@ -1,6 +1,17 @@
 Changelog
 *********
 
+Version 2.0.24
+==============
+
+Added mypy, pylint, flake8, coverage and coveralls to dependencies.
+
+example/intent_classifier.py updated to show how to get the model's editable parameters (intent_classifier_get_params).
+
+example/dashboard.py updated to show how to retrieve response headers X-Rate-Limit-Remain & X-Rate-Limit-Used.
+
+
+
 Version 2.0.23
 ==============
 
