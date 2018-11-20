@@ -124,7 +124,13 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Update the model details:")
+    print("Get the model params:")
+    api_response = api_instance.intent_classifier_get_params(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Update the model params:")
     model_params = feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test intent classifier.",
                                            long_name='Test Intent Classifier')
     api_response = api_instance.intent_classifier_set_params(instance_name, model_params)

@@ -2,14 +2,14 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.23
+  version: 2.0.24
   title: FeersumNLU API
   contact:
     name: Feersum Engine
     url: https://www.feersum.io
     email: nlu@feersum.io
 
-host: nlu.playground.feersum.io:443
+host: nlu.feersum.io:443
 
 basePath: /nlu/v2
 
@@ -25,10 +25,12 @@ produces:
 securityDefinitions:
    APIKeyHeader_old:
      type: apiKey
+     x-apikeyInfoFunc: rest_api.flask_server.controllers.controller_util.api_key_auth
      in: header
      name: AUTH_TOKEN
    APIKeyHeader:
      type: apiKey
+     x-apikeyInfoFunc: rest_api.flask_server.controllers.controller_util.api_key_auth
      in: header
      name: X-Auth-Token
 
@@ -82,7 +84,8 @@ paths:
           $ref: "#/responses/dashboard_detail"
         400:
           description: bad request
-
+        401:
+          $ref: "#/responses/UnauthorizedError"
 ###################################
 ###################################
 ########
@@ -109,6 +112,8 @@ paths:
           $ref: "#/responses/text_classifier_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -122,6 +127,8 @@ paths:
           $ref: "#/responses/text_classifier_instance_detail_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## text_classifiers Get details of named instance
@@ -145,6 +152,8 @@ paths:
           $ref: "#/responses/text_classifier_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -164,6 +173,8 @@ paths:
           $ref: "#/responses/text_classifier_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## text_classifiers training samples
@@ -195,6 +206,8 @@ paths:
           $ref: "#/responses/total_samples"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -214,6 +227,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -241,6 +256,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
   /text_classifiers/{instance_name}/training_samples_all:
     delete:
@@ -261,6 +278,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## text_classifiers testing samples
@@ -292,6 +311,8 @@ paths:
           $ref: "#/responses/total_samples"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -311,6 +332,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -338,6 +361,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
   /text_classifiers/{instance_name}/testing_samples_all:
     delete:
@@ -358,6 +383,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## text_classifiers train
@@ -387,6 +414,8 @@ paths:
           $ref: "#/responses/text_classifier_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## text_classifiers model_params
@@ -416,6 +445,29 @@ paths:
           $ref: "#/responses/text_classifier_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - text_classifiers
+      summary: Get the editable model parameters of named text classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_get_params
+      description: Get the editable model parameters of named text classifier.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## text_classifiers retrieve
@@ -445,6 +497,8 @@ paths:
           $ref: "#/responses/scored_label_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## text_classifiers vaporise
@@ -468,6 +522,8 @@ paths:
           $ref: "#/responses/text_classifier_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## text_classifiers get list of class labels
@@ -491,6 +547,8 @@ paths:
           $ref: "#/responses/labels"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## text_classifiers curation endpoint
@@ -520,6 +578,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ###################################
 ###################################
@@ -546,6 +606,8 @@ paths:
           $ref: "#/responses/word_manifold_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## word_manifolds Get details of named instance
@@ -569,6 +631,8 @@ paths:
           $ref: "#/responses/word_manifold_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -588,6 +652,8 @@ paths:
           $ref: "#/responses/word_manifold_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## word_manifolds vaporise
@@ -611,6 +677,8 @@ paths:
           $ref: "#/responses/word_manifold_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## word_manifolds vocab
@@ -642,6 +710,8 @@ paths:
           $ref: "#/responses/word_manifold_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## word_manifolds similar_words
@@ -671,6 +741,8 @@ paths:
           $ref: "#/responses/word_and_distance_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## word_manifolds spell_correct
@@ -700,6 +772,8 @@ paths:
           $ref: "#/responses/word_and_distance_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ###################################
 ###################################
@@ -726,6 +800,8 @@ paths:
           $ref: "#/responses/intent_classifier_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -739,6 +815,8 @@ paths:
           $ref: "#/responses/intent_classifier_instance_detail_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## intent_classifiers Get details of named instance
@@ -762,6 +840,8 @@ paths:
           $ref: "#/responses/intent_classifier_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -781,6 +861,8 @@ paths:
           $ref: "#/responses/intent_classifier_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## intent_classifiers training samples
@@ -812,6 +894,8 @@ paths:
           $ref: "#/responses/total_samples"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -831,6 +915,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -858,6 +944,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
   /intent_classifiers/{instance_name}/training_samples_all:
     delete:
@@ -878,6 +966,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## intent_classifiers testing samples
@@ -909,6 +999,8 @@ paths:
           $ref: "#/responses/total_samples"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -928,6 +1020,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -955,6 +1049,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
   /intent_classifiers/{instance_name}/testing_samples_all:
     delete:
@@ -975,6 +1071,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## intent_classifiers train
@@ -1004,6 +1102,8 @@ paths:
           $ref: "#/responses/intent_classifier_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## intent_classifiers model_params
@@ -1033,6 +1133,29 @@ paths:
           $ref: "#/responses/intent_classifier_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - intent_classifiers
+      summary: Get the editable model parameters of named intent classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
+      operationId: intent_classifier_get_params
+      description: Get the editable model parameters of named intent classifier.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## intent_classifiers train online
@@ -1064,6 +1187,8 @@ paths:
           $ref: "#/responses/total_samples"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## intent_classifiers retrieve
@@ -1093,6 +1218,8 @@ paths:
           $ref: "#/responses/scored_label_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## intent_classifiers vaporise
@@ -1116,6 +1243,8 @@ paths:
           $ref: "#/responses/intent_classifier_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## intent_classifiers get list of class labels
@@ -1139,6 +1268,8 @@ paths:
           $ref: "#/responses/labels"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## intent_classifiers curation endpoint
@@ -1168,6 +1299,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 
 ###################################
@@ -1195,6 +1328,8 @@ paths:
           $ref: "#/responses/faq_matcher_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -1208,6 +1343,8 @@ paths:
           $ref: "#/responses/faq_matcher_instance_detail_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## faq_matchers Get details of named instance
@@ -1231,6 +1368,8 @@ paths:
           $ref: "#/responses/faq_matcher_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -1250,6 +1389,8 @@ paths:
           $ref: "#/responses/faq_matcher_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## faq_matchers training samples
@@ -1281,6 +1422,8 @@ paths:
           $ref: "#/responses/total_samples"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -1300,6 +1443,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -1327,6 +1472,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
   /faq_matchers/{instance_name}/training_samples_all:
     delete:
@@ -1347,6 +1494,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## faq_matchers testing samples
@@ -1378,6 +1527,8 @@ paths:
           $ref: "#/responses/total_samples"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -1397,6 +1548,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -1424,6 +1577,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
   /faq_matchers/{instance_name}/testing_samples_all:
     delete:
@@ -1444,6 +1599,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## faq_matchers train
@@ -1473,6 +1630,8 @@ paths:
           $ref: "#/responses/faq_matcher_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## faq_matchers model_params
@@ -1502,6 +1661,29 @@ paths:
           $ref: "#/responses/faq_matcher_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - faq_matchers
+      summary: Get the editable model parameters of named FAQ matcher.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_get_params
+      description: Get the editable model parameters of FAQ matcher.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## faq_matchers train online
@@ -1533,6 +1715,8 @@ paths:
           $ref: "#/responses/total_samples"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## faq_matchers retrieve
@@ -1562,6 +1746,8 @@ paths:
           $ref: "#/responses/scored_label_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## faq_matchers vaporise
@@ -1585,6 +1771,8 @@ paths:
           $ref: "#/responses/faq_matcher_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## faq_matchers get list of class labels
@@ -1608,6 +1796,8 @@ paths:
           $ref: "#/responses/labels"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## faq_matchers curation endpoint
@@ -1637,6 +1827,8 @@ paths:
           $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 
 ###################################
@@ -1669,6 +1861,8 @@ paths:
           $ref: "#/responses/date_entity_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 
 ###################################
@@ -1701,6 +1895,8 @@ paths:
           $ref: "#/responses/sentiment"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 
 ###################################
@@ -1728,6 +1924,8 @@ paths:
           $ref: "#/responses/regex_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -1741,6 +1939,8 @@ paths:
           $ref: "#/responses/regex_entity_extractor_instance_detail_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## regex_entity_extractors Get details of named instance
@@ -1764,6 +1964,8 @@ paths:
           $ref: "#/responses/regex_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -1783,6 +1985,8 @@ paths:
           $ref: "#/responses/regex_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## regex_entity_extractors model_params
@@ -1812,6 +2016,29 @@ paths:
           $ref: "#/responses/regex_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - regex_entity_extractors
+      summary: Get the editable model parameters of named regex entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.regex_entity_extractors_controller
+      operationId: regex_entity_extractor_get_params
+      description: Get the editable model parameters of named regex entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## regex_entity_extractors retrieve
@@ -1841,6 +2068,8 @@ paths:
           $ref: "#/responses/entity_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## regex_entity_extractors vaporise
@@ -1864,6 +2093,8 @@ paths:
           $ref: "#/responses/regex_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ###################################
 ###################################
@@ -1890,6 +2121,8 @@ paths:
           $ref: "#/responses/person_name_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -1903,6 +2136,8 @@ paths:
           $ref: "#/responses/person_name_entity_extractor_instance_detail_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## person_name_entity_extractors Get details of named instance
@@ -1926,6 +2161,8 @@ paths:
           $ref: "#/responses/person_name_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -1945,6 +2182,8 @@ paths:
           $ref: "#/responses/person_name_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## person_name_entity_extractors model_params
@@ -1974,6 +2213,29 @@ paths:
           $ref: "#/responses/person_name_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - person_name_entity_extractors
+      summary: Get the editable model parameters of named person name entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
+      operationId: person_name_entity_extractor_get_params
+      description: Get the editable model parameters of named person name entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## person_name_entity_extractors retrieve
@@ -2003,6 +2265,8 @@ paths:
           $ref: "#/responses/entity_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## person_name_entity_extractors vaporise
@@ -2026,6 +2290,8 @@ paths:
           $ref: "#/responses/person_name_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ###################################
 ###################################
@@ -2052,6 +2318,8 @@ paths:
           $ref: "#/responses/duckling_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -2065,6 +2333,8 @@ paths:
           $ref: "#/responses/duckling_entity_extractor_instance_detail_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## duckling_entity_extractors Get details of named instance
@@ -2088,6 +2358,8 @@ paths:
           $ref: "#/responses/duckling_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -2107,6 +2379,8 @@ paths:
           $ref: "#/responses/duckling_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## duckling_entity_extractors model_params
@@ -2136,6 +2410,29 @@ paths:
           $ref: "#/responses/duckling_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - duckling_entity_extractors
+      summary: Get the editable model parameters of named duckling entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.duckling_entity_extractors_controller
+      operationId: duckling_entity_extractor_get_params
+      description: Get the editable model parameters of named duckling entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## duckling_entity_extractors retrieve
@@ -2165,6 +2462,8 @@ paths:
           $ref: "#/responses/entity_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## duckling_entity_extractors vaporise
@@ -2188,6 +2487,8 @@ paths:
           $ref: "#/responses/duckling_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ###################################
 ###################################
@@ -2214,6 +2515,8 @@ paths:
           $ref: "#/responses/sim_word_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -2227,6 +2530,8 @@ paths:
           $ref: "#/responses/sim_word_entity_extractor_instance_detail_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## sim_word_entity_extractors Get details of named instance
@@ -2250,6 +2555,8 @@ paths:
           $ref: "#/responses/sim_word_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -2269,6 +2576,8 @@ paths:
           $ref: "#/responses/sim_word_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## sim_word_entity_extractors model_params
@@ -2298,6 +2607,29 @@ paths:
           $ref: "#/responses/sim_word_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - sim_word_entity_extractors
+      summary: Get the editable model parameters of named similarity entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
+      operationId: sim_word_entity_extractor_get_params
+      description: Get the editable model parameters of named similarity entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## sim_word_entity_extractors retrieve
@@ -2327,6 +2659,8 @@ paths:
           $ref: "#/responses/entity_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## sim_word_entity_extractors vaporise
@@ -2350,6 +2684,8 @@ paths:
           $ref: "#/responses/sim_word_entity_extractor_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ###################################
 ###################################
@@ -2376,6 +2712,8 @@ paths:
           $ref: "#/responses/language_recogniser_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -2389,6 +2727,8 @@ paths:
           $ref: "#/responses/language_recogniser_instance_detail_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## language_recognisers Get details of named instance
@@ -2412,6 +2752,8 @@ paths:
           $ref: "#/responses/language_recogniser_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     delete:
       tags:
@@ -2431,6 +2773,8 @@ paths:
           $ref: "#/responses/language_recogniser_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## language_recognisers model_params
@@ -2460,6 +2804,29 @@ paths:
           $ref: "#/responses/language_recogniser_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - language_recognisers
+      summary: Get the editable model parameters of named language recogniser.
+      x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
+      operationId: language_recogniser_get_params
+      description: Get the editable model parameters of named language recogniser.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## language_recognisers retrieve
@@ -2489,6 +2856,8 @@ paths:
           $ref: "#/responses/scored_label_list"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## language_recognisers vaporise
@@ -2512,6 +2881,8 @@ paths:
           $ref: "#/responses/language_recogniser_instance_detail"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ########
 ## language_recognisers get list of class labels
@@ -2535,15 +2906,28 @@ paths:
           $ref: "#/responses/labels"
         400:
           description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ##################################
 # Descriptions of common responses
 ##################################
 responses:
+  UnauthorizedError:
+    description: API key is missing or invalid
+    headers:
+      WWW_Authenticate:
+        type: string
+
   dashboard_detail:
     description: Your dashboard content.
     schema:
       $ref: "#/definitions/dashboard_detail"
+
+  model_params:
+    description: The model parameters.
+    schema:
+      $ref: "#/definitions/model_params"
 
   text_classifier_instance_detail:
     description: The model instance detail
@@ -2709,6 +3093,14 @@ responses:
 # Descriptions of common definitions
 ####################################
 definitions:
+#  rate_limited_response_headers:
+#    description: The model instance detail.
+#    headers:
+#      X-RateLimit-Remaining:
+#        schema:
+#          type: integer
+#        description: The number of requests left for the time window.
+
   dashboard_model_detail:
     description: The model instance detail.
     type: object
@@ -3040,6 +3432,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'An example of this type of model.'
+      reference_time:
+        description: The reference time of the date parser. Uses international standard date notation 'YYYY-MM-DD hh:mm+hh:mm' e.g. '2017-12-01', '2017-12-01 10:00' (server local zone), '2017-12-01 10:00+02:00'
+        type: string
+        example: '2017-12-10'
 
   sim_word_entity_extractor_instance_detail:
     description: The model instance detail.

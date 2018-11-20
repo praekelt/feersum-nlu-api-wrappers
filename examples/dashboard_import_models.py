@@ -18,28 +18,8 @@ configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative au
 
 configuration.host = feersumnlu_host
 
-# === List of exported models. ===
-model_list = [("business-or-geek", "intent_classifier"),
-              ("cell_network_all_extractor", "regex_entity_extractor"),
-              ("cell_network_cellc_extractor", "regex_entity_extractor"),
-              ("cell_network_extractor", "regex_entity_extractor"),
-              ("cell_network_telkom_extractor", "regex_entity_extractor"),
-              ("cell_network_virgin_extractor", "regex_entity_extractor"),
-              ("feersum-engine-business-focussed-faq", "faq_matcher"),
-              ("feersum-engine-tech-focussed-faq", "faq_matcher"),
-              ("FNB_FAQ", "faq_matcher"),
-              ("Ginger 2.0", "faq_matcher"),
-              ("Liberty Colour Extractor", "sim_word_entity_extractor"),
-              ("Liberty FAQ Coach", "faq_matcher"),
-              ("Liberty FAQ Insured", "faq_matcher"),
-              ("Liberty Quote Intent", "intent_classifier"),
-              ("Liberty Vehicle Make and Model Extractor", "regex_entity_extractor"),
-              ("Liberty Vehicle Year Extractor", "regex_entity_extractor"),
-              ("Liberty VIN Extractor", "regex_entity_extractor"),
-              ("MTN Masterclass event FAQ model", "faq_matcher"),
-              ("MTN Masterclass event", "intent_classifier"),
-              ("Pampers Demo 12", "text_classifier"),
-              ("PartyBotFAQ", "faq_matcher")]
+# === List of exported models to be imported ===
+model_list = [("faq_model_name", "faq_matcher")]
 
 # model_list = [("Help", "faq_matcher")]
 
@@ -48,9 +28,9 @@ for model_name, model_type in model_list:
     print("#####################")
     print("#####################")
 
-    filename_model = model_name + "_" + feersum_nlu_auth_token + "." + model_type + ".json"
-    filename_train_csv = model_name + "_" + feersum_nlu_auth_token + "." + model_type + ".train.csv"
-    filename_test_csv = model_name + "_" + feersum_nlu_auth_token + "." + model_type + ".test.csv"
+    filename_model = "exported_models/" + model_name + "_" + feersum_nlu_auth_token + "." + model_type + ".json"
+    filename_train_csv = "exported_models/" + model_name + "_" + feersum_nlu_auth_token + "." + model_type + ".train.csv"
+    filename_test_csv = "exported_models/" + model_name + "_" + feersum_nlu_auth_token + "." + model_type + ".test.csv"
 
     print('filename_model =', filename_model, flush=True)
     print('filename_train_csv =', filename_train_csv, flush=True)
@@ -68,10 +48,6 @@ for model_name, model_type in model_list:
 
             desc = json_model.get('desc')
             long_name = json_model.get('long_name')
-
-            train_threshold = json_model.get('threshold')
-            word_manifold_list_json = json_model.get('word_manifold_list')
-            word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng')]
 
             # Try to get training samples.
             training_samples = []
@@ -105,7 +81,28 @@ for model_name, model_type in model_list:
             # === ===
             # === ===
 
-            if model_type == 'text_classifier':
+            if model_type == 'language_recogniser':
+                lid_model_file = json_model.get('lid_model_file')
+
+                create_details = feersum_nlu.LanguageRecogniserCreateDetails(name=model_name,
+                                                                             desc=desc,
+                                                                             long_name=long_name,
+                                                                             load_from_store=False,
+                                                                             lid_model_file=lid_model_file)
+
+                api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
+
+                print("  Creating model ... ", flush=True)
+                api_response = api_instance.language_recogniser_create(create_details)
+
+                train_details = feersum_nlu.TrainDetails()
+
+                print()
+
+                print("  Get the details of the imported model ... ", flush=True)
+                api_response = api_instance.language_recogniser_get_details(model_name)
+                print("   api_response", api_response)
+            elif model_type == 'text_classifier':
                 create_details = feersum_nlu.TextClassifierCreateDetails(name=model_name,
                                                                          desc=desc,
                                                                          long_name=long_name,
@@ -115,8 +112,12 @@ for model_name, model_type in model_list:
 
                 print("  Creating model ... ", flush=True)
                 api_response = api_instance.text_classifier_create(create_details)
-                api_response = api_instance.text_classifier_add_training_samples(model_name, training_samples)
-                api_response = api_instance.text_classifier_add_testing_samples(model_name, testing_samples)
+
+                if len(training_samples):
+                    api_response = api_instance.text_classifier_add_training_samples(model_name, training_samples)
+
+                if len(testing_samples):
+                    api_response = api_instance.text_classifier_add_testing_samples(model_name, testing_samples)
 
                 train_details = feersum_nlu.TrainDetails()
 
@@ -139,8 +140,16 @@ for model_name, model_type in model_list:
 
                 print("  Creating model ... ", flush=True)
                 api_response = api_instance.intent_classifier_create(create_details)
-                api_response = api_instance.intent_classifier_add_training_samples(model_name, training_samples)
-                api_response = api_instance.intent_classifier_add_testing_samples(model_name, testing_samples)
+
+                if len(training_samples):
+                    api_response = api_instance.intent_classifier_add_training_samples(model_name, training_samples)
+
+                if len(testing_samples):
+                    api_response = api_instance.intent_classifier_add_testing_samples(model_name, testing_samples)
+
+                train_threshold = json_model.get('threshold')
+                word_manifold_list_json = json_model.get('word_manifold_list')
+                word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng')]
 
                 train_details = feersum_nlu.TrainDetails(threshold=train_threshold, word_manifold_list=word_manifold_list)
 
@@ -163,8 +172,16 @@ for model_name, model_type in model_list:
 
                 print("  Creating model ... ", flush=True)
                 api_response = api_instance.faq_matcher_create(create_details)
-                api_response = api_instance.faq_matcher_add_training_samples(model_name, training_samples)
-                api_response = api_instance.faq_matcher_add_testing_samples(model_name, testing_samples)
+
+                if len(training_samples):
+                    api_response = api_instance.faq_matcher_add_training_samples(model_name, training_samples)
+
+                if len(testing_samples):
+                    api_response = api_instance.faq_matcher_add_testing_samples(model_name, testing_samples)
+
+                train_threshold = json_model.get('threshold')
+                word_manifold_list_json = json_model.get('word_manifold_list')
+                word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng')]
 
                 train_details = feersum_nlu.TrainDetails(threshold=train_threshold, word_manifold_list=word_manifold_list)
 
@@ -175,6 +192,25 @@ for model_name, model_type in model_list:
 
                 print("  Get the details of the imported model ... ", flush=True)
                 api_response = api_instance.faq_matcher_get_details(model_name)
+                print("   api_response", api_response)
+            elif model_type == 'duckling_entity_extractor':
+                reference_time = json_model.get('reference_time')
+
+                create_details = feersum_nlu.DucklingEntityExtractorCreateDetails(name=model_name,
+                                                                                  desc=desc,
+                                                                                  long_name=long_name,
+                                                                                  reference_time=reference_time,
+                                                                                  load_from_store=False)
+
+                api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+
+                print("  Creating model ... ", flush=True)
+                api_response = api_instance.duckling_entity_extractor_create(create_details)
+
+                print()
+
+                print("  Get the details of the imported model ... ", flush=True)
+                api_response = api_instance.duckling_entity_extractor_get_details(model_name)
                 print("   api_response", api_response)
             elif model_type == 'regex_entity_extractor':
                 regex = json_model.get('regex')
@@ -218,9 +254,25 @@ for model_name, model_type in model_list:
                 print("  Get the details of the imported model ... ", flush=True)
                 api_response = api_instance.sim_word_entity_extractor_get_details(model_name)
                 print("   api_response", api_response)
+            elif model_type == 'person_name_entity_extractor':
+                create_details = feersum_nlu.PersonNameEntityExtractorCreateDetails(name=model_name,
+                                                                                    desc=desc,
+                                                                                    long_name=long_name,
+                                                                                    load_from_store=False)
+
+                api_instance = feersum_nlu.PersonNameEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+
+                print("  Creating model ... ", flush=True)
+                api_response = api_instance.person_name_entity_extractor_create(create_details)
+
+                print()
+
+                print("  Get the details of the imported model ... ", flush=True)
+                api_response = api_instance.person_name_entity_extractor_get_details(model_name)
+                print("   api_response", api_response)
 
     except ApiException as e:
-        print("Exception when calling DashboardApi->dashboard_get_details: %s\n" % e)
+        print("Exception when calling an api endpoint: %s\n" % e)
     except urllib3.exceptions.HTTPError as e:
         print("Connection HTTPError! %s\n" % e)
 

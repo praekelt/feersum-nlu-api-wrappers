@@ -1,6 +1,6 @@
 # feersum_nlu.DateParsersApi
 
-All URIs are relative to *https://nlu.dev.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
