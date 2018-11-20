@@ -9,7 +9,7 @@ info:
     url: https://www.feersum.io
     email: nlu@feersum.io
 
-host: nlu.playground.feersum.io:443
+host: nlu.feersum.io:443
 
 basePath: /nlu/v2
 
@@ -3432,6 +3432,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'An example of this type of model.'
+      reference_time:
+        description: The reference time of the date parser. Uses international standard date notation 'YYYY-MM-DD hh:mm+hh:mm' e.g. '2017-12-01', '2017-12-01 10:00' (server local zone), '2017-12-01 10:00+02:00'
+        type: string
+        example: '2017-12-10'
 
   sim_word_entity_extractor_instance_detail:
     description: The model instance detail.

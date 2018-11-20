@@ -110,8 +110,8 @@ class TestFAQMatcher(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            print("Waiting for training...", flush=True)
-            time.sleep(20.0)
+            # print("Waiting for training...", flush=True)
+            # time.sleep(20.0)
 
             print("Get the details of all loaded FAQ matchers:")
             api_response = api_instance.faq_matcher_get_details_all()
@@ -176,11 +176,11 @@ class TestFAQMatcher(unittest.TestCase):
             else:
                 self.assertTrue(False)
 
-            # print("Delete specific named loaded FAQ matcher:")
-            # api_response = api_instance.faq_matcher_del(instance_name)
-            # print(" type(api_response)", type(api_response))
-            # print(" api_response", api_response)
-            # print()
+            print("Delete specific named loaded FAQ matcher:")
+            api_response = api_instance.faq_matcher_del(instance_name)
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
 
             print("Vaporise specific named loaded FAQ matcher:")
             api_response = api_instance.faq_matcher_vaporise(instance_name)

@@ -1,6 +1,6 @@
 # feersum_nlu.FaqMatchersApi
 
-All URIs are relative to *https://nlu.playground.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

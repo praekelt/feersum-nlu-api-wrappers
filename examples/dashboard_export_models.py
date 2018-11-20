@@ -33,7 +33,10 @@ try:
         print(".", end='', flush=True)
 
         if not model.trashed and model.name != "":
-            if model.model_type == 'text_classifier':
+            if model.model_type == 'language_recogniser':
+                api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
+                instance_detail = api_instance.language_recogniser_get_details(model.name)
+            elif model.model_type == 'text_classifier':
                 api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
                 instance_detail = api_instance.text_classifier_get_details(model.name)
             elif model.model_type == 'intent_classifier':
@@ -42,12 +45,18 @@ try:
             elif model.model_type == 'faq_matcher':
                 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
                 instance_detail = api_instance.faq_matcher_get_details(model.name)
+            elif model.model_type == 'duckling_entity_extractor':
+                api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+                instance_detail = api_instance.duckling_entity_extractor_get_details(model.name)
             elif model.model_type == 'regex_entity_extractor':
                 api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
                 instance_detail = api_instance.regex_entity_extractor_get_details(model.name)
             elif model.model_type == 'sim_word_entity_extractor':
                 api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
                 instance_detail = api_instance.sim_word_entity_extractor_get_details(model.name)
+            elif model.model_type == 'person_name_entity_extractor':
+                api_instance = feersum_nlu.PersonNameEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+                instance_detail = api_instance.person_name_entity_extractor_get_details(model.name)
             else:
                 instance_detail = None
 
@@ -92,6 +101,6 @@ try:
     print(' done.', flush=True)
 
 except ApiException as e:
-    print("Exception when calling DashboardApi->dashboard_get_details: %s\n" % e)
+    print("Exception when calling an api endpoint: %s\n" % e)
 except urllib3.exceptions.HTTPError as e:
     print("Connection HTTPError! %s\n" % e)
