@@ -92,8 +92,13 @@ class TestFAQMatcher(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
+            labelled_text_sample_delete_list = []
+
             print("Del the training samples of the FAQ matcher:")
-            api_response = api_instance.faq_matcher_del_training_samples(instance_name)
+            # api_response = api_instance.faq_matcher_del_training_samples_all(instance_name)
+            api_response = api_instance.faq_matcher_del_training_samples(instance_name,
+                                                                         labelled_text_sample_list=
+                                                                         labelled_text_sample_delete_list)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
