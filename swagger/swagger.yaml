@@ -924,7 +924,7 @@ paths:
       summary: Delete training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_del_training_samples
-      description: Delete the listed training samples of the named intent classifier. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.
+      description: Delete the listed training samples of the named intent classifier. Returns the deleted samples.
       parameters:
       - in: path
         name: instance_name
@@ -1029,7 +1029,7 @@ paths:
       summary: Delete testing samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_del_testing_samples
-      description: Delete the listed testing samples of the named intent classifier. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.
+      description: Delete the listed testing samples of the named intent classifier. Returns the deleted samples.
       parameters:
       - in: path
         name: instance_name
@@ -1452,7 +1452,7 @@ paths:
       summary: Delete training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_del_training_samples
-      description: Delete the listed training samples of the named FAQ matcher. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.
+      description: Delete the listed training samples of the named FAQ matcher. Returns the deleted samples.
       parameters:
       - in: path
         name: instance_name
@@ -1557,7 +1557,7 @@ paths:
       summary: Delete testing samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_del_testing_samples
-      description: Delete the listed testing samples of the named FAQ matcher. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.
+      description: Delete the listed testing samples of the named FAQ matcher. Returns the deleted samples.
       parameters:
       - in: path
         name: instance_name
