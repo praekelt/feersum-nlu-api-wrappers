@@ -74,8 +74,10 @@ word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
 # "feers_wm_tsn", "feers_wm_ven", "feers_wm_tso"
 # and "glove6B50D_trimmed"
 
-text_input_0 = feersum_nlu.TextInput("Waar kan ek 'n eis insit?")
-text_input_1 = feersum_nlu.TextInput("How long does a claim take?")
+text_input_0 = feersum_nlu.TextInput("Waar kan ek 'n eis insit?",
+                                     lang_code="afr")  # optional language hint.
+text_input_1 = feersum_nlu.TextInput("How long does a claim take?",
+                                     lang_code="eng")  # optional language hint.
 
 print()
 
