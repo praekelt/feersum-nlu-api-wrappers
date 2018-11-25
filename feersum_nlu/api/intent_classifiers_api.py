@@ -555,7 +555,7 @@ class IntentClassifiersApi(object):
     def intent_classifier_del_testing_samples(self, instance_name, labelled_text_sample_list, **kwargs):  # noqa: E501
         """Delete testing samples.  # noqa: E501
 
-        Delete the listed testing samples of the named intent classifier. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.  # noqa: E501
+        Delete the listed testing samples of the named intent classifier. Returns the deleted samples.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async=True
         >>> thread = api.intent_classifier_del_testing_samples(instance_name, labelled_text_sample_list, async=True)
@@ -578,7 +578,7 @@ class IntentClassifiersApi(object):
     def intent_classifier_del_testing_samples_with_http_info(self, instance_name, labelled_text_sample_list, **kwargs):  # noqa: E501
         """Delete testing samples.  # noqa: E501
 
-        Delete the listed testing samples of the named intent classifier. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.  # noqa: E501
+        Delete the listed testing samples of the named intent classifier. Returns the deleted samples.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async=True
         >>> thread = api.intent_classifier_del_testing_samples_with_http_info(instance_name, labelled_text_sample_list, async=True)
@@ -761,7 +761,7 @@ class IntentClassifiersApi(object):
     def intent_classifier_del_training_samples(self, instance_name, labelled_text_sample_list, **kwargs):  # noqa: E501
         """Delete training samples.  # noqa: E501
 
-        Delete the listed training samples of the named intent classifier. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.  # noqa: E501
+        Delete the listed training samples of the named intent classifier. Returns the deleted samples.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async=True
         >>> thread = api.intent_classifier_del_training_samples(instance_name, labelled_text_sample_list, async=True)
@@ -784,7 +784,7 @@ class IntentClassifiersApi(object):
     def intent_classifier_del_training_samples_with_http_info(self, instance_name, labelled_text_sample_list, **kwargs):  # noqa: E501
         """Delete training samples.  # noqa: E501
 
-        Delete the listed training samples of the named intent classifier. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.  # noqa: E501
+        Delete the listed training samples of the named intent classifier. Returns the deleted samples.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async=True
         >>> thread = api.intent_classifier_del_training_samples_with_http_info(instance_name, labelled_text_sample_list, async=True)
