@@ -10,14 +10,14 @@ from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
 
-class TestIntentClassifier(unittest.TestCase):
+class TestTextClassifier(unittest.TestCase):
     def setUp(self):
         pass
 
     def tearDown(self):
         pass
 
-    def test_intent_classifier(self):
+    def test_text_classifier(self):
         # Configure API key authorization: APIKeyHeader
         configuration = feersum_nlu.Configuration()
 
@@ -26,21 +26,13 @@ class TestIntentClassifier(unittest.TestCase):
 
         configuration.host = feersumnlu_host
 
-        api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
+        api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-        instance_name = 'test_intent_clsfr'
+        instance_name = 'test_text_clsfr'
 
-        word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng')]
-        # The playground's pre-loaded embeddings include:
-        # "feers_wm_afr", "feers_wm_eng", "feers_wm_nbl", "feers_wm_xho",
-        # "feers_wm_zul", "feers_wm_ssw", "feers_wm_nso", "feers_wm_sot",
-        # "feers_wm_tsn", "feers_wm_ven", "feers_wm_tso"
-        # and "glove6B50D_trimmed"
-
-        create_details = feersum_nlu.IntentClassifierCreateDetails(name=instance_name,
-                                                                   desc="Test intent classifier.",
-                                                                   lid_model_file="lid_za",
-                                                                   load_from_store=False)
+        create_details = feersum_nlu.TextClassifierCreateDetails(name=instance_name,
+                                                                 desc="Test text classifier.",
+                                                                 load_from_store=False)
 
         # The training samples.
         labelled_text_sample_list = []
@@ -49,86 +41,84 @@ class TestIntentClassifier(unittest.TestCase):
         labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to get a quote",
                                                                         label="quote"))
 
-        train_details = feersum_nlu.TrainDetails(threshold=0.85,
-                                                 word_manifold_list=word_manifold_list,
-                                                 immediate_mode=True)
+        train_details = feersum_nlu.TrainDetails(immediate_mode=True)
 
         text_input = feersum_nlu.TextInput("How do I get a quote?")
 
         print()
 
         try:
-            print("Create the intent classifier:")
-            api_response = api_instance.intent_classifier_create(create_details)
+            print("Create the text classifier:")
+            api_response = api_instance.text_classifier_create(create_details)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
-            print("Add training samples to the intent classifier:")
-            api_response = api_instance.intent_classifier_add_training_samples(instance_name, labelled_text_sample_list)
+            print("Add training samples to the text classifier:")
+            api_response = api_instance.text_classifier_add_training_samples(instance_name, labelled_text_sample_list)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
-            print("Get the training samples of the intent classifier:")
-            api_response = api_instance.intent_classifier_get_training_samples(instance_name)
+            print("Get the training samples of the text classifier:")
+            api_response = api_instance.text_classifier_get_training_samples(instance_name)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             labelled_text_sample_delete_list = []
 
-            print("Del the training samples of the intent classifier:")
-            # api_response = api_instance.intent_classifier_del_training_samples_all(instance_name)
-            api_response = api_instance.intent_classifier_del_training_samples(instance_name,
+            print("Del the training samples of the text classifier:")
+            # api_response = api_instance.text_classifier_del_training_samples_all(instance_name)
+            api_response = api_instance.text_classifier_del_training_samples(instance_name,
                                                                                labelled_text_sample_list=
                                                                                labelled_text_sample_delete_list)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
-            print("Add training samples to the intent classifier:")
-            api_response = api_instance.intent_classifier_add_training_samples(instance_name, labelled_text_sample_list)
+            print("Add training samples to the text classifier:")
+            api_response = api_instance.text_classifier_add_training_samples(instance_name, labelled_text_sample_list)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
-            print("Train the intent classifier:")
-            api_response = api_instance.intent_classifier_train(instance_name, train_details)
+            print("Train the text classifier:")
+            api_response = api_instance.text_classifier_train(instance_name, train_details)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
-            print("Get the details of all loaded intent classifiers:")
-            api_response = api_instance.intent_classifier_get_details_all()
+            print("Get the details of all loaded text classifiers:")
+            api_response = api_instance.text_classifier_get_details_all()
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
-            print("Get the details of specific named loaded intent classifiers:")
-            api_response = api_instance.intent_classifier_get_details(instance_name)
+            print("Get the details of specific named loaded text classifiers:")
+            api_response = api_instance.text_classifier_get_details(instance_name)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be
             # available after training.
-            print("Get the labels of named loaded intent classifiers:")
-            api_response = api_instance.intent_classifier_get_labels(instance_name)
+            print("Get the labels of named loaded text classifiers:")
+            api_response = api_instance.text_classifier_get_labels(instance_name)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
-            print("Get some curate details of specific named loaded intent classifier:")
+            print("Get some curate details of specific named loaded text classifier:")
             # Use the same labels as returned in the confusion matrix.
             label_pair = feersum_nlu.ClassLabelPair(matrix_name='train', true_label='1', predicted_label='1')
-            api_response = api_instance.intent_classifier_curate(instance_name, label_pair)
+            api_response = api_instance.text_classifier_curate(instance_name, label_pair)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
-            print("Classify intent:")
-            api_response = api_instance.intent_classifier_retrieve(instance_name, text_input)
+            print("Classify text:")
+            api_response = api_instance.text_classifier_retrieve(instance_name, text_input)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
@@ -140,20 +130,20 @@ class TestIntentClassifier(unittest.TestCase):
             else:
                 self.assertTrue(False)
 
-            print("Delete specific named loaded intent classifiers:")
-            api_response = api_instance.intent_classifier_del(instance_name)
+            print("Delete specific named loaded text classifiers:")
+            api_response = api_instance.text_classifier_del(instance_name)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
-            print("Vaporise specific named loaded intent classifiers:")
-            api_response = api_instance.intent_classifier_vaporise(instance_name)
+            print("Vaporise specific named loaded text classifiers:")
+            api_response = api_instance.text_classifier_vaporise(instance_name)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
         except ApiException as e:
-            print("Exception when calling an intent classifier operation: %s\n" % e)
+            print("Exception when calling an text classifier operation: %s\n" % e)
             self.assertTrue(False)
         except urllib3.exceptions.MaxRetryError:
             print("Connection MaxRetryError!")

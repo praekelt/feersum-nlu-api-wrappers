@@ -332,7 +332,7 @@ Name | Type | Description  | Notes
 
 Delete testing samples.
 
-Delete the listed testing samples of the named intent classifier. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.
+Delete the listed testing samples of the named intent classifier. Returns the deleted samples.
 
 ### Example
 ```python
@@ -452,7 +452,7 @@ Name | Type | Description  | Notes
 
 Delete training samples.
 
-Delete the listed training samples of the named intent classifier. The list of samples is optional. IMPORTANT - An empty list deletes all the samples! Returns the deleted samples.
+Delete the listed training samples of the named intent classifier. Returns the deleted samples.
 
 ### Example
 ```python

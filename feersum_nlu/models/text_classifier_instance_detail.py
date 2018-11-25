@@ -42,7 +42,9 @@ class TextClassifierInstanceDetail(object):
         'testing_f1': 'float',
         'testing_cm': 'object',
         'cm_labels': 'object',
-        'training_stamp': 'str'
+        'training_stamp': 'str',
+        'num_training_samples': 'int',
+        'num_testing_samples': 'int'
     }
 
     attribute_map = {
@@ -57,10 +59,12 @@ class TextClassifierInstanceDetail(object):
         'testing_f1': 'testing_f1',
         'testing_cm': 'testing_cm',
         'cm_labels': 'cm_labels',
-        'training_stamp': 'training_stamp'
+        'training_stamp': 'training_stamp',
+        'num_training_samples': 'num_training_samples',
+        'num_testing_samples': 'num_testing_samples'
     }
 
-    def __init__(self, name=None, id=None, long_name=None, desc=None, training_accuracy=None, training_f1=None, training_cm=None, testing_accuracy=None, testing_f1=None, testing_cm=None, cm_labels=None, training_stamp=None):  # noqa: E501
+    def __init__(self, name=None, id=None, long_name=None, desc=None, training_accuracy=None, training_f1=None, training_cm=None, testing_accuracy=None, testing_f1=None, testing_cm=None, cm_labels=None, training_stamp=None, num_training_samples=None, num_testing_samples=None):  # noqa: E501
         """TextClassifierInstanceDetail - a model defined in Swagger"""  # noqa: E501
 
         self._name = None
@@ -75,6 +79,8 @@ class TextClassifierInstanceDetail(object):
         self._testing_cm = None
         self._cm_labels = None
         self._training_stamp = None
+        self._num_training_samples = None
+        self._num_testing_samples = None
         self.discriminator = None
 
         self.name = name
@@ -99,6 +105,10 @@ class TextClassifierInstanceDetail(object):
             self.cm_labels = cm_labels
         if training_stamp is not None:
             self.training_stamp = training_stamp
+        if num_training_samples is not None:
+            self.num_training_samples = num_training_samples
+        if num_testing_samples is not None:
+            self.num_testing_samples = num_testing_samples
 
     @property
     def name(self):
@@ -379,6 +389,52 @@ class TextClassifierInstanceDetail(object):
         """
 
         self._training_stamp = training_stamp
+
+    @property
+    def num_training_samples(self):
+        """Gets the num_training_samples of this TextClassifierInstanceDetail.  # noqa: E501
+
+        The model's number of training samples.  # noqa: E501
+
+        :return: The num_training_samples of this TextClassifierInstanceDetail.  # noqa: E501
+        :rtype: int
+        """
+        return self._num_training_samples
+
+    @num_training_samples.setter
+    def num_training_samples(self, num_training_samples):
+        """Sets the num_training_samples of this TextClassifierInstanceDetail.
+
+        The model's number of training samples.  # noqa: E501
+
+        :param num_training_samples: The num_training_samples of this TextClassifierInstanceDetail.  # noqa: E501
+        :type: int
+        """
+
+        self._num_training_samples = num_training_samples
+
+    @property
+    def num_testing_samples(self):
+        """Gets the num_testing_samples of this TextClassifierInstanceDetail.  # noqa: E501
+
+        The model's number of testing samples.  # noqa: E501
+
+        :return: The num_testing_samples of this TextClassifierInstanceDetail.  # noqa: E501
+        :rtype: int
+        """
+        return self._num_testing_samples
+
+    @num_testing_samples.setter
+    def num_testing_samples(self, num_testing_samples):
+        """Sets the num_testing_samples of this TextClassifierInstanceDetail.
+
+        The model's number of testing samples.  # noqa: E501
+
+        :param num_testing_samples: The num_testing_samples of this TextClassifierInstanceDetail.  # noqa: E501
+        :type: int
+        """
+
+        self._num_testing_samples = num_testing_samples
 
     def to_dict(self):
         """Returns the model properties as a dict"""

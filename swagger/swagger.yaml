@@ -3203,6 +3203,14 @@ definitions:
         description: The time when the training operation concluded.
         type: string
         example: '2017-10-26 10:42:01.589979'
+      num_training_samples:
+        description: The model's number of training samples.
+        type: integer
+        example: 100
+      num_testing_samples:
+        description: The model's number of testing samples.
+        type: integer
+        example: 100
 
   word_manifold_instance_detail:
     description: The model instance detail.
@@ -3284,6 +3292,14 @@ definitions:
         description: The time when the training operation concluded.
         type: string
         example: '2017-10-26 10:42:01.589979'
+      num_training_samples:
+        description: The model's number of training samples.
+        type: integer
+        example: 100
+      num_testing_samples:
+        description: The model's number of testing samples.
+        type: integer
+        example: 100
       word_manifold_list:
         description: The list of labelled word manifolds used for training.
         type: array
@@ -3346,6 +3362,14 @@ definitions:
         description: The time when the training operation concluded.
         type: string
         example: '2017-10-26 10:42:01.589979'
+      num_training_samples:
+        description: The model's number of training samples.
+        type: integer
+        example: 100
+      num_testing_samples:
+        description: The model's number of testing samples.
+        type: integer
+        example: 100
       word_manifold_list:
         description: The list of labelled word manifolds used for training.
         type: array

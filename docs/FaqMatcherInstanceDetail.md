@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **testing_cm** | **object** | The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used. | [optional] 
 **cm_labels** | **object** | A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer. | [optional] 
 **training_stamp** | **str** | The time when the training operation concluded. | [optional] 
+**num_training_samples** | **int** | The model&#39;s number of training samples. | [optional] 
+**num_testing_samples** | **int** | The model&#39;s number of testing samples. | [optional] 
 **word_manifold_list** | [**list[LabeledWordManifold]**](LabeledWordManifold.md) | The list of labelled word manifolds used for training. | [optional] 
 **threshold** | **float** | There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold. | [optional] 
 
