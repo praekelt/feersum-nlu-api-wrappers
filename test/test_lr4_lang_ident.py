@@ -36,7 +36,7 @@ class TestLID(unittest.TestCase):
                                                         lid_model_file='lid_za',
                                                         load_from_store=False)
 
-        text_input = feersum_nlu.TextInput("Isakhiwo sami sebiwe?")
+        text_input = feersum_nlu.TextInput("Ek het 'n huisie by die see.")
 
         print()
 
@@ -77,7 +77,7 @@ class TestLID(unittest.TestCase):
             scored_label_list = api_response
             if len(scored_label_list) > 0:
                 scored_label = scored_label_list[0]
-                self.assertTrue(scored_label.label == 'zul')
+                self.assertTrue(scored_label.label == 'afr')
             else:
                 self.assertTrue(False)
 
