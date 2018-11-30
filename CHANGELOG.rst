@@ -1,6 +1,16 @@
 Changelog
 *********
 
+Version 2.0.25
+==============
+
+Added the threshold param (that used to be only on intents and FAQs) to the text classifier model.
+
+Add num_training_samples and num_testing_samples to model instance details.
+
+example/intent_classifier.py added example of providing a language hint.
+
+
 Version 2.0.24
 ==============
 
@@ -8,7 +18,7 @@ Added mypy, pylint, flake8, coverage and coveralls to dependencies.
 
 example/intent_classifier.py updated to show how to get the model's editable parameters (intent_classifier_get_params).
 
-example/dashboard.py updated to show how to retrieve response headers X-Rate-Limit-Remain & X-Rate-Limit-Used.
+example/dashboard.py updated to show how to retrieve response headers X-RateLimit-Remaining.
 
 
 
