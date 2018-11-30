@@ -44,7 +44,8 @@ class TextClassifierInstanceDetail(object):
         'cm_labels': 'object',
         'training_stamp': 'str',
         'num_training_samples': 'int',
-        'num_testing_samples': 'int'
+        'num_testing_samples': 'int',
+        'threshold': 'float'
     }
 
     attribute_map = {
@@ -61,10 +62,11 @@ class TextClassifierInstanceDetail(object):
         'cm_labels': 'cm_labels',
         'training_stamp': 'training_stamp',
         'num_training_samples': 'num_training_samples',
-        'num_testing_samples': 'num_testing_samples'
+        'num_testing_samples': 'num_testing_samples',
+        'threshold': 'threshold'
     }
 
-    def __init__(self, name=None, id=None, long_name=None, desc=None, training_accuracy=None, training_f1=None, training_cm=None, testing_accuracy=None, testing_f1=None, testing_cm=None, cm_labels=None, training_stamp=None, num_training_samples=None, num_testing_samples=None):  # noqa: E501
+    def __init__(self, name=None, id=None, long_name=None, desc=None, training_accuracy=None, training_f1=None, training_cm=None, testing_accuracy=None, testing_f1=None, testing_cm=None, cm_labels=None, training_stamp=None, num_training_samples=None, num_testing_samples=None, threshold=None):  # noqa: E501
         """TextClassifierInstanceDetail - a model defined in Swagger"""  # noqa: E501
 
         self._name = None
@@ -81,6 +83,7 @@ class TextClassifierInstanceDetail(object):
         self._training_stamp = None
         self._num_training_samples = None
         self._num_testing_samples = None
+        self._threshold = None
         self.discriminator = None
 
         self.name = name
@@ -109,6 +112,8 @@ class TextClassifierInstanceDetail(object):
             self.num_training_samples = num_training_samples
         if num_testing_samples is not None:
             self.num_testing_samples = num_testing_samples
+        if threshold is not None:
+            self.threshold = threshold
 
     @property
     def name(self):
@@ -435,6 +440,29 @@ class TextClassifierInstanceDetail(object):
         """
 
         self._num_testing_samples = num_testing_samples
+
+    @property
+    def threshold(self):
+        """Gets the threshold of this TextClassifierInstanceDetail.  # noqa: E501
+
+        There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.  # noqa: E501
+
+        :return: The threshold of this TextClassifierInstanceDetail.  # noqa: E501
+        :rtype: float
+        """
+        return self._threshold
+
+    @threshold.setter
+    def threshold(self, threshold):
+        """Sets the threshold of this TextClassifierInstanceDetail.
+
+        There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.  # noqa: E501
+
+        :param threshold: The threshold of this TextClassifierInstanceDetail.  # noqa: E501
+        :type: float
+        """
+
+        self._threshold = threshold
 
     def to_dict(self):
         """Returns the model properties as a dict"""

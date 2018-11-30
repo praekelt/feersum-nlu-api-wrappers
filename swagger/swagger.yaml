@@ -3211,6 +3211,10 @@ definitions:
         description: The model's number of testing samples.
         type: integer
         example: 100
+      threshold:
+        description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
+        type: number
+        example: 0.85
 
   word_manifold_instance_detail:
     description: The model instance detail.
