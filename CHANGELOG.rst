@@ -10,6 +10,8 @@ Add num_training_samples and num_testing_samples to model instance details.
 
 example/intent_classifier.py added example of providing a language hint.
 
+Added cross validation testing.
+
 ...
 
 
