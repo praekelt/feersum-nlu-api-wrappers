@@ -66,8 +66,7 @@ additional_labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text=
                                                                            label="claim"))
 
 word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
-                      feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
-                      feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul')]
+                      feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr')]
 # The playground's pre-loaded embeddings include:
 # "feers_wm_afr", "feers_wm_eng", "feers_wm_nbl", "feers_wm_xho",
 # "feers_wm_zul", "feers_wm_ssw", "feers_wm_nso", "feers_wm_sot",
@@ -138,7 +137,7 @@ try:
 
     immediate_mode = True  # Set to True to do a blocking train operation.
 
-    train_details = feersum_nlu.TrainDetails(threshold=10.0,
+    train_details = feersum_nlu.TrainDetails(threshold=0.99,
                                              word_manifold_list=word_manifold_list,
                                              immediate_mode=immediate_mode)
 

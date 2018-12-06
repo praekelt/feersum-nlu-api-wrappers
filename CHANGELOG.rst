@@ -1,6 +1,12 @@
 Changelog
 *********
 
+Version 2.0.26
+==============
+
+Added import and export of models to a feersum_nlu_util.transfer module.
+
+
 Version 2.0.25
 ==============
 
