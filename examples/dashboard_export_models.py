@@ -1,4 +1,7 @@
-""" Example: Shows how to get info about the service using the Dashboard endpoint.  """
+"""
+Example: Shows how to export models using feersum_nlu_util. The model's json object received from the export function is
+split into three separate files for instance_details, training and testing data.
+"""
 
 import json
 import urllib3
@@ -8,99 +11,76 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 from examples import feersumnlu_host, feersum_nlu_auth_token
 
-# Configure API key authorization: APIKeyHeader
-configuration = feersum_nlu.Configuration()
+from feersum_nlu_util.transfer import export_model
 
-# configuration.api_key['AUTH_TOKEN'] = feersum_nlu_auth_token
-configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative auth key header!
 
-configuration.host = feersumnlu_host
-print(configuration.host)
+def main():
+    configuration = feersum_nlu.Configuration()
+    configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative auth key header!
+    configuration.host = feersumnlu_host
 
-api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
+    dash_api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
 
-print()
-
-try:
-    print("Save dashboard models to disk...", end='', flush=True)
-    dashboard_detail = api_instance.dashboard_get_details()  # type: feersum_nlu.models.dashboard_detail.DashboardDetail
-
-    print(" type(api_response)", type(dashboard_detail))
-    print(" api_response", dashboard_detail)
     print()
 
-    for model in dashboard_detail.model_list:
-        print(".", end='', flush=True)
+    try:
+        print("Saving ALL dashboard models to disk...", end='', flush=True)
+        dashb_detail = dash_api_instance.dashboard_get_details()  # type: feersum_nlu.models.dashboard_detail.DashboardDetail
 
-        if not model.trashed and model.name != "":
-            if model.model_type == 'language_recogniser':
-                api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
-                instance_detail = api_instance.language_recogniser_get_details(model.name)
-            elif model.model_type == 'text_classifier':
-                api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
-                instance_detail = api_instance.text_classifier_get_details(model.name)
-            elif model.model_type == 'intent_classifier':
-                api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
-                instance_detail = api_instance.intent_classifier_get_details(model.name)
-            elif model.model_type == 'faq_matcher':
-                api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
-                instance_detail = api_instance.faq_matcher_get_details(model.name)
-            elif model.model_type == 'duckling_entity_extractor':
-                api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-                instance_detail = api_instance.duckling_entity_extractor_get_details(model.name)
-            elif model.model_type == 'regex_entity_extractor':
-                api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-                instance_detail = api_instance.regex_entity_extractor_get_details(model.name)
-            elif model.model_type == 'sim_word_entity_extractor':
-                api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-                instance_detail = api_instance.sim_word_entity_extractor_get_details(model.name)
-            elif model.model_type == 'person_name_entity_extractor':
-                api_instance = feersum_nlu.PersonNameEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-                instance_detail = api_instance.person_name_entity_extractor_get_details(model.name)
-            else:
-                instance_detail = None
+        print(" type(api_response)", type(dashb_detail))
+        print(" api_response", dashb_detail)
+        print()
 
-            if instance_detail is not None:
-                json_dict = instance_detail.to_dict()
+        for model in dashb_detail.model_list:
+            print(".", end='', flush=True)
 
-                filename = "exported_models/" + model.name + "_" + feersum_nlu_auth_token + "." + model.model_type
+            if not model.trashed and model.name != "":
+                # =================================
+                # === FEERSUM_NLU_UTIL's export ===
+                model_dict = export_model(model.name, model.model_type, configuration)
+                # =================================
 
-                with open(filename + ".json", "w") as json_file:
-                    json.dump(json_dict, json_file, sort_keys=True, indent=4)
+                instance_detail = model_dict.get("instance_detail")
 
-                # Save train and test data.
-                if model.model_type == 'text_classifier':
-                    training_samples = api_instance.text_classifier_get_training_samples(model.name)
-                    testing_samples = api_instance.text_classifier_get_testing_samples(model.name)
-                elif model.model_type == 'intent_classifier':
-                    training_samples = api_instance.intent_classifier_get_training_samples(model.name)
-                    testing_samples = api_instance.intent_classifier_get_testing_samples(model.name)
-                elif model.model_type == 'faq_matcher':
-                    training_samples = api_instance.faq_matcher_get_training_samples(model.name)
-                    testing_samples = api_instance.faq_matcher_get_testing_samples(model.name)
-                else:
-                    training_samples = None
-                    testing_samples = None
+                # Write export to file if model supported export.
+                if instance_detail is not None:
+                    # Add the model type which may be used for type checking on import.
+                    instance_detail["model_type"] = model.model_type
 
-                if training_samples is not None:
-                    with open(filename + ".train.csv", "w", newline='') as csv_file:
-                        csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                    training_samples = model_dict.get("training_samples")
+                    testing_samples = model_dict.get("testing_samples")
 
-                        for sample in training_samples:
-                            # print('(', sample.label, ',', sample.text, ')')
-                            csv_writer.writerow([sample.label, sample.text])
+                    instance_detail_filename = f"exported_models/{model.name}_{feersum_nlu_auth_token}.{model.model_type}"
 
-                if testing_samples is not None:
-                    with open(filename + ".test.csv", "w", newline='') as csv_file:
-                        csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                    # Write .json files.
+                    with open(instance_detail_filename + ".json", "w") as json_file:
+                        json.dump(instance_detail, json_file, sort_keys=True, indent=4)
 
-                        for sample in testing_samples:
-                            # print('(', sample.label, ',', sample.text, ')')
-                            csv_writer.writerow([sample.label, sample.text])
+                    # Write any training samples to disk.
+                    if training_samples is not None:
+                        with open(instance_detail_filename + ".train.csv", "w", newline='') as csv_file:
+                            csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-    print(' done.', flush=True)
+                            for sample in training_samples:
+                                # print('(', sample.label, ',', sample.text, ')')
+                                csv_writer.writerow([sample.label, sample.text])
 
-except ApiException as e:
-    print("Exception when calling an api endpoint: %s\n" % e)
-except urllib3.exceptions.HTTPError as e:
-    print("Connection HTTPError! %s\n" % e)
+                    # Write any testing samples to disk.
+                    if testing_samples is not None:
+                        with open(instance_detail_filename + ".test.csv", "w", newline='') as csv_file:
+                            csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+                            for sample in testing_samples:
+                                # print('(', sample.label, ',', sample.text, ')')
+                                csv_writer.writerow([sample.label, sample.text])
+
+        print(' done.', flush=True)
+
+    except ApiException as e:
+        print("Exception when calling an api endpoint: %s\n" % e)
+    except urllib3.exceptions.HTTPError as e:
+        print("Connection HTTPError! %s\n" % e)
+
+
+if __name__ == '__main__':  # pragma: no cover
+    main()

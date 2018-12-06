@@ -57,7 +57,7 @@ word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'glove6B50D_trimmed
 # "feers_wm_tsn", "feers_wm_ven", "feers_wm_tso"
 # and "glove6B50D_trimmed"
 
-train_details = feersum_nlu.TrainDetails(threshold=10.0,
+train_details = feersum_nlu.TrainDetails(threshold=0.95,
                                          word_manifold_list=word_manifold_list)
 
 text_input = feersum_nlu.TextInput("Where do I claim?")

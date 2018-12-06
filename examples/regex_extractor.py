@@ -24,18 +24,19 @@ vehicle_make_reg_ex = "(Suzuki|Honda|Ford|VW|Jeep|Toyota|Fiat|Porsche|Nissan|Che
 # regex_str = r"(?P<year>[0-9]{4})[.,\s]+(?P<make>" + vehicle_make_reg_ex + r")[.,\s]+(?P<model>\w+)"
 # regex_str = r"(?P<make>" + vehicle_make_reg_ex + r")[.,\s]+(?P<model>\w+)[.,\s]+[.,\s\w]*?(?P<year>[0-9]{4})"
 
-# regex_str = r"(?P<machine_id>(\b[0-9]{8}\b))"
-regex_str = (r"(?P<license>"
-             r"([A-Z]{3}[ ]?[0-9]{3}[ ]?(GP|NW|MP|EC|L|NC|NW))|"
-             r"([A-Z]{2}[ ]?[0-9]{2}[ ]?[A-Z]{2}[ ]?(GP|NW|MP|EC|L|NC|NW)))")
+regex_str = r"(?P<ID>(\b[0-9]{13}\b))"
+# regex_str = (r"(?P<license>"
+#              r"([A-Z]{3}[ ]?[0-9]{3}[ ]?(GP|NW|MP|EC|L|NC|NW))|"
+#              r"([A-Z]{2}[ ]?[0-9]{2}[ ]?[A-Z]{2}[ ]?(GP|NW|MP|EC|L|NC|NW)))")
 
 regex_ent_create_details = \
     feersum_nlu.RegexEntityExtractorCreateDetails(name=instance_name,
-                                                  desc="Test regex extractor.",
+                                                  desc="Test ID extractor.",
                                                   regex=regex_str,
                                                   load_from_store=False)
 
-text_input = feersum_nlu.TextInput("My car has license number JMS 007 GP.")
+text_input = feersum_nlu.TextInput("My ID number is 1234567890123.")
+# text_input = feersum_nlu.TextInput("My car has license number JMS 007 GP.")
 #    api_response [{'_all_groups': 'JMS 007 GP', 'license': 'JMS 007 GP'}]
 # text_input = feersum_nlu.TextInput("My car is a 2007 Jeep Wrangler with plate AB 34 EF GP")
 #    api_response [{'_all_groups': 'AB 34 EF GP', 'license': 'AB 34 EF GP'}]

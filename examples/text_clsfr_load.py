@@ -48,7 +48,7 @@ try:
 
     # print("Update the parameters:")
     # model_params = \
-    #     feersum_nlu.ModelParams(threshold=0.9, desc="Example desc.", long_name="A longer name.")
+    #     feersum_nlu.ModelParams(threshold=0.8, desc="Example desc.", long_name="A longer name.")
     # api_response = api_instance.text_classifier_set_params(instance_name, model_params)
     # print(" type(api_response)", type(api_response))
     # print(" api_response", api_response)
