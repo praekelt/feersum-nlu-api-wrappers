@@ -27,7 +27,7 @@ print()
 
 try:
     print("Load the intent classifier:")
-    api_response = api_instance.intent_classifier_create(create_details)  # Create with load_from_store=True in create_details.
+    api_response = api_instance.intent_classifier_create(create_details)  # load_from_store=True in create_details.
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
