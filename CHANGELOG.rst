@@ -4,6 +4,12 @@ Changelog
 Version 2.0.25
 ==============
 
+Added import and export of models to a feersum_nlu_util.transfer module.
+
+
+Version 2.0.25
+==============
+
 Added the threshold param (that used to be only on intents and FAQs) to the text classifier model.
 
 Add num_training_samples and num_testing_samples to model instance details.
