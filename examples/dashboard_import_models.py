@@ -22,7 +22,7 @@ def main():
     src_feersum_nlu_auth_token = feersum_nlu_auth_token
     # src_feersum_nlu_auth_token = "63454b82-ee34-4e26-9a63-6b1d4f51db49"
 
-    model_list = [("massmart", "faq_matcher")]  # List of exported models to be imported.
+    model_list = [("test_faq_mtchr", "faq_matcher")]  # List of exported models to be imported.
 
     # === Import models one by one ===
     for model_name, model_type in model_list:

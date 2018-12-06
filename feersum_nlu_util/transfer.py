@@ -146,6 +146,8 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
 
             train_details = feersum_nlu.TrainDetails()
 
+            print("  train_details =", str(train_details.to_dict()))
+
             print("  Training model ... ", flush=True)
             api_response = api_instance.text_classifier_train(model_name, train_details)
 
@@ -173,11 +175,23 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
                 api_response = api_instance.intent_classifier_add_testing_samples(model_name, testing_samples)
 
             train_threshold = instance_detail.get('threshold')
+
             word_manifold_list_json = instance_detail.get('word_manifold_list')
-            word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng')]
+            word_manifold_list = []
+
+            for word_manifold_json in word_manifold_list_json:
+                language = word_manifold_json.get("label")
+                manifold = word_manifold_json.get("word_manifold")
+
+                if language is not None:
+                    word_manifold_list.append(feersum_nlu.LabeledWordManifold(language, manifold))
 
             train_details = feersum_nlu.TrainDetails(threshold=train_threshold,
                                                      word_manifold_list=word_manifold_list)
+
+            print("  train_details =", str(train_details.to_dict()))
+
+            print("  train_details =", str(train_details.to_dict()))
 
             print("  Training model ... ", flush=True)
             api_response = api_instance.intent_classifier_train(model_name, train_details)
@@ -206,11 +220,21 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
                 api_response = api_instance.faq_matcher_add_testing_samples(model_name, testing_samples)
 
             train_threshold = instance_detail.get('threshold')
+
             word_manifold_list_json = instance_detail.get('word_manifold_list')
-            word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng')]
+            word_manifold_list = []
+
+            for word_manifold_json in word_manifold_list_json:
+                language = word_manifold_json.get("label")
+                manifold = word_manifold_json.get("word_manifold")
+
+                if language is not None:
+                    word_manifold_list.append(feersum_nlu.LabeledWordManifold(language, manifold))
 
             train_details = feersum_nlu.TrainDetails(threshold=train_threshold,
                                                      word_manifold_list=word_manifold_list)
+
+            print("  train_details =", str(train_details.to_dict()))
 
             print("  Training model ... ", flush=True)
             api_response = api_instance.faq_matcher_train(model_name, train_details)
