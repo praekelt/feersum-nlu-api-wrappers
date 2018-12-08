@@ -2,6 +2,7 @@ from typing import Dict
 import urllib3
 
 import feersum_nlu
+from feersum_nlu.rest import ApiException
 
 
 # =======================================
@@ -75,7 +76,7 @@ def export_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
                 "training_samples": training_samples,
                 "testing_samples": testing_samples}
 
-    except feersum_nlu.ApiException as e:
+    except ApiException as e:
         print("Exception when calling an api endpoint: %s\n" % e)
         return {"instance_detail": None, "training_samples": None, "testing_samples": None}
     except urllib3.exceptions.HTTPError as e:
@@ -322,7 +323,7 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
             api_response = api_instance.person_name_entity_extractor_get_details(model_name)
             print("   api_response", api_response)
 
-    except feersum_nlu.ApiException as e:
+    except ApiException as e:
         print("Exception when calling an api endpoint: %s\n" % e)
     except urllib3.exceptions.HTTPError as e:
         print("Connection HTTPError! %s\n" % e)
