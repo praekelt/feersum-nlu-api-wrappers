@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.26
+  version: 2.0.27
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -3347,6 +3347,17 @@ definitions:
         example: 1.0
       training_cm:
         description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      validation_accuracy:
+        description: The accuracy of the model as measured by cross validation on the training set.
+        type: number
+        example: 1.0
+      validation_f1:
+        description: The average F-score of the model as measured by cross validation on the training set.
+        type: number
+        example: 1.0
+      validation_cm:
+        description: The confusion matrix as measured by cross validation on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
       testing_accuracy:
         description: The accuracy of the model as measured on the testing set.
