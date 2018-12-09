@@ -48,6 +48,7 @@ class TestIntentClassifier(unittest.TestCase):
                                                                         label="claim"))
         labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How should I claim?",
                                                                         label="claim"))
+
         labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to get a quote.",
                                                                         label="quote"))
         labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Where can I get a quote?",
