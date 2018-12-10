@@ -4,6 +4,7 @@ from __future__ import absolute_import
 
 # import apis into api package
 from feersum_nlu.api.dashboard_api import DashboardApi
+from feersum_nlu.api.data_objects_api import DataObjectsApi
 from feersum_nlu.api.date_parsers_api import DateParsersApi
 from feersum_nlu.api.duckling_entity_extractors_api import DucklingEntityExtractorsApi
 from feersum_nlu.api.faq_matchers_api import FaqMatchersApi
