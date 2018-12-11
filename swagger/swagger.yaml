@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.26
+  version: 2.0.27
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -64,6 +64,8 @@ tags:
   description: The API to your duckling entity extractor instances for things like distances, volumes, etc.
 - name: sim_word_entity_extractors
   description: The API to your similar/related words entity extractor instances.
+- name: data_objects
+  description: The API to a general data_object store. A data_object is a json object.
 
 paths:
 ###################################
@@ -86,6 +88,7 @@ paths:
           description: bad request
         401:
           $ref: "#/responses/UnauthorizedError"
+
 ###################################
 ###################################
 ########
@@ -2096,6 +2099,7 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+
 ###################################
 ###################################
 ########
@@ -2292,6 +2296,7 @@ paths:
           description: bad request
         401:
           $ref: "#/responses/UnauthorizedError"
+
 
 ###################################
 ###################################
@@ -2490,6 +2495,7 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+
 ###################################
 ###################################
 ########
@@ -2686,6 +2692,7 @@ paths:
           description: bad request
         401:
           $ref: "#/responses/UnauthorizedError"
+
 
 ###################################
 ###################################
@@ -2909,6 +2916,124 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+
+###################################
+###################################
+########
+## data_objects root.
+########
+  /data_objects:
+    get:
+      tags:
+      - data_objects
+      summary: Get list of names of loaded data_objects.
+      x-swagger-router-controller: rest_api.flask_server.controllers.data_objects_controller
+      operationId: data_object_get_names_all
+      description: Get the list of names of loaded data_objects.
+      responses:
+        200:
+          $ref: "#/responses/data_object_name_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## data_objects Update/create an data_object - a data_object is a json object.
+########
+  /data_objects/{instance_name}:
+    post:
+      tags:
+      - data_objects
+      summary: Update/create a data_object.
+      x-swagger-router-controller: rest_api.flask_server.controllers.data_objects_controller
+      operationId: data_object_post
+      description: Update/create a data_object.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the data_object.
+        required: true
+        type: string
+      - in: body
+        name: data
+        description: The data_object.
+        required: true
+        schema:
+          $ref: "#/definitions/data_object"
+      responses:
+        200:
+          $ref: "#/responses/data_object"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - data_objects
+      summary: Get a data_object.
+      x-swagger-router-controller: rest_api.flask_server.controllers.data_objects_controller
+      operationId: data_object_get_details
+      description: Get a data_object.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the data_object.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/data_object"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - data_objects
+      summary: Trash a data_object.
+      x-swagger-router-controller: rest_api.flask_server.controllers.data_objects_controller
+      operationId: data_object_del
+      description: Trash a data_object.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the data_object.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/data_object"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /data_objects/{instance_name}/vaporise:
+    post:
+      tags:
+      - data_objects
+      summary: Vaporise the named data_object.
+      x-swagger-router-controller: rest_api.flask_server.controllers.data_objects_controller
+      operationId: data_object_vaporise
+      description: Permanently vaporise the named data_object.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the data_object.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/data_object"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
 ##################################
 # Descriptions of common responses
 ##################################
@@ -3055,6 +3180,18 @@ responses:
       type: array
       items:
         $ref: "#/definitions/word_and_distance"
+
+  data_object:
+    description: The data_object.
+    schema:
+      $ref: "#/definitions/data_object"
+
+  data_object_name_list:
+    description: A list of data_object names.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/data_object_name"
 
   scored_label_list:
     description: The list of scored and sorted labels.
@@ -3347,6 +3484,17 @@ definitions:
         example: 1.0
       training_cm:
         description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      validation_accuracy:
+        description: The accuracy of the model as measured by cross validation on the training set.
+        type: number
+        example: 1.0
+      validation_f1:
+        description: The average F-score of the model as measured by cross validation on the training set.
+        type: number
+        example: 1.0
+      validation_cm:
+        description: The confusion matrix as measured by cross validation on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
       testing_accuracy:
         description: The accuracy of the model as measured on the testing set.
@@ -3914,6 +4062,14 @@ definitions:
       distance:
         type: number
         example: 0.75
+
+  data_object:
+    description: The data_object data.
+    type: object
+
+  data_object_name:
+    description: The name of a data_object.
+    type: string
 
   scored_label:
     description: A class label with an associated probablity.
