@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **duckling_entity_extractor_retrieve**
-> list[Entity] duckling_entity_extractor_retrieve(instance_name, text_input)
+> list[DucklingEntity] duckling_entity_extractor_retrieve(instance_name, text_input)
 
 Extract information based on the regular expression.
 
@@ -353,7 +353,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**list[Entity]**](Entity.md)
+[**list[DucklingEntity]**](DucklingEntity.md)
 
 ### Authorization
 

@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.27
+  version: 2.0.28
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -10,11 +10,13 @@ info:
     email: nlu@feersum.io
 
 host: nlu.feersum.io:443
+# host: 127.0.0.1:8100
 
 basePath: /nlu/v2
 
 schemes:
   - https
+#  - http
 
 consumes:
 - application/json
@@ -40,10 +42,9 @@ security:
 
 tags:
 - name: dashboard
-  description: A service endpoint to get your list of loaded model instances.
-  #This end-point my also be used to test if your service is available.
+  description: A service endpoint to get your list of loaded model instances. 'Try it out!' to see what models are already created for you.
 - name: text_classifiers
-  description: The API to your Naive Bayes text classifier instances useful for things like classifying phrases into predefined action or intent categories.
+  description: The API to your Naive Bayes text classifier instances useful for things like classifying phrases into predefined action or intent categories. Create a model, add some training data, train it and start doing retrieve/inference calls.
 - name: word_manifolds
   description: The API to your word embedding model instances. The service is pre-loaded with default word embeddings sufficient for most use cases.
 - name: intent_classifiers
@@ -51,7 +52,7 @@ tags:
 - name: faq_matchers
   description: The API to your FAQ matcher/classifier model instances useful to match a user's question to a list of predefined FAQs.
 - name: language_recognisers
-  description: The API to your language recogniser model instances. An 'lid_za' input model file is available and trained on all 11 South African languages.
+  description: The API to your language recogniser model instances. An 'lid_za' input model file is available and trained on all 11 South African languages. Create a model as shown and start doing language ident on your own text.
 - name: date_parsers
   description: The API to a pre-configured 'generic' date parser.
 - name: sentiment_detectors
@@ -65,7 +66,7 @@ tags:
 - name: sim_word_entity_extractors
   description: The API to your similar/related words entity extractor instances.
 - name: data_objects
-  description: The API to a general data_object store. A data_object is a json object.
+  description: The API to a general data_object store useful to hold general application data like user profiles, logs and tables. A data_object is, similar to a json object, of type JSONObj = Union[str, int, float, bool, None, Dict[str, JSONObj], List[JSONObj]].
 
 paths:
 ###################################
@@ -80,7 +81,7 @@ paths:
       summary: Your service dashboard.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_get_details
-      description: Get your list of loaded model instances, the total API hits for each, API version, etc.
+      description: Get your list of loaded model instances, the API version, etc.
       responses:
         200:
           $ref: "#/responses/dashboard_detail"
@@ -2068,7 +2069,7 @@ paths:
           $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/entity_list"
+          $ref: "#/responses/regex_entity_list"
         400:
           description: bad request
         401:
@@ -2266,7 +2267,7 @@ paths:
           $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/entity_list"
+          $ref: "#/responses/person_name_entity_list"
         400:
           description: bad request
         401:
@@ -2464,7 +2465,7 @@ paths:
           $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/entity_list"
+          $ref: "#/responses/duckling_entity_list"
         400:
           description: bad request
         401:
@@ -2662,7 +2663,7 @@ paths:
           $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/entity_list"
+          $ref: "#/responses/sim_word_entity_list"
         400:
           description: bad request
         401:
@@ -3207,15 +3208,36 @@ responses:
       items:
         $ref: "#/definitions/class_label"
 
-  entity_list:
-    description: The list of extracted entities.
+  regex_entity_list:
+    description: The list of extracted regex entities.
     schema:
       type: array
       items:
-        $ref: "#/definitions/entity"
+        $ref: "#/definitions/regex_entity"
+
+  duckling_entity_list:
+    description: The list of extracted duckling entities.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/duckling_entity"
+
+  person_name_entity_list:
+    description: The list of extracted person name entities.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/person_name_entity"
+
+  sim_word_entity_list:
+    description: The list of extracted similar word entities.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/sim_word_entity"
 
   date_entity_list:
-    description: The list of structured dates.
+    description: The list of structured date entities.
     schema:
       type: array
       items:
@@ -4109,21 +4131,6 @@ definitions:
         type: string
         example: 'train'
 
-  date_entity:
-    description: A structured date-time string with a best guess on the specificity/granularity (i.e. hour, day, month)
-    type: object
-    required:
-    - value
-    - granularity
-    properties:
-      value:
-        type: string
-        example: '1981-06-01T00:00:00.000+02:00'
-      granularity:
-        type: string
-        enum: [second, minute, hour, day, week, month, year]
-        example: month
-
   new_word:
     description: A new word similar to an existing word.
     type: object
@@ -4138,9 +4145,78 @@ definitions:
         type: string
         example: 'workwear'
 
-  entity:
-    description: An entity.
+  regex_entity:
+    description: The extracted, possibly named, match from a regex entity extractor. The match for each named pattern is given as well as an _all_groups match.
     type: object
+    example: {"ID": "1234567890123", "_all_groups": "1234567890123"}
+
+  duckling_entity:
+    description: A date, duration, interval, etc. entity from the Duckling entity extractor.
+    type: object
+    required:
+    - body
+    - dim
+    properties:
+      body:
+        type: string
+        example: "5 January 2017 at 15:00"
+        description: The input text associated with the entity.
+      dim:
+        type: string
+        example: "time"
+        description: The dimension (time, duration, distance, etc.) of the entity.
+      type:
+        type: string
+        example: "value"
+        description: The type (value, interval, etc.) of this entity.
+      value:
+        type: string
+        example: "2017-01-05T15:00"
+        description: Structured result value.
+      grain:
+        type: string
+        example: "day"
+        description: The granularity/specificity of a time value.
+      unit:
+        type: string
+        example: "week"
+        description: The units of the value property.
+
+  person_name_entity:
+    description: A person name extracted by the person name entity extractor.
+    type: object
+    example: ["Tom"]
+
+  sim_word_entity:
+    description: A word with a similarity score extracted by a similar word entity extractor.
+    type: object
+    required:
+    - entity
+    - similarity
+    properties:
+      entity:
+        description: The extracted word.
+        type: string
+        example: "orange"
+      similarity:
+        description: The cosine similarity between the extracted word and the closest example word.
+        type: number
+        example: 0.691
+
+  date_entity:
+    description: A structured date-time string with a best guess on the specificity/granularity (i.e. hour, day, month)
+    type: object
+    required:
+    - value
+    - granularity
+    properties:
+      value:
+        type: string
+        example: '1981-06-01T00:00:00.000+02:00'
+      granularity:
+        type: string
+        enum: [second, minute, hour, day, week, month, year]
+        example: month
 
   sentiment_detail:
     description: A sentiment value for text from index with length len. Value may range from -1.0 (very unhappy) to 1.0 (very happy).

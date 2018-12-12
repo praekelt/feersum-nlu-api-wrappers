@@ -24,7 +24,7 @@ instance_name = 'feers_wm_eng'
 # "feers_wm_tsn", "feers_wm_ven", "feers_wm_tso"
 # and "glove6B50D_trimmed"
 
-word_and_threshold = feersum_nlu.WordAndThreshold('chatbots', 0.65)
+word_and_threshold = feersum_nlu.WordAndThreshold('tree', 0.5)
 misspelt_word = feersum_nlu.TextInput('hospitle')
 
 try:

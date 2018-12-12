@@ -10,6 +10,16 @@ from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
 
+# curl -XGET -is "https://nlu.playground.feersum.io:443/nlu/v2/data_objects" \
+# -H "X-Auth-Token: 6847a0a3-169d-4f7a-8eb1-737c9f6e9ffd" \
+# -H "accept: application/json" \
+# -H "content-type: application/json"
+
+# curl -XGET -is "https://nlu.playground.feersum.io:443/nlu/v2/data_objects/john@feersum.io" \
+# -H "X-Auth-Token: 6847a0a3-169d-4f7a-8eb1-737c9f6e9ffd" \
+# -H "accept: application/json" \
+# -H "content-type: application/json"
+
 class TestDataObject(unittest.TestCase):
     def setUp(self):
         pass
