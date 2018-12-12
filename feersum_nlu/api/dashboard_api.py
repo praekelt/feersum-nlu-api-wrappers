@@ -36,7 +36,7 @@ class DashboardApi(object):
     def dashboard_get_details(self, **kwargs):  # noqa: E501
         """Your service dashboard.  # noqa: E501
 
-        Get your list of loaded model instances, the total API hits for each, API version, etc.  # noqa: E501
+        Get your list of loaded model instances, the API version, etc.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async=True
         >>> thread = api.dashboard_get_details(async=True)
@@ -57,7 +57,7 @@ class DashboardApi(object):
     def dashboard_get_details_with_http_info(self, **kwargs):  # noqa: E501
         """Your service dashboard.  # noqa: E501
 
-        Get your list of loaded model instances, the total API hits for each, API version, etc.  # noqa: E501
+        Get your list of loaded model instances, the API version, etc.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async=True
         >>> thread = api.dashboard_get_details_with_http_info(async=True)

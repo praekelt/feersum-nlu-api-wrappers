@@ -1,4 +1,4 @@
-# Entity
+# PersonNameEntity
 
 ## Properties
 Name | Type | Description | Notes

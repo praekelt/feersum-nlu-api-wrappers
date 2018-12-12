@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 Your service dashboard.
 
-Get your list of loaded model instances, the total API hits for each, API version, etc.
+Get your list of loaded model instances, the API version, etc.
 
 ### Example
 ```python

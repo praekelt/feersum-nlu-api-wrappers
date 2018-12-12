@@ -1,6 +1,18 @@
 Changelog
 *********
 
+Version 2.0.28
+==============
+
+Specialised the entity extractor response models from entity_model to duckling_entity, person_name_entity, regex_entity and sim_word_entity.
+
+
+Version 2.0.27
+==============
+
+Added more samples to intent classifier to demonstrate cross validation.
+
+
 Version 2.0.26
 ==============
 
