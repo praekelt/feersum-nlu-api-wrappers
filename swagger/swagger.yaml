@@ -67,6 +67,8 @@ tags:
   description: The API to your similar/related words entity extractor instances.
 - name: data_objects
   description: The API to a general data_object store useful to hold general application data like user profiles, logs and tables. A data_object is, similar to a json object, of type JSONObj = Union[str, int, float, bool, None, Dict[str, JSONObj], List[JSONObj]].
+- name: health
+  description: An enpoint to check if the service is alive and well.
 
 paths:
 ###################################
@@ -3029,6 +3031,28 @@ paths:
       responses:
         200:
           $ref: "#/responses/data_object"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+###################################
+###################################
+########
+## health root
+########
+  /health:
+    get:
+      tags:
+      - health
+      summary: An endpoint to check if the service is alice and well.
+      x-swagger-router-controller: rest_api.flask_server.controllers.health_controller
+      operationId: health_get_status
+      description: Check if the service is alice and well.
+      responses:
+        200:
+          description: service is healthy
         400:
           description: bad request
         401:
