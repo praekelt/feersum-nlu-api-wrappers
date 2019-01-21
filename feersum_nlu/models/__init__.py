@@ -52,6 +52,8 @@ from feersum_nlu.models.text_classifier_instance_detail import TextClassifierIns
 from feersum_nlu.models.text_input import TextInput
 from feersum_nlu.models.total_samples import TotalSamples
 from feersum_nlu.models.train_details import TrainDetails
+from feersum_nlu.models.tsne_sample import TsneSample
+from feersum_nlu.models.tsne_settings import TsneSettings
 from feersum_nlu.models.word_and_distance import WordAndDistance
 from feersum_nlu.models.word_and_threshold import WordAndThreshold
 from feersum_nlu.models.word_manifold_create_details import WordManifoldCreateDetails
