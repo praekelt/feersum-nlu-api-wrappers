@@ -21,6 +21,7 @@ from feersum_nlu.api.data_objects_api import DataObjectsApi
 from feersum_nlu.api.date_parsers_api import DateParsersApi
 from feersum_nlu.api.duckling_entity_extractors_api import DucklingEntityExtractorsApi
 from feersum_nlu.api.faq_matchers_api import FaqMatchersApi
+from feersum_nlu.api.health_api import HealthApi
 from feersum_nlu.api.intent_classifiers_api import IntentClassifiersApi
 from feersum_nlu.api.language_recognisers_api import LanguageRecognisersApi
 from feersum_nlu.api.person_name_entity_extractors_api import PersonNameEntityExtractorsApi
@@ -71,6 +72,8 @@ from feersum_nlu.models.text_classifier_instance_detail import TextClassifierIns
 from feersum_nlu.models.text_input import TextInput
 from feersum_nlu.models.total_samples import TotalSamples
 from feersum_nlu.models.train_details import TrainDetails
+from feersum_nlu.models.tsne_sample import TsneSample
+from feersum_nlu.models.tsne_settings import TsneSettings
 from feersum_nlu.models.word_and_distance import WordAndDistance
 from feersum_nlu.models.word_and_threshold import WordAndThreshold
 from feersum_nlu.models.word_manifold_create_details import WordManifoldCreateDetails
