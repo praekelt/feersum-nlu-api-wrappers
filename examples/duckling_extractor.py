@@ -53,6 +53,32 @@ try:
     print(" api_response", api_response)
     print()
 
+    print("Get the parameters:")
+    api_response = api_instance.duckling_entity_extractor_get_params(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Update the parameters:")
+    model_params = \
+        feersum_nlu.ModelParams(reference_time="2017-01-21 0:00+01:00")
+    api_response = api_instance.duckling_entity_extractor_set_params(instance_name, model_params)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Get the details of specific named loaded entity extractor:")
+    api_response = api_instance.duckling_entity_extractor_get_details(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Extract entities:")
+    api_response = api_instance.duckling_entity_extractor_retrieve(instance_name, text_input)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
     print("Delete named loaded entity extractor:")
     api_response = api_instance.duckling_entity_extractor_del(instance_name)
     print(" type(api_response)", type(api_response))

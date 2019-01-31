@@ -52,6 +52,20 @@ try:
     print(" api_response", api_response)
     print()
 
+    print("Get the model params:")
+    api_response = api_instance.person_name_entity_extractor_get_params(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Update the model params:")
+    model_params = feersum_nlu.ModelParams(desc="Examples: person_name extractor.",
+                                           long_name='person_name extractor')
+    api_response = api_instance.person_name_entity_extractor_set_params(instance_name, model_params)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
     print("Delete named loaded entity extractor:")
     api_response = api_instance.person_name_entity_extractor_del(instance_name)
     print(" type(api_response)", type(api_response))

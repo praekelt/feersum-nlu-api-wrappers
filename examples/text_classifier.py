@@ -141,6 +141,27 @@ try:
     print(" api_response", api_response)
     print()
 
+    print("Get the model params:")
+    api_response = api_instance.text_classifier_get_params(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Update the model params:")
+    model_params = feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test text classifier.",
+                                           long_name='Test Text Classifier',
+                                           readonly=True)
+    api_response = api_instance.text_classifier_set_params(instance_name, model_params)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Get the details of specific named loaded text classifiers:")
+    api_response = api_instance.text_classifier_get_details(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
     # print("Delete named loaded text classifier:")
     # api_response = api_instance.text_classifier_del(instance_name)
     # print(" type(api_response)", type(api_response))

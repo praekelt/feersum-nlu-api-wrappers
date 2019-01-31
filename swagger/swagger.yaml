@@ -67,6 +67,8 @@ tags:
   description: The API to your similar/related words entity extractor instances.
 - name: data_objects
   description: The API to a general data_object store useful to hold general application data like user profiles, logs and tables. A data_object is, similar to a json object, of type JSONObj = Union[str, int, float, bool, None, Dict[str, JSONObj], List[JSONObj]].
+- name: health
+  description: An enpoint to check if the service is alive and well.
 
 paths:
 ###################################
@@ -1301,6 +1303,38 @@ paths:
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+########
+## intent_classifiers tsne endpoint
+########
+  /intent_classifiers/{instance_name}/tsne:
+    post:
+      tags:
+      - intent_classifiers
+      summary: Endpoint to execute and return the results of TSNE.
+      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
+      operationId: intent_classifier_tsne
+      description: Executes and returns the results of TSNE.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: tsne_settings
+        description: The TSNE settings.
+        required: true
+        schema:
+          $ref: "#/definitions/tsne_settings"
+      responses:
+        200:
+          $ref: "#/responses/tsne_sample_list"
         400:
           description: bad request
         401:
@@ -3035,6 +3069,28 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 
+###################################
+###################################
+########
+## health root
+########
+  /health:
+    get:
+      tags:
+      - health
+      summary: An endpoint to check if the service is alice and well.
+      x-swagger-router-controller: rest_api.flask_server.controllers.health_controller
+      operationId: health_get_status
+      description: Check if the service is alice and well.
+      responses:
+        200:
+          description: service is healthy
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
 ##################################
 # Descriptions of common responses
 ##################################
@@ -3174,6 +3230,13 @@ responses:
       type: array
       items:
         $ref: "#/definitions/labelled_text_sample"
+
+  tsne_sample_list:
+    description: The list of tsne samples.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/tsne_sample"
 
   word_and_distance_list:
     description: A list of words with distances.
@@ -3333,6 +3396,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'This is an example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       training_accuracy:
         description: The accuracy of the model as measured on the training set.
         type: number
@@ -3398,6 +3465,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'This is an example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       word_vectors_file:
         description: The input file on the server (if any) to use.
         type: string
@@ -3426,6 +3497,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'This is an example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       training_accuracy:
         description: The accuracy of the model as measured on the training set.
         type: number
@@ -3496,6 +3571,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'This is an example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       training_accuracy:
         description: The accuracy of the model as measured on the training set.
         type: number
@@ -3578,6 +3657,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'An example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       regex:
         description: The regular expression i.e. '(?P<license>([A-Z]{3}[ ]?[0-9]{3}[ ]?(GP|NW|MP|EC|L|NC|NW)))'
         type: string
@@ -3606,6 +3689,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'An example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
 
   duckling_entity_extractor_instance_detail:
     description: The model instance detail.
@@ -3630,6 +3717,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'An example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       reference_time:
         description: The reference time of the date parser. Uses international standard date notation 'YYYY-MM-DD hh:mm+hh:mm' e.g. '2017-12-01', '2017-12-01 10:00' (server local zone), '2017-12-01 10:00+02:00'
         type: string
@@ -3661,6 +3752,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'An example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       similar_words:
         description: The list of similar words to test against.
         type: array
@@ -3700,6 +3795,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'An example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       lid_model_file:
         description: The pre-trained model this instance was created from.
         type: string
@@ -3980,6 +4079,31 @@ definitions:
         type: string
         example: "Greeting with speaker's name."
 
+  tsne_sample:
+    description: A TSNE data sample.
+    type: object
+    required:
+      - text
+      - label
+      - x
+      - y
+    properties:
+      text:
+        type: string
+        example: 'Hello, my name is Tom.'
+      label:
+        type: string
+        example: 'greeting'
+      x:
+        type: number
+        example: 1.5
+      y:
+        type: number
+        example: 1.5
+      z:
+        type: number
+        example: 1.5
+
   labeled_word_manifold:
     description: A labelled (e.g. lang_code labelled) word manifold instance.
     type: object
@@ -4022,15 +4146,29 @@ definitions:
           $ref: "#/definitions/labeled_word_manifold"
 
   model_params:
-    description: The model parameters. Dict of parameters like name, long_name, desc, threshold ...
+    description: The model parameters. Dict of parameters like name, long_name, desc, threshold, etc. Models can surface more paramerters. Use the params end-point to get the set of params that is editable.
     type: object
     properties:
       long_name:
         type: string
       desc:
         type: string
+      readonly:
+        type: boolean
       threshold:
         type: number
+      reference_time:
+        type: string
+      regex:
+        type: string
+      similar_words:
+        type: array
+        items:
+          type: string
+      word_manifold:
+        type: string
+      lid_model_file:
+        type: string
 
   total_samples:
     description: The total number of samples of this type now loaded into the model.
@@ -4056,6 +4194,27 @@ definitions:
         description: An optional ISO 639-3 language code hint - eng, afr, nbl, xho, zul, ssw, nso, sot, tsn, ven, tso.
         type: string
         example: 'eng'
+
+  tsne_settings:
+    description: The TSNE settings.
+    type: object
+    required:
+    - n_components
+    properties:
+      n_components:
+        description: Dimension of the embedded space.
+        type: integer
+        example: 2
+      perplexity:
+        description: The perplexity is related to the number of nearest neighbors that is used in other manifold learning algorithms. Larger datasets usually require a larger perplexity. Consider selecting a value between 5 and 50. The choice is not extremely critical since t-SNE is quite insensitive to this parameter.
+        type: number
+        example: 30.0
+        default: 30.0
+      learning_rate:
+        description: The learning rate for t-SNE is usually in the range [10.0, 1000.0]. If the learning rate is too high, the data may look like a ‘ball’ with any point approximately equidistant from its nearest neighbours. If the learning rate is too low, most points may look compressed in a dense cloud with few outliers. If the cost function gets stuck in a bad local minimum increasing the learning rate may help.
+        type: number
+        example: 200.0
+        default: 200.0
 
   word_and_threshold:
     description: A word and a threshold.

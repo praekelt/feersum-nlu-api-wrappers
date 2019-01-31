@@ -35,6 +35,7 @@ class TextClassifierInstanceDetail(object):
         'id': 'str',
         'long_name': 'str',
         'desc': 'str',
+        'readonly': 'bool',
         'training_accuracy': 'float',
         'training_f1': 'float',
         'training_cm': 'object',
@@ -53,6 +54,7 @@ class TextClassifierInstanceDetail(object):
         'id': 'id',
         'long_name': 'long_name',
         'desc': 'desc',
+        'readonly': 'readonly',
         'training_accuracy': 'training_accuracy',
         'training_f1': 'training_f1',
         'training_cm': 'training_cm',
@@ -66,13 +68,14 @@ class TextClassifierInstanceDetail(object):
         'threshold': 'threshold'
     }
 
-    def __init__(self, name=None, id=None, long_name=None, desc=None, training_accuracy=None, training_f1=None, training_cm=None, testing_accuracy=None, testing_f1=None, testing_cm=None, cm_labels=None, training_stamp=None, num_training_samples=None, num_testing_samples=None, threshold=None):  # noqa: E501
+    def __init__(self, name=None, id=None, long_name=None, desc=None, readonly=None, training_accuracy=None, training_f1=None, training_cm=None, testing_accuracy=None, testing_f1=None, testing_cm=None, cm_labels=None, training_stamp=None, num_training_samples=None, num_testing_samples=None, threshold=None):  # noqa: E501
         """TextClassifierInstanceDetail - a model defined in Swagger"""  # noqa: E501
 
         self._name = None
         self._id = None
         self._long_name = None
         self._desc = None
+        self._readonly = None
         self._training_accuracy = None
         self._training_f1 = None
         self._training_cm = None
@@ -92,6 +95,8 @@ class TextClassifierInstanceDetail(object):
             self.long_name = long_name
         if desc is not None:
             self.desc = desc
+        if readonly is not None:
+            self.readonly = readonly
         if training_accuracy is not None:
             self.training_accuracy = training_accuracy
         if training_f1 is not None:
@@ -210,6 +215,29 @@ class TextClassifierInstanceDetail(object):
         """
 
         self._desc = desc
+
+    @property
+    def readonly(self):
+        """Gets the readonly of this TextClassifierInstanceDetail.  # noqa: E501
+
+        Indicates if the model is readonly and not editable.  # noqa: E501
+
+        :return: The readonly of this TextClassifierInstanceDetail.  # noqa: E501
+        :rtype: bool
+        """
+        return self._readonly
+
+    @readonly.setter
+    def readonly(self, readonly):
+        """Sets the readonly of this TextClassifierInstanceDetail.
+
+        Indicates if the model is readonly and not editable.  # noqa: E501
+
+        :param readonly: The readonly of this TextClassifierInstanceDetail.  # noqa: E501
+        :type: bool
+        """
+
+        self._readonly = readonly
 
     @property
     def training_accuracy(self):
