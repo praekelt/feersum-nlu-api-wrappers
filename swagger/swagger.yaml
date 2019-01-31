@@ -3396,6 +3396,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'This is an example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       training_accuracy:
         description: The accuracy of the model as measured on the training set.
         type: number
@@ -3461,6 +3465,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'This is an example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       word_vectors_file:
         description: The input file on the server (if any) to use.
         type: string
@@ -3489,6 +3497,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'This is an example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       training_accuracy:
         description: The accuracy of the model as measured on the training set.
         type: number
@@ -3559,6 +3571,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'This is an example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       training_accuracy:
         description: The accuracy of the model as measured on the training set.
         type: number
@@ -3641,6 +3657,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'An example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       regex:
         description: The regular expression i.e. '(?P<license>([A-Z]{3}[ ]?[0-9]{3}[ ]?(GP|NW|MP|EC|L|NC|NW)))'
         type: string
@@ -3669,6 +3689,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'An example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
 
   duckling_entity_extractor_instance_detail:
     description: The model instance detail.
@@ -3693,6 +3717,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'An example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       reference_time:
         description: The reference time of the date parser. Uses international standard date notation 'YYYY-MM-DD hh:mm+hh:mm' e.g. '2017-12-01', '2017-12-01 10:00' (server local zone), '2017-12-01 10:00+02:00'
         type: string
@@ -3724,6 +3752,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'An example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       similar_words:
         description: The list of similar words to test against.
         type: array
@@ -3763,6 +3795,10 @@ definitions:
         description: The longer existential description of this instance's purpose in life.
         type: string
         example: 'An example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
       lid_model_file:
         description: The pre-trained model this instance was created from.
         type: string
@@ -4110,15 +4146,29 @@ definitions:
           $ref: "#/definitions/labeled_word_manifold"
 
   model_params:
-    description: The model parameters. Dict of parameters like name, long_name, desc, threshold ...
+    description: The model parameters. Dict of parameters like name, long_name, desc, threshold, etc. Models can surface more paramerters. Use the params end-point to get the set of params that is editable.
     type: object
     properties:
       long_name:
         type: string
       desc:
         type: string
+      readonly:
+        type: boolean
       threshold:
         type: number
+      reference_time:
+        type: string
+      regex:
+        type: string
+      similar_words:
+        type: array
+        items:
+          type: string
+      word_manifold:
+        type: string
+      lid_model_file:
+        type: string
 
   total_samples:
     description: The total number of samples of this type now loaded into the model.
@@ -4146,7 +4196,7 @@ definitions:
         example: 'eng'
 
   tsne_settings:
-    description: The TSNE settings..
+    description: The TSNE settings.
     type: object
     required:
     - n_components

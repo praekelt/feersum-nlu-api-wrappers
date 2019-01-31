@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **id** | **str** | The unique id of a specific version of the model instance. | 
 **long_name** | **str** | The human-friendly-name of the instance. | [optional] 
 **desc** | **str** | The longer existential description of this instance&#39;s purpose in life. | [optional] 
+**readonly** | **bool** | Indicates if the model is readonly and not editable. | [optional] 
 **training_accuracy** | **float** | The accuracy of the model as measured on the training set. | [optional] 
 **training_f1** | **float** | The average F-score of the model as measured on the training set. | [optional] 
 **training_cm** | **object** | The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used. | [optional] 

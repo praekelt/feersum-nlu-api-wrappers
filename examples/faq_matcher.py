@@ -225,14 +225,39 @@ try:
 
     print("Update the parameters:")
     model_params = \
-        feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test FAQ matcher.", long_name="A longer name.")
+        feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test FAQ matcher.",
+                                long_name="A longer name.", readonly=True)
     api_response = api_instance.faq_matcher_set_params(instance_name, model_params)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
 
+    print("Get the details of specific named loaded FAQ matcher:")
+    api_response = api_instance.faq_matcher_get_details(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    cm_labels = api_response.cm_labels
+    print()
+
     print("Match a question:")
     api_response = api_instance.faq_matcher_retrieve(instance_name, text_input_1)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    # Make the model smarter by providing more training example and training online.
+    # Note: The training happens automatically after online samples provided.
+    print("Add online training samples to the FAQ matcher:")
+    api_response = api_instance.faq_matcher_online_training_samples(instance_name,
+                                                                    additional_labelled_text_sample_list)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Update the parameters:")
+    model_params = \
+        feersum_nlu.ModelParams(readonly=False)
+    api_response = api_instance.faq_matcher_set_params(instance_name, model_params)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
