@@ -1,6 +1,12 @@
 Changelog
 *********
 
+Version 2.0.29
+==============
+
+Added TSNE analytics to the intent model and its API. See 'examples/intent_classifier.py'.
+
+
 Version 2.0.28
 ==============
 

@@ -86,5 +86,7 @@ class TestRexEx(unittest.TestCase):
 
         except ApiException as e:
             print("Exception when calling a entity extractor operation: %s\n" % e)
+            self.assertTrue(False)
         except urllib3.exceptions.HTTPError as e:
             print("Connection HTTPError! %s\n" % e)
+            self.assertTrue(False)
