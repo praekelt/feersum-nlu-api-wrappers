@@ -57,6 +57,8 @@ tags:
   description: The API to a pre-configured 'generic' date parser.
 - name: sentiment_detectors
   description: The API to a pre-configured 'generic' sentiment detector.
+- name: crf_entity_extractors
+  description: The API to your crf entity extractor instances.
 - name: regex_entity_extractors
   description: The API to your regular expression entity extractor instances.
 - name: person_name_entity_extractors
@@ -1940,6 +1942,470 @@ paths:
 ###################################
 ###################################
 ########
+## crf_entity_extractors root
+########
+  /crf_entity_extractors:
+    post:
+      tags:
+      - crf_entity_extractors
+      summary: Create a crf entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_create
+      description: Create a new crf entity extractor or reload one from the trash.
+      parameters:
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/crf_entity_extractor_create_details"
+      responses:
+        200:
+          $ref: "#/responses/crf_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - crf_entity_extractors
+      summary: Get list of loaded crf entity extractors.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_get_details_all
+      description: Get the list of loaded crf entity extractors.
+      responses:
+        200:
+          $ref: "#/responses/crf_entity_extractor_instance_detail_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## crf_entity_extractors Get details of named instance
+########
+  /crf_entity_extractors/{instance_name}:
+    get:
+      tags:
+      - crf_entity_extractors
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_get_details
+      description: Get the details of the named crf entity extractor instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/crf_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - crf_entity_extractors
+      summary: Delete named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_del
+      description: Delete and get the details of the named crf entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/crf_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## crf_entity_extractors training samples
+########
+  /crf_entity_extractors/{instance_name}/training_samples:
+    post:
+      tags:
+      - crf_entity_extractors
+      summary: Add training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_add_training_samples
+      description: Add training samples to named extractor. Returns the extractor's updated number of training samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: crf_sample_list
+        description: List of crf samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/crf_sample"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - crf_entity_extractors
+      summary: Get training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_get_training_samples
+      description: Get the training samples of the named extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/crf_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - crf_entity_extractors
+      summary: Delete training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_del_training_samples
+      description: Delete the listed training samples of the named extractor. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: crf_sample_list
+        description: List of crf samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/crf_sample"
+      responses:
+        200:
+          $ref: "#/responses/crf_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /crf_entity_extractors/{instance_name}/training_samples_all:
+    delete:
+      tags:
+      - crf_entity_extractors
+      summary: Delete all training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_del_training_samples_all
+      description: Delete all training samples of the named extractor. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/crf_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  ########
+  ## crf_entity_extractors testing samples
+  ########
+  /crf_entity_extractors/{instance_name}/testing_samples:
+    post:
+      tags:
+      - crf_entity_extractors
+      summary: Add testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_add_testing_samples
+      description: Add testing samples to named extractor. Returns the extractor's updated number of testing samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: crf_sample_list
+        description: List of crf samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/crf_sample"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - crf_entity_extractors
+      summary: Get testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_get_testing_samples
+      description: Get the testing samples of the named extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/crf_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - crf_entity_extractors
+      summary: Delete testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_del_testing_samples
+      description: Delete the listed testing samples of the named extractor. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: crf_sample_list
+        description: List of crf samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/crf_sample"
+      responses:
+        200:
+          $ref: "#/responses/crf_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /crf_entity_extractors/{instance_name}/testing_samples_all:
+    delete:
+      tags:
+      - crf_entity_extractors
+      summary: Delete all testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_del_testing_samples_all
+      description: Delete all testing samples of the named extractor. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/crf_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## intent_classifiers train
+########
+  /crf_entity_extractors/{instance_name}/train:
+    post:
+      tags:
+      - crf_entity_extractors
+      summary: Train the named crf extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_train
+      description: Train the named crf extractor with the training and testing data already provided. Returns the updated instance details.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: train_details
+        description: The arguments provided to the train operation.
+        required: true
+        schema:
+          $ref: "#/definitions/train_details"
+      responses:
+        200:
+          $ref: "#/responses/crf_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## crf_entity_extractors model_params
+########
+  /crf_entity_extractors/{instance_name}/params:
+    post:
+      tags:
+      - crf_entity_extractors
+      summary: Set the model parameters of named crf entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_set_params
+      description: Set the model parameters of named crf entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
+      responses:
+        200:
+          $ref: "#/responses/crf_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - crf_entity_extractors
+      summary: Get the editable model parameters of named crf entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_get_params
+      description: Get the editable model parameters of named crf entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## crf_entity_extractors retrieve
+########
+  /crf_entity_extractors/{instance_name}/retrieve:
+    post:
+      tags:
+      - crf_entity_extractors
+      summary: Predict which entities was mentioned.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_retrieve
+      description: Predict which entities was mentioned.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
+      responses:
+        200:
+          $ref: "#/responses/crf_entity_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## crf_entity_extractors vaporise
+########
+  /crf_entity_extractors/{instance_name}/vaporise:
+    post:
+      tags:
+      - crf_entity_extractors
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/crf_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## crf_entity_extractors get list of entity labels
+########
+  /crf_entity_extractors/{instance_name}/get_labels:
+    get:
+      tags:
+      - crf_entity_extractors
+      summary: Get list of possible labels.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_get_labels
+      description: Returns the extractor's list of possible entity labels.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labels"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+###################################
+###################################
+########
 ## regex_entity_extractors root
 ########
   /regex_entity_extractors:
@@ -3159,6 +3625,18 @@ responses:
       items:
         $ref: "#/definitions/intent_classifier_instance_detail"
 
+  crf_entity_extractor_instance_detail:
+    description: The model instance detail
+    schema:
+      $ref: "#/definitions/crf_entity_extractor_instance_detail"
+
+  crf_entity_extractor_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/crf_entity_extractor_instance_detail"
+
   regex_entity_extractor_instance_detail:
     description: The model instance detail
     schema:
@@ -3224,6 +3702,13 @@ responses:
     schema:
       $ref: "#/definitions/total_samples"
 
+  crf_sample_list:
+    description: List of crf samples.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/crf_sample"
+
   labelled_text_sample_list:
     description: The list of labeled text samples.
     schema:
@@ -3270,6 +3755,13 @@ responses:
       type: array
       items:
         $ref: "#/definitions/class_label"
+
+  crf_entity_list:
+    description: The list of extracted crf entities.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/crf_entity"
 
   regex_entity_list:
     description: The list of extracted regex entities.
@@ -3322,6 +3814,41 @@ definitions:
 #        schema:
 #          type: integer
 #        description: The number of requests left for the time window.
+
+  crf_entity:
+    description: A crf entity.
+    type: object
+    required:
+    - entity
+    - index
+    - len
+    properties:
+      entity:
+        type: string
+        description: The entity class/type.
+      index:
+        type: integer
+        description: The first character of the entity in the associated utterance.
+      len:
+        type: integer
+        description: One past the last character of the entity in the associated utterance.
+    example: {"entity": "location", "index": 31, "len": 8}
+
+  crf_sample:
+    description: A crf entity extractor training/testing utterance with labelled entities.
+    type: object
+    required:
+    - text
+    properties:
+      text:
+        type: string
+      intent:
+        type: string
+      entity_list:
+        description: A list of labelled entities.
+        type: array
+        items:
+          $ref: "#/definitions/crf_entity"
 
   dashboard_model_detail:
     description: The model instance detail.
@@ -3633,6 +4160,74 @@ definitions:
         type: number
         example: 0.85
 
+  crf_entity_extractor_instance_detail:
+    description: The model instance detail.
+    type: object
+    required:
+    - name
+    - id
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      id:
+        description: The unique id of a specific version of the model instance.
+        type: string
+        example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'An example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
+      training_accuracy:
+        description: The accuracy of the model as measured on the training set.
+        type: number
+        example: 1.0
+      training_f1:
+        description: The average F-score of the model as measured on the training set.
+        type: number
+        example: 1.0
+      validation_accuracy:
+        description: The accuracy of the model as measured by cross validation on the training set.
+        type: number
+        example: 1.0
+      validation_f1:
+        description: The average F-score of the model as measured by cross validation on the training set.
+        type: number
+        example: 1.0
+      testing_accuracy:
+        description: The accuracy of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      testing_f1:
+        description: The average F-score of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      training_stamp:
+        description: The time when the training operation concluded.
+        type: string
+        example: '2017-10-26 10:42:01.589979'
+      num_training_samples:
+        description: The model's number of training samples.
+        type: integer
+        example: 100
+      num_testing_samples:
+        description: The model's number of testing samples.
+        type: integer
+        example: 100
+      threshold:
+        description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
+        type: number
+        example: 0.85
+
   regex_entity_extractor_instance_detail:
     description: The model instance detail.
     type: object
@@ -3911,6 +4506,30 @@ definitions:
         description: The input file on the server (if any) to use.
         type: string
         example: 'glove_za_eng.txt'
+
+  crf_entity_extractor_create_details:
+    description: The details of the model instance to create.
+    type: object
+    required:
+    - name
+    - load_from_store
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance to create.
+        type: string
+        example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'An example model of this type.'
+      load_from_store:
+        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        type: boolean
+        example: False
 
   regex_entity_extractor_create_details:
     description: The details of the model instance to create.

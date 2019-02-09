@@ -17,6 +17,10 @@ from __future__ import absolute_import
 # import models into model package
 from feersum_nlu.models.class_label import ClassLabel
 from feersum_nlu.models.class_label_pair import ClassLabelPair
+from feersum_nlu.models.crf_entity import CrfEntity
+from feersum_nlu.models.crf_entity_extractor_create_details import CrfEntityExtractorCreateDetails
+from feersum_nlu.models.crf_entity_extractor_instance_detail import CrfEntityExtractorInstanceDetail
+from feersum_nlu.models.crf_sample import CrfSample
 from feersum_nlu.models.dashboard_detail import DashboardDetail
 from feersum_nlu.models.dashboard_model_detail import DashboardModelDetail
 from feersum_nlu.models.data_object import DataObject
