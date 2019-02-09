@@ -35,6 +35,7 @@ class WordManifoldInstanceDetail(object):
         'id': 'str',
         'long_name': 'str',
         'desc': 'str',
+        'readonly': 'bool',
         'word_vectors_file': 'str'
     }
 
@@ -43,16 +44,18 @@ class WordManifoldInstanceDetail(object):
         'id': 'id',
         'long_name': 'long_name',
         'desc': 'desc',
+        'readonly': 'readonly',
         'word_vectors_file': 'word_vectors_file'
     }
 
-    def __init__(self, name=None, id=None, long_name=None, desc=None, word_vectors_file=None):  # noqa: E501
+    def __init__(self, name=None, id=None, long_name=None, desc=None, readonly=None, word_vectors_file=None):  # noqa: E501
         """WordManifoldInstanceDetail - a model defined in Swagger"""  # noqa: E501
 
         self._name = None
         self._id = None
         self._long_name = None
         self._desc = None
+        self._readonly = None
         self._word_vectors_file = None
         self.discriminator = None
 
@@ -62,6 +65,8 @@ class WordManifoldInstanceDetail(object):
             self.long_name = long_name
         if desc is not None:
             self.desc = desc
+        if readonly is not None:
+            self.readonly = readonly
         if word_vectors_file is not None:
             self.word_vectors_file = word_vectors_file
 
@@ -160,6 +165,29 @@ class WordManifoldInstanceDetail(object):
         """
 
         self._desc = desc
+
+    @property
+    def readonly(self):
+        """Gets the readonly of this WordManifoldInstanceDetail.  # noqa: E501
+
+        Indicates if the model is readonly and not editable.  # noqa: E501
+
+        :return: The readonly of this WordManifoldInstanceDetail.  # noqa: E501
+        :rtype: bool
+        """
+        return self._readonly
+
+    @readonly.setter
+    def readonly(self, readonly):
+        """Sets the readonly of this WordManifoldInstanceDetail.
+
+        Indicates if the model is readonly and not editable.  # noqa: E501
+
+        :param readonly: The readonly of this WordManifoldInstanceDetail.  # noqa: E501
+        :type: bool
+        """
+
+        self._readonly = readonly
 
     @property
     def word_vectors_file(self):

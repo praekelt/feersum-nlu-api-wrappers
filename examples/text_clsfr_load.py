@@ -32,6 +32,12 @@ try:
     print(" api_response", api_response)
     print()
 
+    print("Get the details of all loaded text classifiers:")
+    api_response = api_instance.text_classifier_get_details_all()
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
     print("Get the details of specific named loaded FAQ matcher:")
     api_response = api_instance.text_classifier_get_details(instance_name)
     print(" type(api_response)", type(api_response))
@@ -59,6 +65,26 @@ try:
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
+
+    print("Get the model params:")
+    api_response = api_instance.text_classifier_get_params(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Update the model params:")
+    model_params = feersum_nlu.ModelParams(threshold=0.8, readonly=True)
+    api_response = api_instance.text_classifier_set_params(instance_name, model_params)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Get the model params:")
+    api_response = api_instance.text_classifier_get_params(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
 except ApiException as e:
     print("Exception when calling a text classifier operation: %s\n" % e)
 except urllib3.exceptions.HTTPError:

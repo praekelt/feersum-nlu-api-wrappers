@@ -35,6 +35,7 @@ class RegexEntityExtractorInstanceDetail(object):
         'id': 'str',
         'long_name': 'str',
         'desc': 'str',
+        'readonly': 'bool',
         'regex': 'str'
     }
 
@@ -43,16 +44,18 @@ class RegexEntityExtractorInstanceDetail(object):
         'id': 'id',
         'long_name': 'long_name',
         'desc': 'desc',
+        'readonly': 'readonly',
         'regex': 'regex'
     }
 
-    def __init__(self, name=None, id=None, long_name=None, desc=None, regex=None):  # noqa: E501
+    def __init__(self, name=None, id=None, long_name=None, desc=None, readonly=None, regex=None):  # noqa: E501
         """RegexEntityExtractorInstanceDetail - a model defined in Swagger"""  # noqa: E501
 
         self._name = None
         self._id = None
         self._long_name = None
         self._desc = None
+        self._readonly = None
         self._regex = None
         self.discriminator = None
 
@@ -62,6 +65,8 @@ class RegexEntityExtractorInstanceDetail(object):
             self.long_name = long_name
         if desc is not None:
             self.desc = desc
+        if readonly is not None:
+            self.readonly = readonly
         self.regex = regex
 
     @property
@@ -159,6 +164,29 @@ class RegexEntityExtractorInstanceDetail(object):
         """
 
         self._desc = desc
+
+    @property
+    def readonly(self):
+        """Gets the readonly of this RegexEntityExtractorInstanceDetail.  # noqa: E501
+
+        Indicates if the model is readonly and not editable.  # noqa: E501
+
+        :return: The readonly of this RegexEntityExtractorInstanceDetail.  # noqa: E501
+        :rtype: bool
+        """
+        return self._readonly
+
+    @readonly.setter
+    def readonly(self, readonly):
+        """Sets the readonly of this RegexEntityExtractorInstanceDetail.
+
+        Indicates if the model is readonly and not editable.  # noqa: E501
+
+        :param readonly: The readonly of this RegexEntityExtractorInstanceDetail.  # noqa: E501
+        :type: bool
+        """
+
+        self._readonly = readonly
 
     @property
     def regex(self):

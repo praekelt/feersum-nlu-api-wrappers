@@ -34,7 +34,7 @@ try:
     print(" api_response", api_response)
     print()
 
-    # Spell check is not exposed yet on the server.
+    # Spell check is not yet surfaced on the server.
     # print("Spell correct:")
     # api_response = api_instance.word_manifold_spell_correct(instance_name, misspelt_word)
     # print(" type(api_response)", type(api_response))

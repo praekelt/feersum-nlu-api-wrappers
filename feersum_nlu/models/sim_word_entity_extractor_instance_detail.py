@@ -35,6 +35,7 @@ class SimWordEntityExtractorInstanceDetail(object):
         'id': 'str',
         'long_name': 'str',
         'desc': 'str',
+        'readonly': 'bool',
         'similar_words': 'list[str]',
         'threshold': 'float',
         'word_manifold': 'str'
@@ -45,18 +46,20 @@ class SimWordEntityExtractorInstanceDetail(object):
         'id': 'id',
         'long_name': 'long_name',
         'desc': 'desc',
+        'readonly': 'readonly',
         'similar_words': 'similar_words',
         'threshold': 'threshold',
         'word_manifold': 'word_manifold'
     }
 
-    def __init__(self, name=None, id=None, long_name=None, desc=None, similar_words=None, threshold=None, word_manifold=None):  # noqa: E501
+    def __init__(self, name=None, id=None, long_name=None, desc=None, readonly=None, similar_words=None, threshold=None, word_manifold=None):  # noqa: E501
         """SimWordEntityExtractorInstanceDetail - a model defined in Swagger"""  # noqa: E501
 
         self._name = None
         self._id = None
         self._long_name = None
         self._desc = None
+        self._readonly = None
         self._similar_words = None
         self._threshold = None
         self._word_manifold = None
@@ -68,6 +71,8 @@ class SimWordEntityExtractorInstanceDetail(object):
             self.long_name = long_name
         if desc is not None:
             self.desc = desc
+        if readonly is not None:
+            self.readonly = readonly
         self.similar_words = similar_words
         self.threshold = threshold
         self.word_manifold = word_manifold
@@ -167,6 +172,29 @@ class SimWordEntityExtractorInstanceDetail(object):
         """
 
         self._desc = desc
+
+    @property
+    def readonly(self):
+        """Gets the readonly of this SimWordEntityExtractorInstanceDetail.  # noqa: E501
+
+        Indicates if the model is readonly and not editable.  # noqa: E501
+
+        :return: The readonly of this SimWordEntityExtractorInstanceDetail.  # noqa: E501
+        :rtype: bool
+        """
+        return self._readonly
+
+    @readonly.setter
+    def readonly(self, readonly):
+        """Sets the readonly of this SimWordEntityExtractorInstanceDetail.
+
+        Indicates if the model is readonly and not editable.  # noqa: E501
+
+        :param readonly: The readonly of this SimWordEntityExtractorInstanceDetail.  # noqa: E501
+        :type: bool
+        """
+
+        self._readonly = readonly
 
     @property
     def similar_words(self):

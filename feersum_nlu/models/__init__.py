@@ -17,6 +17,10 @@ from __future__ import absolute_import
 # import models into model package
 from feersum_nlu.models.class_label import ClassLabel
 from feersum_nlu.models.class_label_pair import ClassLabelPair
+from feersum_nlu.models.crf_entity import CrfEntity
+from feersum_nlu.models.crf_entity_extractor_create_details import CrfEntityExtractorCreateDetails
+from feersum_nlu.models.crf_entity_extractor_instance_detail import CrfEntityExtractorInstanceDetail
+from feersum_nlu.models.crf_sample import CrfSample
 from feersum_nlu.models.dashboard_detail import DashboardDetail
 from feersum_nlu.models.dashboard_model_detail import DashboardModelDetail
 from feersum_nlu.models.data_object import DataObject
@@ -52,6 +56,8 @@ from feersum_nlu.models.text_classifier_instance_detail import TextClassifierIns
 from feersum_nlu.models.text_input import TextInput
 from feersum_nlu.models.total_samples import TotalSamples
 from feersum_nlu.models.train_details import TrainDetails
+from feersum_nlu.models.tsne_sample import TsneSample
+from feersum_nlu.models.tsne_settings import TsneSettings
 from feersum_nlu.models.word_and_distance import WordAndDistance
 from feersum_nlu.models.word_and_threshold import WordAndThreshold
 from feersum_nlu.models.word_manifold_create_details import WordManifoldCreateDetails

@@ -1,6 +1,14 @@
 Changelog
 *********
 
+Version 2.0.29
+==============
+
+Added TSNE analytics to the intent model and its API. See 'examples/intent_classifier.py'.
+
+Added model readonly flag which prevents a model from being modified or a new model of the same name being created.
+
+
 Version 2.0.28
 ==============
 

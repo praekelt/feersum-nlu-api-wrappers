@@ -42,6 +42,8 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would li
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Where can I get a quote?",
                                                                 label="quote"))
 
+tsne_settings = feersum_nlu.TsneSettings(n_components=3, perplexity=30.0, learning_rate=200)
+
 # train_details = feersum_nlu.TrainDetails(immediate_mode=True)
 train_details = feersum_nlu.TrainDetails(threshold=1.0,
                                          word_manifold_list=word_manifold_list,
@@ -134,15 +136,27 @@ try:
     print()
 
     print("Update the model params:")
-    model_params = feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test intent classifier.",
-                                           long_name='Test Intent Classifier')
+    model_params = feersum_nlu.ModelParams(threshold=0.7, desc="Examples: Test classifier.",
+                                           long_name='Test Classifier')
     api_response = api_instance.intent_classifier_set_params(instance_name, model_params)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Get the details of specific named loaded intent classifiers:")
+    api_response = api_instance.intent_classifier_get_details(instance_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
 
     print("Classify intent:")
     api_response = api_instance.intent_classifier_retrieve(instance_name, text_input)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Run TSNE:")
+    api_response = api_instance.intent_classifier_tsne(instance_name, tsne_settings)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()

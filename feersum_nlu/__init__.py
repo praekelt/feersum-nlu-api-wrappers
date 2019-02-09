@@ -16,11 +16,13 @@
 from __future__ import absolute_import
 
 # import apis into sdk package
+from feersum_nlu.api.crf_entity_extractors_api import CrfEntityExtractorsApi
 from feersum_nlu.api.dashboard_api import DashboardApi
 from feersum_nlu.api.data_objects_api import DataObjectsApi
 from feersum_nlu.api.date_parsers_api import DateParsersApi
 from feersum_nlu.api.duckling_entity_extractors_api import DucklingEntityExtractorsApi
 from feersum_nlu.api.faq_matchers_api import FaqMatchersApi
+from feersum_nlu.api.health_api import HealthApi
 from feersum_nlu.api.intent_classifiers_api import IntentClassifiersApi
 from feersum_nlu.api.language_recognisers_api import LanguageRecognisersApi
 from feersum_nlu.api.person_name_entity_extractors_api import PersonNameEntityExtractorsApi
@@ -36,6 +38,10 @@ from feersum_nlu.configuration import Configuration
 # import models into sdk package
 from feersum_nlu.models.class_label import ClassLabel
 from feersum_nlu.models.class_label_pair import ClassLabelPair
+from feersum_nlu.models.crf_entity import CrfEntity
+from feersum_nlu.models.crf_entity_extractor_create_details import CrfEntityExtractorCreateDetails
+from feersum_nlu.models.crf_entity_extractor_instance_detail import CrfEntityExtractorInstanceDetail
+from feersum_nlu.models.crf_sample import CrfSample
 from feersum_nlu.models.dashboard_detail import DashboardDetail
 from feersum_nlu.models.dashboard_model_detail import DashboardModelDetail
 from feersum_nlu.models.data_object import DataObject
@@ -71,6 +77,8 @@ from feersum_nlu.models.text_classifier_instance_detail import TextClassifierIns
 from feersum_nlu.models.text_input import TextInput
 from feersum_nlu.models.total_samples import TotalSamples
 from feersum_nlu.models.train_details import TrainDetails
+from feersum_nlu.models.tsne_sample import TsneSample
+from feersum_nlu.models.tsne_settings import TsneSettings
 from feersum_nlu.models.word_and_distance import WordAndDistance
 from feersum_nlu.models.word_and_threshold import WordAndThreshold
 from feersum_nlu.models.word_manifold_create_details import WordManifoldCreateDetails
