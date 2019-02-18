@@ -74,6 +74,14 @@ class TestFAQMatcher(unittest.TestCase):
         print()
 
         try:
+            # print("Update the parameters - To set readonly flag to False:")
+            # model_params = \
+            #     feersum_nlu.ModelParams(readonly=False)
+            # api_response = api_instance.faq_matcher_set_params(instance_name, model_params)
+            # print(" type(api_response)", type(api_response))
+            # print(" api_response", api_response)
+            # print()
+
             print("Create the FAQ matcher:")
             api_response = api_instance.faq_matcher_create(create_details)
             print(" type(api_response)", type(api_response))
