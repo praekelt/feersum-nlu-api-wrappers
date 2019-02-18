@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.28
+  version: 2.0.29
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -71,6 +71,8 @@ tags:
   description: The API to a general data_object store useful to hold general application data like user profiles, logs and tables. A data_object is, similar to a json object, of type JSONObj = Union[str, int, float, bool, None, Dict[str, JSONObj], List[JSONObj]].
 - name: health
   description: An enpoint to check if the service is alive and well.
+- name: api_keys
+  description: An enpoint to manage API keys.
 
 paths:
 ###################################
@@ -3557,6 +3559,96 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 
+###################################
+###################################
+########
+## api_keys root
+########
+  /api_keys:
+    post:
+      tags:
+      - api_keys
+      summary: Create an API key.
+      x-swagger-router-controller: rest_api.flask_server.controllers.api_keys_controller
+      operationId: api_key_create
+      description: Create a new API key. Admin rights are required to create an API key.
+      parameters:
+      - in: body
+        name: create_details
+        description: The details of the API key to create.
+        required: true
+        schema:
+          $ref: "#/definitions/api_key_create_details"
+      responses:
+        200:
+          $ref: "#/responses/api_key_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - api_keys
+      summary: Get list of API keys. Admin rights are required to get the full list of API keys.
+      x-swagger-router-controller: rest_api.flask_server.controllers.api_keys_controller
+      operationId: api_key_get_details_all
+      description: Get list of API keys.
+      responses:
+        200:
+          $ref: "#/responses/api_key_instance_detail_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## api_keys Get details of the API key.
+########
+  /api_keys/{instance_name}:
+    get:
+      tags:
+      - api_keys
+      summary: Get details of named API key.
+      x-swagger-router-controller: rest_api.flask_server.controllers.api_keys_controller
+      operationId: api_key_get_details
+      description: Get the details of the named API key.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The API key.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/api_key_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - api_keys
+      summary: Delete named API key.
+      x-swagger-router-controller: rest_api.flask_server.controllers.api_keys_controller
+      operationId: api_key_del
+      description: Delete and return the details of the named API key.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The API key.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/api_key_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
 ##################################
 # Descriptions of common responses
 ##################################
@@ -3696,6 +3788,18 @@ responses:
       type: array
       items:
         $ref: "#/definitions/language_recogniser_instance_detail"
+
+  api_key_instance_detail:
+    description: The api key instance detail
+    schema:
+      $ref: "#/definitions/api_key_instance_detail"
+
+  api_key_instance_detail_list:
+    description: A list of API keys' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/api_key_instance_detail"
 
   total_samples:
     description: The total number of samples of this type in the model.
@@ -4399,6 +4503,31 @@ definitions:
         type: string
         example: 'lid_za'
 
+  api_key_instance_detail:
+    description: The api key instance detail.
+    type: object
+    required:
+    - api_key
+    - desc
+    - call_count
+    properties:
+      api_key:
+        description: The API key.
+        type: string
+        example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      desc:
+        description: Details of the purpose or owner of this key.
+        type: string
+        example: 'Internal development key. Owner is name@company.io.'
+      call_count:
+        description: The total number of calls made to with this API key.
+        type: integer
+        example: 1000000
+      call_count_limit:
+        description: The number of calls loaded on this key. Default call count limit is 'unlimited'. See the other endpoints for managing the call count limit.
+        type: integer
+        example: 5000
+
   text_classifier_create_details:
     description: The details of the model instance to create.
     type: object
@@ -5028,3 +5157,19 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/sentiment_detail"
+
+  api_key_create_details:
+    description: The details of the api key to create.
+    type: object
+    required:
+    - desc
+    properties:
+      desc:
+        description: Details of the purpose or owner of this key.
+        type: string
+        example: 'Internal development key. Owner is name@company.io.'
+      call_count_limit:
+        description: The number of calls loaded on this key. Default call count limit is 'unlimited'. See the other endpoints for managing the call count limit.
+        type: integer
+        example: 5000
+

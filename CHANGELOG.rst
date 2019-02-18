@@ -8,6 +8,8 @@ Added TSNE analytics to the intent model and its API. See 'examples/intent_class
 
 Added model readonly flag which prevents a model from being modified or a new model of the same name being created.
 
+Added CRF entity extractor.
+
 
 Version 2.0.28
 ==============

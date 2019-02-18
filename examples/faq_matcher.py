@@ -232,6 +232,14 @@ try:
     print(" api_response", api_response)
     print()
 
+    print("Update the parameters:")
+    model_params = \
+        feersum_nlu.ModelParams(readonly=False)
+    api_response = api_instance.faq_matcher_set_params(instance_name, model_params)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
     print("Get the details of specific named loaded FAQ matcher:")
     api_response = api_instance.faq_matcher_get_details(instance_name)
     print(" type(api_response)", type(api_response))

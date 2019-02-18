@@ -59,6 +59,13 @@ text_input = feersum_nlu.TextInput("Is it expensive to get insurance?")  # quote
 print()
 
 try:
+    # print("Update the model params:")
+    # model_params = feersum_nlu.ModelParams(readonly=False)
+    # api_response = api_instance.text_classifier_set_params(instance_name, model_params)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+
     print("Create the text classifier:")
     api_response = api_instance.text_classifier_create(create_details)
     print(" type(api_response)", type(api_response))
