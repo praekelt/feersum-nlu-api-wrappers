@@ -12,7 +12,7 @@ The HTTP API is designed such that a user may apply multi-lingual Natural Langua
 domain without requiring a deep understanding of NLU theory. The examples in this repo demonstrate commonly required NLU
 functions and how to access them. There are also some cURL examples of direct HTTP access in the examples_curl folder.
 
-These language wrappers and examples are for version 2.0.29.dev6 of the HTTP API. The language wrappers are auto-generated
+These language wrappers and examples are for version 2.0.29 of the HTTP API. The language wrappers are auto-generated
 from a Swagger spec of the API available at `<https://nlu.playground.feersum.io:443/nlu/v2/swagger.json>`_
 
 
