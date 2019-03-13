@@ -6,7 +6,7 @@ import unittest
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
-from examples import feersumnlu_host, feersum_nlu_auth_token
+from test import feersumnlu_host, feersum_nlu_auth_token
 
 
 class TestCRFExtractor(unittest.TestCase):
