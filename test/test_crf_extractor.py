@@ -199,6 +199,7 @@ class TestCRFExtractor(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
+            self.assertTrue(len(api_response) == 1)
             self.assertTrue(api_response[0].entity == 'food')
 
             print("Update the parameters:")
