@@ -26,7 +26,7 @@ text_input = feersum_nlu.TextInput("Where can I get a quote?")
 print()
 
 try:
-    print("Create the FAQ matcher:")
+    print("Create the text classifier:")
     api_response = api_instance.text_classifier_create(create_details)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)

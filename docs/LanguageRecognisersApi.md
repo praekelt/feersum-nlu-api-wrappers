@@ -370,7 +370,7 @@ Name | Type | Description  | Notes
 
 Recognise the language the text is written in.
 
-Recognise the language the text is written in. Returns the list of scored language codes.
+Recognise the language the text is written in. Returns the list of scored language codes (ISO 639-3).
 
 ### Example
 ```python
