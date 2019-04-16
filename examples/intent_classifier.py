@@ -29,7 +29,8 @@ create_details = feersum_nlu.IntentClassifierCreateDetails(name=instance_name,
                                                            desc="Test intent classifier.",
                                                            long_name=instance_name,
                                                            lid_model_file="lid_za",
-                                                           load_from_store=False)
+                                                           load_from_store=True,
+                                                           revision_uuid='e514126d-39f3-411a-8a65-6283bfa465ab')
 
 # The training samples.
 labelled_text_sample_list = []
@@ -60,53 +61,53 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Add training samples to the intent classifier:")
-    api_response = api_instance.intent_classifier_add_training_samples(instance_name, labelled_text_sample_list)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
-    print("Get the training samples of the intent classifier:")
-    api_response = api_instance.intent_classifier_get_training_samples(instance_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
-    print("Del the training samples of the intent classifier:")
-    api_response = api_instance.intent_classifier_del_training_samples_all(instance_name)
-    # api_response = api_instance.intent_classifier_del_training_samples(instance_name,
-    #                                                                    labelled_text_sample_list=[])
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
-    print("Add training samples to the intent classifier:")
-    api_response = api_instance.intent_classifier_add_training_samples(instance_name, labelled_text_sample_list)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
-    # print("Del testing samples of the intent classifier:")
-    # api_response = api_instance.intent_classifier_del_testing_samples_all(instance_name)
-    # # api_response = api_instance.intent_classifier_del_testing_samples(instance_name,
-    # #                                                             labelled_text_sample_list=
-    # #                                                             labelled_text_sample_testing_list)
+    # print("Add training samples to the intent classifier:")
+    # api_response = api_instance.intent_classifier_add_training_samples(instance_name, labelled_text_sample_list)
     # print(" type(api_response)", type(api_response))
     # print(" api_response", api_response)
     # print()
-
+    #
+    # print("Get the training samples of the intent classifier:")
+    # api_response = api_instance.intent_classifier_get_training_samples(instance_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+    #
+    # print("Del the training samples of the intent classifier:")
+    # api_response = api_instance.intent_classifier_del_training_samples_all(instance_name)
+    # # api_response = api_instance.intent_classifier_del_training_samples(instance_name,
+    # #                                                                    labelled_text_sample_list=[])
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+    #
+    # print("Add training samples to the intent classifier:")
+    # api_response = api_instance.intent_classifier_add_training_samples(instance_name, labelled_text_sample_list)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+    #
+    # # print("Del testing samples of the intent classifier:")
+    # # api_response = api_instance.intent_classifier_del_testing_samples_all(instance_name)
+    # # # api_response = api_instance.intent_classifier_del_testing_samples(instance_name,
+    # # #                                                             labelled_text_sample_list=
+    # # #                                                             labelled_text_sample_testing_list)
+    # # print(" type(api_response)", type(api_response))
+    # # print(" api_response", api_response)
+    # # print()
+    #
     print("Train the intent classifier:")
     api_response = api_instance.intent_classifier_train(instance_name, train_details)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
-
-    print("Get the details of all loaded intent classifiers:")
-    api_response = api_instance.intent_classifier_get_details_all()
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
+    #
+    # print("Get the details of all loaded intent classifiers:")
+    # api_response = api_instance.intent_classifier_get_details_all()
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+    #
     print("Get the details of specific named loaded intent classifiers:")
     api_response = api_instance.intent_classifier_get_details(instance_name)
     print(" type(api_response)", type(api_response))
@@ -135,19 +136,19 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Update the model params:")
-    model_params = feersum_nlu.ModelParams(threshold=0.7, desc="Examples: Test classifier.",
-                                           long_name='Test Classifier')
-    api_response = api_instance.intent_classifier_set_params(instance_name, model_params)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
-    print("Get the details of specific named loaded intent classifiers:")
-    api_response = api_instance.intent_classifier_get_details(instance_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # print("Update the model params:")
+    # model_params = feersum_nlu.ModelParams(threshold=0.7, desc="Examples: Test classifier.",
+    #                                        long_name='Test Classifier')
+    # api_response = api_instance.intent_classifier_set_params(instance_name, model_params)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+    #
+    # print("Get the details of specific named loaded intent classifiers:")
+    # api_response = api_instance.intent_classifier_get_details(instance_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
     print("Classify intent:")
     api_response = api_instance.intent_classifier_retrieve(instance_name, text_input)
@@ -155,23 +156,23 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Run TSNE:")
-    api_response = api_instance.intent_classifier_tsne(instance_name, tsne_settings)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # print("Run TSNE:")
+    # api_response = api_instance.intent_classifier_tsne(instance_name, tsne_settings)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
-    print("Delete specific named loaded intent classifiers:")
-    api_response = api_instance.intent_classifier_del(instance_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
-    print("Vaporise specific named loaded intent classifiers:")
-    api_response = api_instance.intent_classifier_vaporise(instance_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # print("Delete specific named loaded intent classifiers:")
+    # api_response = api_instance.intent_classifier_del(instance_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+    #
+    # print("Vaporise specific named loaded intent classifiers:")
+    # api_response = api_instance.intent_classifier_vaporise(instance_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
 except ApiException as e:
     print("Exception when calling an intent classifier operation: %s\n" % e)
