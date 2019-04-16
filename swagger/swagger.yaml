@@ -2274,7 +2274,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## intent_classifiers train
+## crf_entity_extractors train
 ########
   /crf_entity_extractors/{instance_name}/train:
     post:
