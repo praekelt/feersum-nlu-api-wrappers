@@ -480,6 +480,39 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
+## text_classifiers train online
+########
+  /text_classifiers/{instance_name}/online_training_samples:
+    post:
+      tags:
+      - text_classifiers
+      summary: Train/update the classifier online with the samples provided.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_online_training_samples
+      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
 ## text_classifiers retrieve
 ########
   /text_classifiers/{instance_name}/retrieve:
@@ -3348,7 +3381,7 @@ paths:
       summary: Recognise the language the text is written in.
       x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
       operationId: language_recogniser_retrieve
-      description: Recognise the language the text is written in. Returns the list of scored language codes.
+      description: Recognise the language the text is written in. Returns the list of scored language codes (ISO 639-3).
       parameters:
       - in: path
         name: instance_name
@@ -4068,6 +4101,15 @@ definitions:
         description: The model's number of testing samples.
         type: integer
         example: 100
+      clsfr_algorithm:
+        description: The name of the algorithm that should be used for the classification.
+        type: string
+        example: "'naive_bayes_char_ngram', 'nearest_neighbour_L1', 'nearest_neighbour_L2', 'nearest_neighbour_cosine', etc."
+      language_model_list:
+        description: The list of labelled language models used as sentence encoders.
+        type: array
+        items:
+          $ref: "#/definitions/labelled_language_model"
       threshold:
         description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
         type: number
@@ -4860,11 +4902,27 @@ definitions:
     - word_manifold
     properties:
       label:
-        description: The language code label.
+        description: The language code label. Please use ISO 639-3 language codes.
         type: string
         example: 'eng'
       word_manifold:
         description: The name of the word manifold to use for the language code.
+        type: string
+        example: 'feers_wm_eng'
+
+  labelled_language_model:
+    description: A labelled (e.g. lang_code labelled) language instance.
+    type: object
+    required:
+    - lang_code
+    - lang_model
+    properties:
+      lang_code:
+        description: The language code label. Please use ISO 639-3 language codes.
+        type: string
+        example: 'eng'
+      lang_model:
+        description: The name of the language model to use for the language code in the associated model.
         type: string
         example: 'feers_wm_eng'
 
@@ -4892,6 +4950,15 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/labeled_word_manifold"
+      clsfr_algorithm:
+        description: The name of the algorithm that should be used for the classification.
+        type: string
+        example: "'nearest_neighbour_word_embeddings', 'nearest_neighbour_usent', 'naive_bayes', etc."
+      language_model_list:
+        description: The list of labelled language models used as sentence encoders.
+        type: array
+        items:
+          $ref: "#/definitions/labelled_language_model"
 
   model_params:
     description: The model parameters. Dict of parameters like name, long_name, desc, threshold, etc. Models can surface more paramerters. Use the params end-point to get the set of params that is editable.

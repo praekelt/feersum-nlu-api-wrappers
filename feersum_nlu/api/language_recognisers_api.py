@@ -622,7 +622,7 @@ class LanguageRecognisersApi(object):
     def language_recogniser_retrieve(self, instance_name, text_input, **kwargs):  # noqa: E501
         """Recognise the language the text is written in.  # noqa: E501
 
-        Recognise the language the text is written in. Returns the list of scored language codes.  # noqa: E501
+        Recognise the language the text is written in. Returns the list of scored language codes (ISO 639-3).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async=True
         >>> thread = api.language_recogniser_retrieve(instance_name, text_input, async=True)
@@ -645,7 +645,7 @@ class LanguageRecognisersApi(object):
     def language_recogniser_retrieve_with_http_info(self, instance_name, text_input, **kwargs):  # noqa: E501
         """Recognise the language the text is written in.  # noqa: E501
 
-        Recognise the language the text is written in. Returns the list of scored language codes.  # noqa: E501
+        Recognise the language the text is written in. Returns the list of scored language codes (ISO 639-3).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async=True
         >>> thread = api.language_recogniser_retrieve_with_http_info(instance_name, text_input, async=True)
