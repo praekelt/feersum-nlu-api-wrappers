@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **threshold** | **float** | The threshold below which words are not similar. | [optional] 
 **word_manifold** | **str** |  | [optional] 
 **load_from_store** | **bool** | Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified. | 
+**revision_uuid** | **str** | If provided, the uuid of the revision of the model to try and load from the model history. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

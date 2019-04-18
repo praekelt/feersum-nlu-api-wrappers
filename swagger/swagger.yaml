@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.29
+  version: 2.0.30.dev1
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -57,16 +57,18 @@ tags:
   description: The API to a pre-configured 'generic' date parser.
 - name: sentiment_detectors
   description: The API to a pre-configured 'generic' sentiment detector.
-- name: crf_entity_extractors
-  description: The API to your crf entity extractor instances.
 - name: regex_entity_extractors
-  description: The API to your regular expression entity extractor instances.
+  description: The API to your regular expression entity extractor instances. The extractor returns and labels the text that matched the named regex patterns.
 - name: person_name_entity_extractors
-  description: The API to your person_name entity extractor instances.
+  description: The API to your person_name entity extractor instances. The extractor returns a list of person names found in the text.
 - name: duckling_entity_extractors
-  description: The API to your duckling entity extractor instances for things like distances, volumes, etc.
+  description: The API to your duckling entity extractor instances for things like distances, volumes, etc. The extractor returns the text recognised as a duckling entity and its parsed/formatted value.
 - name: sim_word_entity_extractors
-  description: The API to your similar/related words entity extractor instances.
+  description: The API to your similar/related words entity extractor instances. The extractor returns the text that matched the listed targets words within the given threshold.
+- name: synonym_entity_extractors
+  description: The API to your synonym entity extractor instances. The extractor matches text to a number of synonym sets and returns the set label and matched text.
+- name: crf_entity_extractors
+  description: The API to your crf entity extractor instances. The extractor recognises words as entities within the context of the rest of the text. The extractor returns the entity label as well as the associated words from the text.
 - name: data_objects
   description: The API to a general data_object store useful to hold general application data like user profiles, logs and tables. A data_object is, similar to a json object, of type JSONObj = Union[str, int, float, bool, None, Dict[str, JSONObj], List[JSONObj]].
 - name: health
@@ -2441,6 +2443,470 @@ paths:
 ###################################
 ###################################
 ########
+## synonym_entity_extractors root
+########
+  /synonym_entity_extractors:
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Create a synonym entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_create
+      description: Create a new synonym entity extractor or reload one from the trash.
+      parameters:
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/synonym_entity_extractor_create_details"
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - synonym_entity_extractors
+      summary: Get list of loaded synonym entity extractors.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_get_details_all
+      description: Get the list of loaded synonym entity extractors.
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors Get details of named instance
+########
+  /synonym_entity_extractors/{instance_name}:
+    get:
+      tags:
+      - synonym_entity_extractors
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_get_details
+      description: Get the details of the named synonym entity extractor instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - synonym_entity_extractors
+      summary: Delete named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_del
+      description: Delete and get the details of the named synonym entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors training samples
+########
+  /synonym_entity_extractors/{instance_name}/training_samples:
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Add training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_add_training_samples
+      description: Add training samples to named extractor. Returns the extractor's updated number of training samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: synonym_sample_list
+        description: List of synonym samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/synonym_sample"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - synonym_entity_extractors
+      summary: Get training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_get_training_samples
+      description: Get the training samples of the named extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - synonym_entity_extractors
+      summary: Delete training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_del_training_samples
+      description: Delete the listed training samples of the named extractor. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: synonym_sample_list
+        description: List of synonym samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/synonym_sample"
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /synonym_entity_extractors/{instance_name}/training_samples_all:
+    delete:
+      tags:
+      - synonym_entity_extractors
+      summary: Delete all training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_del_training_samples_all
+      description: Delete all training samples of the named extractor. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  ########
+  ## synonym_entity_extractors testing samples
+  ########
+  /synonym_entity_extractors/{instance_name}/testing_samples:
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Add testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_add_testing_samples
+      description: Add testing samples to named extractor. Returns the extractor's updated number of testing samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: synonym_sample_list
+        description: List of synonym samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/synonym_sample"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - synonym_entity_extractors
+      summary: Get testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_get_testing_samples
+      description: Get the testing samples of the named extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - synonym_entity_extractors
+      summary: Delete testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_del_testing_samples
+      description: Delete the listed testing samples of the named extractor. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: synonym_sample_list
+        description: List of synonym samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/synonym_sample"
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /synonym_entity_extractors/{instance_name}/testing_samples_all:
+    delete:
+      tags:
+      - synonym_entity_extractors
+      summary: Delete all testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_del_testing_samples_all
+      description: Delete all testing samples of the named extractor. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors train
+########
+  /synonym_entity_extractors/{instance_name}/train:
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Train the named synonym extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_train
+      description: Train the named synonym extractor with the training and testing data already provided. Returns the updated instance details.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: train_details
+        description: The arguments provided to the train operation.
+        required: true
+        schema:
+          $ref: "#/definitions/train_details"
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors model_params
+########
+  /synonym_entity_extractors/{instance_name}/params:
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Set the model parameters of named synonym entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_set_params
+      description: Set the model parameters of named synonym entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - synonym_entity_extractors
+      summary: Get the editable model parameters of named synonym entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_get_params
+      description: Get the editable model parameters of named synonym entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors retrieve
+########
+  /synonym_entity_extractors/{instance_name}/retrieve:
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Predict which entities was mentioned.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_retrieve
+      description: Predict which entities was mentioned.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors vaporise
+########
+  /synonym_entity_extractors/{instance_name}/vaporise:
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors get list of entity labels
+########
+  /synonym_entity_extractors/{instance_name}/get_labels:
+    get:
+      tags:
+      - synonym_entity_extractors
+      summary: Get list of possible labels.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_get_labels
+      description: Returns the extractor's list of possible entity labels.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labels"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+###################################
+###################################
+########
 ## regex_entity_extractors root
 ########
   /regex_entity_extractors:
@@ -3474,6 +3940,21 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+    delete:
+      tags:
+      - data_objects
+      summary: Delete all data_objects.
+      x-swagger-router-controller: rest_api.flask_server.controllers.data_objects_controller
+      operationId: data_object_del_all
+      description: Get the list of names of loaded data_objects.
+      responses:
+        200:
+          $ref: "#/responses/data_object_name_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
 ########
 ## data_objects Update/create an data_object - a data_object is a json object.
 ########
@@ -3547,6 +4028,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+########
+## data_objects vaporise
+########
   /data_objects/{instance_name}/vaporise:
     post:
       tags:
@@ -3762,6 +4246,18 @@ responses:
       items:
         $ref: "#/definitions/crf_entity_extractor_instance_detail"
 
+  synonym_entity_extractor_instance_detail:
+    description: The model instance detail
+    schema:
+      $ref: "#/definitions/synonym_entity_extractor_instance_detail"
+
+  synonym_entity_extractor_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/synonym_entity_extractor_instance_detail"
+
   regex_entity_extractor_instance_detail:
     description: The model instance detail
     schema:
@@ -3846,6 +4342,13 @@ responses:
       items:
         $ref: "#/definitions/crf_sample"
 
+  synonym_sample_list:
+    description: List of synonym samples.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/synonym_sample"
+
   labelled_text_sample_list:
     description: The list of labeled text samples.
     schema:
@@ -3899,6 +4402,13 @@ responses:
       type: array
       items:
         $ref: "#/definitions/crf_entity"
+
+  synonym_entity_list:
+    description: The list of extracted synonym entities.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/synonym_entity"
 
   regex_entity_list:
     description: The list of extracted regex entities.
@@ -3968,7 +4478,7 @@ definitions:
         description: The first character of the entity in the associated utterance.
       len:
         type: integer
-        description: One past the last character of the entity in the associated utterance.
+        description: The length of the extracted entity in the associated utterance.
     example: {"entity": "location", "index": 31, "len": 8}
 
   crf_sample:
@@ -3986,6 +4496,65 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/crf_entity"
+
+  synonym_entity:
+    description: A synonym entity.
+    type: object
+    required:
+    - entity
+    properties:
+      entity:
+        type: string
+        description: The entity label/class/type.
+      syn_set:
+        description: The list of synonyms associated with this entity label. One should either provide a synset OR an index and len of a specific synonym in the associated utterance.
+        type: array
+        items:
+          type: string
+      index:
+        type: integer
+        description: The first character of the entity in the associated utterance. One should either provide a synset OR an index and len of a specific synonym in the associated utterance.
+      len:
+        type: integer
+        description: The length of the extracted entity in the associated utterance.
+    example:
+    - {"entity": "error", "syn_set": ["fault", "error", "red light", "problem"]}
+    - {"entity": "error", "index": 31, "len": 8}
+
+  synonym_sample:
+    description: A synonym entity extractor training/testing utterance with labelled entities. One should either provide an entity list with synsets OR text with index+len of a specific synonym in the associated utterance.
+    type: object
+    properties:
+      text:
+        type: string
+      intent:
+        type: string
+      entity_list:
+        description: A list of labelled entities.
+        type: array
+        items:
+          $ref: "#/definitions/synonym_entity"
+
+  model_revision:
+    description: Summary of a model revision stored in the history.
+    type: object
+    required:
+    - version
+    - uuid
+    - message
+    properties:
+      version:
+        description: The revision ID, a non-consecutive increasing unique number.
+        type: integer
+        example: 10
+      uuid:
+        description: A universally unique ID used to reference this revision.
+        type: string
+        example: ea0e5aa3-1772-49aa-a805-db7ed6da46bf
+      message:
+        description: A longer existential description of this revision.
+        type: string
+        example: Added training data.
 
   dashboard_model_detail:
     description: The model instance detail.
@@ -4014,6 +4583,11 @@ definitions:
         description: Whether or not this model has been deleted. Deleted models need to be loaded to be used again.
         type: boolean
         example: False
+      history:
+        description: The model's history.
+        type: array
+        items:
+          $ref: "#/definitions/model_revision"
 
   dashboard_detail:
     description: Your dashboard content.
@@ -4374,6 +4948,74 @@ definitions:
         type: number
         example: 0.85
 
+  synonym_entity_extractor_instance_detail:
+    description: The model instance detail.
+    type: object
+    required:
+    - name
+    - id
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      id:
+        description: The unique id of a specific version of the model instance.
+        type: string
+        example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'An example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
+      training_accuracy:
+        description: The accuracy of the model as measured on the training set.
+        type: number
+        example: 1.0
+      training_f1:
+        description: The average F-score of the model as measured on the training set.
+        type: number
+        example: 1.0
+      validation_accuracy:
+        description: The accuracy of the model as measured by cross validation on the training set.
+        type: number
+        example: 1.0
+      validation_f1:
+        description: The average F-score of the model as measured by cross validation on the training set.
+        type: number
+        example: 1.0
+      testing_accuracy:
+        description: The accuracy of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      testing_f1:
+        description: The average F-score of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      training_stamp:
+        description: The time when the training operation concluded.
+        type: string
+        example: '2017-10-26 10:42:01.589979'
+      num_training_samples:
+        description: The model's number of training samples.
+        type: integer
+        example: 100
+      num_testing_samples:
+        description: The model's number of testing samples.
+        type: integer
+        example: 100
+      threshold:
+        description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
+        type: number
+        example: 0.85
+
   regex_entity_extractor_instance_detail:
     description: The model instance detail.
     type: object
@@ -4593,6 +5235,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   faq_matcher_create_details:
     description: The details of the model instance to create.
@@ -4621,6 +5267,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   intent_classifier_create_details:
     description: The details of the model instance to create.
@@ -4649,6 +5299,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   word_manifold_create_details:
     description: The details of the model instance to create.
@@ -4677,6 +5331,10 @@ definitions:
         description: The input file on the server (if any) to use.
         type: string
         example: 'glove_za_eng.txt'
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   crf_entity_extractor_create_details:
     description: The details of the model instance to create.
@@ -4701,6 +5359,38 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
+
+  synonym_entity_extractor_create_details:
+    description: The details of the model instance to create.
+    type: object
+    required:
+    - name
+    - load_from_store
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance to create.
+        type: string
+        example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'An example model of this type.'
+      load_from_store:
+        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        type: boolean
+        example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   regex_entity_extractor_create_details:
     description: The details of the model instance to create.
@@ -4729,6 +5419,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   person_name_entity_extractor_create_details:
     description: The details of the model instance to create.
@@ -4782,6 +5476,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   sim_word_entity_extractor_create_details:
     description: The details of the model instance to create.
@@ -4818,6 +5516,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   language_recogniser_create_details:
     description: The details of the model instance to create.
@@ -4846,6 +5548,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   labelled_text_sample:
     description: Labelled text sample.
