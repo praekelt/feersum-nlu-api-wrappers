@@ -45,7 +45,15 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(
     text="How much does it cost?",
     label="quote"))
 
-train_details = feersum_nlu.TrainDetails(immediate_mode=True)
+train_details = feersum_nlu.TrainDetails(immediate_mode=True,
+                                         clsfr_algorithm="nearest_neighbour_word_embeddings",
+                                         language_model_list=[
+                                               {
+                                                   "lang_code": "eng",
+                                                   "lang_model": "glove6B50D_trimmed"
+                                               }
+                                           ]
+                                         )
 
 # text_input = feersum_nlu.TextInput("I would please like to fill in a claim form.")  # claim
 #   [{'label': 'claim', 'probability': 0.9409714994212784}, {'label': 'quote', 'probability': 0.05902850057872078}]

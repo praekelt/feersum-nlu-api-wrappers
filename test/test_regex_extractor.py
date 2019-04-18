@@ -13,7 +13,7 @@ from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
 
-class TestRexEx(unittest.TestCase):
+class TestRegex(unittest.TestCase):
     def setUp(self):
         pass
 

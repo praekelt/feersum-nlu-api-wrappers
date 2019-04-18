@@ -3,7 +3,6 @@
 from __future__ import absolute_import
 
 import urllib3
-import time
 
 import unittest
 

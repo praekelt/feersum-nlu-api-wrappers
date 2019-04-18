@@ -41,7 +41,15 @@ class TestTextClassifier(unittest.TestCase):
         labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to get a quote",
                                                                         label="quote"))
 
-        train_details = feersum_nlu.TrainDetails(immediate_mode=True)
+        train_details = feersum_nlu.TrainDetails(immediate_mode=True,
+                                                 clsfr_algorithm="nearest_neighbour_word_embeddings",
+                                                 language_model_list=[
+                                                     {
+                                                         "lang_code": "eng",
+                                                         "lang_model": "glove6B50D_trimmed"
+                                                     }
+                                                 ]
+                                                 )
 
         text_input = feersum_nlu.TextInput("How do I get a quote?")
 

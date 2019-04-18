@@ -5447,10 +5447,6 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
-      revision_uuid:
-        description: If provided, the uuid of the revision of the model to try and load from the model history.
-        type: string
-        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   duckling_entity_extractor_create_details:
     description: The details of the model instance to create.
