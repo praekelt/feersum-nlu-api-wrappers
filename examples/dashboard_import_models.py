@@ -5,7 +5,6 @@ These files are combined into on json object used by feersum_nlu_util's import f
 """
 
 import json
-import csv
 
 import feersum_nlu
 from examples import feersumnlu_host, feersum_nlu_auth_token
@@ -22,19 +21,16 @@ def main():
     src_feersum_nlu_auth_token = feersum_nlu_auth_token
     # src_feersum_nlu_auth_token = "63454b82-ee34-4e26-9a63-6b1d4f51db49"
 
-    model_list = [("test_faq_mtchr", "faq_matcher")]  # List of exported models to be imported.
+    model_list = [("medium_faq_mtchr", "faq_matcher"),
+                  ("test_crf_extr", "crf_entity_extractor")]  # List of exported models to be imported [(mdl,type), ...]
 
     # === Import models one by one ===
     for model_name, model_type in model_list:
-        print("#####################")
+        print("\n#####################")
 
         filename_model = f"exported_models/{model_name}_{src_feersum_nlu_auth_token}.{model_type}.json"
-        filename_train_csv = f"exported_models/{model_name}_{src_feersum_nlu_auth_token}.{model_type}.train.csv"
-        filename_test_csv = f"exported_models/{model_name}_{src_feersum_nlu_auth_token}.{model_type}.test.csv"
 
         print('filename_model =', filename_model, flush=True)
-        print('filename_train_csv =', filename_train_csv, flush=True)
-        print('filename_test_csv =', filename_test_csv, flush=True)
 
         print()
         print("model_name =", model_name)
@@ -52,32 +48,14 @@ def main():
                 print("INFO: Source model type is different from type to be imported!!!")
 
             # === Try to get training samples from training data CSV ===
-            training_samples = []
+            training_samples = instance_detail.get("training_samples")
 
-            try:
-                with open(filename_train_csv, newline='') as csv_file:
-                    csv_reader = csv.reader(csv_file, delimiter=',', quotechar='"')
-
-                    for row in csv_reader:
-                        training_samples.append(feersum_nlu.LabelledTextSample(text=row[1], label=row[0]))
-            except FileNotFoundError:
-                pass
-
-            print("  training_samples = ", len(training_samples))
+            print("  training_samples = ", len(training_samples) if training_samples is not None else 0)
 
             # === Try to get testing samples from testing data CSV ===
-            testing_samples = []
+            testing_samples = instance_detail.get("testing_samples")
 
-            try:
-                with open(filename_test_csv, newline='') as csv_file:
-                    csv_reader = csv.reader(csv_file, delimiter=',', quotechar='"')
-
-                    for row in csv_reader:
-                        testing_samples.append(feersum_nlu.LabelledTextSample(text=row[1], label=row[0]))
-            except FileNotFoundError:
-                pass
-
-            print("  testing_samples = ", len(testing_samples))
+            print("  testing_samples = ", len(testing_samples) if testing_samples is not None else 0)
 
             # === Make model dict ===
             model_dict = {"instance_detail": instance_detail,

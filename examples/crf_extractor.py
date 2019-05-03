@@ -64,7 +64,7 @@ testing_sample_list.append(feersum_nlu.CrfSample(text="Can I have a hot dog with
                                                  ]))
 
 text_input_0 = feersum_nlu.TextInput("I would like to buy a beef sandwich with mustard.",
-                                     lang_code="afr")  # optional language hint.
+                                     lang_code="eng")  # optional language hint.
 
 print()
 

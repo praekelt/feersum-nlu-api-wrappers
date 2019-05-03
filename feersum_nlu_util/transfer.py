@@ -44,6 +44,12 @@ def export_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
         elif model_type == 'person_name_entity_extractor':
             api_instance = feersum_nlu.PersonNameEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
             instance_detail = api_instance.person_name_entity_extractor_get_details(model_name)
+        elif model_type == 'crf_entity_extractor':
+            api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+            instance_detail = api_instance.crf_entity_extractor_get_details(model_name)
+        elif model_type == 'synonym_entity_extractor':
+            api_instance = feersum_nlu.SynonymEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+            instance_detail = api_instance.synonym_entity_extractor_get_details(model_name)
         else:
             api_instance = None
             instance_detail = None
@@ -65,6 +71,12 @@ def export_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
             elif model_type == 'faq_matcher':
                 training_samples = api_instance.faq_matcher_get_training_samples(model_name)
                 testing_samples = api_instance.faq_matcher_get_testing_samples(model_name)
+            elif model_type == 'crf_entity_extractor':
+                training_samples = api_instance.crf_entity_extractor_get_training_samples(model_name)
+                testing_samples = api_instance.crf_entity_extractor_get_testing_samples(model_name)
+            elif model_type == 'synonym_entity_extractor':
+                training_samples = api_instance.synonym_entity_extractor_get_training_samples(model_name)
+                testing_samples = api_instance.synonym_entity_extractor_get_testing_samples(model_name)
             else:
                 training_samples = None
                 testing_samples = None
@@ -88,9 +100,9 @@ def export_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
 # =======================================
 # =======================================
 def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Configuration,
-                 model_dict: Dict):
+                 model_dict: Dict) -> bool:
     """
-    Imprt the model to a json object {"instance_detail":, "training_samples":, "testing_samples":}
+    Import the model to a json object {"instance_detail":, "training_samples":, "testing_samples":}
 
     :param model_name:
     :param model_type:
@@ -100,8 +112,12 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
     """
 
     instance_detail = model_dict.get("instance_detail")
-    training_samples = model_dict.get("training_samples")
-    testing_samples = model_dict.get("testing_samples")
+
+    if instance_detail is None:
+        return False
+
+    training_samples_json = model_dict.get("training_samples")
+    testing_samples_json = model_dict.get("testing_samples")
 
     desc = instance_detail.get('desc')
     long_name = instance_detail.get('long_name')
@@ -139,6 +155,22 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
             print("  Creating model ... ", flush=True)
             api_response = api_instance.text_classifier_create(create_details)
 
+            training_samples = []
+            testing_samples = []
+
+            if training_samples_json:
+                for sample in training_samples_json:
+                    training_samples.append(feersum_nlu.LabelledTextSample(text=sample.get("text"),
+                                                                           label=sample.get("label"),
+                                                                           lang_code=sample.get("lang_code"),
+                                                                           comment=sample.get("comment")))
+            if testing_samples_json:
+                for sample in testing_samples_json:
+                    testing_samples.append(feersum_nlu.LabelledTextSample(text=sample.get("text"),
+                                                                          label=sample.get("label"),
+                                                                          lang_code=sample.get("lang_code"),
+                                                                          comment=sample.get("comment")))
+
             if len(training_samples):
                 api_response = api_instance.text_classifier_add_training_samples(model_name, training_samples)
 
@@ -168,6 +200,22 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
 
             print("  Creating model ... ", flush=True)
             api_response = api_instance.intent_classifier_create(create_details)
+
+            training_samples = []
+            testing_samples = []
+
+            if training_samples_json:
+                for sample in training_samples_json:
+                    training_samples.append(feersum_nlu.LabelledTextSample(text=sample.get("text"),
+                                                                           label=sample.get("label"),
+                                                                           lang_code=sample.get("lang_code"),
+                                                                           comment=sample.get("comment")))
+            if testing_samples_json:
+                for sample in testing_samples_json:
+                    testing_samples.append(feersum_nlu.LabelledTextSample(text=sample.get("text"),
+                                                                          label=sample.get("label"),
+                                                                          lang_code=sample.get("lang_code"),
+                                                                          comment=sample.get("comment")))
 
             if len(training_samples):
                 api_response = api_instance.intent_classifier_add_training_samples(model_name, training_samples)
@@ -213,6 +261,22 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
 
             print("  Creating model ... ", flush=True)
             api_response = api_instance.faq_matcher_create(create_details)
+
+            training_samples = []
+            testing_samples = []
+
+            if training_samples_json:
+                for sample in training_samples_json:
+                    training_samples.append(feersum_nlu.LabelledTextSample(text=sample.get("text"),
+                                                                           label=sample.get("label"),
+                                                                           lang_code=sample.get("lang_code"),
+                                                                           comment=sample.get("comment")))
+            if testing_samples_json:
+                for sample in testing_samples_json:
+                    testing_samples.append(feersum_nlu.LabelledTextSample(text=sample.get("text"),
+                                                                          label=sample.get("label"),
+                                                                          lang_code=sample.get("lang_code"),
+                                                                          comment=sample.get("comment")))
 
             if len(training_samples):
                 api_response = api_instance.faq_matcher_add_training_samples(model_name, training_samples)
@@ -321,6 +385,144 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
 
             print("  Get the details of the imported model ... ", flush=True)
             api_response = api_instance.person_name_entity_extractor_get_details(model_name)
+            print("   api_response", api_response)
+        elif model_type == 'crf_entity_extractor':
+            create_details = feersum_nlu.CrfEntityExtractorCreateDetails(name=model_name,
+                                                                         desc=desc,
+                                                                         long_name=long_name,
+                                                                         load_from_store=False)
+
+            api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+
+            print("  Creating model ... ", flush=True)
+            api_response = api_instance.crf_entity_extractor_create(create_details)
+
+            training_samples = []
+            testing_samples = []
+
+            if training_samples_json:
+                for sample in training_samples_json:
+                    entity_list_json = sample.get("entity_list")
+                    entity_list = []
+
+                    for entity_json in entity_list_json:
+                        entity_list.append(feersum_nlu.CrfEntity(entity=entity_json.get("entity"),
+                                                                 index=entity_json.get("index"),
+                                                                 len=entity_json.get("len")))
+
+                    training_samples.append(feersum_nlu.CrfSample(text=sample.get("text"),
+                                                                  intent=sample.get("intent"),
+                                                                  entity_list=entity_list))
+
+            if testing_samples_json:
+                for sample in testing_samples_json:
+                    entity_list_json = sample.get("entity_list")
+                    entity_list = []
+
+                    for entity_json in entity_list_json:
+                        entity_list.append(feersum_nlu.CrfEntity(entity=entity_json.get("entity"),
+                                                                 index=entity_json.get("index"),
+                                                                 len=entity_json.get("len")))
+
+                    testing_samples.append(feersum_nlu.CrfSample(text=sample.get("text"),
+                                                                 intent=sample.get("intent"),
+                                                                 entity_list=entity_list))
+
+            if len(training_samples):
+                api_response = api_instance.crf_entity_extractor_add_training_samples(model_name, training_samples)
+
+            if len(testing_samples):
+                api_response = api_instance.crf_entity_extractor_add_testing_samples(model_name, testing_samples)
+
+            train_threshold = instance_detail.get('threshold')
+
+            train_details = feersum_nlu.TrainDetails(threshold=train_threshold)
+
+            print("  train_details =", str(train_details.to_dict()))
+
+            print("  train_details =", str(train_details.to_dict()))
+
+            print("  Training model ... ", flush=True)
+            api_response = api_instance.crf_entity_extractor_train(model_name, train_details)
+
+            print()
+
+            print("  Get the details of the imported model ... ", flush=True)
+            api_response = api_instance.crf_entity_extractor_get_details(model_name)
+            print("   api_response", api_response)
+        elif model_type == 'synonym_entity_extractor':
+            create_details = feersum_nlu.SynonymEntityExtractorCreateDetails(name=model_name,
+                                                                             desc=desc,
+                                                                             long_name=long_name,
+                                                                             load_from_store=False)
+
+            api_instance = feersum_nlu.SynonymEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+
+            print("  Creating model ... ", flush=True)
+            api_response = api_instance.synonym_entity_extractor_create(create_details)
+
+            training_samples = []
+            testing_samples = []
+
+            # 'text': 'str',
+            # 'intent': 'str',
+            # 'entity_list': 'list[SynonymEntity]'
+            #     'entity': 'str',
+            #     'syn_set': 'list[str]',
+            #     'index': 'int',
+            #     'len': 'int'
+
+            if training_samples_json:
+                for sample in training_samples_json:
+                    entity_list_json = sample.get("entity_list")
+                    entity_list = []
+
+                    for entity_json in entity_list_json:
+                        entity_list.append(feersum_nlu.SynonymEntity(entity=entity_json.get("entity"),
+                                                                     syn_set=entity_json.get("syn_set"),
+                                                                     index=entity_json.get("index"),
+                                                                     len=entity_json.get("len")))
+
+                    training_samples.append(feersum_nlu.SynonymSample(text=sample.get("text"),
+                                                                      intent=sample.get("intent"),
+                                                                      entity_list=entity_list))
+
+            if testing_samples_json:
+                for sample in testing_samples_json:
+                    entity_list_json = sample.get("entity_list")
+                    entity_list = []
+
+                    for entity_json in entity_list_json:
+                        entity_list.append(feersum_nlu.SynonymEntity(entity=entity_json.get("entity"),
+                                                                     syn_set=entity_json.get("syn_set"),
+                                                                     index=entity_json.get("index"),
+                                                                     len=entity_json.get("len")))
+
+                    testing_samples.append(feersum_nlu.SynonymSample(text=sample.get("text"),
+                                                                     intent=sample.get("intent"),
+                                                                     entity_list=entity_list))
+
+            if len(training_samples):
+                api_response = api_instance.synonym_entity_extractor_add_training_samples(model_name, training_samples)
+
+            if len(testing_samples):
+                api_response = api_instance.synonym_entity_extractor_add_testing_samples(model_name, testing_samples)
+
+            train_threshold = instance_detail.get('threshold')
+
+            train_details = feersum_nlu.TrainDetails(threshold=train_threshold)
+
+            print("  train_details =", str(train_details.to_dict()))
+
+            print("  train_details =", str(train_details.to_dict()))
+
+            print("  Training model ... ", flush=True)
+            api_response = api_instance.synonym_entity_extractor_train(model_name, train_details)
+
+            print()
+
+            print("  Get the details of the imported model ... ", flush=True)
+            api_response = api_instance.synonym_entity_extractor_get_details(model_name)
             print("   api_response", api_response)
 
     except ApiException as e:
