@@ -133,7 +133,7 @@ class DataObjectsApi(object):
             collection_formats=collection_formats)
 
     def data_object_del_all(self, **kwargs):  # noqa: E501
-        """Delete all data_objects.  # noqa: E501
+        """Delete all data_objects. Returns list of names of data_objects deleted. Note that this is a convenience operation. The objects will still need to be vaporised one by one.  # noqa: E501
 
         Get the list of names of loaded data_objects.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -154,7 +154,7 @@ class DataObjectsApi(object):
             return data
 
     def data_object_del_all_with_http_info(self, **kwargs):  # noqa: E501
-        """Delete all data_objects.  # noqa: E501
+        """Delete all data_objects. Returns list of names of data_objects deleted. Note that this is a convenience operation. The objects will still need to be vaporised one by one.  # noqa: E501
 
         Get the list of names of loaded data_objects.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

@@ -86,10 +86,32 @@ paths:
     get:
       tags:
       - dashboard
-      summary: Your service dashboard.
+      summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_get_details
-      description: Get your list of loaded model instances, the API version, etc.
+      description: Get your list of loaded model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      responses:
+        200:
+          $ref: "#/responses/dashboard_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    post:
+      tags:
+      - dashboard
+      summary: Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
+      operationId: dashboard_get_details_with_params
+      description: Get your list of loaded model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
+      parameters:
+      - in: body
+        name: params
+        description: Params like 'show_data_objects' that influence the dashboard's response.
+        required: true
+        schema:
+          $ref: "#/definitions/dashboard_params"
       responses:
         200:
           $ref: "#/responses/dashboard_detail"
@@ -3943,7 +3965,7 @@ paths:
     delete:
       tags:
       - data_objects
-      summary: Delete all data_objects.
+      summary: Delete all data_objects. Returns list of names of data_objects deleted. Note that this is a convenience operation. The objects will still need to be vaporised one by one.
       x-swagger-router-controller: rest_api.flask_server.controllers.data_objects_controller
       operationId: data_object_del_all
       description: Get the list of names of loaded data_objects.
@@ -3956,7 +3978,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## data_objects Update/create an data_object - a data_object is a json object.
+## data_objects Update/create a data_object - a data_object is a json object.
 ########
   /data_objects/{instance_name}:
     post:
@@ -4375,8 +4397,15 @@ responses:
     schema:
       $ref: "#/definitions/data_object"
 
+  data_object_list:
+    description: The data_object.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/data_object"
+
   data_object_name_list:
-    description: A list of data_object names.
+    description: A list of data_objects.
     schema:
       type: array
       items:
@@ -5212,6 +5241,20 @@ definitions:
         type: integer
         example: 5000
 
+  dashboard_params:
+    description: The params used in generating the dashboard response.
+    type: object
+    properties:
+      show_data_objects:
+        description: Make True to include the data objects on the dashboard. Default is False.
+        type: boolean
+        example: False
+      history_size:
+        description: The max size of the revision history to include for a model.
+        type: integer
+        default: 10
+        example: 10
+
   text_classifier_create_details:
     description: The details of the model instance to create.
     type: object
@@ -5447,6 +5490,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   duckling_entity_extractor_create_details:
     description: The details of the model instance to create.

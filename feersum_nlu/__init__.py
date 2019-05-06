@@ -48,6 +48,7 @@ from feersum_nlu.models.crf_entity_extractor_instance_detail import CrfEntityExt
 from feersum_nlu.models.crf_sample import CrfSample
 from feersum_nlu.models.dashboard_detail import DashboardDetail
 from feersum_nlu.models.dashboard_model_detail import DashboardModelDetail
+from feersum_nlu.models.dashboard_params import DashboardParams
 from feersum_nlu.models.data_object import DataObject
 from feersum_nlu.models.data_object_name import DataObjectName
 from feersum_nlu.models.date_entity import DateEntity

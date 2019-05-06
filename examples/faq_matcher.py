@@ -17,7 +17,7 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 
-instance_name = 'medium_faq_mtchr'
+instance_name = 'test_faq_mtchr'
 
 create_details = feersum_nlu.FaqMatcherCreateDetails(name=instance_name,
                                                      desc="Test FAQ matcher.",
