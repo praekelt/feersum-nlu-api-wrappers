@@ -1,6 +1,21 @@
 Changelog
 *********
 
+Version 2.0.30
+==============
+
+Added git-like revision control. One can now load a specific revision of a model by providing its UUID in the create endpoints.
+The dashboard endpoint also now returns a model's revision history.
+
+Added a second POST dashboard end-point that allows one to set some operation parameters like a model's history size to show.
+
+Added a synonym entity extractor.
+
+Added a convenience 'delete_all' endpoint for data objects.
+
+
+
+
 Version 2.0.29
 ==============
 
