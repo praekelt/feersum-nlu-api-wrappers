@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **word_manifold_add_similar_words**
-> WordManifoldInstanceDetail word_manifold_add_similar_words(instance_name, new_word_list)
+> WordManifoldInstanceDetail word_manifold_add_similar_words(instance_name, new_word_list, x_caller=x_caller)
 
 Add new words.
 
@@ -43,10 +43,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.WordManifoldsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 new_word_list = [feersum_nlu.NewWord()] # list[NewWord] | List of new words.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Add new words.
-    api_response = api_instance.word_manifold_add_similar_words(instance_name, new_word_list)
+    api_response = api_instance.word_manifold_add_similar_words(instance_name, new_word_list, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling WordManifoldsApi->word_manifold_add_similar_words: %s\n" % e)
@@ -58,6 +59,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **new_word_list** | [**list[NewWord]**](NewWord.md)| List of new words. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -75,7 +77,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **word_manifold_create**
-> WordManifoldInstanceDetail word_manifold_create(create_details)
+> WordManifoldInstanceDetail word_manifold_create(create_details, x_caller=x_caller)
 
 Create a word manifold model.
 
@@ -103,10 +105,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.WordManifoldsApi(feersum_nlu.ApiClient(configuration))
 create_details = feersum_nlu.WordManifoldCreateDetails() # WordManifoldCreateDetails | The details of the word manifold instance to create.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Create a word manifold model.
-    api_response = api_instance.word_manifold_create(create_details)
+    api_response = api_instance.word_manifold_create(create_details, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling WordManifoldsApi->word_manifold_create: %s\n" % e)
@@ -117,6 +120,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_details** | [**WordManifoldCreateDetails**](WordManifoldCreateDetails.md)| The details of the word manifold instance to create. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -134,7 +138,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **word_manifold_del**
-> WordManifoldInstanceDetail word_manifold_del(instance_name)
+> WordManifoldInstanceDetail word_manifold_del(instance_name, x_caller=x_caller)
 
 Delete named instance.
 
@@ -162,10 +166,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.WordManifoldsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Delete named instance.
-    api_response = api_instance.word_manifold_del(instance_name)
+    api_response = api_instance.word_manifold_del(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling WordManifoldsApi->word_manifold_del: %s\n" % e)
@@ -176,6 +181,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -193,7 +199,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **word_manifold_get_details**
-> WordManifoldInstanceDetail word_manifold_get_details(instance_name)
+> WordManifoldInstanceDetail word_manifold_get_details(instance_name, x_caller=x_caller)
 
 Get details of named instance.
 
@@ -221,10 +227,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.WordManifoldsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Get details of named instance.
-    api_response = api_instance.word_manifold_get_details(instance_name)
+    api_response = api_instance.word_manifold_get_details(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling WordManifoldsApi->word_manifold_get_details: %s\n" % e)
@@ -235,6 +242,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -252,7 +260,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **word_manifold_get_similar_words**
-> list[WordAndDistance] word_manifold_get_similar_words(instance_name, word_and_threshold)
+> list[WordAndDistance] word_manifold_get_similar_words(instance_name, word_and_threshold, x_caller=x_caller)
 
 Find similar words.
 
@@ -281,10 +289,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.WordManifoldsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 word_and_threshold = feersum_nlu.WordAndThreshold() # WordAndThreshold | A word token and an accompanying threshold.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Find similar words.
-    api_response = api_instance.word_manifold_get_similar_words(instance_name, word_and_threshold)
+    api_response = api_instance.word_manifold_get_similar_words(instance_name, word_and_threshold, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling WordManifoldsApi->word_manifold_get_similar_words: %s\n" % e)
@@ -296,6 +305,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **word_and_threshold** | [**WordAndThreshold**](WordAndThreshold.md)| A word token and an accompanying threshold. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -313,7 +323,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **word_manifold_spell_correct**
-> list[WordAndDistance] word_manifold_spell_correct(instance_name, text_input)
+> list[WordAndDistance] word_manifold_spell_correct(instance_name, text_input, x_caller=x_caller)
 
 Spell correct a word.
 
@@ -342,10 +352,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.WordManifoldsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Spell correct a word.
-    api_response = api_instance.word_manifold_spell_correct(instance_name, text_input)
+    api_response = api_instance.word_manifold_spell_correct(instance_name, text_input, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling WordManifoldsApi->word_manifold_spell_correct: %s\n" % e)
@@ -357,6 +368,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **text_input** | [**TextInput**](TextInput.md)| The input text. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -374,7 +386,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **word_manifold_vaporise**
-> WordManifoldInstanceDetail word_manifold_vaporise(instance_name)
+> WordManifoldInstanceDetail word_manifold_vaporise(instance_name, x_caller=x_caller)
 
 Vaporise the named model.
 
@@ -402,10 +414,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.WordManifoldsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Vaporise the named model.
-    api_response = api_instance.word_manifold_vaporise(instance_name)
+    api_response = api_instance.word_manifold_vaporise(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling WordManifoldsApi->word_manifold_vaporise: %s\n" % e)
@@ -416,6 +429,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 

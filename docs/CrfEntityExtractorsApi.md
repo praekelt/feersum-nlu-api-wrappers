@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 
 # **crf_entity_extractor_add_testing_samples**
-> TotalSamples crf_entity_extractor_add_testing_samples(instance_name, crf_sample_list)
+> TotalSamples crf_entity_extractor_add_testing_samples(instance_name, crf_sample_list, x_caller=x_caller)
 
 Add testing samples.
 
@@ -54,10 +54,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 crf_sample_list = [feersum_nlu.CrfSample()] # list[CrfSample] | List of crf samples.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Add testing samples.
-    api_response = api_instance.crf_entity_extractor_add_testing_samples(instance_name, crf_sample_list)
+    api_response = api_instance.crf_entity_extractor_add_testing_samples(instance_name, crf_sample_list, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_add_testing_samples: %s\n" % e)
@@ -69,6 +70,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **crf_sample_list** | [**list[CrfSample]**](CrfSample.md)| List of crf samples. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -86,7 +88,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_add_training_samples**
-> TotalSamples crf_entity_extractor_add_training_samples(instance_name, crf_sample_list)
+> TotalSamples crf_entity_extractor_add_training_samples(instance_name, crf_sample_list, x_caller=x_caller)
 
 Add training samples.
 
@@ -115,10 +117,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 crf_sample_list = [feersum_nlu.CrfSample()] # list[CrfSample] | List of crf samples.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Add training samples.
-    api_response = api_instance.crf_entity_extractor_add_training_samples(instance_name, crf_sample_list)
+    api_response = api_instance.crf_entity_extractor_add_training_samples(instance_name, crf_sample_list, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_add_training_samples: %s\n" % e)
@@ -130,6 +133,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **crf_sample_list** | [**list[CrfSample]**](CrfSample.md)| List of crf samples. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -147,7 +151,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_create**
-> CrfEntityExtractorInstanceDetail crf_entity_extractor_create(create_details)
+> CrfEntityExtractorInstanceDetail crf_entity_extractor_create(create_details, x_caller=x_caller)
 
 Create a crf entity extractor.
 
@@ -175,10 +179,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 create_details = feersum_nlu.CrfEntityExtractorCreateDetails() # CrfEntityExtractorCreateDetails | The details of the instance to create.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Create a crf entity extractor.
-    api_response = api_instance.crf_entity_extractor_create(create_details)
+    api_response = api_instance.crf_entity_extractor_create(create_details, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_create: %s\n" % e)
@@ -189,6 +194,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_details** | [**CrfEntityExtractorCreateDetails**](CrfEntityExtractorCreateDetails.md)| The details of the instance to create. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -206,7 +212,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_del**
-> CrfEntityExtractorInstanceDetail crf_entity_extractor_del(instance_name)
+> CrfEntityExtractorInstanceDetail crf_entity_extractor_del(instance_name, x_caller=x_caller)
 
 Delete named instance.
 
@@ -234,10 +240,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Delete named instance.
-    api_response = api_instance.crf_entity_extractor_del(instance_name)
+    api_response = api_instance.crf_entity_extractor_del(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_del: %s\n" % e)
@@ -248,6 +255,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -265,7 +273,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_del_testing_samples**
-> list[CrfSample] crf_entity_extractor_del_testing_samples(instance_name, crf_sample_list)
+> list[CrfSample] crf_entity_extractor_del_testing_samples(instance_name, crf_sample_list, x_caller=x_caller)
 
 Delete testing samples.
 
@@ -294,10 +302,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 crf_sample_list = [feersum_nlu.CrfSample()] # list[CrfSample] | List of crf samples.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Delete testing samples.
-    api_response = api_instance.crf_entity_extractor_del_testing_samples(instance_name, crf_sample_list)
+    api_response = api_instance.crf_entity_extractor_del_testing_samples(instance_name, crf_sample_list, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_del_testing_samples: %s\n" % e)
@@ -309,6 +318,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **crf_sample_list** | [**list[CrfSample]**](CrfSample.md)| List of crf samples. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -326,7 +336,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_del_testing_samples_all**
-> list[CrfSample] crf_entity_extractor_del_testing_samples_all(instance_name)
+> list[CrfSample] crf_entity_extractor_del_testing_samples_all(instance_name, x_caller=x_caller)
 
 Delete all testing samples.
 
@@ -354,10 +364,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Delete all testing samples.
-    api_response = api_instance.crf_entity_extractor_del_testing_samples_all(instance_name)
+    api_response = api_instance.crf_entity_extractor_del_testing_samples_all(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_del_testing_samples_all: %s\n" % e)
@@ -368,6 +379,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -385,7 +397,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_del_training_samples**
-> list[CrfSample] crf_entity_extractor_del_training_samples(instance_name, crf_sample_list)
+> list[CrfSample] crf_entity_extractor_del_training_samples(instance_name, crf_sample_list, x_caller=x_caller)
 
 Delete training samples.
 
@@ -414,10 +426,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 crf_sample_list = [feersum_nlu.CrfSample()] # list[CrfSample] | List of crf samples.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Delete training samples.
-    api_response = api_instance.crf_entity_extractor_del_training_samples(instance_name, crf_sample_list)
+    api_response = api_instance.crf_entity_extractor_del_training_samples(instance_name, crf_sample_list, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_del_training_samples: %s\n" % e)
@@ -429,6 +442,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **crf_sample_list** | [**list[CrfSample]**](CrfSample.md)| List of crf samples. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -446,7 +460,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_del_training_samples_all**
-> list[CrfSample] crf_entity_extractor_del_training_samples_all(instance_name)
+> list[CrfSample] crf_entity_extractor_del_training_samples_all(instance_name, x_caller=x_caller)
 
 Delete all training samples.
 
@@ -474,10 +488,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Delete all training samples.
-    api_response = api_instance.crf_entity_extractor_del_training_samples_all(instance_name)
+    api_response = api_instance.crf_entity_extractor_del_training_samples_all(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_del_training_samples_all: %s\n" % e)
@@ -488,6 +503,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -505,7 +521,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_get_details**
-> CrfEntityExtractorInstanceDetail crf_entity_extractor_get_details(instance_name)
+> CrfEntityExtractorInstanceDetail crf_entity_extractor_get_details(instance_name, x_caller=x_caller)
 
 Get details of named instance.
 
@@ -533,10 +549,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Get details of named instance.
-    api_response = api_instance.crf_entity_extractor_get_details(instance_name)
+    api_response = api_instance.crf_entity_extractor_get_details(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_get_details: %s\n" % e)
@@ -547,6 +564,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -564,7 +582,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_get_details_all**
-> list[CrfEntityExtractorInstanceDetail] crf_entity_extractor_get_details_all()
+> list[CrfEntityExtractorInstanceDetail] crf_entity_extractor_get_details_all(x_caller=x_caller)
 
 Get list of loaded crf entity extractors.
 
@@ -591,17 +609,21 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Get list of loaded crf entity extractors.
-    api_response = api_instance.crf_entity_extractor_get_details_all()
+    api_response = api_instance.crf_entity_extractor_get_details_all(x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_get_details_all: %s\n" % e)
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -619,7 +641,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_get_labels**
-> list[ClassLabel] crf_entity_extractor_get_labels(instance_name)
+> list[ClassLabel] crf_entity_extractor_get_labels(instance_name, x_caller=x_caller)
 
 Get list of possible labels.
 
@@ -647,10 +669,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Get list of possible labels.
-    api_response = api_instance.crf_entity_extractor_get_labels(instance_name)
+    api_response = api_instance.crf_entity_extractor_get_labels(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_get_labels: %s\n" % e)
@@ -661,6 +684,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -678,7 +702,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_get_params**
-> ModelParams crf_entity_extractor_get_params(instance_name)
+> ModelParams crf_entity_extractor_get_params(instance_name, x_caller=x_caller)
 
 Get the editable model parameters of named crf entity extractor.
 
@@ -706,10 +730,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Get the editable model parameters of named crf entity extractor.
-    api_response = api_instance.crf_entity_extractor_get_params(instance_name)
+    api_response = api_instance.crf_entity_extractor_get_params(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_get_params: %s\n" % e)
@@ -720,6 +745,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -737,7 +763,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_get_testing_samples**
-> list[CrfSample] crf_entity_extractor_get_testing_samples(instance_name)
+> list[CrfSample] crf_entity_extractor_get_testing_samples(instance_name, x_caller=x_caller)
 
 Get testing samples.
 
@@ -765,10 +791,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Get testing samples.
-    api_response = api_instance.crf_entity_extractor_get_testing_samples(instance_name)
+    api_response = api_instance.crf_entity_extractor_get_testing_samples(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_get_testing_samples: %s\n" % e)
@@ -779,6 +806,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -796,7 +824,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_get_training_samples**
-> list[CrfSample] crf_entity_extractor_get_training_samples(instance_name)
+> list[CrfSample] crf_entity_extractor_get_training_samples(instance_name, x_caller=x_caller)
 
 Get training samples.
 
@@ -824,10 +852,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Get training samples.
-    api_response = api_instance.crf_entity_extractor_get_training_samples(instance_name)
+    api_response = api_instance.crf_entity_extractor_get_training_samples(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_get_training_samples: %s\n" % e)
@@ -838,6 +867,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -855,7 +885,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_retrieve**
-> list[CrfEntity] crf_entity_extractor_retrieve(instance_name, text_input)
+> list[CrfEntity] crf_entity_extractor_retrieve(instance_name, text_input, x_caller=x_caller)
 
 Predict which entities was mentioned.
 
@@ -884,10 +914,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Predict which entities was mentioned.
-    api_response = api_instance.crf_entity_extractor_retrieve(instance_name, text_input)
+    api_response = api_instance.crf_entity_extractor_retrieve(instance_name, text_input, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_retrieve: %s\n" % e)
@@ -899,6 +930,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **text_input** | [**TextInput**](TextInput.md)| The input text. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -916,7 +948,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_set_params**
-> CrfEntityExtractorInstanceDetail crf_entity_extractor_set_params(instance_name, model_params)
+> CrfEntityExtractorInstanceDetail crf_entity_extractor_set_params(instance_name, model_params, x_caller=x_caller)
 
 Set the model parameters of named crf entity extractor.
 
@@ -945,10 +977,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 model_params = feersum_nlu.ModelParams() # ModelParams | The model parameters.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Set the model parameters of named crf entity extractor.
-    api_response = api_instance.crf_entity_extractor_set_params(instance_name, model_params)
+    api_response = api_instance.crf_entity_extractor_set_params(instance_name, model_params, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_set_params: %s\n" % e)
@@ -960,6 +993,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -977,7 +1011,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_train**
-> CrfEntityExtractorInstanceDetail crf_entity_extractor_train(instance_name, train_details)
+> CrfEntityExtractorInstanceDetail crf_entity_extractor_train(instance_name, train_details, x_caller=x_caller)
 
 Train the named crf extractor.
 
@@ -1006,10 +1040,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 train_details = feersum_nlu.TrainDetails() # TrainDetails | The arguments provided to the train operation.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Train the named crf extractor.
-    api_response = api_instance.crf_entity_extractor_train(instance_name, train_details)
+    api_response = api_instance.crf_entity_extractor_train(instance_name, train_details, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_train: %s\n" % e)
@@ -1021,6 +1056,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **train_details** | [**TrainDetails**](TrainDetails.md)| The arguments provided to the train operation. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -1038,7 +1074,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_vaporise**
-> CrfEntityExtractorInstanceDetail crf_entity_extractor_vaporise(instance_name)
+> CrfEntityExtractorInstanceDetail crf_entity_extractor_vaporise(instance_name, x_caller=x_caller)
 
 Vaporise the named model.
 
@@ -1066,10 +1102,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Vaporise the named model.
-    api_response = api_instance.crf_entity_extractor_vaporise(instance_name)
+    api_response = api_instance.crf_entity_extractor_vaporise(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_vaporise: %s\n" % e)
@@ -1080,6 +1117,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 

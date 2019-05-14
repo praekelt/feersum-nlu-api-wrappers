@@ -43,6 +43,7 @@ class HealthApi(object):
         >>> result = thread.get()
 
         :param async bool
+        :param str x_caller:
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -64,12 +65,13 @@ class HealthApi(object):
         >>> result = thread.get()
 
         :param async bool
+        :param str x_caller:
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = []  # noqa: E501
+        all_params = ['x_caller']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -92,6 +94,8 @@ class HealthApi(object):
         query_params = []
 
         header_params = {}
+        if 'x_caller' in params:
+            header_params['X-CALLER'] = params['x_caller']  # noqa: E501
 
         form_params = []
         local_var_files = {}

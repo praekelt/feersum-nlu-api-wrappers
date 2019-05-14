@@ -19,15 +19,18 @@ api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
 dash_params = feersum_nlu.DashboardParams(show_data_objects=True,
                                           history_size=2)
 
+caller_name = 'example_caller'
+
 print()
 
 try:
     # Note: The _with_http_info function also returns the api_response_header!
     #       The header contains response headers like X-Rate-Limit-Remain.
 
-    print("Get dashboard content (use custom operation params):")
+    print("Get dashboard content (use CUSTOM operation params):")
     api_response, api_response_code, api_response_header = \
-        api_instance.dashboard_get_details_with_params_with_http_info(params=dash_params)
+        api_instance.dashboard_get_details_with_params_with_http_info(x_caller=caller_name, params=dash_params)
+
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print(" type(api_response_code)", type(api_response_code))
@@ -36,8 +39,9 @@ try:
     print(" api_response_header", api_response_header)
     print(" calls remaining in this cycle ('-1' means no limit) =", api_response_header.get("X-RateLimit-Remaining"))
 
-    # print("Get dashboard content (use default operations params):")
-    # api_response, api_response_code, api_response_header = api_instance.dashboard_get_details_with_http_info()
+    # print("Get dashboard content (use DEFAULT operations params):")
+    # api_response, api_response_code, api_response_header = \
+    #     api_instance.dashboard_get_details_with_http_info(x_caller=caller_name)
     # print(" type(api_response)", type(api_response))
     # print(" api_response", api_response)
     # print(" type(api_response_code)", type(api_response_code))

@@ -83,6 +83,9 @@ paths:
 ## dashboard root
 ########
   /dashboard:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - dashboard
@@ -126,6 +129,9 @@ paths:
 ## text_classifiers root
 ########
   /text_classifiers:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -168,6 +174,9 @@ paths:
 ## text_classifiers Get details of named instance
 ########
   /text_classifiers/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - text_classifiers
@@ -214,6 +223,9 @@ paths:
 ## text_classifiers training samples
 ########
   /text_classifiers/{instance_name}/training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -294,6 +306,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /text_classifiers/{instance_name}/training_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - text_classifiers
@@ -319,6 +334,9 @@ paths:
 ## text_classifiers testing samples
 ########
   /text_classifiers/{instance_name}/testing_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -399,6 +417,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /text_classifiers/{instance_name}/testing_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - text_classifiers
@@ -424,6 +445,9 @@ paths:
 ## text_classifiers train
 ########
   /text_classifiers/{instance_name}/train:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -455,6 +479,9 @@ paths:
 ## text_classifiers model_params
 ########
   /text_classifiers/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -507,6 +534,9 @@ paths:
 ## text_classifiers train online
 ########
   /text_classifiers/{instance_name}/online_training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -540,6 +570,9 @@ paths:
 ## text_classifiers retrieve
 ########
   /text_classifiers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -571,6 +604,9 @@ paths:
 ## text_classifiers vaporise
 ########
   /text_classifiers/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -596,6 +632,9 @@ paths:
 ## text_classifiers get list of class labels
 ########
   /text_classifiers/{instance_name}/get_labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - text_classifiers
@@ -621,6 +660,9 @@ paths:
 ## text_classifiers curation endpoint
 ########
   /text_classifiers/{instance_name}/curate:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -654,6 +696,9 @@ paths:
 ## word_manifolds root
 ########
   /word_manifolds:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - word_manifolds
@@ -680,6 +725,9 @@ paths:
 ## word_manifolds Get details of named instance
 ########
   /word_manifolds/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - word_manifolds
@@ -726,6 +774,9 @@ paths:
 ## word_manifolds vaporise
 ########
   /word_manifolds/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - word_manifolds
@@ -751,6 +802,9 @@ paths:
 ## word_manifolds vocab
 ########
   /word_manifolds/{instance_name}/vocab:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - word_manifolds
@@ -784,6 +838,9 @@ paths:
 ## word_manifolds similar_words
 ########
   /word_manifolds/{instance_name}/similar_words:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - word_manifolds
@@ -815,6 +872,9 @@ paths:
 ## word_manifolds spell_correct
 ########
   /word_manifolds/{instance_name}/spell_correct:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - word_manifolds
@@ -848,6 +908,9 @@ paths:
 ## intent_classifiers root
 ########
   /intent_classifiers:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -889,6 +952,9 @@ paths:
 ## intent_classifiers Get details of named instance
 ########
   /intent_classifiers/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - intent_classifiers
@@ -935,6 +1001,9 @@ paths:
 ## intent_classifiers training samples
 ########
   /intent_classifiers/{instance_name}/training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1015,6 +1084,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /intent_classifiers/{instance_name}/training_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - intent_classifiers
@@ -1040,6 +1112,9 @@ paths:
 ## intent_classifiers testing samples
 ########
   /intent_classifiers/{instance_name}/testing_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1120,6 +1195,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /intent_classifiers/{instance_name}/testing_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - intent_classifiers
@@ -1145,6 +1223,9 @@ paths:
 ## intent_classifiers train
 ########
   /intent_classifiers/{instance_name}/train:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1176,6 +1257,9 @@ paths:
 ## intent_classifiers model_params
 ########
   /intent_classifiers/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1228,6 +1312,9 @@ paths:
 ## intent_classifiers train online
 ########
   /intent_classifiers/{instance_name}/online_training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1261,6 +1348,9 @@ paths:
 ## intent_classifiers retrieve
 ########
   /intent_classifiers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1292,6 +1382,9 @@ paths:
 ## intent_classifiers vaporise
 ########
   /intent_classifiers/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1317,6 +1410,9 @@ paths:
 ## intent_classifiers get list of class labels
 ########
   /intent_classifiers/{instance_name}/get_labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - intent_classifiers
@@ -1342,6 +1438,9 @@ paths:
 ## intent_classifiers curation endpoint
 ########
   /intent_classifiers/{instance_name}/curate:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1374,6 +1473,9 @@ paths:
 ## intent_classifiers tsne endpoint
 ########
   /intent_classifiers/{instance_name}/tsne:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1408,6 +1510,9 @@ paths:
 ## FAQ matchers root
 ########
   /faq_matchers:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1449,6 +1554,9 @@ paths:
 ## faq_matchers Get details of named instance
 ########
   /faq_matchers/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - faq_matchers
@@ -1495,6 +1603,9 @@ paths:
 ## faq_matchers training samples
 ########
   /faq_matchers/{instance_name}/training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1575,6 +1686,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /faq_matchers/{instance_name}/training_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - faq_matchers
@@ -1600,6 +1714,9 @@ paths:
 ## faq_matchers testing samples
 ########
   /faq_matchers/{instance_name}/testing_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1680,6 +1797,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /faq_matchers/{instance_name}/testing_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - faq_matchers
@@ -1705,6 +1825,9 @@ paths:
 ## faq_matchers train
 ########
   /faq_matchers/{instance_name}/train:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1736,6 +1859,9 @@ paths:
 ## faq_matchers model_params
 ########
   /faq_matchers/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1788,6 +1914,9 @@ paths:
 ## faq_matchers train online
 ########
   /faq_matchers/{instance_name}/online_training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1821,6 +1950,9 @@ paths:
 ## faq_matchers retrieve
 ########
   /faq_matchers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1852,6 +1984,9 @@ paths:
 ## faq_matchers vaporise
 ########
   /faq_matchers/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1877,6 +2012,9 @@ paths:
 ## faq_matchers get list of class labels
 ########
   /faq_matchers/{instance_name}/get_labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - faq_matchers
@@ -1902,6 +2040,9 @@ paths:
 ## faq_matchers curation endpoint
 ########
   /faq_matchers/{instance_name}/curate:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1936,6 +2077,9 @@ paths:
 ## Extract a list of dates from the text input.
 ########
   /date_parsers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - date_parsers
@@ -1970,6 +2114,9 @@ paths:
 ## Detect the sentiment of the text input.
 ########
   /sentiment_detectors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - sentiment_detectors
@@ -2004,6 +2151,9 @@ paths:
 ## crf_entity_extractors root
 ########
   /crf_entity_extractors:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -2045,6 +2195,9 @@ paths:
 ## crf_entity_extractors Get details of named instance
 ########
   /crf_entity_extractors/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - crf_entity_extractors
@@ -2091,6 +2244,9 @@ paths:
 ## crf_entity_extractors training samples
 ########
   /crf_entity_extractors/{instance_name}/training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -2171,6 +2327,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /crf_entity_extractors/{instance_name}/training_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - crf_entity_extractors
@@ -2196,6 +2355,9 @@ paths:
   ## crf_entity_extractors testing samples
   ########
   /crf_entity_extractors/{instance_name}/testing_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -2276,6 +2438,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /crf_entity_extractors/{instance_name}/testing_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - crf_entity_extractors
@@ -2301,6 +2466,9 @@ paths:
 ## crf_entity_extractors train
 ########
   /crf_entity_extractors/{instance_name}/train:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -2332,6 +2500,9 @@ paths:
 ## crf_entity_extractors model_params
 ########
   /crf_entity_extractors/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -2384,6 +2555,9 @@ paths:
 ## crf_entity_extractors retrieve
 ########
   /crf_entity_extractors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -2415,6 +2589,9 @@ paths:
 ## crf_entity_extractors vaporise
 ########
   /crf_entity_extractors/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -2440,6 +2617,9 @@ paths:
 ## crf_entity_extractors get list of entity labels
 ########
   /crf_entity_extractors/{instance_name}/get_labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - crf_entity_extractors
@@ -2468,6 +2648,9 @@ paths:
 ## synonym_entity_extractors root
 ########
   /synonym_entity_extractors:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - synonym_entity_extractors
@@ -2509,6 +2692,9 @@ paths:
 ## synonym_entity_extractors Get details of named instance
 ########
   /synonym_entity_extractors/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - synonym_entity_extractors
@@ -2555,6 +2741,9 @@ paths:
 ## synonym_entity_extractors training samples
 ########
   /synonym_entity_extractors/{instance_name}/training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - synonym_entity_extractors
@@ -2635,6 +2824,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /synonym_entity_extractors/{instance_name}/training_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - synonym_entity_extractors
@@ -2660,6 +2852,9 @@ paths:
   ## synonym_entity_extractors testing samples
   ########
   /synonym_entity_extractors/{instance_name}/testing_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - synonym_entity_extractors
@@ -2740,6 +2935,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /synonym_entity_extractors/{instance_name}/testing_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - synonym_entity_extractors
@@ -2765,6 +2963,9 @@ paths:
 ## synonym_entity_extractors train
 ########
   /synonym_entity_extractors/{instance_name}/train:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - synonym_entity_extractors
@@ -2796,6 +2997,9 @@ paths:
 ## synonym_entity_extractors model_params
 ########
   /synonym_entity_extractors/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - synonym_entity_extractors
@@ -2848,6 +3052,9 @@ paths:
 ## synonym_entity_extractors retrieve
 ########
   /synonym_entity_extractors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - synonym_entity_extractors
@@ -2879,6 +3086,9 @@ paths:
 ## synonym_entity_extractors vaporise
 ########
   /synonym_entity_extractors/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - synonym_entity_extractors
@@ -2904,6 +3114,9 @@ paths:
 ## synonym_entity_extractors get list of entity labels
 ########
   /synonym_entity_extractors/{instance_name}/get_labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - synonym_entity_extractors
@@ -2932,6 +3145,9 @@ paths:
 ## regex_entity_extractors root
 ########
   /regex_entity_extractors:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - regex_entity_extractors
@@ -2973,6 +3189,9 @@ paths:
 ## regex_entity_extractors Get details of named instance
 ########
   /regex_entity_extractors/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - regex_entity_extractors
@@ -3019,6 +3238,9 @@ paths:
 ## regex_entity_extractors model_params
 ########
   /regex_entity_extractors/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - regex_entity_extractors
@@ -3071,6 +3293,9 @@ paths:
 ## regex_entity_extractors retrieve
 ########
   /regex_entity_extractors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - regex_entity_extractors
@@ -3102,6 +3327,9 @@ paths:
 ## regex_entity_extractors vaporise
 ########
   /regex_entity_extractors/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - regex_entity_extractors
@@ -3130,6 +3358,9 @@ paths:
 ## person_name_entity_extractors root
 ########
   /person_name_entity_extractors:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - person_name_entity_extractors
@@ -3171,6 +3402,9 @@ paths:
 ## person_name_entity_extractors Get details of named instance
 ########
   /person_name_entity_extractors/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - person_name_entity_extractors
@@ -3217,6 +3451,9 @@ paths:
 ## person_name_entity_extractors model_params
 ########
   /person_name_entity_extractors/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - person_name_entity_extractors
@@ -3269,6 +3506,9 @@ paths:
 ## person_name_entity_extractors retrieve
 ########
   /person_name_entity_extractors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - person_name_entity_extractors
@@ -3300,6 +3540,9 @@ paths:
 ## person_name_entity_extractors vaporise
 ########
   /person_name_entity_extractors/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - person_name_entity_extractors
@@ -3328,6 +3571,9 @@ paths:
 ## duckling_entity_extractors root
 ########
   /duckling_entity_extractors:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - duckling_entity_extractors
@@ -3369,6 +3615,9 @@ paths:
 ## duckling_entity_extractors Get details of named instance
 ########
   /duckling_entity_extractors/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - duckling_entity_extractors
@@ -3415,6 +3664,9 @@ paths:
 ## duckling_entity_extractors model_params
 ########
   /duckling_entity_extractors/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - duckling_entity_extractors
@@ -3467,6 +3719,9 @@ paths:
 ## duckling_entity_extractors retrieve
 ########
   /duckling_entity_extractors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - duckling_entity_extractors
@@ -3498,6 +3753,9 @@ paths:
 ## duckling_entity_extractors vaporise
 ########
   /duckling_entity_extractors/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - duckling_entity_extractors
@@ -3526,6 +3784,9 @@ paths:
 ## sim_word_entity_extractors root
 ########
   /sim_word_entity_extractors:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - sim_word_entity_extractors
@@ -3567,6 +3828,9 @@ paths:
 ## sim_word_entity_extractors Get details of named instance
 ########
   /sim_word_entity_extractors/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - sim_word_entity_extractors
@@ -3613,6 +3877,9 @@ paths:
 ## sim_word_entity_extractors model_params
 ########
   /sim_word_entity_extractors/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - sim_word_entity_extractors
@@ -3665,6 +3932,9 @@ paths:
 ## sim_word_entity_extractors retrieve
 ########
   /sim_word_entity_extractors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - sim_word_entity_extractors
@@ -3696,6 +3966,9 @@ paths:
 ## sim_word_entity_extractors vaporise
 ########
   /sim_word_entity_extractors/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - sim_word_entity_extractors
@@ -3724,6 +3997,9 @@ paths:
 ## language_recognisers root
 ########
   /language_recognisers:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - language_recognisers
@@ -3765,6 +4041,9 @@ paths:
 ## language_recognisers Get details of named instance
 ########
   /language_recognisers/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - language_recognisers
@@ -3811,6 +4090,9 @@ paths:
 ## language_recognisers model_params
 ########
   /language_recognisers/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - language_recognisers
@@ -3863,6 +4145,9 @@ paths:
 ## language_recognisers retrieve
 ########
   /language_recognisers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - language_recognisers
@@ -3894,6 +4179,9 @@ paths:
 ## language_recognisers vaporise
 ########
   /language_recognisers/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - language_recognisers
@@ -3919,6 +4207,9 @@ paths:
 ## language_recognisers get list of class labels
 ########
   /language_recognisers/{instance_name}/get_labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - language_recognisers
@@ -3947,6 +4238,9 @@ paths:
 ## data_objects root.
 ########
   /data_objects:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - data_objects
@@ -3981,6 +4275,9 @@ paths:
 ## data_objects Update/create a data_object - a data_object is a json object.
 ########
   /data_objects/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - data_objects
@@ -4054,6 +4351,9 @@ paths:
 ## data_objects vaporise
 ########
   /data_objects/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - data_objects
@@ -4082,6 +4382,9 @@ paths:
 ## health root
 ########
   /health:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - health
@@ -4104,6 +4407,9 @@ paths:
 ## api_keys root
 ########
   /api_keys:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - api_keys
@@ -4145,6 +4451,9 @@ paths:
 ## api_keys Get details of the API key.
 ########
   /api_keys/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - api_keys
@@ -4186,6 +4495,17 @@ paths:
           description: bad request
         401:
           $ref: "#/responses/UnauthorizedError"
+
+
+###################################
+# Descriptions of common parameters
+###################################
+parameters:
+  caller:
+    in: header
+    name: X-CALLER
+    type: string
+    required: false
 
 
 ##################################

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **data_object_del**
-> DataObject data_object_del(instance_name)
+> DataObject data_object_del(instance_name, x_caller=x_caller)
 
 Trash a data_object.
 
@@ -41,10 +41,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.DataObjectsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the data_object.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Trash a data_object.
-    api_response = api_instance.data_object_del(instance_name)
+    api_response = api_instance.data_object_del(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DataObjectsApi->data_object_del: %s\n" % e)
@@ -55,6 +56,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the data_object. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -72,7 +74,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **data_object_del_all**
-> list[DataObjectName] data_object_del_all()
+> list[DataObjectName] data_object_del_all(x_caller=x_caller)
 
 Delete all data_objects. Returns list of names of data_objects deleted. Note that this is a convenience operation. The objects will still need to be vaporised one by one.
 
@@ -99,17 +101,21 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.DataObjectsApi(feersum_nlu.ApiClient(configuration))
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Delete all data_objects. Returns list of names of data_objects deleted. Note that this is a convenience operation. The objects will still need to be vaporised one by one.
-    api_response = api_instance.data_object_del_all()
+    api_response = api_instance.data_object_del_all(x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DataObjectsApi->data_object_del_all: %s\n" % e)
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -127,7 +133,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **data_object_get_details**
-> DataObject data_object_get_details(instance_name)
+> DataObject data_object_get_details(instance_name, x_caller=x_caller)
 
 Get a data_object.
 
@@ -155,10 +161,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.DataObjectsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the data_object.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Get a data_object.
-    api_response = api_instance.data_object_get_details(instance_name)
+    api_response = api_instance.data_object_get_details(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DataObjectsApi->data_object_get_details: %s\n" % e)
@@ -169,6 +176,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the data_object. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -186,7 +194,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **data_object_get_names_all**
-> list[DataObjectName] data_object_get_names_all()
+> list[DataObjectName] data_object_get_names_all(x_caller=x_caller)
 
 Get list of names of loaded data_objects.
 
@@ -213,17 +221,21 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.DataObjectsApi(feersum_nlu.ApiClient(configuration))
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Get list of names of loaded data_objects.
-    api_response = api_instance.data_object_get_names_all()
+    api_response = api_instance.data_object_get_names_all(x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DataObjectsApi->data_object_get_names_all: %s\n" % e)
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -241,7 +253,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **data_object_post**
-> DataObject data_object_post(instance_name, data)
+> DataObject data_object_post(instance_name, data, x_caller=x_caller)
 
 Update/create a data_object.
 
@@ -270,10 +282,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.DataObjectsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the data_object.
 data = feersum_nlu.DataObject() # DataObject | The data_object.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Update/create a data_object.
-    api_response = api_instance.data_object_post(instance_name, data)
+    api_response = api_instance.data_object_post(instance_name, data, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DataObjectsApi->data_object_post: %s\n" % e)
@@ -285,6 +298,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the data_object. | 
  **data** | [**DataObject**](DataObject.md)| The data_object. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 
@@ -302,7 +316,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **data_object_vaporise**
-> DataObject data_object_vaporise(instance_name)
+> DataObject data_object_vaporise(instance_name, x_caller=x_caller)
 
 Vaporise the named data_object.
 
@@ -330,10 +344,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.DataObjectsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the data_object.
+x_caller = 'x_caller_example' # str |  (optional)
 
 try:
     # Vaporise the named data_object.
-    api_response = api_instance.data_object_vaporise(instance_name)
+    api_response = api_instance.data_object_vaporise(instance_name, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DataObjectsApi->data_object_vaporise: %s\n" % e)
@@ -344,6 +359,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the data_object. | 
+ **x_caller** | **str**|  | [optional] 
 
 ### Return type
 

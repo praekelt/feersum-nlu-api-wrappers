@@ -52,10 +52,13 @@ def main():
                     testing_samples_json = []
 
                     # Convert training & testing samples to JSON-serialisable dicts.
-                    for sample in training_samples:
-                        training_samples_json.append(sample.to_dict())
-                    for sample in testing_samples:
-                        testing_samples_json.append(sample.to_dict())
+                    if training_samples is not None:
+                        for sample in training_samples:
+                            training_samples_json.append(sample.to_dict())
+
+                    if testing_samples is not None:
+                        for sample in testing_samples:
+                            testing_samples_json.append(sample.to_dict())
 
                     # Add the model type and training+testing data to the instance detail
                     instance_detail["model_type"] = model.model_type

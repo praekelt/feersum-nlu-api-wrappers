@@ -13,7 +13,7 @@ Added a synonym entity extractor.
 
 Added a convenience 'delete_all' endpoint for data objects.
 
-
+Added X-Caller header param. E.g. x_caller='example_caller' in api call.
 
 
 Version 2.0.29

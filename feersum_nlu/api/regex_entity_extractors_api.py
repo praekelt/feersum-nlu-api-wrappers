@@ -44,6 +44,7 @@ class RegexEntityExtractorsApi(object):
 
         :param async bool
         :param RegexEntityExtractorCreateDetails create_details: The details of the instance to create. (required)
+        :param str x_caller:
         :return: RegexEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -66,12 +67,13 @@ class RegexEntityExtractorsApi(object):
 
         :param async bool
         :param RegexEntityExtractorCreateDetails create_details: The details of the instance to create. (required)
+        :param str x_caller:
         :return: RegexEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['create_details']  # noqa: E501
+        all_params = ['create_details', 'x_caller']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -98,6 +100,8 @@ class RegexEntityExtractorsApi(object):
         query_params = []
 
         header_params = {}
+        if 'x_caller' in params:
+            header_params['X-CALLER'] = params['x_caller']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -143,6 +147,7 @@ class RegexEntityExtractorsApi(object):
 
         :param async bool
         :param str instance_name: The name of the model instance. (required)
+        :param str x_caller:
         :return: RegexEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -165,12 +170,13 @@ class RegexEntityExtractorsApi(object):
 
         :param async bool
         :param str instance_name: The name of the model instance. (required)
+        :param str x_caller:
         :return: RegexEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name']  # noqa: E501
+        all_params = ['instance_name', 'x_caller']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -199,6 +205,8 @@ class RegexEntityExtractorsApi(object):
         query_params = []
 
         header_params = {}
+        if 'x_caller' in params:
+            header_params['X-CALLER'] = params['x_caller']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -242,6 +250,7 @@ class RegexEntityExtractorsApi(object):
 
         :param async bool
         :param str instance_name: The name of the model instance. (required)
+        :param str x_caller:
         :return: RegexEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -264,12 +273,13 @@ class RegexEntityExtractorsApi(object):
 
         :param async bool
         :param str instance_name: The name of the model instance. (required)
+        :param str x_caller:
         :return: RegexEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name']  # noqa: E501
+        all_params = ['instance_name', 'x_caller']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -298,6 +308,8 @@ class RegexEntityExtractorsApi(object):
         query_params = []
 
         header_params = {}
+        if 'x_caller' in params:
+            header_params['X-CALLER'] = params['x_caller']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -340,6 +352,7 @@ class RegexEntityExtractorsApi(object):
         >>> result = thread.get()
 
         :param async bool
+        :param str x_caller:
         :return: list[RegexEntityExtractorInstanceDetail]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -361,12 +374,13 @@ class RegexEntityExtractorsApi(object):
         >>> result = thread.get()
 
         :param async bool
+        :param str x_caller:
         :return: list[RegexEntityExtractorInstanceDetail]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = []  # noqa: E501
+        all_params = ['x_caller']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -389,6 +403,8 @@ class RegexEntityExtractorsApi(object):
         query_params = []
 
         header_params = {}
+        if 'x_caller' in params:
+            header_params['X-CALLER'] = params['x_caller']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -432,6 +448,7 @@ class RegexEntityExtractorsApi(object):
 
         :param async bool
         :param str instance_name: The name of the model instance. (required)
+        :param str x_caller:
         :return: ModelParams
                  If the method is called asynchronously,
                  returns the request thread.
@@ -454,12 +471,13 @@ class RegexEntityExtractorsApi(object):
 
         :param async bool
         :param str instance_name: The name of the model instance. (required)
+        :param str x_caller:
         :return: ModelParams
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name']  # noqa: E501
+        all_params = ['instance_name', 'x_caller']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -488,6 +506,8 @@ class RegexEntityExtractorsApi(object):
         query_params = []
 
         header_params = {}
+        if 'x_caller' in params:
+            header_params['X-CALLER'] = params['x_caller']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -532,6 +552,7 @@ class RegexEntityExtractorsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param TextInput text_input: The input text. (required)
+        :param str x_caller:
         :return: list[RegexEntity]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -555,12 +576,13 @@ class RegexEntityExtractorsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param TextInput text_input: The input text. (required)
+        :param str x_caller:
         :return: list[RegexEntity]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'text_input']  # noqa: E501
+        all_params = ['instance_name', 'text_input', 'x_caller']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -593,6 +615,8 @@ class RegexEntityExtractorsApi(object):
         query_params = []
 
         header_params = {}
+        if 'x_caller' in params:
+            header_params['X-CALLER'] = params['x_caller']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -639,6 +663,7 @@ class RegexEntityExtractorsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param ModelParams model_params: The model parameters. (required)
+        :param str x_caller:
         :return: RegexEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -662,12 +687,13 @@ class RegexEntityExtractorsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param ModelParams model_params: The model parameters. (required)
+        :param str x_caller:
         :return: RegexEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'model_params']  # noqa: E501
+        all_params = ['instance_name', 'model_params', 'x_caller']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -700,6 +726,8 @@ class RegexEntityExtractorsApi(object):
         query_params = []
 
         header_params = {}
+        if 'x_caller' in params:
+            header_params['X-CALLER'] = params['x_caller']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -745,6 +773,7 @@ class RegexEntityExtractorsApi(object):
 
         :param async bool
         :param str instance_name: The name of the model instance. (required)
+        :param str x_caller:
         :return: RegexEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -767,12 +796,13 @@ class RegexEntityExtractorsApi(object):
 
         :param async bool
         :param str instance_name: The name of the model instance. (required)
+        :param str x_caller:
         :return: RegexEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name']  # noqa: E501
+        all_params = ['instance_name', 'x_caller']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -801,6 +831,8 @@ class RegexEntityExtractorsApi(object):
         query_params = []
 
         header_params = {}
+        if 'x_caller' in params:
+            header_params['X-CALLER'] = params['x_caller']  # noqa: E501
 
         form_params = []
         local_var_files = {}
