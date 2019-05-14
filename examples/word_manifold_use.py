@@ -28,11 +28,12 @@ word_and_threshold = feersum_nlu.WordAndThreshold('tree', 0.5)
 misspelt_word = feersum_nlu.TextInput('hospitle')
 
 try:
-    print("Find words similar to:")
-    api_response = api_instance.word_manifold_get_similar_words(instance_name, word_and_threshold)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    pass
+    # print("Find words similar to:")
+    # api_response = api_instance.word_manifold_get_similar_words(instance_name, word_and_threshold)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
     # Spell check is not yet surfaced on the server.
     # print("Spell correct:")

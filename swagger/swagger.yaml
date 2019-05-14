@@ -780,67 +780,67 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-########
-## word_manifolds similar_words
-########
-  /word_manifolds/{instance_name}/similar_words:
-    post:
-      tags:
-      - word_manifolds
-      summary: Find similar words.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_get_similar_words
-      description: Returns words from the manifold that are similar to the parameter word.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      - in: body
-        name: word_and_threshold
-        description: A word token and an accompanying threshold.
-        required: true
-        schema:
-          $ref: "#/definitions/word_and_threshold"
-      responses:
-        200:
-          $ref: "#/responses/word_and_distance_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## word_manifolds spell_correct
-########
-  /word_manifolds/{instance_name}/spell_correct:
-    post:
-      tags:
-      - word_manifolds
-      summary: Spell correct a word.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_spell_correct
-      description: Spell correct a word replacing it with the most likely word from the manifold. Returns one or more scored candidate words.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      - in: body
-        name: text_input
-        description: The input text.
-        required: true
-        schema:
-          $ref: "#/definitions/text_input"
-      responses:
-        200:
-          $ref: "#/responses/word_and_distance_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
+#########
+### word_manifolds similar_words
+#########
+#  /word_manifolds/{instance_name}/similar_words:
+#    post:
+#      tags:
+#      - word_manifolds
+#      summary: Find similar words.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#      operationId: word_manifold_get_similar_words
+#      description: Returns words from the manifold that are similar to the parameter word.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: word_and_threshold
+#        description: A word token and an accompanying threshold.
+#        required: true
+#        schema:
+#          $ref: "#/definitions/word_and_threshold"
+#      responses:
+#        200:
+#          $ref: "#/responses/word_and_distance_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### word_manifolds spell_correct
+#########
+#  /word_manifolds/{instance_name}/spell_correct:
+#    post:
+#      tags:
+#      - word_manifolds
+#      summary: Spell correct a word.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#      operationId: word_manifold_spell_correct
+#      description: Spell correct a word replacing it with the most likely word from the manifold. Returns one or more scored candidate words.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: text_input
+#        description: The input text.
+#        required: true
+#        schema:
+#          $ref: "#/definitions/text_input"
+#      responses:
+#        200:
+#          $ref: "#/responses/word_and_distance_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
 
 ###################################
 ###################################
