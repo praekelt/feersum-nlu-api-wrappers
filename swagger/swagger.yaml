@@ -4854,8 +4854,6 @@ definitions:
     type: object
     required:
     - entity
-    - index
-    - len
     properties:
       entity:
         type: string
