@@ -61,8 +61,10 @@ class SynonymEntity(object):
             self.value = value
         if syn_set is not None:
             self.syn_set = syn_set
-        self.index = index
-        self.len = len
+        if index is not None:
+            self.index = index
+        if len is not None:
+            self.len = len
 
     @property
     def entity(self):
@@ -155,8 +157,6 @@ class SynonymEntity(object):
         :param index: The index of this SynonymEntity.  # noqa: E501
         :type: int
         """
-        if index is None:
-            raise ValueError("Invalid value for `index`, must not be `None`")  # noqa: E501
 
         self._index = index
 
@@ -180,8 +180,6 @@ class SynonymEntity(object):
         :param len: The len of this SynonymEntity.  # noqa: E501
         :type: int
         """
-        if len is None:
-            raise ValueError("Invalid value for `len`, must not be `None`")  # noqa: E501
 
         self._len = len
 
