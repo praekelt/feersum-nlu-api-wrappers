@@ -834,73 +834,73 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-########
-## word_manifolds similar_words
-########
-  /word_manifolds/{instance_name}/similar_words:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - word_manifolds
-      summary: Find similar words.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_get_similar_words
-      description: Returns words from the manifold that are similar to the parameter word.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      - in: body
-        name: word_and_threshold
-        description: A word token and an accompanying threshold.
-        required: true
-        schema:
-          $ref: "#/definitions/word_and_threshold"
-      responses:
-        200:
-          $ref: "#/responses/word_and_distance_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## word_manifolds spell_correct
-########
-  /word_manifolds/{instance_name}/spell_correct:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - word_manifolds
-      summary: Spell correct a word.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_spell_correct
-      description: Spell correct a word replacing it with the most likely word from the manifold. Returns one or more scored candidate words.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      - in: body
-        name: text_input
-        description: The input text.
-        required: true
-        schema:
-          $ref: "#/definitions/text_input"
-      responses:
-        200:
-          $ref: "#/responses/word_and_distance_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
+# ########
+# ## word_manifolds similar_words
+# ########
+#   /word_manifolds/{instance_name}/similar_words:
+#     parameters:
+#     - $ref: '#/parameters/caller'
+#
+#     post:
+#       tags:
+#       - word_manifolds
+#       summary: Find similar words.
+#       x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#       operationId: word_manifold_get_similar_words
+#       description: Returns words from the manifold that are similar to the parameter word.
+#       parameters:
+#       - in: path
+#         name: instance_name
+#         description: The name of the model instance.
+#         required: true
+#         type: string
+#       - in: body
+#         name: word_and_threshold
+#         description: A word token and an accompanying threshold.
+#         required: true
+#         schema:
+#           $ref: "#/definitions/word_and_threshold"
+#       responses:
+#         200:
+#           $ref: "#/responses/word_and_distance_list"
+#         400:
+#           description: bad request
+#         401:
+#           $ref: "#/responses/UnauthorizedError"
+#
+# ########
+# ## word_manifolds spell_correct
+# ########
+#   /word_manifolds/{instance_name}/spell_correct:
+#     parameters:
+#     - $ref: '#/parameters/caller'
+#
+#     post:
+#       tags:
+#       - word_manifolds
+#       summary: Spell correct a word.
+#       x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#       operationId: word_manifold_spell_correct
+#       description: Spell correct a word replacing it with the most likely word from the manifold. Returns one or more scored candidate words.
+#       parameters:
+#       - in: path
+#         name: instance_name
+#         description: The name of the model instance.
+#         required: true
+#         type: string
+#       - in: body
+#         name: text_input
+#         description: The input text.
+#         required: true
+#         schema:
+#           $ref: "#/definitions/text_input"
+#       responses:
+#         200:
+#           $ref: "#/responses/word_and_distance_list"
+#         400:
+#           description: bad request
+#         401:
+#           $ref: "#/responses/UnauthorizedError"
 
 ###################################
 ###################################
@@ -4821,7 +4821,10 @@ definitions:
     properties:
       entity:
         type: string
-        description: The entity class/type.
+        description: The entity label/class/type.
+      value:
+        type: string
+        description: The value of the entity as extracted from the input text. Not used during training!
       index:
         type: integer
         description: The first character of the entity in the associated utterance.
@@ -4851,10 +4854,15 @@ definitions:
     type: object
     required:
     - entity
+    - index
+    - len
     properties:
       entity:
         type: string
         description: The entity label/class/type.
+      value:
+        type: string
+        description: The value of the entity as extracted from the input text. Not used during training!
       syn_set:
         description: The list of synonyms associated with this entity label. One should either provide a synset OR an index and len of a specific synonym in the associated utterance.
         type: array
@@ -6026,7 +6034,7 @@ definitions:
       clsfr_algorithm:
         description: The name of the algorithm that should be used for the classification.
         type: string
-        example: "'nearest_neighbour_word_embeddings', 'nearest_neighbour_usent', 'naive_bayes', etc."
+        example: "'nearest_neighbour_l1', 'nearest_neighbour_cosine', 'naive_bayes', etc."
       language_model_list:
         description: The list of labelled language models used as sentence encoders.
         type: array

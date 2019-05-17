@@ -32,6 +32,7 @@ class SynonymEntity(object):
     """
     swagger_types = {
         'entity': 'str',
+        'value': 'str',
         'syn_set': 'list[str]',
         'index': 'int',
         'len': 'int'
@@ -39,27 +40,29 @@ class SynonymEntity(object):
 
     attribute_map = {
         'entity': 'entity',
+        'value': 'value',
         'syn_set': 'syn_set',
         'index': 'index',
         'len': 'len'
     }
 
-    def __init__(self, entity=None, syn_set=None, index=None, len=None):  # noqa: E501
+    def __init__(self, entity=None, value=None, syn_set=None, index=None, len=None):  # noqa: E501
         """SynonymEntity - a model defined in Swagger"""  # noqa: E501
 
         self._entity = None
+        self._value = None
         self._syn_set = None
         self._index = None
         self._len = None
         self.discriminator = None
 
         self.entity = entity
+        if value is not None:
+            self.value = value
         if syn_set is not None:
             self.syn_set = syn_set
-        if index is not None:
-            self.index = index
-        if len is not None:
-            self.len = len
+        self.index = index
+        self.len = len
 
     @property
     def entity(self):
@@ -85,6 +88,29 @@ class SynonymEntity(object):
             raise ValueError("Invalid value for `entity`, must not be `None`")  # noqa: E501
 
         self._entity = entity
+
+    @property
+    def value(self):
+        """Gets the value of this SynonymEntity.  # noqa: E501
+
+        The value of the entity as extracted from the input text. Not used during training!  # noqa: E501
+
+        :return: The value of this SynonymEntity.  # noqa: E501
+        :rtype: str
+        """
+        return self._value
+
+    @value.setter
+    def value(self, value):
+        """Sets the value of this SynonymEntity.
+
+        The value of the entity as extracted from the input text. Not used during training!  # noqa: E501
+
+        :param value: The value of this SynonymEntity.  # noqa: E501
+        :type: str
+        """
+
+        self._value = value
 
     @property
     def syn_set(self):
@@ -129,6 +155,8 @@ class SynonymEntity(object):
         :param index: The index of this SynonymEntity.  # noqa: E501
         :type: int
         """
+        if index is None:
+            raise ValueError("Invalid value for `index`, must not be `None`")  # noqa: E501
 
         self._index = index
 
@@ -152,6 +180,8 @@ class SynonymEntity(object):
         :param len: The len of this SynonymEntity.  # noqa: E501
         :type: int
         """
+        if len is None:
+            raise ValueError("Invalid value for `len`, must not be `None`")  # noqa: E501
 
         self._len = len
 

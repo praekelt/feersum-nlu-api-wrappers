@@ -66,11 +66,13 @@ testing_sample_list.append(feersum_nlu.CrfSample(text="Can I have a hot dog with
 text_input_0 = feersum_nlu.TextInput("I would like to buy a beef sandwich with mustard.",
                                      lang_code="eng")  # optional language hint.
 
+caller_name = 'example_caller'
+
 print()
 
 try:
     print("Create the CRF entity extractor:")
-    api_response = api_instance.crf_entity_extractor_create(create_details)
+    api_response = api_instance.crf_entity_extractor_create(create_details, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -148,7 +150,7 @@ try:
     print()
 
     print("Extract some entities::")
-    api_response = api_instance.crf_entity_extractor_retrieve(instance_name, text_input_0)
+    api_response = api_instance.crf_entity_extractor_retrieve(instance_name, text_input_0, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()

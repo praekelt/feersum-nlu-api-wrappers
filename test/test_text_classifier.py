@@ -42,7 +42,7 @@ class TestTextClassifier(unittest.TestCase):
                                                                         label="quote"))
 
         train_details = feersum_nlu.TrainDetails(immediate_mode=True,
-                                                 clsfr_algorithm="nearest_neighbour_word_embeddings",
+                                                 clsfr_algorithm="nearest_neighbour_l1",
                                                  language_model_list=[
                                                      {
                                                          "lang_code": "eng",
@@ -75,12 +75,14 @@ class TestTextClassifier(unittest.TestCase):
             print()
 
             labelled_text_sample_delete_list = []
+            labelled_text_sample_delete_list.append(feersum_nlu.LabelledTextSample(text="I would like to get a quote",
+                                                                                   label="quote"))
 
             print("Del the training samples of the text classifier:")
             # api_response = api_instance.text_classifier_del_training_samples_all(instance_name)
             api_response = api_instance.text_classifier_del_training_samples(instance_name,
-                                                                               labelled_text_sample_list=
-                                                                               labelled_text_sample_delete_list)
+                                                                             labelled_text_sample_list=
+                                                                             labelled_text_sample_delete_list)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()

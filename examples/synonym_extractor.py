@@ -26,19 +26,55 @@ create_details = feersum_nlu.SynonymEntityExtractorCreateDetails(name=instance_n
 # The training samples.
 
 training_sample_list = []
+training_sample_list.append(feersum_nlu.CrfSample(text="Can I have a burger with chips please?", intent=None,
+                                                  entity_list=[
+                                                      feersum_nlu.CrfEntity(entity="food", index=13, len=17)
+                                                  ]))
 
-testing_sample_list = []
+training_sample_list.append(feersum_nlu.CrfSample(text="Can I have a slice of pizza?", intent=None,
+                                                  entity_list=[
+                                                      feersum_nlu.CrfEntity(entity="food", index=13, len=14)
+                                                  ]))
+
+training_sample_list.append(feersum_nlu.CrfSample(text="Can I have a hot dog with mustard?", intent=None,
+                                                  entity_list=[
+                                                      feersum_nlu.CrfEntity(entity="food", index=13, len=20)
+                                                  ]))
+
 
 sample_delete_list = []
+sample_delete_list.append(feersum_nlu.CrfSample(text="Can I have a slice of pizza?", intent=None,
+                                                entity_list=[
+                                                    feersum_nlu.CrfEntity(entity="food", index=13, len=14)
+                                                ]))
 
-text_input_0 = feersum_nlu.TextInput("I would like to shop buy koop something.",
+testing_sample_list = []
+testing_sample_list.append(feersum_nlu.CrfSample(text="Can I have a burger with chips please?", intent=None,
+                                                 entity_list=[
+                                                     feersum_nlu.CrfEntity(entity="food", index=13, len=17)
+                                                 ]))
+
+testing_sample_list.append(feersum_nlu.CrfSample(text="Can I have a slice of pizza?", intent=None,
+                                                 entity_list=[
+                                                     feersum_nlu.CrfEntity(entity="food", index=13, len=14)
+                                                 ]))
+
+testing_sample_list.append(feersum_nlu.CrfSample(text="Can I have a hot dog with mustard?", intent=None,
+                                                 entity_list=[
+                                                     feersum_nlu.CrfEntity(entity="food", index=13, len=20)
+                                                 ]))
+
+
+text_input_0 = feersum_nlu.TextInput("I would like to buy a slice of pizza.",
                                      lang_code="eng")  # optional language hint.
+
+caller_name = 'example_caller'
 
 print()
 
 try:
     print("Create the synonym entity extractor:")
-    api_response = api_instance.synonym_entity_extractor_create(create_details)
+    api_response = api_instance.synonym_entity_extractor_create(create_details, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -151,7 +187,7 @@ try:
     print()
 
     print("Match a question:")
-    api_response = api_instance.synonym_entity_extractor_retrieve(instance_name, text_input_0)
+    api_response = api_instance.synonym_entity_extractor_retrieve(instance_name, text_input_0, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()

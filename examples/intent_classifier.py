@@ -52,11 +52,13 @@ train_details = feersum_nlu.TrainDetails(threshold=1.0,
 
 text_input = feersum_nlu.TextInput("How do I get a quote?")
 
+caller_name = 'example_caller'
+
 print()
 
 try:
     print("Create the intent classifier:")
-    api_response = api_instance.intent_classifier_create(create_details)
+    api_response = api_instance.intent_classifier_create(create_details, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -151,7 +153,7 @@ try:
     print()
 
     print("Classify intent:")
-    api_response = api_instance.intent_classifier_retrieve(instance_name, text_input)
+    api_response = api_instance.intent_classifier_retrieve(instance_name, text_input, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()

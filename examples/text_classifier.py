@@ -64,12 +64,14 @@ train_details = feersum_nlu.TrainDetails(immediate_mode=True,
 text_input = feersum_nlu.TextInput("Is it expensive to get insurance?")  # quote
 #   [{'label': 'quote', 'probability': 0.9692558260098282}, {'label': 'claim', 'probability': 0.030744173990171327}]
 
+caller_name = 'example_caller'
+
 print()
 
 try:
     print("Update the model params:")
     model_params = feersum_nlu.ModelParams(readonly=False)
-    api_response = api_instance.text_classifier_set_params(instance_name, model_params)
+    api_response = api_instance.text_classifier_set_params(instance_name, model_params, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -151,7 +153,7 @@ try:
     print()
 
     print("Classify text:")
-    api_response = api_instance.text_classifier_retrieve(instance_name, text_input)
+    api_response = api_instance.text_classifier_retrieve(instance_name, text_input, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()

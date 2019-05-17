@@ -17,7 +17,7 @@ configuration.host = feersumnlu_host
 api_instance = feersum_nlu.SentimentDetectorsApi(feersum_nlu.ApiClient(configuration))
 
 model_instance_name = 'generic'
-text_input = feersum_nlu.TextInput(" 😡 ")
+text_input = feersum_nlu.TextInput("I am very happy. I am not happy.")
 
 print()
 
