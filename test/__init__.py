@@ -1,8 +1,8 @@
 import os
 
 # feersumnlu_host = "http://127.0.0.1:8080/nlu/v2"
-# feersumnlu_host = "http://127.0.0.1:8100/nlu/v2"
-feersumnlu_host = "https://nlu.playground.feersum.io:443/nlu/v2"
+feersumnlu_host = "http://127.0.0.1:8100/nlu/v2"
+# feersumnlu_host = "https://nlu.playground.feersum.io:443/nlu/v2"
 # feersumnlu_host = "https://nlu.dev.feersum.io:443/nlu/v2"
 
 
