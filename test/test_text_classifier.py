@@ -42,7 +42,7 @@ class TestTextClassifier(unittest.TestCase):
                                                                         label="quote"))
 
         train_details = feersum_nlu.TrainDetails(immediate_mode=True,
-                                                 clsfr_algorithm="nearest_neighbour_l1",
+                                                 clsfr_algorithm="naive_bayes",
                                                  language_model_list=[
                                                      {
                                                          "lang_code": "eng",

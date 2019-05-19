@@ -21,8 +21,12 @@ def main():
     src_feersum_nlu_auth_token = feersum_nlu_auth_token
     # src_feersum_nlu_auth_token = "63454b82-ee34-4e26-9a63-6b1d4f51db49"
 
-    model_list = [("medium_faq_mtchr", "faq_matcher"),
-                  ("test_crf_extr", "crf_entity_extractor")]  # List of exported models to be imported [(mdl,type), ...]
+    model_list = [
+        ("emergencies_category", "text_classifier"),
+        ("figure_out_category", "text_classifier"),
+        ("it_category", "text_classifier"),
+        ("userhappy", "text_classifier"),
+    ]  # List of exported models to be imported [(mdl,type), ...]
 
     # === Import models one by one ===
     for model_name, model_type in model_list:

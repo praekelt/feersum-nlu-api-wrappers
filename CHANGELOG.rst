@@ -13,6 +13,8 @@ Added a synonym entity extractor.
 
 Added a convenience 'delete_all' endpoint for data objects.
 
+Added a PrometheusHandler logging handler that logs counts of various log level emits to Prometheus.
+
 Added X-Caller header param. E.g. x_caller='example_caller' in api call.
 
 

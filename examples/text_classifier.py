@@ -46,7 +46,7 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(
     label="quote"))
 
 train_details = feersum_nlu.TrainDetails(immediate_mode=True,
-                                         clsfr_algorithm="nearest_neighbour_word_embeddings",
+                                         clsfr_algorithm="naive_bayes",
                                          language_model_list=[
                                                {
                                                    "lang_code": "eng",
