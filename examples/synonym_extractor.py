@@ -26,46 +26,66 @@ create_details = feersum_nlu.SynonymEntityExtractorCreateDetails(name=instance_n
 # The training samples.
 
 training_sample_list = []
-training_sample_list.append(feersum_nlu.CrfSample(text="Can I have a burger with chips please?", intent=None,
-                                                  entity_list=[
-                                                      feersum_nlu.CrfEntity(entity="food", index=13, len=17)
-                                                  ]))
+training_sample_list.append(feersum_nlu.SynonymSample(text="Can I have a burger with chips please?", intent=None,
+                                                      entity_list=[
+                                                          feersum_nlu.SynonymEntity(entity="food", index=13, len=17)
+                                                      ]))
 
-training_sample_list.append(feersum_nlu.CrfSample(text="Can I have a slice of pizza?", intent=None,
-                                                  entity_list=[
-                                                      feersum_nlu.CrfEntity(entity="food", index=13, len=14)
-                                                  ]))
+training_sample_list.append(feersum_nlu.SynonymSample(text="Can I have a slice of pizza?", intent=None,
+                                                      entity_list=[
+                                                          feersum_nlu.SynonymEntity(entity="food", index=13, len=14)
+                                                      ]))
 
-training_sample_list.append(feersum_nlu.CrfSample(text="Can I have a hot dog with mustard?", intent=None,
-                                                  entity_list=[
-                                                      feersum_nlu.CrfEntity(entity="food", index=13, len=20)
-                                                  ]))
+training_sample_list.append(feersum_nlu.SynonymSample(text="Can I have a hot dog with mustard?", intent=None,
+                                                      entity_list=[
+                                                          feersum_nlu.SynonymEntity(entity="food", index=13, len=20)
+                                                      ]))
 
+# === Training samples with ONLY synsets.
+training_sample_list.append(feersum_nlu.SynonymSample(text=None, intent=None,
+                                                      entity_list=[
+                                                          feersum_nlu.SynonymEntity(entity="Game of Thrones",
+                                                                                    syn_set=['GOT',
+                                                                                             'GoT'])
+                                                      ]))
+
+training_sample_list.append(feersum_nlu.SynonymSample(text=None, intent=None,
+                                                      entity_list=[
+                                                          feersum_nlu.SynonymEntity(entity="Marvel's Agents of S.H.I.E.L.D.",
+                                                                                    syn_set=['Agents of shield',
+                                                                                             'Agents of Shield',
+                                                                                             'Agents of SHIELD',
+                                                                                             'agents of shield',
+                                                                                             'agents of Shield',
+                                                                                             'agents of SHIELD'])
+                                                      ]))
+# ===
 
 sample_delete_list = []
-sample_delete_list.append(feersum_nlu.CrfSample(text="Can I have a slice of pizza?", intent=None,
-                                                entity_list=[
-                                                    feersum_nlu.CrfEntity(entity="food", index=13, len=14)
-                                                ]))
+sample_delete_list.append(feersum_nlu.SynonymSample(text="Can I have a slice of pizza?", intent=None,
+                                                    entity_list=[
+                                                        feersum_nlu.SynonymEntity(entity="food", index=13, len=14)
+                                                    ]))
 
 testing_sample_list = []
-testing_sample_list.append(feersum_nlu.CrfSample(text="Can I have a burger with chips please?", intent=None,
-                                                 entity_list=[
-                                                     feersum_nlu.CrfEntity(entity="food", index=13, len=17)
-                                                 ]))
+testing_sample_list.append(feersum_nlu.SynonymSample(text="Can I have a burger with chips please?", intent=None,
+                                                     entity_list=[
+                                                         feersum_nlu.SynonymEntity(entity="food", index=13, len=17)
+                                                     ]))
 
-testing_sample_list.append(feersum_nlu.CrfSample(text="Can I have a slice of pizza?", intent=None,
-                                                 entity_list=[
-                                                     feersum_nlu.CrfEntity(entity="food", index=13, len=14)
-                                                 ]))
+testing_sample_list.append(feersum_nlu.SynonymSample(text="Can I have a slice of pizza?", intent=None,
+                                                     entity_list=[
+                                                         feersum_nlu.SynonymEntity(entity="food", index=13, len=14)
+                                                     ]))
 
-testing_sample_list.append(feersum_nlu.CrfSample(text="Can I have a hot dog with mustard?", intent=None,
-                                                 entity_list=[
-                                                     feersum_nlu.CrfEntity(entity="food", index=13, len=20)
-                                                 ]))
+testing_sample_list.append(feersum_nlu.SynonymSample(text="Can I have a hot dog with mustard?", intent=None,
+                                                     entity_list=[
+                                                         feersum_nlu.SynonymEntity(entity="food", index=13, len=20)
+                                                     ]))
 
-
-text_input_0 = feersum_nlu.TextInput("I would like to buy a slice of pizza.",
+# text_input_0 = feersum_nlu.TextInput("I would like to buy a slice of pizza.",
+#                                      lang_code="eng")  # optional language hint.
+text_input_0 = feersum_nlu.TextInput("When is agents of shield showing?",
                                      lang_code="eng")  # optional language hint.
 
 caller_name = 'example_caller'
