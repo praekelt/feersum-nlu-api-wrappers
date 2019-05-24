@@ -45,14 +45,14 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(
     text="How much does it cost?",
     label="quote"))
 
-train_details = feersum_nlu.TrainDetails(immediate_mode=True,
-                                         clsfr_algorithm="naive_bayes",
-                                         language_model_list=[
-                                               {
-                                                   "lang_code": "eng",
-                                                   "lang_model": "glove6B50D_trimmed"
-                                               }
-                                           ]
+train_details = feersum_nlu.TrainDetails(immediate_mode=True  # ,
+                                         # clsfr_algorithm="naive_bayes",
+                                         # language_model_list=[
+                                         #     {
+                                         #         "lang_code": "eng",
+                                         #         "lang_model": "glove6B50D_trimmed"
+                                         #     }
+                                         # ]
                                          )
 
 # text_input = feersum_nlu.TextInput("I would please like to fill in a claim form.")  # claim
@@ -69,12 +69,12 @@ caller_name = 'example_caller'
 print()
 
 try:
-    print("Update the model params:")
-    model_params = feersum_nlu.ModelParams(readonly=False)
-    api_response = api_instance.text_classifier_set_params(instance_name, model_params, x_caller=caller_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    #    print("Update the model params:")
+    #    model_params = feersum_nlu.ModelParams(readonly=False)
+    #    api_response = api_instance.text_classifier_set_params(instance_name, model_params, x_caller=caller_name)
+    #    print(" type(api_response)", type(api_response))
+    #    print(" api_response", api_response)
+    #    print()
 
     print("Create the text classifier:")
     api_response = api_instance.text_classifier_create(create_details)
