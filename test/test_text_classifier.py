@@ -105,13 +105,14 @@ class TestTextClassifier(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            self.assertTrue(api_response[0].cm_labels['0'] == 'claim')
-
             print("Get the details of specific named loaded text classifiers:")
             api_response = api_instance.text_classifier_get_details(instance_name)
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
+
+            self.assertTrue(api_response.cm_labels['0'] == 'claim')
+            self.assertTrue(api_response.cm_labels['1'] == 'quote')
 
             # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be
             # available after training.

@@ -137,6 +137,9 @@ class TestFAQMatcher(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
+            self.assertTrue(api_response.cm_labels['1'] == 'claim')
+            self.assertTrue(api_response.cm_labels['0'] == 'quote')
+
             # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be
             # available after training.
             print("Get the labels of named loaded FAQ matcher:")
