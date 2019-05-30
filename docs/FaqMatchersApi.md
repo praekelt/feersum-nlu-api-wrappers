@@ -23,6 +23,8 @@ Method | HTTP request | Description
 [**faq_matcher_retrieve**](FaqMatchersApi.md#faq_matcher_retrieve) | **POST** /faq_matchers/{instance_name}/retrieve | Match retrieve and FAQ.
 [**faq_matcher_set_params**](FaqMatchersApi.md#faq_matcher_set_params) | **POST** /faq_matchers/{instance_name}/params | Set the model parameters of named FAQ matcher.
 [**faq_matcher_train**](FaqMatchersApi.md#faq_matcher_train) | **POST** /faq_matchers/{instance_name}/train | Train the named FAQ matcher.
+[**faq_matcher_tsne_get**](FaqMatchersApi.md#faq_matcher_tsne_get) | **GET** /faq_matchers/{instance_name}/tsne | Get the latest results of TSNE.
+[**faq_matcher_tsne_post**](FaqMatchersApi.md#faq_matcher_tsne_post) | **POST** /faq_matchers/{instance_name}/tsne | Endpoint to start a TSNE process.
 [**faq_matcher_vaporise**](FaqMatchersApi.md#faq_matcher_vaporise) | **POST** /faq_matchers/{instance_name}/vaporise | Vaporise the named model.
 
 
@@ -1189,6 +1191,129 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FaqMatcherInstanceDetail**](FaqMatcherInstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **faq_matcher_tsne_get**
+> list[TsneSample] faq_matcher_tsne_get(instance_name, x_caller=x_caller)
+
+Get the latest results of TSNE.
+
+Get the latest results of TSNE.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+x_caller = 'x_caller_example' # str |  (optional)
+
+try:
+    # Get the latest results of TSNE.
+    api_response = api_instance.faq_matcher_tsne_get(instance_name, x_caller=x_caller)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling FaqMatchersApi->faq_matcher_tsne_get: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **x_caller** | **str**|  | [optional] 
+
+### Return type
+
+[**list[TsneSample]**](TsneSample.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **faq_matcher_tsne_post**
+> faq_matcher_tsne_post(instance_name, tsne_settings, x_caller=x_caller)
+
+Endpoint to start a TSNE process.
+
+Starts a TSNE process.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+tsne_settings = feersum_nlu.TsneSettings() # TsneSettings | The TSNE settings.
+x_caller = 'x_caller_example' # str |  (optional)
+
+try:
+    # Endpoint to start a TSNE process.
+    api_instance.faq_matcher_tsne_post(instance_name, tsne_settings, x_caller=x_caller)
+except ApiException as e:
+    print("Exception when calling FaqMatchersApi->faq_matcher_tsne_post: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **tsne_settings** | [**TsneSettings**](TsneSettings.md)| The TSNE settings. | 
+ **x_caller** | **str**|  | [optional] 
+
+### Return type
+
+void (empty response body)
 
 ### Authorization
 

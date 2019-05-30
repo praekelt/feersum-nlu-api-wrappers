@@ -690,6 +690,62 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+########
+## text_classifiers tsne endpoint
+########
+  /text_classifiers/{instance_name}/tsne:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - text_classifiers
+      summary: Endpoint to start a TSNE process.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_tsne_post
+      description: Starts a TSNE process.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: tsne_settings
+        description: The TSNE settings.
+        required: true
+        schema:
+          $ref: "#/definitions/tsne_settings"
+      responses:
+        200:
+          description: successful request
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - text_classifiers
+      summary: Get the latest results of TSNE.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_tsne_get
+      description: Get the latest results of TSNE.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/tsne_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
 ###################################
 ###################################
 ########
@@ -1479,10 +1535,10 @@ paths:
     post:
       tags:
       - intent_classifiers
-      summary: Endpoint to execute and return the results of TSNE.
+      summary: Endpoint to start a TSNE process.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
-      operationId: intent_classifier_tsne
-      description: Executes and returns the results of TSNE.
+      operationId: intent_classifier_tsne_post
+      description: Starts a TSNE process.
       parameters:
       - in: path
         name: instance_name
@@ -1495,6 +1551,27 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/tsne_settings"
+      responses:
+        200:
+          description: successful request
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - intent_classifiers
+      summary: Get the latest results of TSNE.
+      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
+      operationId: intent_classifier_tsne_get
+      description: Get the latest results of TSNE.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/tsne_sample_list"
@@ -2065,6 +2142,61 @@ paths:
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## faq_matchers tsne endpoint
+########
+  /faq_matchers/{instance_name}/tsne:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - faq_matchers
+      summary: Endpoint to start a TSNE process.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_tsne_post
+      description: Starts a TSNE process.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: tsne_settings
+        description: The TSNE settings.
+        required: true
+        schema:
+          $ref: "#/definitions/tsne_settings"
+      responses:
+        200:
+          description: successful request
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - faq_matchers
+      summary: Get the latest results of TSNE.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_tsne_get
+      description: Get the latest results of TSNE.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/tsne_sample_list"
         400:
           description: bad request
         401:
