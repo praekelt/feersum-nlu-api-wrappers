@@ -5,7 +5,6 @@ from __future__ import absolute_import
 import urllib3
 import unittest
 import time
-import uuid
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
