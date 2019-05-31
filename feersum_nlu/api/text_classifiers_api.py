@@ -2054,6 +2054,220 @@ class TextClassifiersApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def text_classifier_tsne_get(self, instance_name, **kwargs):  # noqa: E501
+        """Get the latest results of TSNE.  # noqa: E501
+
+        Get the latest results of TSNE.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.text_classifier_tsne_get(instance_name, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str instance_name: The name of the model instance. (required)
+        :param str x_caller:
+        :return: list[TsneSample]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async'):
+            return self.text_classifier_tsne_get_with_http_info(instance_name, **kwargs)  # noqa: E501
+        else:
+            (data) = self.text_classifier_tsne_get_with_http_info(instance_name, **kwargs)  # noqa: E501
+            return data
+
+    def text_classifier_tsne_get_with_http_info(self, instance_name, **kwargs):  # noqa: E501
+        """Get the latest results of TSNE.  # noqa: E501
+
+        Get the latest results of TSNE.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.text_classifier_tsne_get_with_http_info(instance_name, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str instance_name: The name of the model instance. (required)
+        :param str x_caller:
+        :return: list[TsneSample]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params.append('async')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method text_classifier_tsne_get" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'instance_name' is set
+        if ('instance_name' not in params or
+                params['instance_name'] is None):
+            raise ValueError("Missing the required parameter `instance_name` when calling `text_classifier_tsne_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'instance_name' in params:
+            path_params['instance_name'] = params['instance_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+        if 'x_caller' in params:
+            header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/text_classifiers/{instance_name}/tsne', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[TsneSample]',  # noqa: E501
+            auth_settings=auth_settings,
+            async=params.get('async'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def text_classifier_tsne_post(self, instance_name, tsne_settings, **kwargs):  # noqa: E501
+        """Endpoint to start a TSNE process.  # noqa: E501
+
+        Starts a TSNE process.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.text_classifier_tsne_post(instance_name, tsne_settings, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str instance_name: The name of the model instance. (required)
+        :param TsneSettings tsne_settings: The TSNE settings. (required)
+        :param str x_caller:
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async'):
+            return self.text_classifier_tsne_post_with_http_info(instance_name, tsne_settings, **kwargs)  # noqa: E501
+        else:
+            (data) = self.text_classifier_tsne_post_with_http_info(instance_name, tsne_settings, **kwargs)  # noqa: E501
+            return data
+
+    def text_classifier_tsne_post_with_http_info(self, instance_name, tsne_settings, **kwargs):  # noqa: E501
+        """Endpoint to start a TSNE process.  # noqa: E501
+
+        Starts a TSNE process.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.text_classifier_tsne_post_with_http_info(instance_name, tsne_settings, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str instance_name: The name of the model instance. (required)
+        :param TsneSettings tsne_settings: The TSNE settings. (required)
+        :param str x_caller:
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['instance_name', 'tsne_settings', 'x_caller']  # noqa: E501
+        all_params.append('async')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method text_classifier_tsne_post" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'instance_name' is set
+        if ('instance_name' not in params or
+                params['instance_name'] is None):
+            raise ValueError("Missing the required parameter `instance_name` when calling `text_classifier_tsne_post`")  # noqa: E501
+        # verify the required parameter 'tsne_settings' is set
+        if ('tsne_settings' not in params or
+                params['tsne_settings'] is None):
+            raise ValueError("Missing the required parameter `tsne_settings` when calling `text_classifier_tsne_post`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'instance_name' in params:
+            path_params['instance_name'] = params['instance_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+        if 'x_caller' in params:
+            header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'tsne_settings' in params:
+            body_params = params['tsne_settings']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/text_classifiers/{instance_name}/tsne', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async=params.get('async'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def text_classifier_vaporise(self, instance_name, **kwargs):  # noqa: E501
         """Vaporise the named model.  # noqa: E501
 

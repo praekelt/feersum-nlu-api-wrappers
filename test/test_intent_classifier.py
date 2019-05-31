@@ -4,6 +4,7 @@ from __future__ import absolute_import
 
 import urllib3
 import unittest
+import time
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
@@ -56,7 +57,9 @@ class TestIntentClassifier(unittest.TestCase):
 
         train_details = feersum_nlu.TrainDetails(threshold=0.85,
                                                  word_manifold_list=word_manifold_list,
-                                                 immediate_mode=True)
+                                                 immediate_mode=False)
+
+        tsne_settings = feersum_nlu.TsneSettings(n_components=3, perplexity=35, learning_rate=250)
 
         text_input = feersum_nlu.TextInput("How do I get a quote?")
 
@@ -104,6 +107,28 @@ class TestIntentClassifier(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
+            # TRAINING:
+            # If timestamp begins with 'ASYNC...' the the training is running in the background and you need to poll until
+            # the model ID has updated.
+            # if timestamp doesn't begin with ASYNC then the training has completed synchronously and you may continue.
+            # In the near future webhooks will be supported to let you know when async training has finished.
+
+            if api_response.training_stamp.startswith('ASYNC'):
+                # Background training in progress. We'll poll and wait for it to complete.
+                print("Background training in progress...", flush=True, end='')
+                previous_id = api_response.id
+
+                while True:
+                    print('.', end='', flush=True)
+                    time.sleep(1)
+                    inst_det = api_instance.intent_classifier_get_details(instance_name)
+                    if inst_det.id != previous_id:
+                        # ToDo: Stop if details indicate that training failed.
+                        break  # break from while-loop when ID updated which indicates training done.
+
+                print('Done.')
+                print()
+
             print("Get the details of all loaded intent classifiers:")
             api_response = api_instance.intent_classifier_get_details_all()
             print(" type(api_response)", type(api_response))
@@ -147,6 +172,21 @@ class TestIntentClassifier(unittest.TestCase):
                 self.assertTrue(scored_label.label == 'quote')
             else:
                 self.assertTrue(False)
+
+            print("Start a TSNE calculation:")
+            api_response = api_instance.intent_classifier_tsne_post(instance_name, tsne_settings)
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
+
+            # Wait for TSNE result to be ready.
+            time.sleep(3)
+
+            print("Get latest a TSNE results:")
+            api_response = api_instance.intent_classifier_tsne_get(instance_name)
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
 
             print("Delete specific named loaded intent classifiers:")
             api_response = api_instance.intent_classifier_del(instance_name)
