@@ -173,21 +173,22 @@ class TestIntentClassifier(unittest.TestCase):
             else:
                 self.assertTrue(False)
 
-            print("Start a TSNE calculation:")
-            api_response = api_instance.intent_classifier_tsne_post(instance_name, tsne_settings)
-            print(" type(api_response)", type(api_response))
-            print(" api_response", api_response)
-            print()
+            # print("Start a TSNE calculation:")
+            # api_response = api_instance.intent_classifier_tsne_post(instance_name, tsne_settings)
+            # print(" type(api_response)", type(api_response))
+            # print(" api_response", api_response)
+            # print()
 
-            # Wait for TSNE result to be ready.
-            time.sleep(3)
+            # # Wait for TSNE result to be ready.
+            # time.sleep(3)
 
-            print("Get latest a TSNE results:")
-            api_response = api_instance.intent_classifier_tsne_get(instance_name)
-            print(" type(api_response)", type(api_response))
-            print(" api_response", api_response)
-            print()
+            # print("Get latest a TSNE results:")
+            # api_response = api_instance.intent_classifier_tsne_get(instance_name)
+            # print(" type(api_response)", type(api_response))
+            # print(" api_response", api_response)
+            # print()
 
+            # =====
             print("Delete specific named loaded intent classifiers:")
             api_response = api_instance.intent_classifier_del(instance_name)
             print(" type(api_response)", type(api_response))

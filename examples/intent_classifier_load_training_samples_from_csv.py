@@ -1,4 +1,4 @@
-""" Example: Shows how to create & train an FAQ matcher from a CSV file. """
+""" Example: Shows how to create & train an Intent classifier from a CSV file. """
 
 import urllib3
 import time
@@ -16,15 +16,15 @@ configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative au
 
 configuration.host = feersumnlu_host
 
-api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-instance_name = 'test_faq'
+instance_name = 'intent-model'
 
-create_details = feersum_nlu.FaqMatcherCreateDetails(name=instance_name,
-                                                     desc="Longer desc of model.",
-                                                     long_name="test_faq",
-                                                     lid_model_file="lid_za",
-                                                     load_from_store=False)
+create_details = feersum_nlu.IntentClassifierCreateDetails(name=instance_name,
+                                                           desc="Intent model for demos to ....",
+                                                           long_name="Intent Model",
+                                                           lid_model_file="lid_za",
+                                                           load_from_store=False)
 
 # The training samples.
 text_sample_list = []
@@ -46,15 +46,15 @@ offline_batch_size = 10
 
 word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
                       feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
-                      feersum_nlu.LabeledWordManifold('nbl', 'feers_wm_xho'),
-                      feersum_nlu.LabeledWordManifold('xho', 'feers_wm_xho'),
-                      feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul'),
-                      feersum_nlu.LabeledWordManifold('ssw', 'feers_wm_ssw'),
-                      feersum_nlu.LabeledWordManifold('nso', 'feers_wm_nso'),
-                      feersum_nlu.LabeledWordManifold('sot', 'feers_wm_sot'),
-                      feersum_nlu.LabeledWordManifold('tsn', 'feers_wm_tsn'),
-                      feersum_nlu.LabeledWordManifold('ven', 'feers_wm_ven'),
-                      feersum_nlu.LabeledWordManifold('tso', 'feers_wm_tso')
+                      # feersum_nlu.LabeledWordManifold('nbl', 'feers_wm_xho'),
+                      # feersum_nlu.LabeledWordManifold('xho', 'feers_wm_xho'),
+                      # feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul'),
+                      # feersum_nlu.LabeledWordManifold('ssw', 'feers_wm_ssw'),
+                      # feersum_nlu.LabeledWordManifold('nso', 'feers_wm_nso'),
+                      # feersum_nlu.LabeledWordManifold('sot', 'feers_wm_sot'),
+                      # feersum_nlu.LabeledWordManifold('tsn', 'feers_wm_tsn'),
+                      # feersum_nlu.LabeledWordManifold('ven', 'feers_wm_ven'),
+                      # eersum_nlu.LabeledWordManifold('tso', 'feers_wm_tso')
                       ]
 
 # The playground's pre-loaded embeddings include:
@@ -69,15 +69,15 @@ caller_name = 'example_caller'
 print()
 
 try:
-    print("Create the FAQ matcher:")
-    api_response = api_instance.faq_matcher_create(create_details, x_caller=caller_name)
+    print("Create the Intent classifier:")
+    api_response = api_instance.intent_classifier_create(create_details, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
 
-    print("Add training samples to the FAQ matcher:")
-    api_response = api_instance.faq_matcher_add_training_samples(instance_name,
-                                                                 text_sample_list[:offline_batch_size])
+    print("Add training samples to the Intent classifier:")
+    api_response = api_instance.intent_classifier_add_training_samples(instance_name,
+                                                                       text_sample_list[:offline_batch_size])
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -88,8 +88,8 @@ try:
                                              word_manifold_list=word_manifold_list,
                                              immediate_mode=immediate_mode)
 
-    print("Train the FAQ matcher:")
-    instance_detail = api_instance.faq_matcher_train(instance_name, train_details)
+    print("Train the Intent classifier:")
+    instance_detail = api_instance.intent_classifier_train(instance_name, train_details)
     print(" type(api_response)", type(instance_detail))
     print(" api_response", instance_detail)
     print()
@@ -108,7 +108,7 @@ try:
         while True:
             print('.', end='', flush=True)
             time.sleep(1)
-            inst_det = api_instance.faq_matcher_get_details(instance_name)
+            inst_det = api_instance.intent_classifier_get_details(instance_name)
             if inst_det.id != previous_id:
                 # ToDo: Stop if details indicate that training failed.
                 break  # break from while-loop when ID updated which indicates training done.
@@ -116,15 +116,15 @@ try:
         print('Done.')
         print()
 
-    print("Get the details of specific named loaded FAQ matcher:")
-    api_response = api_instance.faq_matcher_get_details(instance_name)
+    print("Get the details of specific named loaded Intent classifier:")
+    api_response = api_instance.intent_classifier_get_details(instance_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     cm_labels = api_response.cm_labels
     print()
 
     print("Get the parameters:")
-    api_response = api_instance.faq_matcher_get_params(instance_name)
+    api_response = api_instance.intent_classifier_get_params(instance_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -134,24 +134,24 @@ try:
     online_batch_size = 100
     for i in range(offline_batch_size, len(text_sample_list), online_batch_size):
         api_response = \
-            api_instance.faq_matcher_online_training_samples(instance_name,
-                                                             text_sample_list[i:min(i + online_batch_size,
-                                                                                    len(text_sample_list))])
+            api_instance.intent_classifier_online_training_samples(instance_name,
+                                                                   text_sample_list[i:min(i + online_batch_size,
+                                                                                          len(text_sample_list))])
         print(f"{i}/{len(text_sample_list)}")
 
-    # print("Delete specific named loaded FAQ matcher:")
-    # api_response = api_instance.faq_matcher_del(instance_name)
+    # print("Delete specific named loaded Intent classifier:")
+    # api_response = api_instance.intent_classifier_del(instance_name)
     # print(" type(api_response)", type(api_response))
     # print(" api_response", api_response)
     # print()
     #
-    # print("Vaporise specific named loaded FAQ matcher:")
-    # api_response = api_instance.faq_matcher_vaporise(instance_name)
+    # print("Vaporise specific named loaded Intent classifier:")
+    # api_response = api_instance.intent_classifier_vaporise(instance_name)
     # print(" type(api_response)", type(api_response))
     # print(" api_response", api_response)
     # print()
 
 except ApiException as e:
-    print("Exception when calling an FAQ matcher operation: %s\n" % e)
+    print("Exception when calling an Intent classifier operation: %s\n" % e)
 except urllib3.exceptions.HTTPError as e:
     print("Connection HTTPError! %s\n" % e)

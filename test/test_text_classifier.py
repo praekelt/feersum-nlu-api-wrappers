@@ -4,6 +4,7 @@ from __future__ import absolute_import
 
 import urllib3
 import unittest
+import time
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
@@ -38,10 +39,11 @@ class TestTextClassifier(unittest.TestCase):
         labelled_text_sample_list = []
         labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to fill in a claim form",
                                                                         label="claim"))
+
         labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would like to get a quote",
                                                                         label="quote"))
 
-        train_details = feersum_nlu.TrainDetails(immediate_mode=True,
+        train_details = feersum_nlu.TrainDetails(immediate_mode=False,
                                                  clsfr_algorithm="naive_bayes",
                                                  language_model_list=[
                                                      {
@@ -99,6 +101,28 @@ class TestTextClassifier(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
+            # TRAINING:
+            # If timestamp begins with 'ASYNC...' the the training is running in the background and you need to poll until
+            # the model ID has updated.
+            # if timestamp doesn't begin with ASYNC then the training has completed synchronously and you may continue.
+            # In the near future webhooks will be supported to let you know when async training has finished.
+
+            if api_response.training_stamp.startswith('ASYNC'):
+                # Background training in progress. We'll poll and wait for it to complete.
+                print("Background training in progress...", flush=True, end='')
+                previous_id = api_response.id
+
+                while True:
+                    print('.', end='', flush=True)
+                    time.sleep(1)
+                    inst_det = api_instance.text_classifier_get_details(instance_name)
+                    if inst_det.id != previous_id:
+                        # ToDo: Stop if details indicate that training failed.
+                        break  # break from while-loop when ID updated which indicates training done.
+
+                print('Done.')
+                print()
+
             print("Get the details of all loaded text classifiers:")
             api_response = api_instance.text_classifier_get_details_all()
             print(" type(api_response)", type(api_response))
@@ -139,10 +163,12 @@ class TestTextClassifier(unittest.TestCase):
             scored_label_list = api_response
             if len(scored_label_list) > 0:
                 scored_label = scored_label_list[0]
+                print(scored_label.label, flush=True)
                 self.assertTrue(scored_label.label == 'quote')
             else:
                 self.assertTrue(False)
 
+            # =====
             print("Delete specific named loaded text classifiers:")
             api_response = api_instance.text_classifier_del(instance_name)
             print(" type(api_response)", type(api_response))
