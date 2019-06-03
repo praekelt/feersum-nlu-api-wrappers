@@ -1,7 +1,7 @@
 Changelog
 *********
 
-Version 2.0.30
+Version 2.0.31
 ==============
 
 Added git-like revision control. One can now load a specific revision of a model by providing its UUID in the create endpoints.
