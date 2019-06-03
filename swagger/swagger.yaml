@@ -5402,6 +5402,9 @@ definitions:
         description: The average F-score of the model as measured on the training set.
         type: number
         example: 1.0
+      training_cm:
+        description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
       validation_accuracy:
         description: The accuracy of the model as measured by cross validation on the training set.
         type: number
@@ -5410,6 +5413,9 @@ definitions:
         description: The average F-score of the model as measured by cross validation on the training set.
         type: number
         example: 1.0
+      validation_cm:
+        description: The confusion matrix as measured by cross validation on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
       testing_accuracy:
         description: The accuracy of the model as measured on the testing set.
         type: number
@@ -5418,6 +5424,12 @@ definitions:
         description: The average F-score of the model as measured on the testing set.
         type: number
         example: 1.0
+      testing_cm:
+        description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      cm_labels:
+        description: A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer.
+        type: object
       training_stamp:
         description: The time when the training operation concluded.
         type: string
