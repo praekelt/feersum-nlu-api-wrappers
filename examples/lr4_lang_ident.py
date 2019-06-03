@@ -68,13 +68,13 @@ try:
     print(" api_response", api_response)
     print()
 
-    # print("Update the parameters:")
-    # model_params = \
-    #     feersum_nlu.ModelParams(reference_time="2017-01-21 0:00+01:00")
-    # api_response = api_instance.language_recogniser_set_params(instance_name, model_params)
-    # print(" type(api_response)", type(api_response))
-    # print(" api_response", api_response)
-    # print()
+    print("Update the parameters:")
+    model_params = \
+        feersum_nlu.ModelParams(reference_time="2017-01-21 0:00+01:00")
+    api_response = api_instance.language_recogniser_set_params(instance_name, model_params)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
 
     print("Delete specific named loaded language recogniser instance:")
     api_response = api_instance.language_recogniser_del(instance_name)

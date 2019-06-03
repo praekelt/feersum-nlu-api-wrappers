@@ -17,7 +17,7 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-instance_name = 'test_intent_clsfr'
+instance_name = 'intent-model'
 
 print()
 

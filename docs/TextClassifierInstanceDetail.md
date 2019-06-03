@@ -18,6 +18,8 @@ Name | Type | Description | Notes
 **training_stamp** | **str** | The time when the training operation concluded. | [optional] 
 **num_training_samples** | **int** | The model&#39;s number of training samples. | [optional] 
 **num_testing_samples** | **int** | The model&#39;s number of testing samples. | [optional] 
+**clsfr_algorithm** | **str** | The name of the algorithm that should be used for the classification. | [optional] 
+**language_model_list** | [**list[LabelledLanguageModel]**](LabelledLanguageModel.md) | The list of labelled language models used as sentence encoders. | [optional] 
 **threshold** | **float** | There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.29
+  version: 2.0.30.dev4
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -57,16 +57,18 @@ tags:
   description: The API to a pre-configured 'generic' date parser.
 - name: sentiment_detectors
   description: The API to a pre-configured 'generic' sentiment detector.
-- name: crf_entity_extractors
-  description: The API to your crf entity extractor instances.
 - name: regex_entity_extractors
-  description: The API to your regular expression entity extractor instances.
+  description: The API to your regular expression entity extractor instances. The extractor returns and labels the text that matched the named regex patterns.
 - name: person_name_entity_extractors
-  description: The API to your person_name entity extractor instances.
+  description: The API to your person_name entity extractor instances. The extractor returns a list of person names found in the text.
 - name: duckling_entity_extractors
-  description: The API to your duckling entity extractor instances for things like distances, volumes, etc.
+  description: The API to your duckling entity extractor instances for things like distances, volumes, etc. The extractor returns the text recognised as a duckling entity and its parsed/formatted value.
 - name: sim_word_entity_extractors
-  description: The API to your similar/related words entity extractor instances.
+  description: The API to your similar/related words entity extractor instances. The extractor returns the text that matched the listed targets words within the given threshold.
+- name: synonym_entity_extractors
+  description: The API to your synonym entity extractor instances. The extractor matches text to a number of synonym sets and returns the set label and matched text.
+- name: crf_entity_extractors
+  description: The API to your crf entity extractor instances. The extractor recognises words as entities within the context of the rest of the text. The extractor returns the entity label as well as the associated words from the text.
 - name: data_objects
   description: The API to a general data_object store useful to hold general application data like user profiles, logs and tables. A data_object is, similar to a json object, of type JSONObj = Union[str, int, float, bool, None, Dict[str, JSONObj], List[JSONObj]].
 - name: health
@@ -81,13 +83,38 @@ paths:
 ## dashboard root
 ########
   /dashboard:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - dashboard
-      summary: Your service dashboard.
+      summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_get_details
-      description: Get your list of loaded model instances, the API version, etc.
+      description: Get your list of loaded model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      responses:
+        200:
+          $ref: "#/responses/dashboard_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    post:
+      tags:
+      - dashboard
+      summary: Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
+      operationId: dashboard_get_details_with_params
+      description: Get your list of loaded model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
+      parameters:
+      - in: body
+        name: params
+        description: Params like 'show_data_objects' that influence the dashboard's response.
+        required: true
+        schema:
+          $ref: "#/definitions/dashboard_params"
       responses:
         200:
           $ref: "#/responses/dashboard_detail"
@@ -102,6 +129,9 @@ paths:
 ## text_classifiers root
 ########
   /text_classifiers:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -144,6 +174,9 @@ paths:
 ## text_classifiers Get details of named instance
 ########
   /text_classifiers/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - text_classifiers
@@ -190,6 +223,9 @@ paths:
 ## text_classifiers training samples
 ########
   /text_classifiers/{instance_name}/training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -270,6 +306,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /text_classifiers/{instance_name}/training_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - text_classifiers
@@ -295,6 +334,9 @@ paths:
 ## text_classifiers testing samples
 ########
   /text_classifiers/{instance_name}/testing_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -375,6 +417,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /text_classifiers/{instance_name}/testing_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - text_classifiers
@@ -400,6 +445,9 @@ paths:
 ## text_classifiers train
 ########
   /text_classifiers/{instance_name}/train:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -431,6 +479,9 @@ paths:
 ## text_classifiers model_params
 ########
   /text_classifiers/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -480,9 +531,48 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
+## text_classifiers train online
+########
+  /text_classifiers/{instance_name}/online_training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - text_classifiers
+      summary: Train/update the classifier online with the samples provided.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_online_training_samples
+      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
 ## text_classifiers retrieve
 ########
   /text_classifiers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -514,6 +604,9 @@ paths:
 ## text_classifiers vaporise
 ########
   /text_classifiers/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -539,6 +632,9 @@ paths:
 ## text_classifiers get list of class labels
 ########
   /text_classifiers/{instance_name}/get_labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - text_classifiers
@@ -564,6 +660,9 @@ paths:
 ## text_classifiers curation endpoint
 ########
   /text_classifiers/{instance_name}/curate:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - text_classifiers
@@ -591,12 +690,71 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+########
+## text_classifiers tsne endpoint
+########
+  /text_classifiers/{instance_name}/tsne:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - text_classifiers
+      summary: Endpoint to start a TSNE process.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_tsne_post
+      description: Starts a TSNE process.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: tsne_settings
+        description: The TSNE settings.
+        required: true
+        schema:
+          $ref: "#/definitions/tsne_settings"
+      responses:
+        200:
+          description: successful request
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - text_classifiers
+      summary: Get the latest results of TSNE.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_tsne_get
+      description: Get the latest results of TSNE.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/tsne_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
 ###################################
 ###################################
 ########
 ## word_manifolds root
 ########
   /word_manifolds:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - word_manifolds
@@ -623,6 +781,9 @@ paths:
 ## word_manifolds Get details of named instance
 ########
   /word_manifolds/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - word_manifolds
@@ -669,6 +830,9 @@ paths:
 ## word_manifolds vaporise
 ########
   /word_manifolds/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - word_manifolds
@@ -694,6 +858,9 @@ paths:
 ## word_manifolds vocab
 ########
   /word_manifolds/{instance_name}/vocab:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - word_manifolds
@@ -723,67 +890,73 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-########
-## word_manifolds similar_words
-########
-  /word_manifolds/{instance_name}/similar_words:
-    post:
-      tags:
-      - word_manifolds
-      summary: Find similar words.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_get_similar_words
-      description: Returns words from the manifold that are similar to the parameter word.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      - in: body
-        name: word_and_threshold
-        description: A word token and an accompanying threshold.
-        required: true
-        schema:
-          $ref: "#/definitions/word_and_threshold"
-      responses:
-        200:
-          $ref: "#/responses/word_and_distance_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## word_manifolds spell_correct
-########
-  /word_manifolds/{instance_name}/spell_correct:
-    post:
-      tags:
-      - word_manifolds
-      summary: Spell correct a word.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_spell_correct
-      description: Spell correct a word replacing it with the most likely word from the manifold. Returns one or more scored candidate words.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      - in: body
-        name: text_input
-        description: The input text.
-        required: true
-        schema:
-          $ref: "#/definitions/text_input"
-      responses:
-        200:
-          $ref: "#/responses/word_and_distance_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
+# ########
+# ## word_manifolds similar_words
+# ########
+#   /word_manifolds/{instance_name}/similar_words:
+#     parameters:
+#     - $ref: '#/parameters/caller'
+#
+#     post:
+#       tags:
+#       - word_manifolds
+#       summary: Find similar words.
+#       x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#       operationId: word_manifold_get_similar_words
+#       description: Returns words from the manifold that are similar to the parameter word.
+#       parameters:
+#       - in: path
+#         name: instance_name
+#         description: The name of the model instance.
+#         required: true
+#         type: string
+#       - in: body
+#         name: word_and_threshold
+#         description: A word token and an accompanying threshold.
+#         required: true
+#         schema:
+#           $ref: "#/definitions/word_and_threshold"
+#       responses:
+#         200:
+#           $ref: "#/responses/word_and_distance_list"
+#         400:
+#           description: bad request
+#         401:
+#           $ref: "#/responses/UnauthorizedError"
+#
+# ########
+# ## word_manifolds spell_correct
+# ########
+#   /word_manifolds/{instance_name}/spell_correct:
+#     parameters:
+#     - $ref: '#/parameters/caller'
+#
+#     post:
+#       tags:
+#       - word_manifolds
+#       summary: Spell correct a word.
+#       x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#       operationId: word_manifold_spell_correct
+#       description: Spell correct a word replacing it with the most likely word from the manifold. Returns one or more scored candidate words.
+#       parameters:
+#       - in: path
+#         name: instance_name
+#         description: The name of the model instance.
+#         required: true
+#         type: string
+#       - in: body
+#         name: text_input
+#         description: The input text.
+#         required: true
+#         schema:
+#           $ref: "#/definitions/text_input"
+#       responses:
+#         200:
+#           $ref: "#/responses/word_and_distance_list"
+#         400:
+#           description: bad request
+#         401:
+#           $ref: "#/responses/UnauthorizedError"
 
 ###################################
 ###################################
@@ -791,6 +964,9 @@ paths:
 ## intent_classifiers root
 ########
   /intent_classifiers:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -832,6 +1008,9 @@ paths:
 ## intent_classifiers Get details of named instance
 ########
   /intent_classifiers/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - intent_classifiers
@@ -878,6 +1057,9 @@ paths:
 ## intent_classifiers training samples
 ########
   /intent_classifiers/{instance_name}/training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -958,6 +1140,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /intent_classifiers/{instance_name}/training_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - intent_classifiers
@@ -983,6 +1168,9 @@ paths:
 ## intent_classifiers testing samples
 ########
   /intent_classifiers/{instance_name}/testing_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1063,6 +1251,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /intent_classifiers/{instance_name}/testing_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - intent_classifiers
@@ -1088,6 +1279,9 @@ paths:
 ## intent_classifiers train
 ########
   /intent_classifiers/{instance_name}/train:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1119,6 +1313,9 @@ paths:
 ## intent_classifiers model_params
 ########
   /intent_classifiers/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1171,6 +1368,9 @@ paths:
 ## intent_classifiers train online
 ########
   /intent_classifiers/{instance_name}/online_training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1204,6 +1404,9 @@ paths:
 ## intent_classifiers retrieve
 ########
   /intent_classifiers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1235,6 +1438,9 @@ paths:
 ## intent_classifiers vaporise
 ########
   /intent_classifiers/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1260,6 +1466,9 @@ paths:
 ## intent_classifiers get list of class labels
 ########
   /intent_classifiers/{instance_name}/get_labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - intent_classifiers
@@ -1285,6 +1494,9 @@ paths:
 ## intent_classifiers curation endpoint
 ########
   /intent_classifiers/{instance_name}/curate:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
@@ -1317,13 +1529,16 @@ paths:
 ## intent_classifiers tsne endpoint
 ########
   /intent_classifiers/{instance_name}/tsne:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - intent_classifiers
-      summary: Endpoint to execute and return the results of TSNE.
+      summary: Endpoint to start a TSNE process.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
-      operationId: intent_classifier_tsne
-      description: Executes and returns the results of TSNE.
+      operationId: intent_classifier_tsne_post
+      description: Starts a TSNE process.
       parameters:
       - in: path
         name: instance_name
@@ -1336,6 +1551,27 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/tsne_settings"
+      responses:
+        200:
+          description: successful request
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - intent_classifiers
+      summary: Get the latest results of TSNE.
+      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
+      operationId: intent_classifier_tsne_get
+      description: Get the latest results of TSNE.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
       responses:
         200:
           $ref: "#/responses/tsne_sample_list"
@@ -1351,6 +1587,9 @@ paths:
 ## FAQ matchers root
 ########
   /faq_matchers:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1392,6 +1631,9 @@ paths:
 ## faq_matchers Get details of named instance
 ########
   /faq_matchers/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - faq_matchers
@@ -1438,6 +1680,9 @@ paths:
 ## faq_matchers training samples
 ########
   /faq_matchers/{instance_name}/training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1518,6 +1763,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /faq_matchers/{instance_name}/training_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - faq_matchers
@@ -1543,6 +1791,9 @@ paths:
 ## faq_matchers testing samples
 ########
   /faq_matchers/{instance_name}/testing_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1623,6 +1874,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /faq_matchers/{instance_name}/testing_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - faq_matchers
@@ -1648,6 +1902,9 @@ paths:
 ## faq_matchers train
 ########
   /faq_matchers/{instance_name}/train:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1679,6 +1936,9 @@ paths:
 ## faq_matchers model_params
 ########
   /faq_matchers/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1731,6 +1991,9 @@ paths:
 ## faq_matchers train online
 ########
   /faq_matchers/{instance_name}/online_training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1764,6 +2027,9 @@ paths:
 ## faq_matchers retrieve
 ########
   /faq_matchers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1795,6 +2061,9 @@ paths:
 ## faq_matchers vaporise
 ########
   /faq_matchers/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1820,6 +2089,9 @@ paths:
 ## faq_matchers get list of class labels
 ########
   /faq_matchers/{instance_name}/get_labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - faq_matchers
@@ -1845,6 +2117,9 @@ paths:
 ## faq_matchers curation endpoint
 ########
   /faq_matchers/{instance_name}/curate:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - faq_matchers
@@ -1872,6 +2147,61 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+########
+## faq_matchers tsne endpoint
+########
+  /faq_matchers/{instance_name}/tsne:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - faq_matchers
+      summary: Endpoint to start a TSNE process.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_tsne_post
+      description: Starts a TSNE process.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: tsne_settings
+        description: The TSNE settings.
+        required: true
+        schema:
+          $ref: "#/definitions/tsne_settings"
+      responses:
+        200:
+          description: successful request
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - faq_matchers
+      summary: Get the latest results of TSNE.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_tsne_get
+      description: Get the latest results of TSNE.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/tsne_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
 
 ###################################
 ###################################
@@ -1879,6 +2209,9 @@ paths:
 ## Extract a list of dates from the text input.
 ########
   /date_parsers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - date_parsers
@@ -1913,6 +2246,9 @@ paths:
 ## Detect the sentiment of the text input.
 ########
   /sentiment_detectors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - sentiment_detectors
@@ -1947,6 +2283,9 @@ paths:
 ## crf_entity_extractors root
 ########
   /crf_entity_extractors:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -1988,6 +2327,9 @@ paths:
 ## crf_entity_extractors Get details of named instance
 ########
   /crf_entity_extractors/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - crf_entity_extractors
@@ -2034,6 +2376,9 @@ paths:
 ## crf_entity_extractors training samples
 ########
   /crf_entity_extractors/{instance_name}/training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -2114,6 +2459,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /crf_entity_extractors/{instance_name}/training_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - crf_entity_extractors
@@ -2139,6 +2487,9 @@ paths:
   ## crf_entity_extractors testing samples
   ########
   /crf_entity_extractors/{instance_name}/testing_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -2219,6 +2570,9 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
   /crf_entity_extractors/{instance_name}/testing_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     delete:
       tags:
       - crf_entity_extractors
@@ -2241,9 +2595,12 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## intent_classifiers train
+## crf_entity_extractors train
 ########
   /crf_entity_extractors/{instance_name}/train:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -2275,6 +2632,9 @@ paths:
 ## crf_entity_extractors model_params
 ########
   /crf_entity_extractors/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -2327,6 +2687,9 @@ paths:
 ## crf_entity_extractors retrieve
 ########
   /crf_entity_extractors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -2358,6 +2721,9 @@ paths:
 ## crf_entity_extractors vaporise
 ########
   /crf_entity_extractors/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - crf_entity_extractors
@@ -2383,6 +2749,9 @@ paths:
 ## crf_entity_extractors get list of entity labels
 ########
   /crf_entity_extractors/{instance_name}/get_labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - crf_entity_extractors
@@ -2408,9 +2777,509 @@ paths:
 ###################################
 ###################################
 ########
+## synonym_entity_extractors root
+########
+  /synonym_entity_extractors:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Create a synonym entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_create
+      description: Create a new synonym entity extractor or reload one from the trash.
+      parameters:
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/synonym_entity_extractor_create_details"
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - synonym_entity_extractors
+      summary: Get list of loaded synonym entity extractors.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_get_details_all
+      description: Get the list of loaded synonym entity extractors.
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors Get details of named instance
+########
+  /synonym_entity_extractors/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    get:
+      tags:
+      - synonym_entity_extractors
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_get_details
+      description: Get the details of the named synonym entity extractor instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - synonym_entity_extractors
+      summary: Delete named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_del
+      description: Delete and get the details of the named synonym entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors training samples
+########
+  /synonym_entity_extractors/{instance_name}/training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Add training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_add_training_samples
+      description: Add training samples to named extractor. Returns the extractor's updated number of training samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: synonym_sample_list
+        description: List of synonym samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/synonym_sample"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - synonym_entity_extractors
+      summary: Get training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_get_training_samples
+      description: Get the training samples of the named extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - synonym_entity_extractors
+      summary: Delete training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_del_training_samples
+      description: Delete the listed training samples of the named extractor. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: synonym_sample_list
+        description: List of synonym samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/synonym_sample"
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /synonym_entity_extractors/{instance_name}/training_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    delete:
+      tags:
+      - synonym_entity_extractors
+      summary: Delete all training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_del_training_samples_all
+      description: Delete all training samples of the named extractor. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  ########
+  ## synonym_entity_extractors testing samples
+  ########
+  /synonym_entity_extractors/{instance_name}/testing_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Add testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_add_testing_samples
+      description: Add testing samples to named extractor. Returns the extractor's updated number of testing samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: synonym_sample_list
+        description: List of synonym samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/synonym_sample"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - synonym_entity_extractors
+      summary: Get testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_get_testing_samples
+      description: Get the testing samples of the named extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - synonym_entity_extractors
+      summary: Delete testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_del_testing_samples
+      description: Delete the listed testing samples of the named extractor. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: synonym_sample_list
+        description: List of synonym samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/synonym_sample"
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /synonym_entity_extractors/{instance_name}/testing_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    delete:
+      tags:
+      - synonym_entity_extractors
+      summary: Delete all testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_del_testing_samples_all
+      description: Delete all testing samples of the named extractor. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors train
+########
+  /synonym_entity_extractors/{instance_name}/train:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Train the named synonym extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_train
+      description: Train the named synonym extractor with the training and testing data already provided. Returns the updated instance details.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: train_details
+        description: The arguments provided to the train operation.
+        required: true
+        schema:
+          $ref: "#/definitions/train_details"
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors model_params
+########
+  /synonym_entity_extractors/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Set the model parameters of named synonym entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_set_params
+      description: Set the model parameters of named synonym entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - synonym_entity_extractors
+      summary: Get the editable model parameters of named synonym entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_get_params
+      description: Get the editable model parameters of named synonym entity extractor.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors retrieve
+########
+  /synonym_entity_extractors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Predict which entities was mentioned.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_retrieve
+      description: Predict which entities was mentioned.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors vaporise
+########
+  /synonym_entity_extractors/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors get list of entity labels
+########
+  /synonym_entity_extractors/{instance_name}/get_labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    get:
+      tags:
+      - synonym_entity_extractors
+      summary: Get list of possible labels.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_get_labels
+      description: Returns the extractor's list of possible entity labels.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labels"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+###################################
+###################################
+########
 ## regex_entity_extractors root
 ########
   /regex_entity_extractors:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - regex_entity_extractors
@@ -2452,6 +3321,9 @@ paths:
 ## regex_entity_extractors Get details of named instance
 ########
   /regex_entity_extractors/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - regex_entity_extractors
@@ -2498,6 +3370,9 @@ paths:
 ## regex_entity_extractors model_params
 ########
   /regex_entity_extractors/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - regex_entity_extractors
@@ -2550,6 +3425,9 @@ paths:
 ## regex_entity_extractors retrieve
 ########
   /regex_entity_extractors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - regex_entity_extractors
@@ -2581,6 +3459,9 @@ paths:
 ## regex_entity_extractors vaporise
 ########
   /regex_entity_extractors/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - regex_entity_extractors
@@ -2609,6 +3490,9 @@ paths:
 ## person_name_entity_extractors root
 ########
   /person_name_entity_extractors:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - person_name_entity_extractors
@@ -2650,6 +3534,9 @@ paths:
 ## person_name_entity_extractors Get details of named instance
 ########
   /person_name_entity_extractors/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - person_name_entity_extractors
@@ -2696,6 +3583,9 @@ paths:
 ## person_name_entity_extractors model_params
 ########
   /person_name_entity_extractors/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - person_name_entity_extractors
@@ -2748,6 +3638,9 @@ paths:
 ## person_name_entity_extractors retrieve
 ########
   /person_name_entity_extractors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - person_name_entity_extractors
@@ -2779,6 +3672,9 @@ paths:
 ## person_name_entity_extractors vaporise
 ########
   /person_name_entity_extractors/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - person_name_entity_extractors
@@ -2807,6 +3703,9 @@ paths:
 ## duckling_entity_extractors root
 ########
   /duckling_entity_extractors:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - duckling_entity_extractors
@@ -2848,6 +3747,9 @@ paths:
 ## duckling_entity_extractors Get details of named instance
 ########
   /duckling_entity_extractors/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - duckling_entity_extractors
@@ -2894,6 +3796,9 @@ paths:
 ## duckling_entity_extractors model_params
 ########
   /duckling_entity_extractors/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - duckling_entity_extractors
@@ -2946,6 +3851,9 @@ paths:
 ## duckling_entity_extractors retrieve
 ########
   /duckling_entity_extractors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - duckling_entity_extractors
@@ -2977,6 +3885,9 @@ paths:
 ## duckling_entity_extractors vaporise
 ########
   /duckling_entity_extractors/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - duckling_entity_extractors
@@ -3005,6 +3916,9 @@ paths:
 ## sim_word_entity_extractors root
 ########
   /sim_word_entity_extractors:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - sim_word_entity_extractors
@@ -3046,6 +3960,9 @@ paths:
 ## sim_word_entity_extractors Get details of named instance
 ########
   /sim_word_entity_extractors/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - sim_word_entity_extractors
@@ -3092,6 +4009,9 @@ paths:
 ## sim_word_entity_extractors model_params
 ########
   /sim_word_entity_extractors/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - sim_word_entity_extractors
@@ -3144,6 +4064,9 @@ paths:
 ## sim_word_entity_extractors retrieve
 ########
   /sim_word_entity_extractors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - sim_word_entity_extractors
@@ -3175,6 +4098,9 @@ paths:
 ## sim_word_entity_extractors vaporise
 ########
   /sim_word_entity_extractors/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - sim_word_entity_extractors
@@ -3203,6 +4129,9 @@ paths:
 ## language_recognisers root
 ########
   /language_recognisers:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - language_recognisers
@@ -3244,6 +4173,9 @@ paths:
 ## language_recognisers Get details of named instance
 ########
   /language_recognisers/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - language_recognisers
@@ -3290,6 +4222,9 @@ paths:
 ## language_recognisers model_params
 ########
   /language_recognisers/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - language_recognisers
@@ -3342,13 +4277,16 @@ paths:
 ## language_recognisers retrieve
 ########
   /language_recognisers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - language_recognisers
       summary: Recognise the language the text is written in.
       x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
       operationId: language_recogniser_retrieve
-      description: Recognise the language the text is written in. Returns the list of scored language codes.
+      description: Recognise the language the text is written in. Returns the list of scored language codes (ISO 639-3).
       parameters:
       - in: path
         name: instance_name
@@ -3373,6 +4311,9 @@ paths:
 ## language_recognisers vaporise
 ########
   /language_recognisers/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - language_recognisers
@@ -3398,6 +4339,9 @@ paths:
 ## language_recognisers get list of class labels
 ########
   /language_recognisers/{instance_name}/get_labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - language_recognisers
@@ -3426,6 +4370,9 @@ paths:
 ## data_objects root.
 ########
   /data_objects:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - data_objects
@@ -3441,10 +4388,28 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+    delete:
+      tags:
+      - data_objects
+      summary: Delete all data_objects. Returns list of names of data_objects deleted. Note that this is a convenience operation. The objects will still need to be vaporised one by one.
+      x-swagger-router-controller: rest_api.flask_server.controllers.data_objects_controller
+      operationId: data_object_del_all
+      description: Get the list of names of loaded data_objects.
+      responses:
+        200:
+          $ref: "#/responses/data_object_name_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
 ########
-## data_objects Update/create an data_object - a data_object is a json object.
+## data_objects Update/create a data_object - a data_object is a json object.
 ########
   /data_objects/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - data_objects
@@ -3514,7 +4479,13 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+########
+## data_objects vaporise
+########
   /data_objects/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - data_objects
@@ -3543,6 +4514,9 @@ paths:
 ## health root
 ########
   /health:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - health
@@ -3565,6 +4539,9 @@ paths:
 ## api_keys root
 ########
   /api_keys:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     post:
       tags:
       - api_keys
@@ -3606,6 +4583,9 @@ paths:
 ## api_keys Get details of the API key.
 ########
   /api_keys/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
     get:
       tags:
       - api_keys
@@ -3647,6 +4627,17 @@ paths:
           description: bad request
         401:
           $ref: "#/responses/UnauthorizedError"
+
+
+###################################
+# Descriptions of common parameters
+###################################
+parameters:
+  caller:
+    in: header
+    name: X-CALLER
+    type: string
+    required: false
 
 
 ##################################
@@ -3728,6 +4719,18 @@ responses:
       type: array
       items:
         $ref: "#/definitions/crf_entity_extractor_instance_detail"
+
+  synonym_entity_extractor_instance_detail:
+    description: The model instance detail
+    schema:
+      $ref: "#/definitions/synonym_entity_extractor_instance_detail"
+
+  synonym_entity_extractor_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/synonym_entity_extractor_instance_detail"
 
   regex_entity_extractor_instance_detail:
     description: The model instance detail
@@ -3813,6 +4816,13 @@ responses:
       items:
         $ref: "#/definitions/crf_sample"
 
+  synonym_sample_list:
+    description: List of synonym samples.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/synonym_sample"
+
   labelled_text_sample_list:
     description: The list of labeled text samples.
     schema:
@@ -3839,8 +4849,15 @@ responses:
     schema:
       $ref: "#/definitions/data_object"
 
+  data_object_list:
+    description: The data_object.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/data_object"
+
   data_object_name_list:
-    description: A list of data_object names.
+    description: A list of data_objects.
     schema:
       type: array
       items:
@@ -3866,6 +4883,13 @@ responses:
       type: array
       items:
         $ref: "#/definitions/crf_entity"
+
+  synonym_entity_list:
+    description: The list of extracted synonym entities.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/synonym_entity"
 
   regex_entity_list:
     description: The list of extracted regex entities.
@@ -3929,13 +4953,16 @@ definitions:
     properties:
       entity:
         type: string
-        description: The entity class/type.
+        description: The entity label/class/type.
+      value:
+        type: string
+        description: The value of the entity as extracted from the input text. Not used during training!
       index:
         type: integer
         description: The first character of the entity in the associated utterance.
       len:
         type: integer
-        description: One past the last character of the entity in the associated utterance.
+        description: The length of the extracted entity in the associated utterance.
     example: {"entity": "location", "index": 31, "len": 8}
 
   crf_sample:
@@ -3953,6 +4980,68 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/crf_entity"
+
+  synonym_entity:
+    description: A synonym entity.
+    type: object
+    required:
+    - entity
+    properties:
+      entity:
+        type: string
+        description: The entity label/class/type.
+      value:
+        type: string
+        description: The value of the entity as extracted from the input text. Not used during training!
+      syn_set:
+        description: The list of synonyms associated with this entity label. One should either provide a synset OR an index and len of a specific synonym in the associated utterance.
+        type: array
+        items:
+          type: string
+      index:
+        type: integer
+        description: The first character of the entity in the associated utterance. One should either provide a synset OR an index and len of a specific synonym in the associated utterance.
+      len:
+        type: integer
+        description: The length of the extracted entity in the associated utterance.
+    example:
+    - {"entity": "error", "syn_set": ["fault", "error", "red light", "problem"]}
+    - {"entity": "error", "index": 31, "len": 8}
+
+  synonym_sample:
+    description: A synonym entity extractor training/testing utterance with labelled entities. One should either provide an entity list with synsets OR text with index+len of a specific synonym in the associated utterance.
+    type: object
+    properties:
+      text:
+        type: string
+      intent:
+        type: string
+      entity_list:
+        description: A list of labelled entities.
+        type: array
+        items:
+          $ref: "#/definitions/synonym_entity"
+
+  model_revision:
+    description: Summary of a model revision stored in the history.
+    type: object
+    required:
+    - version
+    - uuid
+    - message
+    properties:
+      version:
+        description: The revision ID, a non-consecutive increasing unique number.
+        type: integer
+        example: 10
+      uuid:
+        description: A universally unique ID used to reference this revision.
+        type: string
+        example: ea0e5aa3-1772-49aa-a805-db7ed6da46bf
+      message:
+        description: A longer existential description of this revision.
+        type: string
+        example: Added training data.
 
   dashboard_model_detail:
     description: The model instance detail.
@@ -3981,6 +5070,11 @@ definitions:
         description: Whether or not this model has been deleted. Deleted models need to be loaded to be used again.
         type: boolean
         example: False
+      history:
+        description: The model's history.
+        type: array
+        items:
+          $ref: "#/definitions/model_revision"
 
   dashboard_detail:
     description: Your dashboard content.
@@ -4068,6 +5162,15 @@ definitions:
         description: The model's number of testing samples.
         type: integer
         example: 100
+      clsfr_algorithm:
+        description: The name of the algorithm that should be used for the classification.
+        type: string
+        example: "'naive_bayes_char_ngram', 'nearest_neighbour_L1', 'nearest_neighbour_L2', 'nearest_neighbour_cosine', etc."
+      language_model_list:
+        description: The list of labelled language models used as sentence encoders.
+        type: array
+        items:
+          $ref: "#/definitions/labelled_language_model"
       threshold:
         description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
         type: number
@@ -4332,6 +5435,74 @@ definitions:
         type: number
         example: 0.85
 
+  synonym_entity_extractor_instance_detail:
+    description: The model instance detail.
+    type: object
+    required:
+    - name
+    - id
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      id:
+        description: The unique id of a specific version of the model instance.
+        type: string
+        example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'An example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
+      training_accuracy:
+        description: The accuracy of the model as measured on the training set.
+        type: number
+        example: 1.0
+      training_f1:
+        description: The average F-score of the model as measured on the training set.
+        type: number
+        example: 1.0
+      validation_accuracy:
+        description: The accuracy of the model as measured by cross validation on the training set.
+        type: number
+        example: 1.0
+      validation_f1:
+        description: The average F-score of the model as measured by cross validation on the training set.
+        type: number
+        example: 1.0
+      testing_accuracy:
+        description: The accuracy of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      testing_f1:
+        description: The average F-score of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      training_stamp:
+        description: The time when the training operation concluded.
+        type: string
+        example: '2017-10-26 10:42:01.589979'
+      num_training_samples:
+        description: The model's number of training samples.
+        type: integer
+        example: 100
+      num_testing_samples:
+        description: The model's number of testing samples.
+        type: integer
+        example: 100
+      threshold:
+        description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
+        type: number
+        example: 0.85
+
   regex_entity_extractor_instance_detail:
     description: The model instance detail.
     type: object
@@ -4528,6 +5699,20 @@ definitions:
         type: integer
         example: 5000
 
+  dashboard_params:
+    description: The params used in generating the dashboard response.
+    type: object
+    properties:
+      show_data_objects:
+        description: Make True to include the data objects on the dashboard. Default is False.
+        type: boolean
+        example: False
+      history_size:
+        description: The max size of the revision history to include for a model.
+        type: integer
+        default: 10
+        example: 10
+
   text_classifier_create_details:
     description: The details of the model instance to create.
     type: object
@@ -4551,6 +5736,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   faq_matcher_create_details:
     description: The details of the model instance to create.
@@ -4579,6 +5768,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   intent_classifier_create_details:
     description: The details of the model instance to create.
@@ -4607,6 +5800,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   word_manifold_create_details:
     description: The details of the model instance to create.
@@ -4635,6 +5832,10 @@ definitions:
         description: The input file on the server (if any) to use.
         type: string
         example: 'glove_za_eng.txt'
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   crf_entity_extractor_create_details:
     description: The details of the model instance to create.
@@ -4659,6 +5860,38 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
+
+  synonym_entity_extractor_create_details:
+    description: The details of the model instance to create.
+    type: object
+    required:
+    - name
+    - load_from_store
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance to create.
+        type: string
+        example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'An example model of this type.'
+      load_from_store:
+        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        type: boolean
+        example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   regex_entity_extractor_create_details:
     description: The details of the model instance to create.
@@ -4687,6 +5920,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   person_name_entity_extractor_create_details:
     description: The details of the model instance to create.
@@ -4711,6 +5948,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   duckling_entity_extractor_create_details:
     description: The details of the model instance to create.
@@ -4740,6 +5981,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   sim_word_entity_extractor_create_details:
     description: The details of the model instance to create.
@@ -4776,6 +6021,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   language_recogniser_create_details:
     description: The details of the model instance to create.
@@ -4804,6 +6053,10 @@ definitions:
         description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   labelled_text_sample:
     description: Labelled text sample.
@@ -4860,11 +6113,27 @@ definitions:
     - word_manifold
     properties:
       label:
-        description: The language code label.
+        description: The language code label. Please use ISO 639-3 language codes.
         type: string
         example: 'eng'
       word_manifold:
         description: The name of the word manifold to use for the language code.
+        type: string
+        example: 'feers_wm_eng'
+
+  labelled_language_model:
+    description: A labelled (e.g. lang_code labelled) language instance.
+    type: object
+    required:
+    - lang_code
+    - lang_model
+    properties:
+      lang_code:
+        description: The language code label. Please use ISO 639-3 language codes.
+        type: string
+        example: 'eng'
+      lang_model:
+        description: The name of the language model to use for the language code in the associated model.
         type: string
         example: 'feers_wm_eng'
 
@@ -4892,6 +6161,15 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/labeled_word_manifold"
+      clsfr_algorithm:
+        description: The name of the algorithm that should be used for the classification.
+        type: string
+        example: "'nearest_neighbour_l1', 'nearest_neighbour_cosine', 'naive_bayes', etc."
+      language_model_list:
+        description: The list of labelled language models used as sentence encoders.
+        type: array
+        items:
+          $ref: "#/definitions/labelled_language_model"
 
   model_params:
     description: The model parameters. Dict of parameters like name, long_name, desc, threshold, etc. Models can surface more paramerters. Use the params end-point to get the set of params that is editable.

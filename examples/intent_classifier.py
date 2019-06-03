@@ -29,7 +29,8 @@ create_details = feersum_nlu.IntentClassifierCreateDetails(name=instance_name,
                                                            desc="Test intent classifier.",
                                                            long_name=instance_name,
                                                            lid_model_file="lid_za",
-                                                           load_from_store=False)
+                                                           load_from_store=True,
+                                                           revision_uuid='e514126d-39f3-411a-8a65-6283bfa465ab')
 
 # The training samples.
 labelled_text_sample_list = []
@@ -42,8 +43,6 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="I would li
 labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Where can I get a quote?",
                                                                 label="quote"))
 
-tsne_settings = feersum_nlu.TsneSettings(n_components=3, perplexity=30.0, learning_rate=200)
-
 # train_details = feersum_nlu.TrainDetails(immediate_mode=True)
 train_details = feersum_nlu.TrainDetails(threshold=1.0,
                                          word_manifold_list=word_manifold_list,
@@ -51,11 +50,13 @@ train_details = feersum_nlu.TrainDetails(threshold=1.0,
 
 text_input = feersum_nlu.TextInput("How do I get a quote?")
 
+caller_name = 'example_caller'
+
 print()
 
 try:
     print("Create the intent classifier:")
-    api_response = api_instance.intent_classifier_create(create_details)
+    api_response = api_instance.intent_classifier_create(create_details, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -150,13 +151,7 @@ try:
     print()
 
     print("Classify intent:")
-    api_response = api_instance.intent_classifier_retrieve(instance_name, text_input)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
-    print("Run TSNE:")
-    api_response = api_instance.intent_classifier_tsne(instance_name, tsne_settings)
+    api_response = api_instance.intent_classifier_retrieve(instance_name, text_input, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()

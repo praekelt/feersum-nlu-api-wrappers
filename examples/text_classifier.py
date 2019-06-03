@@ -45,7 +45,15 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(
     text="How much does it cost?",
     label="quote"))
 
-train_details = feersum_nlu.TrainDetails(immediate_mode=True)
+train_details = feersum_nlu.TrainDetails(immediate_mode=True  # ,
+                                         # clsfr_algorithm="naive_bayes",
+                                         # language_model_list=[
+                                         #     {
+                                         #         "lang_code": "eng",
+                                         #         "lang_model": "glove6B50D_trimmed"
+                                         #     }
+                                         # ]
+                                         )
 
 # text_input = feersum_nlu.TextInput("I would please like to fill in a claim form.")  # claim
 #   [{'label': 'claim', 'probability': 0.9409714994212784}, {'label': 'quote', 'probability': 0.05902850057872078}]
@@ -56,15 +64,17 @@ train_details = feersum_nlu.TrainDetails(immediate_mode=True)
 text_input = feersum_nlu.TextInput("Is it expensive to get insurance?")  # quote
 #   [{'label': 'quote', 'probability': 0.9692558260098282}, {'label': 'claim', 'probability': 0.030744173990171327}]
 
+caller_name = 'example_caller'
+
 print()
 
 try:
-    # print("Update the model params:")
-    # model_params = feersum_nlu.ModelParams(readonly=False)
-    # api_response = api_instance.text_classifier_set_params(instance_name, model_params)
-    # print(" type(api_response)", type(api_response))
-    # print(" api_response", api_response)
-    # print()
+    #    print("Update the model params:")
+    #    model_params = feersum_nlu.ModelParams(readonly=False)
+    #    api_response = api_instance.text_classifier_set_params(instance_name, model_params, x_caller=caller_name)
+    #    print(" type(api_response)", type(api_response))
+    #    print(" api_response", api_response)
+    #    print()
 
     print("Create the text classifier:")
     api_response = api_instance.text_classifier_create(create_details)
@@ -143,7 +153,7 @@ try:
     print()
 
     print("Classify text:")
-    api_response = api_instance.text_classifier_retrieve(instance_name, text_input)
+    api_response = api_instance.text_classifier_retrieve(instance_name, text_input, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -169,17 +179,17 @@ try:
     print(" api_response", api_response)
     print()
 
-    # print("Delete named loaded text classifier:")
-    # api_response = api_instance.text_classifier_del(instance_name)
-    # print(" type(api_response)", type(api_response))
-    # print(" api_response", api_response)
-    # print()
-    #
-    # print("Vaporise named loaded text classifier:")
-    # api_response = api_instance.text_classifier_vaporise(instance_name)
-    # print(" type(api_response)", type(api_response))
-    # print(" api_response", api_response)
-    # print()
+    print("Delete named loaded text classifier:")
+    api_response = api_instance.text_classifier_del(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Vaporise named loaded text classifier:")
+    api_response = api_instance.text_classifier_vaporise(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
 except ApiException as e:
     print("Exception when calling a text classifier operation: %s\n" % e)
 except urllib3.exceptions.HTTPError as e:

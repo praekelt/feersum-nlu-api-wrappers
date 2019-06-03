@@ -17,11 +17,14 @@ print(configuration.host)
 
 api_instance = feersum_nlu.HealthApi(feersum_nlu.ApiClient(configuration))
 
+caller_name = 'example_caller'
+
 print()
 
 try:
     print("Get health status:")
-    api_response, api_response_code, api_response_header = api_instance.health_get_status_with_http_info()
+    api_response, api_response_code, api_response_header = \
+        api_instance.health_get_status_with_http_info(x_caller=caller_name)
 
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)

@@ -78,11 +78,13 @@ text_input_0 = feersum_nlu.TextInput("Waar kan ek 'n eis insit?",
 text_input_1 = feersum_nlu.TextInput("How long does a claim take?",
                                      lang_code="eng")  # optional language hint.
 
+caller_name = 'example_caller'
+
 print()
 
 try:
     print("Create the FAQ matcher:")
-    api_response = api_instance.faq_matcher_create(create_details)
+    api_response = api_instance.faq_matcher_create(create_details, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -212,7 +214,7 @@ try:
     print()
 
     print("Match a question:")
-    api_response = api_instance.faq_matcher_retrieve(instance_name, text_input_0)
+    api_response = api_instance.faq_matcher_retrieve(instance_name, text_input_0, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
