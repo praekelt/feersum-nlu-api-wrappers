@@ -1,0 +1,26 @@
+# ImageClassifierInstanceDetail
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**name** | **str** | The sluggy-url-friendly-name of the instance. | 
+**id** | **str** | The unique id of a specific version of the model instance. | 
+**long_name** | **str** | The human-friendly-name of the instance. | [optional] 
+**desc** | **str** | The longer existential description of this instance&#39;s purpose in life. | [optional] 
+**readonly** | **bool** | Indicates if the model is readonly and not editable. | [optional] 
+**training_accuracy** | **float** | The accuracy of the model as measured on the training set. | [optional] 
+**training_f1** | **float** | The average F-score of the model as measured on the training set. | [optional] 
+**training_cm** | **object** | The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used. | [optional] 
+**testing_accuracy** | **float** | The accuracy of the model as measured on the testing set. | [optional] 
+**testing_f1** | **float** | The average F-score of the model as measured on the testing set. | [optional] 
+**testing_cm** | **object** | The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used. | [optional] 
+**cm_labels** | **object** | A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer. | [optional] 
+**training_stamp** | **str** | The time when the training operation concluded. | [optional] 
+**num_training_samples** | **int** | The model&#39;s number of training samples. | [optional] 
+**num_testing_samples** | **int** | The model&#39;s number of testing samples. | [optional] 
+**clsfr_algorithm** | **str** | The name of the algorithm that should be used for the classification. | [optional] 
+**threshold** | **float** | There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold. | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

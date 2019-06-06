@@ -29,7 +29,7 @@ Method | HTTP request | Description
 
 
 # **faq_matcher_add_testing_samples**
-> TotalSamples faq_matcher_add_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller)
+> TotalSamples faq_matcher_add_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Add testing samples.
 
@@ -59,10 +59,11 @@ api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Add testing samples.
-    api_response = api_instance.faq_matcher_add_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_add_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_add_testing_samples: %s\n" % e)
@@ -75,6 +76,7 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -92,7 +94,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_add_training_samples**
-> TotalSamples faq_matcher_add_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller)
+> TotalSamples faq_matcher_add_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Add training samples.
 
@@ -122,10 +124,11 @@ api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Add training samples.
-    api_response = api_instance.faq_matcher_add_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_add_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_add_training_samples: %s\n" % e)
@@ -138,6 +141,7 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -155,7 +159,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_create**
-> FaqMatcherInstanceDetail faq_matcher_create(create_details, x_caller=x_caller)
+> FaqMatcherInstanceDetail faq_matcher_create(create_details, x_caller=x_caller, origin=origin)
 
 Create an FAQ matcher.
 
@@ -184,10 +188,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 create_details = feersum_nlu.FaqMatcherCreateDetails() # FaqMatcherCreateDetails | The details of the instance to create.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Create an FAQ matcher.
-    api_response = api_instance.faq_matcher_create(create_details, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_create(create_details, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_create: %s\n" % e)
@@ -199,6 +204,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_details** | [**FaqMatcherCreateDetails**](FaqMatcherCreateDetails.md)| The details of the instance to create. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -216,7 +222,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_curate**
-> list[LabelledTextSample] faq_matcher_curate(instance_name, label_pair, x_caller=x_caller)
+> list[LabelledTextSample] faq_matcher_curate(instance_name, label_pair, x_caller=x_caller, origin=origin)
 
 Endpoint to aid in the curation of a model instance.
 
@@ -246,10 +252,11 @@ api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 label_pair = feersum_nlu.ClassLabelPair() # ClassLabelPair | The true label, predicted label and matrix (train/test) to use.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Endpoint to aid in the curation of a model instance.
-    api_response = api_instance.faq_matcher_curate(instance_name, label_pair, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_curate(instance_name, label_pair, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_curate: %s\n" % e)
@@ -262,6 +269,7 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **label_pair** | [**ClassLabelPair**](ClassLabelPair.md)| The true label, predicted label and matrix (train/test) to use. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -279,7 +287,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_del**
-> FaqMatcherInstanceDetail faq_matcher_del(instance_name, x_caller=x_caller)
+> FaqMatcherInstanceDetail faq_matcher_del(instance_name, x_caller=x_caller, origin=origin)
 
 Delete named instance.
 
@@ -308,10 +316,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Delete named instance.
-    api_response = api_instance.faq_matcher_del(instance_name, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_del(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_del: %s\n" % e)
@@ -323,6 +332,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -340,7 +350,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_del_testing_samples**
-> list[LabelledTextSample] faq_matcher_del_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller)
+> list[LabelledTextSample] faq_matcher_del_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Delete testing samples.
 
@@ -370,10 +380,11 @@ api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Delete testing samples.
-    api_response = api_instance.faq_matcher_del_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_del_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_del_testing_samples: %s\n" % e)
@@ -386,6 +397,7 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -403,7 +415,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_del_testing_samples_all**
-> list[LabelledTextSample] faq_matcher_del_testing_samples_all(instance_name, x_caller=x_caller)
+> list[LabelledTextSample] faq_matcher_del_testing_samples_all(instance_name, x_caller=x_caller, origin=origin)
 
 Delete all testing samples.
 
@@ -432,10 +444,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Delete all testing samples.
-    api_response = api_instance.faq_matcher_del_testing_samples_all(instance_name, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_del_testing_samples_all(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_del_testing_samples_all: %s\n" % e)
@@ -447,6 +460,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -464,7 +478,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_del_training_samples**
-> list[LabelledTextSample] faq_matcher_del_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller)
+> list[LabelledTextSample] faq_matcher_del_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Delete training samples.
 
@@ -494,10 +508,11 @@ api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Delete training samples.
-    api_response = api_instance.faq_matcher_del_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_del_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_del_training_samples: %s\n" % e)
@@ -510,6 +525,7 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -527,7 +543,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_del_training_samples_all**
-> list[LabelledTextSample] faq_matcher_del_training_samples_all(instance_name, x_caller=x_caller)
+> list[LabelledTextSample] faq_matcher_del_training_samples_all(instance_name, x_caller=x_caller, origin=origin)
 
 Delete all training samples.
 
@@ -556,10 +572,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Delete all training samples.
-    api_response = api_instance.faq_matcher_del_training_samples_all(instance_name, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_del_training_samples_all(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_del_training_samples_all: %s\n" % e)
@@ -571,6 +588,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -588,7 +606,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_get_details**
-> FaqMatcherInstanceDetail faq_matcher_get_details(instance_name, x_caller=x_caller)
+> FaqMatcherInstanceDetail faq_matcher_get_details(instance_name, x_caller=x_caller, origin=origin)
 
 Get details of named instance.
 
@@ -617,10 +635,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Get details of named instance.
-    api_response = api_instance.faq_matcher_get_details(instance_name, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_get_details(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_get_details: %s\n" % e)
@@ -632,6 +651,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -649,7 +669,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_get_details_all**
-> list[FaqMatcherInstanceDetail] faq_matcher_get_details_all(x_caller=x_caller)
+> list[FaqMatcherInstanceDetail] faq_matcher_get_details_all(x_caller=x_caller, origin=origin)
 
 Get list of loaded FAQ matchers.
 
@@ -677,10 +697,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Get list of loaded FAQ matchers.
-    api_response = api_instance.faq_matcher_get_details_all(x_caller=x_caller)
+    api_response = api_instance.faq_matcher_get_details_all(x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_get_details_all: %s\n" % e)
@@ -691,6 +712,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -708,7 +730,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_get_labels**
-> list[ClassLabel] faq_matcher_get_labels(instance_name, x_caller=x_caller)
+> list[ClassLabel] faq_matcher_get_labels(instance_name, x_caller=x_caller, origin=origin)
 
 Get list of possible labels.
 
@@ -737,10 +759,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Get list of possible labels.
-    api_response = api_instance.faq_matcher_get_labels(instance_name, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_get_labels(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_get_labels: %s\n" % e)
@@ -752,6 +775,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -769,7 +793,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_get_params**
-> ModelParams faq_matcher_get_params(instance_name, x_caller=x_caller)
+> ModelParams faq_matcher_get_params(instance_name, x_caller=x_caller, origin=origin)
 
 Get the editable model parameters of named FAQ matcher.
 
@@ -798,10 +822,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Get the editable model parameters of named FAQ matcher.
-    api_response = api_instance.faq_matcher_get_params(instance_name, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_get_params(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_get_params: %s\n" % e)
@@ -813,6 +838,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -830,7 +856,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_get_testing_samples**
-> list[LabelledTextSample] faq_matcher_get_testing_samples(instance_name, x_caller=x_caller)
+> list[LabelledTextSample] faq_matcher_get_testing_samples(instance_name, x_caller=x_caller, origin=origin)
 
 Get testing samples.
 
@@ -859,10 +885,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Get testing samples.
-    api_response = api_instance.faq_matcher_get_testing_samples(instance_name, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_get_testing_samples(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_get_testing_samples: %s\n" % e)
@@ -874,6 +901,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -891,7 +919,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_get_training_samples**
-> list[LabelledTextSample] faq_matcher_get_training_samples(instance_name, x_caller=x_caller)
+> list[LabelledTextSample] faq_matcher_get_training_samples(instance_name, x_caller=x_caller, origin=origin)
 
 Get training samples.
 
@@ -920,10 +948,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Get training samples.
-    api_response = api_instance.faq_matcher_get_training_samples(instance_name, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_get_training_samples(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_get_training_samples: %s\n" % e)
@@ -935,6 +964,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -952,7 +982,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_online_training_samples**
-> TotalSamples faq_matcher_online_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller)
+> TotalSamples faq_matcher_online_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Train/update the classifier online with the samples provided.
 
@@ -982,10 +1012,11 @@ api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Train/update the classifier online with the samples provided.
-    api_response = api_instance.faq_matcher_online_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_online_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_online_training_samples: %s\n" % e)
@@ -998,6 +1029,7 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -1015,7 +1047,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_retrieve**
-> list[ScoredLabel] faq_matcher_retrieve(instance_name, text_input, x_caller=x_caller)
+> list[ScoredLabel] faq_matcher_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
 
 Match retrieve and FAQ.
 
@@ -1045,10 +1077,11 @@ api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Match retrieve and FAQ.
-    api_response = api_instance.faq_matcher_retrieve(instance_name, text_input, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_retrieve: %s\n" % e)
@@ -1061,6 +1094,7 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **text_input** | [**TextInput**](TextInput.md)| The input text. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -1078,7 +1112,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_set_params**
-> FaqMatcherInstanceDetail faq_matcher_set_params(instance_name, model_params, x_caller=x_caller)
+> FaqMatcherInstanceDetail faq_matcher_set_params(instance_name, model_params, x_caller=x_caller, origin=origin)
 
 Set the model parameters of named FAQ matcher.
 
@@ -1108,10 +1142,11 @@ api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 model_params = feersum_nlu.ModelParams() # ModelParams | The model parameters.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Set the model parameters of named FAQ matcher.
-    api_response = api_instance.faq_matcher_set_params(instance_name, model_params, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_set_params(instance_name, model_params, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_set_params: %s\n" % e)
@@ -1124,6 +1159,7 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -1141,7 +1177,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_train**
-> FaqMatcherInstanceDetail faq_matcher_train(instance_name, train_details, x_caller=x_caller)
+> FaqMatcherInstanceDetail faq_matcher_train(instance_name, train_details, x_caller=x_caller, origin=origin)
 
 Train the named FAQ matcher.
 
@@ -1171,10 +1207,11 @@ api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 train_details = feersum_nlu.TrainDetails() # TrainDetails | The arguments provided to the train operation.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Train the named FAQ matcher.
-    api_response = api_instance.faq_matcher_train(instance_name, train_details, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_train(instance_name, train_details, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_train: %s\n" % e)
@@ -1187,6 +1224,7 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **train_details** | [**TrainDetails**](TrainDetails.md)| The arguments provided to the train operation. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -1204,7 +1242,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_tsne_get**
-> list[TsneSample] faq_matcher_tsne_get(instance_name, x_caller=x_caller)
+> list[TsneSample] faq_matcher_tsne_get(instance_name, x_caller=x_caller, origin=origin)
 
 Get the latest results of TSNE.
 
@@ -1233,10 +1271,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Get the latest results of TSNE.
-    api_response = api_instance.faq_matcher_tsne_get(instance_name, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_tsne_get(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_tsne_get: %s\n" % e)
@@ -1248,6 +1287,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -1265,7 +1305,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_tsne_post**
-> faq_matcher_tsne_post(instance_name, tsne_settings, x_caller=x_caller)
+> faq_matcher_tsne_post(instance_name, tsne_settings, x_caller=x_caller, origin=origin)
 
 Endpoint to start a TSNE process.
 
@@ -1295,10 +1335,11 @@ api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 tsne_settings = feersum_nlu.TsneSettings() # TsneSettings | The TSNE settings.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Endpoint to start a TSNE process.
-    api_instance.faq_matcher_tsne_post(instance_name, tsne_settings, x_caller=x_caller)
+    api_instance.faq_matcher_tsne_post(instance_name, tsne_settings, x_caller=x_caller, origin=origin)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_tsne_post: %s\n" % e)
 ```
@@ -1310,6 +1351,7 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **tsne_settings** | [**TsneSettings**](TsneSettings.md)| The TSNE settings. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -1327,7 +1369,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **faq_matcher_vaporise**
-> FaqMatcherInstanceDetail faq_matcher_vaporise(instance_name, x_caller=x_caller)
+> FaqMatcherInstanceDetail faq_matcher_vaporise(instance_name, x_caller=x_caller, origin=origin)
 
 Vaporise the named model.
 
@@ -1356,10 +1398,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Vaporise the named model.
-    api_response = api_instance.faq_matcher_vaporise(instance_name, x_caller=x_caller)
+    api_response = api_instance.faq_matcher_vaporise(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling FaqMatchersApi->faq_matcher_vaporise: %s\n" % e)
@@ -1371,6 +1414,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 

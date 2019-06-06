@@ -46,6 +46,7 @@ class DateParsersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param TextInput text_input: The input text. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[DateEntity]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -70,12 +71,13 @@ class DateParsersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param TextInput text_input: The input text. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[DateEntity]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'text_input', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'text_input', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -110,6 +112,8 @@ class DateParsersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}

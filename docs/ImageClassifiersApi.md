@@ -1,35 +1,37 @@
-# feersum_nlu.CrfEntityExtractorsApi
+# feersum_nlu.ImageClassifiersApi
 
 All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**crf_entity_extractor_add_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_add_testing_samples) | **POST** /crf_entity_extractors/{instance_name}/testing_samples | Add testing samples.
-[**crf_entity_extractor_add_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_add_training_samples) | **POST** /crf_entity_extractors/{instance_name}/training_samples | Add training samples.
-[**crf_entity_extractor_create**](CrfEntityExtractorsApi.md#crf_entity_extractor_create) | **POST** /crf_entity_extractors | Create a crf entity extractor.
-[**crf_entity_extractor_del**](CrfEntityExtractorsApi.md#crf_entity_extractor_del) | **DELETE** /crf_entity_extractors/{instance_name} | Delete named instance.
-[**crf_entity_extractor_del_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_del_testing_samples) | **DELETE** /crf_entity_extractors/{instance_name}/testing_samples | Delete testing samples.
-[**crf_entity_extractor_del_testing_samples_all**](CrfEntityExtractorsApi.md#crf_entity_extractor_del_testing_samples_all) | **DELETE** /crf_entity_extractors/{instance_name}/testing_samples_all | Delete all testing samples.
-[**crf_entity_extractor_del_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_del_training_samples) | **DELETE** /crf_entity_extractors/{instance_name}/training_samples | Delete training samples.
-[**crf_entity_extractor_del_training_samples_all**](CrfEntityExtractorsApi.md#crf_entity_extractor_del_training_samples_all) | **DELETE** /crf_entity_extractors/{instance_name}/training_samples_all | Delete all training samples.
-[**crf_entity_extractor_get_details**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_details) | **GET** /crf_entity_extractors/{instance_name} | Get details of named instance.
-[**crf_entity_extractor_get_details_all**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_details_all) | **GET** /crf_entity_extractors | Get list of loaded crf entity extractors.
-[**crf_entity_extractor_get_labels**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_labels) | **GET** /crf_entity_extractors/{instance_name}/get_labels | Get list of possible labels.
-[**crf_entity_extractor_get_params**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_params) | **GET** /crf_entity_extractors/{instance_name}/params | Get the editable model parameters of named crf entity extractor.
-[**crf_entity_extractor_get_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_testing_samples) | **GET** /crf_entity_extractors/{instance_name}/testing_samples | Get testing samples.
-[**crf_entity_extractor_get_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_training_samples) | **GET** /crf_entity_extractors/{instance_name}/training_samples | Get training samples.
-[**crf_entity_extractor_retrieve**](CrfEntityExtractorsApi.md#crf_entity_extractor_retrieve) | **POST** /crf_entity_extractors/{instance_name}/retrieve | Predict which entities was mentioned.
-[**crf_entity_extractor_set_params**](CrfEntityExtractorsApi.md#crf_entity_extractor_set_params) | **POST** /crf_entity_extractors/{instance_name}/params | Set the model parameters of named crf entity extractor.
-[**crf_entity_extractor_train**](CrfEntityExtractorsApi.md#crf_entity_extractor_train) | **POST** /crf_entity_extractors/{instance_name}/train | Train the named crf extractor.
-[**crf_entity_extractor_vaporise**](CrfEntityExtractorsApi.md#crf_entity_extractor_vaporise) | **POST** /crf_entity_extractors/{instance_name}/vaporise | Vaporise the named model.
+[**image_classifier_add_testing_samples**](ImageClassifiersApi.md#image_classifier_add_testing_samples) | **POST** /image_classifiers/{instance_name}/testing_samples | Add testing samples.
+[**image_classifier_add_training_samples**](ImageClassifiersApi.md#image_classifier_add_training_samples) | **POST** /image_classifiers/{instance_name}/training_samples | Add training samples.
+[**image_classifier_create**](ImageClassifiersApi.md#image_classifier_create) | **POST** /image_classifiers | Create an image classifier.
+[**image_classifier_curate**](ImageClassifiersApi.md#image_classifier_curate) | **POST** /image_classifiers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
+[**image_classifier_del**](ImageClassifiersApi.md#image_classifier_del) | **DELETE** /image_classifiers/{instance_name} | Delete named instance.
+[**image_classifier_del_testing_samples**](ImageClassifiersApi.md#image_classifier_del_testing_samples) | **DELETE** /image_classifiers/{instance_name}/testing_samples | Delete testing samples.
+[**image_classifier_del_testing_samples_all**](ImageClassifiersApi.md#image_classifier_del_testing_samples_all) | **DELETE** /image_classifiers/{instance_name}/testing_samples_all | Delete testing samples.
+[**image_classifier_del_training_samples**](ImageClassifiersApi.md#image_classifier_del_training_samples) | **DELETE** /image_classifiers/{instance_name}/training_samples | Delete training samples.
+[**image_classifier_del_training_samples_all**](ImageClassifiersApi.md#image_classifier_del_training_samples_all) | **DELETE** /image_classifiers/{instance_name}/training_samples_all | Delete all training samples.
+[**image_classifier_get_details**](ImageClassifiersApi.md#image_classifier_get_details) | **GET** /image_classifiers/{instance_name} | Get details of named instance.
+[**image_classifier_get_details_all**](ImageClassifiersApi.md#image_classifier_get_details_all) | **GET** /image_classifiers | Get list of loaded image classifiers.
+[**image_classifier_get_labels**](ImageClassifiersApi.md#image_classifier_get_labels) | **GET** /image_classifiers/{instance_name}/get_labels | Get list of possible labels.
+[**image_classifier_get_params**](ImageClassifiersApi.md#image_classifier_get_params) | **GET** /image_classifiers/{instance_name}/params | Get the editable model parameters of named image classifier.
+[**image_classifier_get_testing_samples**](ImageClassifiersApi.md#image_classifier_get_testing_samples) | **GET** /image_classifiers/{instance_name}/testing_samples | Get testing samples.
+[**image_classifier_get_training_samples**](ImageClassifiersApi.md#image_classifier_get_training_samples) | **GET** /image_classifiers/{instance_name}/training_samples | Get training samples.
+[**image_classifier_online_training_samples**](ImageClassifiersApi.md#image_classifier_online_training_samples) | **POST** /image_classifiers/{instance_name}/online_training_samples | Train/update the classifier online with the samples provided.
+[**image_classifier_retrieve**](ImageClassifiersApi.md#image_classifier_retrieve) | **POST** /image_classifiers/{instance_name}/retrieve | Classify image.
+[**image_classifier_set_params**](ImageClassifiersApi.md#image_classifier_set_params) | **POST** /image_classifiers/{instance_name}/params | Set the model parameters of named image classifier.
+[**image_classifier_train**](ImageClassifiersApi.md#image_classifier_train) | **POST** /image_classifiers/{instance_name}/train | Train the named image classifier.
+[**image_classifier_vaporise**](ImageClassifiersApi.md#image_classifier_vaporise) | **POST** /image_classifiers/{instance_name}/vaporise | Vaporise the named model.
 
 
-# **crf_entity_extractor_add_testing_samples**
-> TotalSamples crf_entity_extractor_add_testing_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+# **image_classifier_add_testing_samples**
+> TotalSamples image_classifier_add_testing_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
 Add testing samples.
 
-Add testing samples to named extractor. Returns the extractor's updated number of testing samples.
+Add testing samples to named image classifier. Returns the classifier's updated number of testing samples.
 
 ### Example
 ```python
@@ -51,18 +53,18 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-crf_sample_list = [feersum_nlu.CrfSample()] # list[CrfSample] | List of crf samples.
+labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
     # Add testing samples.
-    api_response = api_instance.crf_entity_extractor_add_testing_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_classifier_add_testing_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_add_testing_samples: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_add_testing_samples: %s\n" % e)
 ```
 
 ### Parameters
@@ -70,7 +72,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **crf_sample_list** | [**list[CrfSample]**](CrfSample.md)| List of crf samples. | 
+ **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. | 
  **x_caller** | **str**|  | [optional] 
  **origin** | **str**|  | [optional] 
 
@@ -89,12 +91,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_add_training_samples**
-> TotalSamples crf_entity_extractor_add_training_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+# **image_classifier_add_training_samples**
+> TotalSamples image_classifier_add_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
 Add training samples.
 
-Add training samples to named extractor. Returns the extractor's updated number of training samples.
+Add training samples to named image classifier. Returns the classifier's updated number of training samples.
 
 ### Example
 ```python
@@ -116,18 +118,18 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-crf_sample_list = [feersum_nlu.CrfSample()] # list[CrfSample] | List of crf samples.
+labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
     # Add training samples.
-    api_response = api_instance.crf_entity_extractor_add_training_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_classifier_add_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_add_training_samples: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_add_training_samples: %s\n" % e)
 ```
 
 ### Parameters
@@ -135,7 +137,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **crf_sample_list** | [**list[CrfSample]**](CrfSample.md)| List of crf samples. | 
+ **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. | 
  **x_caller** | **str**|  | [optional] 
  **origin** | **str**|  | [optional] 
 
@@ -154,12 +156,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_create**
-> CrfEntityExtractorInstanceDetail crf_entity_extractor_create(create_details, x_caller=x_caller, origin=origin)
+# **image_classifier_create**
+> ImageClassifierInstanceDetail image_classifier_create(create_details, x_caller=x_caller, origin=origin)
 
-Create a crf entity extractor.
+Create an image classifier.
 
-Create a new crf entity extractor or reload one from the trash.
+Create a new image classifier or reload one from the trash. Returns the details of the new or loaded instance.
 
 ### Example
 ```python
@@ -181,30 +183,30 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-create_details = feersum_nlu.CrfEntityExtractorCreateDetails() # CrfEntityExtractorCreateDetails | The details of the instance to create.
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
+create_details = feersum_nlu.ImageClassifierCreateDetails() # ImageClassifierCreateDetails | The details of the instance to create.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
-    # Create a crf entity extractor.
-    api_response = api_instance.crf_entity_extractor_create(create_details, x_caller=x_caller, origin=origin)
+    # Create an image classifier.
+    api_response = api_instance.image_classifier_create(create_details, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_create: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_create: %s\n" % e)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_details** | [**CrfEntityExtractorCreateDetails**](CrfEntityExtractorCreateDetails.md)| The details of the instance to create. | 
+ **create_details** | [**ImageClassifierCreateDetails**](ImageClassifierCreateDetails.md)| The details of the instance to create. | 
  **x_caller** | **str**|  | [optional] 
  **origin** | **str**|  | [optional] 
 
 ### Return type
 
-[**CrfEntityExtractorInstanceDetail**](CrfEntityExtractorInstanceDetail.md)
+[**ImageClassifierInstanceDetail**](ImageClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -217,12 +219,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_del**
-> CrfEntityExtractorInstanceDetail crf_entity_extractor_del(instance_name, x_caller=x_caller, origin=origin)
+# **image_classifier_curate**
+> list[LabelledImageSample] image_classifier_curate(instance_name, label_pair, x_caller=x_caller, origin=origin)
 
-Delete named instance.
+Endpoint to aid in the curation of a model instance.
 
-Delete and get the details of the named crf entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
+Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
 
 ### Example
 ```python
@@ -244,17 +246,82 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+label_pair = feersum_nlu.ClassLabelPair() # ClassLabelPair | The true label, predicted label and matrix (train/test) to use.
+x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
+
+try:
+    # Endpoint to aid in the curation of a model instance.
+    api_response = api_instance.image_classifier_curate(instance_name, label_pair, x_caller=x_caller, origin=origin)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ImageClassifiersApi->image_classifier_curate: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **label_pair** | [**ClassLabelPair**](ClassLabelPair.md)| The true label, predicted label and matrix (train/test) to use. | 
+ **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
+
+### Return type
+
+[**list[LabelledImageSample]**](LabelledImageSample.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **image_classifier_del**
+> ImageClassifierInstanceDetail image_classifier_del(instance_name, x_caller=x_caller, origin=origin)
+
+Delete named instance.
+
+Delete and return the details of the named image classifier instance. Deleted models can be reloaded from the trash with the create operation.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
     # Delete named instance.
-    api_response = api_instance.crf_entity_extractor_del(instance_name, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_classifier_del(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_del: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_del: %s\n" % e)
 ```
 
 ### Parameters
@@ -267,7 +334,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CrfEntityExtractorInstanceDetail**](CrfEntityExtractorInstanceDetail.md)
+[**ImageClassifierInstanceDetail**](ImageClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -280,12 +347,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_del_testing_samples**
-> list[CrfSample] crf_entity_extractor_del_testing_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+# **image_classifier_del_testing_samples**
+> list[LabelledImageSample] image_classifier_del_testing_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
 Delete testing samples.
 
-Delete the listed testing samples of the named extractor. Returns the deleted samples.
+Delete the listed testing samples of the named image classifier. Returns the deleted samples.
 
 ### Example
 ```python
@@ -307,18 +374,18 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-crf_sample_list = [feersum_nlu.CrfSample()] # list[CrfSample] | List of crf samples.
+labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
     # Delete testing samples.
-    api_response = api_instance.crf_entity_extractor_del_testing_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_classifier_del_testing_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_del_testing_samples: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_del_testing_samples: %s\n" % e)
 ```
 
 ### Parameters
@@ -326,13 +393,13 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **crf_sample_list** | [**list[CrfSample]**](CrfSample.md)| List of crf samples. | 
+ **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. | 
  **x_caller** | **str**|  | [optional] 
  **origin** | **str**|  | [optional] 
 
 ### Return type
 
-[**list[CrfSample]**](CrfSample.md)
+[**list[LabelledImageSample]**](LabelledImageSample.md)
 
 ### Authorization
 
@@ -345,12 +412,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_del_testing_samples_all**
-> list[CrfSample] crf_entity_extractor_del_testing_samples_all(instance_name, x_caller=x_caller, origin=origin)
+# **image_classifier_del_testing_samples_all**
+> list[LabelledImageSample] image_classifier_del_testing_samples_all(instance_name, x_caller=x_caller, origin=origin)
 
-Delete all testing samples.
+Delete testing samples.
 
-Delete all testing samples of the named extractor. Returns the deleted samples.
+Delete all testing samples of the named image classifier. Returns the deleted samples.
 
 ### Example
 ```python
@@ -372,17 +439,17 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
-    # Delete all testing samples.
-    api_response = api_instance.crf_entity_extractor_del_testing_samples_all(instance_name, x_caller=x_caller, origin=origin)
+    # Delete testing samples.
+    api_response = api_instance.image_classifier_del_testing_samples_all(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_del_testing_samples_all: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_del_testing_samples_all: %s\n" % e)
 ```
 
 ### Parameters
@@ -395,7 +462,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**list[CrfSample]**](CrfSample.md)
+[**list[LabelledImageSample]**](LabelledImageSample.md)
 
 ### Authorization
 
@@ -408,12 +475,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_del_training_samples**
-> list[CrfSample] crf_entity_extractor_del_training_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+# **image_classifier_del_training_samples**
+> list[LabelledImageSample] image_classifier_del_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
 Delete training samples.
 
-Delete the listed training samples of the named extractor. Returns the deleted samples.
+Delete the listed training samples of the named image classifier. Returns the deleted samples.
 
 ### Example
 ```python
@@ -435,18 +502,18 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-crf_sample_list = [feersum_nlu.CrfSample()] # list[CrfSample] | List of crf samples.
+labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
     # Delete training samples.
-    api_response = api_instance.crf_entity_extractor_del_training_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_classifier_del_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_del_training_samples: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_del_training_samples: %s\n" % e)
 ```
 
 ### Parameters
@@ -454,13 +521,13 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **crf_sample_list** | [**list[CrfSample]**](CrfSample.md)| List of crf samples. | 
+ **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. | 
  **x_caller** | **str**|  | [optional] 
  **origin** | **str**|  | [optional] 
 
 ### Return type
 
-[**list[CrfSample]**](CrfSample.md)
+[**list[LabelledImageSample]**](LabelledImageSample.md)
 
 ### Authorization
 
@@ -473,12 +540,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_del_training_samples_all**
-> list[CrfSample] crf_entity_extractor_del_training_samples_all(instance_name, x_caller=x_caller, origin=origin)
+# **image_classifier_del_training_samples_all**
+> list[LabelledImageSample] image_classifier_del_training_samples_all(instance_name, x_caller=x_caller, origin=origin)
 
 Delete all training samples.
 
-Delete all training samples of the named extractor. Returns the deleted samples.
+Delete all training samples of the named image classifier. Returns the deleted samples.
 
 ### Example
 ```python
@@ -500,17 +567,17 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
     # Delete all training samples.
-    api_response = api_instance.crf_entity_extractor_del_training_samples_all(instance_name, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_classifier_del_training_samples_all(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_del_training_samples_all: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_del_training_samples_all: %s\n" % e)
 ```
 
 ### Parameters
@@ -523,7 +590,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**list[CrfSample]**](CrfSample.md)
+[**list[LabelledImageSample]**](LabelledImageSample.md)
 
 ### Authorization
 
@@ -536,12 +603,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_get_details**
-> CrfEntityExtractorInstanceDetail crf_entity_extractor_get_details(instance_name, x_caller=x_caller, origin=origin)
+# **image_classifier_get_details**
+> ImageClassifierInstanceDetail image_classifier_get_details(instance_name, x_caller=x_caller, origin=origin)
 
 Get details of named instance.
 
-Get the details of the named crf entity extractor instance.
+Get the details of the named image classifier instance.
 
 ### Example
 ```python
@@ -563,17 +630,17 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
     # Get details of named instance.
-    api_response = api_instance.crf_entity_extractor_get_details(instance_name, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_classifier_get_details(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_get_details: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_get_details: %s\n" % e)
 ```
 
 ### Parameters
@@ -586,7 +653,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CrfEntityExtractorInstanceDetail**](CrfEntityExtractorInstanceDetail.md)
+[**ImageClassifierInstanceDetail**](ImageClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -599,12 +666,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_get_details_all**
-> list[CrfEntityExtractorInstanceDetail] crf_entity_extractor_get_details_all(x_caller=x_caller, origin=origin)
+# **image_classifier_get_details_all**
+> list[ImageClassifierInstanceDetail] image_classifier_get_details_all(x_caller=x_caller, origin=origin)
 
-Get list of loaded crf entity extractors.
+Get list of loaded image classifiers.
 
-Get the list of loaded crf entity extractors.
+Get the list of loaded image classifiers.
 
 ### Example
 ```python
@@ -626,16 +693,16 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
-    # Get list of loaded crf entity extractors.
-    api_response = api_instance.crf_entity_extractor_get_details_all(x_caller=x_caller, origin=origin)
+    # Get list of loaded image classifiers.
+    api_response = api_instance.image_classifier_get_details_all(x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_get_details_all: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_get_details_all: %s\n" % e)
 ```
 
 ### Parameters
@@ -647,7 +714,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**list[CrfEntityExtractorInstanceDetail]**](CrfEntityExtractorInstanceDetail.md)
+[**list[ImageClassifierInstanceDetail]**](ImageClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -660,12 +727,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_get_labels**
-> list[ClassLabel] crf_entity_extractor_get_labels(instance_name, x_caller=x_caller, origin=origin)
+# **image_classifier_get_labels**
+> list[ClassLabel] image_classifier_get_labels(instance_name, x_caller=x_caller, origin=origin)
 
 Get list of possible labels.
 
-Returns the extractor's list of possible entity labels.
+Returns the classifier's list of possible class labels.
 
 ### Example
 ```python
@@ -687,17 +754,17 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
     # Get list of possible labels.
-    api_response = api_instance.crf_entity_extractor_get_labels(instance_name, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_classifier_get_labels(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_get_labels: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_get_labels: %s\n" % e)
 ```
 
 ### Parameters
@@ -723,12 +790,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_get_params**
-> ModelParams crf_entity_extractor_get_params(instance_name, x_caller=x_caller, origin=origin)
+# **image_classifier_get_params**
+> ModelParams image_classifier_get_params(instance_name, x_caller=x_caller, origin=origin)
 
-Get the editable model parameters of named crf entity extractor.
+Get the editable model parameters of named image classifier.
 
-Get the editable model parameters of named crf entity extractor.
+Get the editable model parameters of named image classifier.
 
 ### Example
 ```python
@@ -750,17 +817,17 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
-    # Get the editable model parameters of named crf entity extractor.
-    api_response = api_instance.crf_entity_extractor_get_params(instance_name, x_caller=x_caller, origin=origin)
+    # Get the editable model parameters of named image classifier.
+    api_response = api_instance.image_classifier_get_params(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_get_params: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_get_params: %s\n" % e)
 ```
 
 ### Parameters
@@ -786,12 +853,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_get_testing_samples**
-> list[CrfSample] crf_entity_extractor_get_testing_samples(instance_name, x_caller=x_caller, origin=origin)
+# **image_classifier_get_testing_samples**
+> list[LabelledImageSample] image_classifier_get_testing_samples(instance_name, x_caller=x_caller, origin=origin)
 
 Get testing samples.
 
-Get the testing samples of the named extractor.
+Get the testing samples of the named image classifier.
 
 ### Example
 ```python
@@ -813,17 +880,17 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
     # Get testing samples.
-    api_response = api_instance.crf_entity_extractor_get_testing_samples(instance_name, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_classifier_get_testing_samples(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_get_testing_samples: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_get_testing_samples: %s\n" % e)
 ```
 
 ### Parameters
@@ -836,7 +903,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**list[CrfSample]**](CrfSample.md)
+[**list[LabelledImageSample]**](LabelledImageSample.md)
 
 ### Authorization
 
@@ -849,12 +916,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_get_training_samples**
-> list[CrfSample] crf_entity_extractor_get_training_samples(instance_name, x_caller=x_caller, origin=origin)
+# **image_classifier_get_training_samples**
+> list[LabelledImageSample] image_classifier_get_training_samples(instance_name, x_caller=x_caller, origin=origin)
 
 Get training samples.
 
-Get the training samples of the named extractor.
+Get the training samples of the named image classifier.
 
 ### Example
 ```python
@@ -876,17 +943,17 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
     # Get training samples.
-    api_response = api_instance.crf_entity_extractor_get_training_samples(instance_name, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_classifier_get_training_samples(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_get_training_samples: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_get_training_samples: %s\n" % e)
 ```
 
 ### Parameters
@@ -899,7 +966,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**list[CrfSample]**](CrfSample.md)
+[**list[LabelledImageSample]**](LabelledImageSample.md)
 
 ### Authorization
 
@@ -912,12 +979,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_retrieve**
-> list[CrfEntity] crf_entity_extractor_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
+# **image_classifier_online_training_samples**
+> TotalSamples image_classifier_online_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
-Predict which entities was mentioned.
+Train/update the classifier online with the samples provided.
 
-Predict which entities was mentioned.
+Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
 
 ### Example
 ```python
@@ -939,18 +1006,18 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-text_input = feersum_nlu.TextInput() # TextInput | The input text.
+labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
-    # Predict which entities was mentioned.
-    api_response = api_instance.crf_entity_extractor_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
+    # Train/update the classifier online with the samples provided.
+    api_response = api_instance.image_classifier_online_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_retrieve: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_online_training_samples: %s\n" % e)
 ```
 
 ### Parameters
@@ -958,13 +1025,13 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **text_input** | [**TextInput**](TextInput.md)| The input text. | 
+ **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. | 
  **x_caller** | **str**|  | [optional] 
  **origin** | **str**|  | [optional] 
 
 ### Return type
 
-[**list[CrfEntity]**](CrfEntity.md)
+[**TotalSamples**](TotalSamples.md)
 
 ### Authorization
 
@@ -977,12 +1044,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_set_params**
-> CrfEntityExtractorInstanceDetail crf_entity_extractor_set_params(instance_name, model_params, x_caller=x_caller, origin=origin)
+# **image_classifier_retrieve**
+> list[ScoredLabel] image_classifier_retrieve(instance_name, image_input, x_caller=x_caller, origin=origin)
 
-Set the model parameters of named crf entity extractor.
+Classify image.
 
-Set the model parameters of named crf entity extractor.
+Classifies the image and returns a probability sorted list of classes.
 
 ### Example
 ```python
@@ -1004,18 +1071,83 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+image_input = feersum_nlu.ImageInput() # ImageInput | The input image.
+x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
+
+try:
+    # Classify image.
+    api_response = api_instance.image_classifier_retrieve(instance_name, image_input, x_caller=x_caller, origin=origin)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ImageClassifiersApi->image_classifier_retrieve: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **image_input** | [**ImageInput**](ImageInput.md)| The input image. | 
+ **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
+
+### Return type
+
+[**list[ScoredLabel]**](ScoredLabel.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **image_classifier_set_params**
+> ImageClassifierInstanceDetail image_classifier_set_params(instance_name, model_params, x_caller=x_caller, origin=origin)
+
+Set the model parameters of named image classifier.
+
+Set the model parameters of named image classifier.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 model_params = feersum_nlu.ModelParams() # ModelParams | The model parameters.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
-    # Set the model parameters of named crf entity extractor.
-    api_response = api_instance.crf_entity_extractor_set_params(instance_name, model_params, x_caller=x_caller, origin=origin)
+    # Set the model parameters of named image classifier.
+    api_response = api_instance.image_classifier_set_params(instance_name, model_params, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_set_params: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_set_params: %s\n" % e)
 ```
 
 ### Parameters
@@ -1029,7 +1161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CrfEntityExtractorInstanceDetail**](CrfEntityExtractorInstanceDetail.md)
+[**ImageClassifierInstanceDetail**](ImageClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -1042,12 +1174,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_train**
-> CrfEntityExtractorInstanceDetail crf_entity_extractor_train(instance_name, train_details, x_caller=x_caller, origin=origin)
+# **image_classifier_train**
+> ImageClassifierInstanceDetail image_classifier_train(instance_name, train_details, x_caller=x_caller, origin=origin)
 
-Train the named crf extractor.
+Train the named image classifier.
 
-Train the named crf extractor with the training and testing data already provided. Returns the updated instance details.
+Train the named image classifier with the training and testing data already provided. Returns the details of the model instance.
 
 ### Example
 ```python
@@ -1069,18 +1201,18 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 train_details = feersum_nlu.TrainDetails() # TrainDetails | The arguments provided to the train operation.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
-    # Train the named crf extractor.
-    api_response = api_instance.crf_entity_extractor_train(instance_name, train_details, x_caller=x_caller, origin=origin)
+    # Train the named image classifier.
+    api_response = api_instance.image_classifier_train(instance_name, train_details, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_train: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_train: %s\n" % e)
 ```
 
 ### Parameters
@@ -1094,7 +1226,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CrfEntityExtractorInstanceDetail**](CrfEntityExtractorInstanceDetail.md)
+[**ImageClassifierInstanceDetail**](ImageClassifierInstanceDetail.md)
 
 ### Authorization
 
@@ -1107,8 +1239,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **crf_entity_extractor_vaporise**
-> CrfEntityExtractorInstanceDetail crf_entity_extractor_vaporise(instance_name, x_caller=x_caller, origin=origin)
+# **image_classifier_vaporise**
+> ImageClassifierInstanceDetail image_classifier_vaporise(instance_name, x_caller=x_caller, origin=origin)
 
 Vaporise the named model.
 
@@ -1134,17 +1266,17 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
     # Vaporise the named model.
-    api_response = api_instance.crf_entity_extractor_vaporise(instance_name, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_classifier_vaporise(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_vaporise: %s\n" % e)
+    print("Exception when calling ImageClassifiersApi->image_classifier_vaporise: %s\n" % e)
 ```
 
 ### Parameters
@@ -1157,7 +1289,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CrfEntityExtractorInstanceDetail**](CrfEntityExtractorInstanceDetail.md)
+[**ImageClassifierInstanceDetail**](ImageClassifierInstanceDetail.md)
 
 ### Authorization
 

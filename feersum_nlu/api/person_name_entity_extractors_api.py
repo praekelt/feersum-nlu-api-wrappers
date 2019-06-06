@@ -45,6 +45,7 @@ class PersonNameEntityExtractorsApi(object):
         :param async bool
         :param PersonNameEntityExtractorCreateDetails create_details: The details of the instance to create. (required)
         :param str x_caller:
+        :param str origin:
         :return: PersonNameEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -68,12 +69,13 @@ class PersonNameEntityExtractorsApi(object):
         :param async bool
         :param PersonNameEntityExtractorCreateDetails create_details: The details of the instance to create. (required)
         :param str x_caller:
+        :param str origin:
         :return: PersonNameEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['create_details', 'x_caller']  # noqa: E501
+        all_params = ['create_details', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -102,6 +104,8 @@ class PersonNameEntityExtractorsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -148,6 +152,7 @@ class PersonNameEntityExtractorsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: PersonNameEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -171,12 +176,13 @@ class PersonNameEntityExtractorsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: PersonNameEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -207,6 +213,8 @@ class PersonNameEntityExtractorsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -251,6 +259,7 @@ class PersonNameEntityExtractorsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: PersonNameEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -274,12 +283,13 @@ class PersonNameEntityExtractorsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: PersonNameEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -310,6 +320,8 @@ class PersonNameEntityExtractorsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -353,6 +365,7 @@ class PersonNameEntityExtractorsApi(object):
 
         :param async bool
         :param str x_caller:
+        :param str origin:
         :return: list[PersonNameEntityExtractorInstanceDetail]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -375,12 +388,13 @@ class PersonNameEntityExtractorsApi(object):
 
         :param async bool
         :param str x_caller:
+        :param str origin:
         :return: list[PersonNameEntityExtractorInstanceDetail]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['x_caller']  # noqa: E501
+        all_params = ['x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -405,6 +419,8 @@ class PersonNameEntityExtractorsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -449,6 +465,7 @@ class PersonNameEntityExtractorsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: ModelParams
                  If the method is called asynchronously,
                  returns the request thread.
@@ -472,12 +489,13 @@ class PersonNameEntityExtractorsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: ModelParams
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -508,6 +526,8 @@ class PersonNameEntityExtractorsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -553,6 +573,7 @@ class PersonNameEntityExtractorsApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param TextInput text_input: The input text. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[PersonNameEntity]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -577,12 +598,13 @@ class PersonNameEntityExtractorsApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param TextInput text_input: The input text. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[PersonNameEntity]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'text_input', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'text_input', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -617,6 +639,8 @@ class PersonNameEntityExtractorsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -664,6 +688,7 @@ class PersonNameEntityExtractorsApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param ModelParams model_params: The model parameters. (required)
         :param str x_caller:
+        :param str origin:
         :return: PersonNameEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -688,12 +713,13 @@ class PersonNameEntityExtractorsApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param ModelParams model_params: The model parameters. (required)
         :param str x_caller:
+        :param str origin:
         :return: PersonNameEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'model_params', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'model_params', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -728,6 +754,8 @@ class PersonNameEntityExtractorsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -774,6 +802,7 @@ class PersonNameEntityExtractorsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: PersonNameEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -797,12 +826,13 @@ class PersonNameEntityExtractorsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: PersonNameEntityExtractorInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -833,6 +863,8 @@ class PersonNameEntityExtractorsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
