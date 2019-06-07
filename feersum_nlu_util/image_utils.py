@@ -1,8 +1,11 @@
+from typing import List, Tuple
+
 import PIL
 from PIL import Image
 
 import base64
 import io
+import os
 
 
 # =======================================
@@ -57,3 +60,16 @@ def save_image(file_name: str, base64_string: str) -> bool:
     pil_image.save(fp=file_name)
 
     return True
+
+
+def get_image_samples(data_path: str, label: str) -> List[Tuple[str, str]]:
+    directory = os.fsencode(data_path + "/" + label)
+
+    image_samples = []  # type: List[Tuple[str, str]]
+
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        if filename.endswith((".jpg", ".jpeg", ".png")):
+            image_samples.append((load_image(data_path + "/" + label + "/" + filename), label))
+
+    return image_samples
