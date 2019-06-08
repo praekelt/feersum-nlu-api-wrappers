@@ -46,6 +46,7 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param list[LabelledTextSample] labelled_text_sample_list: List of labelled text samples. (required)
         :param str x_caller:
+        :param str origin:
         :return: TotalSamples
                  If the method is called asynchronously,
                  returns the request thread.
@@ -70,12 +71,13 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param list[LabelledTextSample] labelled_text_sample_list: List of labelled text samples. (required)
         :param str x_caller:
+        :param str origin:
         :return: TotalSamples
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'labelled_text_sample_list', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'labelled_text_sample_list', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -110,6 +112,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -157,6 +161,7 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param list[LabelledTextSample] labelled_text_sample_list: List of labelled text samples. (required)
         :param str x_caller:
+        :param str origin:
         :return: TotalSamples
                  If the method is called asynchronously,
                  returns the request thread.
@@ -181,12 +186,13 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param list[LabelledTextSample] labelled_text_sample_list: List of labelled text samples. (required)
         :param str x_caller:
+        :param str origin:
         :return: TotalSamples
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'labelled_text_sample_list', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'labelled_text_sample_list', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -221,6 +227,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -267,6 +275,7 @@ class FaqMatchersApi(object):
         :param async bool
         :param FaqMatcherCreateDetails create_details: The details of the instance to create. (required)
         :param str x_caller:
+        :param str origin:
         :return: FaqMatcherInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -290,12 +299,13 @@ class FaqMatchersApi(object):
         :param async bool
         :param FaqMatcherCreateDetails create_details: The details of the instance to create. (required)
         :param str x_caller:
+        :param str origin:
         :return: FaqMatcherInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['create_details', 'x_caller']  # noqa: E501
+        all_params = ['create_details', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -324,6 +334,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -371,6 +383,7 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param ClassLabelPair label_pair: The true label, predicted label and matrix (train/test) to use. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -395,12 +408,13 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param ClassLabelPair label_pair: The true label, predicted label and matrix (train/test) to use. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'label_pair', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'label_pair', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -435,6 +449,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -481,6 +497,7 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: FaqMatcherInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -504,12 +521,13 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: FaqMatcherInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -540,6 +558,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -585,6 +605,7 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param list[LabelledTextSample] labelled_text_sample_list: List of labelled text samples. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -609,12 +630,13 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param list[LabelledTextSample] labelled_text_sample_list: List of labelled text samples. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'labelled_text_sample_list', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'labelled_text_sample_list', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -649,6 +671,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -695,6 +719,7 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -718,12 +743,13 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -754,6 +780,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -799,6 +827,7 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param list[LabelledTextSample] labelled_text_sample_list: List of labelled text samples. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -823,12 +852,13 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param list[LabelledTextSample] labelled_text_sample_list: List of labelled text samples. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'labelled_text_sample_list', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'labelled_text_sample_list', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -863,6 +893,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -909,6 +941,7 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -932,12 +965,13 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -968,6 +1002,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -1012,6 +1048,7 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: FaqMatcherInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1035,12 +1072,13 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: FaqMatcherInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1071,6 +1109,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -1114,6 +1154,7 @@ class FaqMatchersApi(object):
 
         :param async bool
         :param str x_caller:
+        :param str origin:
         :return: list[FaqMatcherInstanceDetail]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1136,12 +1177,13 @@ class FaqMatchersApi(object):
 
         :param async bool
         :param str x_caller:
+        :param str origin:
         :return: list[FaqMatcherInstanceDetail]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['x_caller']  # noqa: E501
+        all_params = ['x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1166,6 +1208,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -1210,6 +1254,7 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[ClassLabel]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1233,12 +1278,13 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[ClassLabel]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1269,6 +1315,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -1313,6 +1361,7 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: ModelParams
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1336,12 +1385,13 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: ModelParams
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1372,6 +1422,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -1416,6 +1468,7 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1439,12 +1492,13 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1475,6 +1529,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -1519,6 +1575,7 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1542,12 +1599,13 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[LabelledTextSample]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1578,6 +1636,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -1623,6 +1683,7 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param list[LabelledTextSample] labelled_text_sample_list: List of labelled text samples. (required)
         :param str x_caller:
+        :param str origin:
         :return: TotalSamples
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1647,12 +1708,13 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param list[LabelledTextSample] labelled_text_sample_list: List of labelled text samples. (required)
         :param str x_caller:
+        :param str origin:
         :return: TotalSamples
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'labelled_text_sample_list', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'labelled_text_sample_list', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1687,6 +1749,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -1734,6 +1798,7 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param TextInput text_input: The input text. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[ScoredLabel]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1758,12 +1823,13 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param TextInput text_input: The input text. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[ScoredLabel]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'text_input', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'text_input', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1798,6 +1864,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -1845,6 +1913,7 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param ModelParams model_params: The model parameters. (required)
         :param str x_caller:
+        :param str origin:
         :return: FaqMatcherInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1869,12 +1938,13 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param ModelParams model_params: The model parameters. (required)
         :param str x_caller:
+        :param str origin:
         :return: FaqMatcherInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'model_params', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'model_params', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1909,6 +1979,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -1956,6 +2028,7 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param TrainDetails train_details: The arguments provided to the train operation. (required)
         :param str x_caller:
+        :param str origin:
         :return: FaqMatcherInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1980,12 +2053,13 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param TrainDetails train_details: The arguments provided to the train operation. (required)
         :param str x_caller:
+        :param str origin:
         :return: FaqMatcherInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'train_details', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'train_details', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2020,6 +2094,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -2066,6 +2142,7 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[TsneSample]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2089,12 +2166,13 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: list[TsneSample]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2125,6 +2203,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -2170,6 +2250,7 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param TsneSettings tsne_settings: The TSNE settings. (required)
         :param str x_caller:
+        :param str origin:
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2194,12 +2275,13 @@ class FaqMatchersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param TsneSettings tsne_settings: The TSNE settings. (required)
         :param str x_caller:
+        :param str origin:
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'tsne_settings', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'tsne_settings', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2234,6 +2316,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -2280,6 +2364,7 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: FaqMatcherInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2303,12 +2388,13 @@ class FaqMatchersApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: FaqMatcherInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2339,6 +2425,8 @@ class FaqMatchersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}

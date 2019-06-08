@@ -45,6 +45,7 @@ class ApiKeysApi(object):
         :param async bool
         :param ApiKeyCreateDetails create_details: The details of the API key to create. (required)
         :param str x_caller:
+        :param str origin:
         :return: ApiKeyInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -68,12 +69,13 @@ class ApiKeysApi(object):
         :param async bool
         :param ApiKeyCreateDetails create_details: The details of the API key to create. (required)
         :param str x_caller:
+        :param str origin:
         :return: ApiKeyInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['create_details', 'x_caller']  # noqa: E501
+        all_params = ['create_details', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -102,6 +104,8 @@ class ApiKeysApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -148,6 +152,7 @@ class ApiKeysApi(object):
         :param async bool
         :param str instance_name: The API key. (required)
         :param str x_caller:
+        :param str origin:
         :return: ApiKeyInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -171,12 +176,13 @@ class ApiKeysApi(object):
         :param async bool
         :param str instance_name: The API key. (required)
         :param str x_caller:
+        :param str origin:
         :return: ApiKeyInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -207,6 +213,8 @@ class ApiKeysApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -251,6 +259,7 @@ class ApiKeysApi(object):
         :param async bool
         :param str instance_name: The API key. (required)
         :param str x_caller:
+        :param str origin:
         :return: ApiKeyInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -274,12 +283,13 @@ class ApiKeysApi(object):
         :param async bool
         :param str instance_name: The API key. (required)
         :param str x_caller:
+        :param str origin:
         :return: ApiKeyInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -310,6 +320,8 @@ class ApiKeysApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -353,6 +365,7 @@ class ApiKeysApi(object):
 
         :param async bool
         :param str x_caller:
+        :param str origin:
         :return: list[ApiKeyInstanceDetail]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -375,12 +388,13 @@ class ApiKeysApi(object):
 
         :param async bool
         :param str x_caller:
+        :param str origin:
         :return: list[ApiKeyInstanceDetail]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['x_caller']  # noqa: E501
+        all_params = ['x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -405,6 +419,8 @@ class ApiKeysApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}

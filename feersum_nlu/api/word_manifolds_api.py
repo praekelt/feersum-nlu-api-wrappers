@@ -46,6 +46,7 @@ class WordManifoldsApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param list[NewWord] new_word_list: List of new words. (required)
         :param str x_caller:
+        :param str origin:
         :return: WordManifoldInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -70,12 +71,13 @@ class WordManifoldsApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param list[NewWord] new_word_list: List of new words. (required)
         :param str x_caller:
+        :param str origin:
         :return: WordManifoldInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'new_word_list', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'new_word_list', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -110,6 +112,8 @@ class WordManifoldsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -156,6 +160,7 @@ class WordManifoldsApi(object):
         :param async bool
         :param WordManifoldCreateDetails create_details: The details of the word manifold instance to create. (required)
         :param str x_caller:
+        :param str origin:
         :return: WordManifoldInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -179,12 +184,13 @@ class WordManifoldsApi(object):
         :param async bool
         :param WordManifoldCreateDetails create_details: The details of the word manifold instance to create. (required)
         :param str x_caller:
+        :param str origin:
         :return: WordManifoldInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['create_details', 'x_caller']  # noqa: E501
+        all_params = ['create_details', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -213,6 +219,8 @@ class WordManifoldsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -259,6 +267,7 @@ class WordManifoldsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: WordManifoldInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -282,12 +291,13 @@ class WordManifoldsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: WordManifoldInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -318,6 +328,8 @@ class WordManifoldsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -362,6 +374,7 @@ class WordManifoldsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: WordManifoldInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -385,12 +398,13 @@ class WordManifoldsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: WordManifoldInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -421,6 +435,8 @@ class WordManifoldsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -465,6 +481,7 @@ class WordManifoldsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: WordManifoldInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -488,12 +505,13 @@ class WordManifoldsApi(object):
         :param async bool
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
+        :param str origin:
         :return: WordManifoldInstanceDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -524,6 +542,8 @@ class WordManifoldsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}

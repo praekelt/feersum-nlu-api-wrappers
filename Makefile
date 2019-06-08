@@ -1,4 +1,4 @@
-_checkfiles = examples/
+_checkfiles = examples/ feersum_nlu_util/
 checkfiles = $(_checkfiles) *.py
 
 mypy_flags = --ignore-missing-imports --follow-imports=silent --check-untyped-defs --warn-no-return --warn-unused-ignores

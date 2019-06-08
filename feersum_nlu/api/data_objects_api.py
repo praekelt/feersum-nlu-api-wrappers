@@ -45,6 +45,7 @@ class DataObjectsApi(object):
         :param async bool
         :param str instance_name: The name of the data_object. (required)
         :param str x_caller:
+        :param str origin:
         :return: DataObject
                  If the method is called asynchronously,
                  returns the request thread.
@@ -68,12 +69,13 @@ class DataObjectsApi(object):
         :param async bool
         :param str instance_name: The name of the data_object. (required)
         :param str x_caller:
+        :param str origin:
         :return: DataObject
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -104,6 +106,8 @@ class DataObjectsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -147,6 +151,7 @@ class DataObjectsApi(object):
 
         :param async bool
         :param str x_caller:
+        :param str origin:
         :return: list[DataObjectName]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -169,12 +174,13 @@ class DataObjectsApi(object):
 
         :param async bool
         :param str x_caller:
+        :param str origin:
         :return: list[DataObjectName]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['x_caller']  # noqa: E501
+        all_params = ['x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -199,6 +205,8 @@ class DataObjectsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -243,6 +251,7 @@ class DataObjectsApi(object):
         :param async bool
         :param str instance_name: The name of the data_object. (required)
         :param str x_caller:
+        :param str origin:
         :return: DataObject
                  If the method is called asynchronously,
                  returns the request thread.
@@ -266,12 +275,13 @@ class DataObjectsApi(object):
         :param async bool
         :param str instance_name: The name of the data_object. (required)
         :param str x_caller:
+        :param str origin:
         :return: DataObject
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -302,6 +312,8 @@ class DataObjectsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -345,6 +357,7 @@ class DataObjectsApi(object):
 
         :param async bool
         :param str x_caller:
+        :param str origin:
         :return: list[DataObjectName]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -367,12 +380,13 @@ class DataObjectsApi(object):
 
         :param async bool
         :param str x_caller:
+        :param str origin:
         :return: list[DataObjectName]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['x_caller']  # noqa: E501
+        all_params = ['x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -397,6 +411,8 @@ class DataObjectsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -442,6 +458,7 @@ class DataObjectsApi(object):
         :param str instance_name: The name of the data_object. (required)
         :param DataObject data: The data_object. (required)
         :param str x_caller:
+        :param str origin:
         :return: DataObject
                  If the method is called asynchronously,
                  returns the request thread.
@@ -466,12 +483,13 @@ class DataObjectsApi(object):
         :param str instance_name: The name of the data_object. (required)
         :param DataObject data: The data_object. (required)
         :param str x_caller:
+        :param str origin:
         :return: DataObject
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'data', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'data', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -506,6 +524,8 @@ class DataObjectsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -552,6 +572,7 @@ class DataObjectsApi(object):
         :param async bool
         :param str instance_name: The name of the data_object. (required)
         :param str x_caller:
+        :param str origin:
         :return: DataObject
                  If the method is called asynchronously,
                  returns the request thread.
@@ -575,12 +596,13 @@ class DataObjectsApi(object):
         :param async bool
         :param str instance_name: The name of the data_object. (required)
         :param str x_caller:
+        :param str origin:
         :return: DataObject
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -611,6 +633,8 @@ class DataObjectsApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
+        if 'origin' in params:
+            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
