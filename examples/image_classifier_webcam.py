@@ -19,7 +19,7 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-instance_name = 'test_image_clsfr'
+instance_name = 'cat_vs_dog_image_clsfr'
 caller_name = 'example_caller'
 
 cap = cv2.VideoCapture(0)  # pylint: disable=no-member
@@ -47,17 +47,26 @@ try:
         resized_frame = \
             cv2.resize(frame, (resized_width, resized_height), interpolation=cv2.INTER_LINEAR)  # pylint: disable=no-member
 
-        # Display the resulting frame
-        cv2.imshow('img', resized_frame)  # pylint: disable=no-member
-
         cv2.imwrite("img.png", resized_frame)  # pylint: disable=no-member
         image_input = feersum_nlu.ImageInput(image_utils.load_image("img.png"))
 
         print("Classify image:")
-        api_response = api_instance.image_classifier_retrieve(instance_name, image_input, x_caller=caller_name)
-        print(" type(api_response)", type(api_response))
-        print(" api_response", api_response)
+        score_label_list = api_instance.image_classifier_retrieve(instance_name, image_input, x_caller=caller_name)
+        # print(" type(api_response)", type(score_label_list))
+        # print(" api_response", score_label_list)
         print()
+        print(score_label_list)
+
+        # Display the resulting frame
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        cv2.putText(resized_frame,  # pylint: disable=no-member
+                    f"{score_label_list[0].label} {round(score_label_list[0].probability,2)}",  # pylint: disable=no-member
+                    (10, 30), font, 1, (0, 0, 0), 5)  # pylint: disable=no-member
+        cv2.putText(resized_frame,  # pylint: disable=no-member
+                    f"{score_label_list[0].label} {round(score_label_list[0].probability,2)}",  # pylint: disable=no-member
+                    (10, 30), font, 1, (255, 255, 255), 2)  # pylint: disable=no-member
+
+        cv2.imshow('img', resized_frame)  # pylint: disable=no-member
 
         if cv2.waitKey(1) & 0xFF == ord('q'):  # pylint: disable=no-member
             break

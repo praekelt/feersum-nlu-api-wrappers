@@ -75,8 +75,11 @@ class TestSimEnt(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            self.assertTrue(api_response[0].to_dict() == {'entity': 'orange', 'similarity': 0.6299035873841149})
-            self.assertTrue(api_response[1].to_dict() == {'entity': 'pink', 'similarity': 0.690814436389662})
+            self.assertTrue(api_response[0].entity == 'orange')
+            self.assertTrue(round(api_response[0].similarity, 2) == 0.63)
+
+            self.assertTrue(api_response[1].entity == 'pink')
+            self.assertTrue(round(api_response[1].similarity, 2) == 0.69)
 
             print("Delete named loaded entity extractor:")
             api_response = api_instance.sim_word_entity_extractor_del(instance_name)

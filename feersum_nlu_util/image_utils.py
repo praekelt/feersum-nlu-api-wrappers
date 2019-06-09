@@ -29,14 +29,15 @@ def load_image(file_name: str) -> str:
     target_size = 256
     w, h = pil_image.size
 
-    if w < h:
-        resize_w = target_size
-        resize_h = round(h / w * target_size)
-    else:
-        resize_w = round(w / h * target_size)
-        resize_h = target_size
+    if (w != 256) and (h != 256):
+        if w < h:
+            resize_w = target_size
+            resize_h = round(h / w * target_size)
+        else:
+            resize_w = round(w / h * target_size)
+            resize_h = target_size
 
-    pil_image = pil_image.resize((resize_w, resize_h), PIL.Image.BILINEAR)
+        pil_image = pil_image.resize((resize_w, resize_h), PIL.Image.BILINEAR)
 
     # Save to in memory jpeg byte stream.
     image_file = io.BytesIO()
