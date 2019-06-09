@@ -58,7 +58,7 @@ try:
         print(score_label_list)
 
         # Display the resulting frame
-        font = cv2.FONT_HERSHEY_SIMPLEX
+        font = cv2.FONT_HERSHEY_SIMPLEX  # pylint: disable=no-member
         cv2.putText(resized_frame,  # pylint: disable=no-member
                     f"{score_label_list[0].label} {round(score_label_list[0].probability,2)}",  # pylint: disable=no-member
                     (10, 30), font, 1, (0, 0, 0), 5)  # pylint: disable=no-member
