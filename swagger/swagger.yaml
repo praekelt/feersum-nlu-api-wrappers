@@ -5717,9 +5717,7 @@ definitions:
       len:
         type: integer
         description: The length of the extracted entity in the associated utterance.
-    example:
-    - {"entity": "error", "syn_set": ["fault", "error", "red light", "problem"]}
-    - {"entity": "error", "index": 31, "len": 8}
+    example: {"entity": "error", "syn_set": ["fault", "error", "red light", "problem"]}
 
   synonym_sample:
     description: A synonym entity extractor training/testing utterance with labelled entities. One should either provide an entity list with synsets OR text with index+len of a specific synonym in the associated utterance.

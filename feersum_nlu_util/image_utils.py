@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 import PIL
 from PIL import Image
@@ -8,28 +8,17 @@ import io
 import os
 
 
-# =======================================
-# =======================================
-# =======================================
-def show_image(file_name: str):
-    im = Image.open(file_name)
-    im.show()
-
-
-def load_image(file_name: str) -> str:
+def _resize_pil_image(pil_image: Image) -> Image:
     """
-    Load an image from disk and encode to base64 jpeg.
+    Resize the image if required.
 
-    :param file_name: The file name to load.
-    :return: utf8 encoded base64 string.
+    :param pil_image: The input image.
+    :return: A resized pillow image OR the input image.
     """
-    pil_image = Image.open(file_name)
-
-    # Resize the image.
-    target_size = 256
+    target_size = 256  # The service expects images with smallest dimension 256 pixels!
     w, h = pil_image.size
 
-    if (w != 256) and (h != 256):
+    if (w < target_size) or (h < target_size) or ((w > target_size) and (h > target_size)):
         if w < h:
             resize_w = target_size
             resize_h = round(h / w * target_size)
@@ -37,30 +26,112 @@ def load_image(file_name: str) -> str:
             resize_w = round(w / h * target_size)
             resize_h = target_size
 
-        pil_image = pil_image.resize((resize_w, resize_h), PIL.Image.BILINEAR)
+        return pil_image.resize((resize_w, resize_h), PIL.Image.BILINEAR)
+    else:
+        return pil_image
 
-    # Save to in memory jpeg byte stream.
+
+def _base64_encode_from_pil_image(pil_image: Image) -> str:
+    """ Save image to base64 jpeg string.
+
+    :param pil_image: The input image.
+    :return: utf8 encoded base64 string.
+    """
     image_file = io.BytesIO()
     pil_image.save(fp=image_file, format="jpeg", quality=50)
     base64_bytes = base64.b64encode(image_file.getvalue())
-
     return base64_bytes.decode('utf-8')
 
 
-def save_image(file_name: str, base64_string: str) -> bool:
+def _base64_decode_to_pil_image(base64_image_str: str) -> Optional[PIL.Image.Image]:
+    """ Recover image from base64 jpeg string.
+
+    :param base64_image_str: utf8 encoded base64 image string.
+    :return: The recovered image.
+    """
+    try:
+        base8_bytes = base64.b64decode(base64_image_str.encode('utf-8'))
+        image_file = io.BytesIO(base8_bytes)
+        return Image.open(image_file)
+    except IOError:
+        return None
+
+
+# =======================================
+# =======================================
+# =======================================
+def show_image(file_name: str):
+    """
+    Show an image using PILLOW.
+
+    :param file_name: The name of the file to load and display.
+    :return: Nothing
+    """
+    im = Image.open(file_name)
+    im.show()
+
+
+def load_image(file_name: str) -> str:
+    """
+    Load an image from disk, resize and encode to base64 jpeg.
+
+    :param file_name: The file name to load.
+    :return: utf8 encoded base64 string.
+    :exception IOError: If the file cannot be found, or the image cannot be
+       opened and identified.
+    """
+    pil_image = Image.open(file_name)
+    return _base64_encode_from_pil_image(_resize_pil_image(pil_image))
+
+
+def save_image(file_name: str, base64_image_str: str) -> bool:
     """
     Save a base64 encoded image to disk.
 
     :param file_name: The image file name. Image format to save is deduced from the file extension.
-    :param base64_string: The base64 encoded string to decode and save.
+    :param base64_image_str: The base64 encoded image to decode and save.
     :return: True if successful.
     """
-    base8_bytes = base64.b64decode(base64_string.encode('utf-8'))
-    image_file = io.BytesIO(base8_bytes)
-    pil_image = Image.open(image_file)
-    pil_image.save(fp=file_name)
+    pil_image = _base64_decode_to_pil_image(base64_image_str)
 
-    return True
+    if pil_image is not None:
+        pil_image.save(fp=file_name)
+        return True
+    else:
+        return False
+
+
+def check_image_format(base64_image_str: str) -> bool:
+    """
+    Reformat the base64 image string for consumption by API.
+
+    :param base64_image_str: utf8 encoded base64 image string.
+    :return: True if image is 256x256xRGB jpeg.
+    """
+    pil_image = _base64_decode_to_pil_image(base64_image_str)
+
+    if pil_image is None:
+        return False
+
+    w, h = pil_image.size
+    target_size = 256  # The service expects images with smallest dimension 256 pixels!
+
+    return ((w == target_size) and (h >= target_size)) or ((w >= target_size) and (h == target_size))
+
+
+def reformat_image(base64_image_str: str) -> Optional[str]:
+    """
+    Reformat the base64 image string for consumption by API.
+
+    :param base64_image_str: utf8 encoded base64 image string.
+    :return: utf8 encoded base64 string (256x256xRGB jpeg)
+    """
+    pil_image = _base64_decode_to_pil_image(base64_image_str)
+
+    if pil_image is None:
+        return None
+
+    return _base64_encode_from_pil_image(_resize_pil_image(pil_image))
 
 
 def get_image_samples(data_path: str, label: str) -> List[Tuple[str, str]]:
