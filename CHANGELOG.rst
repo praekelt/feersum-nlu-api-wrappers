@@ -1,6 +1,14 @@
 Changelog
 *********
 
+Version 2.0.32
+==============
+
+Added image classifier endpoint.
+
+
+
+
 Version 2.0.31
 ==============
 
