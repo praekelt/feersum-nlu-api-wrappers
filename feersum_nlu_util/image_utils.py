@@ -135,13 +135,19 @@ def reformat_image(base64_image_str: str) -> Optional[str]:
 
 
 def get_image_samples(data_path: str, label: str) -> List[Tuple[str, str]]:
+    """
+    Get all the images within a specific data_path/'label' file path and assign 'label' to the samples.
+    :param data_path: The base path i.e. '/home/data/cat_vs_dog'
+    :param label: The actual label folder to load i.e. 'cat' which would load images in '/home/data/cat_vs_dog/cat' as cat.
+    :return: The list of loaded base64 image samples all labeled with 'label'.
+    """
     directory = os.fsencode(data_path + "/" + label)
 
     image_samples = []  # type: List[Tuple[str, str]]
 
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
-        if filename.endswith((".jpg", ".jpeg", ".png")):
+        if filename.endswith((".jpg", ".jpeg", ".j2k", ".j2p", ".jpx", ".png", ".bmp")):
             image_samples.append((load_image(data_path + "/" + label + "/" + filename), label))
 
     return image_samples

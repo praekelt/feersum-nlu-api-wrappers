@@ -31,7 +31,6 @@ try:
     api_response, api_response_code, api_response_header = \
         api_instance.dashboard_get_details_with_params_with_http_info(x_caller=caller_name,  # Or origin=caller_name,
                                                                       params=dash_params)
-
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print(" type(api_response_code)", type(api_response_code))
