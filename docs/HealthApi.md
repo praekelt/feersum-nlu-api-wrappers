@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **health_get_status**
-> health_get_status(x_caller=x_caller)
+> health_get_status(x_caller=x_caller, origin=origin)
 
 An endpoint to check if the service is alice and well.
 
@@ -36,10 +36,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.HealthApi(feersum_nlu.ApiClient(configuration))
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # An endpoint to check if the service is alice and well.
-    api_instance.health_get_status(x_caller=x_caller)
+    api_instance.health_get_status(x_caller=x_caller, origin=origin)
 except ApiException as e:
     print("Exception when calling HealthApi->health_get_status: %s\n" % e)
 ```
@@ -49,6 +50,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 

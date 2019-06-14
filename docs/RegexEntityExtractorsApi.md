@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **regex_entity_extractor_create**
-> RegexEntityExtractorInstanceDetail regex_entity_extractor_create(create_details, x_caller=x_caller)
+> RegexEntityExtractorInstanceDetail regex_entity_extractor_create(create_details, x_caller=x_caller, origin=origin)
 
 Create a regular expression entity extractor.
 
@@ -44,10 +44,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 create_details = feersum_nlu.RegexEntityExtractorCreateDetails() # RegexEntityExtractorCreateDetails | The details of the instance to create.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Create a regular expression entity extractor.
-    api_response = api_instance.regex_entity_extractor_create(create_details, x_caller=x_caller)
+    api_response = api_instance.regex_entity_extractor_create(create_details, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling RegexEntityExtractorsApi->regex_entity_extractor_create: %s\n" % e)
@@ -59,6 +60,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_details** | [**RegexEntityExtractorCreateDetails**](RegexEntityExtractorCreateDetails.md)| The details of the instance to create. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -76,7 +78,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **regex_entity_extractor_del**
-> RegexEntityExtractorInstanceDetail regex_entity_extractor_del(instance_name, x_caller=x_caller)
+> RegexEntityExtractorInstanceDetail regex_entity_extractor_del(instance_name, x_caller=x_caller, origin=origin)
 
 Delete named instance.
 
@@ -105,10 +107,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Delete named instance.
-    api_response = api_instance.regex_entity_extractor_del(instance_name, x_caller=x_caller)
+    api_response = api_instance.regex_entity_extractor_del(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling RegexEntityExtractorsApi->regex_entity_extractor_del: %s\n" % e)
@@ -120,6 +123,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -137,7 +141,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **regex_entity_extractor_get_details**
-> RegexEntityExtractorInstanceDetail regex_entity_extractor_get_details(instance_name, x_caller=x_caller)
+> RegexEntityExtractorInstanceDetail regex_entity_extractor_get_details(instance_name, x_caller=x_caller, origin=origin)
 
 Get details of named instance.
 
@@ -166,10 +170,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Get details of named instance.
-    api_response = api_instance.regex_entity_extractor_get_details(instance_name, x_caller=x_caller)
+    api_response = api_instance.regex_entity_extractor_get_details(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling RegexEntityExtractorsApi->regex_entity_extractor_get_details: %s\n" % e)
@@ -181,6 +186,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -198,7 +204,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **regex_entity_extractor_get_details_all**
-> list[RegexEntityExtractorInstanceDetail] regex_entity_extractor_get_details_all(x_caller=x_caller)
+> list[RegexEntityExtractorInstanceDetail] regex_entity_extractor_get_details_all(x_caller=x_caller, origin=origin)
 
 Get list of loaded regular expression entity extractors.
 
@@ -226,10 +232,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Get list of loaded regular expression entity extractors.
-    api_response = api_instance.regex_entity_extractor_get_details_all(x_caller=x_caller)
+    api_response = api_instance.regex_entity_extractor_get_details_all(x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling RegexEntityExtractorsApi->regex_entity_extractor_get_details_all: %s\n" % e)
@@ -240,6 +247,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -257,7 +265,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **regex_entity_extractor_get_params**
-> ModelParams regex_entity_extractor_get_params(instance_name, x_caller=x_caller)
+> ModelParams regex_entity_extractor_get_params(instance_name, x_caller=x_caller, origin=origin)
 
 Get the editable model parameters of named regex entity extractor.
 
@@ -286,10 +294,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Get the editable model parameters of named regex entity extractor.
-    api_response = api_instance.regex_entity_extractor_get_params(instance_name, x_caller=x_caller)
+    api_response = api_instance.regex_entity_extractor_get_params(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling RegexEntityExtractorsApi->regex_entity_extractor_get_params: %s\n" % e)
@@ -301,6 +310,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -318,7 +328,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **regex_entity_extractor_retrieve**
-> list[RegexEntity] regex_entity_extractor_retrieve(instance_name, text_input, x_caller=x_caller)
+> list[RegexEntity] regex_entity_extractor_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
 
 Extract information based on the regular expression.
 
@@ -348,10 +358,11 @@ api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(config
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Extract information based on the regular expression.
-    api_response = api_instance.regex_entity_extractor_retrieve(instance_name, text_input, x_caller=x_caller)
+    api_response = api_instance.regex_entity_extractor_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling RegexEntityExtractorsApi->regex_entity_extractor_retrieve: %s\n" % e)
@@ -364,6 +375,7 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **text_input** | [**TextInput**](TextInput.md)| The input text. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -381,7 +393,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **regex_entity_extractor_set_params**
-> RegexEntityExtractorInstanceDetail regex_entity_extractor_set_params(instance_name, model_params, x_caller=x_caller)
+> RegexEntityExtractorInstanceDetail regex_entity_extractor_set_params(instance_name, model_params, x_caller=x_caller, origin=origin)
 
 Set the model parameters of named regex entity extractor.
 
@@ -411,10 +423,11 @@ api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(config
 instance_name = 'instance_name_example' # str | The name of the model instance.
 model_params = feersum_nlu.ModelParams() # ModelParams | The model parameters.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Set the model parameters of named regex entity extractor.
-    api_response = api_instance.regex_entity_extractor_set_params(instance_name, model_params, x_caller=x_caller)
+    api_response = api_instance.regex_entity_extractor_set_params(instance_name, model_params, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling RegexEntityExtractorsApi->regex_entity_extractor_set_params: %s\n" % e)
@@ -427,6 +440,7 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -444,7 +458,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **regex_entity_extractor_vaporise**
-> RegexEntityExtractorInstanceDetail regex_entity_extractor_vaporise(instance_name, x_caller=x_caller)
+> RegexEntityExtractorInstanceDetail regex_entity_extractor_vaporise(instance_name, x_caller=x_caller, origin=origin)
 
 Vaporise the named model.
 
@@ -473,10 +487,11 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Vaporise the named model.
-    api_response = api_instance.regex_entity_extractor_vaporise(instance_name, x_caller=x_caller)
+    api_response = api_instance.regex_entity_extractor_vaporise(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling RegexEntityExtractorsApi->regex_entity_extractor_vaporise: %s\n" % e)
@@ -488,6 +503,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 

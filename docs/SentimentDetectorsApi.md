@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **sentiment_detector_retrieve**
-> Sentiment sentiment_detector_retrieve(instance_name, text_input, x_caller=x_caller)
+> Sentiment sentiment_detector_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
 
 Detect sentiment.
 
@@ -38,10 +38,11 @@ api_instance = feersum_nlu.SentimentDetectorsApi(feersum_nlu.ApiClient(configura
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
 
 try:
     # Detect sentiment.
-    api_response = api_instance.sentiment_detector_retrieve(instance_name, text_input, x_caller=x_caller)
+    api_response = api_instance.sentiment_detector_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling SentimentDetectorsApi->sentiment_detector_retrieve: %s\n" % e)
@@ -54,6 +55,7 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **text_input** | [**TextInput**](TextInput.md)| The input text. | 
  **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
 
 ### Return type
 

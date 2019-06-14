@@ -529,4 +529,3 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
         print("Exception when calling an api endpoint: %s\n" % e)
     except urllib3.exceptions.HTTPError as e:
         print("Connection HTTPError! %s\n" % e)
-

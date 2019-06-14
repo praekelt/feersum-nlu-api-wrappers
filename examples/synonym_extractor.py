@@ -26,10 +26,11 @@ create_details = feersum_nlu.SynonymEntityExtractorCreateDetails(name=instance_n
 # The training samples.
 
 training_sample_list = []
+
 training_sample_list.append(feersum_nlu.SynonymSample(text="Can I have a burger with chips please?", intent=None,
                                                       entity_list=[
-                                                          feersum_nlu.SynonymEntity(entity="food", index=13, len=17)
-                                                      ]))
+                                                              feersum_nlu.SynonymEntity(entity="food", index=13, len=17)
+                                                          ]))
 
 training_sample_list.append(feersum_nlu.SynonymSample(text="Can I have a slice of pizza?", intent=None,
                                                       entity_list=[

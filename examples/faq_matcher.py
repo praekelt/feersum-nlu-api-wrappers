@@ -137,7 +137,7 @@ try:
     # print(" api_response", api_response)
     # print()
 
-    immediate_mode = True  # Set to True to do a blocking train operation.
+    immediate_mode = False  # Set to True to do a blocking train operation.
 
     train_details = feersum_nlu.TrainDetails(threshold=0.99,
                                              word_manifold_list=word_manifold_list,

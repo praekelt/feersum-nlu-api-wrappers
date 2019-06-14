@@ -11,3 +11,5 @@ six
 python_dateutil
 urllib3
 requests
+pillow
+opencv-python

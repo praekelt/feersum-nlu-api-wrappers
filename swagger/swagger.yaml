@@ -75,6 +75,9 @@ tags:
   description: An enpoint to check if the service is alive and well.
 - name: api_keys
   description: An enpoint to manage API keys.
+- name: image_classifiers
+  description: The API to your image classifier instances. Create a model, add some training data, train it and start doing retrieve/inference calls.
+
 
 paths:
 ###################################
@@ -85,6 +88,7 @@ paths:
   /dashboard:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -131,6 +135,7 @@ paths:
   /text_classifiers:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -176,6 +181,7 @@ paths:
   /text_classifiers/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -225,6 +231,7 @@ paths:
   /text_classifiers/{instance_name}/training_samples:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -308,6 +315,7 @@ paths:
   /text_classifiers/{instance_name}/training_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -336,6 +344,7 @@ paths:
   /text_classifiers/{instance_name}/testing_samples:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -419,6 +428,7 @@ paths:
   /text_classifiers/{instance_name}/testing_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -447,6 +457,7 @@ paths:
   /text_classifiers/{instance_name}/train:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -481,6 +492,7 @@ paths:
   /text_classifiers/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -536,6 +548,7 @@ paths:
   /text_classifiers/{instance_name}/online_training_samples:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -572,6 +585,7 @@ paths:
   /text_classifiers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -606,6 +620,7 @@ paths:
   /text_classifiers/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -634,6 +649,7 @@ paths:
   /text_classifiers/{instance_name}/get_labels:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -662,6 +678,7 @@ paths:
   /text_classifiers/{instance_name}/curate:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -696,6 +713,7 @@ paths:
   /text_classifiers/{instance_name}/tsne:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -754,6 +772,7 @@ paths:
   /word_manifolds:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -783,6 +802,7 @@ paths:
   /word_manifolds/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -832,6 +852,7 @@ paths:
   /word_manifolds/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -860,6 +881,7 @@ paths:
   /word_manifolds/{instance_name}/vocab:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -896,6 +918,7 @@ paths:
 #   /word_manifolds/{instance_name}/similar_words:
 #     parameters:
 #     - $ref: '#/parameters/caller'
+#     - $ref: '#/parameters/origin'
 #
 #     post:
 #       tags:
@@ -930,6 +953,7 @@ paths:
 #   /word_manifolds/{instance_name}/spell_correct:
 #     parameters:
 #     - $ref: '#/parameters/caller'
+#     - $ref: '#/parameters/origin'
 #
 #     post:
 #       tags:
@@ -966,6 +990,7 @@ paths:
   /intent_classifiers:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1010,6 +1035,7 @@ paths:
   /intent_classifiers/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -1059,6 +1085,7 @@ paths:
   /intent_classifiers/{instance_name}/training_samples:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1142,6 +1169,7 @@ paths:
   /intent_classifiers/{instance_name}/training_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -1170,6 +1198,7 @@ paths:
   /intent_classifiers/{instance_name}/testing_samples:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1253,6 +1282,7 @@ paths:
   /intent_classifiers/{instance_name}/testing_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -1281,6 +1311,7 @@ paths:
   /intent_classifiers/{instance_name}/train:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1315,6 +1346,7 @@ paths:
   /intent_classifiers/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1370,6 +1402,7 @@ paths:
   /intent_classifiers/{instance_name}/online_training_samples:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1406,6 +1439,7 @@ paths:
   /intent_classifiers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1440,6 +1474,7 @@ paths:
   /intent_classifiers/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1468,6 +1503,7 @@ paths:
   /intent_classifiers/{instance_name}/get_labels:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -1496,6 +1532,7 @@ paths:
   /intent_classifiers/{instance_name}/curate:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1531,6 +1568,7 @@ paths:
   /intent_classifiers/{instance_name}/tsne:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1589,6 +1627,7 @@ paths:
   /faq_matchers:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1633,6 +1672,7 @@ paths:
   /faq_matchers/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -1682,6 +1722,7 @@ paths:
   /faq_matchers/{instance_name}/training_samples:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1765,6 +1806,7 @@ paths:
   /faq_matchers/{instance_name}/training_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -1793,6 +1835,7 @@ paths:
   /faq_matchers/{instance_name}/testing_samples:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1876,6 +1919,7 @@ paths:
   /faq_matchers/{instance_name}/testing_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -1904,6 +1948,7 @@ paths:
   /faq_matchers/{instance_name}/train:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1938,6 +1983,7 @@ paths:
   /faq_matchers/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1993,6 +2039,7 @@ paths:
   /faq_matchers/{instance_name}/online_training_samples:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2029,6 +2076,7 @@ paths:
   /faq_matchers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2063,6 +2111,7 @@ paths:
   /faq_matchers/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2091,6 +2140,7 @@ paths:
   /faq_matchers/{instance_name}/get_labels:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -2119,6 +2169,7 @@ paths:
   /faq_matchers/{instance_name}/curate:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2153,6 +2204,7 @@ paths:
   /faq_matchers/{instance_name}/tsne:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2211,6 +2263,7 @@ paths:
   /date_parsers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2248,6 +2301,7 @@ paths:
   /sentiment_detectors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2285,6 +2339,7 @@ paths:
   /crf_entity_extractors:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2329,6 +2384,7 @@ paths:
   /crf_entity_extractors/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -2378,6 +2434,7 @@ paths:
   /crf_entity_extractors/{instance_name}/training_samples:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2461,6 +2518,7 @@ paths:
   /crf_entity_extractors/{instance_name}/training_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -2489,6 +2547,7 @@ paths:
   /crf_entity_extractors/{instance_name}/testing_samples:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2572,6 +2631,7 @@ paths:
   /crf_entity_extractors/{instance_name}/testing_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -2600,6 +2660,7 @@ paths:
   /crf_entity_extractors/{instance_name}/train:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2634,6 +2695,7 @@ paths:
   /crf_entity_extractors/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2689,6 +2751,7 @@ paths:
   /crf_entity_extractors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2723,6 +2786,7 @@ paths:
   /crf_entity_extractors/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2751,6 +2815,7 @@ paths:
   /crf_entity_extractors/{instance_name}/get_labels:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -2782,6 +2847,7 @@ paths:
   /synonym_entity_extractors:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2826,6 +2892,7 @@ paths:
   /synonym_entity_extractors/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -2875,6 +2942,7 @@ paths:
   /synonym_entity_extractors/{instance_name}/training_samples:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2958,6 +3026,7 @@ paths:
   /synonym_entity_extractors/{instance_name}/training_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -2986,6 +3055,7 @@ paths:
   /synonym_entity_extractors/{instance_name}/testing_samples:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3069,6 +3139,7 @@ paths:
   /synonym_entity_extractors/{instance_name}/testing_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -3097,6 +3168,7 @@ paths:
   /synonym_entity_extractors/{instance_name}/train:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3131,6 +3203,7 @@ paths:
   /synonym_entity_extractors/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3186,6 +3259,7 @@ paths:
   /synonym_entity_extractors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3220,6 +3294,7 @@ paths:
   /synonym_entity_extractors/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3248,6 +3323,7 @@ paths:
   /synonym_entity_extractors/{instance_name}/get_labels:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -3279,6 +3355,7 @@ paths:
   /regex_entity_extractors:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3323,6 +3400,7 @@ paths:
   /regex_entity_extractors/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -3372,6 +3450,7 @@ paths:
   /regex_entity_extractors/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3427,6 +3506,7 @@ paths:
   /regex_entity_extractors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3461,6 +3541,7 @@ paths:
   /regex_entity_extractors/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3492,6 +3573,7 @@ paths:
   /person_name_entity_extractors:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3536,6 +3618,7 @@ paths:
   /person_name_entity_extractors/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -3585,6 +3668,7 @@ paths:
   /person_name_entity_extractors/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3640,6 +3724,7 @@ paths:
   /person_name_entity_extractors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3674,6 +3759,7 @@ paths:
   /person_name_entity_extractors/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3705,6 +3791,7 @@ paths:
   /duckling_entity_extractors:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3749,6 +3836,7 @@ paths:
   /duckling_entity_extractors/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -3798,6 +3886,7 @@ paths:
   /duckling_entity_extractors/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3853,6 +3942,7 @@ paths:
   /duckling_entity_extractors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3887,6 +3977,7 @@ paths:
   /duckling_entity_extractors/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3918,6 +4009,7 @@ paths:
   /sim_word_entity_extractors:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3962,6 +4054,7 @@ paths:
   /sim_word_entity_extractors/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -4011,6 +4104,7 @@ paths:
   /sim_word_entity_extractors/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4066,6 +4160,7 @@ paths:
   /sim_word_entity_extractors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4100,6 +4195,7 @@ paths:
   /sim_word_entity_extractors/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4131,6 +4227,7 @@ paths:
   /language_recognisers:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4175,6 +4272,7 @@ paths:
   /language_recognisers/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -4224,6 +4322,7 @@ paths:
   /language_recognisers/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4279,6 +4378,7 @@ paths:
   /language_recognisers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4313,6 +4413,7 @@ paths:
   /language_recognisers/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4341,6 +4442,7 @@ paths:
   /language_recognisers/{instance_name}/get_labels:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -4372,6 +4474,7 @@ paths:
   /data_objects:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -4409,6 +4512,7 @@ paths:
   /data_objects/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4485,6 +4589,7 @@ paths:
   /data_objects/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4516,6 +4621,7 @@ paths:
   /health:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -4541,6 +4647,7 @@ paths:
   /api_keys:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4585,6 +4692,7 @@ paths:
   /api_keys/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -4630,12 +4738,598 @@ paths:
 
 
 ###################################
+###################################
+########
+## image_classifiers root
+########
+  /image_classifiers:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_classifiers
+      summary: Create an image classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_create
+      description: Create a new image classifier or reload one from the trash. Returns the details of the new or loaded instance.
+      parameters:
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/image_classifier_create_details"
+
+      responses:
+        200:
+          $ref: "#/responses/image_classifier_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - image_classifiers
+      summary: Get list of loaded image classifiers.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_get_details_all
+      description: Get the list of loaded image classifiers.
+      responses:
+        200:
+          $ref: "#/responses/image_classifier_instance_detail_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_classifiers Get details of named instance
+########
+  /image_classifiers/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    get:
+      tags:
+      - image_classifiers
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_get_details
+      description: Get the details of the named image classifier instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/image_classifier_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - image_classifiers
+      summary: Delete named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_del
+      description: Delete and return the details of the named image classifier instance. Deleted models can be reloaded from the trash with the create operation.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/image_classifier_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_classifiers training samples
+########
+  /image_classifiers/{instance_name}/training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_classifiers
+      summary: Add training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_add_training_samples
+      description: Add training samples to named image classifier. Returns the classifier's updated number of training samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_sample_list
+        description: List of labelled image samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_sample"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - image_classifiers
+      summary: Get training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_get_training_samples
+      description: Get the training samples of the named image classifier.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - image_classifiers
+      summary: Delete training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_del_training_samples
+      description: Delete the listed training samples of the named image classifier. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_sample_list
+        description: List of labelled image samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /image_classifiers/{instance_name}/training_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    delete:
+      tags:
+      - image_classifiers
+      summary: Delete all training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_del_training_samples_all
+      description: Delete all training samples of the named image classifier. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_classifiers testing samples
+########
+  /image_classifiers/{instance_name}/testing_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_classifiers
+      summary: Add testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_add_testing_samples
+      description: Add testing samples to named image classifier. Returns the classifier's updated number of testing samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_sample_list
+        description: List of labelled image samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_sample"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - image_classifiers
+      summary: Get testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_get_testing_samples
+      description: Get the testing samples of the named image classifier.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - image_classifiers
+      summary: Delete testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_del_testing_samples
+      description: Delete the listed testing samples of the named image classifier. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_sample_list
+        description: List of labelled image samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /image_classifiers/{instance_name}/testing_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    delete:
+      tags:
+      - image_classifiers
+      summary: Delete testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_del_testing_samples_all
+      description: Delete all testing samples of the named image classifier. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_classifiers train
+########
+  /image_classifiers/{instance_name}/train:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_classifiers
+      summary: Train the named image classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_train
+      description: Train the named image classifier with the training and testing data already provided. Returns the details of the model instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: train_details
+        description: The arguments provided to the train operation.
+        required: true
+        schema:
+          $ref: "#/definitions/train_details"
+      responses:
+        200:
+          $ref: "#/responses/image_classifier_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_classifiers model_params
+########
+  /image_classifiers/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_classifiers
+      summary: Set the model parameters of named image classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_set_params
+      description: Set the model parameters of named image classifier.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
+      responses:
+        200:
+          $ref: "#/responses/image_classifier_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - image_classifiers
+      summary: Get the editable model parameters of named image classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_get_params
+      description: Get the editable model parameters of named image classifier.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_classifiers train online
+########
+  /image_classifiers/{instance_name}/online_training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_classifiers
+      summary: Train/update the classifier online with the samples provided.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_online_training_samples
+      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_sample_list
+        description: List of labelled image samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_sample"
+      responses:
+        200:
+          $ref: "#/responses/total_samples"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_classifiers retrieve
+########
+  /image_classifiers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_classifiers
+      summary: Classify image.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_retrieve
+      description: Classifies the image and returns a probability sorted list of classes.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: image_input
+        description: The input image.
+        required: true
+        schema:
+          $ref: "#/definitions/image_input"
+      responses:
+        200:
+          $ref: "#/responses/scored_label_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_classifiers vaporise
+########
+  /image_classifiers/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_classifiers
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/image_classifier_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_classifiers get list of class labels
+########
+  /image_classifiers/{instance_name}/get_labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    get:
+      tags:
+      - image_classifiers
+      summary: Get list of possible labels.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_get_labels
+      description: Returns the classifier's list of possible class labels.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labels"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_classifiers curation endpoint
+########
+  /image_classifiers/{instance_name}/curate:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_classifiers
+      summary: Endpoint to aid in the curation of a model instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_curate
+      description: Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: label_pair
+        description: The true label, predicted label and matrix (train/test) to use.
+        required: true
+        schema:
+          $ref: "#/definitions/class_label_pair"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+###################################
 # Descriptions of common parameters
 ###################################
 parameters:
   caller:
     in: header
     name: X-CALLER
+    type: string
+    required: false
+  origin:
+    in: header
+    name: Origin
     type: string
     required: false
 
@@ -4659,6 +5353,18 @@ responses:
     description: The model parameters.
     schema:
       $ref: "#/definitions/model_params"
+
+  image_classifier_instance_detail:
+    description: The model instance detail
+    schema:
+      $ref: "#/definitions/image_classifier_instance_detail"
+
+  image_classifier_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/image_classifier_instance_detail"
 
   text_classifier_instance_detail:
     description: The model instance detail
@@ -4822,6 +5528,13 @@ responses:
       type: array
       items:
         $ref: "#/definitions/synonym_sample"
+
+  labelled_image_sample_list:
+    description: The list of labeled image samples.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/labelled_image_sample"
 
   labelled_text_sample_list:
     description: The list of labeled text samples.
@@ -5004,9 +5717,7 @@ definitions:
       len:
         type: integer
         description: The length of the extracted entity in the associated utterance.
-    example:
-    - {"entity": "error", "syn_set": ["fault", "error", "red light", "problem"]}
-    - {"entity": "error", "index": 31, "len": 8}
+    example: {"entity": "error", "syn_set": ["fault", "error", "red light", "problem"]}
 
   synonym_sample:
     description: A synonym entity extractor training/testing utterance with labelled entities. One should either provide an entity list with synsets OR text with index+len of a specific synonym in the associated utterance.
@@ -5097,6 +5808,79 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/dashboard_model_detail"
+
+  image_classifier_instance_detail:
+    description: The model instance detail.
+    type: object
+    required:
+    - name
+    - id
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      id:
+        description: The unique id of a specific version of the model instance.
+        type: string
+        example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'This is an example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
+      training_accuracy:
+        description: The accuracy of the model as measured on the training set.
+        type: number
+        example: 1.0
+      training_f1:
+        description: The average F-score of the model as measured on the training set.
+        type: number
+        example: 1.0
+      training_cm:
+        description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      testing_accuracy:
+        description: The accuracy of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      testing_f1:
+        description: The average F-score of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      testing_cm:
+        description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      cm_labels:
+        description: A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer.
+        type: object
+      training_stamp:
+        description: The time when the training operation concluded.
+        type: string
+        example: '2017-10-26 10:42:01.589979'
+      num_training_samples:
+        description: The model's number of training samples.
+        type: integer
+        example: 100
+      num_testing_samples:
+        description: The model's number of testing samples.
+        type: integer
+        example: 100
+      clsfr_algorithm:
+        description: The name of the algorithm that should be used for the classification.
+        type: string
+        example: "'resnet152', etc."
+      threshold:
+        description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
+        type: number
+        example: 0.85
 
   text_classifier_instance_detail:
     description: The model instance detail.
@@ -5402,6 +6186,9 @@ definitions:
         description: The average F-score of the model as measured on the training set.
         type: number
         example: 1.0
+      training_cm:
+        description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
       validation_accuracy:
         description: The accuracy of the model as measured by cross validation on the training set.
         type: number
@@ -5410,6 +6197,9 @@ definitions:
         description: The average F-score of the model as measured by cross validation on the training set.
         type: number
         example: 1.0
+      validation_cm:
+        description: The confusion matrix as measured by cross validation on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
       testing_accuracy:
         description: The accuracy of the model as measured on the testing set.
         type: number
@@ -5418,6 +6208,12 @@ definitions:
         description: The average F-score of the model as measured on the testing set.
         type: number
         example: 1.0
+      testing_cm:
+        description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      cm_labels:
+        description: A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer.
+        type: object
       training_stamp:
         description: The time when the training operation concluded.
         type: string
@@ -5712,6 +6508,34 @@ definitions:
         type: integer
         default: 10
         example: 10
+
+  image_classifier_create_details:
+    description: The details of the model instance to create.
+    type: object
+    required:
+    - name
+    - load_from_store
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'An example of this type of model.'
+      load_from_store:
+        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        type: boolean
+        example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   text_classifier_create_details:
     description: The details of the model instance to create.
@@ -6058,6 +6882,24 @@ definitions:
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
+  labelled_image_sample:
+    description: Labelled image sample.
+    type: object
+    required:
+      - image
+      - label
+    properties:
+      image:
+        type: string
+        format: byte  # base64-encoded file contents
+      label:
+        type: string
+        example: 'unicorn'
+      comment:
+        description: A string note about the sample.
+        type: string
+        example: "Second sighting of a unicorn, but still looks a lot like a horse with a horn glued on."
+
   labelled_text_sample:
     description: Labelled text sample.
     type: object
@@ -6205,6 +7047,17 @@ definitions:
       total_samples:
         type: integer
         example: 4
+
+  image_input:
+    description: The image input to be classified or processed.
+    type: object
+    required:
+    - image
+    properties:
+      image:
+        description: The image input to be classified or processed.
+        type: string
+        format: byte  # base64-encoded file contents
 
   text_input:
     description: The text input to be classified, matched or parsed.
