@@ -4,8 +4,8 @@ All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**image_classifier_add_testing_samples**](ImageClassifiersApi.md#image_classifier_add_testing_samples) | **POST** /image_classifiers/{instance_name}/testing_samples | Add testing samples.
-[**image_classifier_add_training_samples**](ImageClassifiersApi.md#image_classifier_add_training_samples) | **POST** /image_classifiers/{instance_name}/training_samples | Add training samples.
+[**image_classifier_add_testing_samples**](ImageClassifiersApi.md#image_classifier_add_testing_samples) | **POST** /image_classifiers/{instance_name}/testing_samples | Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+[**image_classifier_add_training_samples**](ImageClassifiersApi.md#image_classifier_add_training_samples) | **POST** /image_classifiers/{instance_name}/training_samples | Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 [**image_classifier_create**](ImageClassifiersApi.md#image_classifier_create) | **POST** /image_classifiers | Create an image classifier.
 [**image_classifier_curate**](ImageClassifiersApi.md#image_classifier_curate) | **POST** /image_classifiers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
 [**image_classifier_del**](ImageClassifiersApi.md#image_classifier_del) | **DELETE** /image_classifiers/{instance_name} | Delete named instance.
@@ -17,10 +17,10 @@ Method | HTTP request | Description
 [**image_classifier_get_details_all**](ImageClassifiersApi.md#image_classifier_get_details_all) | **GET** /image_classifiers | Get list of loaded image classifiers.
 [**image_classifier_get_labels**](ImageClassifiersApi.md#image_classifier_get_labels) | **GET** /image_classifiers/{instance_name}/get_labels | Get list of possible labels.
 [**image_classifier_get_params**](ImageClassifiersApi.md#image_classifier_get_params) | **GET** /image_classifiers/{instance_name}/params | Get the editable model parameters of named image classifier.
-[**image_classifier_get_testing_samples**](ImageClassifiersApi.md#image_classifier_get_testing_samples) | **GET** /image_classifiers/{instance_name}/testing_samples | Get testing samples.
-[**image_classifier_get_training_samples**](ImageClassifiersApi.md#image_classifier_get_training_samples) | **GET** /image_classifiers/{instance_name}/training_samples | Get training samples.
-[**image_classifier_online_training_samples**](ImageClassifiersApi.md#image_classifier_online_training_samples) | **POST** /image_classifiers/{instance_name}/online_training_samples | Train/update the classifier online with the samples provided.
-[**image_classifier_retrieve**](ImageClassifiersApi.md#image_classifier_retrieve) | **POST** /image_classifiers/{instance_name}/retrieve | Classify image.
+[**image_classifier_get_testing_samples**](ImageClassifiersApi.md#image_classifier_get_testing_samples) | **GET** /image_classifiers/{instance_name}/testing_samples | Get testing samples. Image format is 256x256 RGB.
+[**image_classifier_get_training_samples**](ImageClassifiersApi.md#image_classifier_get_training_samples) | **GET** /image_classifiers/{instance_name}/training_samples | Get training samples. Image format is 256x256 RGB.
+[**image_classifier_online_training_samples**](ImageClassifiersApi.md#image_classifier_online_training_samples) | **POST** /image_classifiers/{instance_name}/online_training_samples | Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+[**image_classifier_retrieve**](ImageClassifiersApi.md#image_classifier_retrieve) | **POST** /image_classifiers/{instance_name}/retrieve | Classify image; Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 [**image_classifier_set_params**](ImageClassifiersApi.md#image_classifier_set_params) | **POST** /image_classifiers/{instance_name}/params | Set the model parameters of named image classifier.
 [**image_classifier_train**](ImageClassifiersApi.md#image_classifier_train) | **POST** /image_classifiers/{instance_name}/train | Train the named image classifier.
 [**image_classifier_vaporise**](ImageClassifiersApi.md#image_classifier_vaporise) | **POST** /image_classifiers/{instance_name}/vaporise | Vaporise the named model.
@@ -29,7 +29,7 @@ Method | HTTP request | Description
 # **image_classifier_add_testing_samples**
 > TotalSamples image_classifier_add_testing_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
-Add testing samples.
+Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 
 Add testing samples to named image classifier. Returns the classifier's updated number of testing samples.
 
@@ -60,7 +60,7 @@ x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
-    # Add testing samples.
+    # Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
     api_response = api_instance.image_classifier_add_testing_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 # **image_classifier_add_training_samples**
 > TotalSamples image_classifier_add_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
-Add training samples.
+Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 
 Add training samples to named image classifier. Returns the classifier's updated number of training samples.
 
@@ -125,7 +125,7 @@ x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
-    # Add training samples.
+    # Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
     api_response = api_instance.image_classifier_add_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
@@ -856,7 +856,7 @@ Name | Type | Description  | Notes
 # **image_classifier_get_testing_samples**
 > list[LabelledImageSample] image_classifier_get_testing_samples(instance_name, x_caller=x_caller, origin=origin)
 
-Get testing samples.
+Get testing samples. Image format is 256x256 RGB.
 
 Get the testing samples of the named image classifier.
 
@@ -886,7 +886,7 @@ x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
-    # Get testing samples.
+    # Get testing samples. Image format is 256x256 RGB.
     api_response = api_instance.image_classifier_get_testing_samples(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
@@ -919,7 +919,7 @@ Name | Type | Description  | Notes
 # **image_classifier_get_training_samples**
 > list[LabelledImageSample] image_classifier_get_training_samples(instance_name, x_caller=x_caller, origin=origin)
 
-Get training samples.
+Get training samples. Image format is 256x256 RGB.
 
 Get the training samples of the named image classifier.
 
@@ -949,7 +949,7 @@ x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
-    # Get training samples.
+    # Get training samples. Image format is 256x256 RGB.
     api_response = api_instance.image_classifier_get_training_samples(instance_name, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
@@ -982,7 +982,7 @@ Name | Type | Description  | Notes
 # **image_classifier_online_training_samples**
 > TotalSamples image_classifier_online_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
-Train/update the classifier online with the samples provided.
+Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 
 Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
 
@@ -1013,7 +1013,7 @@ x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
-    # Train/update the classifier online with the samples provided.
+    # Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
     api_response = api_instance.image_classifier_online_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:
@@ -1047,7 +1047,7 @@ Name | Type | Description  | Notes
 # **image_classifier_retrieve**
 > list[ScoredLabel] image_classifier_retrieve(instance_name, image_input, x_caller=x_caller, origin=origin)
 
-Classify image.
+Classify image; Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 
 Classifies the image and returns a probability sorted list of classes.
 
@@ -1078,7 +1078,7 @@ x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
 try:
-    # Classify image.
+    # Classify image; Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
     api_response = api_instance.image_classifier_retrieve(instance_name, image_input, x_caller=x_caller, origin=origin)
     pprint(api_response)
 except ApiException as e:

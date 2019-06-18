@@ -53,6 +53,8 @@ tags:
   description: The API to your FAQ matcher/classifier model instances useful to match a user's question to a list of predefined FAQs.
 - name: language_recognisers
   description: The API to your language recogniser model instances. An 'lid_za' input model file is available and trained on all 11 South African languages. Create a model as shown and start doing language ident on your own text.
+- name: lr4_language_recognisers
+  description: The API to your lr4 language recogniser model instances (deprecated; please use language_recognisers instead). An 'lid_za' input model file is available and trained on all 11 South African languages. Create a model as shown and start doing language ident on your own text.
 - name: date_parsers
   description: The API to a pre-configured 'generic' date parser.
 - name: sentiment_detectors
@@ -4222,6 +4224,44 @@ paths:
 ###################################
 ###################################
 ########
+## lr4_language_recognisers retrieve
+########
+  /lr4_language_recognisers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - lr4_language_recognisers
+      summary: Recognise the language the text is written in.
+      x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
+      operationId: lr4_language_recogniser_retrieve
+      description: Recognise the language the text is written in. Returns the list of scored language codes (ISO 639-3).
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
+      responses:
+        200:
+          $ref: "#/responses/scored_label_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+###################################
+###################################
+########
 ## language_recognisers root
 ########
   /language_recognisers:
@@ -4846,7 +4886,7 @@ paths:
     post:
       tags:
       - image_classifiers
-      summary: Add training samples.
+      summary: Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_add_training_samples
       description: Add training samples to named image classifier. Returns the classifier's updated number of training samples.
@@ -4875,7 +4915,7 @@ paths:
     get:
       tags:
       - image_classifiers
-      summary: Get training samples.
+      summary: Get training samples. Image format is 256x256 RGB.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_get_training_samples
       description: Get the training samples of the named image classifier.
@@ -4959,7 +4999,7 @@ paths:
     post:
       tags:
       - image_classifiers
-      summary: Add testing samples.
+      summary: Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_add_testing_samples
       description: Add testing samples to named image classifier. Returns the classifier's updated number of testing samples.
@@ -4988,7 +5028,7 @@ paths:
     get:
       tags:
       - image_classifiers
-      summary: Get testing samples.
+      summary: Get testing samples. Image format is 256x256 RGB.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_get_testing_samples
       description: Get the testing samples of the named image classifier.
@@ -5163,7 +5203,7 @@ paths:
     post:
       tags:
       - image_classifiers
-      summary: Train/update the classifier online with the samples provided.
+      summary: Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_online_training_samples
       description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
@@ -5200,7 +5240,7 @@ paths:
     post:
       tags:
       - image_classifiers
-      summary: Classify image.
+      summary: Classify image; Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_retrieve
       description: Classifies the image and returns a probability sorted list of classes.

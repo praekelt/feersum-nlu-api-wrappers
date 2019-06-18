@@ -61,6 +61,12 @@ The below commands can be run from a bash or similar terminal
     	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
     	-d '{"text": "Watter taal praat ek?"}' 
 
+    # Detect the language of a piece of text (using lr4 alias):
+    curl -XPOST "$SERVICE"'/nlu/v2/lr4_language_recognisers/test_model/retrieve' \
+    	-H 'Content-Type: application/json' \
+    	-H 'Accept: application/json' \
+    	-H 'AUTH_TOKEN: '"$AUTH_TOKEN" \
+    	-d '{"text": "Watter taal praat ek?"}'
 
 .. code-block:: sh
 

@@ -6,7 +6,7 @@ Version 2.0.32
 
 Added image classifier endpoint.
 
-
+Added LR4_language_recogniser alias for language_recogniser for compatibility with some older applications.
 
 
 Version 2.0.31

@@ -14,6 +14,7 @@ from feersum_nlu.api.health_api import HealthApi
 from feersum_nlu.api.image_classifiers_api import ImageClassifiersApi
 from feersum_nlu.api.intent_classifiers_api import IntentClassifiersApi
 from feersum_nlu.api.language_recognisers_api import LanguageRecognisersApi
+from feersum_nlu.api.lr4_language_recognisers_api import Lr4LanguageRecognisersApi
 from feersum_nlu.api.person_name_entity_extractors_api import PersonNameEntityExtractorsApi
 from feersum_nlu.api.regex_entity_extractors_api import RegexEntityExtractorsApi
 from feersum_nlu.api.sentiment_detectors_api import SentimentDetectorsApi
