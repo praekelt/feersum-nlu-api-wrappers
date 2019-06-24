@@ -5743,9 +5743,12 @@ definitions:
       entity:
         type: string
         description: The entity label/class/type.
-      value:
-        type: string
-        description: The value of the entity as extracted from the input text. Not used during training!
+      ignore_word_boundaries:
+        type: boolean
+        description: If True then parts of input words will also be matched. Default is False to only match input words exactly. See 'ignore_case' flag to also control the case sensitivity of the match.
+      ignore_case:
+        type: boolean
+        description: If True then the casing is ignored. The default is True i.e. to ignore case.
       syn_set:
         description: The list of synonyms associated with this entity label. One should either provide a synset OR an index and len of a specific synonym in the associated utterance.
         type: array
@@ -5757,6 +5760,9 @@ definitions:
       len:
         type: integer
         description: The length of the extracted entity in the associated utterance.
+      value:
+        type: string
+        description: The value of the entity as extracted from the input text. Not used during training!
     example: {"entity": "error", "syn_set": ["fault", "error", "red light", "problem"]}
 
   synonym_sample:
