@@ -34,7 +34,6 @@ from feersum_nlu.api.sentiment_detectors_api import SentimentDetectorsApi
 from feersum_nlu.api.sim_word_entity_extractors_api import SimWordEntityExtractorsApi
 from feersum_nlu.api.synonym_entity_extractors_api import SynonymEntityExtractorsApi
 from feersum_nlu.api.text_classifiers_api import TextClassifiersApi
-from feersum_nlu.api.word_manifolds_api import WordManifoldsApi
 
 # import ApiClient
 from feersum_nlu.api_client import ApiClient

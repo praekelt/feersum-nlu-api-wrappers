@@ -45,8 +45,8 @@ tags:
   description: A service endpoint to get your list of loaded model instances. 'Try it out!' to see what models are already created for you.
 - name: text_classifiers
   description: The API to your Naive Bayes text classifier instances useful for things like classifying phrases into predefined action or intent categories. Create a model, add some training data, train it and start doing retrieve/inference calls.
-- name: word_manifolds
-  description: The API to your word embedding model instances. The service is pre-loaded with default word embeddings sufficient for most use cases.
+# - name: word_manifolds
+#   description: The API to your word embedding model instances. The service is pre-loaded with default word embeddings sufficient for most use cases.
 - name: intent_classifiers
   description: The API to your intent classifier model instances used to classify a user's utterance into a predefined action or intent category.
 - name: faq_matchers
@@ -766,154 +766,154 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 
-###################################
-###################################
-########
-## word_manifolds root
-########
-  /word_manifolds:
-    parameters:
-    - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
-
-    post:
-      tags:
-      - word_manifolds
-      summary: Create a word manifold model.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_create
-      description: Create a new word manifold model using an input file or reload one from the trash. Warning! - These models are quite big and each takes a few seconds to load/create. Returns the details of the new or loaded instance.
-      parameters:
-      - in: body
-        name: create_details
-        description: The details of the word manifold instance to create.
-        required: true
-        schema:
-          $ref: "#/definitions/word_manifold_create_details"
-      responses:
-        200:
-          $ref: "#/responses/word_manifold_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## word_manifolds Get details of named instance
-########
-  /word_manifolds/{instance_name}:
-    parameters:
-    - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
-
-    get:
-      tags:
-      - word_manifolds
-      summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_get_details
-      description: Get the details of the named word manifold instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/word_manifold_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    delete:
-      tags:
-      - word_manifolds
-      summary: Delete named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_del
-      description: Delete and return the details of the word manifold instance. Deleted models can be reloaded from the trash with the create operation.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/word_manifold_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## word_manifolds vaporise
-########
-  /word_manifolds/{instance_name}/vaporise:
-    parameters:
-    - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
-
-    post:
-      tags:
-      - word_manifolds
-      summary: Vaporise the named model.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_vaporise
-      description: Permanently vaporises a model even if not trashed.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/word_manifold_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## word_manifolds vocab
-########
-  /word_manifolds/{instance_name}/vocab:
-    parameters:
-    - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
-
-    post:
-      tags:
-      - word_manifolds
-      summary: Add new words.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_add_similar_words
-      description: Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold to the store it could take a few seconds to complete. Returns the details of the updated instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      - in: body
-        name: new_word_list
-        description: List of new words.
-        required: true
-        schema:
-          type: array
-          items:
-            $ref: "#/definitions/new_word"
-      responses:
-        200:
-          $ref: "#/responses/word_manifold_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
+####################################
+####################################
+#########
+### word_manifolds root
+#########
+#  /word_manifolds:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#    - $ref: '#/parameters/origin'
+#
+#    post:
+#      tags:
+#      - word_manifolds
+#      summary: Create a word manifold model.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#      operationId: word_manifold_create
+#      description: Create a new word manifold model using an input file or reload one from the trash. Warning! - These models are quite big and each takes a few seconds to load/create. Returns the details of the new or loaded instance.
+#      parameters:
+#      - in: body
+#        name: create_details
+#        description: The details of the word manifold instance to create.
+#        required: true
+#        schema:
+#          $ref: "#/definitions/word_manifold_create_details"
+#      responses:
+#        200:
+#          $ref: "#/responses/word_manifold_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### word_manifolds Get details of named instance
+#########
+#  /word_manifolds/{instance_name}:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#    - $ref: '#/parameters/origin'
+#
+#    get:
+#      tags:
+#      - word_manifolds
+#      summary: Get details of named instance.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#      operationId: word_manifold_get_details
+#      description: Get the details of the named word manifold instance.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/word_manifold_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#    delete:
+#      tags:
+#      - word_manifolds
+#      summary: Delete named instance.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#      operationId: word_manifold_del
+#      description: Delete and return the details of the word manifold instance. Deleted models can be reloaded from the trash with the create operation.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/word_manifold_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### word_manifolds vaporise
+#########
+#  /word_manifolds/{instance_name}/vaporise:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#    - $ref: '#/parameters/origin'
+#
+#    post:
+#      tags:
+#      - word_manifolds
+#      summary: Vaporise the named model.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#      operationId: word_manifold_vaporise
+#      description: Permanently vaporises a model even if not trashed.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/word_manifold_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### word_manifolds vocab
+#########
+#  /word_manifolds/{instance_name}/vocab:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#    - $ref: '#/parameters/origin'
+#
+#    post:
+#      tags:
+#      - word_manifolds
+#      summary: Add new words.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#      operationId: word_manifold_add_similar_words
+#      description: Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold to the store it could take a few seconds to complete. Returns the details of the updated instance.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: new_word_list
+#        description: List of new words.
+#        required: true
+#        schema:
+#          type: array
+#          items:
+#            $ref: "#/definitions/new_word"
+#      responses:
+#        200:
+#          $ref: "#/responses/word_manifold_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
 # ########
 # ## word_manifolds similar_words
 # ########
@@ -5680,7 +5680,7 @@ responses:
         $ref: "#/definitions/date_entity"
 
   sentiment:
-    description: The coarse sentiment.
+    description: The sentiment response.
     schema:
       $ref: "#/definitions/sentiment"
 

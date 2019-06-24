@@ -12,6 +12,7 @@ from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
 
+@unittest.skip("Skipping - The word manifold endpoint have been removed while developing the new language model endpoints!")
 class TestWordManifold(unittest.TestCase):
     def setUp(self):
         pass

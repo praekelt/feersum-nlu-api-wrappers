@@ -147,7 +147,7 @@ def get_image_samples(data_path: str, label: str) -> List[Tuple[str, str]]:
 
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
-        if filename.endswith((".jpg", ".jpeg", ".j2k", ".j2p", ".jpx", ".png", ".bmp")):
+        if filename.lower().endswith((".jpg", ".jpeg", ".j2k", ".j2p", ".jpx", ".png", ".bmp")):
             image_samples.append((load_image(data_path + "/" + label + "/" + filename), label))
 
     return image_samples
