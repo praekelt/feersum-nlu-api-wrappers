@@ -34,7 +34,7 @@ class ImageClassifiersApi(object):
         self.api_client = api_client
 
     def image_classifier_add_testing_samples(self, instance_name, labelled_image_sample_list, **kwargs):  # noqa: E501
-        """Add testing samples.  # noqa: E501
+        """Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.  # noqa: E501
 
         Add testing samples to named image classifier. Returns the classifier's updated number of testing samples.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -59,7 +59,7 @@ class ImageClassifiersApi(object):
             return data
 
     def image_classifier_add_testing_samples_with_http_info(self, instance_name, labelled_image_sample_list, **kwargs):  # noqa: E501
-        """Add testing samples.  # noqa: E501
+        """Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.  # noqa: E501
 
         Add testing samples to named image classifier. Returns the classifier's updated number of testing samples.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -149,7 +149,7 @@ class ImageClassifiersApi(object):
             collection_formats=collection_formats)
 
     def image_classifier_add_training_samples(self, instance_name, labelled_image_sample_list, **kwargs):  # noqa: E501
-        """Add training samples.  # noqa: E501
+        """Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.  # noqa: E501
 
         Add training samples to named image classifier. Returns the classifier's updated number of training samples.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -174,7 +174,7 @@ class ImageClassifiersApi(object):
             return data
 
     def image_classifier_add_training_samples_with_http_info(self, instance_name, labelled_image_sample_list, **kwargs):  # noqa: E501
-        """Add training samples.  # noqa: E501
+        """Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.  # noqa: E501
 
         Add training samples to named image classifier. Returns the classifier's updated number of training samples.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1457,7 +1457,7 @@ class ImageClassifiersApi(object):
             collection_formats=collection_formats)
 
     def image_classifier_get_testing_samples(self, instance_name, **kwargs):  # noqa: E501
-        """Get testing samples.  # noqa: E501
+        """Get testing samples. Image format is 256x256 RGB.  # noqa: E501
 
         Get the testing samples of the named image classifier.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1481,7 +1481,7 @@ class ImageClassifiersApi(object):
             return data
 
     def image_classifier_get_testing_samples_with_http_info(self, instance_name, **kwargs):  # noqa: E501
-        """Get testing samples.  # noqa: E501
+        """Get testing samples. Image format is 256x256 RGB.  # noqa: E501
 
         Get the testing samples of the named image classifier.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1564,7 +1564,7 @@ class ImageClassifiersApi(object):
             collection_formats=collection_formats)
 
     def image_classifier_get_training_samples(self, instance_name, **kwargs):  # noqa: E501
-        """Get training samples.  # noqa: E501
+        """Get training samples. Image format is 256x256 RGB.  # noqa: E501
 
         Get the training samples of the named image classifier.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1588,7 +1588,7 @@ class ImageClassifiersApi(object):
             return data
 
     def image_classifier_get_training_samples_with_http_info(self, instance_name, **kwargs):  # noqa: E501
-        """Get training samples.  # noqa: E501
+        """Get training samples. Image format is 256x256 RGB.  # noqa: E501
 
         Get the training samples of the named image classifier.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1671,7 +1671,7 @@ class ImageClassifiersApi(object):
             collection_formats=collection_formats)
 
     def image_classifier_online_training_samples(self, instance_name, labelled_image_sample_list, **kwargs):  # noqa: E501
-        """Train/update the classifier online with the samples provided.  # noqa: E501
+        """Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.  # noqa: E501
 
         Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1696,7 +1696,7 @@ class ImageClassifiersApi(object):
             return data
 
     def image_classifier_online_training_samples_with_http_info(self, instance_name, labelled_image_sample_list, **kwargs):  # noqa: E501
-        """Train/update the classifier online with the samples provided.  # noqa: E501
+        """Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.  # noqa: E501
 
         Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1786,7 +1786,7 @@ class ImageClassifiersApi(object):
             collection_formats=collection_formats)
 
     def image_classifier_retrieve(self, instance_name, image_input, **kwargs):  # noqa: E501
-        """Classify image.  # noqa: E501
+        """Classify image; Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.  # noqa: E501
 
         Classifies the image and returns a probability sorted list of classes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1811,7 +1811,7 @@ class ImageClassifiersApi(object):
             return data
 
     def image_classifier_retrieve_with_http_info(self, instance_name, image_input, **kwargs):  # noqa: E501
-        """Classify image.  # noqa: E501
+        """Classify image; Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.  # noqa: E501
 
         Classifies the image and returns a probability sorted list of classes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

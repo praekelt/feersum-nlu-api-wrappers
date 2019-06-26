@@ -62,6 +62,7 @@ try:
         # print(" type(api_response)", type(score_label_list))
         # print(" api_response", score_label_list)
         print(score_label_list)
+        print(f"base64_img_str size = {round(len(base64_img_str)/1000, 2)}kB")
         print()
 
         # Display the resulting frame

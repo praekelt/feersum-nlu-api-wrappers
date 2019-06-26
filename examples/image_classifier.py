@@ -21,18 +21,22 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 
+instance_name = 'under_vs_over_image_clsfr'
+train_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker/train"
+test_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker/test"
+labels = ["over", "under"]
+
 # instance_name = 'hot_dog_vs_not_hot_dog_image_clsfr'
 # train_data_path = "/Users/bduvenhage/Downloads/vision_data/hot-dog-vs-not-hot-dog/train"
 # test_data_path = "/Users/bduvenhage/Downloads/vision_data/hot-dog-vs-not-hot-dog/test"
 # labels = ["hot_dog", "not_hot_dog"]
 
-
-instance_name = 'cat_vs_dog_image_clsfr'
-train_data_path = "/Users/bduvenhage/myWork/dev/Praekelt/feersum-nlu-sdk_develop/feersum_nlu/nlp_engine_data/vision/" + \
-                  "cats-vs-dogs/train"
-test_data_path = "/Users/bduvenhage/myWork/dev/Praekelt/feersum-nlu-sdk_develop/feersum_nlu/nlp_engine_data/vision/" + \
-                  "cats-vs-dogs/test"
-labels = ["cat", "dog"]
+# instance_name = 'cat_vs_dog_image_clsfr'
+# train_data_path = "/Users/bduvenhage/myWork/dev/Praekelt/feersum-nlu-sdk_develop/feersum_nlu/nlp_engine_data/vision/" + \
+#                   "cats-vs-dogs/train"
+# test_data_path = "/Users/bduvenhage/myWork/dev/Praekelt/feersum-nlu-sdk_develop/feersum_nlu/nlp_engine_data/vision/" + \
+#                   "cats-vs-dogs/test"
+# labels = ["cat", "dog"]
 
 
 # === Load the data samples ===
@@ -74,12 +78,12 @@ caller_name = 'example_caller'
 print()
 
 try:
-    # print("Update the model params:")
-    # model_params = feersum_nlu.ModelParams(readonly=False)
-    # api_response = api_instance.image_classifier_set_params(instance_name, model_params, x_caller=caller_name)
-    # print(" type(api_response)", type(api_response))
-    # print(" api_response", api_response)
-    # print()
+    print("Update the model params:")
+    model_params = feersum_nlu.ModelParams(readonly=False)
+    api_response = api_instance.image_classifier_set_params(instance_name, model_params, x_caller=caller_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
 
     print("Create the image classifier:")
     api_response = api_instance.image_classifier_create(create_details)

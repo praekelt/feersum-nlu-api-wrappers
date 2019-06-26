@@ -1,6 +1,30 @@
 Changelog
 *********
 
+Version 2.0.34
+==============
+
+Server patched, no functional updates.
+
+
+Version 2.0.33
+==============
+
+Added image classifier endpoint.
+
+Added LR4_language_recogniser alias for language_recogniser for compatibility with some older applications.
+
+The dashboard now reports language models as sentence_encoders instead of word_manifolds. The sentence encoder model
+also now returns the encoder type and language.
+
+Added examples of how to use the text classifier using Naive Bayes and nearest neighbour L1 search (with different language
+models).
+
+The word manifold endpoint have been removed from the service while developing the new language model endpoints!
+
+Add ignore word boundaries and ignore case flags to synonym extractor entities.
+
+
 Version 2.0.31
 ==============
 

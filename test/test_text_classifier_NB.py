@@ -45,12 +45,12 @@ class TestTextClassifier(unittest.TestCase):
 
         train_details = feersum_nlu.TrainDetails(immediate_mode=False,
                                                  clsfr_algorithm="naive_bayes",
-                                                 language_model_list=[
-                                                     {
-                                                         "lang_code": "eng",
-                                                         "lang_model": "glove6B50D_trimmed"
-                                                     }
-                                                 ]
+                                                 # language_model_list=[
+                                                 #     {
+                                                 #         "lang_code": "eng",
+                                                 #         "lang_model": "glove6B50D_trimmed"
+                                                 #     }
+                                                 # ]
                                                  )
 
         text_input = feersum_nlu.TextInput("How do I get a quote?")

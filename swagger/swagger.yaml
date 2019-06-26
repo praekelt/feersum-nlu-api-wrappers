@@ -45,14 +45,16 @@ tags:
   description: A service endpoint to get your list of loaded model instances. 'Try it out!' to see what models are already created for you.
 - name: text_classifiers
   description: The API to your Naive Bayes text classifier instances useful for things like classifying phrases into predefined action or intent categories. Create a model, add some training data, train it and start doing retrieve/inference calls.
-- name: word_manifolds
-  description: The API to your word embedding model instances. The service is pre-loaded with default word embeddings sufficient for most use cases.
+# - name: word_manifolds
+#   description: The API to your word embedding model instances. The service is pre-loaded with default word embeddings sufficient for most use cases.
 - name: intent_classifiers
   description: The API to your intent classifier model instances used to classify a user's utterance into a predefined action or intent category.
 - name: faq_matchers
   description: The API to your FAQ matcher/classifier model instances useful to match a user's question to a list of predefined FAQs.
 - name: language_recognisers
   description: The API to your language recogniser model instances. An 'lid_za' input model file is available and trained on all 11 South African languages. Create a model as shown and start doing language ident on your own text.
+- name: lr4_language_recognisers
+  description: The API to your lr4 language recogniser model instances (deprecated; please use language_recognisers instead). An 'lid_za' input model file is available and trained on all 11 South African languages. Create a model as shown and start doing language ident on your own text.
 - name: date_parsers
   description: The API to a pre-configured 'generic' date parser.
 - name: sentiment_detectors
@@ -764,154 +766,154 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 
-###################################
-###################################
-########
-## word_manifolds root
-########
-  /word_manifolds:
-    parameters:
-    - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
-
-    post:
-      tags:
-      - word_manifolds
-      summary: Create a word manifold model.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_create
-      description: Create a new word manifold model using an input file or reload one from the trash. Warning! - These models are quite big and each takes a few seconds to load/create. Returns the details of the new or loaded instance.
-      parameters:
-      - in: body
-        name: create_details
-        description: The details of the word manifold instance to create.
-        required: true
-        schema:
-          $ref: "#/definitions/word_manifold_create_details"
-      responses:
-        200:
-          $ref: "#/responses/word_manifold_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## word_manifolds Get details of named instance
-########
-  /word_manifolds/{instance_name}:
-    parameters:
-    - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
-
-    get:
-      tags:
-      - word_manifolds
-      summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_get_details
-      description: Get the details of the named word manifold instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/word_manifold_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    delete:
-      tags:
-      - word_manifolds
-      summary: Delete named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_del
-      description: Delete and return the details of the word manifold instance. Deleted models can be reloaded from the trash with the create operation.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/word_manifold_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## word_manifolds vaporise
-########
-  /word_manifolds/{instance_name}/vaporise:
-    parameters:
-    - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
-
-    post:
-      tags:
-      - word_manifolds
-      summary: Vaporise the named model.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_vaporise
-      description: Permanently vaporises a model even if not trashed.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/word_manifold_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## word_manifolds vocab
-########
-  /word_manifolds/{instance_name}/vocab:
-    parameters:
-    - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
-
-    post:
-      tags:
-      - word_manifolds
-      summary: Add new words.
-      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
-      operationId: word_manifold_add_similar_words
-      description: Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold to the store it could take a few seconds to complete. Returns the details of the updated instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the model instance.
-        required: true
-        type: string
-      - in: body
-        name: new_word_list
-        description: List of new words.
-        required: true
-        schema:
-          type: array
-          items:
-            $ref: "#/definitions/new_word"
-      responses:
-        200:
-          $ref: "#/responses/word_manifold_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
+####################################
+####################################
+#########
+### word_manifolds root
+#########
+#  /word_manifolds:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#    - $ref: '#/parameters/origin'
+#
+#    post:
+#      tags:
+#      - word_manifolds
+#      summary: Create a word manifold model.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#      operationId: word_manifold_create
+#      description: Create a new word manifold model using an input file or reload one from the trash. Warning! - These models are quite big and each takes a few seconds to load/create. Returns the details of the new or loaded instance.
+#      parameters:
+#      - in: body
+#        name: create_details
+#        description: The details of the word manifold instance to create.
+#        required: true
+#        schema:
+#          $ref: "#/definitions/word_manifold_create_details"
+#      responses:
+#        200:
+#          $ref: "#/responses/word_manifold_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### word_manifolds Get details of named instance
+#########
+#  /word_manifolds/{instance_name}:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#    - $ref: '#/parameters/origin'
+#
+#    get:
+#      tags:
+#      - word_manifolds
+#      summary: Get details of named instance.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#      operationId: word_manifold_get_details
+#      description: Get the details of the named word manifold instance.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/word_manifold_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#    delete:
+#      tags:
+#      - word_manifolds
+#      summary: Delete named instance.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#      operationId: word_manifold_del
+#      description: Delete and return the details of the word manifold instance. Deleted models can be reloaded from the trash with the create operation.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/word_manifold_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### word_manifolds vaporise
+#########
+#  /word_manifolds/{instance_name}/vaporise:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#    - $ref: '#/parameters/origin'
+#
+#    post:
+#      tags:
+#      - word_manifolds
+#      summary: Vaporise the named model.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#      operationId: word_manifold_vaporise
+#      description: Permanently vaporises a model even if not trashed.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/word_manifold_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### word_manifolds vocab
+#########
+#  /word_manifolds/{instance_name}/vocab:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#    - $ref: '#/parameters/origin'
+#
+#    post:
+#      tags:
+#      - word_manifolds
+#      summary: Add new words.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
+#      operationId: word_manifold_add_similar_words
+#      description: Add new words to the manifold that are similar to existing words and save the manifold. Warning! - Because this operation saves the updated word manifold to the store it could take a few seconds to complete. Returns the details of the updated instance.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: new_word_list
+#        description: List of new words.
+#        required: true
+#        schema:
+#          type: array
+#          items:
+#            $ref: "#/definitions/new_word"
+#      responses:
+#        200:
+#          $ref: "#/responses/word_manifold_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
 # ########
 # ## word_manifolds similar_words
 # ########
@@ -4222,6 +4224,44 @@ paths:
 ###################################
 ###################################
 ########
+## lr4_language_recognisers retrieve
+########
+  /lr4_language_recognisers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - lr4_language_recognisers
+      summary: Recognise the language the text is written in.
+      x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
+      operationId: lr4_language_recogniser_retrieve
+      description: Recognise the language the text is written in. Returns the list of scored language codes (ISO 639-3).
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
+      responses:
+        200:
+          $ref: "#/responses/scored_label_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+###################################
+###################################
+########
 ## language_recognisers root
 ########
   /language_recognisers:
@@ -4846,7 +4886,7 @@ paths:
     post:
       tags:
       - image_classifiers
-      summary: Add training samples.
+      summary: Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_add_training_samples
       description: Add training samples to named image classifier. Returns the classifier's updated number of training samples.
@@ -4875,7 +4915,7 @@ paths:
     get:
       tags:
       - image_classifiers
-      summary: Get training samples.
+      summary: Get training samples. Image format is 256x256 RGB.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_get_training_samples
       description: Get the training samples of the named image classifier.
@@ -4959,7 +4999,7 @@ paths:
     post:
       tags:
       - image_classifiers
-      summary: Add testing samples.
+      summary: Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_add_testing_samples
       description: Add testing samples to named image classifier. Returns the classifier's updated number of testing samples.
@@ -4988,7 +5028,7 @@ paths:
     get:
       tags:
       - image_classifiers
-      summary: Get testing samples.
+      summary: Get testing samples. Image format is 256x256 RGB.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_get_testing_samples
       description: Get the testing samples of the named image classifier.
@@ -5163,7 +5203,7 @@ paths:
     post:
       tags:
       - image_classifiers
-      summary: Train/update the classifier online with the samples provided.
+      summary: Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_online_training_samples
       description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
@@ -5200,7 +5240,7 @@ paths:
     post:
       tags:
       - image_classifiers
-      summary: Classify image.
+      summary: Classify image; Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_retrieve
       description: Classifies the image and returns a probability sorted list of classes.
@@ -5640,7 +5680,7 @@ responses:
         $ref: "#/definitions/date_entity"
 
   sentiment:
-    description: The coarse sentiment.
+    description: The sentiment response.
     schema:
       $ref: "#/definitions/sentiment"
 
@@ -5703,9 +5743,12 @@ definitions:
       entity:
         type: string
         description: The entity label/class/type.
-      value:
-        type: string
-        description: The value of the entity as extracted from the input text. Not used during training!
+      ignore_word_boundaries:
+        type: boolean
+        description: If True then parts of input words will also be matched. Default is False to only match input words exactly. See 'ignore_case' flag to also control the case sensitivity of the match.
+      ignore_case:
+        type: boolean
+        description: If True then the casing is ignored. The default is True i.e. to ignore case.
       syn_set:
         description: The list of synonyms associated with this entity label. One should either provide a synset OR an index and len of a specific synonym in the associated utterance.
         type: array
@@ -5717,6 +5760,9 @@ definitions:
       len:
         type: integer
         description: The length of the extracted entity in the associated utterance.
+      value:
+        type: string
+        description: The value of the entity as extracted from the input text. Not used during training!
     example: {"entity": "error", "syn_set": ["fault", "error", "red light", "problem"]}
 
   synonym_sample:
