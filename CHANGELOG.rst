@@ -1,6 +1,12 @@
 Changelog
 *********
 
+Version 2.0.34
+==============
+
+Server patched, no functional updates.
+
+
 Version 2.0.33
 ==============
 

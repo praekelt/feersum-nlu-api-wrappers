@@ -206,7 +206,7 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Match a question:")
+    print("Extract some entities::")
     api_response = api_instance.synonym_entity_extractor_retrieve(instance_name, text_input_0, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
@@ -220,6 +220,7 @@ try:
     print(" api_response", api_response)
     print()
 
+    print("Extract some entities::")
     api_response = api_instance.synonym_entity_extractor_retrieve(instance_name, text_input_0)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
