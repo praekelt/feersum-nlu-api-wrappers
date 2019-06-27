@@ -32,39 +32,49 @@ class SynonymEntity(object):
     """
     swagger_types = {
         'entity': 'str',
-        'value': 'str',
+        'ignore_word_boundaries': 'bool',
+        'ignore_case': 'bool',
         'syn_set': 'list[str]',
         'index': 'int',
-        'len': 'int'
+        'len': 'int',
+        'value': 'str'
     }
 
     attribute_map = {
         'entity': 'entity',
-        'value': 'value',
+        'ignore_word_boundaries': 'ignore_word_boundaries',
+        'ignore_case': 'ignore_case',
         'syn_set': 'syn_set',
         'index': 'index',
-        'len': 'len'
+        'len': 'len',
+        'value': 'value'
     }
 
-    def __init__(self, entity=None, value=None, syn_set=None, index=None, len=None):  # noqa: E501
+    def __init__(self, entity=None, ignore_word_boundaries=None, ignore_case=None, syn_set=None, index=None, len=None, value=None):  # noqa: E501
         """SynonymEntity - a model defined in Swagger"""  # noqa: E501
 
         self._entity = None
-        self._value = None
+        self._ignore_word_boundaries = None
+        self._ignore_case = None
         self._syn_set = None
         self._index = None
         self._len = None
+        self._value = None
         self.discriminator = None
 
         self.entity = entity
-        if value is not None:
-            self.value = value
+        if ignore_word_boundaries is not None:
+            self.ignore_word_boundaries = ignore_word_boundaries
+        if ignore_case is not None:
+            self.ignore_case = ignore_case
         if syn_set is not None:
             self.syn_set = syn_set
         if index is not None:
             self.index = index
         if len is not None:
             self.len = len
+        if value is not None:
+            self.value = value
 
     @property
     def entity(self):
@@ -92,27 +102,50 @@ class SynonymEntity(object):
         self._entity = entity
 
     @property
-    def value(self):
-        """Gets the value of this SynonymEntity.  # noqa: E501
+    def ignore_word_boundaries(self):
+        """Gets the ignore_word_boundaries of this SynonymEntity.  # noqa: E501
 
-        The value of the entity as extracted from the input text. Not used during training!  # noqa: E501
+        If True then parts of input words will also be matched. Default is False to only match input words exactly. See 'ignore_case' flag to also control the case sensitivity of the match.  # noqa: E501
 
-        :return: The value of this SynonymEntity.  # noqa: E501
-        :rtype: str
+        :return: The ignore_word_boundaries of this SynonymEntity.  # noqa: E501
+        :rtype: bool
         """
-        return self._value
+        return self._ignore_word_boundaries
 
-    @value.setter
-    def value(self, value):
-        """Sets the value of this SynonymEntity.
+    @ignore_word_boundaries.setter
+    def ignore_word_boundaries(self, ignore_word_boundaries):
+        """Sets the ignore_word_boundaries of this SynonymEntity.
 
-        The value of the entity as extracted from the input text. Not used during training!  # noqa: E501
+        If True then parts of input words will also be matched. Default is False to only match input words exactly. See 'ignore_case' flag to also control the case sensitivity of the match.  # noqa: E501
 
-        :param value: The value of this SynonymEntity.  # noqa: E501
-        :type: str
+        :param ignore_word_boundaries: The ignore_word_boundaries of this SynonymEntity.  # noqa: E501
+        :type: bool
         """
 
-        self._value = value
+        self._ignore_word_boundaries = ignore_word_boundaries
+
+    @property
+    def ignore_case(self):
+        """Gets the ignore_case of this SynonymEntity.  # noqa: E501
+
+        If True then the casing is ignored. The default is True i.e. to ignore case.  # noqa: E501
+
+        :return: The ignore_case of this SynonymEntity.  # noqa: E501
+        :rtype: bool
+        """
+        return self._ignore_case
+
+    @ignore_case.setter
+    def ignore_case(self, ignore_case):
+        """Sets the ignore_case of this SynonymEntity.
+
+        If True then the casing is ignored. The default is True i.e. to ignore case.  # noqa: E501
+
+        :param ignore_case: The ignore_case of this SynonymEntity.  # noqa: E501
+        :type: bool
+        """
+
+        self._ignore_case = ignore_case
 
     @property
     def syn_set(self):
@@ -182,6 +215,29 @@ class SynonymEntity(object):
         """
 
         self._len = len
+
+    @property
+    def value(self):
+        """Gets the value of this SynonymEntity.  # noqa: E501
+
+        The value of the entity as extracted from the input text. Not used during training!  # noqa: E501
+
+        :return: The value of this SynonymEntity.  # noqa: E501
+        :rtype: str
+        """
+        return self._value
+
+    @value.setter
+    def value(self, value):
+        """Sets the value of this SynonymEntity.
+
+        The value of the entity as extracted from the input text. Not used during training!  # noqa: E501
+
+        :param value: The value of this SynonymEntity.  # noqa: E501
+        :type: str
+        """
+
+        self._value = value
 
     def to_dict(self):
         """Returns the model properties as a dict"""

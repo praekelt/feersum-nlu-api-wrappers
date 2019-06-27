@@ -1,7 +1,13 @@
 Changelog
 *********
 
-Version 2.0.32
+Version 2.0.34
+==============
+
+Server patched, no functional updates.
+
+
+Version 2.0.33
 ==============
 
 Added image classifier endpoint.
@@ -15,6 +21,8 @@ Added examples of how to use the text classifier using Naive Bayes and nearest n
 models).
 
 The word manifold endpoint have been removed from the service while developing the new language model endpoints!
+
+Add ignore word boundaries and ignore case flags to synonym extractor entities.
 
 
 Version 2.0.31

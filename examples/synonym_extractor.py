@@ -52,13 +52,12 @@ training_sample_list.append(feersum_nlu.SynonymSample(text=None, intent=None,
 
 training_sample_list.append(feersum_nlu.SynonymSample(text=None, intent=None,
                                                       entity_list=[
+                                                          # ignore_case=True & ignore_word_boundaries=False is the default!
                                                           feersum_nlu.SynonymEntity(entity="Marvel's Agents of S.H.I.E.L.D.",
-                                                                                    syn_set=['Agents of shield',
-                                                                                             'Agents of Shield',
-                                                                                             'Agents of SHIELD',
-                                                                                             'agents of shield',
-                                                                                             'agents of Shield',
-                                                                                             'agents of SHIELD'])
+                                                                                    syn_set=['agents of shield',
+                                                                                             's.h.i.e.l.d'],
+                                                                                    ignore_case=True,
+                                                                                    ignore_word_boundaries=False)
                                                       ]))
 # ===
 
@@ -86,7 +85,7 @@ testing_sample_list.append(feersum_nlu.SynonymSample(text="Can I have a hot dog 
 
 # text_input_0 = feersum_nlu.TextInput("I would like to buy a slice of pizza.",
 #                                      lang_code="eng")  # optional language hint.
-text_input_0 = feersum_nlu.TextInput("When is agents of shield showing?",
+text_input_0 = feersum_nlu.TextInput("When is agents of ShielD showing?",
                                      lang_code="eng")  # optional language hint.
 
 caller_name = 'example_caller'
@@ -207,7 +206,7 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Match a question:")
+    print("Extract some entities::")
     api_response = api_instance.synonym_entity_extractor_retrieve(instance_name, text_input_0, x_caller=caller_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
@@ -221,6 +220,7 @@ try:
     print(" api_response", api_response)
     print()
 
+    print("Extract some entities::")
     api_response = api_instance.synonym_entity_extractor_retrieve(instance_name, text_input_0)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
