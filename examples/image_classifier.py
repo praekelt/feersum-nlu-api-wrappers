@@ -92,7 +92,8 @@ create_details = feersum_nlu.ImageClassifierCreateDetails(name=instance_name,
 
 
 train_details = feersum_nlu.TrainDetails(immediate_mode=False,
-                                         clsfr_algorithm="resnet152")
+                                         clsfr_algorithm="resnet152",
+                                         num_epochs=50)
 
 # image_utils.show_image("/Users/bduvenhage/Desktop/1500x500.jpg")
 # image_string = image_utils.load_image(file_name="/Users/bduvenhage/Desktop/1500x500.jpg")
