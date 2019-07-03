@@ -2,6 +2,7 @@
 
 import urllib3
 import time
+import random
 
 from typing import List, Tuple
 
@@ -22,9 +23,37 @@ configuration.host = feersumnlu_host
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 
 instance_name = 'under_vs_over_image_clsfr'
-train_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker/train"
-test_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker/test"
+all_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker_cropped/all"
 labels = ["over", "under"]
+
+# === Load the data samples ===
+training_list = []  # type: List[Tuple[str, str]]
+testing_list = []  # type: List[Tuple[str, str]]
+
+for label in labels:
+    samples = image_utils.get_image_samples(all_data_path, label)
+    samples = samples[:min(len(samples), 100)]  # limit number of samples per class.
+
+    num_samples = len(samples)
+    num_testing_samples = int(num_samples * 0.2)
+    num_training_samples = num_samples - num_testing_samples
+
+    random.shuffle(samples)
+    training_samples = samples[:num_training_samples]
+    testing_samples = samples[num_training_samples:]
+
+    training_list.extend(training_samples)
+    testing_list.extend(testing_samples)
+
+training_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in training_list]
+testing_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in testing_list]
+# === ===
+
+
+# instance_name = 'under_vs_over_image_clsfr'
+# train_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetkerCropped/train"
+# test_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker/test"
+# labels = ["over", "under"]
 
 # instance_name = 'hot_dog_vs_not_hot_dog_image_clsfr'
 # train_data_path = "/Users/bduvenhage/Downloads/vision_data/hot-dog-vs-not-hot-dog/train"
@@ -38,23 +67,22 @@ labels = ["over", "under"]
 #                   "cats-vs-dogs/test"
 # labels = ["cat", "dog"]
 
-
 # === Load the data samples ===
 #   Assumes data in folder structure like - ..../train/dog OR ..../train/cat OR ..../test/dog etc.
-training_list = []  # type: List[Tuple[str, str]]
-for label in labels:
-    label_samples = image_utils.get_image_samples(train_data_path, label)
-    label_samples = label_samples[:min(len(label_samples), 50)]  # limit number of samples per class.
-    training_list.extend(label_samples)
-
-testing_list = []  # type: List[Tuple[str, str]]
-for label in labels:
-    label_samples = image_utils.get_image_samples(test_data_path, label)
-    label_samples = label_samples[:min(len(label_samples), 50)]  # limit number of samples per class.
-    testing_list.extend(label_samples)
-
-training_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in training_list]
-testing_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in testing_list]
+# training_list = []  # type: List[Tuple[str, str]]
+# for label in labels:
+#     samples = image_utils.get_image_samples(train_data_path, label)
+#     samples = samples[:min(len(samples), 100)]  # limit number of samples per class.
+#     training_list.extend(samples)
+#
+# testing_list = []  # type: List[Tuple[str, str]]
+# for label in labels:
+#     samples = image_utils.get_image_samples(test_data_path, label)
+#     samples = samples[:min(len(samples), 100)]  # limit number of samples per class.
+#     testing_list.extend(samples)
+#
+# training_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in training_list]
+# testing_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in testing_list]
 # === ===
 
 
@@ -63,8 +91,9 @@ create_details = feersum_nlu.ImageClassifierCreateDetails(name=instance_name,
                                                           load_from_store=False)
 
 
-train_details = feersum_nlu.TrainDetails(immediate_mode=True,
-                                         clsfr_algorithm="resnet152")
+train_details = feersum_nlu.TrainDetails(immediate_mode=False,
+                                         clsfr_algorithm="resnet152",
+                                         num_epochs=50)
 
 # image_utils.show_image("/Users/bduvenhage/Desktop/1500x500.jpg")
 # image_string = image_utils.load_image(file_name="/Users/bduvenhage/Desktop/1500x500.jpg")
@@ -107,8 +136,8 @@ try:
 
     print("Train the image classifier:")
     instance_detail = api_instance.image_classifier_train(instance_name, train_details)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
+    print(" type(api_response)", type(instance_detail))
+    print(" api_response", instance_detail)
     print()
 
     # TRAINING:
