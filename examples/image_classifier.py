@@ -22,17 +22,21 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-instance_name = 'under_vs_over_image_clsfr'
-all_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker_cropped/all"
-labels = ["over", "under"]
+# instance_name = 'under_vs_over_image_clsfr'
+# all_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker_cropped/all"
+# labels = ["over", "under"]
+
+instance_name = 'cat_vs_dog_image_clsfr'
+all_data_path = "/Users/bduvenhage/Downloads/vision_data/dogs-vs-cats/train"
+labels = ["cat", "dog"]
 
 # === Load the data samples ===
 training_list = []  # type: List[Tuple[str, str]]
 testing_list = []  # type: List[Tuple[str, str]]
 
 for label in labels:
-    samples = image_utils.get_image_samples(all_data_path, label)
-    samples = samples[:min(len(samples), 100)]  # limit number of samples per class.
+    samples = image_utils.get_image_samples(all_data_path, label,
+                                            max_samples=100)
 
     num_samples = len(samples)
     num_testing_samples = int(num_samples * 0.2)
@@ -47,42 +51,6 @@ for label in labels:
 
 training_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in training_list]
 testing_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in testing_list]
-# === ===
-
-
-# instance_name = 'under_vs_over_image_clsfr'
-# train_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetkerCropped/train"
-# test_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker/test"
-# labels = ["over", "under"]
-
-# instance_name = 'hot_dog_vs_not_hot_dog_image_clsfr'
-# train_data_path = "/Users/bduvenhage/Downloads/vision_data/hot-dog-vs-not-hot-dog/train"
-# test_data_path = "/Users/bduvenhage/Downloads/vision_data/hot-dog-vs-not-hot-dog/test"
-# labels = ["hot_dog", "not_hot_dog"]
-
-# instance_name = 'cat_vs_dog_image_clsfr'
-# train_data_path = "/Users/bduvenhage/myWork/dev/Praekelt/feersum-nlu-sdk_develop/feersum_nlu/nlp_engine_data/vision/" + \
-#                   "cats-vs-dogs/train"
-# test_data_path = "/Users/bduvenhage/myWork/dev/Praekelt/feersum-nlu-sdk_develop/feersum_nlu/nlp_engine_data/vision/" + \
-#                   "cats-vs-dogs/test"
-# labels = ["cat", "dog"]
-
-# === Load the data samples ===
-#   Assumes data in folder structure like - ..../train/dog OR ..../train/cat OR ..../test/dog etc.
-# training_list = []  # type: List[Tuple[str, str]]
-# for label in labels:
-#     samples = image_utils.get_image_samples(train_data_path, label)
-#     samples = samples[:min(len(samples), 100)]  # limit number of samples per class.
-#     training_list.extend(samples)
-#
-# testing_list = []  # type: List[Tuple[str, str]]
-# for label in labels:
-#     samples = image_utils.get_image_samples(test_data_path, label)
-#     samples = samples[:min(len(samples), 100)]  # limit number of samples per class.
-#     testing_list.extend(samples)
-#
-# training_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in training_list]
-# testing_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in testing_list]
 # === ===
 
 

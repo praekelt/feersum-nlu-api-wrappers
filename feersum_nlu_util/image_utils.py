@@ -6,6 +6,7 @@ from PIL import Image
 import base64
 import io
 import os
+import binascii
 
 
 def _resize_pil_image(pil_image: Image) -> Image:
@@ -53,7 +54,7 @@ def _base64_decode_to_pil_image(base64_image_str: str) -> Optional[PIL.Image.Ima
         base8_bytes = base64.b64decode(base64_image_str.encode('utf-8'))
         image_file = io.BytesIO(base8_bytes)
         return Image.open(image_file)
-    except IOError:
+    except (IOError, binascii.Error, UnicodeError):
         return None
 
 
@@ -81,7 +82,25 @@ def load_image(file_name: str) -> str:
        opened and identified.
     """
     pil_image = Image.open(file_name)
-    return _base64_encode_from_pil_image(_resize_pil_image(pil_image))
+    resized_image = _resize_pil_image(pil_image)
+
+    return _base64_encode_from_pil_image(resized_image)
+
+
+def load_image_from_bytes(base8_bytes: bytes) -> str:
+    """
+    Load an image from bytes, resize and encode to base64 jpeg.
+
+    :param base8_bytes: The bytes of the image to laod.
+    :return: utf8 encoded base64 string.
+    :exception IOError: If the file cannot be found, or the image cannot be
+       opened and identified.
+    """
+    image_file = io.BytesIO(base8_bytes)
+    pil_image = Image.open(image_file)
+    resized_image = _resize_pil_image(pil_image)
+
+    return _base64_encode_from_pil_image(resized_image)
 
 
 def save_image(file_name: str, base64_image_str: str) -> bool:
@@ -121,7 +140,7 @@ def check_image_format(base64_image_str: str) -> bool:
 
 def reformat_image(base64_image_str: str) -> Optional[str]:
     """
-    Reformat the base64 image string for consumption by API.
+    Reformat the base64 image string for consumption by API. Changes both size and encoding.
 
     :param base64_image_str: utf8 encoded base64 image string.
     :return: utf8 encoded base64 string (256x256xRGB jpeg)
@@ -131,14 +150,18 @@ def reformat_image(base64_image_str: str) -> Optional[str]:
     if pil_image is None:
         return None
 
-    return _base64_encode_from_pil_image(_resize_pil_image(pil_image))
+    resized_image = _resize_pil_image(pil_image)
+
+    return _base64_encode_from_pil_image(resized_image)
 
 
-def get_image_samples(data_path: str, label: str) -> List[Tuple[str, str]]:
+def get_image_samples(data_path: str, label: str,
+                      max_samples: Optional[int] = None) -> List[Tuple[str, str]]:
     """
     Get all the images within a specific data_path/'label' file path and assign 'label' to the samples.
     :param data_path: The base path i.e. '/home/data/cat_vs_dog'
     :param label: The actual label folder to load i.e. 'cat' which would load images in '/home/data/cat_vs_dog/cat' as cat.
+    :param max_samples: The maximum number of samples to load and return. No limit if max_samples=None!
     :return: The list of loaded base64 image samples all labeled with 'label'.
     """
     directory = os.fsencode(data_path + "/" + label)
@@ -149,5 +172,8 @@ def get_image_samples(data_path: str, label: str) -> List[Tuple[str, str]]:
         filename = os.fsdecode(file)
         if filename.lower().endswith((".jpg", ".jpeg", ".j2k", ".j2p", ".jpx", ".png", ".bmp")):
             image_samples.append((load_image(data_path + "/" + label + "/" + filename), label))
+
+        if (max_samples is not None) and (len(image_samples) >= max_samples):
+            break  # from for-loop.
 
     return image_samples
