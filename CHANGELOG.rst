@@ -1,6 +1,16 @@
 Changelog
 *********
 
+Version 2.0.35
+==============
+
+Added num_epochs to the image classifier's train endpoint.
+
+Added automatic class balancing added for the image classifier.
+
+Updated the Python API wrapper for Python 3.7 using swagger-codegen 2.4.6.
+
+
 Version 2.0.34
 ==============
 
