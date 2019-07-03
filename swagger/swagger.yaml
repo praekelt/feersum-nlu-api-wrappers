@@ -7053,6 +7053,10 @@ definitions:
         description: The name of the algorithm that should be used for the classification.
         type: string
         example: "'nearest_neighbour_l1', 'nearest_neighbour_cosine', 'naive_bayes', etc."
+      num_epochs:
+        description: The number of epochs to train the model for.
+        type: integer
+        default: 30
       language_model_list:
         description: The list of labelled language models used as sentence encoders.
         type: array
@@ -7095,15 +7099,17 @@ definitions:
         example: 4
 
   image_input:
-    description: The image input to be classified or processed.
+    description: The image input to be classified or processed. Can be provided as a base64 encoded string or alternatively as a URL to a an image.
     type: object
-    required:
-    - image
     properties:
       image:
-        description: The image input to be classified or processed.
+        description: The base64 image input to be classified or processed.
         type: string
         format: byte  # base64-encoded file contents
+      url:
+        description: The URL to the image.
+        type: string
+
 
   text_input:
     description: The text input to be classified, matched or parsed.
