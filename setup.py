@@ -12,8 +12,7 @@
 
 from setuptools import setup, find_packages  # noqa: H301
 
-NAME = "feersum_nlu"
-VERSION = "2.0.34.post7"
+VERSION = "2.0.35.dev1"
 
 # To install the library, run the following
 #
@@ -25,7 +24,7 @@ VERSION = "2.0.34.post7"
 REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
 
 setup(
-    name=NAME,
+    name="feersum_nlu",
     version=VERSION,
     description="FeersumNLU API",
     long_description=open("README.rst", "r").read() + "\n\n" + open("CHANGELOG.rst", "r").read(),

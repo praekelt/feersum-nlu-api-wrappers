@@ -35,7 +35,10 @@ check:
 update_spec:
 	-rm -rf swagger/build/docs
 	-rm -rf swagger/build/feersum_nlu
-	@swagger-codegen generate -i swagger/swagger.yaml -l python -c swagger/swagger_codegen-python_config.json -o swagger/build
+	# @swagger-codegen generate -i swagger/swagger.yaml -l python -c swagger/swagger_codegen-python_config.json -o swagger/build
+	# Use swagger-codegen 2.4.6 - has Python3.7 fix and still does swagger 2.0 named body params!!!
+	#  - brew install swagger-codegen@2
+	@/usr/local/opt/swagger-codegen\@2/bin/swagger-codegen generate -i swagger/swagger.yaml -l python -c swagger/swagger_codegen-python_config.json -o swagger/build
 	rm -rf docs
 	rm -rf feersum_nlu
 	cp -a swagger/build/docs .
