@@ -12,6 +12,7 @@ from feersum_nlu.api.duckling_entity_extractors_api import DucklingEntityExtract
 from feersum_nlu.api.faq_matchers_api import FaqMatchersApi
 from feersum_nlu.api.health_api import HealthApi
 from feersum_nlu.api.image_classifiers_api import ImageClassifiersApi
+from feersum_nlu.api.image_readers_api import ImageReadersApi
 from feersum_nlu.api.intent_classifiers_api import IntentClassifiersApi
 from feersum_nlu.api.language_recognisers_api import LanguageRecognisersApi
 from feersum_nlu.api.lr4_language_recognisers_api import Lr4LanguageRecognisersApi
