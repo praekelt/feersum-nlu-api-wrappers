@@ -5359,6 +5359,52 @@ paths:
 
 
 ###################################
+###################################
+########
+## image_readers root
+########
+  /image_readers:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+########
+## image_readers retrieve
+########
+  /image_readers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_readers
+      summary: Read text from the image.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_readers_controller
+      operationId: image_reader_retrieve
+      description: Read text from the image. Returns list of strings found.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: image_input
+        description: The input image.
+        required: true
+        schema:
+          $ref: "#/definitions/image_input"
+      responses:
+        200:
+          $ref: "#/responses/text_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+###################################
 # Descriptions of common parameters
 ###################################
 parameters:
@@ -5683,6 +5729,13 @@ responses:
     description: The sentiment response.
     schema:
       $ref: "#/definitions/sentiment"
+
+  text_list:
+    description: The list of text responses.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/text"
 
 ####################################
 # Descriptions of common definitions
@@ -7356,3 +7409,17 @@ definitions:
         type: integer
         example: 5000
 
+  text:
+    description: Extracted text.
+    type: object
+    required:
+    - text
+    properties:
+      text:
+        description: The extracted text.
+        type: string
+        example: 'Hi, you may call me Tom.'
+      lang_code:
+        description: The ISO 639-3 language code of the text. Included if available.
+        type: string
+        example: 'eng'

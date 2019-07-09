@@ -72,35 +72,41 @@ def show_image(file_name: str):
     im.show()
 
 
-def load_image(file_name: str) -> str:
+def load_image(file_name: str, ignore_resolution: bool = False) -> str:
     """
     Load an image from disk, resize and encode to base64 jpeg.
 
     :param file_name: The file name to load.
+    :param ignore_resolution: Don't change the image resolution if True.
     :return: utf8 encoded base64 string.
     :exception IOError: If the file cannot be found, or the image cannot be
        opened and identified.
     """
     pil_image = Image.open(file_name)
-    resized_image = _resize_pil_image(pil_image)
 
-    return _base64_encode_from_pil_image(resized_image)
+    if not ignore_resolution:
+        pil_image = _resize_pil_image(pil_image)
+
+    return _base64_encode_from_pil_image(pil_image)
 
 
-def load_image_from_bytes(base8_bytes: bytes) -> str:
+def load_image_from_bytes(base8_bytes: bytes, ignore_resolution: bool = False) -> str:
     """
     Load an image from bytes, resize and encode to base64 jpeg.
 
     :param base8_bytes: The bytes of the image to laod.
+    :param ignore_resolution: Don't change the image resolution if True.
     :return: utf8 encoded base64 string.
     :exception IOError: If the file cannot be found, or the image cannot be
        opened and identified.
     """
     image_file = io.BytesIO(base8_bytes)
     pil_image = Image.open(image_file)
-    resized_image = _resize_pil_image(pil_image)
 
-    return _base64_encode_from_pil_image(resized_image)
+    if not ignore_resolution:
+        pil_image = _resize_pil_image(pil_image)
+
+    return _base64_encode_from_pil_image(pil_image)
 
 
 def save_image(file_name: str, base64_image_str: str) -> bool:
@@ -120,9 +126,9 @@ def save_image(file_name: str, base64_image_str: str) -> bool:
         return False
 
 
-def check_image_format(base64_image_str: str) -> bool:
+def check_image_format(base64_image_str: str, ignore_resolution: bool = False) -> bool:
     """
-    Reformat the base64 image string for consumption by API.
+    Check the format of the base64 image string for consumption by API.
 
     :param base64_image_str: utf8 encoded base64 image string.
     :return: True if image is 256x256xRGB jpeg.
@@ -131,6 +137,9 @@ def check_image_format(base64_image_str: str) -> bool:
 
     if pil_image is None:
         return False
+
+    if ignore_resolution:
+        return True  # return here that the format is ok if ignore_resolution!
 
     w, h = pil_image.size
     target_size = 256  # The service expects images with smallest dimension 256 pixels!

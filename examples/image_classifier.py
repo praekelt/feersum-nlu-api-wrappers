@@ -22,13 +22,17 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-# instance_name = 'under_vs_over_image_clsfr'
-# all_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker_cropped/all"
-# labels = ["over", "under"]
+# instance_name = 'hot_dog_vs_not_hot_dog'
+# all_data_path = "/Users/bduvenhage/Downloads/vision_data/hot-dog-vs-not-hot-dog/train"
+# labels = ["hot_dog", "not_hot_dog"]
 
-instance_name = 'cat_vs_dog_image_clsfr'
-all_data_path = "/Users/bduvenhage/Downloads/vision_data/dogs-vs-cats/train"
-labels = ["cat", "dog"]
+instance_name = 'under_vs_over_image_clsfr'
+all_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker_cropped/all"
+labels = ["over", "under"]
+
+# instance_name = 'cat_vs_dog_2_image_clsfr'
+# all_data_path = "/Users/bduvenhage/Downloads/vision_data/dogs-vs-cats/train"
+# labels = ["cat", "dog"]
 
 # === Load the data samples ===
 training_list = []  # type: List[Tuple[str, str]]
@@ -68,6 +72,7 @@ train_details = feersum_nlu.TrainDetails(immediate_mode=False,
 # image_utils.save_image(file_name="/Users/bduvenhage/Desktop/1500x500_.png", base64_string=image_string)
 
 image_input = feersum_nlu.ImageInput(testing_samples[0].image)
+print("len(image_input) =", len(image_input.image))
 
 
 caller_name = 'example_caller'
@@ -75,12 +80,12 @@ caller_name = 'example_caller'
 print()
 
 try:
-    print("Update the model params:")
-    model_params = feersum_nlu.ModelParams(readonly=False)
-    api_response = api_instance.image_classifier_set_params(instance_name, model_params, x_caller=caller_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # print("Update the model params:")
+    # model_params = feersum_nlu.ModelParams(readonly=False)
+    # api_response = api_instance.image_classifier_set_params(instance_name, model_params, x_caller=caller_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
     print("Create the image classifier:")
     api_response = api_instance.image_classifier_create(create_details)
