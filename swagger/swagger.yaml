@@ -59,6 +59,8 @@ tags:
   description: The API to a pre-configured 'generic' date parser.
 - name: sentiment_detectors
   description: The API to a pre-configured 'generic' sentiment detector.
+- name: emotion_classifiers
+  description: The API to a pre-configured 'generic' emotion classifier.
 - name: regex_entity_extractors
   description: The API to your regular expression entity extractor instances. The extractor returns and labels the text that matched the named regex patterns.
 - name: person_name_entity_extractors
@@ -2298,7 +2300,7 @@ paths:
 ###################################
 ###################################
 ########
-## Detect the sentiment of the text input.
+## Detect the sentiment of the text input - Generic, always available, model.
 ########
   /sentiment_detectors/{instance_name}/retrieve:
     parameters:
@@ -2332,6 +2334,43 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+
+###################################
+###################################
+########
+## Detect the emotion in the text input - Generic, always available, model.
+########
+  /emotion_classifiers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - emotion_classifiers
+      summary: Classify emotion.
+      x-swagger-router-controller: rest_api.flask_server.controllers.emotion_classifiers_controller
+      operationId: emotion_classifier_retrieve
+      description: Classifies the emotion in the text and returns a probability sorted list of classes.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
+      responses:
+        200:
+          $ref: "#/responses/scored_label_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ###################################
 ###################################
