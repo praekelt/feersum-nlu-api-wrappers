@@ -25,7 +25,7 @@ try:
     print("Get the training samples of the FAQ matcher:")
     training_samples = api_instance.faq_matcher_get_training_samples(instance_name)
     print(" type(training_samples)", type(training_samples), flush=True)
-    print(" training_samples", training_samples, flush=True)
+    # print(" training_samples", training_samples, flush=True)
     print()
 
     print("Get the details of specific named loaded FAQ matcher:")
@@ -39,7 +39,7 @@ try:
     print("Get the labels of named loaded FAQ matcher:")
     api_response = api_instance.faq_matcher_get_labels(instance_name)
     print(" type(api_response)", type(api_response), flush=True)
-    print(" api_response", api_response, flush=True)
+    # print(" api_response", api_response, flush=True)
     print()
 
     # ===

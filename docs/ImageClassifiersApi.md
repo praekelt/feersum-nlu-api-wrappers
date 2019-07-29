@@ -854,7 +854,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **image_classifier_get_testing_samples**
-> list[LabelledImageSample] image_classifier_get_testing_samples(instance_name, x_caller=x_caller, origin=origin)
+> list[LabelledImageSample] image_classifier_get_testing_samples(instance_name, x_caller=x_caller, origin=origin, index=index, len=len)
 
 Get testing samples. Image format is 256x256 RGB.
 
@@ -884,10 +884,12 @@ api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configurati
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
+index = 56 # int | The sample index to start from. (optional)
+len = 56 # int | The number of samples to return. (optional)
 
 try:
     # Get testing samples. Image format is 256x256 RGB.
-    api_response = api_instance.image_classifier_get_testing_samples(instance_name, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_classifier_get_testing_samples(instance_name, x_caller=x_caller, origin=origin, index=index, len=len)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ImageClassifiersApi->image_classifier_get_testing_samples: %s\n" % e)
@@ -900,6 +902,8 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
  **origin** | **str**|  | [optional] 
+ **index** | **int**| The sample index to start from. | [optional] 
+ **len** | **int**| The number of samples to return. | [optional] 
 
 ### Return type
 
@@ -917,7 +921,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **image_classifier_get_training_samples**
-> list[LabelledImageSample] image_classifier_get_training_samples(instance_name, x_caller=x_caller, origin=origin)
+> list[LabelledImageSample] image_classifier_get_training_samples(instance_name, x_caller=x_caller, origin=origin, index=index, len=len)
 
 Get training samples. Image format is 256x256 RGB.
 
@@ -947,10 +951,12 @@ api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configurati
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
+index = 56 # int | The sample index to start from. (optional)
+len = 56 # int | The number of samples to return. (optional)
 
 try:
     # Get training samples. Image format is 256x256 RGB.
-    api_response = api_instance.image_classifier_get_training_samples(instance_name, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_classifier_get_training_samples(instance_name, x_caller=x_caller, origin=origin, index=index, len=len)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ImageClassifiersApi->image_classifier_get_training_samples: %s\n" % e)
@@ -963,6 +969,8 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
  **origin** | **str**|  | [optional] 
+ **index** | **int**| The sample index to start from. | [optional] 
+ **len** | **int**| The number of samples to return. | [optional] 
 
 ### Return type
 
