@@ -279,6 +279,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
@@ -392,6 +402,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
@@ -1133,6 +1153,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
@@ -1246,6 +1276,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
@@ -1770,6 +1810,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
@@ -1883,6 +1933,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
@@ -2519,6 +2579,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/crf_sample_list"
@@ -2632,6 +2702,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/crf_sample_list"
@@ -3027,6 +3107,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/synonym_sample_list"
@@ -3140,6 +3230,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/synonym_sample_list"
@@ -4964,6 +5064,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_image_sample_list"
@@ -5077,6 +5187,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_image_sample_list"

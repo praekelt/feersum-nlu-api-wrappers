@@ -26,13 +26,13 @@ api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configurati
 # all_data_path = "/Users/bduvenhage/Downloads/vision_data/hot-dog-vs-not-hot-dog/train"
 # labels = ["hot_dog", "not_hot_dog"]
 
-instance_name = 'under_vs_over_image_clsfr'
-all_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker_cropped/all"
-labels = ["over", "under"]
+# instance_name = 'under_vs_over_image_clsfr'
+# all_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker_cropped/all"
+# labels = ["over", "under"]
 
-# instance_name = 'cat_vs_dog_2_image_clsfr'
-# all_data_path = "/Users/bduvenhage/Downloads/vision_data/dogs-vs-cats/train"
-# labels = ["cat", "dog"]
+instance_name = 'cat_vs_dog_image_clsfr'
+all_data_path = "/Users/bduvenhage/Downloads/vision_data/dogs-vs-cats/train"
+labels = ["cat", "dog"]
 
 # === Load the data samples ===
 training_list = []  # type: List[Tuple[str, str]]
@@ -80,18 +80,23 @@ caller_name = 'example_caller'
 print()
 
 try:
-    # print("Update the model params:")
-    # model_params = feersum_nlu.ModelParams(readonly=False)
-    # api_response = api_instance.image_classifier_set_params(instance_name, model_params, x_caller=caller_name)
-    # print(" type(api_response)", type(api_response))
-    # print(" api_response", api_response)
-    # print()
+    print("Update the model params:")
+    model_params = feersum_nlu.ModelParams(readonly=False)
+    api_response = api_instance.image_classifier_set_params(instance_name, model_params, x_caller=caller_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
 
     print("Create the image classifier:")
     api_response = api_instance.image_classifier_create(create_details)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
+
+    # api_response = api_instance.image_classifier_add_training_samples(instance_name, training_samples)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
     print("Add training samples to the image classifier:")
     for training_sample in training_samples:
@@ -105,6 +110,12 @@ try:
         api_response = api_instance.image_classifier_add_testing_samples(instance_name, [testing_sample])
         print(" type(api_response)", type(api_response))
         print(" api_response", api_response)
+    print()
+
+    print("Get the training samples of the image classifier:")
+    api_response = api_instance.image_classifier_get_training_samples(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
     print()
 
     print("Train the image classifier:")

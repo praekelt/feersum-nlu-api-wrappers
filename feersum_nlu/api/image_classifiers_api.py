@@ -1469,6 +1469,8 @@ class ImageClassifiersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
         :param str origin:
+        :param int index: The sample index to start from.
+        :param int len: The number of samples to return.
         :return: list[LabelledImageSample]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1493,12 +1495,14 @@ class ImageClassifiersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
         :param str origin:
+        :param int index: The sample index to start from.
+        :param int len: The number of samples to return.
         :return: list[LabelledImageSample]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin', 'index', 'len']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1525,6 +1529,10 @@ class ImageClassifiersApi(object):
             path_params['instance_name'] = params['instance_name']  # noqa: E501
 
         query_params = []
+        if 'index' in params:
+            query_params.append(('index', params['index']))  # noqa: E501
+        if 'len' in params:
+            query_params.append(('len', params['len']))  # noqa: E501
 
         header_params = {}
         if 'x_caller' in params:
@@ -1576,6 +1584,8 @@ class ImageClassifiersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
         :param str origin:
+        :param int index: The sample index to start from.
+        :param int len: The number of samples to return.
         :return: list[LabelledImageSample]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1600,12 +1610,14 @@ class ImageClassifiersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param str x_caller:
         :param str origin:
+        :param int index: The sample index to start from.
+        :param int len: The number of samples to return.
         :return: list[LabelledImageSample]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'x_caller', 'origin']  # noqa: E501
+        all_params = ['instance_name', 'x_caller', 'origin', 'index', 'len']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1632,6 +1644,10 @@ class ImageClassifiersApi(object):
             path_params['instance_name'] = params['instance_name']  # noqa: E501
 
         query_params = []
+        if 'index' in params:
+            query_params.append(('index', params['index']))  # noqa: E501
+        if 'len' in params:
+            query_params.append(('len', params['len']))  # noqa: E501
 
         header_params = {}
         if 'x_caller' in params:
