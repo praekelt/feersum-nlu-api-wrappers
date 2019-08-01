@@ -1,6 +1,27 @@
 Changelog
 *********
 
+Version 2.0.36
+==============
+
+Added an emotion classifier model.
+
+Added an image reader model for OCR and barcode reading applications.
+
+Added optional index and len query params to the GET sample endpoints to allow one to split large sample
+downloads over multiple calls in cases where the service config doesn't allow large responses.
+
+
+Version 2.0.35
+==============
+
+Added num_epochs to the image classifier's train endpoint.
+
+Added automatic class balancing added for the image classifier.
+
+Updated the Python API wrapper for Python 3.7 using swagger-codegen 2.4.6.
+
+
 Version 2.0.34
 ==============
 
