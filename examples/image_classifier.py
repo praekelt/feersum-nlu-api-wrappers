@@ -22,17 +22,25 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-instance_name = 'under_vs_over_image_clsfr'
-all_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker_cropped/all"
-labels = ["over", "under"]
+# instance_name = 'hot_dog_vs_not_hot_dog'
+# all_data_path = "/Users/bduvenhage/Downloads/vision_data/hot-dog-vs-not-hot-dog/train"
+# labels = ["hot_dog", "not_hot_dog"]
+
+# instance_name = 'under_vs_over_image_clsfr'
+# all_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker_cropped/all"
+# labels = ["over", "under"]
+
+instance_name = 'cat_vs_dog_image_clsfr'
+all_data_path = "/Users/bduvenhage/Downloads/vision_data/dogs-vs-cats/train"
+labels = ["cat", "dog"]
 
 # === Load the data samples ===
 training_list = []  # type: List[Tuple[str, str]]
 testing_list = []  # type: List[Tuple[str, str]]
 
 for label in labels:
-    samples = image_utils.get_image_samples(all_data_path, label)
-    samples = samples[:min(len(samples), 100)]  # limit number of samples per class.
+    samples = image_utils.get_image_samples(all_data_path, label,
+                                            max_samples=100)
 
     num_samples = len(samples)
     num_testing_samples = int(num_samples * 0.2)
@@ -50,42 +58,6 @@ testing_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for
 # === ===
 
 
-# instance_name = 'under_vs_over_image_clsfr'
-# train_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetkerCropped/train"
-# test_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker/test"
-# labels = ["over", "under"]
-
-# instance_name = 'hot_dog_vs_not_hot_dog_image_clsfr'
-# train_data_path = "/Users/bduvenhage/Downloads/vision_data/hot-dog-vs-not-hot-dog/train"
-# test_data_path = "/Users/bduvenhage/Downloads/vision_data/hot-dog-vs-not-hot-dog/test"
-# labels = ["hot_dog", "not_hot_dog"]
-
-# instance_name = 'cat_vs_dog_image_clsfr'
-# train_data_path = "/Users/bduvenhage/myWork/dev/Praekelt/feersum-nlu-sdk_develop/feersum_nlu/nlp_engine_data/vision/" + \
-#                   "cats-vs-dogs/train"
-# test_data_path = "/Users/bduvenhage/myWork/dev/Praekelt/feersum-nlu-sdk_develop/feersum_nlu/nlp_engine_data/vision/" + \
-#                   "cats-vs-dogs/test"
-# labels = ["cat", "dog"]
-
-# === Load the data samples ===
-#   Assumes data in folder structure like - ..../train/dog OR ..../train/cat OR ..../test/dog etc.
-# training_list = []  # type: List[Tuple[str, str]]
-# for label in labels:
-#     samples = image_utils.get_image_samples(train_data_path, label)
-#     samples = samples[:min(len(samples), 100)]  # limit number of samples per class.
-#     training_list.extend(samples)
-#
-# testing_list = []  # type: List[Tuple[str, str]]
-# for label in labels:
-#     samples = image_utils.get_image_samples(test_data_path, label)
-#     samples = samples[:min(len(samples), 100)]  # limit number of samples per class.
-#     testing_list.extend(samples)
-#
-# training_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in training_list]
-# testing_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in testing_list]
-# === ===
-
-
 create_details = feersum_nlu.ImageClassifierCreateDetails(name=instance_name,
                                                           desc=instance_name,
                                                           load_from_store=False)
@@ -100,6 +72,7 @@ train_details = feersum_nlu.TrainDetails(immediate_mode=False,
 # image_utils.save_image(file_name="/Users/bduvenhage/Desktop/1500x500_.png", base64_string=image_string)
 
 image_input = feersum_nlu.ImageInput(testing_samples[0].image)
+print("len(image_input) =", len(image_input.image))
 
 
 caller_name = 'example_caller'
@@ -120,6 +93,11 @@ try:
     print(" api_response", api_response)
     print()
 
+    # api_response = api_instance.image_classifier_add_training_samples(instance_name, training_samples)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+
     print("Add training samples to the image classifier:")
     for training_sample in training_samples:
         api_response = api_instance.image_classifier_add_training_samples(instance_name, [training_sample])
@@ -132,6 +110,12 @@ try:
         api_response = api_instance.image_classifier_add_testing_samples(instance_name, [testing_sample])
         print(" type(api_response)", type(api_response))
         print(" api_response", api_response)
+    print()
+
+    print("Get the training samples of the image classifier:")
+    api_response = api_instance.image_classifier_get_training_samples(instance_name)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
     print()
 
     print("Train the image classifier:")

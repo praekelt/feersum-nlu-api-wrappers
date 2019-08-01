@@ -19,12 +19,13 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 
+instance_name = 'under_vs_over_image_clsfr'
 # instance_name = 'cat_vs_dog_image_clsfr'
-instance_name = 'hot_dog_vs_not_hot_dog_image_clsfr'
+# instance_name = 'hot_dog_vs_not_hot_dog_image_clsfr'
 
 caller_name = 'example_caller'
 
-cap = cv2.VideoCapture(0)  # pylint: disable=no-member
+cap = cv2.VideoCapture(1)  # pylint: disable=no-member
 print()
 
 try:
@@ -62,7 +63,7 @@ try:
         # print(" type(api_response)", type(score_label_list))
         # print(" api_response", score_label_list)
         print(score_label_list)
-        print(f"base64_img_str size = {round(len(base64_img_str)/1000, 2)}kB")
+        print(f"base64_img_str size = {round(len(base64_img_str)/1024, 2)}kB")
         print()
 
         # Display the resulting frame

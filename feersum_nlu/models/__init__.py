@@ -64,6 +64,7 @@ from feersum_nlu.models.synonym_entity import SynonymEntity
 from feersum_nlu.models.synonym_entity_extractor_create_details import SynonymEntityExtractorCreateDetails
 from feersum_nlu.models.synonym_entity_extractor_instance_detail import SynonymEntityExtractorInstanceDetail
 from feersum_nlu.models.synonym_sample import SynonymSample
+from feersum_nlu.models.text import Text
 from feersum_nlu.models.text_classifier_create_details import TextClassifierCreateDetails
 from feersum_nlu.models.text_classifier_instance_detail import TextClassifierInstanceDetail
 from feersum_nlu.models.text_input import TextInput

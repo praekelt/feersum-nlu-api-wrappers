@@ -856,7 +856,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_get_testing_samples**
-> list[LabelledTextSample] text_classifier_get_testing_samples(instance_name, x_caller=x_caller, origin=origin)
+> list[LabelledTextSample] text_classifier_get_testing_samples(instance_name, x_caller=x_caller, origin=origin, index=index, len=len)
 
 Get testing samples.
 
@@ -886,10 +886,12 @@ api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuratio
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
+index = 56 # int | The sample index to start from. (optional)
+len = 56 # int | The number of samples to return. (optional)
 
 try:
     # Get testing samples.
-    api_response = api_instance.text_classifier_get_testing_samples(instance_name, x_caller=x_caller, origin=origin)
+    api_response = api_instance.text_classifier_get_testing_samples(instance_name, x_caller=x_caller, origin=origin, index=index, len=len)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TextClassifiersApi->text_classifier_get_testing_samples: %s\n" % e)
@@ -902,6 +904,8 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
  **origin** | **str**|  | [optional] 
+ **index** | **int**| The sample index to start from. | [optional] 
+ **len** | **int**| The number of samples to return. | [optional] 
 
 ### Return type
 
@@ -919,7 +923,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_get_training_samples**
-> list[LabelledTextSample] text_classifier_get_training_samples(instance_name, x_caller=x_caller, origin=origin)
+> list[LabelledTextSample] text_classifier_get_training_samples(instance_name, x_caller=x_caller, origin=origin, index=index, len=len)
 
 Get training samples.
 
@@ -949,10 +953,12 @@ api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuratio
 instance_name = 'instance_name_example' # str | The name of the model instance.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
+index = 56 # int | The sample index to start from. (optional)
+len = 56 # int | The number of samples to return. (optional)
 
 try:
     # Get training samples.
-    api_response = api_instance.text_classifier_get_training_samples(instance_name, x_caller=x_caller, origin=origin)
+    api_response = api_instance.text_classifier_get_training_samples(instance_name, x_caller=x_caller, origin=origin, index=index, len=len)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TextClassifiersApi->text_classifier_get_training_samples: %s\n" % e)
@@ -965,6 +971,8 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **x_caller** | **str**|  | [optional] 
  **origin** | **str**|  | [optional] 
+ **index** | **int**| The sample index to start from. | [optional] 
+ **len** | **int**| The number of samples to return. | [optional] 
 
 ### Return type
 

@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.35
+  version: 2.0.36
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -59,6 +59,8 @@ tags:
   description: The API to a pre-configured 'generic' date parser.
 - name: sentiment_detectors
   description: The API to a pre-configured 'generic' sentiment detector.
+- name: emotion_classifiers
+  description: The API to a pre-configured 'generic' emotion classifier.
 - name: regex_entity_extractors
   description: The API to your regular expression entity extractor instances. The extractor returns and labels the text that matched the named regex patterns.
 - name: person_name_entity_extractors
@@ -277,6 +279,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
@@ -390,6 +402,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
@@ -1131,6 +1153,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
@@ -1244,6 +1276,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
@@ -1768,6 +1810,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
@@ -1881,6 +1933,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
@@ -2298,7 +2360,7 @@ paths:
 ###################################
 ###################################
 ########
-## Detect the sentiment of the text input.
+## Detect the sentiment of the text input - Generic, always available, model.
 ########
   /sentiment_detectors/{instance_name}/retrieve:
     parameters:
@@ -2332,6 +2394,43 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+
+###################################
+###################################
+########
+## Detect the emotion in the text input - Generic, always available, model.
+########
+  /emotion_classifiers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - emotion_classifiers
+      summary: Classify emotion.
+      x-swagger-router-controller: rest_api.flask_server.controllers.emotion_classifiers_controller
+      operationId: emotion_classifier_retrieve
+      description: Classifies the emotion in the text and returns a probability sorted list of classes.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
+      responses:
+        200:
+          $ref: "#/responses/scored_label_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ###################################
 ###################################
@@ -2480,6 +2579,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/crf_sample_list"
@@ -2593,6 +2702,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/crf_sample_list"
@@ -2988,6 +3107,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/synonym_sample_list"
@@ -3101,6 +3230,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/synonym_sample_list"
@@ -4925,6 +5064,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_image_sample_list"
@@ -5038,6 +5187,16 @@ paths:
         description: The name of the model instance.
         required: true
         type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_image_sample_list"
@@ -5352,6 +5511,52 @@ paths:
       responses:
         200:
           $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+###################################
+###################################
+########
+## image_readers root
+########
+  /image_readers:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+########
+## image_readers retrieve
+########
+  /image_readers/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_readers
+      summary: Read text from the image.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_readers_controller
+      operationId: image_reader_retrieve
+      description: Read text from the image. Returns list of strings found.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: image_input
+        description: The input image.
+        required: true
+        schema:
+          $ref: "#/definitions/image_input"
+      responses:
+        200:
+          $ref: "#/responses/text_list"
         400:
           description: bad request
         401:
@@ -5683,6 +5888,13 @@ responses:
     description: The sentiment response.
     schema:
       $ref: "#/definitions/sentiment"
+
+  text_list:
+    description: The list of text responses.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/text"
 
 ####################################
 # Descriptions of common definitions
@@ -7356,3 +7568,17 @@ definitions:
         type: integer
         example: 5000
 
+  text:
+    description: Extracted text.
+    type: object
+    required:
+    - text
+    properties:
+      text:
+        description: The extracted text.
+        type: string
+        example: 'Hi, you may call me Tom.'
+      lang_code:
+        description: The ISO 639-3 language code of the text. Included if available.
+        type: string
+        example: 'eng'

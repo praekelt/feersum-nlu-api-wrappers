@@ -22,9 +22,11 @@ from feersum_nlu.api.dashboard_api import DashboardApi
 from feersum_nlu.api.data_objects_api import DataObjectsApi
 from feersum_nlu.api.date_parsers_api import DateParsersApi
 from feersum_nlu.api.duckling_entity_extractors_api import DucklingEntityExtractorsApi
+from feersum_nlu.api.emotion_classifiers_api import EmotionClassifiersApi
 from feersum_nlu.api.faq_matchers_api import FaqMatchersApi
 from feersum_nlu.api.health_api import HealthApi
 from feersum_nlu.api.image_classifiers_api import ImageClassifiersApi
+from feersum_nlu.api.image_readers_api import ImageReadersApi
 from feersum_nlu.api.intent_classifiers_api import IntentClassifiersApi
 from feersum_nlu.api.language_recognisers_api import LanguageRecognisersApi
 from feersum_nlu.api.lr4_language_recognisers_api import Lr4LanguageRecognisersApi
@@ -88,6 +90,7 @@ from feersum_nlu.models.synonym_entity import SynonymEntity
 from feersum_nlu.models.synonym_entity_extractor_create_details import SynonymEntityExtractorCreateDetails
 from feersum_nlu.models.synonym_entity_extractor_instance_detail import SynonymEntityExtractorInstanceDetail
 from feersum_nlu.models.synonym_sample import SynonymSample
+from feersum_nlu.models.text import Text
 from feersum_nlu.models.text_classifier_create_details import TextClassifierCreateDetails
 from feersum_nlu.models.text_classifier_instance_detail import TextClassifierInstanceDetail
 from feersum_nlu.models.text_input import TextInput

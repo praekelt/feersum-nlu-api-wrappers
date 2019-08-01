@@ -1,6 +1,17 @@
 Changelog
 *********
 
+Version 2.0.36
+==============
+
+Added an emotion classifier model.
+
+Added an image reader model for OCR and barcode reading applications.
+
+Added optional index and len query params to the GET sample endpoints to allow one to split large sample
+downloads over multiple calls in cases where the service config doesn't allow large responses.
+
+
 Version 2.0.35
 ==============
 
