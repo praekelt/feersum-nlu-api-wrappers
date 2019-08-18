@@ -38,6 +38,14 @@ try:
     print(" len(api_response) =", len(api_response))
     print()
 
+    configuration.api_key['X-Auth-Token'] = user_key  # Test the new key.
+    print("Get the details of specific named API key:")
+    api_response = api_instance.api_key_get_details(user_key)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Go back to original key.
     print("Get the details of specific named API key:")
     api_response = api_instance.api_key_get_details(user_key)
     print(" type(api_response)", type(api_response))
