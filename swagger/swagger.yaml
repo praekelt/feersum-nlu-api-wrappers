@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.36
+  version: 2.0.37.dev1
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -4894,6 +4894,33 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+    post:
+      tags:
+      - api_keys
+      summary: Update the details of named API key. Adds the key if not found. Admin rights are required to update details.
+      x-swagger-router-controller: rest_api.flask_server.controllers.api_keys_controller
+      operationId: api_key_update_details
+      description: Update the details of the named API key. Adds the key if not found.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The API key.
+        required: true
+        type: string
+      - in: body
+        name: create_details
+        description: The details of the API key to create.
+        required: true
+        schema:
+          $ref: "#/definitions/api_key_create_details"
+      responses:
+        200:
+          $ref: "#/responses/api_key_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
     delete:
       tags:
       - api_keys
@@ -6748,6 +6775,10 @@ definitions:
         description: The total number of calls made to with this API key.
         type: integer
         example: 1000000
+      call_count_breakdown:
+        description: The call count breakdown over the API endpoints by operation and model type.
+        type: object
+        example: {"operation": "retrieve", "call_count": 1034, "by_model_type": {"faq_matcher": 1034}}
       call_count_limit:
         description: The number of calls loaded on this key. Default call count limit is 'unlimited'. See the other endpoints for managing the call count limit.
         type: integer
@@ -7556,8 +7587,6 @@ definitions:
   api_key_create_details:
     description: The details of the api key to create.
     type: object
-    required:
-    - desc
     properties:
       desc:
         description: Details of the purpose or owner of this key.

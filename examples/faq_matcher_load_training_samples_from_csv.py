@@ -137,7 +137,7 @@ try:
             api_instance.faq_matcher_online_training_samples(instance_name,
                                                              text_sample_list[i:min(i + online_batch_size,
                                                                                     len(text_sample_list))])
-        print(f"{i}/{len(text_sample_list)}")
+        print(f"{api_response.total_samples}/{len(text_sample_list)}")
 
     # print("Delete specific named loaded FAQ matcher:")
     # api_response = api_instance.faq_matcher_del(instance_name)
