@@ -1,6 +1,14 @@
 Changelog
 *********
 
+Version 2.0.37
+==============
+
+Updated the API key management interface to allow one to add an entry with an existing key.
+
+The api key details response now includes an api call breakdown over the endpoints.
+
+
 Version 2.0.36
 ==============
 
