@@ -11,7 +11,7 @@ FeersumNLU & FeersumVision are the language and image comprehension components o
 
 Overview
 ********
-FeersumNLU & FeersumVision provide machine comprehension for natural chat-like interactions with your users. FeersumNLU is
+FeersumNLU & FeersumVision provide machine comprehension for natural chat-like interactions with your users. The components are
 designed to be flexible enough to work with any language, even in markets where large bodies of labelled
 data do not exist yet.
 
