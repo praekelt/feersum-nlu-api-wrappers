@@ -5,7 +5,7 @@ FeersumNLU API Wrappers
     :target: https://badge.fury.io/py/feersum_nlu
 
 
-This git repo hosts Python language wrappers and cURL examples for using the FeersumNLU & FeersumVision RESTful HTTP APIs.
+This git repo hosts Python language wrappers and cURL examples for the FeersumNLU & FeersumVision RESTful HTTP APIs.
 FeersumNLU & FeersumVision are the language and image comprehension components of Feersum Engine `<https://www.feersum.io>`_ .
 
 
@@ -16,12 +16,12 @@ designed to be flexible enough to work with any language, even in markets where 
 data do not exist yet.
 
 Our in-house comprehension models are based on the latest research and can be
-setup to provide solutions for various specialised verticals like finance and health. The APIs are however designed such that a
+setup for various specialised verticals like finance and health. The APIs are also designed such that a
 user may add multi-lingual Natural Language Understanding (NLU) and image comprehension
 to their application without requiring a deep understanding of NLU and computer vision theory.
 
-The examples in this repo demonstrate commonly required NLU and vision functions and how to access them. The language wrappers
-are auto-generated from a Swagger spec of the API available at `<https://nlu.playground.feersum.io:443/nlu/v2/swagger.json>`_.
+The examples in this repo demonstrate commonly required NLU and vision functions. The language wrappers
+are auto-generated from an API Swagger spec available at `<https://nlu.playground.feersum.io:443/nlu/v2/swagger.json>`_.
 The cURL examples of direct HTTP access are in the examples_curl folder.
 
 (Note: This repo is currently being updated with more examples. You may subscribe to receive notifications about updates
