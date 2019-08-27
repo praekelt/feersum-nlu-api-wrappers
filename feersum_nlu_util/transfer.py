@@ -233,7 +233,7 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
                 manifold = word_manifold_json.get("word_manifold")
 
                 if language is not None:
-                    word_manifold_list.append(feersum_nlu.LabeledWordManifold(language, manifold))
+                    word_manifold_list.append(feersum_nlu.LabelledWordManifold(language, manifold))
 
             train_details = feersum_nlu.TrainDetails(threshold=train_threshold,
                                                      word_manifold_list=word_manifold_list)
@@ -294,7 +294,7 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
                 manifold = word_manifold_json.get("word_manifold")
 
                 if language is not None:
-                    word_manifold_list.append(feersum_nlu.LabeledWordManifold(language, manifold))
+                    word_manifold_list.append(feersum_nlu.LabelledWordManifold(language, manifold))
 
             train_details = feersum_nlu.TrainDetails(threshold=train_threshold,
                                                      word_manifold_list=word_manifold_list)

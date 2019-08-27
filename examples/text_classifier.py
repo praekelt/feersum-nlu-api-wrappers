@@ -102,7 +102,21 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Del the training samples of the text classifier:")
+    print("Del a training sample by uuid:")
+    uuid_to_delete = api_response[0].uuid
+    api_response = api_instance.text_classifier_del_training_samples(instance_name,
+                                                                     [feersum_nlu.LabelledTextSample(uuid=uuid_to_delete)])
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Add training samples to the text classifier (ignoring duplicates):")
+    api_response = api_instance.text_classifier_add_training_samples(instance_name, labelled_text_sample_list)
+    print(" type(api_response)", type(api_response))
+    print(" api_response", api_response)
+    print()
+
+    print("Del ALL the training samples of the text classifier:")
     api_response = api_instance.text_classifier_del_training_samples_all(instance_name)
     # api_response = api_instance.text_classifier_del_training_samples(instance_name,
     #                                                              labelled_text_sample_list=
@@ -117,7 +131,7 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Del testing samples of the text classifier:")
+    print("Del ALL testing samples of the text classifier:")
     api_response = api_instance.text_classifier_del_testing_samples_all(instance_name)
     # api_response = api_instance.text_classifier_del_testing_samples(instance_name,
     #                                                             labelled_text_sample_list=

@@ -22,16 +22,19 @@ instance_name = 'test_faq_mtchr'
 print()
 
 try:
-    print("Get the training samples of the FAQ matcher:")
-    training_samples = api_instance.faq_matcher_get_training_samples(instance_name)
-    print(" type(training_samples)", type(training_samples), flush=True)
-    # print(" training_samples", training_samples, flush=True)
-    print()
-
     print("Get the details of specific named loaded FAQ matcher:")
     api_response = api_instance.faq_matcher_get_details(instance_name)
     print(" type(api_response)", type(api_response), flush=True)
     print(" api_response", api_response, flush=True)
+    print()
+
+    num_training_samples = api_response.num_training_samples
+    print(num_training_samples)
+
+    print("Get the training samples of the FAQ matcher:")
+    training_samples = api_instance.faq_matcher_get_training_samples(instance_name)
+    print(" type(training_samples)", type(training_samples), flush=True)
+    # print(" training_samples", training_samples, flush=True)
     print()
 
     # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be available

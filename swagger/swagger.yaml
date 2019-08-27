@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.36
+  version: 2.0.38
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -81,6 +81,8 @@ tags:
   description: An enpoint to manage API keys.
 - name: image_classifiers
   description: The API to your image classifier instances. Create a model, add some training data, train it and start doing retrieve/inference calls.
+- name: image_readers
+  description: The API to your image reader instances.
 
 
 paths:
@@ -4894,6 +4896,33 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+    post:
+      tags:
+      - api_keys
+      summary: Update the details of named API key. Adds the key if not found. Admin rights are required to update details.
+      x-swagger-router-controller: rest_api.flask_server.controllers.api_keys_controller
+      operationId: api_key_update_details
+      description: Update the details of the named API key. Adds the key if not found.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The API key.
+        required: true
+        type: string
+      - in: body
+        name: create_details
+        description: The details of the API key to create.
+        required: true
+        schema:
+          $ref: "#/definitions/api_key_create_details"
+      responses:
+        200:
+          $ref: "#/responses/api_key_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
     delete:
       tags:
       - api_keys
@@ -5097,7 +5126,7 @@ paths:
         type: string
       - in: body
         name: labelled_image_sample_list
-        description: List of labelled image samples.
+        description: List of image samples to delete. A sample can be deleted using either its content & label or its uuid.
         required: true
         schema:
           type: array
@@ -5220,7 +5249,7 @@ paths:
         type: string
       - in: body
         name: labelled_image_sample_list
-        description: List of labelled image samples.
+        description: List of image samples to delete. A sample can be deleted using either its content & label or its uuid.
         required: true
         schema:
           type: array
@@ -5775,14 +5804,14 @@ responses:
         $ref: "#/definitions/synonym_sample"
 
   labelled_image_sample_list:
-    description: The list of labeled image samples.
+    description: The list of labelled image samples.
     schema:
       type: array
       items:
         $ref: "#/definitions/labelled_image_sample"
 
   labelled_text_sample_list:
-    description: The list of labeled text samples.
+    description: The list of labelled text samples.
     schema:
       type: array
       items:
@@ -5933,8 +5962,6 @@ definitions:
   crf_sample:
     description: A crf entity extractor training/testing utterance with labelled entities.
     type: object
-    required:
-    - text
     properties:
       text:
         type: string
@@ -5945,6 +5972,10 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/crf_entity"
+      uuid:
+        type: string
+        example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
+        description: The uuid of the sample.
 
   synonym_entity:
     description: A synonym entity.
@@ -5990,6 +6021,10 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/synonym_entity"
+      uuid:
+        type: string
+        example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
+        description: The uuid of the sample.
 
   model_revision:
     description: Summary of a model revision stored in the history.
@@ -6318,7 +6353,7 @@ definitions:
         description: The list of labelled word manifolds used for training.
         type: array
         items:
-          $ref: "#/definitions/labeled_word_manifold"
+          $ref: "#/definitions/labelled_word_manifold"
       threshold:
         description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
         type: number
@@ -6403,7 +6438,7 @@ definitions:
         description: The list of labelled word manifolds used for training.
         type: array
         items:
-          $ref: "#/definitions/labeled_word_manifold"
+          $ref: "#/definitions/labelled_word_manifold"
       threshold:
         description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
         type: number
@@ -6748,6 +6783,10 @@ definitions:
         description: The total number of calls made to with this API key.
         type: integer
         example: 1000000
+      call_count_breakdown:
+        description: The call count breakdown over the API endpoints by operation and model type.
+        type: object
+        example: {"operation": "retrieve", "call_count": 1034, "by_model_type": {"faq_matcher": 1034}}
       call_count_limit:
         description: The number of calls loaded on this key. Default call count limit is 'unlimited'. See the other endpoints for managing the call count limit.
         type: integer
@@ -7143,9 +7182,6 @@ definitions:
   labelled_image_sample:
     description: Labelled image sample.
     type: object
-    required:
-      - image
-      - label
     properties:
       image:
         type: string
@@ -7157,13 +7193,14 @@ definitions:
         description: A string note about the sample.
         type: string
         example: "Second sighting of a unicorn, but still looks a lot like a horse with a horn glued on."
+      uuid:
+        type: string
+        example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
+        description: The uuid of the sample.
 
   labelled_text_sample:
     description: Labelled text sample.
     type: object
-    required:
-      - text
-      - label
     properties:
       text:
         type: string
@@ -7179,6 +7216,10 @@ definitions:
         description: A string note such as the exact answer text from a helpdesk or any other important facts about the text.
         type: string
         example: "Greeting with speaker's name."
+      uuid:
+        type: string
+        example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
+        description: The uuid of the sample.
 
   tsne_sample:
     description: A TSNE data sample.
@@ -7205,7 +7246,7 @@ definitions:
         type: number
         example: 1.5
 
-  labeled_word_manifold:
+  labelled_word_manifold:
     description: A labelled (e.g. lang_code labelled) word manifold instance.
     type: object
     required:
@@ -7260,7 +7301,7 @@ definitions:
         description: The list of labelled word manifolds to use for training.
         type: array
         items:
-          $ref: "#/definitions/labeled_word_manifold"
+          $ref: "#/definitions/labelled_word_manifold"
       clsfr_algorithm:
         description: The name of the algorithm that should be used for the classification.
         type: string
@@ -7556,8 +7597,6 @@ definitions:
   api_key_create_details:
     description: The details of the api key to create.
     type: object
-    required:
-    - desc
     properties:
       desc:
         description: Details of the purpose or owner of this key.

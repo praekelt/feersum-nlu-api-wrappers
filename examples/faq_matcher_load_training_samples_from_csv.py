@@ -44,17 +44,17 @@ with open('training_samples.csv',
 
 offline_batch_size = 10
 
-word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
-                      feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
-                      feersum_nlu.LabeledWordManifold('nbl', 'feers_wm_xho'),
-                      feersum_nlu.LabeledWordManifold('xho', 'feers_wm_xho'),
-                      feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul'),
-                      feersum_nlu.LabeledWordManifold('ssw', 'feers_wm_ssw'),
-                      feersum_nlu.LabeledWordManifold('nso', 'feers_wm_nso'),
-                      feersum_nlu.LabeledWordManifold('sot', 'feers_wm_sot'),
-                      feersum_nlu.LabeledWordManifold('tsn', 'feers_wm_tsn'),
-                      feersum_nlu.LabeledWordManifold('ven', 'feers_wm_ven'),
-                      feersum_nlu.LabeledWordManifold('tso', 'feers_wm_tso')
+word_manifold_list = [feersum_nlu.LabelledWordManifold('eng', 'feers_wm_eng'),
+                      feersum_nlu.LabelledWordManifold('afr', 'feers_wm_afr'),
+                      feersum_nlu.LabelledWordManifold('nbl', 'feers_wm_xho'),
+                      feersum_nlu.LabelledWordManifold('xho', 'feers_wm_xho'),
+                      feersum_nlu.LabelledWordManifold('zul', 'feers_wm_zul'),
+                      feersum_nlu.LabelledWordManifold('ssw', 'feers_wm_ssw'),
+                      feersum_nlu.LabelledWordManifold('nso', 'feers_wm_nso'),
+                      feersum_nlu.LabelledWordManifold('sot', 'feers_wm_sot'),
+                      feersum_nlu.LabelledWordManifold('tsn', 'feers_wm_tsn'),
+                      feersum_nlu.LabelledWordManifold('ven', 'feers_wm_ven'),
+                      feersum_nlu.LabelledWordManifold('tso', 'feers_wm_tso')
                       ]
 
 # The playground's pre-loaded embeddings include:
@@ -137,7 +137,7 @@ try:
             api_instance.faq_matcher_online_training_samples(instance_name,
                                                              text_sample_list[i:min(i + online_batch_size,
                                                                                     len(text_sample_list))])
-        print(f"{i}/{len(text_sample_list)}")
+        print(f"{api_response.total_samples}/{len(text_sample_list)}")
 
     # print("Delete specific named loaded FAQ matcher:")
     # api_response = api_instance.faq_matcher_del(instance_name)

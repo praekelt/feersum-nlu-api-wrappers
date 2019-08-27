@@ -17,7 +17,7 @@ print(configuration.host)
 
 api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
 dash_params = feersum_nlu.DashboardParams(show_data_objects=True,
-                                          history_size=2)
+                                          history_size=5)
 
 caller_name = 'example_caller'
 

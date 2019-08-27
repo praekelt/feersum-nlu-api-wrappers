@@ -5,39 +5,35 @@ FeersumNLU API Wrappers
     :target: https://badge.fury.io/py/feersum_nlu
 
 
-This git repo hosts Python and other language wrappers for the FeersumNLU RESTful HTTP API. FeersumNLU is the natural
-language understanding component of Feersum Engine `<https://www.feersum.io>`_ .
+This git repo hosts Python language wrappers and cURL examples for the FeersumNLU & FeersumVision RESTful HTTP APIs.
+FeersumNLU & FeersumVision are the language and image comprehension components of Feersum Engine `<https://www.feersum.io>`_ .
 
-The HTTP API is designed such that a user may apply multi-lingual Natural Language Understanding (NLU) to their application
-domain without requiring a deep understanding of NLU theory. The examples in this repo demonstrate commonly required NLU
-functions and how to access them. There are also some cURL examples of direct HTTP access in the examples_curl folder.
-
-These language wrappers and examples are for version 2.0.36 of the HTTP API. The language wrappers are auto-generated
-from a Swagger spec of the API available at `<https://nlu.playground.feersum.io:443/nlu/v2/swagger.json>`_
-
-
-(Note: This repo is currently being updated with more examples. You may subscribe to update notifications
-at `<https://libraries.io/pypi/feersum_nlu>`_ )
 
 Overview
 ********
+FeersumNLU & FeersumVision provide machine comprehension for natural chat-like interactions with your users. The components are
+designed to be flexible enough to work with any language, even in markets where large bodies of labelled
+data do not exist yet.
 
-FeersumNLU provides natural language understanding solutions for chat-based interactions, where messages from
-the end-user may be long or very short. Our product is also designed to be language-agnostic, which
-means it can be scaled to work with any language, even in markets where large bodies of labelled
-data do not exist. Our Natural Language Understanding models are developed locally, and can be
-modified to provide solutions for specialised industries like finance or health.
+Our in-house comprehension models are based on the latest research and can be
+setup for various specialised verticals like finance and health. The APIs are also designed such that a
+user may add multi-lingual Natural Language Understanding (NLU) and image comprehension
+to their application without requiring a deep understanding of NLU and computer vision theory.
+
+The examples in this repo demonstrate commonly required NLU and vision functions. The language wrappers
+are auto-generated from an API Swagger spec available at `<https://nlu.playground.feersum.io:443/nlu/v2/swagger.json>`_.
+The cURL examples of direct HTTP access are in the examples_curl folder.
+
+(Note: This repo is currently being updated with more examples. You may subscribe to receive notifications about updates
+at `<https://libraries.io/pypi/feersum_nlu>`_ )
 
 
 Features
 ********
-
-FeersumNLU makes use of open-source building blocks like NLTK, sklearn, PyTorch and Duckling, as
-well as algorithms we've developed in-house. We build on all elements to support a growing list
-of local and international languages.
-
-Current features include Natural Language FAQ's, detection of the user's intent and sentiment,
+Current NLU features include natural language FAQ's, detection of the user's intent and sentiment,
 information extraction, entity extraction, and text-based language identification.
+
+Current vision features include image classification and information extraction.
 
 
 Installing

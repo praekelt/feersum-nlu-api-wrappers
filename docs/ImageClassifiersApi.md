@@ -376,7 +376,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples.
+labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of image samples to delete. A sample can be deleted using either its content & label or its uuid.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
@@ -393,7 +393,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. | 
+ **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of image samples to delete. A sample can be deleted using either its content &amp; label or its uuid. | 
  **x_caller** | **str**|  | [optional] 
  **origin** | **str**|  | [optional] 
 
@@ -504,7 +504,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
-labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples.
+labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of image samples to delete. A sample can be deleted using either its content & label or its uuid.
 x_caller = 'x_caller_example' # str |  (optional)
 origin = 'origin_example' # str |  (optional)
 
@@ -521,7 +521,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the model instance. | 
- **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. | 
+ **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of image samples to delete. A sample can be deleted using either its content &amp; label or its uuid. | 
  **x_caller** | **str**|  | [optional] 
  **origin** | **str**|  | [optional] 
 

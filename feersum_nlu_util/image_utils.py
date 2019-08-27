@@ -131,6 +131,7 @@ def check_image_format(base64_image_str: str, ignore_resolution: bool = False) -
     Check the format of the base64 image string for consumption by API.
 
     :param base64_image_str: utf8 encoded base64 image string.
+    :param ignore_resolution: Don't check the image resolution if True.
     :return: True if image is 256x256xRGB jpeg.
     """
     pil_image = _base64_decode_to_pil_image(base64_image_str)
