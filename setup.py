@@ -12,7 +12,7 @@
 
 from setuptools import setup, find_packages  # noqa: H301
 
-VERSION = "2.0.37"
+VERSION = "2.0.38"
 
 # To install the library, run the following
 #

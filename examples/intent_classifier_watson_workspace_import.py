@@ -45,7 +45,7 @@ api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configurat
 
 instance_name = 'tumi_intent_clsfr'
 
-word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng')]
+word_manifold_list = [feersum_nlu.LabelledWordManifold('eng', 'feers_wm_eng')]
 # The playground's pre-loaded embeddings include:
 # "feers_wm_afr", "feers_wm_eng", "feers_wm_nbl", "feers_wm_xho",
 # "feers_wm_zul", "feers_wm_ssw", "feers_wm_nso", "feers_wm_sot",

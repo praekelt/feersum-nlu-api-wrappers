@@ -1,4 +1,4 @@
-# LabeledWordManifold
+# LabelledWordManifold
 
 ## Properties
 Name | Type | Description | Notes

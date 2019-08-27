@@ -54,9 +54,9 @@ class TestFAQMatcher(unittest.TestCase):
         additional_labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How long does a claim take?",
                                                                                    label="claim"))
 
-        word_manifold_list = [feersum_nlu.LabeledWordManifold('eng', 'feers_wm_eng'),
-                              feersum_nlu.LabeledWordManifold('afr', 'feers_wm_afr'),
-                              feersum_nlu.LabeledWordManifold('zul', 'feers_wm_zul')]
+        word_manifold_list = [feersum_nlu.LabelledWordManifold('eng', 'feers_wm_eng'),
+                              feersum_nlu.LabelledWordManifold('afr', 'feers_wm_afr'),
+                              feersum_nlu.LabelledWordManifold('zul', 'feers_wm_zul')]
         # The playground's pre-loaded embeddings include:
         # "feers_wm_afr", "feers_wm_eng", "feers_wm_nbl", "feers_wm_xho",
         # "feers_wm_zul", "feers_wm_ssw", "feers_wm_nso", "feers_wm_sot",

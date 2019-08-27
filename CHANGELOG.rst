@@ -1,6 +1,13 @@
 Changelog
 *********
 
+Version 2.0.38
+==============
+
+Updated the sample delete endpoints to allow one to delete samples by their UUIDs. The sample UUIDs are allocated by the
+service and returned along with the samples from the get samples endpoints.
+
+
 Version 2.0.37
 ==============
 
