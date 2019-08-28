@@ -16,7 +16,7 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 
-instance_name = 'test_crf_extr'
+instance_name = 'crf_entity_extractor_integration_test'
 
 create_details = feersum_nlu.CrfEntityExtractorCreateDetails(name=instance_name,
                                                              desc="Test CRF extractor.",
