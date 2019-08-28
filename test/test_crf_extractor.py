@@ -75,7 +75,7 @@ class TestCRFExtractor(unittest.TestCase):
                                                          ]))
 
         text_input_0 = feersum_nlu.TextInput("I would like to buy a beef sandwich with mustard.",
-                                             lang_code="afr")  # optional language hint.
+                                             lang_code="eng")  # optional language hint.
 
         print()
 
@@ -129,6 +129,21 @@ class TestCRFExtractor(unittest.TestCase):
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
+
+            try:
+                print("Try to add invalid sample to the CRF entity extractor:")
+                api_instance.crf_entity_extractor_add_testing_samples(instance_name, [
+                    feersum_nlu.CrfSample(text="Can I have a burger with chips please?", intent=None, entity_list=None)])
+            except ApiException:
+                self.assertTrue(True)  # This should fail!
+
+            try:
+                print("Try to add invalid sample to the CRF entity extractor:")
+                api_instance.crf_entity_extractor_add_testing_samples(instance_name, [
+                    feersum_nlu.CrfSample(text=None, intent=None,
+                                          entity_list=[feersum_nlu.CrfEntity(entity="food", index=13, len=17)])])
+            except ApiException:
+                self.assertTrue(True)  # This should fail!
 
             train_details = feersum_nlu.TrainDetails(threshold=0.99)
 

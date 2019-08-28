@@ -164,8 +164,8 @@ class TestFAQMatcherPerf(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            self.assertTrue(api_response.cm_labels['1'] == 'claim')
-            self.assertTrue(api_response.cm_labels['0'] == 'quote')
+            self.assertTrue(api_response.cm_labels['0'] == 'claim' or api_response.cm_labels['1'] == 'claim')
+            self.assertTrue(api_response.cm_labels['0'] == 'quote' or api_response.cm_labels['1'] == 'quote')
 
             # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be
             # available after training.
