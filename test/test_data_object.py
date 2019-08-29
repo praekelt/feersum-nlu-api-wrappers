@@ -9,6 +9,8 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
+import uuid
+
 
 # curl -XGET -is "https://nlu.playground.feersum.io:443/nlu/v2/data_objects" \
 # -H "X-Auth-Token: 6847a0a3-169d-4f7a-8eb1-737c9f6e9ffd" \
@@ -38,7 +40,7 @@ class TestDataObject(unittest.TestCase):
 
         api_instance = feersum_nlu.DataObjectsApi(feersum_nlu.ApiClient(configuration))
 
-        instance_name = 'test_data_object'
+        instance_name = 'test_data_object_' + str(uuid.uuid4())
         data = {"key0": [0, 1, 2], "key1": "value1"}
 
         print()

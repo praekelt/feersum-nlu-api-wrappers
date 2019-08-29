@@ -11,6 +11,8 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
+import uuid
+
 
 class TestFAQMatcherPerf(unittest.TestCase):
     def setUp(self):
@@ -30,7 +32,7 @@ class TestFAQMatcherPerf(unittest.TestCase):
 
         api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 
-        instance_name = 'test_faq_mtchr'
+        instance_name = 'test_faq_mtchr_' + str(uuid.uuid4())
 
         create_details = feersum_nlu.FaqMatcherCreateDetails(name=instance_name,
                                                              desc="Test FAQ matcher.",

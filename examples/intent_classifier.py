@@ -29,8 +29,9 @@ create_details = feersum_nlu.IntentClassifierCreateDetails(name=instance_name,
                                                            desc="Test intent classifier.",
                                                            long_name=instance_name,
                                                            lid_model_file="lid_za",
-                                                           load_from_store=True,
-                                                           revision_uuid='e514126d-39f3-411a-8a65-6283bfa465ab')
+                                                           load_from_store=False)
+# load_from_store=True,
+# revision_uuid='e514126d-39f3-411a-8a65-6283bfa465ab')
 
 # The training samples.
 labelled_text_sample_list = []

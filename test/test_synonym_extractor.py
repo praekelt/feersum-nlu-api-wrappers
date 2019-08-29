@@ -8,6 +8,8 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
+import uuid
+
 
 class TestSynonymExtractor(unittest.TestCase):
     def setUp(self):
@@ -27,7 +29,7 @@ class TestSynonymExtractor(unittest.TestCase):
 
         api_instance = feersum_nlu.SynonymEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 
-        instance_name = 'test_synonym_extr'
+        instance_name = 'test_synonym_extr_' + str(uuid.uuid4())
 
         create_details = feersum_nlu.SynonymEntityExtractorCreateDetails(name=instance_name,
                                                                          desc="Test Synonym extractor.",

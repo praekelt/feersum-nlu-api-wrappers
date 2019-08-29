@@ -8,6 +8,8 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
+import uuid
+
 
 class TestCRFExtractor(unittest.TestCase):
     def setUp(self):
@@ -27,7 +29,7 @@ class TestCRFExtractor(unittest.TestCase):
 
         api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 
-        instance_name = 'test_crf_extr'
+        instance_name = 'test_crf_extr_' + str(uuid.uuid4())
 
         create_details = feersum_nlu.CrfEntityExtractorCreateDetails(name=instance_name,
                                                                      desc="Test CRF extractor.",

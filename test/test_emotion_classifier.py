@@ -9,6 +9,8 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
+import uuid
+
 
 class TestEmotion(unittest.TestCase):
     def setUp(self):
@@ -28,7 +30,7 @@ class TestEmotion(unittest.TestCase):
 
         api_instance = feersum_nlu.EmotionClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-        model_instance_name = 'generic'
+        model_instance_name = 'generic_' + str(uuid.uuid4())
         text_input = feersum_nlu.TextInput("I am very happy to hear that?")  # TextInput | The input text.
 
         print()

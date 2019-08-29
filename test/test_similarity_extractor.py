@@ -12,6 +12,8 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
+import uuid
+
 
 class TestSimEnt(unittest.TestCase):
     def setUp(self):
@@ -31,7 +33,7 @@ class TestSimEnt(unittest.TestCase):
 
         api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 
-        instance_name = 'sim-word-extractor-test'
+        instance_name = 'sim-word-extractor-test_' + str(uuid.uuid4())
 
         similarity_ent_create_details = \
             feersum_nlu.SimWordEntityExtractorCreateDetails(name=instance_name,

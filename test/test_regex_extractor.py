@@ -12,6 +12,8 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
+import uuid
+
 
 class TestRegex(unittest.TestCase):
     def setUp(self):
@@ -31,7 +33,7 @@ class TestRegex(unittest.TestCase):
 
         api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 
-        instance_name = 'test_regex_extr'
+        instance_name = 'test_regex_extr_' + str(uuid.uuid4())
 
         regex_str = r"(?P<ID>(\b[0-9]{13}\b))"
 
