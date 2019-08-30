@@ -82,7 +82,7 @@ class TestDucklingExtractorPerf(unittest.TestCase):
                 api_response = api_instance.duckling_entity_extractor_retrieve(instance_name, text_input)
 
                 if ((i % 10) == 0) or (i == (num_iterations-1)):
-                    print(f"{round(i*100.0/num_iterations, 0)}%...", end="", flush=True)
+                    print(f"{round(i*100.0/(num_iterations-1), 0)}%...", end="", flush=True)
 
                 scored_label_list = api_response
                 if len(scored_label_list) > 0:
@@ -96,7 +96,6 @@ class TestDucklingExtractorPerf(unittest.TestCase):
             request_time = (end_time-start_time) / num_iterations
             print("done.")
             print(f"Time per request = {round(request_time, 3)}s.")
-            self.assertTrue(request_time < 0.1)
             print()
 
             print("Delete named loaded entity extractor:")
@@ -110,6 +109,8 @@ class TestDucklingExtractorPerf(unittest.TestCase):
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
+
+            self.assertTrue(request_time < 0.1)
 
         except ApiException as e:
             print("Exception when calling a entity extractor operation: %s\n" % e)
