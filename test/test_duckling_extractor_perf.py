@@ -10,6 +10,8 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
+import uuid
+
 
 class TestDucklingExtractorPerf(unittest.TestCase):
     def setUp(self):
@@ -29,7 +31,7 @@ class TestDucklingExtractorPerf(unittest.TestCase):
 
         api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 
-        instance_name = 'test_duckling_extr'
+        instance_name = 'test_duckling_extr_' + str(uuid.uuid4())
 
         duckling_ent_create_details = \
             feersum_nlu.DucklingEntityExtractorCreateDetails(name=instance_name,
@@ -80,7 +82,7 @@ class TestDucklingExtractorPerf(unittest.TestCase):
                 api_response = api_instance.duckling_entity_extractor_retrieve(instance_name, text_input)
 
                 if ((i % 10) == 0) or (i == (num_iterations-1)):
-                    print(f"{round(i*100.0/num_iterations, 0)}%...", end="", flush=True)
+                    print(f"{round(i*100.0/(num_iterations-1), 0)}%...", end="", flush=True)
 
                 scored_label_list = api_response
                 if len(scored_label_list) > 0:
@@ -94,7 +96,6 @@ class TestDucklingExtractorPerf(unittest.TestCase):
             request_time = (end_time-start_time) / num_iterations
             print("done.")
             print(f"Time per request = {round(request_time, 3)}s.")
-            self.assertTrue(request_time < 0.1)
             print()
 
             print("Delete named loaded entity extractor:")
@@ -108,6 +109,8 @@ class TestDucklingExtractorPerf(unittest.TestCase):
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
+
+            self.assertTrue(request_time < 0.1)
 
         except ApiException as e:
             print("Exception when calling a entity extractor operation: %s\n" % e)

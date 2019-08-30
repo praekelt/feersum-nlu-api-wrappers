@@ -11,6 +11,8 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
+import uuid
+
 
 class TestFAQMatcherPerf(unittest.TestCase):
     def setUp(self):
@@ -30,7 +32,7 @@ class TestFAQMatcherPerf(unittest.TestCase):
 
         api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
 
-        instance_name = 'test_faq_mtchr'
+        instance_name = 'test_faq_mtchr_' + str(uuid.uuid4())
 
         create_details = feersum_nlu.FaqMatcherCreateDetails(name=instance_name,
                                                              desc="Test FAQ matcher.",
@@ -225,7 +227,7 @@ class TestFAQMatcherPerf(unittest.TestCase):
                 api_response = api_instance.faq_matcher_retrieve(instance_name, text_input_1)
 
                 if ((i % 10) == 0) or (i == (num_iterations-1)):
-                    print(f"{round(i*100.0/num_iterations, 0)}%...", end="", flush=True)
+                    print(f"{round(i*100.0/(num_iterations-1), 0)}%...", end="", flush=True)
 
                 scored_label_list = api_response
                 if len(scored_label_list) > 0:
@@ -238,7 +240,6 @@ class TestFAQMatcherPerf(unittest.TestCase):
             request_time = (end_time-start_time) / num_iterations
             print("done.")
             print(f"Time per request = {round(request_time, 3)}s.")
-            self.assertTrue(request_time < 0.1)
             print()
 
             # print("Start a TSNE calculation:")
@@ -268,6 +269,8 @@ class TestFAQMatcherPerf(unittest.TestCase):
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
+
+            self.assertTrue(request_time < 0.1)
 
         except ApiException as e:
             print("Exception when calling an FAQ matcher operation: %s\n" % e)

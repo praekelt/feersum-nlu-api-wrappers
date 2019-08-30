@@ -9,6 +9,8 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 from test import feersumnlu_host, feersum_nlu_auth_token
 
+import uuid
+
 
 class TestDucklingExtractor(unittest.TestCase):
     def setUp(self):
@@ -28,7 +30,7 @@ class TestDucklingExtractor(unittest.TestCase):
 
         api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
 
-        instance_name = 'test_duckling_extr'
+        instance_name = 'test_duckling_extr_' + str(uuid.uuid4())
 
         duckling_ent_create_details = \
             feersum_nlu.DucklingEntityExtractorCreateDetails(name=instance_name,
