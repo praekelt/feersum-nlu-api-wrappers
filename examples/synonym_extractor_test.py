@@ -26,37 +26,37 @@ caller_name = 'example_caller'
 print()
 
 try:
-    print("Get the training samples of the synonym entity extractor:")
-    api_response = api_instance.synonym_entity_extractor_get_training_samples(instance_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
-    print("Get the details of specific named loaded synonym entity extractor:")
-    api_response = api_instance.synonym_entity_extractor_get_details(instance_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
-    # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be available
-    # after training.
-    print("Get the labels of named loaded synonym entity extractor:")
-    api_response = api_instance.synonym_entity_extractor_get_labels(instance_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
+    # print("Get the training samples of the synonym entity extractor:")
+    # api_response = api_instance.synonym_entity_extractor_get_training_samples(instance_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+    #
+    # print("Get the details of specific named loaded synonym entity extractor:")
+    # api_response = api_instance.synonym_entity_extractor_get_details(instance_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+    #
+    # # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be available
+    # # after training.
+    # print("Get the labels of named loaded synonym entity extractor:")
+    # api_response = api_instance.synonym_entity_extractor_get_labels(instance_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+    #
     print("Extract some entities::")
     api_response = api_instance.synonym_entity_extractor_retrieve(instance_name, text_input_0)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
 
-    print("Get the parameters:")
-    api_response = api_instance.synonym_entity_extractor_get_params(instance_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # print("Get the parameters:")
+    # api_response = api_instance.synonym_entity_extractor_get_params(instance_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
 except ApiException as e:
     print("Exception when calling an synonym Entity Extractor operation: %s\n" % e)

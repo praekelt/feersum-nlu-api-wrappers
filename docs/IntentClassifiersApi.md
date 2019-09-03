@@ -29,7 +29,7 @@ Method | HTTP request | Description
 
 
 # **intent_classifier_add_testing_samples**
-> TotalSamples intent_classifier_add_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+> UpdatedLabelledTextSamples intent_classifier_add_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Add testing samples.
 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TotalSamples**](TotalSamples.md)
+[**UpdatedLabelledTextSamples**](UpdatedLabelledTextSamples.md)
 
 ### Authorization
 
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **intent_classifier_add_training_samples**
-> TotalSamples intent_classifier_add_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+> UpdatedLabelledTextSamples intent_classifier_add_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Add training samples.
 
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TotalSamples**](TotalSamples.md)
+[**UpdatedLabelledTextSamples**](UpdatedLabelledTextSamples.md)
 
 ### Authorization
 
@@ -990,7 +990,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **intent_classifier_online_training_samples**
-> TotalSamples intent_classifier_online_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+> UpdatedLabelledTextSamples intent_classifier_online_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Train/update the classifier online with the samples provided.
 
@@ -1041,7 +1041,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TotalSamples**](TotalSamples.md)
+[**UpdatedLabelledTextSamples**](UpdatedLabelledTextSamples.md)
 
 ### Authorization
 
