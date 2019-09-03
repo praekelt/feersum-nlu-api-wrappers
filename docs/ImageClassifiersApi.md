@@ -27,7 +27,7 @@ Method | HTTP request | Description
 
 
 # **image_classifier_add_testing_samples**
-> TotalSamples image_classifier_add_testing_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
+> UpdatedLabelledImageSamples image_classifier_add_testing_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
 Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 
@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TotalSamples**](TotalSamples.md)
+[**UpdatedLabelledImageSamples**](UpdatedLabelledImageSamples.md)
 
 ### Authorization
 
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **image_classifier_add_training_samples**
-> TotalSamples image_classifier_add_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
+> UpdatedLabelledImageSamples image_classifier_add_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
 Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TotalSamples**](TotalSamples.md)
+[**UpdatedLabelledImageSamples**](UpdatedLabelledImageSamples.md)
 
 ### Authorization
 
@@ -988,7 +988,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **image_classifier_online_training_samples**
-> TotalSamples image_classifier_online_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
+> UpdatedLabelledImageSamples image_classifier_online_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
 Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 
@@ -1039,7 +1039,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TotalSamples**](TotalSamples.md)
+[**UpdatedLabelledImageSamples**](UpdatedLabelledImageSamples.md)
 
 ### Authorization
 

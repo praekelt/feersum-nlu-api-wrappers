@@ -262,7 +262,36 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_labelled_text_samples"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - text_classifiers
+      summary: Update training samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_update_training_samples
+      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of text samples to update. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
+      responses:
+        200:
+          $ref: "#/responses/updated_labelled_text_samples"
         400:
           description: bad request
         401:
@@ -385,7 +414,36 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_labelled_text_samples"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - text_classifiers
+      summary: Update testing samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_update_testing_samples
+      description: Update testing samples of the named text classifier. A sample's UUIDs is used to uniquely identify it.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of text samples to update. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
+      responses:
+        200:
+          $ref: "#/responses/updated_labelled_text_samples"
         400:
           description: bad request
         401:
@@ -599,7 +657,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_labelled_text_samples"
         400:
           description: bad request
         401:
@@ -1136,7 +1194,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_labelled_text_samples"
         400:
           description: bad request
         401:
@@ -1259,7 +1317,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_labelled_text_samples"
         400:
           description: bad request
         401:
@@ -1473,7 +1531,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_labelled_text_samples"
         400:
           description: bad request
         401:
@@ -1793,7 +1851,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_labelled_text_samples"
         400:
           description: bad request
         401:
@@ -1916,7 +1974,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_labelled_text_samples"
         400:
           description: bad request
         401:
@@ -2130,7 +2188,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_labelled_text_samples"
         400:
           description: bad request
         401:
@@ -2562,7 +2620,7 @@ paths:
             $ref: "#/definitions/crf_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_crf_samples"
         400:
           description: bad request
         401:
@@ -2685,7 +2743,7 @@ paths:
             $ref: "#/definitions/crf_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_crf_samples"
         400:
           description: bad request
         401:
@@ -3090,7 +3148,7 @@ paths:
             $ref: "#/definitions/synonym_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_synonym_samples"
         400:
           description: bad request
         401:
@@ -3213,7 +3271,7 @@ paths:
             $ref: "#/definitions/synonym_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_synonym_samples"
         400:
           description: bad request
         401:
@@ -5074,7 +5132,7 @@ paths:
             $ref: "#/definitions/labelled_image_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_labelled_image_samples"
         400:
           description: bad request
         401:
@@ -5197,7 +5255,7 @@ paths:
             $ref: "#/definitions/labelled_image_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_labelled_image_samples"
         400:
           description: bad request
         401:
@@ -5411,7 +5469,7 @@ paths:
             $ref: "#/definitions/labelled_image_sample"
       responses:
         200:
-          $ref: "#/responses/total_samples"
+          $ref: "#/responses/updated_labelled_image_samples"
         400:
           description: bad request
         401:
@@ -5784,11 +5842,6 @@ responses:
       items:
         $ref: "#/definitions/api_key_instance_detail"
 
-  total_samples:
-    description: The total number of samples of this type in the model.
-    schema:
-      $ref: "#/definitions/total_samples"
-
   crf_sample_list:
     description: List of crf samples.
     schema:
@@ -5816,6 +5869,26 @@ responses:
       type: array
       items:
         $ref: "#/definitions/labelled_text_sample"
+
+  updated_labelled_text_samples:
+    description: The list of added/updated labelled text samples as well as the total number of samples.
+    schema:
+      $ref: "#/definitions/updated_labelled_text_samples"
+
+  updated_labelled_image_samples:
+    description: The list of added/updated labelled image samples as well as the total number of samples.
+    schema:
+      $ref: "#/definitions/updated_labelled_image_samples"
+
+  updated_crf_samples:
+    description: The list of added/updated CRF entity samples as well as the total number of samples.
+    schema:
+      $ref: "#/definitions/updated_crf_samples"
+
+  updated_synonym_samples:
+    description: The list of added/updated synonym entity samples as well as the total number of samples.
+    schema:
+      $ref: "#/definitions/updated_synonym_samples"
 
   tsne_sample_list:
     description: The list of tsne samples.
@@ -7341,15 +7414,65 @@ definitions:
       lid_model_file:
         type: string
 
-  total_samples:
-    description: The total number of samples of this type now loaded into the model.
+  updated_labelled_text_samples:
+    description: The list of added labelled text samples as well as the total number of samples.
     type: object
     required:
     - total_samples
     properties:
       total_samples:
+        description: The total number of samples the model now has after adding/updating the samples. Note that attempts at adding duplicate samples are not counted.
         type: integer
         example: 4
+      sample_list:
+        type: array
+        items:
+          $ref: "#/definitions/labelled_text_sample"
+
+  updated_labelled_image_samples:
+    description: The list of added/updated labelled image samples as well as the total number of samples.
+    type: object
+    required:
+    - total_samples
+    properties:
+      total_samples:
+        description: The total number of samples the model now has after adding/updating the samples. Note that attempts at adding duplicate samples are not counted.
+        type: integer
+        example: 4
+      sample_list:
+        type: array
+        items:
+          $ref: "#/definitions/labelled_image_sample"
+
+  updated_crf_samples:
+    description: The list of added/updated CRF entity samples as well as the total number of samples.
+    type: object
+    required:
+    - total_samples
+    properties:
+      total_samples:
+        description: The total number of samples the model now has after adding/updating the samples. Note that attempts at adding duplicate samples are not counted.
+        type: integer
+        example: 4
+      sample_list:
+        type: array
+        items:
+          $ref: "#/definitions/crf_sample"
+
+  updated_synonym_samples:
+    description: The list of added/updated synonym entity samples as well as the total number of samples.
+    type: object
+    required:
+    - total_samples
+    properties:
+      total_samples:
+        description: The total number of samples the model now has after adding/updating the samples. Note that attempts at adding duplicate samples are not counted.
+        type: integer
+        example: 4
+      sample_list:
+        type: array
+        items:
+          $ref: "#/definitions/synonym_sample"
 
   image_input:
     description: The image input to be classified or processed. Can be provided as a base64 encoded string or alternatively as a URL to a an image.

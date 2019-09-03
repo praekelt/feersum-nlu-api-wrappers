@@ -25,11 +25,13 @@ Method | HTTP request | Description
 [**text_classifier_train**](TextClassifiersApi.md#text_classifier_train) | **POST** /text_classifiers/{instance_name}/train | Train the named text classifier.
 [**text_classifier_tsne_get**](TextClassifiersApi.md#text_classifier_tsne_get) | **GET** /text_classifiers/{instance_name}/tsne | Get the latest results of TSNE.
 [**text_classifier_tsne_post**](TextClassifiersApi.md#text_classifier_tsne_post) | **POST** /text_classifiers/{instance_name}/tsne | Endpoint to start a TSNE process.
+[**text_classifier_update_testing_samples**](TextClassifiersApi.md#text_classifier_update_testing_samples) | **PUT** /text_classifiers/{instance_name}/testing_samples | Update testing samples by UUID.
+[**text_classifier_update_training_samples**](TextClassifiersApi.md#text_classifier_update_training_samples) | **PUT** /text_classifiers/{instance_name}/training_samples | Update training samples by UUID.
 [**text_classifier_vaporise**](TextClassifiersApi.md#text_classifier_vaporise) | **POST** /text_classifiers/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **text_classifier_add_testing_samples**
-> TotalSamples text_classifier_add_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+> UpdatedLabelledTextSamples text_classifier_add_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Add testing samples.
 
@@ -80,7 +82,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TotalSamples**](TotalSamples.md)
+[**UpdatedLabelledTextSamples**](UpdatedLabelledTextSamples.md)
 
 ### Authorization
 
@@ -94,7 +96,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_add_training_samples**
-> TotalSamples text_classifier_add_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+> UpdatedLabelledTextSamples text_classifier_add_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Add training samples.
 
@@ -145,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TotalSamples**](TotalSamples.md)
+[**UpdatedLabelledTextSamples**](UpdatedLabelledTextSamples.md)
 
 ### Authorization
 
@@ -990,7 +992,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_online_training_samples**
-> TotalSamples text_classifier_online_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+> UpdatedLabelledTextSamples text_classifier_online_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Train/update the classifier online with the samples provided.
 
@@ -1041,7 +1043,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TotalSamples**](TotalSamples.md)
+[**UpdatedLabelledTextSamples**](UpdatedLabelledTextSamples.md)
 
 ### Authorization
 
@@ -1364,6 +1366,136 @@ Name | Type | Description  | Notes
 ### Return type
 
 void (empty response body)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **text_classifier_update_testing_samples**
+> UpdatedLabelledTextSamples text_classifier_update_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+
+Update testing samples by UUID.
+
+Update testing samples of the named text classifier. A sample's UUIDs is used to uniquely identify it.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of text samples to update. A sample's UUIDs is used to uniquely identify it.
+x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
+
+try:
+    # Update testing samples by UUID.
+    api_response = api_instance.text_classifier_update_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TextClassifiersApi->text_classifier_update_testing_samples: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of text samples to update. A sample&#39;s UUIDs is used to uniquely identify it. | 
+ **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
+
+### Return type
+
+[**UpdatedLabelledTextSamples**](UpdatedLabelledTextSamples.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **text_classifier_update_training_samples**
+> UpdatedLabelledTextSamples text_classifier_update_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+
+Update training samples by UUID.
+
+Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of text samples to update. A sample's UUIDs is used to uniquely identify it.
+x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
+
+try:
+    # Update training samples by UUID.
+    api_response = api_instance.text_classifier_update_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TextClassifiersApi->text_classifier_update_training_samples: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of text samples to update. A sample&#39;s UUIDs is used to uniquely identify it. | 
+ **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
+
+### Return type
+
+[**UpdatedLabelledTextSamples**](UpdatedLabelledTextSamples.md)
 
 ### Authorization
 

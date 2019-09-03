@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 
 # **crf_entity_extractor_add_testing_samples**
-> TotalSamples crf_entity_extractor_add_testing_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+> UpdatedCrfSamples crf_entity_extractor_add_testing_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
 
 Add testing samples.
 
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TotalSamples**](TotalSamples.md)
+[**UpdatedCrfSamples**](UpdatedCrfSamples.md)
 
 ### Authorization
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_add_training_samples**
-> TotalSamples crf_entity_extractor_add_training_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+> UpdatedCrfSamples crf_entity_extractor_add_training_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
 
 Add training samples.
 
@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TotalSamples**](TotalSamples.md)
+[**UpdatedCrfSamples**](UpdatedCrfSamples.md)
 
 ### Authorization
 
