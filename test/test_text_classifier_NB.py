@@ -78,11 +78,51 @@ class TestTextClassifier(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            labelled_text_sample_delete_list = []
-            labelled_text_sample_delete_list.append(feersum_nlu.LabelledTextSample(text="I would like to get a quote",
-                                                                                   label="quote"))
+            labelled_text_sample_delete_list = [feersum_nlu.LabelledTextSample(text="I would like to get a quote",
+                                                                               label="quote")]
 
             print("Del the training samples of the text classifier:")
+            # api_response = api_instance.text_classifier_del_training_samples_all(instance_name)
+            api_response = api_instance.text_classifier_del_training_samples(instance_name,
+                                                                             labelled_text_sample_list=
+                                                                             labelled_text_sample_delete_list)
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
+
+            print("Add training samples to the text classifier:")
+            api_response = api_instance.text_classifier_add_training_samples(instance_name, labelled_text_sample_list)
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
+
+            print("Get the training samples of the text classifier:")
+            api_response = api_instance.text_classifier_get_training_samples(instance_name)
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
+
+            sample_uuid = api_response[0].uuid
+            print("sample_uuid = ", sample_uuid)
+            print()
+
+            labelled_text_sample_update_list = [feersum_nlu.LabelledTextSample(uuid=sample_uuid,
+                                                                               text=api_response[0].text + " more text.",
+                                                                               label=api_response[0].label,
+                                                                               lang_code="eng")]
+
+            print("Update a training sample of the text classifier:")
+            # api_response = api_instance.text_classifier_del_training_samples_all(instance_name)
+            api_response = api_instance.text_classifier_update_training_samples(instance_name,
+                                                                                labelled_text_sample_list=
+                                                                                labelled_text_sample_update_list)
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
+
+            labelled_text_sample_delete_list = [feersum_nlu.LabelledTextSample(uuid=sample_uuid)]
+
+            print("Del a training sample of the text classifier:")
             # api_response = api_instance.text_classifier_del_training_samples_all(instance_name)
             api_response = api_instance.text_classifier_del_training_samples(instance_name,
                                                                              labelled_text_sample_list=
@@ -137,8 +177,8 @@ class TestTextClassifier(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            self.assertTrue(api_response.cm_labels['0'] == 'claim')
-            self.assertTrue(api_response.cm_labels['1'] == 'quote')
+            self.assertTrue(api_response.cm_labels['0'] == 'claim' or api_response.cm_labels['1'] == 'claim')
+            self.assertTrue(api_response.cm_labels['0'] == 'quote' or api_response.cm_labels['1'] == 'quote')
 
             # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be
             # available after training.
