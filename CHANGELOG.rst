@@ -1,10 +1,16 @@
 Changelog
 *********
 
+Version 2.0.40
+==============
+
+Updated the 'update_samples' and 'update_samples'end points to just return a list of samples.
+
+
 Version 2.0.39
 ==============
 
-Added 'updated_samples' response to add samples endpoints.
+Added 'update_samples' response to update samples endpoints.
 
 Added a samples put/update endpoint to update samples by uuid.
 
