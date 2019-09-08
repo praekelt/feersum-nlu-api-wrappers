@@ -31,11 +31,11 @@ Method | HTTP request | Description
 
 
 # **text_classifier_add_testing_samples**
-> UpdatedLabelledTextSamples text_classifier_add_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+> list[LabelledTextSample] text_classifier_add_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Add testing samples.
 
-Add testing samples to named text classifier. Returns the classifier's updated number of testing samples.
+Add testing samples to named text classifier. Returns the samples added to the model.
 
 ### Example
 ```python
@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdatedLabelledTextSamples**](UpdatedLabelledTextSamples.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -96,11 +96,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_add_training_samples**
-> UpdatedLabelledTextSamples text_classifier_add_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+> list[LabelledTextSample] text_classifier_add_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Add training samples.
 
-Add training samples to named text classifier. Returns the classifier's updated number of training samples.
+Add training samples to named text classifier. Returns the samples added to the model.
 
 ### Example
 ```python
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdatedLabelledTextSamples**](UpdatedLabelledTextSamples.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -992,11 +992,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_online_training_samples**
-> UpdatedLabelledTextSamples text_classifier_online_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+> list[LabelledTextSample] text_classifier_online_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Train/update the classifier online with the samples provided.
 
-Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
+Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the model.
 
 ### Example
 ```python
@@ -1043,7 +1043,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdatedLabelledTextSamples**](UpdatedLabelledTextSamples.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -1379,11 +1379,11 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_update_testing_samples**
-> UpdatedLabelledTextSamples text_classifier_update_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+> list[LabelledTextSample] text_classifier_update_testing_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Update testing samples by UUID.
 
-Update testing samples of the named text classifier. A sample's UUIDs is used to uniquely identify it.
+Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
 
 ### Example
 ```python
@@ -1430,7 +1430,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdatedLabelledTextSamples**](UpdatedLabelledTextSamples.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
@@ -1444,11 +1444,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **text_classifier_update_training_samples**
-> UpdatedLabelledTextSamples text_classifier_update_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
+> list[LabelledTextSample] text_classifier_update_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller, origin=origin)
 
 Update training samples by UUID.
 
-Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it.
+Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
 
 ### Example
 ```python
@@ -1495,7 +1495,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdatedLabelledTextSamples**](UpdatedLabelledTextSamples.md)
+[**list[LabelledTextSample]**](LabelledTextSample.md)
 
 ### Authorization
 
