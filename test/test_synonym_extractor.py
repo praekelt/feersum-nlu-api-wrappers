@@ -108,6 +108,12 @@ class TestSynonymExtractor(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
+            print("Add training samples to the Synonym entity extractor avoiding duplicates:")
+            api_response = api_instance.synonym_entity_extractor_add_training_samples(instance_name, training_sample_list)
+            print(" type(api_response)", type(api_response))
+            print(" api_response", api_response)
+            print()
+
             print("Del training samples of the Synonym entity extractor:")
             api_response = api_instance.synonym_entity_extractor_del_training_samples_all(instance_name)
             print(" type(api_response)", type(api_response))

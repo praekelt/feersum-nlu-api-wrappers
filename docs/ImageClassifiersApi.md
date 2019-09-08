@@ -23,15 +23,17 @@ Method | HTTP request | Description
 [**image_classifier_retrieve**](ImageClassifiersApi.md#image_classifier_retrieve) | **POST** /image_classifiers/{instance_name}/retrieve | Classify image; Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 [**image_classifier_set_params**](ImageClassifiersApi.md#image_classifier_set_params) | **POST** /image_classifiers/{instance_name}/params | Set the model parameters of named image classifier.
 [**image_classifier_train**](ImageClassifiersApi.md#image_classifier_train) | **POST** /image_classifiers/{instance_name}/train | Train the named image classifier.
+[**image_classifier_update_testing_samples**](ImageClassifiersApi.md#image_classifier_update_testing_samples) | **PUT** /image_classifiers/{instance_name}/testing_samples | Update testing samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+[**image_classifier_update_training_samples**](ImageClassifiersApi.md#image_classifier_update_training_samples) | **PUT** /image_classifiers/{instance_name}/training_samples | Update training samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 [**image_classifier_vaporise**](ImageClassifiersApi.md#image_classifier_vaporise) | **POST** /image_classifiers/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **image_classifier_add_testing_samples**
-> UpdatedLabelledImageSamples image_classifier_add_testing_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
+> list[LabelledImageSample] image_classifier_add_testing_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
 Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 
-Add testing samples to named image classifier. Returns the classifier's updated number of testing samples.
+Add testing samples to named image classifier. Returns the samples added to the model.
 
 ### Example
 ```python
@@ -78,7 +80,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdatedLabelledImageSamples**](UpdatedLabelledImageSamples.md)
+[**list[LabelledImageSample]**](LabelledImageSample.md)
 
 ### Authorization
 
@@ -92,11 +94,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **image_classifier_add_training_samples**
-> UpdatedLabelledImageSamples image_classifier_add_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
+> list[LabelledImageSample] image_classifier_add_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
 Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 
-Add training samples to named image classifier. Returns the classifier's updated number of training samples.
+Add training samples to named image classifier. Returns the samples added to the model.
 
 ### Example
 ```python
@@ -143,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdatedLabelledImageSamples**](UpdatedLabelledImageSamples.md)
+[**list[LabelledImageSample]**](LabelledImageSample.md)
 
 ### Authorization
 
@@ -988,11 +990,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **image_classifier_online_training_samples**
-> UpdatedLabelledImageSamples image_classifier_online_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
+> list[LabelledImageSample] image_classifier_online_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
 
 Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 
-Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
+Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the model.
 
 ### Example
 ```python
@@ -1039,7 +1041,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdatedLabelledImageSamples**](UpdatedLabelledImageSamples.md)
+[**list[LabelledImageSample]**](LabelledImageSample.md)
 
 ### Authorization
 
@@ -1235,6 +1237,136 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ImageClassifierInstanceDetail**](ImageClassifierInstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **image_classifier_update_testing_samples**
+> list[LabelledImageSample] image_classifier_update_testing_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
+
+Update testing samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+
+Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples. A sample's UUIDs is used to uniquely identify it.
+x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
+
+try:
+    # Update testing samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+    api_response = api_instance.image_classifier_update_testing_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ImageClassifiersApi->image_classifier_update_testing_samples: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. A sample&#39;s UUIDs is used to uniquely identify it. | 
+ **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
+
+### Return type
+
+[**list[LabelledImageSample]**](LabelledImageSample.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **image_classifier_update_training_samples**
+> list[LabelledImageSample] image_classifier_update_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
+
+Update training samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+
+Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples. A sample's UUIDs is used to uniquely identify it.
+x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
+
+try:
+    # Update training samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+    api_response = api_instance.image_classifier_update_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller, origin=origin)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ImageClassifiersApi->image_classifier_update_training_samples: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. A sample&#39;s UUIDs is used to uniquely identify it. | 
+ **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
+
+### Return type
+
+[**list[LabelledImageSample]**](LabelledImageSample.md)
 
 ### Authorization
 

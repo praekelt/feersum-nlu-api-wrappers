@@ -1,9 +1,10 @@
 """ Example: Shows how to use the API to analyse samples from a CSV file. """
 
 import urllib3
-import time
 import csv
 import operator
+
+from typing import Dict
 
 import feersum_nlu
 from feersum_nlu.rest import ApiException
@@ -50,20 +51,23 @@ def update_LID(sample_list_name: str = 'training_samples'):
                                                         load_from_store=False)
 
         print("Create the language recogniser instance:")
-        api_response = lid_api_instance.language_recogniser_create(language_recogniser_create_details)
+        api_response = lid_api_instance.language_recogniser_create(language_recogniser_create_details,
+                                                                   x_caller=caller_name)
         print(" type(api_response)", type(api_response))
         print(" api_response", api_response)
         print()
 
         print("Get the labels of named loaded language recogniser instance:")
-        api_response = lid_api_instance.language_recogniser_get_labels(lid_instance_name)
+        api_response = lid_api_instance.language_recogniser_get_labels(lid_instance_name,
+                                                                       x_caller=caller_name)
         print(" type(api_response)", type(api_response))
         print(" api_response", api_response)
         print()
 
         print("Add language to samples.")
         for i in range(len(text_sample_list)):
-            scored_label_list = lid_api_instance.language_recogniser_retrieve(lid_instance_name, text_sample_list[i])
+            scored_label_list = lid_api_instance.language_recogniser_retrieve(lid_instance_name, text_sample_list[i],
+                                                                              x_caller=caller_name)
             text_sample_list[i].lang_code = scored_label_list[0].label
             if i % 1000 == 0:
                 print(i / len(text_sample_list))

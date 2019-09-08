@@ -21,15 +21,17 @@ Method | HTTP request | Description
 [**crf_entity_extractor_retrieve**](CrfEntityExtractorsApi.md#crf_entity_extractor_retrieve) | **POST** /crf_entity_extractors/{instance_name}/retrieve | Predict which entities was mentioned.
 [**crf_entity_extractor_set_params**](CrfEntityExtractorsApi.md#crf_entity_extractor_set_params) | **POST** /crf_entity_extractors/{instance_name}/params | Set the model parameters of named crf entity extractor.
 [**crf_entity_extractor_train**](CrfEntityExtractorsApi.md#crf_entity_extractor_train) | **POST** /crf_entity_extractors/{instance_name}/train | Train the named crf extractor.
+[**crf_entity_extractor_update_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_update_testing_samples) | **PUT** /crf_entity_extractors/{instance_name}/testing_samples | Update testing samples by UUID.
+[**crf_entity_extractor_update_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_update_training_samples) | **PUT** /crf_entity_extractors/{instance_name}/training_samples | Update training samples by UUID.
 [**crf_entity_extractor_vaporise**](CrfEntityExtractorsApi.md#crf_entity_extractor_vaporise) | **POST** /crf_entity_extractors/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **crf_entity_extractor_add_testing_samples**
-> UpdatedCrfSamples crf_entity_extractor_add_testing_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+> list[CrfSample] crf_entity_extractor_add_testing_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
 
 Add testing samples.
 
-Add testing samples to named extractor. Returns the extractor's updated number of testing samples.
+Add testing samples to named extractor. Returns the samples added to the model.
 
 ### Example
 ```python
@@ -76,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdatedCrfSamples**](UpdatedCrfSamples.md)
+[**list[CrfSample]**](CrfSample.md)
 
 ### Authorization
 
@@ -90,11 +92,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **crf_entity_extractor_add_training_samples**
-> UpdatedCrfSamples crf_entity_extractor_add_training_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+> list[CrfSample] crf_entity_extractor_add_training_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
 
 Add training samples.
 
-Add training samples to named extractor. Returns the extractor's updated number of training samples.
+Add training samples to named extractor. Returns the samples added to the model.
 
 ### Example
 ```python
@@ -141,7 +143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdatedCrfSamples**](UpdatedCrfSamples.md)
+[**list[CrfSample]**](CrfSample.md)
 
 ### Authorization
 
@@ -1103,6 +1105,136 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CrfEntityExtractorInstanceDetail**](CrfEntityExtractorInstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **crf_entity_extractor_update_testing_samples**
+> list[CrfSample] crf_entity_extractor_update_testing_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+
+Update testing samples by UUID.
+
+Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+crf_sample_list = [feersum_nlu.CrfSample()] # list[CrfSample] | List of crf samples. A sample's UUIDs is used to uniquely identify it.
+x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
+
+try:
+    # Update testing samples by UUID.
+    api_response = api_instance.crf_entity_extractor_update_testing_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_update_testing_samples: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **crf_sample_list** | [**list[CrfSample]**](CrfSample.md)| List of crf samples. A sample&#39;s UUIDs is used to uniquely identify it. | 
+ **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
+
+### Return type
+
+[**list[CrfSample]**](CrfSample.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **crf_entity_extractor_update_training_samples**
+> list[CrfSample] crf_entity_extractor_update_training_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+
+Update training samples by UUID.
+
+Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the model instance.
+crf_sample_list = [feersum_nlu.CrfSample()] # list[CrfSample] | List of crf samples. A sample's UUIDs is used to uniquely identify it.
+x_caller = 'x_caller_example' # str |  (optional)
+origin = 'origin_example' # str |  (optional)
+
+try:
+    # Update training samples by UUID.
+    api_response = api_instance.crf_entity_extractor_update_training_samples(instance_name, crf_sample_list, x_caller=x_caller, origin=origin)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_update_training_samples: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the model instance. | 
+ **crf_sample_list** | [**list[CrfSample]**](CrfSample.md)| List of crf samples. A sample&#39;s UUIDs is used to uniquely identify it. | 
+ **x_caller** | **str**|  | [optional] 
+ **origin** | **str**|  | [optional] 
+
+### Return type
+
+[**list[CrfSample]**](CrfSample.md)
 
 ### Authorization
 

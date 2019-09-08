@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.39
+  version: 2.0.40
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -245,7 +245,7 @@ paths:
       summary: Add training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_add_training_samples
-      description: Add training samples to named text classifier. Returns the classifier's updated number of training samples.
+      description: Add training samples to named text classifier. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -262,7 +262,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_text_samples"
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -274,7 +274,7 @@ paths:
       summary: Update training samples by UUID.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_update_training_samples
-      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it.
+      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -291,7 +291,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_text_samples"
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -397,7 +397,7 @@ paths:
       summary: Add testing samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_add_testing_samples
-      description: Add testing samples to named text classifier. Returns the classifier's updated number of testing samples.
+      description: Add testing samples to named text classifier. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -414,7 +414,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_text_samples"
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -426,7 +426,7 @@ paths:
       summary: Update testing samples by UUID.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_update_testing_samples
-      description: Update testing samples of the named text classifier. A sample's UUIDs is used to uniquely identify it.
+      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -443,7 +443,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_text_samples"
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -640,7 +640,7 @@ paths:
       summary: Train/update the classifier online with the samples provided.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_online_training_samples
-      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
+      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -657,7 +657,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_text_samples"
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -1177,7 +1177,7 @@ paths:
       summary: Add training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_add_training_samples
-      description: Add training samples to named intent classifier. Returns the classifier's updated number of training samples.
+      description: Add training samples to named intent classifier. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -1194,7 +1194,36 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_text_samples"
+          $ref: "#/responses/labelled_text_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - intent_classifiers
+      summary: Update training samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
+      operationId: intent_classifier_update_training_samples
+      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of text samples to update. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -1300,7 +1329,7 @@ paths:
       summary: Add testing samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_add_testing_samples
-      description: Add testing samples to named intent classifier. Returns the classifier's updated number of testing samples.
+      description: Add testing samples to named intent classifier. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -1317,7 +1346,36 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_text_samples"
+          $ref: "#/responses/labelled_text_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - intent_classifiers
+      summary: Update testning samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
+      operationId: intent_classifier_update_testing_samples
+      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of text samples to update. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -1514,7 +1572,7 @@ paths:
       summary: Train/update the classifier online with the samples provided.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_online_training_samples
-      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
+      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -1531,7 +1589,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_text_samples"
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -1834,7 +1892,7 @@ paths:
       summary: Add training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_add_training_samples
-      description: Add training samples to named faq matcher. Returns the FAQ matcher's updated number of training samples.
+      description: Add training samples to named faq matcher. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -1851,7 +1909,36 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_text_samples"
+          $ref: "#/responses/labelled_text_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - faq_matchers
+      summary: Update training samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_update_training_samples
+      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of text samples to update. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -1957,7 +2044,7 @@ paths:
       summary: Add testing samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_add_testing_samples
-      description: Add testing samples to named faq matcher. Returns the FAQ matcher's updated number of testing samples.
+      description: Add testing samples to named faq matcher. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -1974,7 +2061,36 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_text_samples"
+          $ref: "#/responses/labelled_text_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - faq_matchers
+      summary: Update testning samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_update_testing_samples
+      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of text samples to update. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -2171,7 +2287,7 @@ paths:
       summary: Train/update the classifier online with the samples provided.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_online_training_samples
-      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
+      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -2188,7 +2304,7 @@ paths:
             $ref: "#/definitions/labelled_text_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_text_samples"
+          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -2603,7 +2719,7 @@ paths:
       summary: Add training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
       operationId: crf_entity_extractor_add_training_samples
-      description: Add training samples to named extractor. Returns the extractor's updated number of training samples.
+      description: Add training samples to named extractor. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -2620,7 +2736,36 @@ paths:
             $ref: "#/definitions/crf_sample"
       responses:
         200:
-          $ref: "#/responses/updated_crf_samples"
+          $ref: "#/responses/crf_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - crf_entity_extractors
+      summary: Update training samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_update_training_samples
+      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: crf_sample_list
+        description: List of crf samples. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/crf_sample"
+      responses:
+        200:
+          $ref: "#/responses/crf_sample_list"
         400:
           description: bad request
         401:
@@ -2726,7 +2871,7 @@ paths:
       summary: Add testing samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
       operationId: crf_entity_extractor_add_testing_samples
-      description: Add testing samples to named extractor. Returns the extractor's updated number of testing samples.
+      description: Add testing samples to named extractor. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -2743,7 +2888,36 @@ paths:
             $ref: "#/definitions/crf_sample"
       responses:
         200:
-          $ref: "#/responses/updated_crf_samples"
+          $ref: "#/responses/crf_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - crf_entity_extractors
+      summary: Update testing samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_update_testing_samples
+      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: crf_sample_list
+        description: List of crf samples. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/crf_sample"
+      responses:
+        200:
+          $ref: "#/responses/crf_sample_list"
         400:
           description: bad request
         401:
@@ -3131,7 +3305,7 @@ paths:
       summary: Add training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
       operationId: synonym_entity_extractor_add_training_samples
-      description: Add training samples to named extractor. Returns the extractor's updated number of training samples.
+      description: Add training samples to named extractor. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -3148,7 +3322,36 @@ paths:
             $ref: "#/definitions/synonym_sample"
       responses:
         200:
-          $ref: "#/responses/updated_synonym_samples"
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - synonym_entity_extractors
+      summary: Update training samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_update_training_samples
+      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: synonym_sample_list
+        description: List of synonym samples. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/synonym_sample"
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
         400:
           description: bad request
         401:
@@ -3254,7 +3457,7 @@ paths:
       summary: Add testing samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
       operationId: synonym_entity_extractor_add_testing_samples
-      description: Add testing samples to named extractor. Returns the extractor's updated number of testing samples.
+      description: Add testing samples to named extractor. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -3271,7 +3474,36 @@ paths:
             $ref: "#/definitions/synonym_sample"
       responses:
         200:
-          $ref: "#/responses/updated_synonym_samples"
+          $ref: "#/responses/synonym_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - synonym_entity_extractors
+      summary: Update testing samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_update_testing_samples
+      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: synonym_sample_list
+        description: List of synonym samples. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/synonym_sample"
+      responses:
+        200:
+          $ref: "#/responses/synonym_sample_list"
         400:
           description: bad request
         401:
@@ -5115,7 +5347,7 @@ paths:
       summary: Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_add_training_samples
-      description: Add training samples to named image classifier. Returns the classifier's updated number of training samples.
+      description: Add training samples to named image classifier. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -5132,7 +5364,36 @@ paths:
             $ref: "#/definitions/labelled_image_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_image_samples"
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - image_classifiers
+      summary: Update training samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_update_training_samples
+      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_sample_list
+        description: List of labelled image samples. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
         400:
           description: bad request
         401:
@@ -5238,7 +5499,7 @@ paths:
       summary: Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_add_testing_samples
-      description: Add testing samples to named image classifier. Returns the classifier's updated number of testing samples.
+      description: Add testing samples to named image classifier. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -5255,7 +5516,36 @@ paths:
             $ref: "#/definitions/labelled_image_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_image_samples"
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - image_classifiers
+      summary: Update testing samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_update_testing_samples
+      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_sample_list
+        description: List of labelled image samples. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
         400:
           description: bad request
         401:
@@ -5452,7 +5742,7 @@ paths:
       summary: Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_online_training_samples
-      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the classifier's updated number of training samples.
+      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the model.
       parameters:
       - in: path
         name: instance_name
@@ -5469,7 +5759,7 @@ paths:
             $ref: "#/definitions/labelled_image_sample"
       responses:
         200:
-          $ref: "#/responses/updated_labelled_image_samples"
+          $ref: "#/responses/labelled_image_sample_list"
         400:
           description: bad request
         401:
@@ -5869,26 +6159,6 @@ responses:
       type: array
       items:
         $ref: "#/definitions/labelled_text_sample"
-
-  updated_labelled_text_samples:
-    description: The list of added/updated labelled text samples as well as the total number of samples.
-    schema:
-      $ref: "#/definitions/updated_labelled_text_samples"
-
-  updated_labelled_image_samples:
-    description: The list of added/updated labelled image samples as well as the total number of samples.
-    schema:
-      $ref: "#/definitions/updated_labelled_image_samples"
-
-  updated_crf_samples:
-    description: The list of added/updated CRF entity samples as well as the total number of samples.
-    schema:
-      $ref: "#/definitions/updated_crf_samples"
-
-  updated_synonym_samples:
-    description: The list of added/updated synonym entity samples as well as the total number of samples.
-    schema:
-      $ref: "#/definitions/updated_synonym_samples"
 
   tsne_sample_list:
     description: The list of tsne samples.
@@ -7413,66 +7683,6 @@ definitions:
         type: string
       lid_model_file:
         type: string
-
-  updated_labelled_text_samples:
-    description: The list of added labelled text samples as well as the total number of samples.
-    type: object
-    required:
-    - total_samples
-    properties:
-      total_samples:
-        description: The total number of samples the model now has after adding/updating the samples. Note that attempts at adding duplicate samples are not counted.
-        type: integer
-        example: 4
-      sample_list:
-        type: array
-        items:
-          $ref: "#/definitions/labelled_text_sample"
-
-  updated_labelled_image_samples:
-    description: The list of added/updated labelled image samples as well as the total number of samples.
-    type: object
-    required:
-    - total_samples
-    properties:
-      total_samples:
-        description: The total number of samples the model now has after adding/updating the samples. Note that attempts at adding duplicate samples are not counted.
-        type: integer
-        example: 4
-      sample_list:
-        type: array
-        items:
-          $ref: "#/definitions/labelled_image_sample"
-
-  updated_crf_samples:
-    description: The list of added/updated CRF entity samples as well as the total number of samples.
-    type: object
-    required:
-    - total_samples
-    properties:
-      total_samples:
-        description: The total number of samples the model now has after adding/updating the samples. Note that attempts at adding duplicate samples are not counted.
-        type: integer
-        example: 4
-      sample_list:
-        type: array
-        items:
-          $ref: "#/definitions/crf_sample"
-
-  updated_synonym_samples:
-    description: The list of added/updated synonym entity samples as well as the total number of samples.
-    type: object
-    required:
-    - total_samples
-    properties:
-      total_samples:
-        description: The total number of samples the model now has after adding/updating the samples. Note that attempts at adding duplicate samples are not counted.
-        type: integer
-        example: 4
-      sample_list:
-        type: array
-        items:
-          $ref: "#/definitions/synonym_sample"
 
   image_input:
     description: The image input to be classified or processed. Can be provided as a base64 encoded string or alternatively as a URL to a an image.
