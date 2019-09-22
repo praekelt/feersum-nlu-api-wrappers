@@ -6,6 +6,8 @@ import feersum_nlu
 from feersum_nlu.rest import ApiException
 from examples import feersumnlu_host, feersum_nlu_auth_token
 
+import time
+
 # Configure API key authorization: APIKeyHeader
 configuration = feersum_nlu.Configuration()
 
@@ -26,6 +28,8 @@ print()
 try:
     # Note: The _with_http_info function also returns the api_response_header!
     #       The header contains response headers like X-Rate-Limit-Remain.
+
+    start = time.time()
 
     print("Get dashboard content (use CUSTOM operation params):")
     api_response, api_response_code, api_response_header = \
@@ -50,6 +54,9 @@ try:
     # print(" api_response_header", api_response_header)
     # print(" calls remaining in this cycle ('-1' means no limit) =", api_response_header.get("X-RateLimit-Remaining"))
 
+    print()
+    end = time.time()
+    print("dashboard query time =", end - start)
     print()
 
 except ApiException as e:
