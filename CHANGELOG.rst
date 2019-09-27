@@ -1,6 +1,21 @@
 Changelog
 *********
 
+Version 2.0.41
+==============
+
+Added an SVM classifier algorithm option to the text classifier. The supported algorithms now are naive_bayes, svm, nearest_neighbour_l1,
+and nearest_neighbour_cosine.
+
+Added `collection_uri` to the dashboard's model detail. It is the URI of the model type's collection resource e.g. /faq_matchers
+for the collection of faq_matcher models. Typically it is just the plural of the model type.
+
+The model's uuid is now also returned in the dashboard model detail. The model history includes the current version of the model
+only if the last update was pushed to the history.
+
+The dashboard now also returns any custom sentence_encoders (language_models) and image_encoders (vision_models) that is loaded
+for the API key.
+
 Version 2.0.40
 ==============
 
