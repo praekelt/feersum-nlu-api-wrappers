@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.40
+  version: 2.0.41
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -6396,6 +6396,7 @@ definitions:
     required:
     - name
     - model_type
+    - collection_uri
     properties:
       name:
         description: The sluggy-url-friendly-name of the instance.
@@ -6413,12 +6414,16 @@ definitions:
         description: The type of this model.
         type: string
         example: faq_matcher
+      collection_uri:
+        description: "The URI of the model type's collection resource e.g. /faq_matchers for the collection of faq_matcher models."
+        type: string
+        example: "/faq_matchers"
       trashed:
         description: Whether or not this model has been deleted. Deleted models need to be loaded to be used again.
         type: boolean
         example: False
       history:
-        description: The model's history.
+        description: The model's history. The history includes the current version of the model only if the last update was pushed to the history.
         type: array
         items:
           $ref: "#/definitions/model_revision"
