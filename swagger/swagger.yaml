@@ -6402,6 +6402,10 @@ definitions:
         description: The sluggy-url-friendly-name of the instance.
         type: string
         example: example_instance
+      uuid:
+        description: A universally unique ID used to reference this revision of the model.
+        type: string
+        example: ea0e5aa3-1772-49aa-a805-db7ed6da46bf
       long_name:
         description: The human-friendly-name of the instance.
         type: string
