@@ -34,6 +34,7 @@ class DashboardModelDetail(object):
     """
     swagger_types = {
         'name': 'str',
+        'uuid': 'str',
         'long_name': 'str',
         'desc': 'str',
         'model_type': 'str',
@@ -44,6 +45,7 @@ class DashboardModelDetail(object):
 
     attribute_map = {
         'name': 'name',
+        'uuid': 'uuid',
         'long_name': 'long_name',
         'desc': 'desc',
         'model_type': 'model_type',
@@ -52,10 +54,11 @@ class DashboardModelDetail(object):
         'history': 'history'
     }
 
-    def __init__(self, name=None, long_name=None, desc=None, model_type=None, collection_uri=None, trashed=None, history=None):  # noqa: E501
+    def __init__(self, name=None, uuid=None, long_name=None, desc=None, model_type=None, collection_uri=None, trashed=None, history=None):  # noqa: E501
         """DashboardModelDetail - a model defined in Swagger"""  # noqa: E501
 
         self._name = None
+        self._uuid = None
         self._long_name = None
         self._desc = None
         self._model_type = None
@@ -65,6 +68,8 @@ class DashboardModelDetail(object):
         self.discriminator = None
 
         self.name = name
+        if uuid is not None:
+            self.uuid = uuid
         if long_name is not None:
             self.long_name = long_name
         if desc is not None:
@@ -100,6 +105,29 @@ class DashboardModelDetail(object):
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
 
         self._name = name
+
+    @property
+    def uuid(self):
+        """Gets the uuid of this DashboardModelDetail.  # noqa: E501
+
+        A universally unique ID used to reference this revision of the model.  # noqa: E501
+
+        :return: The uuid of this DashboardModelDetail.  # noqa: E501
+        :rtype: str
+        """
+        return self._uuid
+
+    @uuid.setter
+    def uuid(self, uuid):
+        """Sets the uuid of this DashboardModelDetail.
+
+        A universally unique ID used to reference this revision of the model.  # noqa: E501
+
+        :param uuid: The uuid of this DashboardModelDetail.  # noqa: E501
+        :type: str
+        """
+
+        self._uuid = uuid
 
     @property
     def long_name(self):
