@@ -1,4 +1,4 @@
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Dict, Any
 
 import PIL
 from PIL import Image
@@ -83,6 +83,9 @@ def load_image(file_name: str, ignore_resolution: bool = False) -> str:
        opened and identified.
     """
     pil_image = Image.open(file_name)
+
+    if pil_image.mode != 'RGB':
+        pil_image = pil_image.convert(mode='RGB')
 
     if not ignore_resolution:
         pil_image = _resize_pil_image(pil_image)
@@ -187,3 +190,32 @@ def get_image_samples(data_path: str, label: str,
             break  # from for-loop.
 
     return image_samples
+
+
+def get_image_value_samples(data_path: str,
+                            name_value_dict: Dict[str, Any],
+                            max_samples: Optional[int] = None) -> List[Tuple[str, Any]]:
+    """
+    Get all the images within a specific data_path assign values from name_value_dict.
+    :param data_path: The base path i.e. '/home/data/images'
+    :param name_value_dict: The name value dict to use.
+    :param max_samples: The maximum number of samples to load and return. No limit if max_samples=None!
+    :return: The list of loaded base64 image samples all labeled with 'label'.
+    """
+    directory = os.fsencode(data_path)
+
+    image_value_samples = []  # type: List[Tuple[str, Any]]
+
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        if filename.lower().endswith((".jpg", ".jpeg", ".j2k", ".j2p", ".jpx", ".png", ".bmp")):
+            value = name_value_dict.get(filename)
+            image_str = load_image(data_path + "/" + filename)
+
+            if value is not None:
+                image_value_samples.append((image_str, value))
+
+        if (max_samples is not None) and (len(image_value_samples) >= max_samples):
+            break  # from for-loop.
+
+    return image_value_samples
