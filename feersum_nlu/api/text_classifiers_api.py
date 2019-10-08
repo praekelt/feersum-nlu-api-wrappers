@@ -1334,7 +1334,7 @@ class TextClassifiersApi(object):
         auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
-            '/text_classifiers/{instance_name}/get_labels', 'GET',
+            '/text_classifiers/{instance_name}/labels', 'GET',
             path_params,
             query_params,
             header_params,

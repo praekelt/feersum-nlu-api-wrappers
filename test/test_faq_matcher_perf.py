@@ -270,7 +270,7 @@ class TestFAQMatcherPerf(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            self.assertTrue(request_time < 0.1)
+            self.assertTrue(request_time < 0.4)
 
         except ApiException as e:
             print("Exception when calling an FAQ matcher operation: %s\n" % e)

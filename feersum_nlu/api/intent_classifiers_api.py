@@ -1334,7 +1334,7 @@ class IntentClassifiersApi(object):
         auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
-            '/intent_classifiers/{instance_name}/get_labels', 'GET',
+            '/intent_classifiers/{instance_name}/labels', 'GET',
             path_params,
             query_params,
             header_params,

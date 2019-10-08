@@ -545,7 +545,7 @@ class LanguageRecognisersApi(object):
         auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
-            '/language_recognisers/{instance_name}/get_labels', 'GET',
+            '/language_recognisers/{instance_name}/labels', 'GET',
             path_params,
             query_params,
             header_params,

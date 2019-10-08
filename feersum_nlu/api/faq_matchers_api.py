@@ -1334,7 +1334,7 @@ class FaqMatchersApi(object):
         auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
-            '/faq_matchers/{instance_name}/get_labels', 'GET',
+            '/faq_matchers/{instance_name}/labels', 'GET',
             path_params,
             query_params,
             header_params,

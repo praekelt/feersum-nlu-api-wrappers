@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**language_recogniser_del**](LanguageRecognisersApi.md#language_recogniser_del) | **DELETE** /language_recognisers/{instance_name} | Delete named instance.
 [**language_recogniser_get_details**](LanguageRecognisersApi.md#language_recogniser_get_details) | **GET** /language_recognisers/{instance_name} | Get details of named instance.
 [**language_recogniser_get_details_all**](LanguageRecognisersApi.md#language_recogniser_get_details_all) | **GET** /language_recognisers | Get list of loaded text language detectors.
-[**language_recogniser_get_labels**](LanguageRecognisersApi.md#language_recogniser_get_labels) | **GET** /language_recognisers/{instance_name}/get_labels | Get list of possible labels.
+[**language_recogniser_get_labels**](LanguageRecognisersApi.md#language_recogniser_get_labels) | **GET** /language_recognisers/{instance_name}/labels | Get list of possible labels.
 [**language_recogniser_get_params**](LanguageRecognisersApi.md#language_recogniser_get_params) | **GET** /language_recognisers/{instance_name}/params | Get the editable model parameters of named language recogniser.
 [**language_recogniser_retrieve**](LanguageRecognisersApi.md#language_recogniser_retrieve) | **POST** /language_recognisers/{instance_name}/retrieve | Recognise the language the text is written in.
 [**language_recogniser_set_params**](LanguageRecognisersApi.md#language_recogniser_set_params) | **POST** /language_recognisers/{instance_name}/params | Set the model parameters of named language recogniser.

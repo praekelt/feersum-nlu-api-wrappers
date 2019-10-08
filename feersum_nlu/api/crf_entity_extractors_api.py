@@ -1219,7 +1219,7 @@ class CrfEntityExtractorsApi(object):
         auth_settings = ['APIKeyHeader', 'APIKeyHeader_old']  # noqa: E501
 
         return self.api_client.call_api(
-            '/crf_entity_extractors/{instance_name}/get_labels', 'GET',
+            '/crf_entity_extractors/{instance_name}/labels', 'GET',
             path_params,
             query_params,
             header_params,
