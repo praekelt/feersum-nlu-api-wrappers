@@ -4,6 +4,14 @@ Changelog
 Version 2.0.41
 ==============
 
+Some example updates.
+
+Changed the 'get_labels' rest api collection to a more resty 'labels'. No change to wrapper functions.
+
+
+Version 2.0.41
+==============
+
 Added an SVM classifier algorithm option to the text classifier. The supported algorithms now are naive_bayes, svm, nearest_neighbour_l1,
 and nearest_neighbour_cosine.
 
@@ -15,6 +23,7 @@ only if the last update was pushed to the history.
 
 The dashboard now also returns any custom sentence_encoders (language_models) and image_encoders (vision_models) that is loaded
 for the API key.
+
 
 Version 2.0.40
 ==============
