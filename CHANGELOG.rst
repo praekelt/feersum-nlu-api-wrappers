@@ -1,7 +1,7 @@
 Changelog
 *********
 
-Version 2.0.41
+Version 2.0.42
 ==============
 
 Some example updates.
