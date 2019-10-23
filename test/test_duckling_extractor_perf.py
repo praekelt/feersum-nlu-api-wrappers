@@ -70,8 +70,7 @@ class TestDucklingExtractorPerf(unittest.TestCase):
             entity_list = api_response
             if len(entity_list) > 0:
                 entity = entity_list[0]
-                self.assertTrue((entity.value == '2017-01-05T15:00:00.000+02:00') or
-                                (entity.value == '2017-01-05T15:00:00.000Z'))
+                self.assertTrue((entity.value == '2017-01-05T15:00:00.000'))
             else:
                 self.assertTrue(False)
 
@@ -84,11 +83,10 @@ class TestDucklingExtractorPerf(unittest.TestCase):
                 if ((i % 10) == 0) or (i == (num_iterations-1)):
                     print(f"{round(i*100.0/(num_iterations-1), 0)}%...", end="", flush=True)
 
-                scored_label_list = api_response
-                if len(scored_label_list) > 0:
-                    scored_label = scored_label_list[0]
-                    self.assertTrue((entity.value == '2017-01-05T15:00:00.000+02:00') or
-                                    (entity.value == '2017-01-05T15:00:00.000Z'))
+                entity_list = api_response
+                if len(entity_list) > 0:
+                    entity = entity_list[0]
+                    self.assertTrue((entity.value == '2017-01-05T15:00:00.000'))
                 else:
                     self.assertTrue(False)
 
@@ -110,7 +108,7 @@ class TestDucklingExtractorPerf(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            self.assertTrue(request_time < 0.4)
+            self.assertTrue(request_time < 1.0)
 
         except ApiException as e:
             print("Exception when calling a entity extractor operation: %s\n" % e)
