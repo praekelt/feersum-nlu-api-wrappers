@@ -35,26 +35,31 @@ class DashboardDetail(object):
     swagger_types = {
         'api_version': 'str',
         'service_name': 'str',
-        'model_list': 'list[DashboardModelDetail]'
+        'model_list': 'list[DashboardModelDetail]',
+        'log_file': 'str'
     }
 
     attribute_map = {
         'api_version': 'api_version',
         'service_name': 'service_name',
-        'model_list': 'model_list'
+        'model_list': 'model_list',
+        'log_file': 'log_file'
     }
 
-    def __init__(self, api_version=None, service_name=None, model_list=None):  # noqa: E501
+    def __init__(self, api_version=None, service_name=None, model_list=None, log_file=None):  # noqa: E501
         """DashboardDetail - a model defined in Swagger"""  # noqa: E501
 
         self._api_version = None
         self._service_name = None
         self._model_list = None
+        self._log_file = None
         self.discriminator = None
 
         self.api_version = api_version
         self.service_name = service_name
         self.model_list = model_list
+        if log_file is not None:
+            self.log_file = log_file
 
     @property
     def api_version(self):
@@ -130,6 +135,27 @@ class DashboardDetail(object):
             raise ValueError("Invalid value for `model_list`, must not be `None`")  # noqa: E501
 
         self._model_list = model_list
+
+    @property
+    def log_file(self):
+        """Gets the log_file of this DashboardDetail.  # noqa: E501
+
+
+        :return: The log_file of this DashboardDetail.  # noqa: E501
+        :rtype: str
+        """
+        return self._log_file
+
+    @log_file.setter
+    def log_file(self, log_file):
+        """Sets the log_file of this DashboardDetail.
+
+
+        :param log_file: The log_file of this DashboardDetail.  # noqa: E501
+        :type: str
+        """
+
+        self._log_file = log_file
 
     def to_dict(self):
         """Returns the model properties as a dict"""
