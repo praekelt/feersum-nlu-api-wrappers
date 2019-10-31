@@ -1,7 +1,6 @@
 """ Example: Shows how to create, train and use an FAQ matcher. """
 
 import urllib3
-import time
 import csv
 
 import feersum_nlu
