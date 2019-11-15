@@ -5,15 +5,15 @@ from pymba import Vimba, VimbaException
 
 import cv2
 
-PIXEL_FORMATS_CONVERSIONS = {
-    'BayerRG8': cv2.COLOR_BAYER_RG2RGB,
-}
-
 import feersum_nlu
 from feersum_nlu.rest import ApiException
 from examples import feersumnlu_host, feersum_nlu_auth_token
 
 from feersum_nlu_util import image_utils
+
+PIXEL_FORMATS_CONVERSIONS = {
+    'BayerRG8': cv2.COLOR_BAYER_RG2RGB,  # pylint: disable=no-member
+}
 
 # Configure API key authorization: APIKeyHeader
 configuration = feersum_nlu.Configuration()
@@ -50,7 +50,7 @@ with Vimba() as vimba:
                 frame = camera.acquire_frame()
                 image = frame.buffer_data_numpy()
 
-                image = cv2.cvtColor(image, PIXEL_FORMATS_CONVERSIONS[frame.pixel_format])
+                image = cv2.cvtColor(image, PIXEL_FORMATS_CONVERSIONS[frame.pixel_format])  # pylint: disable=no-member
 
                 height, width = image.shape[:2]
                 target_size = 256
@@ -63,7 +63,8 @@ with Vimba() as vimba:
                     resized_width = target_size
 
                 resized_image = \
-                    cv2.resize(image, (resized_width, resized_height), interpolation=cv2.INTER_LINEAR)  # pylint: disable=no-member
+                    cv2.resize(image, (resized_width, resized_height),  # pylint: disable=no-member
+                               interpolation=cv2.INTER_LINEAR)  # pylint: disable=no-member
 
                 cv2.imwrite("temp_img.png", resized_image)  # pylint: disable=no-member
 
@@ -83,10 +84,10 @@ with Vimba() as vimba:
                 # Display the resulting image
                 font = cv2.FONT_HERSHEY_SIMPLEX  # pylint: disable=no-member
                 cv2.putText(resized_image,  # pylint: disable=no-member
-                            f"{score_label_list[0].label} {round(score_label_list[0].probability,2)}",  # pylint: disable=no-member
+                            f"{score_label_list[0].label} {round(score_label_list[0].probability,2)}",
                             (10, 30), font, 1, (0, 0, 0), 5)  # pylint: disable=no-member
                 cv2.putText(resized_image,  # pylint: disable=no-member
-                            f"{score_label_list[0].label} {round(score_label_list[0].probability,2)}",  # pylint: disable=no-member
+                            f"{score_label_list[0].label} {round(score_label_list[0].probability,2)}",
                             (10, 30), font, 1, (255, 255, 255), 2)  # pylint: disable=no-member
 
                 cv2.imshow('img', resized_image)  # pylint: disable=no-member
