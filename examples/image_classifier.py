@@ -23,15 +23,15 @@ configuration.host = feersumnlu_host
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 
 # instance_name = 'hot_dog_vs_not_hot_dog'
-# all_data_path = "/Users/bduvenhage/Downloads/vision_data/hot-dog-vs-not-hot-dog/train"
+# all_data_path = "/Volumes/256GB/vision_data/hot-dog-vs-not-hot-dog/train"
 # labels = ["hot_dog", "not_hot_dog"]
 
 # instance_name = 'under_vs_over_image_clsfr'
-# all_data_path = "/Users/bduvenhage/Downloads/vision_data/DrOetker_cropped/all"
+# all_data_path = "/Volumes/256GB/vision_data/DrOetker_cropped/all"
 # labels = ["over", "under"]
 
 instance_name = 'cat_vs_dog_image_clsfr'
-all_data_path = "/Users/bduvenhage/Downloads/vision_data/dogs-vs-cats/train"
+all_data_path = "/Volumes/256GB/vision_data/dogs-vs-cats/train"
 labels = ["cat", "dog"]
 
 # === Load the data samples ===
@@ -57,7 +57,6 @@ training_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) fo
 testing_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in testing_list]
 # === ===
 
-
 create_details = feersum_nlu.ImageClassifierCreateDetails(name=instance_name,
                                                           desc=instance_name,
                                                           load_from_store=False)
@@ -80,12 +79,19 @@ caller_name = 'example_caller'
 print()
 
 try:
-    print("Update the model params:")
-    model_params = feersum_nlu.ModelParams(readonly=False)
-    api_response = api_instance.image_classifier_set_params(instance_name, model_params, x_caller=caller_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # print("Classify image:")
+    # api_response = api_instance.image_classifier_retrieve(instance_name, image_input, x_caller=caller_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+    # exit(0)
+
+    # print("Update the model params:")
+    # model_params = feersum_nlu.ModelParams(readonly=False)
+    # api_response = api_instance.image_classifier_set_params(instance_name, model_params, x_caller=caller_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
     print("Create the image classifier:")
     api_response = api_instance.image_classifier_create(create_details)

@@ -1,6 +1,24 @@
 Changelog
 *********
 
+Version 2.0.43
+==============
+
+Updated the sentiment model to add additional emoji sentiment mainly to support thumbs up/down.
+
+Tested and fixed the emotion rest API.
+
+Added the active log file's name to the dashboard response to know which file to download when needed.
+
+
+Version 2.0.42
+==============
+
+Some example updates.
+
+Changed the 'get_labels' rest api collection to a more resty 'labels'. No change to wrapper functions.
+
+
 Version 2.0.41
 ==============
 
@@ -15,6 +33,7 @@ only if the last update was pushed to the history.
 
 The dashboard now also returns any custom sentence_encoders (language_models) and image_encoders (vision_models) that is loaded
 for the API key.
+
 
 Version 2.0.40
 ==============

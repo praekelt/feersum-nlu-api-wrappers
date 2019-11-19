@@ -4,7 +4,7 @@ flake8
 coverage
 coveralls
 docutils
-psycopg2
+psycopg2-binary
 pygments
 certifi
 six
@@ -13,3 +13,6 @@ urllib3
 requests
 pillow
 opencv-python
+pymba
+flask
+

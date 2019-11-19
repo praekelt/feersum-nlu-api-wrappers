@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**text_classifier_del_training_samples_all**](TextClassifiersApi.md#text_classifier_del_training_samples_all) | **DELETE** /text_classifiers/{instance_name}/training_samples_all | Delete all training samples.
 [**text_classifier_get_details**](TextClassifiersApi.md#text_classifier_get_details) | **GET** /text_classifiers/{instance_name} | Get details of named instance.
 [**text_classifier_get_details_all**](TextClassifiersApi.md#text_classifier_get_details_all) | **GET** /text_classifiers | Get list of loaded text classifiers.
-[**text_classifier_get_labels**](TextClassifiersApi.md#text_classifier_get_labels) | **GET** /text_classifiers/{instance_name}/get_labels | Get list of possible labels.
+[**text_classifier_get_labels**](TextClassifiersApi.md#text_classifier_get_labels) | **GET** /text_classifiers/{instance_name}/labels | Get list of possible labels.
 [**text_classifier_get_params**](TextClassifiersApi.md#text_classifier_get_params) | **GET** /text_classifiers/{instance_name}/params | Get the editable model parameters of named text classifier.
 [**text_classifier_get_testing_samples**](TextClassifiersApi.md#text_classifier_get_testing_samples) | **GET** /text_classifiers/{instance_name}/testing_samples | Get testing samples.
 [**text_classifier_get_training_samples**](TextClassifiersApi.md#text_classifier_get_training_samples) | **GET** /text_classifiers/{instance_name}/training_samples | Get training samples.

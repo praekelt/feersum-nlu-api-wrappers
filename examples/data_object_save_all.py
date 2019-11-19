@@ -31,12 +31,16 @@ try:
 
     print("GET-ing all the objects...", flush=True, end='')
     for object_name in object_name_list:
-        # print("Get the details of specific named data object:")
-        api_response = api_instance.data_object_get_details(object_name)
-        # print(" type(api_response)", type(api_response))
-        # print(" api_response", api_response)
-        # print()
-        data_object_dict[object_name] = api_response
+        try:
+            # print("Get the details of specific named data object:")
+            api_response = api_instance.data_object_get_details(object_name)
+            # print(" type(api_response)", type(api_response))
+            # print(" api_response", api_response)
+            # print()
+            data_object_dict[object_name] = api_response
+            print(f"Received {object_name}.")
+        except ApiException as e:
+            print("Exception when calling a data object operation: %s\n" % e)
     print('done.')
 
     print("Saving the objects...", flush=True, end='')

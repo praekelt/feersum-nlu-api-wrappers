@@ -14,7 +14,7 @@ Method | HTTP request | Description
 [**synonym_entity_extractor_del_training_samples_all**](SynonymEntityExtractorsApi.md#synonym_entity_extractor_del_training_samples_all) | **DELETE** /synonym_entity_extractors/{instance_name}/training_samples_all | Delete all training samples.
 [**synonym_entity_extractor_get_details**](SynonymEntityExtractorsApi.md#synonym_entity_extractor_get_details) | **GET** /synonym_entity_extractors/{instance_name} | Get details of named instance.
 [**synonym_entity_extractor_get_details_all**](SynonymEntityExtractorsApi.md#synonym_entity_extractor_get_details_all) | **GET** /synonym_entity_extractors | Get list of loaded synonym entity extractors.
-[**synonym_entity_extractor_get_labels**](SynonymEntityExtractorsApi.md#synonym_entity_extractor_get_labels) | **GET** /synonym_entity_extractors/{instance_name}/get_labels | Get list of possible labels.
+[**synonym_entity_extractor_get_labels**](SynonymEntityExtractorsApi.md#synonym_entity_extractor_get_labels) | **GET** /synonym_entity_extractors/{instance_name}/labels | Get list of possible labels.
 [**synonym_entity_extractor_get_params**](SynonymEntityExtractorsApi.md#synonym_entity_extractor_get_params) | **GET** /synonym_entity_extractors/{instance_name}/params | Get the editable model parameters of named synonym entity extractor.
 [**synonym_entity_extractor_get_testing_samples**](SynonymEntityExtractorsApi.md#synonym_entity_extractor_get_testing_samples) | **GET** /synonym_entity_extractors/{instance_name}/testing_samples | Get testing samples.
 [**synonym_entity_extractor_get_training_samples**](SynonymEntityExtractorsApi.md#synonym_entity_extractor_get_training_samples) | **GET** /synonym_entity_extractors/{instance_name}/training_samples | Get training samples.

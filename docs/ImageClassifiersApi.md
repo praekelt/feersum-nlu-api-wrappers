@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**image_classifier_del_training_samples_all**](ImageClassifiersApi.md#image_classifier_del_training_samples_all) | **DELETE** /image_classifiers/{instance_name}/training_samples_all | Delete all training samples.
 [**image_classifier_get_details**](ImageClassifiersApi.md#image_classifier_get_details) | **GET** /image_classifiers/{instance_name} | Get details of named instance.
 [**image_classifier_get_details_all**](ImageClassifiersApi.md#image_classifier_get_details_all) | **GET** /image_classifiers | Get list of loaded image classifiers.
-[**image_classifier_get_labels**](ImageClassifiersApi.md#image_classifier_get_labels) | **GET** /image_classifiers/{instance_name}/get_labels | Get list of possible labels.
+[**image_classifier_get_labels**](ImageClassifiersApi.md#image_classifier_get_labels) | **GET** /image_classifiers/{instance_name}/labels | Get list of possible labels.
 [**image_classifier_get_params**](ImageClassifiersApi.md#image_classifier_get_params) | **GET** /image_classifiers/{instance_name}/params | Get the editable model parameters of named image classifier.
 [**image_classifier_get_testing_samples**](ImageClassifiersApi.md#image_classifier_get_testing_samples) | **GET** /image_classifiers/{instance_name}/testing_samples | Get testing samples. Image format is 256x256 RGB.
 [**image_classifier_get_training_samples**](ImageClassifiersApi.md#image_classifier_get_training_samples) | **GET** /image_classifiers/{instance_name}/training_samples | Get training samples. Image format is 256x256 RGB.

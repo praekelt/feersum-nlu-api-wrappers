@@ -14,7 +14,7 @@ Method | HTTP request | Description
 [**crf_entity_extractor_del_training_samples_all**](CrfEntityExtractorsApi.md#crf_entity_extractor_del_training_samples_all) | **DELETE** /crf_entity_extractors/{instance_name}/training_samples_all | Delete all training samples.
 [**crf_entity_extractor_get_details**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_details) | **GET** /crf_entity_extractors/{instance_name} | Get details of named instance.
 [**crf_entity_extractor_get_details_all**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_details_all) | **GET** /crf_entity_extractors | Get list of loaded crf entity extractors.
-[**crf_entity_extractor_get_labels**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_labels) | **GET** /crf_entity_extractors/{instance_name}/get_labels | Get list of possible labels.
+[**crf_entity_extractor_get_labels**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_labels) | **GET** /crf_entity_extractors/{instance_name}/labels | Get list of possible labels.
 [**crf_entity_extractor_get_params**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_params) | **GET** /crf_entity_extractors/{instance_name}/params | Get the editable model parameters of named crf entity extractor.
 [**crf_entity_extractor_get_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_testing_samples) | **GET** /crf_entity_extractors/{instance_name}/testing_samples | Get testing samples.
 [**crf_entity_extractor_get_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_training_samples) | **GET** /crf_entity_extractors/{instance_name}/training_samples | Get training samples.

@@ -22,13 +22,12 @@ instance_name = 'test_faq'
 
 create_details = feersum_nlu.FaqMatcherCreateDetails(name=instance_name,
                                                      desc="Longer desc of model.",
-                                                     long_name="test_faq",
+                                                     long_name=instance_name,
                                                      lid_model_file="lid_za",
                                                      load_from_store=False)
 
 # The training samples.
 text_sample_list = []
-# labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Hoe eis?", label="claim", lang_code="afr"))
 
 with open('training_samples.csv',
           'r', newline='') as csvfile:
@@ -38,6 +37,10 @@ with open('training_samples.csv',
                             quoting=csv.QUOTE_MINIMAL)
 
     for row in csv_reader:
+        if len(row) >= 3:
+            lang_code = row[2] if row[2] != '' else None
+        else:
+            lang_code = None
         text_sample_list.append(feersum_nlu.LabelledTextSample(text=row[1],
                                                                label=row[0],
                                                                lang_code=None))
@@ -46,7 +49,7 @@ offline_batch_size = 10
 
 word_manifold_list = [feersum_nlu.LabelledWordManifold('eng', 'feers_wm_eng'),
                       feersum_nlu.LabelledWordManifold('afr', 'feers_wm_afr'),
-                      feersum_nlu.LabelledWordManifold('nbl', 'feers_wm_xho'),
+                      feersum_nlu.LabelledWordManifold('nbl', 'feers_wm_nbl'),
                       feersum_nlu.LabelledWordManifold('xho', 'feers_wm_xho'),
                       feersum_nlu.LabelledWordManifold('zul', 'feers_wm_zul'),
                       feersum_nlu.LabelledWordManifold('ssw', 'feers_wm_ssw'),
@@ -129,15 +132,16 @@ try:
     print(" api_response", api_response)
     print()
 
+    print("Online train the FAQ matcher:")
     # Make the model smarter by providing more training example and training online.
     # Note: The training happens automatically after online samples provided.
-    online_batch_size = 100
+    online_batch_size = 10
     for i in range(offline_batch_size, len(text_sample_list), online_batch_size):
+        batch_end = min(i + online_batch_size, len(text_sample_list))
         api_response = \
             api_instance.faq_matcher_online_training_samples(instance_name,
-                                                             text_sample_list[i:min(i + online_batch_size,
-                                                                                    len(text_sample_list))])
-        print(f"{api_response.total_samples}/{len(text_sample_list)}")
+                                                             text_sample_list[i:batch_end])
+        print(f"{batch_end}/{len(text_sample_list)}")
 
     # print("Delete specific named loaded FAQ matcher:")
     # api_response = api_instance.faq_matcher_del(instance_name)

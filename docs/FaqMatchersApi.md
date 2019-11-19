@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**faq_matcher_del_training_samples_all**](FaqMatchersApi.md#faq_matcher_del_training_samples_all) | **DELETE** /faq_matchers/{instance_name}/training_samples_all | Delete all training samples.
 [**faq_matcher_get_details**](FaqMatchersApi.md#faq_matcher_get_details) | **GET** /faq_matchers/{instance_name} | Get details of named instance.
 [**faq_matcher_get_details_all**](FaqMatchersApi.md#faq_matcher_get_details_all) | **GET** /faq_matchers | Get list of loaded FAQ matchers.
-[**faq_matcher_get_labels**](FaqMatchersApi.md#faq_matcher_get_labels) | **GET** /faq_matchers/{instance_name}/get_labels | Get list of possible labels.
+[**faq_matcher_get_labels**](FaqMatchersApi.md#faq_matcher_get_labels) | **GET** /faq_matchers/{instance_name}/labels | Get list of possible labels.
 [**faq_matcher_get_params**](FaqMatchersApi.md#faq_matcher_get_params) | **GET** /faq_matchers/{instance_name}/params | Get the editable model parameters of named FAQ matcher.
 [**faq_matcher_get_testing_samples**](FaqMatchersApi.md#faq_matcher_get_testing_samples) | **GET** /faq_matchers/{instance_name}/testing_samples | Get testing samples.
 [**faq_matcher_get_training_samples**](FaqMatchersApi.md#faq_matcher_get_training_samples) | **GET** /faq_matchers/{instance_name}/training_samples | Get training samples.

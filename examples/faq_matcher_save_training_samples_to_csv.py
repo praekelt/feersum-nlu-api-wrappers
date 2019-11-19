@@ -31,11 +31,22 @@ try:
     num_training_samples = api_response.num_training_samples
     print(num_training_samples)
 
-    print("Get the training samples of the FAQ matcher:")
-    training_samples = api_instance.faq_matcher_get_training_samples(instance_name)
-    print(" type(training_samples)", type(training_samples), flush=True)
+    training_samples = []
+    sample_batch_size = 1000
+
+    for i in range(0, num_training_samples, sample_batch_size):
+        current_batch_size = min(sample_batch_size + i, num_training_samples) - i
+        print(i, current_batch_size)
+        training_samples_batch = api_instance.faq_matcher_get_training_samples(instance_name,
+                                                                               index=i,
+                                                                               len=current_batch_size)
+        training_samples.extend(training_samples_batch)
+
+    # print("Get the training samples of the FAQ matcher:")
+    # training_samples = api_instance.faq_matcher_get_training_samples(instance_name)
+    # print(" type(training_samples)", type(training_samples), flush=True)
     # print(" training_samples", training_samples, flush=True)
-    print()
+    # print()
 
     # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be available
     # after training.
@@ -56,9 +67,10 @@ try:
         for sample in training_samples:
             label = sample.label
             text = sample.text
+            lang_code = str(sample.lang_code)
 
             if (label is not None) and (text is not None):
-                csv_writer.writerow([label, text])
+                csv_writer.writerow([label, text, lang_code])
 
 except ApiException as e:
     print("Exception when calling an FAQ matcher operation: %s\n" % e, flush=True)

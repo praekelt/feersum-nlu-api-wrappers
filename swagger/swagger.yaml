@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.41
+  version: 2.0.43
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -730,7 +730,7 @@ paths:
 ########
 ## text_classifiers get list of class labels
 ########
-  /text_classifiers/{instance_name}/get_labels:
+  /text_classifiers/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
     - $ref: '#/parameters/origin'
@@ -1662,7 +1662,7 @@ paths:
 ########
 ## intent_classifiers get list of class labels
 ########
-  /intent_classifiers/{instance_name}/get_labels:
+  /intent_classifiers/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
     - $ref: '#/parameters/origin'
@@ -2377,7 +2377,7 @@ paths:
 ########
 ## faq_matchers get list of class labels
 ########
-  /faq_matchers/{instance_name}/get_labels:
+  /faq_matchers/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
     - $ref: '#/parameters/origin'
@@ -3167,7 +3167,7 @@ paths:
 ########
 ## crf_entity_extractors get list of entity labels
 ########
-  /crf_entity_extractors/{instance_name}/get_labels:
+  /crf_entity_extractors/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
     - $ref: '#/parameters/origin'
@@ -3753,7 +3753,7 @@ paths:
 ########
 ## synonym_entity_extractors get list of entity labels
 ########
-  /synonym_entity_extractors/{instance_name}/get_labels:
+  /synonym_entity_extractors/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
     - $ref: '#/parameters/origin'
@@ -4910,7 +4910,7 @@ paths:
 ########
 ## language_recognisers get list of class labels
 ########
-  /language_recognisers/{instance_name}/get_labels:
+  /language_recognisers/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
     - $ref: '#/parameters/origin'
@@ -5083,6 +5083,35 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+
+########
+## data_objects untrash
+########
+  /data_objects/{instance_name}/untrash:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - data_objects
+      summary: Untrash the named data_object.
+      x-swagger-router-controller: rest_api.flask_server.controllers.data_objects_controller
+      operationId: data_object_untrash
+      description: Bring the named data_object back from the trash.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the data_object.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/data_object"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
 ###################################
 ###################################
@@ -5832,7 +5861,7 @@ paths:
 ########
 ## image_classifiers get list of class labels
 ########
-  /image_classifiers/{instance_name}/get_labels:
+  /image_classifiers/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
     - $ref: '#/parameters/origin'
@@ -6453,6 +6482,8 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/dashboard_model_detail"
+      log_file:
+        type: string
 
   image_classifier_instance_detail:
     description: The model instance detail.

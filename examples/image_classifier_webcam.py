@@ -1,4 +1,4 @@
-""" Example: Shows how to create, train and use a image classifier. """
+""" Example: Shows how to use an image classifier with a webcam. """
 
 import urllib3
 import cv2

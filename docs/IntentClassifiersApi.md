@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**intent_classifier_del_training_samples_all**](IntentClassifiersApi.md#intent_classifier_del_training_samples_all) | **DELETE** /intent_classifiers/{instance_name}/training_samples_all | Delete all training samples.
 [**intent_classifier_get_details**](IntentClassifiersApi.md#intent_classifier_get_details) | **GET** /intent_classifiers/{instance_name} | Get details of named instance.
 [**intent_classifier_get_details_all**](IntentClassifiersApi.md#intent_classifier_get_details_all) | **GET** /intent_classifiers | Get list of loaded intent classifiers.
-[**intent_classifier_get_labels**](IntentClassifiersApi.md#intent_classifier_get_labels) | **GET** /intent_classifiers/{instance_name}/get_labels | Get list of possible labels.
+[**intent_classifier_get_labels**](IntentClassifiersApi.md#intent_classifier_get_labels) | **GET** /intent_classifiers/{instance_name}/labels | Get list of possible labels.
 [**intent_classifier_get_params**](IntentClassifiersApi.md#intent_classifier_get_params) | **GET** /intent_classifiers/{instance_name}/params | Get the editable model parameters of named intent classifier.
 [**intent_classifier_get_testing_samples**](IntentClassifiersApi.md#intent_classifier_get_testing_samples) | **GET** /intent_classifiers/{instance_name}/testing_samples | Get testing samples.
 [**intent_classifier_get_training_samples**](IntentClassifiersApi.md#intent_classifier_get_training_samples) | **GET** /intent_classifiers/{instance_name}/training_samples | Get training samples.
