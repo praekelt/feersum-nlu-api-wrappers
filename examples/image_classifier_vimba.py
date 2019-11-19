@@ -2,7 +2,6 @@
 
 import urllib3
 from pymba import Vimba, VimbaException
-
 import cv2
 
 import feersum_nlu
