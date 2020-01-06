@@ -22,17 +22,17 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-# instance_name = 'hot_dog_vs_not_hot_dog'
-# all_data_path = "/Volumes/256GB/vision_data/hot-dog-vs-not-hot-dog/train"
-# labels = ["hot_dog", "not_hot_dog"]
-
 # instance_name = 'under_vs_over_image_clsfr'
 # all_data_path = "/Volumes/256GB/vision_data/DrOetker_cropped/all"
 # labels = ["over", "under"]
 
-instance_name = 'cat_vs_dog_image_clsfr'
-all_data_path = "/Volumes/256GB/vision_data/dogs-vs-cats/train"
-labels = ["cat", "dog"]
+# instance_name = 'cat_vs_dog_image_clsfr'
+# all_data_path = "/Volumes/256GB/vision_data/dogs-vs-cats/train"
+# labels = ["cat", "dog"]
+
+instance_name = 'hot_dog_vs_not_hot_dog'
+all_data_path = "/Volumes/256GB/vision_data/hot-dog-vs-not-hot-dog/train"
+labels = ["hot_dog", "not_hot_dog"]
 
 # === Load the data samples ===
 training_list = []  # type: List[Tuple[str, str]]

@@ -15,4 +15,5 @@ pillow
 opencv-python
 pymba
 flask
+connexion
 

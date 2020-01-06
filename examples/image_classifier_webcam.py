@@ -25,7 +25,7 @@ instance_name = 'under_vs_over_image_clsfr'
 
 caller_name = 'example_caller'
 
-cap = cv2.VideoCapture(1)  # pylint: disable=no-member
+cap = cv2.VideoCapture(0)  # pylint: disable=no-member
 print()
 
 try:

@@ -1,6 +1,12 @@
 Changelog
 *********
 
+Version 2.0.43.post6
+====================
+
+Updated the dependency versions.
+
+
 Version 2.0.43
 ==============
 
