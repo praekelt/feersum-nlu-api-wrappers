@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.43
+  version: 2.0.44
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -6557,6 +6557,10 @@ definitions:
         description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
         type: number
         example: 0.85
+      temperature:
+        description: The softmax temperature. The lower the temperature the more pronounced the winning class' probability will be. The default is 1.0. A lower temperature is useful in a many class problem when the probabilty might otherwise be diluted amongst the classes.
+        type: number
+        example: 1.0
 
   text_classifier_instance_detail:
     description: The model instance detail.
@@ -6625,7 +6629,7 @@ definitions:
       clsfr_algorithm:
         description: The name of the algorithm that should be used for the classification.
         type: string
-        example: "'naive_bayes_char_ngram', 'nearest_neighbour_L1', 'nearest_neighbour_L2', 'nearest_neighbour_cosine', etc."
+        example: "'svm', 'naive_bayes', 'nearest_neighbour_fuzzy', 'nearest_neighbour_l1', 'nearest_neighbour_cosine', 'nearest_neighbour_cosine', 'fully_connected_neural_net', etc."
       language_model_list:
         description: The list of labelled language models used as sentence encoders.
         type: array
@@ -6635,6 +6639,10 @@ definitions:
         description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
         type: number
         example: 0.85
+      temperature:
+        description: The softmax temperature. The lower the temperature the more pronounced the winning class' probability will be. The default is 1.0. A lower temperature is useful in a many class problem when the probabilty might otherwise be diluted amongst the classes.
+        type: number
+        example: 1.0
 
   word_manifold_instance_detail:
     description: The model instance detail.
@@ -6741,6 +6749,10 @@ definitions:
         description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
         type: number
         example: 0.85
+      temperature:
+        description: The softmax temperature. The lower the temperature the more pronounced the winning class' probability will be. The default is 1.0. A lower temperature is useful in a many class problem when the probabilty might otherwise be diluted amongst the classes.
+        type: number
+        example: 1.0
 
   intent_classifier_instance_detail:
     description: The model instance detail.
@@ -6826,6 +6838,10 @@ definitions:
         description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
         type: number
         example: 0.85
+      temperature:
+        description: The softmax temperature. The lower the temperature the more pronounced the winning class' probability will be. The default is 1.0. A lower temperature is useful in a many class problem when the probabilty might otherwise be diluted amongst the classes.
+        type: number
+        example: 1.0
 
   crf_entity_extractor_instance_detail:
     description: The model instance detail.
@@ -7669,6 +7685,10 @@ definitions:
         description: There is typically some model dependent threshold to be set upon training which is possibly mutable post training. This is that threshold.
         type: number
         example: 0.85
+      temperature:
+        description: The softmax temperature. The lower the temperature the more pronounced the winning class' probability will be. The default is 1.0. A lower temperature is useful in a many class problem when the probabilty might otherwise be diluted amongst the classes.
+        type: number
+        example: 1.0
       immediate_mode:
         description: Set immediate_mode to True to do synchronous/blocking training. Might be forced to False in production.
         type: boolean
@@ -7723,6 +7743,10 @@ definitions:
         type: string
       lid_model_file:
         type: string
+      temperature:
+        description: The softmax temperature. The lower the temperature the more pronounced the winning class' probability will be. The default is 1.0. A lower temperature is useful in a many class problem when the probabilty might otherwise be diluted amongst the classes.
+        type: number
+        example: 1.0
 
   image_input:
     description: The image input to be classified or processed. Can be provided as a base64 encoded string or alternatively as a URL to a an image.

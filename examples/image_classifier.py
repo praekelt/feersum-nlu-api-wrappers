@@ -22,17 +22,17 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-# instance_name = 'hot_dog_vs_not_hot_dog'
-# all_data_path = "/Volumes/256GB/vision_data/hot-dog-vs-not-hot-dog/train"
-# labels = ["hot_dog", "not_hot_dog"]
-
 # instance_name = 'under_vs_over_image_clsfr'
 # all_data_path = "/Volumes/256GB/vision_data/DrOetker_cropped/all"
 # labels = ["over", "under"]
 
-instance_name = 'cat_vs_dog_image_clsfr'
-all_data_path = "/Volumes/256GB/vision_data/dogs-vs-cats/train"
-labels = ["cat", "dog"]
+# instance_name = 'cat_vs_dog_image_clsfr'
+# all_data_path = "/Volumes/256GB/vision_data/dogs-vs-cats/train"
+# labels = ["cat", "dog"]
+
+instance_name = 'hot_dog_vs_not_hot_dog'
+all_data_path = "/Volumes/256GB/vision_data/hot-dog-vs-not-hot-dog/train"
+labels = ["hot_dog", "not_hot_dog"]
 
 # === Load the data samples ===
 training_list = []  # type: List[Tuple[str, str]]
@@ -62,7 +62,8 @@ create_details = feersum_nlu.ImageClassifierCreateDetails(name=instance_name,
                                                           load_from_store=False)
 
 
-train_details = feersum_nlu.TrainDetails(immediate_mode=False,
+train_details = feersum_nlu.TrainDetails(temperature=1.0,
+                                         immediate_mode=False,
                                          clsfr_algorithm="resnet152",
                                          num_epochs=50)
 
@@ -193,7 +194,9 @@ try:
     print()
 
     print("Update the model params:")
-    model_params = feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test image classifier.",
+    model_params = feersum_nlu.ModelParams(threshold=0.9,
+                                           temperature=1.0,
+                                           desc="Examples: Test image classifier.",
                                            long_name='Test image Classifier',
                                            readonly=True)
     api_response = api_instance.image_classifier_set_params(instance_name, model_params)

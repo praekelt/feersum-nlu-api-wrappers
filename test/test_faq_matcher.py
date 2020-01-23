@@ -66,6 +66,7 @@ class TestFAQMatcher(unittest.TestCase):
         # and "glove6B50D_trimmed"
 
         train_details = feersum_nlu.TrainDetails(threshold=0.85,
+                                                 temperature=1.0,
                                                  word_manifold_list=word_manifold_list,
                                                  immediate_mode=True)
 

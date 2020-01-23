@@ -1,6 +1,14 @@
 Changelog
 *********
 
+Version 2.0.44
+==============
+
+Added the approximate (fuzzy) string matching text classifier.
+
+Added the softmax temperature as a hyper parameter to the text, intent and FAQ classifiers.
+
+
 Version 2.0.43
 ==============
 
