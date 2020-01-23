@@ -46,6 +46,7 @@ labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Where can 
 
 # train_details = feersum_nlu.TrainDetails(immediate_mode=True)
 train_details = feersum_nlu.TrainDetails(threshold=1.0,
+                                         temperature=0.9,
                                          word_manifold_list=word_manifold_list,
                                          immediate_mode=True)
 

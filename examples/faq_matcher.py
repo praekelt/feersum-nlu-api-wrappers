@@ -140,6 +140,7 @@ try:
     immediate_mode = False  # Set to True to do a blocking train operation.
 
     train_details = feersum_nlu.TrainDetails(threshold=0.99,
+                                             temperature=1.0,
                                              word_manifold_list=word_manifold_list,
                                              immediate_mode=immediate_mode)
 

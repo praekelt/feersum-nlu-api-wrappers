@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **num_testing_samples** | **int** | The model&#39;s number of testing samples. | [optional] 
 **clsfr_algorithm** | **str** | The name of the algorithm that should be used for the classification. | [optional] 
 **threshold** | **float** | There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold. | [optional] 
+**temperature** | **float** | The softmax temperature. The lower the temperature the more pronounced the winning class&#39; probability will be. The default is 1.0. A lower temperature is useful in a many class problem when the probabilty might otherwise be diluted amongst the classes. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
