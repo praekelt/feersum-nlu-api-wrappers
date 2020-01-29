@@ -1,6 +1,12 @@
 Changelog
 *********
 
+Version 2.0.45
+==============
+
+Added the text and image labelled datasets endpoints to allow a user to create and manage labelled datasets.
+
+
 Version 2.0.44
 ==============
 
