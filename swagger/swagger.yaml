@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.44
+  version: 2.0.45
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -5970,6 +5970,739 @@ paths:
 
 
 ###################################
+###################################
+########
+## text_datasets root
+########
+  /text_datasets:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - text_datasets
+      summary: Create a text dataset.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
+      operationId: text_dataset_create
+      description: Create a new text dataset or reload one from the trash. Returns the details of the new or loaded instance.
+      parameters:
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/text_dataset_create_details"
+
+      responses:
+        200:
+          $ref: "#/responses/text_dataset_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - text_datasets
+      summary: Get list of loaded text datasets.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
+      operationId: text_dataset_get_details_all
+      description: Get the list of loaded text datasets.
+      responses:
+        200:
+          $ref: "#/responses/text_dataset_instance_detail_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## text_datasets Get details of named instance
+########
+  /text_datasets/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    get:
+      tags:
+      - text_datasets
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
+      operationId: text_dataset_get_details
+      description: Get the details of the named text dataset instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/text_dataset_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - text_datasets
+      summary: Delete named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
+      operationId: text_dataset_del
+      description: Delete and return the details of the named text dataset instance. Deleted instances can be reloaded from the trash with the create operation.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/text_dataset_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## text_datasets samples
+########
+  /text_datasets/{instance_name}/samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - text_datasets
+      summary: Add samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
+      operationId: text_dataset_add_samples
+      description: Add samples to named text dataset. Returns the samples added to the model.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - text_datasets
+      summary: Update samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
+      operationId: text_dataset_update_samples
+      description: Update samples of the named text dataset. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of text samples to update. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - text_datasets
+      summary: Get samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
+      operationId: text_dataset_get_samples
+      description: Get the samples of the named text dataset.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - text_datasets
+      summary: Delete samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
+      operationId: text_dataset_del_samples
+      description: Delete the listed samples of the named text dataset. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /text_datasets/{instance_name}/samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    delete:
+      tags:
+      - text_datasets
+      summary: Delete all samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
+      operationId: text_dataset_del_samples_all
+      description: Delete all samples of the named text dataset. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+########
+## text_datasets model_params
+########
+  /text_datasets/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - text_datasets
+      summary: Set the model parameters of named text dataset.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
+      operationId: text_dataset_set_params
+      description: Set the model parameters of named text dataset.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
+      responses:
+        200:
+          $ref: "#/responses/text_dataset_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - text_datasets
+      summary: Get the editable model parameters of named text dataset.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
+      operationId: text_dataset_get_params
+      description: Get the editable model parameters of named text dataset.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## text_datasets vaporise
+########
+  /text_datasets/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - text_datasets
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
+      operationId: text_dataset_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/text_dataset_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## text_datasets get list of class labels
+########
+  /text_datasets/{instance_name}/labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    get:
+      tags:
+      - text_datasets
+      summary: Get list of possible labels.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
+      operationId: text_dataset_get_labels
+      description: Returns the dataset's list of possible class labels.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labels"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+###################################
+###################################
+########
+## image_datasets root
+########
+  /image_datasets:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_datasets
+      summary: Create an image dataset.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
+      operationId: image_dataset_create
+      description: Create a new image dataset or reload one from the trash. Returns the details of the new or loaded instance.
+      parameters:
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/image_dataset_create_details"
+
+      responses:
+        200:
+          $ref: "#/responses/image_dataset_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - image_datasets
+      summary: Get list of loaded image datasets.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
+      operationId: image_dataset_get_details_all
+      description: Get the list of loaded image datasets.
+      responses:
+        200:
+          $ref: "#/responses/image_dataset_instance_detail_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_datasets Get details of named instance
+########
+  /image_datasets/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    get:
+      tags:
+      - image_datasets
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
+      operationId: image_dataset_get_details
+      description: Get the details of the named image dataset instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/image_dataset_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - image_datasets
+      summary: Delete named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
+      operationId: image_dataset_del
+      description: Delete and return the details of the named image dataset instance. Deleted instances can be reloaded from the trash with the create operation.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/image_dataset_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_datasets samples
+########
+  /image_datasets/{instance_name}/samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_datasets
+      summary: Add samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
+      operationId: image_dataset_add_samples
+      description: Add samples to named image dataset. Returns the samples added to the model.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_sample_list
+        description: List of labelled image samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - image_datasets
+      summary: Update samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
+      operationId: image_dataset_update_samples
+      description: Update samples of the named text dataset. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_sample_list
+        description: List of labelled image samples. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - image_datasets
+      summary: Get samples. Image format is 256x256 RGB.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
+      operationId: image_dataset_get_samples
+      description: Get the samples of the named image dataset.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - image_datasets
+      summary: Delete samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
+      operationId: image_dataset_del_samples
+      description: Delete the listed samples of the named image dataset. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_sample_list
+        description: List of image samples to delete. A sample can be deleted using either its content & label or its uuid.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_sample"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /image_datasets/{instance_name}/samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    delete:
+      tags:
+      - image_datasets
+      summary: Delete all samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
+      operationId: image_dataset_del_samples_all
+      description: Delete all samples of the named image dataset. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+########
+## image_datasets model_params
+########
+  /image_datasets/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_datasets
+      summary: Set the model parameters of named image dataset.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
+      operationId: image_dataset_set_params
+      description: Set the model parameters of named image dataset.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
+      responses:
+        200:
+          $ref: "#/responses/image_dataset_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - image_datasets
+      summary: Get the editable model parameters of named image dataset.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
+      operationId: image_dataset_get_params
+      description: Get the editable model parameters of named image dataset.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+########
+## image_datasets vaporise
+########
+  /image_datasets/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    post:
+      tags:
+      - image_datasets
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
+      operationId: image_dataset_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/image_dataset_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_datasets get list of class labels
+########
+  /image_datasets/{instance_name}/labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+    - $ref: '#/parameters/origin'
+
+    get:
+      tags:
+      - image_datasets
+      summary: Get list of possible labels.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
+      operationId: image_dataset_get_labels
+      description: Returns the dataset's list of possible class labels.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labels"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+###################################
 # Descriptions of common parameters
 ###################################
 parameters:
@@ -6017,6 +6750,18 @@ responses:
       items:
         $ref: "#/definitions/image_classifier_instance_detail"
 
+  image_dataset_instance_detail:
+    description: The dataset instance detail
+    schema:
+      $ref: "#/definitions/image_dataset_instance_detail"
+
+  image_dataset_instance_detail_list:
+    description: A list of datasets' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/image_dataset_instance_detail"
+
   text_classifier_instance_detail:
     description: The model instance detail
     schema:
@@ -6028,6 +6773,18 @@ responses:
       type: array
       items:
         $ref: "#/definitions/text_classifier_instance_detail"
+
+  text_dataset_instance_detail:
+    description: The dataset instance detail
+    schema:
+      $ref: "#/definitions/text_dataset_instance_detail"
+
+  text_dataset_instance_detail_list:
+    description: A list of datasets' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/text_dataset_instance_detail"
 
   word_manifold_instance_detail:
     description: The model instance detail
@@ -6562,6 +7319,34 @@ definitions:
         type: number
         example: 1.0
 
+  image_dataset_instance_detail:
+    description: The dataset instance detail.
+    type: object
+    required:
+    - name
+    - id
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      id:
+        description: The unique id of a specific version of the dataset instance.
+        type: string
+        example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'This is an example of this type of dataset.'
+      readonly:
+        description: Indicates if the dataset is readonly and not editable.
+        type: boolean
+        example: False
+
   text_classifier_instance_detail:
     description: The model instance detail.
     type: object
@@ -6643,6 +7428,34 @@ definitions:
         description: The softmax temperature. The lower the temperature the more pronounced the winning class' probability will be. The default is 1.0. A lower temperature is useful in a many class problem when the probabilty might otherwise be diluted amongst the classes.
         type: number
         example: 1.0
+
+  text_dataset_instance_detail:
+    description: The dataset instance detail.
+    type: object
+    required:
+    - name
+    - id
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      id:
+        description: The unique id of a specific version of the dataset instance.
+        type: string
+        example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'This is an example of this type of dataset.'
+      readonly:
+        description: Indicates if the dataset is readonly and not editable.
+        type: boolean
+        example: False
 
   word_manifold_instance_detail:
     description: The model instance detail.
@@ -7233,6 +8046,34 @@ definitions:
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
+  image_dataset_create_details:
+    description: The details of the dataset instance to create.
+    type: object
+    required:
+    - name
+    - load_from_store
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'An example of this type of model.'
+      load_from_store:
+        description: Indicates if a pre-existing dataset with the specified name should be loaded from the trash. Usually set to False in which case a new dataset is created with details as specified.
+        type: boolean
+        example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the dataset to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
+
   text_classifier_create_details:
     description: The details of the model instance to create.
     type: object
@@ -7258,6 +8099,34 @@ definitions:
         example: False
       revision_uuid:
         description: If provided, the uuid of the revision of the model to try and load from the model history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
+
+  text_dataset_create_details:
+    description: The details of the dataset instance to create.
+    type: object
+    required:
+    - name
+    - load_from_store
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'An example of this type of model.'
+      load_from_store:
+        description: Indicates if a pre-existing dataset with the specified name should be loaded from the trash. Usually set to False in which case a new dataset is created with details as specified.
+        type: boolean
+        example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the dataset to try and load from the dataset history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
