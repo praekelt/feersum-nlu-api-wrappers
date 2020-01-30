@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.45
+  version: 2.0.45.post3
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -44,7 +44,9 @@ tags:
 - name: dashboard
   description: A service endpoint to get your list of loaded model instances. 'Try it out!' to see what models are already created for you.
 - name: text_classifiers
-  description: The API to your Naive Bayes text classifier instances useful for things like classifying phrases into predefined action or intent categories. Create a model, add some training data, train it and start doing retrieve/inference calls.
+  description: The API to your text classifier instances useful for things like classifying phrases into predefined action or intent categories. Create a model, add some training data, train it and start doing retrieve/inference calls. A variety of shallow to deep classifier algorithms and language models can be selected at training time from naive Bayes and SVM to fully connected neural classifiers using USent and Elmo features.
+- name: text_datasets
+  description: The API to your labelled text datasets useful for things like labelling data. Store unlabelled samples with a label like '_unlabelled'.
 # - name: word_manifolds
 #   description: The API to your word embedding model instances. The service is pre-loaded with default word embeddings sufficient for most use cases.
 - name: intent_classifiers
@@ -81,6 +83,8 @@ tags:
   description: An enpoint to manage API keys.
 - name: image_classifiers
   description: The API to your image classifier instances. Create a model, add some training data, train it and start doing retrieve/inference calls.
+- name: image_datasets
+  description: The API to your labelled image datasets useful for things like labelling data. Store unlabelled samples with a label like '_unlabelled'.
 - name: image_readers
   description: The API to your image reader instances.
 
@@ -6156,6 +6160,11 @@ paths:
         description: The number of samples to return.
         required: false
         type: integer
+      - in: query
+        name: sub_sample
+        description: If provided, the size of the shuffled sub-sample to return.
+        required: false
+        type: integer
       responses:
         200:
           $ref: "#/responses/labelled_text_sample_list"
@@ -6520,6 +6529,11 @@ paths:
       - in: query
         name: len
         description: The number of samples to return.
+        required: false
+        type: integer
+      - in: query
+        name: sub_sample
+        description: If provided, the size of the shuffled sub-sample to return.
         required: false
         type: integer
       responses:
