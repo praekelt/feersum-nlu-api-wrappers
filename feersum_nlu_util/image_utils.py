@@ -3,6 +3,8 @@ from typing import List, Tuple, Optional, Dict, Any
 import PIL
 from PIL import Image
 
+import cv2
+
 import base64
 import io
 import os
@@ -72,9 +74,9 @@ def show_image(file_name: str):
     im.show()
 
 
-def load_image(file_name: str, ignore_resolution: bool = False) -> str:
+def load_image_file(file_name: str, ignore_resolution: bool = False) -> str:
     """
-    Load an image from disk, resize and encode to base64 jpeg.
+    Load an image from file, resize and encode to base64 jpeg.
 
     :param file_name: The file name to load.
     :param ignore_resolution: Don't change the image resolution if True.
@@ -86,6 +88,24 @@ def load_image(file_name: str, ignore_resolution: bool = False) -> str:
 
     if pil_image.mode != 'RGB':
         pil_image = pil_image.convert(mode='RGB')
+
+    if not ignore_resolution:
+        pil_image = _resize_pil_image(pil_image)
+
+    return _base64_encode_from_pil_image(pil_image)
+
+
+def load_image_opencvBGR(opencv_image, ignore_resolution: bool = False) -> str:
+    """
+    Load an image from an opencv2 image, resize and encode to base64 jpeg.
+
+    :param opencv_image: The opencv2 image.
+    :param ignore_resolution: Don't change the image resolution if True.
+    :return: utf8 encoded base64 string.
+    :exception IOError: If the file cannot be found, or the image cannot be
+       opened and identified.
+    """
+    pil_image = Image.fromarray(cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB))  # pylint: disable=no-member
 
     if not ignore_resolution:
         pil_image = _resize_pil_image(pil_image)
@@ -184,7 +204,7 @@ def get_image_samples(data_path: str, label: str,
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
         if filename.lower().endswith((".jpg", ".jpeg", ".j2k", ".j2p", ".jpx", ".png", ".bmp")):
-            image_samples.append((load_image(data_path + "/" + label + "/" + filename), label))
+            image_samples.append((load_image_file(data_path + "/" + label + "/" + filename), label))
 
         if (max_samples is not None) and (len(image_samples) >= max_samples):
             break  # from for-loop.
@@ -210,7 +230,7 @@ def get_image_value_samples(data_path: str,
         filename = os.fsdecode(file)
         if filename.lower().endswith((".jpg", ".jpeg", ".j2k", ".j2p", ".jpx", ".png", ".bmp")):
             value = name_value_dict.get(filename)
-            image_str = load_image(data_path + "/" + filename)
+            image_str = load_image_file(data_path + "/" + filename)
 
             if value is not None:
                 image_value_samples.append((image_str, value))

@@ -34,6 +34,7 @@ class TestIntentClassifier(unittest.TestCase):
         instance_name = 'test_intent_clsfr_' + str(uuid.uuid4())
 
         word_manifold_list = [feersum_nlu.LabelledWordManifold('eng', 'feers_wm_eng')]
+        language_model_list = [feersum_nlu.LabelledLanguageModel('eng', 'feers_wm_eng')]
         # The playground's pre-loaded embeddings include:
         # "feers_wm_afr", "feers_wm_eng", "feers_wm_nbl", "feers_wm_xho",
         # "feers_wm_zul", "feers_wm_ssw", "feers_wm_nso", "feers_wm_sot",
@@ -58,7 +59,8 @@ class TestIntentClassifier(unittest.TestCase):
                                                                         label="quote"))
 
         train_details = feersum_nlu.TrainDetails(threshold=0.85,
-                                                 word_manifold_list=word_manifold_list,
+                                                 # word_manifold_list=word_manifold_list,
+                                                 language_model_list=language_model_list,
                                                  immediate_mode=False)
 
         tsne_settings = feersum_nlu.TsneSettings(n_components=3, perplexity=35, learning_rate=250)

@@ -44,7 +44,6 @@ class DashboardApi(object):
 
         :param async_req bool
         :param str x_caller:
-        :param str origin:
         :return: DashboardDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -67,13 +66,12 @@ class DashboardApi(object):
 
         :param async_req bool
         :param str x_caller:
-        :param str origin:
         :return: DashboardDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['x_caller', 'origin']  # noqa: E501
+        all_params = ['x_caller']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -98,8 +96,6 @@ class DashboardApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
-        if 'origin' in params:
-            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -144,7 +140,6 @@ class DashboardApi(object):
         :param async_req bool
         :param DashboardParams params: Params like 'show_data_objects' that influence the dashboard's response. (required)
         :param str x_caller:
-        :param str origin:
         :return: DashboardDetail
                  If the method is called asynchronously,
                  returns the request thread.
@@ -168,13 +163,12 @@ class DashboardApi(object):
         :param async_req bool
         :param DashboardParams params: Params like 'show_data_objects' that influence the dashboard's response. (required)
         :param str x_caller:
-        :param str origin:
         :return: DashboardDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['params', 'x_caller', 'origin']  # noqa: E501
+        all_params = ['params', 'x_caller']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -203,8 +197,6 @@ class DashboardApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
-        if 'origin' in params:
-            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}

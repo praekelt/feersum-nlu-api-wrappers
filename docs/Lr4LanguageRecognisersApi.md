@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **lr4_language_recogniser_retrieve**
-> list[ScoredLabel] lr4_language_recogniser_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
+> list[ScoredLabel] lr4_language_recogniser_retrieve(instance_name, text_input, x_caller=x_caller)
 
 Recognise the language the text is written in.
 
@@ -38,11 +38,10 @@ api_instance = feersum_nlu.Lr4LanguageRecognisersApi(feersum_nlu.ApiClient(confi
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 x_caller = 'x_caller_example' # str |  (optional)
-origin = 'origin_example' # str |  (optional)
 
 try:
     # Recognise the language the text is written in.
-    api_response = api_instance.lr4_language_recogniser_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
+    api_response = api_instance.lr4_language_recogniser_retrieve(instance_name, text_input, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling Lr4LanguageRecognisersApi->lr4_language_recogniser_retrieve: %s\n" % e)
@@ -55,7 +54,6 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **text_input** | [**TextInput**](TextInput.md)| The input text. | 
  **x_caller** | **str**|  | [optional] 
- **origin** | **str**|  | [optional] 
 
 ### Return type
 

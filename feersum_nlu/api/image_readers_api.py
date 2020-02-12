@@ -46,7 +46,6 @@ class ImageReadersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param ImageInput image_input: The input image. (required)
         :param str x_caller:
-        :param str origin:
         :return: list[Text]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -71,13 +70,12 @@ class ImageReadersApi(object):
         :param str instance_name: The name of the model instance. (required)
         :param ImageInput image_input: The input image. (required)
         :param str x_caller:
-        :param str origin:
         :return: list[Text]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['instance_name', 'image_input', 'x_caller', 'origin']  # noqa: E501
+        all_params = ['instance_name', 'image_input', 'x_caller']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -112,8 +110,6 @@ class ImageReadersApi(object):
         header_params = {}
         if 'x_caller' in params:
             header_params['X-CALLER'] = params['x_caller']  # noqa: E501
-        if 'origin' in params:
-            header_params['Origin'] = params['origin']  # noqa: E501
 
         form_params = []
         local_var_files = {}

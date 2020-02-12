@@ -33,7 +33,7 @@ try:
 
     print("Get dashboard content (use CUSTOM operation params):")
     api_response, api_response_code, api_response_header = \
-        api_instance.dashboard_get_details_with_params_with_http_info(x_caller=caller_name,  # Or origin=caller_name,
+        api_instance.dashboard_get_details_with_params_with_http_info(x_caller=caller_name,
                                                                       params=dash_params,
                                                                       _request_timeout=2)
     print(" type(api_response)", type(api_response))

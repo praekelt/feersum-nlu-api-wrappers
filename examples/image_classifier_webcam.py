@@ -37,8 +37,8 @@ try:
 
     while True:
         # Capture frame-by-frame
-        ret, frame = cap.read()
-        height, width = frame.shape[:2]
+        ret, image = cap.read()
+        height, width = image.shape[:2]
         target_size = 256
 
         if width > height:
@@ -48,13 +48,10 @@ try:
             resized_height = int((target_size / width) * height)
             resized_width = target_size
 
-        resized_frame = \
-            cv2.resize(frame, (resized_width, resized_height), interpolation=cv2.INTER_LINEAR)  # pylint: disable=no-member
+        resized_image = \
+            cv2.resize(image, (resized_width, resized_height), interpolation=cv2.INTER_LINEAR)  # pylint: disable=no-member
 
-        cv2.imwrite("temp_img.png", resized_frame)  # pylint: disable=no-member
-
-        # ToDo: Find a better way to move image from OpenCV to base64 than writing to disk.
-        base64_img_str = image_utils.load_image("temp_img.png")
+        base64_img_str = image_utils.load_image_opencvBGR(resized_image)
         image_input = feersum_nlu.ImageInput(base64_img_str)  # The same size as the camera frame, but jpeg encoded.
 
         print("Classify image:")
@@ -68,14 +65,14 @@ try:
 
         # Display the resulting frame
         font = cv2.FONT_HERSHEY_SIMPLEX  # pylint: disable=no-member
-        cv2.putText(resized_frame,  # pylint: disable=no-member
+        cv2.putText(resized_image,  # pylint: disable=no-member
                     f"{score_label_list[0].label} {round(score_label_list[0].probability,2)}",  # pylint: disable=no-member
                     (10, 30), font, 1, (0, 0, 0), 5)  # pylint: disable=no-member
-        cv2.putText(resized_frame,  # pylint: disable=no-member
+        cv2.putText(resized_image,  # pylint: disable=no-member
                     f"{score_label_list[0].label} {round(score_label_list[0].probability,2)}",  # pylint: disable=no-member
                     (10, 30), font, 1, (255, 255, 255), 2)  # pylint: disable=no-member
 
-        cv2.imshow('img', resized_frame)  # pylint: disable=no-member
+        cv2.imshow('img', resized_image)  # pylint: disable=no-member
 
         if cv2.waitKey(1) & 0xFF == ord('q'):  # pylint: disable=no-member
             break

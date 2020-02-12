@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **dashboard_get_details**
-> DashboardDetail dashboard_get_details(x_caller=x_caller, origin=origin)
+> DashboardDetail dashboard_get_details(x_caller=x_caller)
 
 Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
 
@@ -37,11 +37,10 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 # create an instance of the API class
 api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
 x_caller = 'x_caller_example' # str |  (optional)
-origin = 'origin_example' # str |  (optional)
 
 try:
     # Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
-    api_response = api_instance.dashboard_get_details(x_caller=x_caller, origin=origin)
+    api_response = api_instance.dashboard_get_details(x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DashboardApi->dashboard_get_details: %s\n" % e)
@@ -52,7 +51,6 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_caller** | **str**|  | [optional] 
- **origin** | **str**|  | [optional] 
 
 ### Return type
 
@@ -70,7 +68,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dashboard_get_details_with_params**
-> DashboardDetail dashboard_get_details_with_params(params, x_caller=x_caller, origin=origin)
+> DashboardDetail dashboard_get_details_with_params(params, x_caller=x_caller)
 
 Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
 
@@ -99,11 +97,10 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
 params = feersum_nlu.DashboardParams() # DashboardParams | Params like 'show_data_objects' that influence the dashboard's response.
 x_caller = 'x_caller_example' # str |  (optional)
-origin = 'origin_example' # str |  (optional)
 
 try:
     # Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
-    api_response = api_instance.dashboard_get_details_with_params(params, x_caller=x_caller, origin=origin)
+    api_response = api_instance.dashboard_get_details_with_params(params, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DashboardApi->dashboard_get_details_with_params: %s\n" % e)
@@ -115,7 +112,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **params** | [**DashboardParams**](DashboardParams.md)| Params like &#39;show_data_objects&#39; that influence the dashboard&#39;s response. | 
  **x_caller** | **str**|  | [optional] 
- **origin** | **str**|  | [optional] 
 
 ### Return type
 

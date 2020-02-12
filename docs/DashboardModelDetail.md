@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **desc** | **str** | The longer existential description of this instance&#39;s purpose in life. | [optional] 
 **model_type** | **str** | The type of this model. | 
 **collection_uri** | **str** | The URI of the model type&#39;s collection resource e.g. /faq_matchers for the collection of faq_matcher models. | 
+**has_labels** | **bool** | Whether or not the model is returns a list of scored labels. Unknown if flag not present. | [optional] 
 **trashed** | **bool** | Whether or not this model has been deleted. Deleted models need to be loaded to be used again. | [optional] 
 **history** | [**list[ModelRevision]**](ModelRevision.md) | The model&#39;s history. The history includes the current version of the model only if the last update was pushed to the history. | [optional] 
 

@@ -21,9 +21,9 @@ print()
 
 try:
     print("Delete all data objects:")
-    api_response = api_instance.data_object_del_all()
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
+    # api_response = api_instance.data_object_del_all()
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
     print()
 
 except ApiException as e:

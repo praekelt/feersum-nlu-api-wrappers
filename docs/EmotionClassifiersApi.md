@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **emotion_classifier_retrieve**
-> list[ScoredLabel] emotion_classifier_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
+> list[ScoredLabel] emotion_classifier_retrieve(instance_name, text_input, x_caller=x_caller)
 
 Classify emotion.
 
@@ -38,11 +38,10 @@ api_instance = feersum_nlu.EmotionClassifiersApi(feersum_nlu.ApiClient(configura
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 x_caller = 'x_caller_example' # str |  (optional)
-origin = 'origin_example' # str |  (optional)
 
 try:
     # Classify emotion.
-    api_response = api_instance.emotion_classifier_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
+    api_response = api_instance.emotion_classifier_retrieve(instance_name, text_input, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling EmotionClassifiersApi->emotion_classifier_retrieve: %s\n" % e)
@@ -55,7 +54,6 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **text_input** | [**TextInput**](TextInput.md)| The input text. | 
  **x_caller** | **str**|  | [optional] 
- **origin** | **str**|  | [optional] 
 
 ### Return type
 

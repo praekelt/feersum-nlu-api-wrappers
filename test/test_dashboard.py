@@ -34,8 +34,10 @@ class TestDashboard(unittest.TestCase):
             print("Get dashboard content:")
             api_response, api_response_code, api_response_header = api_instance.dashboard_get_details_with_http_info()
 
+            print(api_response)
+
             print("api_response.api_version =", api_response.api_version)
-            self.assertTrue(api_response.api_version == "2.0.45.post3")
+            self.assertTrue(api_response.api_version == "2.0.45.post4")
 
             print(" api_response_header", api_response_header)
             print(" calls remaining in this cycle ('-1' means no limit) =", api_response_header.get("X-RateLimit-Remaining"))
