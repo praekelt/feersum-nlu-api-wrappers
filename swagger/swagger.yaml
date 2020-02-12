@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.45.post3
+  version: 2.0.45.post5
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -2559,6 +2559,35 @@ paths:
           description: bad request
         401:
           $ref: "#/responses/UnauthorizedError"
+
+########
+## emotion_classifiers get list of class labels
+########
+  /emotion_classifiers/{instance_name}/labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    get:
+      tags:
+      - emotion_classifiers
+      summary: Get list of possible labels.
+      x-swagger-router-controller: rest_api.flask_server.controllers.emotion_classifiers_controller
+      operationId: emotion_classifier_get_labels
+      description: Returns the classifier's list of possible class labels.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labels"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
 
 ###################################
 ###################################
@@ -8458,6 +8487,7 @@ definitions:
         description: The number of epochs to train the model for.
         type: integer
         default: 30
+      # ToDo: Add a vision model to be used for the image classifiers that make use of an encoder + classifier.
       language_model_list:
         description: The list of labelled language models used as sentence encoders.
         type: array

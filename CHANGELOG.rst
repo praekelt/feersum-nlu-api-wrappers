@@ -6,6 +6,9 @@ Version 2.0.45
 
 Added the text and image labelled datasets endpoints to allow a user to create and manage labelled datasets.
 
+Added a 'has_labels' flag to the model details returned on the dashboard. Useful to know which model types have a
+'get_labels' endpoint.
+
 
 Version 2.0.44
 ==============
