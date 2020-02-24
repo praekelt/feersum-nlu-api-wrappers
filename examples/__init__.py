@@ -1,7 +1,7 @@
 import os
 
-feersumnlu_host = "http://127.0.0.1:8100"
-# feersumnlu_host = "https://nlu.playground.feersum.io:443"
+# feersumnlu_host = "http://127.0.0.1:8100"
+feersumnlu_host = "https://nlu.feersum.io:443"
 
 
 # Try to get the API key from your OS environment, else use 'YOUR_API_KEY' as the default value in the code below.
