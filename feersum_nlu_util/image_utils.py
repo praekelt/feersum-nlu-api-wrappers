@@ -3,6 +3,9 @@ from typing import List, Tuple, Optional, Dict, Any
 import PIL
 from PIL import Image
 
+import cv2
+import random
+
 import base64
 import io
 import os
@@ -72,9 +75,11 @@ def show_image(file_name: str):
     im.show()
 
 
-def load_image(file_name: str, ignore_resolution: bool = False) -> str:
+def load_image_file(file_name: str,
+                    ignore_resolution: bool = False,
+                    random_crop: Optional[int] = None) -> str:
     """
-    Load an image from disk, resize and encode to base64 jpeg.
+    Load an image from file, resize and encode to base64 jpeg.
 
     :param file_name: The file name to load.
     :param ignore_resolution: Don't change the image resolution if True.
@@ -86,6 +91,32 @@ def load_image(file_name: str, ignore_resolution: bool = False) -> str:
 
     if pil_image.mode != 'RGB':
         pil_image = pil_image.convert(mode='RGB')
+
+    if (random_crop is not None) and (random_crop > 0):
+        w, h = pil_image.size
+        left = random.randint(0, w - random_crop)
+        right = left + random_crop - 1
+        upper = random.randint(0, h - random_crop)
+        lower = upper + random_crop - 1
+        pil_image = pil_image.crop((left, upper, right, lower))
+
+    if not ignore_resolution:
+        pil_image = _resize_pil_image(pil_image)
+
+    return _base64_encode_from_pil_image(pil_image)
+
+
+def load_image_opencvBGR(opencv_image, ignore_resolution: bool = False) -> str:
+    """
+    Load an image from an opencv2 image, resize and encode to base64 jpeg.
+
+    :param opencv_image: The opencv2 image.
+    :param ignore_resolution: Don't change the image resolution if True.
+    :return: utf8 encoded base64 string.
+    :exception IOError: If the file cannot be found, or the image cannot be
+       opened and identified.
+    """
+    pil_image = Image.fromarray(cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB))  # pylint: disable=no-member
 
     if not ignore_resolution:
         pil_image = _resize_pil_image(pil_image)
@@ -169,12 +200,16 @@ def reformat_image(base64_image_str: str) -> Optional[str]:
 
 
 def get_image_samples(data_path: str, label: str,
-                      max_samples: Optional[int] = None) -> List[Tuple[str, str]]:
+                      max_samples: Optional[int] = None,
+                      ignore_resolution: bool = False,
+                      random_crop: Optional[int] = None,
+                      repeat: Optional[int] = None) -> List[Tuple[str, str]]:
     """
     Get all the images within a specific data_path/'label' file path and assign 'label' to the samples.
     :param data_path: The base path i.e. '/home/data/cat_vs_dog'
     :param label: The actual label folder to load i.e. 'cat' which would load images in '/home/data/cat_vs_dog/cat' as cat.
-    :param max_samples: The maximum number of samples to load and return. No limit if max_samples=None!
+    :param max_samples: The maximum number of samples to load and return.
+    :param ignore_resolution: Don't change the image resolution if True.
     :return: The list of loaded base64 image samples all labeled with 'label'.
     """
     directory = os.fsencode(data_path + "/" + label)
@@ -184,7 +219,13 @@ def get_image_samples(data_path: str, label: str,
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
         if filename.lower().endswith((".jpg", ".jpeg", ".j2k", ".j2p", ".jpx", ".png", ".bmp")):
-            image_samples.append((load_image(data_path + "/" + label + "/" + filename), label))
+            if (repeat is None) or (repeat < 1):
+                repeat = 1
+
+            for i in range(repeat):
+                image_samples.append((load_image_file(data_path + "/" + label + "/" + filename,
+                                                      ignore_resolution=ignore_resolution,
+                                                      random_crop=random_crop), label))
 
         if (max_samples is not None) and (len(image_samples) >= max_samples):
             break  # from for-loop.
@@ -196,7 +237,7 @@ def get_image_value_samples(data_path: str,
                             name_value_dict: Dict[str, Any],
                             max_samples: Optional[int] = None) -> List[Tuple[str, Any]]:
     """
-    Get all the images within a specific data_path assign values from name_value_dict.
+    Get all the images within a specific data_path and assign values from name_value_dict.
     :param data_path: The base path i.e. '/home/data/images'
     :param name_value_dict: The name value dict to use.
     :param max_samples: The maximum number of samples to load and return. No limit if max_samples=None!
@@ -210,7 +251,7 @@ def get_image_value_samples(data_path: str,
         filename = os.fsdecode(file)
         if filename.lower().endswith((".jpg", ".jpeg", ".j2k", ".j2p", ".jpx", ".png", ".bmp")):
             value = name_value_dict.get(filename)
-            image_str = load_image(data_path + "/" + filename)
+            image_str = load_image_file(data_path + "/" + filename)
 
             if value is not None:
                 image_value_samples.append((image_str, value))

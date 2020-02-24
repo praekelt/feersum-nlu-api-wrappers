@@ -59,6 +59,9 @@ class TestFAQMatcher(unittest.TestCase):
         word_manifold_list = [feersum_nlu.LabelledWordManifold('eng', 'feers_wm_eng'),
                               feersum_nlu.LabelledWordManifold('afr', 'feers_wm_afr'),
                               feersum_nlu.LabelledWordManifold('zul', 'feers_wm_zul')]
+        language_model_list = [feersum_nlu.LabelledLanguageModel('eng', 'feers_wm_eng'),
+                               feersum_nlu.LabelledLanguageModel('afr', 'feers_wm_afr'),
+                               feersum_nlu.LabelledLanguageModel('zul', 'feers_wm_zul')]
         # The playground's pre-loaded embeddings include:
         # "feers_wm_afr", "feers_wm_eng", "feers_wm_nbl", "feers_wm_xho",
         # "feers_wm_zul", "feers_wm_ssw", "feers_wm_nso", "feers_wm_sot",
@@ -67,7 +70,8 @@ class TestFAQMatcher(unittest.TestCase):
 
         train_details = feersum_nlu.TrainDetails(threshold=0.85,
                                                  temperature=1.0,
-                                                 word_manifold_list=word_manifold_list,
+                                                 # word_manifold_list=word_manifold_list,
+                                                 language_model_list=language_model_list,
                                                  immediate_mode=True)
 
         text_input_0 = feersum_nlu.TextInput("Where can I get a quote?")

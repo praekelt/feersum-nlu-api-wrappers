@@ -21,10 +21,10 @@ create_details = feersum_nlu.ApiKeyCreateDetails(desc="Test API key.")
 print()
 
 try:
-    api_key = "Some existing API key."
+    api_key_to_delete = "Some existing API key."
 
     print("Delete specific named API key:")
-    api_response = api_instance.api_key_del(api_key)
+    api_response = api_instance.api_key_del(api_key_to_delete)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()

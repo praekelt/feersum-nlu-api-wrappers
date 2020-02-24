@@ -65,10 +65,7 @@ with Vimba() as vimba:
                     cv2.resize(image, (resized_width, resized_height),  # pylint: disable=no-member
                                interpolation=cv2.INTER_LINEAR)  # pylint: disable=no-member
 
-                cv2.imwrite("temp_img.png", resized_image)  # pylint: disable=no-member
-
-                # ToDo: Find a better way to move image from OpenCV to base64 than writing to disk.
-                base64_img_str = image_utils.load_image("temp_img.png")
+                base64_img_str = image_utils.load_image_opencvBGR(resized_image)
                 image_input = feersum_nlu.ImageInput(base64_img_str)  # The same size as the camera image, but jpeg encoded.
 
                 print("Classify image:")

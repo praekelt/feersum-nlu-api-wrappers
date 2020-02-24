@@ -1,14 +1,14 @@
 # feersum_nlu.DateParsersApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**date_parser_retrieve**](DateParsersApi.md#date_parser_retrieve) | **POST** /date_parsers/{instance_name}/retrieve | Extract dates.
+[**date_parser_retrieve**](DateParsersApi.md#date_parser_retrieve) | **POST** /nlu/v2/date_parsers/{instance_name}/retrieve | Extract dates.
 
 
 # **date_parser_retrieve**
-> list[DateEntity] date_parser_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
+> list[DateEntity] date_parser_retrieve(instance_name, text_input, x_caller=x_caller)
 
 Extract dates.
 
@@ -38,11 +38,10 @@ api_instance = feersum_nlu.DateParsersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 x_caller = 'x_caller_example' # str |  (optional)
-origin = 'origin_example' # str |  (optional)
 
 try:
     # Extract dates.
-    api_response = api_instance.date_parser_retrieve(instance_name, text_input, x_caller=x_caller, origin=origin)
+    api_response = api_instance.date_parser_retrieve(instance_name, text_input, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DateParsersApi->date_parser_retrieve: %s\n" % e)
@@ -55,7 +54,6 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **text_input** | [**TextInput**](TextInput.md)| The input text. | 
  **x_caller** | **str**|  | [optional] 
- **origin** | **str**|  | [optional] 
 
 ### Return type
 

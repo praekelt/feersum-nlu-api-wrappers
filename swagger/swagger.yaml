@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.45.post3
+  version: 2.0.46
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -12,7 +12,7 @@ info:
 host: nlu.feersum.io:443
 # host: 127.0.0.1:8100
 
-basePath: /nlu/v2
+# basePath: /nlu/v2
 
 schemes:
   - https
@@ -95,10 +95,9 @@ paths:
 ########
 ## dashboard root
 ########
-  /dashboard:
+  /nlu/v2/dashboard:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -142,10 +141,9 @@ paths:
 ########
 ## text_classifiers root
 ########
-  /text_classifiers:
+  /nlu/v2/text_classifiers:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -188,10 +186,9 @@ paths:
 ########
 ## text_classifiers Get details of named instance
 ########
-  /text_classifiers/{instance_name}:
+  /nlu/v2/text_classifiers/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -238,10 +235,9 @@ paths:
 ########
 ## text_classifiers training samples
 ########
-  /text_classifiers/{instance_name}/training_samples:
+  /nlu/v2/text_classifiers/{instance_name}/training_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -361,10 +357,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /text_classifiers/{instance_name}/training_samples_all:
+  /nlu/v2/text_classifiers/{instance_name}/training_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -390,10 +385,9 @@ paths:
 ########
 ## text_classifiers testing samples
 ########
-  /text_classifiers/{instance_name}/testing_samples:
+  /nlu/v2/text_classifiers/{instance_name}/testing_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -513,10 +507,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /text_classifiers/{instance_name}/testing_samples_all:
+  /nlu/v2/text_classifiers/{instance_name}/testing_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -542,10 +535,9 @@ paths:
 ########
 ## text_classifiers train
 ########
-  /text_classifiers/{instance_name}/train:
+  /nlu/v2/text_classifiers/{instance_name}/train:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -577,10 +569,9 @@ paths:
 ########
 ## text_classifiers model_params
 ########
-  /text_classifiers/{instance_name}/params:
+  /nlu/v2/text_classifiers/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -633,10 +624,9 @@ paths:
 ########
 ## text_classifiers train online
 ########
-  /text_classifiers/{instance_name}/online_training_samples:
+  /nlu/v2/text_classifiers/{instance_name}/online_training_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -670,10 +660,9 @@ paths:
 ########
 ## text_classifiers retrieve
 ########
-  /text_classifiers/{instance_name}/retrieve:
+  /nlu/v2/text_classifiers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -705,10 +694,9 @@ paths:
 ########
 ## text_classifiers vaporise
 ########
-  /text_classifiers/{instance_name}/vaporise:
+  /nlu/v2/text_classifiers/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -734,10 +722,9 @@ paths:
 ########
 ## text_classifiers get list of class labels
 ########
-  /text_classifiers/{instance_name}/labels:
+  /nlu/v2/text_classifiers/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -763,10 +750,9 @@ paths:
 ########
 ## text_classifiers curation endpoint
 ########
-  /text_classifiers/{instance_name}/curate:
+  /nlu/v2/text_classifiers/{instance_name}/curate:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -798,10 +784,9 @@ paths:
 ########
 ## text_classifiers tsne endpoint
 ########
-  /text_classifiers/{instance_name}/tsne:
+  /nlu/v2/text_classifiers/{instance_name}/tsne:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -857,10 +842,9 @@ paths:
 #########
 ### word_manifolds root
 #########
-#  /word_manifolds:
+#  /nlu/v2/word_manifolds:
 #    parameters:
 #    - $ref: '#/parameters/caller'
-#    - $ref: '#/parameters/origin'
 #
 #    post:
 #      tags:
@@ -887,10 +871,9 @@ paths:
 #########
 ### word_manifolds Get details of named instance
 #########
-#  /word_manifolds/{instance_name}:
+#  /nlu/v2/word_manifolds/{instance_name}:
 #    parameters:
 #    - $ref: '#/parameters/caller'
-#    - $ref: '#/parameters/origin'
 #
 #    get:
 #      tags:
@@ -937,10 +920,9 @@ paths:
 #########
 ### word_manifolds vaporise
 #########
-#  /word_manifolds/{instance_name}/vaporise:
+#  /nlu/v2/word_manifolds/{instance_name}/vaporise:
 #    parameters:
 #    - $ref: '#/parameters/caller'
-#    - $ref: '#/parameters/origin'
 #
 #    post:
 #      tags:
@@ -966,10 +948,9 @@ paths:
 #########
 ### word_manifolds vocab
 #########
-#  /word_manifolds/{instance_name}/vocab:
+#  /nlu/v2/word_manifolds/{instance_name}/vocab:
 #    parameters:
 #    - $ref: '#/parameters/caller'
-#    - $ref: '#/parameters/origin'
 #
 #    post:
 #      tags:
@@ -1003,10 +984,9 @@ paths:
 # ########
 # ## word_manifolds similar_words
 # ########
-#   /word_manifolds/{instance_name}/similar_words:
+#   /nlu/v2/word_manifolds/{instance_name}/similar_words:
 #     parameters:
 #     - $ref: '#/parameters/caller'
-#     - $ref: '#/parameters/origin'
 #
 #     post:
 #       tags:
@@ -1038,10 +1018,9 @@ paths:
 # ########
 # ## word_manifolds spell_correct
 # ########
-#   /word_manifolds/{instance_name}/spell_correct:
+#   /nlu/v2/word_manifolds/{instance_name}/spell_correct:
 #     parameters:
 #     - $ref: '#/parameters/caller'
-#     - $ref: '#/parameters/origin'
 #
 #     post:
 #       tags:
@@ -1075,10 +1054,9 @@ paths:
 ########
 ## intent_classifiers root
 ########
-  /intent_classifiers:
+  /nlu/v2/intent_classifiers:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1120,10 +1098,9 @@ paths:
 ########
 ## intent_classifiers Get details of named instance
 ########
-  /intent_classifiers/{instance_name}:
+  /nlu/v2/intent_classifiers/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -1170,10 +1147,9 @@ paths:
 ########
 ## intent_classifiers training samples
 ########
-  /intent_classifiers/{instance_name}/training_samples:
+  /nlu/v2/intent_classifiers/{instance_name}/training_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1293,10 +1269,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /intent_classifiers/{instance_name}/training_samples_all:
+  /nlu/v2/intent_classifiers/{instance_name}/training_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -1322,10 +1297,9 @@ paths:
 ########
 ## intent_classifiers testing samples
 ########
-  /intent_classifiers/{instance_name}/testing_samples:
+  /nlu/v2/intent_classifiers/{instance_name}/testing_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1445,10 +1419,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /intent_classifiers/{instance_name}/testing_samples_all:
+  /nlu/v2/intent_classifiers/{instance_name}/testing_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -1474,10 +1447,9 @@ paths:
 ########
 ## intent_classifiers train
 ########
-  /intent_classifiers/{instance_name}/train:
+  /nlu/v2/intent_classifiers/{instance_name}/train:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1509,10 +1481,9 @@ paths:
 ########
 ## intent_classifiers model_params
 ########
-  /intent_classifiers/{instance_name}/params:
+  /nlu/v2/intent_classifiers/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1565,10 +1536,9 @@ paths:
 ########
 ## intent_classifiers train online
 ########
-  /intent_classifiers/{instance_name}/online_training_samples:
+  /nlu/v2/intent_classifiers/{instance_name}/online_training_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1602,10 +1572,9 @@ paths:
 ########
 ## intent_classifiers retrieve
 ########
-  /intent_classifiers/{instance_name}/retrieve:
+  /nlu/v2/intent_classifiers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1637,10 +1606,9 @@ paths:
 ########
 ## intent_classifiers vaporise
 ########
-  /intent_classifiers/{instance_name}/vaporise:
+  /nlu/v2/intent_classifiers/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1666,10 +1634,9 @@ paths:
 ########
 ## intent_classifiers get list of class labels
 ########
-  /intent_classifiers/{instance_name}/labels:
+  /nlu/v2/intent_classifiers/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -1695,10 +1662,9 @@ paths:
 ########
 ## intent_classifiers curation endpoint
 ########
-  /intent_classifiers/{instance_name}/curate:
+  /nlu/v2/intent_classifiers/{instance_name}/curate:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1731,10 +1697,9 @@ paths:
 ########
 ## intent_classifiers tsne endpoint
 ########
-  /intent_classifiers/{instance_name}/tsne:
+  /nlu/v2/intent_classifiers/{instance_name}/tsne:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1790,10 +1755,9 @@ paths:
 ########
 ## FAQ matchers root
 ########
-  /faq_matchers:
+  /nlu/v2/faq_matchers:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -1835,10 +1799,9 @@ paths:
 ########
 ## faq_matchers Get details of named instance
 ########
-  /faq_matchers/{instance_name}:
+  /nlu/v2/faq_matchers/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -1885,10 +1848,9 @@ paths:
 ########
 ## faq_matchers training samples
 ########
-  /faq_matchers/{instance_name}/training_samples:
+  /nlu/v2/faq_matchers/{instance_name}/training_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2008,10 +1970,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /faq_matchers/{instance_name}/training_samples_all:
+  /nlu/v2/faq_matchers/{instance_name}/training_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -2037,10 +1998,9 @@ paths:
 ########
 ## faq_matchers testing samples
 ########
-  /faq_matchers/{instance_name}/testing_samples:
+  /nlu/v2/faq_matchers/{instance_name}/testing_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2160,10 +2120,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /faq_matchers/{instance_name}/testing_samples_all:
+  /nlu/v2/faq_matchers/{instance_name}/testing_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -2189,10 +2148,9 @@ paths:
 ########
 ## faq_matchers train
 ########
-  /faq_matchers/{instance_name}/train:
+  /nlu/v2/faq_matchers/{instance_name}/train:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2224,10 +2182,9 @@ paths:
 ########
 ## faq_matchers model_params
 ########
-  /faq_matchers/{instance_name}/params:
+  /nlu/v2/faq_matchers/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2280,10 +2237,9 @@ paths:
 ########
 ## faq_matchers train online
 ########
-  /faq_matchers/{instance_name}/online_training_samples:
+  /nlu/v2/faq_matchers/{instance_name}/online_training_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2317,10 +2273,9 @@ paths:
 ########
 ## faq_matchers retrieve
 ########
-  /faq_matchers/{instance_name}/retrieve:
+  /nlu/v2/faq_matchers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2352,10 +2307,9 @@ paths:
 ########
 ## faq_matchers vaporise
 ########
-  /faq_matchers/{instance_name}/vaporise:
+  /nlu/v2/faq_matchers/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2381,10 +2335,9 @@ paths:
 ########
 ## faq_matchers get list of class labels
 ########
-  /faq_matchers/{instance_name}/labels:
+  /nlu/v2/faq_matchers/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -2410,10 +2363,9 @@ paths:
 ########
 ## faq_matchers curation endpoint
 ########
-  /faq_matchers/{instance_name}/curate:
+  /nlu/v2/faq_matchers/{instance_name}/curate:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2445,10 +2397,9 @@ paths:
 ########
 ## faq_matchers tsne endpoint
 ########
-  /faq_matchers/{instance_name}/tsne:
+  /nlu/v2/faq_matchers/{instance_name}/tsne:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2504,10 +2455,9 @@ paths:
 ########
 ## Extract a list of dates from the text input.
 ########
-  /date_parsers/{instance_name}/retrieve:
+  /nlu/v2/date_parsers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2542,10 +2492,9 @@ paths:
 ########
 ## Detect the sentiment of the text input - Generic, always available, model.
 ########
-  /sentiment_detectors/{instance_name}/retrieve:
+  /nlu/v2/sentiment_detectors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2580,10 +2529,9 @@ paths:
 ########
 ## Detect the emotion in the text input - Generic, always available, model.
 ########
-  /emotion_classifiers/{instance_name}/retrieve:
+  /nlu/v2/emotion_classifiers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2612,15 +2560,43 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
+########
+## emotion_classifiers get list of class labels
+########
+  /nlu/v2/emotion_classifiers/{instance_name}/labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    get:
+      tags:
+      - emotion_classifiers
+      summary: Get list of possible labels.
+      x-swagger-router-controller: rest_api.flask_server.controllers.emotion_classifiers_controller
+      operationId: emotion_classifier_get_labels
+      description: Returns the classifier's list of possible class labels.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labels"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
 ###################################
 ###################################
 ########
 ## crf_entity_extractors root
 ########
-  /crf_entity_extractors:
+  /nlu/v2/crf_entity_extractors:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2662,10 +2638,9 @@ paths:
 ########
 ## crf_entity_extractors Get details of named instance
 ########
-  /crf_entity_extractors/{instance_name}:
+  /nlu/v2/crf_entity_extractors/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -2712,10 +2687,9 @@ paths:
 ########
 ## crf_entity_extractors training samples
 ########
-  /crf_entity_extractors/{instance_name}/training_samples:
+  /nlu/v2/crf_entity_extractors/{instance_name}/training_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2835,10 +2809,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /crf_entity_extractors/{instance_name}/training_samples_all:
+  /nlu/v2/crf_entity_extractors/{instance_name}/training_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -2864,10 +2837,9 @@ paths:
   ########
   ## crf_entity_extractors testing samples
   ########
-  /crf_entity_extractors/{instance_name}/testing_samples:
+  /nlu/v2/crf_entity_extractors/{instance_name}/testing_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -2987,10 +2959,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /crf_entity_extractors/{instance_name}/testing_samples_all:
+  /nlu/v2/crf_entity_extractors/{instance_name}/testing_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -3016,10 +2987,9 @@ paths:
 ########
 ## crf_entity_extractors train
 ########
-  /crf_entity_extractors/{instance_name}/train:
+  /nlu/v2/crf_entity_extractors/{instance_name}/train:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3051,10 +3021,9 @@ paths:
 ########
 ## crf_entity_extractors model_params
 ########
-  /crf_entity_extractors/{instance_name}/params:
+  /nlu/v2/crf_entity_extractors/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3107,10 +3076,9 @@ paths:
 ########
 ## crf_entity_extractors retrieve
 ########
-  /crf_entity_extractors/{instance_name}/retrieve:
+  /nlu/v2/crf_entity_extractors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3142,10 +3110,9 @@ paths:
 ########
 ## crf_entity_extractors vaporise
 ########
-  /crf_entity_extractors/{instance_name}/vaporise:
+  /nlu/v2/crf_entity_extractors/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3171,10 +3138,9 @@ paths:
 ########
 ## crf_entity_extractors get list of entity labels
 ########
-  /crf_entity_extractors/{instance_name}/labels:
+  /nlu/v2/crf_entity_extractors/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -3203,10 +3169,9 @@ paths:
 ########
 ## synonym_entity_extractors root
 ########
-  /synonym_entity_extractors:
+  /nlu/v2/synonym_entity_extractors:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3248,10 +3213,9 @@ paths:
 ########
 ## synonym_entity_extractors Get details of named instance
 ########
-  /synonym_entity_extractors/{instance_name}:
+  /nlu/v2/synonym_entity_extractors/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -3298,10 +3262,9 @@ paths:
 ########
 ## synonym_entity_extractors training samples
 ########
-  /synonym_entity_extractors/{instance_name}/training_samples:
+  /nlu/v2/synonym_entity_extractors/{instance_name}/training_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3421,10 +3384,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /synonym_entity_extractors/{instance_name}/training_samples_all:
+  /nlu/v2/synonym_entity_extractors/{instance_name}/training_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -3450,10 +3412,9 @@ paths:
   ########
   ## synonym_entity_extractors testing samples
   ########
-  /synonym_entity_extractors/{instance_name}/testing_samples:
+  /nlu/v2/synonym_entity_extractors/{instance_name}/testing_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3573,10 +3534,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /synonym_entity_extractors/{instance_name}/testing_samples_all:
+  /nlu/v2/synonym_entity_extractors/{instance_name}/testing_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -3602,10 +3562,9 @@ paths:
 ########
 ## synonym_entity_extractors train
 ########
-  /synonym_entity_extractors/{instance_name}/train:
+  /nlu/v2/synonym_entity_extractors/{instance_name}/train:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3637,10 +3596,9 @@ paths:
 ########
 ## synonym_entity_extractors model_params
 ########
-  /synonym_entity_extractors/{instance_name}/params:
+  /nlu/v2/synonym_entity_extractors/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3693,10 +3651,9 @@ paths:
 ########
 ## synonym_entity_extractors retrieve
 ########
-  /synonym_entity_extractors/{instance_name}/retrieve:
+  /nlu/v2/synonym_entity_extractors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3728,10 +3685,9 @@ paths:
 ########
 ## synonym_entity_extractors vaporise
 ########
-  /synonym_entity_extractors/{instance_name}/vaporise:
+  /nlu/v2/synonym_entity_extractors/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3757,10 +3713,9 @@ paths:
 ########
 ## synonym_entity_extractors get list of entity labels
 ########
-  /synonym_entity_extractors/{instance_name}/labels:
+  /nlu/v2/synonym_entity_extractors/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -3789,10 +3744,9 @@ paths:
 ########
 ## regex_entity_extractors root
 ########
-  /regex_entity_extractors:
+  /nlu/v2/regex_entity_extractors:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3834,10 +3788,9 @@ paths:
 ########
 ## regex_entity_extractors Get details of named instance
 ########
-  /regex_entity_extractors/{instance_name}:
+  /nlu/v2/regex_entity_extractors/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -3884,10 +3837,9 @@ paths:
 ########
 ## regex_entity_extractors model_params
 ########
-  /regex_entity_extractors/{instance_name}/params:
+  /nlu/v2/regex_entity_extractors/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3940,10 +3892,9 @@ paths:
 ########
 ## regex_entity_extractors retrieve
 ########
-  /regex_entity_extractors/{instance_name}/retrieve:
+  /nlu/v2/regex_entity_extractors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -3975,10 +3926,9 @@ paths:
 ########
 ## regex_entity_extractors vaporise
 ########
-  /regex_entity_extractors/{instance_name}/vaporise:
+  /nlu/v2/regex_entity_extractors/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4007,10 +3957,9 @@ paths:
 ########
 ## person_name_entity_extractors root
 ########
-  /person_name_entity_extractors:
+  /nlu/v2/person_name_entity_extractors:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4052,10 +4001,9 @@ paths:
 ########
 ## person_name_entity_extractors Get details of named instance
 ########
-  /person_name_entity_extractors/{instance_name}:
+  /nlu/v2/person_name_entity_extractors/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -4102,10 +4050,9 @@ paths:
 ########
 ## person_name_entity_extractors model_params
 ########
-  /person_name_entity_extractors/{instance_name}/params:
+  /nlu/v2/person_name_entity_extractors/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4158,10 +4105,9 @@ paths:
 ########
 ## person_name_entity_extractors retrieve
 ########
-  /person_name_entity_extractors/{instance_name}/retrieve:
+  /nlu/v2/person_name_entity_extractors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4193,10 +4139,9 @@ paths:
 ########
 ## person_name_entity_extractors vaporise
 ########
-  /person_name_entity_extractors/{instance_name}/vaporise:
+  /nlu/v2/person_name_entity_extractors/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4225,10 +4170,9 @@ paths:
 ########
 ## duckling_entity_extractors root
 ########
-  /duckling_entity_extractors:
+  /nlu/v2/duckling_entity_extractors:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4270,10 +4214,9 @@ paths:
 ########
 ## duckling_entity_extractors Get details of named instance
 ########
-  /duckling_entity_extractors/{instance_name}:
+  /nlu/v2/duckling_entity_extractors/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -4320,10 +4263,9 @@ paths:
 ########
 ## duckling_entity_extractors model_params
 ########
-  /duckling_entity_extractors/{instance_name}/params:
+  /nlu/v2/duckling_entity_extractors/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4376,10 +4318,9 @@ paths:
 ########
 ## duckling_entity_extractors retrieve
 ########
-  /duckling_entity_extractors/{instance_name}/retrieve:
+  /nlu/v2/duckling_entity_extractors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4411,10 +4352,9 @@ paths:
 ########
 ## duckling_entity_extractors vaporise
 ########
-  /duckling_entity_extractors/{instance_name}/vaporise:
+  /nlu/v2/duckling_entity_extractors/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4443,10 +4383,9 @@ paths:
 ########
 ## sim_word_entity_extractors root
 ########
-  /sim_word_entity_extractors:
+  /nlu/v2/sim_word_entity_extractors:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4488,10 +4427,9 @@ paths:
 ########
 ## sim_word_entity_extractors Get details of named instance
 ########
-  /sim_word_entity_extractors/{instance_name}:
+  /nlu/v2/sim_word_entity_extractors/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -4538,10 +4476,9 @@ paths:
 ########
 ## sim_word_entity_extractors model_params
 ########
-  /sim_word_entity_extractors/{instance_name}/params:
+  /nlu/v2/sim_word_entity_extractors/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4594,10 +4531,9 @@ paths:
 ########
 ## sim_word_entity_extractors retrieve
 ########
-  /sim_word_entity_extractors/{instance_name}/retrieve:
+  /nlu/v2/sim_word_entity_extractors/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4629,10 +4565,9 @@ paths:
 ########
 ## sim_word_entity_extractors vaporise
 ########
-  /sim_word_entity_extractors/{instance_name}/vaporise:
+  /nlu/v2/sim_word_entity_extractors/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4661,10 +4596,9 @@ paths:
 ########
 ## lr4_language_recognisers retrieve
 ########
-  /lr4_language_recognisers/{instance_name}/retrieve:
+  /nlu/v2/lr4_language_recognisers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4699,10 +4633,9 @@ paths:
 ########
 ## language_recognisers root
 ########
-  /language_recognisers:
+  /nlu/v2/language_recognisers:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4744,10 +4677,9 @@ paths:
 ########
 ## language_recognisers Get details of named instance
 ########
-  /language_recognisers/{instance_name}:
+  /nlu/v2/language_recognisers/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -4794,10 +4726,9 @@ paths:
 ########
 ## language_recognisers model_params
 ########
-  /language_recognisers/{instance_name}/params:
+  /nlu/v2/language_recognisers/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4850,10 +4781,9 @@ paths:
 ########
 ## language_recognisers retrieve
 ########
-  /language_recognisers/{instance_name}/retrieve:
+  /nlu/v2/language_recognisers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4885,10 +4815,9 @@ paths:
 ########
 ## language_recognisers vaporise
 ########
-  /language_recognisers/{instance_name}/vaporise:
+  /nlu/v2/language_recognisers/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -4914,10 +4843,9 @@ paths:
 ########
 ## language_recognisers get list of class labels
 ########
-  /language_recognisers/{instance_name}/labels:
+  /nlu/v2/language_recognisers/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -4946,10 +4874,9 @@ paths:
 ########
 ## data_objects root.
 ########
-  /data_objects:
+  /nlu/v2/data_objects:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -4984,10 +4911,9 @@ paths:
 ########
 ## data_objects Update/create a data_object - a data_object is a json object.
 ########
-  /data_objects/{instance_name}:
+  /nlu/v2/data_objects/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5061,10 +4987,9 @@ paths:
 ########
 ## data_objects vaporise
 ########
-  /data_objects/{instance_name}/vaporise:
+  /nlu/v2/data_objects/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5091,10 +5016,9 @@ paths:
 ########
 ## data_objects untrash
 ########
-  /data_objects/{instance_name}/untrash:
+  /nlu/v2/data_objects/{instance_name}/untrash:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5122,10 +5046,9 @@ paths:
 ########
 ## health root
 ########
-  /health:
+  /nlu/v2/health:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -5142,16 +5065,14 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-
 ###################################
 ###################################
 ########
 ## api_keys root
 ########
-  /api_keys:
+  /nlu/v2/api_keys:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5191,12 +5112,11 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## api_keys Get details of the API key.
+## api_keys Get/Update details of the API key.
 ########
-  /api_keys/{instance_name}:
+  /nlu/v2/api_keys/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -5273,10 +5193,9 @@ paths:
 ########
 ## image_classifiers root
 ########
-  /image_classifiers:
+  /vision/v2/image_classifiers:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5319,10 +5238,9 @@ paths:
 ########
 ## image_classifiers Get details of named instance
 ########
-  /image_classifiers/{instance_name}:
+  /vision/v2/image_classifiers/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -5369,10 +5287,9 @@ paths:
 ########
 ## image_classifiers training samples
 ########
-  /image_classifiers/{instance_name}/training_samples:
+  /vision/v2/image_classifiers/{instance_name}/training_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5492,10 +5409,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /image_classifiers/{instance_name}/training_samples_all:
+  /vision/v2/image_classifiers/{instance_name}/training_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -5521,10 +5437,9 @@ paths:
 ########
 ## image_classifiers testing samples
 ########
-  /image_classifiers/{instance_name}/testing_samples:
+  /vision/v2/image_classifiers/{instance_name}/testing_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5644,10 +5559,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /image_classifiers/{instance_name}/testing_samples_all:
+  /vision/v2/image_classifiers/{instance_name}/testing_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -5673,10 +5587,9 @@ paths:
 ########
 ## image_classifiers train
 ########
-  /image_classifiers/{instance_name}/train:
+  /vision/v2/image_classifiers/{instance_name}/train:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5708,10 +5621,9 @@ paths:
 ########
 ## image_classifiers model_params
 ########
-  /image_classifiers/{instance_name}/params:
+  /vision/v2/image_classifiers/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5764,10 +5676,9 @@ paths:
 ########
 ## image_classifiers train online
 ########
-  /image_classifiers/{instance_name}/online_training_samples:
+  /vision/v2/image_classifiers/{instance_name}/online_training_samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5801,10 +5712,9 @@ paths:
 ########
 ## image_classifiers retrieve
 ########
-  /image_classifiers/{instance_name}/retrieve:
+  /vision/v2/image_classifiers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5836,10 +5746,9 @@ paths:
 ########
 ## image_classifiers vaporise
 ########
-  /image_classifiers/{instance_name}/vaporise:
+  /vision/v2/image_classifiers/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5865,10 +5774,9 @@ paths:
 ########
 ## image_classifiers get list of class labels
 ########
-  /image_classifiers/{instance_name}/labels:
+  /vision/v2/image_classifiers/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -5894,10 +5802,9 @@ paths:
 ########
 ## image_classifiers curation endpoint
 ########
-  /image_classifiers/{instance_name}/curate:
+  /vision/v2/image_classifiers/{instance_name}/curate:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5932,18 +5839,16 @@ paths:
 ########
 ## image_readers root
 ########
-  /image_readers:
+  /vision/v2/image_readers:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
 ########
 ## image_readers retrieve
 ########
-  /image_readers/{instance_name}/retrieve:
+  /vision/v2/image_readers/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -5978,10 +5883,9 @@ paths:
 ########
 ## text_datasets root
 ########
-  /text_datasets:
+  /nlu/v2/text_datasets:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -6024,10 +5928,9 @@ paths:
 ########
 ## text_datasets Get details of named instance
 ########
-  /text_datasets/{instance_name}:
+  /nlu/v2/text_datasets/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -6074,10 +5977,9 @@ paths:
 ########
 ## text_datasets samples
 ########
-  /text_datasets/{instance_name}/samples:
+  /nlu/v2/text_datasets/{instance_name}/samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -6202,10 +6104,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /text_datasets/{instance_name}/samples_all:
+  /nlu/v2/text_datasets/{instance_name}/samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -6232,10 +6133,9 @@ paths:
 ########
 ## text_datasets model_params
 ########
-  /text_datasets/{instance_name}/params:
+  /nlu/v2/text_datasets/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -6288,10 +6188,9 @@ paths:
 ########
 ## text_datasets vaporise
 ########
-  /text_datasets/{instance_name}/vaporise:
+  /nlu/v2/text_datasets/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -6317,10 +6216,9 @@ paths:
 ########
 ## text_datasets get list of class labels
 ########
-  /text_datasets/{instance_name}/labels:
+  /nlu/v2/text_datasets/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -6349,10 +6247,9 @@ paths:
 ########
 ## image_datasets root
 ########
-  /image_datasets:
+  /vision/v2/image_datasets:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -6395,10 +6292,9 @@ paths:
 ########
 ## image_datasets Get details of named instance
 ########
-  /image_datasets/{instance_name}:
+  /vision/v2/image_datasets/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -6445,10 +6341,9 @@ paths:
 ########
 ## image_datasets samples
 ########
-  /image_datasets/{instance_name}/samples:
+  /vision/v2/image_datasets/{instance_name}/samples:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -6573,10 +6468,9 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /image_datasets/{instance_name}/samples_all:
+  /vision/v2/image_datasets/{instance_name}/samples_all:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     delete:
       tags:
@@ -6603,10 +6497,9 @@ paths:
 ########
 ## image_datasets model_params
 ########
-  /image_datasets/{instance_name}/params:
+  /vision/v2/image_datasets/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -6660,10 +6553,9 @@ paths:
 ########
 ## image_datasets vaporise
 ########
-  /image_datasets/{instance_name}/vaporise:
+  /vision/v2/image_datasets/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     post:
       tags:
@@ -6689,10 +6581,9 @@ paths:
 ########
 ## image_datasets get list of class labels
 ########
-  /image_datasets/{instance_name}/labels:
+  /vision/v2/image_datasets/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
-    - $ref: '#/parameters/origin'
 
     get:
       tags:
@@ -6723,11 +6614,6 @@ parameters:
   caller:
     in: header
     name: X-CALLER
-    type: string
-    required: false
-  origin:
-    in: header
-    name: Origin
     type: string
     required: false
 
@@ -7222,6 +7108,10 @@ definitions:
         description: "The URI of the model type's collection resource e.g. /faq_matchers for the collection of faq_matcher models."
         type: string
         example: "/faq_matchers"
+      has_labels:
+        description: "Whether or not the model is returns a list of scored labels. Unknown if flag not present."
+        type: boolean
+        example: True
       trashed:
         description: Whether or not this model has been deleted. Deleted models need to be loaded to be used again.
         type: boolean
@@ -8006,7 +7896,7 @@ definitions:
         type: string
         example: 'Internal development key. Owner is name@company.io.'
       call_count:
-        description: The total number of calls made to with this API key.
+        description: The total number of calls made with this API key.
         type: integer
         example: 1000000
       call_count_breakdown:
@@ -8014,7 +7904,7 @@ definitions:
         type: object
         example: {"operation": "retrieve", "call_count": 1034, "by_model_type": {"faq_matcher": 1034}}
       call_count_limit:
-        description: The number of calls loaded on this key. Default call count limit is 'unlimited'. See the other endpoints for managing the call count limit.
+        description: The number of calls loaded on this key. 'None' or no value implies unlimited.
         type: integer
         example: 5000
 
@@ -8558,7 +8448,7 @@ definitions:
       lang_model:
         description: The name of the language model to use for the language code in the associated model.
         type: string
-        example: 'feers_wm_eng'
+        example: 'feers_usent_eng'
 
   train_details:
     description: The parameters provided to the train operation.
@@ -8596,6 +8486,7 @@ definitions:
         description: The number of epochs to train the model for.
         type: integer
         default: 30
+      # ToDo: Add a vision model to be used for the image classifiers that make use of an encoder + classifier.
       language_model_list:
         description: The list of labelled language models used as sentence encoders.
         type: array
@@ -8883,7 +8774,7 @@ definitions:
         type: string
         example: 'Internal development key. Owner is name@company.io.'
       call_count_limit:
-        description: The number of calls loaded on this key. Default call count limit is 'unlimited'. See the other endpoints for managing the call count limit.
+        description: The number of calls loaded on this key. 'None' or no value implies unlimited.
         type: integer
         example: 5000
 

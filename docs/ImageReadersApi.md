@@ -1,14 +1,14 @@
 # feersum_nlu.ImageReadersApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**image_reader_retrieve**](ImageReadersApi.md#image_reader_retrieve) | **POST** /image_readers/{instance_name}/retrieve | Read text from the image.
+[**image_reader_retrieve**](ImageReadersApi.md#image_reader_retrieve) | **POST** /vision/v2/image_readers/{instance_name}/retrieve | Read text from the image.
 
 
 # **image_reader_retrieve**
-> list[Text] image_reader_retrieve(instance_name, image_input, x_caller=x_caller, origin=origin)
+> list[Text] image_reader_retrieve(instance_name, image_input, x_caller=x_caller)
 
 Read text from the image.
 
@@ -38,11 +38,10 @@ api_instance = feersum_nlu.ImageReadersApi(feersum_nlu.ApiClient(configuration))
 instance_name = 'instance_name_example' # str | The name of the model instance.
 image_input = feersum_nlu.ImageInput() # ImageInput | The input image.
 x_caller = 'x_caller_example' # str |  (optional)
-origin = 'origin_example' # str |  (optional)
 
 try:
     # Read text from the image.
-    api_response = api_instance.image_reader_retrieve(instance_name, image_input, x_caller=x_caller, origin=origin)
+    api_response = api_instance.image_reader_retrieve(instance_name, image_input, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ImageReadersApi->image_reader_retrieve: %s\n" % e)
@@ -55,7 +54,6 @@ Name | Type | Description  | Notes
  **instance_name** | **str**| The name of the model instance. | 
  **image_input** | [**ImageInput**](ImageInput.md)| The input image. | 
  **x_caller** | **str**|  | [optional] 
- **origin** | **str**|  | [optional] 
 
 ### Return type
 
