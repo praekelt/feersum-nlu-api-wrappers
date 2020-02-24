@@ -23,12 +23,12 @@ try:
     print("api_key =", api_key)
     print()
 
-    print("Get the details of all API keys:")
-    api_response = api_instance.api_key_get_details_all()
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print(" len(api_response) =", len(api_response))
-    print()
+    # print("Get the details of all API keys:")
+    # api_response = api_instance.api_key_get_details_all()
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print(" len(api_response) =", len(api_response))
+    # print()
 
     print("Get the details of specific named API key:")
     api_response = api_instance.api_key_get_details(api_key)

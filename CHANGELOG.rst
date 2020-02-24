@@ -1,6 +1,14 @@
 Changelog
 *********
 
+Version 2.0.46
+==============
+
+configuration.host should no longer contain the service and version postfix, for example, '/nlu/v2' in
+'https://nlu.playground.feersum.io:443/nlu/v2'. The host should now just be, for example,
+'https://nlu.playground.feersum.io:443'.
+
+
 Version 2.0.45
 ==============
 

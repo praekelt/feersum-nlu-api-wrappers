@@ -1,33 +1,33 @@
 # feersum_nlu.TextClassifiersApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**text_classifier_add_testing_samples**](TextClassifiersApi.md#text_classifier_add_testing_samples) | **POST** /text_classifiers/{instance_name}/testing_samples | Add testing samples.
-[**text_classifier_add_training_samples**](TextClassifiersApi.md#text_classifier_add_training_samples) | **POST** /text_classifiers/{instance_name}/training_samples | Add training samples.
-[**text_classifier_create**](TextClassifiersApi.md#text_classifier_create) | **POST** /text_classifiers | Create a text classifier.
-[**text_classifier_curate**](TextClassifiersApi.md#text_classifier_curate) | **POST** /text_classifiers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
-[**text_classifier_del**](TextClassifiersApi.md#text_classifier_del) | **DELETE** /text_classifiers/{instance_name} | Delete named instance.
-[**text_classifier_del_testing_samples**](TextClassifiersApi.md#text_classifier_del_testing_samples) | **DELETE** /text_classifiers/{instance_name}/testing_samples | Delete testing samples.
-[**text_classifier_del_testing_samples_all**](TextClassifiersApi.md#text_classifier_del_testing_samples_all) | **DELETE** /text_classifiers/{instance_name}/testing_samples_all | Delete testing samples.
-[**text_classifier_del_training_samples**](TextClassifiersApi.md#text_classifier_del_training_samples) | **DELETE** /text_classifiers/{instance_name}/training_samples | Delete training samples.
-[**text_classifier_del_training_samples_all**](TextClassifiersApi.md#text_classifier_del_training_samples_all) | **DELETE** /text_classifiers/{instance_name}/training_samples_all | Delete all training samples.
-[**text_classifier_get_details**](TextClassifiersApi.md#text_classifier_get_details) | **GET** /text_classifiers/{instance_name} | Get details of named instance.
-[**text_classifier_get_details_all**](TextClassifiersApi.md#text_classifier_get_details_all) | **GET** /text_classifiers | Get list of loaded text classifiers.
-[**text_classifier_get_labels**](TextClassifiersApi.md#text_classifier_get_labels) | **GET** /text_classifiers/{instance_name}/labels | Get list of possible labels.
-[**text_classifier_get_params**](TextClassifiersApi.md#text_classifier_get_params) | **GET** /text_classifiers/{instance_name}/params | Get the editable model parameters of named text classifier.
-[**text_classifier_get_testing_samples**](TextClassifiersApi.md#text_classifier_get_testing_samples) | **GET** /text_classifiers/{instance_name}/testing_samples | Get testing samples.
-[**text_classifier_get_training_samples**](TextClassifiersApi.md#text_classifier_get_training_samples) | **GET** /text_classifiers/{instance_name}/training_samples | Get training samples.
-[**text_classifier_online_training_samples**](TextClassifiersApi.md#text_classifier_online_training_samples) | **POST** /text_classifiers/{instance_name}/online_training_samples | Train/update the classifier online with the samples provided.
-[**text_classifier_retrieve**](TextClassifiersApi.md#text_classifier_retrieve) | **POST** /text_classifiers/{instance_name}/retrieve | Classify text.
-[**text_classifier_set_params**](TextClassifiersApi.md#text_classifier_set_params) | **POST** /text_classifiers/{instance_name}/params | Set the model parameters of named text classifier.
-[**text_classifier_train**](TextClassifiersApi.md#text_classifier_train) | **POST** /text_classifiers/{instance_name}/train | Train the named text classifier.
-[**text_classifier_tsne_get**](TextClassifiersApi.md#text_classifier_tsne_get) | **GET** /text_classifiers/{instance_name}/tsne | Get the latest results of TSNE.
-[**text_classifier_tsne_post**](TextClassifiersApi.md#text_classifier_tsne_post) | **POST** /text_classifiers/{instance_name}/tsne | Endpoint to start a TSNE process.
-[**text_classifier_update_testing_samples**](TextClassifiersApi.md#text_classifier_update_testing_samples) | **PUT** /text_classifiers/{instance_name}/testing_samples | Update testing samples by UUID.
-[**text_classifier_update_training_samples**](TextClassifiersApi.md#text_classifier_update_training_samples) | **PUT** /text_classifiers/{instance_name}/training_samples | Update training samples by UUID.
-[**text_classifier_vaporise**](TextClassifiersApi.md#text_classifier_vaporise) | **POST** /text_classifiers/{instance_name}/vaporise | Vaporise the named model.
+[**text_classifier_add_testing_samples**](TextClassifiersApi.md#text_classifier_add_testing_samples) | **POST** /nlu/v2/text_classifiers/{instance_name}/testing_samples | Add testing samples.
+[**text_classifier_add_training_samples**](TextClassifiersApi.md#text_classifier_add_training_samples) | **POST** /nlu/v2/text_classifiers/{instance_name}/training_samples | Add training samples.
+[**text_classifier_create**](TextClassifiersApi.md#text_classifier_create) | **POST** /nlu/v2/text_classifiers | Create a text classifier.
+[**text_classifier_curate**](TextClassifiersApi.md#text_classifier_curate) | **POST** /nlu/v2/text_classifiers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
+[**text_classifier_del**](TextClassifiersApi.md#text_classifier_del) | **DELETE** /nlu/v2/text_classifiers/{instance_name} | Delete named instance.
+[**text_classifier_del_testing_samples**](TextClassifiersApi.md#text_classifier_del_testing_samples) | **DELETE** /nlu/v2/text_classifiers/{instance_name}/testing_samples | Delete testing samples.
+[**text_classifier_del_testing_samples_all**](TextClassifiersApi.md#text_classifier_del_testing_samples_all) | **DELETE** /nlu/v2/text_classifiers/{instance_name}/testing_samples_all | Delete testing samples.
+[**text_classifier_del_training_samples**](TextClassifiersApi.md#text_classifier_del_training_samples) | **DELETE** /nlu/v2/text_classifiers/{instance_name}/training_samples | Delete training samples.
+[**text_classifier_del_training_samples_all**](TextClassifiersApi.md#text_classifier_del_training_samples_all) | **DELETE** /nlu/v2/text_classifiers/{instance_name}/training_samples_all | Delete all training samples.
+[**text_classifier_get_details**](TextClassifiersApi.md#text_classifier_get_details) | **GET** /nlu/v2/text_classifiers/{instance_name} | Get details of named instance.
+[**text_classifier_get_details_all**](TextClassifiersApi.md#text_classifier_get_details_all) | **GET** /nlu/v2/text_classifiers | Get list of loaded text classifiers.
+[**text_classifier_get_labels**](TextClassifiersApi.md#text_classifier_get_labels) | **GET** /nlu/v2/text_classifiers/{instance_name}/labels | Get list of possible labels.
+[**text_classifier_get_params**](TextClassifiersApi.md#text_classifier_get_params) | **GET** /nlu/v2/text_classifiers/{instance_name}/params | Get the editable model parameters of named text classifier.
+[**text_classifier_get_testing_samples**](TextClassifiersApi.md#text_classifier_get_testing_samples) | **GET** /nlu/v2/text_classifiers/{instance_name}/testing_samples | Get testing samples.
+[**text_classifier_get_training_samples**](TextClassifiersApi.md#text_classifier_get_training_samples) | **GET** /nlu/v2/text_classifiers/{instance_name}/training_samples | Get training samples.
+[**text_classifier_online_training_samples**](TextClassifiersApi.md#text_classifier_online_training_samples) | **POST** /nlu/v2/text_classifiers/{instance_name}/online_training_samples | Train/update the classifier online with the samples provided.
+[**text_classifier_retrieve**](TextClassifiersApi.md#text_classifier_retrieve) | **POST** /nlu/v2/text_classifiers/{instance_name}/retrieve | Classify text.
+[**text_classifier_set_params**](TextClassifiersApi.md#text_classifier_set_params) | **POST** /nlu/v2/text_classifiers/{instance_name}/params | Set the model parameters of named text classifier.
+[**text_classifier_train**](TextClassifiersApi.md#text_classifier_train) | **POST** /nlu/v2/text_classifiers/{instance_name}/train | Train the named text classifier.
+[**text_classifier_tsne_get**](TextClassifiersApi.md#text_classifier_tsne_get) | **GET** /nlu/v2/text_classifiers/{instance_name}/tsne | Get the latest results of TSNE.
+[**text_classifier_tsne_post**](TextClassifiersApi.md#text_classifier_tsne_post) | **POST** /nlu/v2/text_classifiers/{instance_name}/tsne | Endpoint to start a TSNE process.
+[**text_classifier_update_testing_samples**](TextClassifiersApi.md#text_classifier_update_testing_samples) | **PUT** /nlu/v2/text_classifiers/{instance_name}/testing_samples | Update testing samples by UUID.
+[**text_classifier_update_training_samples**](TextClassifiersApi.md#text_classifier_update_training_samples) | **PUT** /nlu/v2/text_classifiers/{instance_name}/training_samples | Update training samples by UUID.
+[**text_classifier_vaporise**](TextClassifiersApi.md#text_classifier_vaporise) | **POST** /nlu/v2/text_classifiers/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **text_classifier_add_testing_samples**

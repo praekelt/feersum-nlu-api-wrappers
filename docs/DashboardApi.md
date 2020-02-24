@@ -1,11 +1,11 @@
 # feersum_nlu.DashboardApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**dashboard_get_details**](DashboardApi.md#dashboard_get_details) | **GET** /dashboard | Your service dashboard. Same as POST endpoint, but doesn&#39;t allow params to be supplied to the operation.
-[**dashboard_get_details_with_params**](DashboardApi.md#dashboard_get_details_with_params) | **POST** /dashboard | Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+[**dashboard_get_details**](DashboardApi.md#dashboard_get_details) | **GET** /nlu/v2/dashboard | Your service dashboard. Same as POST endpoint, but doesn&#39;t allow params to be supplied to the operation.
+[**dashboard_get_details_with_params**](DashboardApi.md#dashboard_get_details_with_params) | **POST** /nlu/v2/dashboard | Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
 
 
 # **dashboard_get_details**

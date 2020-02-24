@@ -1,4 +1,4 @@
-""" Example: Shows how to create, train and use a image classifier. """
+""" Example: Shows how to create, train and use an image classifier. """
 
 import urllib3
 import time
@@ -26,23 +26,25 @@ api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configurati
 # all_data_path = "/Volumes/256GB/vision_data/DrOetker_cropped/all"
 # labels = ["over", "under"]
 
-# instance_name = 'cat_vs_dog_image_clsfr'
-# all_data_path = "/Volumes/256GB/vision_data/dogs-vs-cats/train"
-# labels = ["cat", "dog"]
+instance_name = 'cat_vs_dog_image_clsfr'
+all_data_path = "/Volumes/256GB/vision_data/dogs-vs-cats/train"
+labels = ["cat", "dog"]
 
-instance_name = 'hot_dog_vs_not_hot_dog'
-all_data_path = "/Volumes/256GB/vision_data/hot-dog-vs-not-hot-dog/train"
-labels = ["hot_dog", "not_hot_dog"]
+# instance_name = 'hot_dog_vs_not_hot_dog'
+# all_data_path = "/Volumes/256GB/vision_data/hot-dog-vs-not-hot-dog/train"
+# labels = ["hot_dog", "not_hot_dog"]
 
 # === Load the data samples ===
 training_list = []  # type: List[Tuple[str, str]]
 testing_list = []  # type: List[Tuple[str, str]]
 
+print("Loading data samples...", end='', flush=True)
 for label in labels:
     samples = image_utils.get_image_samples(all_data_path, label,
                                             max_samples=100)
 
     num_samples = len(samples)
+    print(f"label: num_samples = {num_samples}")
     num_testing_samples = int(num_samples * 0.2)
     num_training_samples = num_samples - num_testing_samples
 
@@ -52,6 +54,7 @@ for label in labels:
 
     training_list.extend(training_samples)
     testing_list.extend(testing_samples)
+print("done.")
 
 training_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in training_list]
 testing_samples = [feersum_nlu.LabelledImageSample(image=image, label=label) for image, label in testing_list]
@@ -65,7 +68,7 @@ create_details = feersum_nlu.ImageClassifierCreateDetails(name=instance_name,
 train_details = feersum_nlu.TrainDetails(temperature=1.0,
                                          immediate_mode=False,
                                          clsfr_algorithm="resnet152",
-                                         num_epochs=50)
+                                         num_epochs=20)
 
 # image_utils.show_image("/Users/bduvenhage/Desktop/1500x500.jpg")
 # image_string = image_utils.load_image(file_name="/Users/bduvenhage/Desktop/1500x500.jpg")

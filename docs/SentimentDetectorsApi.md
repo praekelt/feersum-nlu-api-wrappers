@@ -1,10 +1,10 @@
 # feersum_nlu.SentimentDetectorsApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**sentiment_detector_retrieve**](SentimentDetectorsApi.md#sentiment_detector_retrieve) | **POST** /sentiment_detectors/{instance_name}/retrieve | Detect sentiment.
+[**sentiment_detector_retrieve**](SentimentDetectorsApi.md#sentiment_detector_retrieve) | **POST** /nlu/v2/sentiment_detectors/{instance_name}/retrieve | Detect sentiment.
 
 
 # **sentiment_detector_retrieve**

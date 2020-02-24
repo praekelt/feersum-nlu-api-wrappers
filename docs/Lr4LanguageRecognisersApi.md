@@ -1,10 +1,10 @@
 # feersum_nlu.Lr4LanguageRecognisersApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**lr4_language_recogniser_retrieve**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_retrieve) | **POST** /lr4_language_recognisers/{instance_name}/retrieve | Recognise the language the text is written in.
+[**lr4_language_recogniser_retrieve**](Lr4LanguageRecognisersApi.md#lr4_language_recogniser_retrieve) | **POST** /nlu/v2/lr4_language_recognisers/{instance_name}/retrieve | Recognise the language the text is written in.
 
 
 # **lr4_language_recogniser_retrieve**

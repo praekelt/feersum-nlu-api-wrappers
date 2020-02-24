@@ -1,10 +1,10 @@
 # feersum_nlu.ImageReadersApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**image_reader_retrieve**](ImageReadersApi.md#image_reader_retrieve) | **POST** /image_readers/{instance_name}/retrieve | Read text from the image.
+[**image_reader_retrieve**](ImageReadersApi.md#image_reader_retrieve) | **POST** /vision/v2/image_readers/{instance_name}/retrieve | Read text from the image.
 
 
 # **image_reader_retrieve**

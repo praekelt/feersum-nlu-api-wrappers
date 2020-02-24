@@ -1,33 +1,33 @@
 # feersum_nlu.FaqMatchersApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**faq_matcher_add_testing_samples**](FaqMatchersApi.md#faq_matcher_add_testing_samples) | **POST** /faq_matchers/{instance_name}/testing_samples | Add testing samples.
-[**faq_matcher_add_training_samples**](FaqMatchersApi.md#faq_matcher_add_training_samples) | **POST** /faq_matchers/{instance_name}/training_samples | Add training samples.
-[**faq_matcher_create**](FaqMatchersApi.md#faq_matcher_create) | **POST** /faq_matchers | Create an FAQ matcher.
-[**faq_matcher_curate**](FaqMatchersApi.md#faq_matcher_curate) | **POST** /faq_matchers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
-[**faq_matcher_del**](FaqMatchersApi.md#faq_matcher_del) | **DELETE** /faq_matchers/{instance_name} | Delete named instance.
-[**faq_matcher_del_testing_samples**](FaqMatchersApi.md#faq_matcher_del_testing_samples) | **DELETE** /faq_matchers/{instance_name}/testing_samples | Delete testing samples.
-[**faq_matcher_del_testing_samples_all**](FaqMatchersApi.md#faq_matcher_del_testing_samples_all) | **DELETE** /faq_matchers/{instance_name}/testing_samples_all | Delete all testing samples.
-[**faq_matcher_del_training_samples**](FaqMatchersApi.md#faq_matcher_del_training_samples) | **DELETE** /faq_matchers/{instance_name}/training_samples | Delete training samples.
-[**faq_matcher_del_training_samples_all**](FaqMatchersApi.md#faq_matcher_del_training_samples_all) | **DELETE** /faq_matchers/{instance_name}/training_samples_all | Delete all training samples.
-[**faq_matcher_get_details**](FaqMatchersApi.md#faq_matcher_get_details) | **GET** /faq_matchers/{instance_name} | Get details of named instance.
-[**faq_matcher_get_details_all**](FaqMatchersApi.md#faq_matcher_get_details_all) | **GET** /faq_matchers | Get list of loaded FAQ matchers.
-[**faq_matcher_get_labels**](FaqMatchersApi.md#faq_matcher_get_labels) | **GET** /faq_matchers/{instance_name}/labels | Get list of possible labels.
-[**faq_matcher_get_params**](FaqMatchersApi.md#faq_matcher_get_params) | **GET** /faq_matchers/{instance_name}/params | Get the editable model parameters of named FAQ matcher.
-[**faq_matcher_get_testing_samples**](FaqMatchersApi.md#faq_matcher_get_testing_samples) | **GET** /faq_matchers/{instance_name}/testing_samples | Get testing samples.
-[**faq_matcher_get_training_samples**](FaqMatchersApi.md#faq_matcher_get_training_samples) | **GET** /faq_matchers/{instance_name}/training_samples | Get training samples.
-[**faq_matcher_online_training_samples**](FaqMatchersApi.md#faq_matcher_online_training_samples) | **POST** /faq_matchers/{instance_name}/online_training_samples | Train/update the classifier online with the samples provided.
-[**faq_matcher_retrieve**](FaqMatchersApi.md#faq_matcher_retrieve) | **POST** /faq_matchers/{instance_name}/retrieve | Match retrieve and FAQ.
-[**faq_matcher_set_params**](FaqMatchersApi.md#faq_matcher_set_params) | **POST** /faq_matchers/{instance_name}/params | Set the model parameters of named FAQ matcher.
-[**faq_matcher_train**](FaqMatchersApi.md#faq_matcher_train) | **POST** /faq_matchers/{instance_name}/train | Train the named FAQ matcher.
-[**faq_matcher_tsne_get**](FaqMatchersApi.md#faq_matcher_tsne_get) | **GET** /faq_matchers/{instance_name}/tsne | Get the latest results of TSNE.
-[**faq_matcher_tsne_post**](FaqMatchersApi.md#faq_matcher_tsne_post) | **POST** /faq_matchers/{instance_name}/tsne | Endpoint to start a TSNE process.
-[**faq_matcher_update_testing_samples**](FaqMatchersApi.md#faq_matcher_update_testing_samples) | **PUT** /faq_matchers/{instance_name}/testing_samples | Update testning samples by UUID.
-[**faq_matcher_update_training_samples**](FaqMatchersApi.md#faq_matcher_update_training_samples) | **PUT** /faq_matchers/{instance_name}/training_samples | Update training samples by UUID.
-[**faq_matcher_vaporise**](FaqMatchersApi.md#faq_matcher_vaporise) | **POST** /faq_matchers/{instance_name}/vaporise | Vaporise the named model.
+[**faq_matcher_add_testing_samples**](FaqMatchersApi.md#faq_matcher_add_testing_samples) | **POST** /nlu/v2/faq_matchers/{instance_name}/testing_samples | Add testing samples.
+[**faq_matcher_add_training_samples**](FaqMatchersApi.md#faq_matcher_add_training_samples) | **POST** /nlu/v2/faq_matchers/{instance_name}/training_samples | Add training samples.
+[**faq_matcher_create**](FaqMatchersApi.md#faq_matcher_create) | **POST** /nlu/v2/faq_matchers | Create an FAQ matcher.
+[**faq_matcher_curate**](FaqMatchersApi.md#faq_matcher_curate) | **POST** /nlu/v2/faq_matchers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
+[**faq_matcher_del**](FaqMatchersApi.md#faq_matcher_del) | **DELETE** /nlu/v2/faq_matchers/{instance_name} | Delete named instance.
+[**faq_matcher_del_testing_samples**](FaqMatchersApi.md#faq_matcher_del_testing_samples) | **DELETE** /nlu/v2/faq_matchers/{instance_name}/testing_samples | Delete testing samples.
+[**faq_matcher_del_testing_samples_all**](FaqMatchersApi.md#faq_matcher_del_testing_samples_all) | **DELETE** /nlu/v2/faq_matchers/{instance_name}/testing_samples_all | Delete all testing samples.
+[**faq_matcher_del_training_samples**](FaqMatchersApi.md#faq_matcher_del_training_samples) | **DELETE** /nlu/v2/faq_matchers/{instance_name}/training_samples | Delete training samples.
+[**faq_matcher_del_training_samples_all**](FaqMatchersApi.md#faq_matcher_del_training_samples_all) | **DELETE** /nlu/v2/faq_matchers/{instance_name}/training_samples_all | Delete all training samples.
+[**faq_matcher_get_details**](FaqMatchersApi.md#faq_matcher_get_details) | **GET** /nlu/v2/faq_matchers/{instance_name} | Get details of named instance.
+[**faq_matcher_get_details_all**](FaqMatchersApi.md#faq_matcher_get_details_all) | **GET** /nlu/v2/faq_matchers | Get list of loaded FAQ matchers.
+[**faq_matcher_get_labels**](FaqMatchersApi.md#faq_matcher_get_labels) | **GET** /nlu/v2/faq_matchers/{instance_name}/labels | Get list of possible labels.
+[**faq_matcher_get_params**](FaqMatchersApi.md#faq_matcher_get_params) | **GET** /nlu/v2/faq_matchers/{instance_name}/params | Get the editable model parameters of named FAQ matcher.
+[**faq_matcher_get_testing_samples**](FaqMatchersApi.md#faq_matcher_get_testing_samples) | **GET** /nlu/v2/faq_matchers/{instance_name}/testing_samples | Get testing samples.
+[**faq_matcher_get_training_samples**](FaqMatchersApi.md#faq_matcher_get_training_samples) | **GET** /nlu/v2/faq_matchers/{instance_name}/training_samples | Get training samples.
+[**faq_matcher_online_training_samples**](FaqMatchersApi.md#faq_matcher_online_training_samples) | **POST** /nlu/v2/faq_matchers/{instance_name}/online_training_samples | Train/update the classifier online with the samples provided.
+[**faq_matcher_retrieve**](FaqMatchersApi.md#faq_matcher_retrieve) | **POST** /nlu/v2/faq_matchers/{instance_name}/retrieve | Match retrieve and FAQ.
+[**faq_matcher_set_params**](FaqMatchersApi.md#faq_matcher_set_params) | **POST** /nlu/v2/faq_matchers/{instance_name}/params | Set the model parameters of named FAQ matcher.
+[**faq_matcher_train**](FaqMatchersApi.md#faq_matcher_train) | **POST** /nlu/v2/faq_matchers/{instance_name}/train | Train the named FAQ matcher.
+[**faq_matcher_tsne_get**](FaqMatchersApi.md#faq_matcher_tsne_get) | **GET** /nlu/v2/faq_matchers/{instance_name}/tsne | Get the latest results of TSNE.
+[**faq_matcher_tsne_post**](FaqMatchersApi.md#faq_matcher_tsne_post) | **POST** /nlu/v2/faq_matchers/{instance_name}/tsne | Endpoint to start a TSNE process.
+[**faq_matcher_update_testing_samples**](FaqMatchersApi.md#faq_matcher_update_testing_samples) | **PUT** /nlu/v2/faq_matchers/{instance_name}/testing_samples | Update testning samples by UUID.
+[**faq_matcher_update_training_samples**](FaqMatchersApi.md#faq_matcher_update_training_samples) | **PUT** /nlu/v2/faq_matchers/{instance_name}/training_samples | Update training samples by UUID.
+[**faq_matcher_vaporise**](FaqMatchersApi.md#faq_matcher_vaporise) | **POST** /nlu/v2/faq_matchers/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **faq_matcher_add_testing_samples**

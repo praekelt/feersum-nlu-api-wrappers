@@ -1,17 +1,17 @@
 # feersum_nlu.DucklingEntityExtractorsApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**duckling_entity_extractor_create**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_create) | **POST** /duckling_entity_extractors | Create a duckling entity extractor.
-[**duckling_entity_extractor_del**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_del) | **DELETE** /duckling_entity_extractors/{instance_name} | Delete named instance.
-[**duckling_entity_extractor_get_details**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_details) | **GET** /duckling_entity_extractors/{instance_name} | Get details of named instance.
-[**duckling_entity_extractor_get_details_all**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_details_all) | **GET** /duckling_entity_extractors | Get list of loaded regular expression entity extractors.
-[**duckling_entity_extractor_get_params**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_params) | **GET** /duckling_entity_extractors/{instance_name}/params | Get the editable model parameters of named duckling entity extractor.
-[**duckling_entity_extractor_retrieve**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_retrieve) | **POST** /duckling_entity_extractors/{instance_name}/retrieve | Extract information based on the regular expression.
-[**duckling_entity_extractor_set_params**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_set_params) | **POST** /duckling_entity_extractors/{instance_name}/params | Set the model parameters of named duckling entity extractor.
-[**duckling_entity_extractor_vaporise**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_vaporise) | **POST** /duckling_entity_extractors/{instance_name}/vaporise | Vaporise the named model.
+[**duckling_entity_extractor_create**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_create) | **POST** /nlu/v2/duckling_entity_extractors | Create a duckling entity extractor.
+[**duckling_entity_extractor_del**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_del) | **DELETE** /nlu/v2/duckling_entity_extractors/{instance_name} | Delete named instance.
+[**duckling_entity_extractor_get_details**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_details) | **GET** /nlu/v2/duckling_entity_extractors/{instance_name} | Get details of named instance.
+[**duckling_entity_extractor_get_details_all**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_details_all) | **GET** /nlu/v2/duckling_entity_extractors | Get list of loaded regular expression entity extractors.
+[**duckling_entity_extractor_get_params**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_params) | **GET** /nlu/v2/duckling_entity_extractors/{instance_name}/params | Get the editable model parameters of named duckling entity extractor.
+[**duckling_entity_extractor_retrieve**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_retrieve) | **POST** /nlu/v2/duckling_entity_extractors/{instance_name}/retrieve | Extract information based on the regular expression.
+[**duckling_entity_extractor_set_params**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_set_params) | **POST** /nlu/v2/duckling_entity_extractors/{instance_name}/params | Set the model parameters of named duckling entity extractor.
+[**duckling_entity_extractor_vaporise**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_vaporise) | **POST** /nlu/v2/duckling_entity_extractors/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **duckling_entity_extractor_create**

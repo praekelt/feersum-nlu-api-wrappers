@@ -1,22 +1,22 @@
 # feersum_nlu.TextDatasetsApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**text_dataset_add_samples**](TextDatasetsApi.md#text_dataset_add_samples) | **POST** /text_datasets/{instance_name}/samples | Add samples.
-[**text_dataset_create**](TextDatasetsApi.md#text_dataset_create) | **POST** /text_datasets | Create a text dataset.
-[**text_dataset_del**](TextDatasetsApi.md#text_dataset_del) | **DELETE** /text_datasets/{instance_name} | Delete named instance.
-[**text_dataset_del_samples**](TextDatasetsApi.md#text_dataset_del_samples) | **DELETE** /text_datasets/{instance_name}/samples | Delete samples.
-[**text_dataset_del_samples_all**](TextDatasetsApi.md#text_dataset_del_samples_all) | **DELETE** /text_datasets/{instance_name}/samples_all | Delete all samples.
-[**text_dataset_get_details**](TextDatasetsApi.md#text_dataset_get_details) | **GET** /text_datasets/{instance_name} | Get details of named instance.
-[**text_dataset_get_details_all**](TextDatasetsApi.md#text_dataset_get_details_all) | **GET** /text_datasets | Get list of loaded text datasets.
-[**text_dataset_get_labels**](TextDatasetsApi.md#text_dataset_get_labels) | **GET** /text_datasets/{instance_name}/labels | Get list of possible labels.
-[**text_dataset_get_params**](TextDatasetsApi.md#text_dataset_get_params) | **GET** /text_datasets/{instance_name}/params | Get the editable model parameters of named text dataset.
-[**text_dataset_get_samples**](TextDatasetsApi.md#text_dataset_get_samples) | **GET** /text_datasets/{instance_name}/samples | Get samples.
-[**text_dataset_set_params**](TextDatasetsApi.md#text_dataset_set_params) | **POST** /text_datasets/{instance_name}/params | Set the model parameters of named text dataset.
-[**text_dataset_update_samples**](TextDatasetsApi.md#text_dataset_update_samples) | **PUT** /text_datasets/{instance_name}/samples | Update samples by UUID.
-[**text_dataset_vaporise**](TextDatasetsApi.md#text_dataset_vaporise) | **POST** /text_datasets/{instance_name}/vaporise | Vaporise the named model.
+[**text_dataset_add_samples**](TextDatasetsApi.md#text_dataset_add_samples) | **POST** /nlu/v2/text_datasets/{instance_name}/samples | Add samples.
+[**text_dataset_create**](TextDatasetsApi.md#text_dataset_create) | **POST** /nlu/v2/text_datasets | Create a text dataset.
+[**text_dataset_del**](TextDatasetsApi.md#text_dataset_del) | **DELETE** /nlu/v2/text_datasets/{instance_name} | Delete named instance.
+[**text_dataset_del_samples**](TextDatasetsApi.md#text_dataset_del_samples) | **DELETE** /nlu/v2/text_datasets/{instance_name}/samples | Delete samples.
+[**text_dataset_del_samples_all**](TextDatasetsApi.md#text_dataset_del_samples_all) | **DELETE** /nlu/v2/text_datasets/{instance_name}/samples_all | Delete all samples.
+[**text_dataset_get_details**](TextDatasetsApi.md#text_dataset_get_details) | **GET** /nlu/v2/text_datasets/{instance_name} | Get details of named instance.
+[**text_dataset_get_details_all**](TextDatasetsApi.md#text_dataset_get_details_all) | **GET** /nlu/v2/text_datasets | Get list of loaded text datasets.
+[**text_dataset_get_labels**](TextDatasetsApi.md#text_dataset_get_labels) | **GET** /nlu/v2/text_datasets/{instance_name}/labels | Get list of possible labels.
+[**text_dataset_get_params**](TextDatasetsApi.md#text_dataset_get_params) | **GET** /nlu/v2/text_datasets/{instance_name}/params | Get the editable model parameters of named text dataset.
+[**text_dataset_get_samples**](TextDatasetsApi.md#text_dataset_get_samples) | **GET** /nlu/v2/text_datasets/{instance_name}/samples | Get samples.
+[**text_dataset_set_params**](TextDatasetsApi.md#text_dataset_set_params) | **POST** /nlu/v2/text_datasets/{instance_name}/params | Set the model parameters of named text dataset.
+[**text_dataset_update_samples**](TextDatasetsApi.md#text_dataset_update_samples) | **PUT** /nlu/v2/text_datasets/{instance_name}/samples | Update samples by UUID.
+[**text_dataset_vaporise**](TextDatasetsApi.md#text_dataset_vaporise) | **POST** /nlu/v2/text_datasets/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **text_dataset_add_samples**

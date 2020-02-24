@@ -1,10 +1,10 @@
 # feersum_nlu.HealthApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**health_get_status**](HealthApi.md#health_get_status) | **GET** /health | An endpoint to check if the service is alice and well.
+[**health_get_status**](HealthApi.md#health_get_status) | **GET** /nlu/v2/health | An endpoint to check if the service is alice and well.
 
 
 # **health_get_status**

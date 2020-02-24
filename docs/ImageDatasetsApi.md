@@ -1,22 +1,22 @@
 # feersum_nlu.ImageDatasetsApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**image_dataset_add_samples**](ImageDatasetsApi.md#image_dataset_add_samples) | **POST** /image_datasets/{instance_name}/samples | Add samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
-[**image_dataset_create**](ImageDatasetsApi.md#image_dataset_create) | **POST** /image_datasets | Create an image dataset.
-[**image_dataset_del**](ImageDatasetsApi.md#image_dataset_del) | **DELETE** /image_datasets/{instance_name} | Delete named instance.
-[**image_dataset_del_samples**](ImageDatasetsApi.md#image_dataset_del_samples) | **DELETE** /image_datasets/{instance_name}/samples | Delete samples.
-[**image_dataset_del_samples_all**](ImageDatasetsApi.md#image_dataset_del_samples_all) | **DELETE** /image_datasets/{instance_name}/samples_all | Delete all samples.
-[**image_dataset_get_details**](ImageDatasetsApi.md#image_dataset_get_details) | **GET** /image_datasets/{instance_name} | Get details of named instance.
-[**image_dataset_get_details_all**](ImageDatasetsApi.md#image_dataset_get_details_all) | **GET** /image_datasets | Get list of loaded image datasets.
-[**image_dataset_get_labels**](ImageDatasetsApi.md#image_dataset_get_labels) | **GET** /image_datasets/{instance_name}/labels | Get list of possible labels.
-[**image_dataset_get_params**](ImageDatasetsApi.md#image_dataset_get_params) | **GET** /image_datasets/{instance_name}/params | Get the editable model parameters of named image dataset.
-[**image_dataset_get_samples**](ImageDatasetsApi.md#image_dataset_get_samples) | **GET** /image_datasets/{instance_name}/samples | Get samples. Image format is 256x256 RGB.
-[**image_dataset_set_params**](ImageDatasetsApi.md#image_dataset_set_params) | **POST** /image_datasets/{instance_name}/params | Set the model parameters of named image dataset.
-[**image_dataset_update_samples**](ImageDatasetsApi.md#image_dataset_update_samples) | **PUT** /image_datasets/{instance_name}/samples | Update samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
-[**image_dataset_vaporise**](ImageDatasetsApi.md#image_dataset_vaporise) | **POST** /image_datasets/{instance_name}/vaporise | Vaporise the named model.
+[**image_dataset_add_samples**](ImageDatasetsApi.md#image_dataset_add_samples) | **POST** /vision/v2/image_datasets/{instance_name}/samples | Add samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+[**image_dataset_create**](ImageDatasetsApi.md#image_dataset_create) | **POST** /vision/v2/image_datasets | Create an image dataset.
+[**image_dataset_del**](ImageDatasetsApi.md#image_dataset_del) | **DELETE** /vision/v2/image_datasets/{instance_name} | Delete named instance.
+[**image_dataset_del_samples**](ImageDatasetsApi.md#image_dataset_del_samples) | **DELETE** /vision/v2/image_datasets/{instance_name}/samples | Delete samples.
+[**image_dataset_del_samples_all**](ImageDatasetsApi.md#image_dataset_del_samples_all) | **DELETE** /vision/v2/image_datasets/{instance_name}/samples_all | Delete all samples.
+[**image_dataset_get_details**](ImageDatasetsApi.md#image_dataset_get_details) | **GET** /vision/v2/image_datasets/{instance_name} | Get details of named instance.
+[**image_dataset_get_details_all**](ImageDatasetsApi.md#image_dataset_get_details_all) | **GET** /vision/v2/image_datasets | Get list of loaded image datasets.
+[**image_dataset_get_labels**](ImageDatasetsApi.md#image_dataset_get_labels) | **GET** /vision/v2/image_datasets/{instance_name}/labels | Get list of possible labels.
+[**image_dataset_get_params**](ImageDatasetsApi.md#image_dataset_get_params) | **GET** /vision/v2/image_datasets/{instance_name}/params | Get the editable model parameters of named image dataset.
+[**image_dataset_get_samples**](ImageDatasetsApi.md#image_dataset_get_samples) | **GET** /vision/v2/image_datasets/{instance_name}/samples | Get samples. Image format is 256x256 RGB.
+[**image_dataset_set_params**](ImageDatasetsApi.md#image_dataset_set_params) | **POST** /vision/v2/image_datasets/{instance_name}/params | Set the model parameters of named image dataset.
+[**image_dataset_update_samples**](ImageDatasetsApi.md#image_dataset_update_samples) | **PUT** /vision/v2/image_datasets/{instance_name}/samples | Update samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+[**image_dataset_vaporise**](ImageDatasetsApi.md#image_dataset_vaporise) | **POST** /vision/v2/image_datasets/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **image_dataset_add_samples**

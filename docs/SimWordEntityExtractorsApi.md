@@ -1,17 +1,17 @@
 # feersum_nlu.SimWordEntityExtractorsApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**sim_word_entity_extractor_create**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_create) | **POST** /sim_word_entity_extractors | Create a word similarity entity extractor.
-[**sim_word_entity_extractor_del**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_del) | **DELETE** /sim_word_entity_extractors/{instance_name} | Delete named instance.
-[**sim_word_entity_extractor_get_details**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_get_details) | **GET** /sim_word_entity_extractors/{instance_name} | Get details of named instance.
-[**sim_word_entity_extractor_get_details_all**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_get_details_all) | **GET** /sim_word_entity_extractors | Get list of loaded similarity entity extractors.
-[**sim_word_entity_extractor_get_params**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_get_params) | **GET** /sim_word_entity_extractors/{instance_name}/params | Get the editable model parameters of named similarity entity extractor.
-[**sim_word_entity_extractor_retrieve**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_retrieve) | **POST** /sim_word_entity_extractors/{instance_name}/retrieve | Extract information based on word similarity.
-[**sim_word_entity_extractor_set_params**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_set_params) | **POST** /sim_word_entity_extractors/{instance_name}/params | Set the model parameters of named similarity entity extractor.
-[**sim_word_entity_extractor_vaporise**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_vaporise) | **POST** /sim_word_entity_extractors/{instance_name}/vaporise | Vaporise the named model.
+[**sim_word_entity_extractor_create**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_create) | **POST** /nlu/v2/sim_word_entity_extractors | Create a word similarity entity extractor.
+[**sim_word_entity_extractor_del**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_del) | **DELETE** /nlu/v2/sim_word_entity_extractors/{instance_name} | Delete named instance.
+[**sim_word_entity_extractor_get_details**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_get_details) | **GET** /nlu/v2/sim_word_entity_extractors/{instance_name} | Get details of named instance.
+[**sim_word_entity_extractor_get_details_all**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_get_details_all) | **GET** /nlu/v2/sim_word_entity_extractors | Get list of loaded similarity entity extractors.
+[**sim_word_entity_extractor_get_params**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_get_params) | **GET** /nlu/v2/sim_word_entity_extractors/{instance_name}/params | Get the editable model parameters of named similarity entity extractor.
+[**sim_word_entity_extractor_retrieve**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_retrieve) | **POST** /nlu/v2/sim_word_entity_extractors/{instance_name}/retrieve | Extract information based on word similarity.
+[**sim_word_entity_extractor_set_params**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_set_params) | **POST** /nlu/v2/sim_word_entity_extractors/{instance_name}/params | Set the model parameters of named similarity entity extractor.
+[**sim_word_entity_extractor_vaporise**](SimWordEntityExtractorsApi.md#sim_word_entity_extractor_vaporise) | **POST** /nlu/v2/sim_word_entity_extractors/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **sim_word_entity_extractor_create**

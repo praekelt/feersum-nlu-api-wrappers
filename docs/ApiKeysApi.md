@@ -1,14 +1,14 @@
 # feersum_nlu.ApiKeysApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api_key_create**](ApiKeysApi.md#api_key_create) | **POST** /api_keys | Create an API key.
-[**api_key_del**](ApiKeysApi.md#api_key_del) | **DELETE** /api_keys/{instance_name} | Delete named API key.
-[**api_key_get_details**](ApiKeysApi.md#api_key_get_details) | **GET** /api_keys/{instance_name} | Get details of named API key.
-[**api_key_get_details_all**](ApiKeysApi.md#api_key_get_details_all) | **GET** /api_keys | Get list of API keys. Admin rights are required to get the full list of API keys.
-[**api_key_update_details**](ApiKeysApi.md#api_key_update_details) | **POST** /api_keys/{instance_name} | Update the details of named API key. Adds the key if not found. Admin rights are required to update details.
+[**api_key_create**](ApiKeysApi.md#api_key_create) | **POST** /nlu/v2/api_keys | Create an API key.
+[**api_key_del**](ApiKeysApi.md#api_key_del) | **DELETE** /nlu/v2/api_keys/{instance_name} | Delete named API key.
+[**api_key_get_details**](ApiKeysApi.md#api_key_get_details) | **GET** /nlu/v2/api_keys/{instance_name} | Get details of named API key.
+[**api_key_get_details_all**](ApiKeysApi.md#api_key_get_details_all) | **GET** /nlu/v2/api_keys | Get list of API keys. Admin rights are required to get the full list of API keys.
+[**api_key_update_details**](ApiKeysApi.md#api_key_update_details) | **POST** /nlu/v2/api_keys/{instance_name} | Update the details of named API key. Adds the key if not found. Admin rights are required to update details.
 
 
 # **api_key_create**

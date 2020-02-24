@@ -1,11 +1,11 @@
 # feersum_nlu.EmotionClassifiersApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**emotion_classifier_get_labels**](EmotionClassifiersApi.md#emotion_classifier_get_labels) | **GET** /emotion_classifiers/{instance_name}/labels | Get list of possible labels.
-[**emotion_classifier_retrieve**](EmotionClassifiersApi.md#emotion_classifier_retrieve) | **POST** /emotion_classifiers/{instance_name}/retrieve | Classify emotion.
+[**emotion_classifier_get_labels**](EmotionClassifiersApi.md#emotion_classifier_get_labels) | **GET** /nlu/v2/emotion_classifiers/{instance_name}/labels | Get list of possible labels.
+[**emotion_classifier_retrieve**](EmotionClassifiersApi.md#emotion_classifier_retrieve) | **POST** /nlu/v2/emotion_classifiers/{instance_name}/retrieve | Classify emotion.
 
 
 # **emotion_classifier_get_labels**

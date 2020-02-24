@@ -1,31 +1,31 @@
 # feersum_nlu.ImageClassifiersApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**image_classifier_add_testing_samples**](ImageClassifiersApi.md#image_classifier_add_testing_samples) | **POST** /image_classifiers/{instance_name}/testing_samples | Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
-[**image_classifier_add_training_samples**](ImageClassifiersApi.md#image_classifier_add_training_samples) | **POST** /image_classifiers/{instance_name}/training_samples | Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
-[**image_classifier_create**](ImageClassifiersApi.md#image_classifier_create) | **POST** /image_classifiers | Create an image classifier.
-[**image_classifier_curate**](ImageClassifiersApi.md#image_classifier_curate) | **POST** /image_classifiers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
-[**image_classifier_del**](ImageClassifiersApi.md#image_classifier_del) | **DELETE** /image_classifiers/{instance_name} | Delete named instance.
-[**image_classifier_del_testing_samples**](ImageClassifiersApi.md#image_classifier_del_testing_samples) | **DELETE** /image_classifiers/{instance_name}/testing_samples | Delete testing samples.
-[**image_classifier_del_testing_samples_all**](ImageClassifiersApi.md#image_classifier_del_testing_samples_all) | **DELETE** /image_classifiers/{instance_name}/testing_samples_all | Delete testing samples.
-[**image_classifier_del_training_samples**](ImageClassifiersApi.md#image_classifier_del_training_samples) | **DELETE** /image_classifiers/{instance_name}/training_samples | Delete training samples.
-[**image_classifier_del_training_samples_all**](ImageClassifiersApi.md#image_classifier_del_training_samples_all) | **DELETE** /image_classifiers/{instance_name}/training_samples_all | Delete all training samples.
-[**image_classifier_get_details**](ImageClassifiersApi.md#image_classifier_get_details) | **GET** /image_classifiers/{instance_name} | Get details of named instance.
-[**image_classifier_get_details_all**](ImageClassifiersApi.md#image_classifier_get_details_all) | **GET** /image_classifiers | Get list of loaded image classifiers.
-[**image_classifier_get_labels**](ImageClassifiersApi.md#image_classifier_get_labels) | **GET** /image_classifiers/{instance_name}/labels | Get list of possible labels.
-[**image_classifier_get_params**](ImageClassifiersApi.md#image_classifier_get_params) | **GET** /image_classifiers/{instance_name}/params | Get the editable model parameters of named image classifier.
-[**image_classifier_get_testing_samples**](ImageClassifiersApi.md#image_classifier_get_testing_samples) | **GET** /image_classifiers/{instance_name}/testing_samples | Get testing samples. Image format is 256x256 RGB.
-[**image_classifier_get_training_samples**](ImageClassifiersApi.md#image_classifier_get_training_samples) | **GET** /image_classifiers/{instance_name}/training_samples | Get training samples. Image format is 256x256 RGB.
-[**image_classifier_online_training_samples**](ImageClassifiersApi.md#image_classifier_online_training_samples) | **POST** /image_classifiers/{instance_name}/online_training_samples | Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
-[**image_classifier_retrieve**](ImageClassifiersApi.md#image_classifier_retrieve) | **POST** /image_classifiers/{instance_name}/retrieve | Classify image; Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
-[**image_classifier_set_params**](ImageClassifiersApi.md#image_classifier_set_params) | **POST** /image_classifiers/{instance_name}/params | Set the model parameters of named image classifier.
-[**image_classifier_train**](ImageClassifiersApi.md#image_classifier_train) | **POST** /image_classifiers/{instance_name}/train | Train the named image classifier.
-[**image_classifier_update_testing_samples**](ImageClassifiersApi.md#image_classifier_update_testing_samples) | **PUT** /image_classifiers/{instance_name}/testing_samples | Update testing samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
-[**image_classifier_update_training_samples**](ImageClassifiersApi.md#image_classifier_update_training_samples) | **PUT** /image_classifiers/{instance_name}/training_samples | Update training samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
-[**image_classifier_vaporise**](ImageClassifiersApi.md#image_classifier_vaporise) | **POST** /image_classifiers/{instance_name}/vaporise | Vaporise the named model.
+[**image_classifier_add_testing_samples**](ImageClassifiersApi.md#image_classifier_add_testing_samples) | **POST** /vision/v2/image_classifiers/{instance_name}/testing_samples | Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+[**image_classifier_add_training_samples**](ImageClassifiersApi.md#image_classifier_add_training_samples) | **POST** /vision/v2/image_classifiers/{instance_name}/training_samples | Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+[**image_classifier_create**](ImageClassifiersApi.md#image_classifier_create) | **POST** /vision/v2/image_classifiers | Create an image classifier.
+[**image_classifier_curate**](ImageClassifiersApi.md#image_classifier_curate) | **POST** /vision/v2/image_classifiers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
+[**image_classifier_del**](ImageClassifiersApi.md#image_classifier_del) | **DELETE** /vision/v2/image_classifiers/{instance_name} | Delete named instance.
+[**image_classifier_del_testing_samples**](ImageClassifiersApi.md#image_classifier_del_testing_samples) | **DELETE** /vision/v2/image_classifiers/{instance_name}/testing_samples | Delete testing samples.
+[**image_classifier_del_testing_samples_all**](ImageClassifiersApi.md#image_classifier_del_testing_samples_all) | **DELETE** /vision/v2/image_classifiers/{instance_name}/testing_samples_all | Delete testing samples.
+[**image_classifier_del_training_samples**](ImageClassifiersApi.md#image_classifier_del_training_samples) | **DELETE** /vision/v2/image_classifiers/{instance_name}/training_samples | Delete training samples.
+[**image_classifier_del_training_samples_all**](ImageClassifiersApi.md#image_classifier_del_training_samples_all) | **DELETE** /vision/v2/image_classifiers/{instance_name}/training_samples_all | Delete all training samples.
+[**image_classifier_get_details**](ImageClassifiersApi.md#image_classifier_get_details) | **GET** /vision/v2/image_classifiers/{instance_name} | Get details of named instance.
+[**image_classifier_get_details_all**](ImageClassifiersApi.md#image_classifier_get_details_all) | **GET** /vision/v2/image_classifiers | Get list of loaded image classifiers.
+[**image_classifier_get_labels**](ImageClassifiersApi.md#image_classifier_get_labels) | **GET** /vision/v2/image_classifiers/{instance_name}/labels | Get list of possible labels.
+[**image_classifier_get_params**](ImageClassifiersApi.md#image_classifier_get_params) | **GET** /vision/v2/image_classifiers/{instance_name}/params | Get the editable model parameters of named image classifier.
+[**image_classifier_get_testing_samples**](ImageClassifiersApi.md#image_classifier_get_testing_samples) | **GET** /vision/v2/image_classifiers/{instance_name}/testing_samples | Get testing samples. Image format is 256x256 RGB.
+[**image_classifier_get_training_samples**](ImageClassifiersApi.md#image_classifier_get_training_samples) | **GET** /vision/v2/image_classifiers/{instance_name}/training_samples | Get training samples. Image format is 256x256 RGB.
+[**image_classifier_online_training_samples**](ImageClassifiersApi.md#image_classifier_online_training_samples) | **POST** /vision/v2/image_classifiers/{instance_name}/online_training_samples | Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+[**image_classifier_retrieve**](ImageClassifiersApi.md#image_classifier_retrieve) | **POST** /vision/v2/image_classifiers/{instance_name}/retrieve | Classify image; Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+[**image_classifier_set_params**](ImageClassifiersApi.md#image_classifier_set_params) | **POST** /vision/v2/image_classifiers/{instance_name}/params | Set the model parameters of named image classifier.
+[**image_classifier_train**](ImageClassifiersApi.md#image_classifier_train) | **POST** /vision/v2/image_classifiers/{instance_name}/train | Train the named image classifier.
+[**image_classifier_update_testing_samples**](ImageClassifiersApi.md#image_classifier_update_testing_samples) | **PUT** /vision/v2/image_classifiers/{instance_name}/testing_samples | Update testing samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+[**image_classifier_update_training_samples**](ImageClassifiersApi.md#image_classifier_update_training_samples) | **PUT** /vision/v2/image_classifiers/{instance_name}/training_samples | Update training samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
+[**image_classifier_vaporise**](ImageClassifiersApi.md#image_classifier_vaporise) | **POST** /vision/v2/image_classifiers/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **image_classifier_add_testing_samples**

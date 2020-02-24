@@ -1,17 +1,17 @@
 # feersum_nlu.RegexEntityExtractorsApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**regex_entity_extractor_create**](RegexEntityExtractorsApi.md#regex_entity_extractor_create) | **POST** /regex_entity_extractors | Create a regular expression entity extractor.
-[**regex_entity_extractor_del**](RegexEntityExtractorsApi.md#regex_entity_extractor_del) | **DELETE** /regex_entity_extractors/{instance_name} | Delete named instance.
-[**regex_entity_extractor_get_details**](RegexEntityExtractorsApi.md#regex_entity_extractor_get_details) | **GET** /regex_entity_extractors/{instance_name} | Get details of named instance.
-[**regex_entity_extractor_get_details_all**](RegexEntityExtractorsApi.md#regex_entity_extractor_get_details_all) | **GET** /regex_entity_extractors | Get list of loaded regular expression entity extractors.
-[**regex_entity_extractor_get_params**](RegexEntityExtractorsApi.md#regex_entity_extractor_get_params) | **GET** /regex_entity_extractors/{instance_name}/params | Get the editable model parameters of named regex entity extractor.
-[**regex_entity_extractor_retrieve**](RegexEntityExtractorsApi.md#regex_entity_extractor_retrieve) | **POST** /regex_entity_extractors/{instance_name}/retrieve | Extract information based on the regular expression.
-[**regex_entity_extractor_set_params**](RegexEntityExtractorsApi.md#regex_entity_extractor_set_params) | **POST** /regex_entity_extractors/{instance_name}/params | Set the model parameters of named regex entity extractor.
-[**regex_entity_extractor_vaporise**](RegexEntityExtractorsApi.md#regex_entity_extractor_vaporise) | **POST** /regex_entity_extractors/{instance_name}/vaporise | Vaporise the named model.
+[**regex_entity_extractor_create**](RegexEntityExtractorsApi.md#regex_entity_extractor_create) | **POST** /nlu/v2/regex_entity_extractors | Create a regular expression entity extractor.
+[**regex_entity_extractor_del**](RegexEntityExtractorsApi.md#regex_entity_extractor_del) | **DELETE** /nlu/v2/regex_entity_extractors/{instance_name} | Delete named instance.
+[**regex_entity_extractor_get_details**](RegexEntityExtractorsApi.md#regex_entity_extractor_get_details) | **GET** /nlu/v2/regex_entity_extractors/{instance_name} | Get details of named instance.
+[**regex_entity_extractor_get_details_all**](RegexEntityExtractorsApi.md#regex_entity_extractor_get_details_all) | **GET** /nlu/v2/regex_entity_extractors | Get list of loaded regular expression entity extractors.
+[**regex_entity_extractor_get_params**](RegexEntityExtractorsApi.md#regex_entity_extractor_get_params) | **GET** /nlu/v2/regex_entity_extractors/{instance_name}/params | Get the editable model parameters of named regex entity extractor.
+[**regex_entity_extractor_retrieve**](RegexEntityExtractorsApi.md#regex_entity_extractor_retrieve) | **POST** /nlu/v2/regex_entity_extractors/{instance_name}/retrieve | Extract information based on the regular expression.
+[**regex_entity_extractor_set_params**](RegexEntityExtractorsApi.md#regex_entity_extractor_set_params) | **POST** /nlu/v2/regex_entity_extractors/{instance_name}/params | Set the model parameters of named regex entity extractor.
+[**regex_entity_extractor_vaporise**](RegexEntityExtractorsApi.md#regex_entity_extractor_vaporise) | **POST** /nlu/v2/regex_entity_extractors/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **regex_entity_extractor_create**

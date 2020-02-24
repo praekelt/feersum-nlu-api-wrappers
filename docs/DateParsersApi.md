@@ -1,10 +1,10 @@
 # feersum_nlu.DateParsersApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**date_parser_retrieve**](DateParsersApi.md#date_parser_retrieve) | **POST** /date_parsers/{instance_name}/retrieve | Extract dates.
+[**date_parser_retrieve**](DateParsersApi.md#date_parser_retrieve) | **POST** /nlu/v2/date_parsers/{instance_name}/retrieve | Extract dates.
 
 
 # **date_parser_retrieve**

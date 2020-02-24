@@ -1,29 +1,29 @@
 # feersum_nlu.CrfEntityExtractorsApi
 
-All URIs are relative to *https://nlu.feersum.io:443/nlu/v2*
+All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**crf_entity_extractor_add_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_add_testing_samples) | **POST** /crf_entity_extractors/{instance_name}/testing_samples | Add testing samples.
-[**crf_entity_extractor_add_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_add_training_samples) | **POST** /crf_entity_extractors/{instance_name}/training_samples | Add training samples.
-[**crf_entity_extractor_create**](CrfEntityExtractorsApi.md#crf_entity_extractor_create) | **POST** /crf_entity_extractors | Create a crf entity extractor.
-[**crf_entity_extractor_del**](CrfEntityExtractorsApi.md#crf_entity_extractor_del) | **DELETE** /crf_entity_extractors/{instance_name} | Delete named instance.
-[**crf_entity_extractor_del_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_del_testing_samples) | **DELETE** /crf_entity_extractors/{instance_name}/testing_samples | Delete testing samples.
-[**crf_entity_extractor_del_testing_samples_all**](CrfEntityExtractorsApi.md#crf_entity_extractor_del_testing_samples_all) | **DELETE** /crf_entity_extractors/{instance_name}/testing_samples_all | Delete all testing samples.
-[**crf_entity_extractor_del_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_del_training_samples) | **DELETE** /crf_entity_extractors/{instance_name}/training_samples | Delete training samples.
-[**crf_entity_extractor_del_training_samples_all**](CrfEntityExtractorsApi.md#crf_entity_extractor_del_training_samples_all) | **DELETE** /crf_entity_extractors/{instance_name}/training_samples_all | Delete all training samples.
-[**crf_entity_extractor_get_details**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_details) | **GET** /crf_entity_extractors/{instance_name} | Get details of named instance.
-[**crf_entity_extractor_get_details_all**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_details_all) | **GET** /crf_entity_extractors | Get list of loaded crf entity extractors.
-[**crf_entity_extractor_get_labels**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_labels) | **GET** /crf_entity_extractors/{instance_name}/labels | Get list of possible labels.
-[**crf_entity_extractor_get_params**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_params) | **GET** /crf_entity_extractors/{instance_name}/params | Get the editable model parameters of named crf entity extractor.
-[**crf_entity_extractor_get_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_testing_samples) | **GET** /crf_entity_extractors/{instance_name}/testing_samples | Get testing samples.
-[**crf_entity_extractor_get_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_training_samples) | **GET** /crf_entity_extractors/{instance_name}/training_samples | Get training samples.
-[**crf_entity_extractor_retrieve**](CrfEntityExtractorsApi.md#crf_entity_extractor_retrieve) | **POST** /crf_entity_extractors/{instance_name}/retrieve | Predict which entities was mentioned.
-[**crf_entity_extractor_set_params**](CrfEntityExtractorsApi.md#crf_entity_extractor_set_params) | **POST** /crf_entity_extractors/{instance_name}/params | Set the model parameters of named crf entity extractor.
-[**crf_entity_extractor_train**](CrfEntityExtractorsApi.md#crf_entity_extractor_train) | **POST** /crf_entity_extractors/{instance_name}/train | Train the named crf extractor.
-[**crf_entity_extractor_update_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_update_testing_samples) | **PUT** /crf_entity_extractors/{instance_name}/testing_samples | Update testing samples by UUID.
-[**crf_entity_extractor_update_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_update_training_samples) | **PUT** /crf_entity_extractors/{instance_name}/training_samples | Update training samples by UUID.
-[**crf_entity_extractor_vaporise**](CrfEntityExtractorsApi.md#crf_entity_extractor_vaporise) | **POST** /crf_entity_extractors/{instance_name}/vaporise | Vaporise the named model.
+[**crf_entity_extractor_add_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_add_testing_samples) | **POST** /nlu/v2/crf_entity_extractors/{instance_name}/testing_samples | Add testing samples.
+[**crf_entity_extractor_add_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_add_training_samples) | **POST** /nlu/v2/crf_entity_extractors/{instance_name}/training_samples | Add training samples.
+[**crf_entity_extractor_create**](CrfEntityExtractorsApi.md#crf_entity_extractor_create) | **POST** /nlu/v2/crf_entity_extractors | Create a crf entity extractor.
+[**crf_entity_extractor_del**](CrfEntityExtractorsApi.md#crf_entity_extractor_del) | **DELETE** /nlu/v2/crf_entity_extractors/{instance_name} | Delete named instance.
+[**crf_entity_extractor_del_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_del_testing_samples) | **DELETE** /nlu/v2/crf_entity_extractors/{instance_name}/testing_samples | Delete testing samples.
+[**crf_entity_extractor_del_testing_samples_all**](CrfEntityExtractorsApi.md#crf_entity_extractor_del_testing_samples_all) | **DELETE** /nlu/v2/crf_entity_extractors/{instance_name}/testing_samples_all | Delete all testing samples.
+[**crf_entity_extractor_del_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_del_training_samples) | **DELETE** /nlu/v2/crf_entity_extractors/{instance_name}/training_samples | Delete training samples.
+[**crf_entity_extractor_del_training_samples_all**](CrfEntityExtractorsApi.md#crf_entity_extractor_del_training_samples_all) | **DELETE** /nlu/v2/crf_entity_extractors/{instance_name}/training_samples_all | Delete all training samples.
+[**crf_entity_extractor_get_details**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_details) | **GET** /nlu/v2/crf_entity_extractors/{instance_name} | Get details of named instance.
+[**crf_entity_extractor_get_details_all**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_details_all) | **GET** /nlu/v2/crf_entity_extractors | Get list of loaded crf entity extractors.
+[**crf_entity_extractor_get_labels**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_labels) | **GET** /nlu/v2/crf_entity_extractors/{instance_name}/labels | Get list of possible labels.
+[**crf_entity_extractor_get_params**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_params) | **GET** /nlu/v2/crf_entity_extractors/{instance_name}/params | Get the editable model parameters of named crf entity extractor.
+[**crf_entity_extractor_get_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_testing_samples) | **GET** /nlu/v2/crf_entity_extractors/{instance_name}/testing_samples | Get testing samples.
+[**crf_entity_extractor_get_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_training_samples) | **GET** /nlu/v2/crf_entity_extractors/{instance_name}/training_samples | Get training samples.
+[**crf_entity_extractor_retrieve**](CrfEntityExtractorsApi.md#crf_entity_extractor_retrieve) | **POST** /nlu/v2/crf_entity_extractors/{instance_name}/retrieve | Predict which entities was mentioned.
+[**crf_entity_extractor_set_params**](CrfEntityExtractorsApi.md#crf_entity_extractor_set_params) | **POST** /nlu/v2/crf_entity_extractors/{instance_name}/params | Set the model parameters of named crf entity extractor.
+[**crf_entity_extractor_train**](CrfEntityExtractorsApi.md#crf_entity_extractor_train) | **POST** /nlu/v2/crf_entity_extractors/{instance_name}/train | Train the named crf extractor.
+[**crf_entity_extractor_update_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_update_testing_samples) | **PUT** /nlu/v2/crf_entity_extractors/{instance_name}/testing_samples | Update testing samples by UUID.
+[**crf_entity_extractor_update_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_update_training_samples) | **PUT** /nlu/v2/crf_entity_extractors/{instance_name}/training_samples | Update training samples by UUID.
+[**crf_entity_extractor_vaporise**](CrfEntityExtractorsApi.md#crf_entity_extractor_vaporise) | **POST** /nlu/v2/crf_entity_extractors/{instance_name}/vaporise | Vaporise the named model.
 
 
 # **crf_entity_extractor_add_testing_samples**
