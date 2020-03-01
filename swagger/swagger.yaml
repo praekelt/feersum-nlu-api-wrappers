@@ -95,6 +95,50 @@ paths:
 ########
 ## dashboard root
 ########
+  /dashboard:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    get:
+      tags:
+      - dashboard
+      summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
+      operationId: dashboard_root_get_details
+      description: Get your list of loaded model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      responses:
+        200:
+          $ref: "#/responses/dashboard_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    post:
+      tags:
+      - dashboard
+      summary: Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
+      operationId: dashboard_get_details_with_params
+      description: Get your list of loaded model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
+      parameters:
+      - in: body
+        name: params
+        description: Params like 'show_data_objects' that influence the dashboard's response.
+        required: true
+        schema:
+          $ref: "#/definitions/dashboard_params"
+      responses:
+        200:
+          $ref: "#/responses/dashboard_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## dashboard nlu
+########
   /nlu/v2/dashboard:
     parameters:
     - $ref: '#/parameters/caller'
@@ -104,7 +148,95 @@ paths:
       - dashboard
       summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
-      operationId: dashboard_get_details
+      operationId: dashboard_nlu_get_details
+      description: Get your list of loaded model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      responses:
+        200:
+          $ref: "#/responses/dashboard_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    post:
+      tags:
+      - dashboard
+      summary: Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
+      operationId: dashboard_get_details_with_params
+      description: Get your list of loaded model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
+      parameters:
+      - in: body
+        name: params
+        description: Params like 'show_data_objects' that influence the dashboard's response.
+        required: true
+        schema:
+          $ref: "#/definitions/dashboard_params"
+      responses:
+        200:
+          $ref: "#/responses/dashboard_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## dashboard vision
+########
+  /vision/v2/dashboard:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    get:
+      tags:
+      - dashboard
+      summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
+      operationId: dashboard_vision_get_details
+      description: Get your list of loaded model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      responses:
+        200:
+          $ref: "#/responses/dashboard_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    post:
+      tags:
+      - dashboard
+      summary: Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
+      operationId: dashboard_get_details_with_params
+      description: Get your list of loaded model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
+      parameters:
+      - in: body
+        name: params
+        description: Params like 'show_data_objects' that influence the dashboard's response.
+        required: true
+        schema:
+          $ref: "#/definitions/dashboard_params"
+      responses:
+        200:
+          $ref: "#/responses/dashboard_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## dashboard audio
+########
+  /audio/v2/dashboard:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    get:
+      tags:
+      - dashboard
+      summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
+      operationId: dashboard_audio_get_details
       description: Get your list of loaded model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       responses:
         200:
@@ -5871,7 +6003,7 @@ paths:
           $ref: "#/definitions/image_input"
       responses:
         200:
-          $ref: "#/responses/text_list"
+          $ref: "#/responses/document"
         400:
           description: bad request
         401:
@@ -6947,12 +7079,12 @@ responses:
     schema:
       $ref: "#/definitions/sentiment"
 
-  text_list:
-    description: The list of text responses.
+  document:
+    description: A document.
     schema:
       type: array
       items:
-        $ref: "#/definitions/text"
+        $ref: "#/definitions/paragraph"
 
 ####################################
 # Descriptions of common definitions
@@ -8534,7 +8666,7 @@ definitions:
         description: The URL to the image.
         type: string
 
-
+  # Input text.
   text_input:
     description: The text input to be classified, matched or parsed.
     type: object
@@ -8547,6 +8679,25 @@ definitions:
         example: 'Hi, you may call me Tom.'
       lang_code:
         description: An optional ISO 639-3 language code hint - eng, afr, nbl, xho, zul, ssw, nso, sot, tsn, ven, tso.
+        type: string
+        example: 'eng'
+      conversation_id:
+        description: The conversation ID.
+        type: string
+        example: ''
+
+  paragraph:
+    description: A paragraph.
+    type: object
+    required:
+    - text
+    properties:
+      text:
+        description: The extracted text.
+        type: string
+        example: 'Hi, you may call me Tom too.'
+      lang_code:
+        description: The ISO 639-3 language code of the text. Included if available.
         type: string
         example: 'eng'
 
@@ -8777,18 +8928,3 @@ definitions:
         description: The number of calls loaded on this key. 'None' or no value implies unlimited.
         type: integer
         example: 5000
-
-  text:
-    description: Extracted text.
-    type: object
-    required:
-    - text
-    properties:
-      text:
-        description: The extracted text.
-        type: string
-        example: 'Hi, you may call me Tom.'
-      lang_code:
-        description: The ISO 639-3 language code of the text. Included if available.
-        type: string
-        example: 'eng'
