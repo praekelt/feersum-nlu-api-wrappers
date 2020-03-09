@@ -42,7 +42,7 @@ security:
 
 tags:
 - name: dashboard
-  description: A service endpoint to get your list of loaded model instances. 'Try it out!' to see what models are already created for you.
+  description: A service endpoint to get your list of model instances. 'Try it out!' to see what models are already created for you.
 - name: text_classifiers
   description: The API to your text classifier instances useful for things like classifying phrases into predefined action or intent categories. Create a model, add some training data, train it and start doing retrieve/inference calls. A variety of shallow to deep classifier algorithms and language models can be selected at training time from naive Bayes and SVM to fully connected neural classifiers using USent and Elmo features.
 - name: text_datasets
@@ -87,7 +87,8 @@ tags:
   description: The API to your labelled image datasets useful for things like labelling data. Store unlabelled samples with a label like '_unlabelled'.
 - name: image_readers
   description: The API to your image reader instances.
-
+- name: text_pipelines
+  description: Build an NLU pipeline with annotators, extractors and classifiers. The annotators enrich the text with POS tags, etc. after which the classifiers and extractors run.
 
 paths:
 ###################################
@@ -105,7 +106,7 @@ paths:
       summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_root_get_details
-      description: Get your list of loaded model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      description: Get your list of model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       responses:
         200:
           $ref: "#/responses/dashboard_detail"
@@ -120,7 +121,7 @@ paths:
       summary: Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_get_details_with_params
-      description: Get your list of loaded model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
+      description: Get your list of model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
       parameters:
       - in: body
         name: params
@@ -149,7 +150,7 @@ paths:
       summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_nlu_get_details
-      description: Get your list of loaded model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      description: Get your list of model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       responses:
         200:
           $ref: "#/responses/dashboard_detail"
@@ -163,8 +164,8 @@ paths:
       - dashboard
       summary: Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
-      operationId: dashboard_get_details_with_params
-      description: Get your list of loaded model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
+      operationId: dashboard_nlu_get_details_with_params
+      description: Get your list of model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
       parameters:
       - in: body
         name: params
@@ -175,6 +176,49 @@ paths:
       responses:
         200:
           $ref: "#/responses/dashboard_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## dashboard nlu
+########
+  /nlu/v2/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    get:
+      tags:
+      - params
+      summary: Get the service params.
+      x-swagger-router-controller: rest_api.flask_server.controllers.params_controller
+      operationId: params_nlu_get
+      description: Set the service params.
+      responses:
+        200:
+          $ref: "#/responses/service_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    post:
+      tags:
+      - params
+      summary: Set the service params.
+      x-swagger-router-controller: rest_api.flask_server.controllers.params_controller
+      operationId: params_nlu_set
+      description: Set the service params.
+      parameters:
+      - in: body
+        name: params
+        required: true
+        schema:
+          $ref: "#/definitions/service_params"
+      responses:
+        200:
+          $ref: "#/responses/service_params"
         400:
           description: bad request
         401:
@@ -193,7 +237,7 @@ paths:
       summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_vision_get_details
-      description: Get your list of loaded model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      description: Get your list of model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       responses:
         200:
           $ref: "#/responses/dashboard_detail"
@@ -207,8 +251,8 @@ paths:
       - dashboard
       summary: Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
-      operationId: dashboard_get_details_with_params
-      description: Get your list of loaded model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
+      operationId: dashboard_vision_get_details_with_params
+      description: Get your list of model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
       parameters:
       - in: body
         name: params
@@ -237,7 +281,7 @@ paths:
       summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_audio_get_details
-      description: Get your list of loaded model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      description: Get your list of model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       responses:
         200:
           $ref: "#/responses/dashboard_detail"
@@ -251,8 +295,8 @@ paths:
       - dashboard
       summary: Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
-      operationId: dashboard_get_details_with_params
-      description: Get your list of loaded model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
+      operationId: dashboard_audio_get_details_with_params
+      description: Get your list of model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
       parameters:
       - in: body
         name: params
@@ -283,7 +327,7 @@ paths:
       summary: Create a text classifier.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_create
-      description: Create a new text classifier or reload one from the trash. Returns the details of the new or loaded instance.
+      description: Create a new text classifier or reload one from the trash. Returns the details of the model instance.
       parameters:
       - in: body
         name: create_details
@@ -303,10 +347,10 @@ paths:
     get:
       tags:
       - text_classifiers
-      summary: Get list of loaded text classifiers.
+      summary: Get list of text classifiers.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_get_details_all
-      description: Get the list of loaded text classifiers.
+      description: Get the list of text classifiers.
       responses:
         200:
           $ref: "#/responses/text_classifier_instance_detail_list"
@@ -321,6 +365,34 @@ paths:
   /nlu/v2/text_classifiers/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - text_classifiers
+      summary: Create a text classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_create_from_path
+      description: Create a new text classifier or reload one from the trash. Returns the details of the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the model instance.
+        required: true
+        type: string
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/text_classifier_create_details"
+
+      responses:
+        200:
+          $ref: "#/responses/text_classifier_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
 
     get:
       tags:
@@ -984,7 +1056,7 @@ paths:
 #      summary: Create a word manifold model.
 #      x-swagger-router-controller: rest_api.flask_server.controllers.word_manifolds_controller
 #      operationId: word_manifold_create
-#      description: Create a new word manifold model using an input file or reload one from the trash. Warning! - These models are quite big and each takes a few seconds to load/create. Returns the details of the new or loaded instance.
+#      description: Create a new word manifold model using an input file or reload one from the trash. Warning! - These models are quite big and each takes a few seconds to load/create. Returns the details of the instance.
 #      parameters:
 #      - in: body
 #        name: create_details
@@ -1196,7 +1268,7 @@ paths:
       summary: Create an intent classifier.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_create
-      description: Create a new intent classifier or reload one from the trash. Returns the details of the new or loaded instance.
+      description: Create a new intent classifier or reload one from the trash. Returns the details of the instance.
       parameters:
       - in: body
         name: create_details
@@ -1215,10 +1287,10 @@ paths:
     get:
       tags:
       - intent_classifiers
-      summary: Get list of loaded intent classifiers.
+      summary: Get list of intent classifiers.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_get_details_all
-      description: Returns the list of loaded intent classifiers.
+      description: Returns the list of intent classifiers.
       responses:
         200:
           $ref: "#/responses/intent_classifier_instance_detail_list"
@@ -1897,7 +1969,7 @@ paths:
       summary: Create an FAQ matcher.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_create
-      description: Create a new faq matcher or reload one from the trash. Returns the details of the new or loaded instance.
+      description: Create a new faq matcher or reload one from the trash. Returns the details of the instance.
       parameters:
       - in: body
         name: create_details
@@ -1916,10 +1988,10 @@ paths:
     get:
       tags:
       - faq_matchers
-      summary: Get list of loaded FAQ matchers.
+      summary: Get list of FAQ matchers.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_get_details_all
-      description: Returns the list of loaded faq matchers.
+      description: Returns the list of faq matchers.
       responses:
         200:
           $ref: "#/responses/faq_matcher_instance_detail_list"
@@ -2755,10 +2827,10 @@ paths:
     get:
       tags:
       - crf_entity_extractors
-      summary: Get list of loaded crf entity extractors.
+      summary: Get list of crf entity extractors.
       x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
       operationId: crf_entity_extractor_get_details_all
-      description: Get the list of loaded crf entity extractors.
+      description: Get the list of crf entity extractors.
       responses:
         200:
           $ref: "#/responses/crf_entity_extractor_instance_detail_list"
@@ -3330,10 +3402,10 @@ paths:
     get:
       tags:
       - synonym_entity_extractors
-      summary: Get list of loaded synonym entity extractors.
+      summary: Get list of synonym entity extractors.
       x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
       operationId: synonym_entity_extractor_get_details_all
-      description: Get the list of loaded synonym entity extractors.
+      description: Get the list of synonym entity extractors.
       responses:
         200:
           $ref: "#/responses/synonym_entity_extractor_instance_detail_list"
@@ -3905,10 +3977,10 @@ paths:
     get:
       tags:
       - regex_entity_extractors
-      summary: Get list of loaded regular expression entity extractors.
+      summary: Get list of regular expression entity extractors.
       x-swagger-router-controller: rest_api.flask_server.controllers.regex_entity_extractors_controller
       operationId: regex_entity_extractor_get_details_all
-      description: Get the list of loaded regular expression entity extractors.
+      description: Get the list of regular expression entity extractors.
       responses:
         200:
           $ref: "#/responses/regex_entity_extractor_instance_detail_list"
@@ -4118,10 +4190,10 @@ paths:
     get:
       tags:
       - person_name_entity_extractors
-      summary: Get list of loaded regular expression entity extractors.
+      summary: Get list of regular expression entity extractors.
       x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
       operationId: person_name_entity_extractor_get_details_all
-      description: Get the list of loaded person_name entity extractors.
+      description: Get the list of person_name entity extractors.
       responses:
         200:
           $ref: "#/responses/person_name_entity_extractor_instance_detail_list"
@@ -4331,10 +4403,10 @@ paths:
     get:
       tags:
       - duckling_entity_extractors
-      summary: Get list of loaded regular expression entity extractors.
+      summary: Get list of regular expression entity extractors.
       x-swagger-router-controller: rest_api.flask_server.controllers.duckling_entity_extractors_controller
       operationId: duckling_entity_extractor_get_details_all
-      description: Get the list of loaded duckling entity extractors.
+      description: Get the list of duckling entity extractors.
       responses:
         200:
           $ref: "#/responses/duckling_entity_extractor_instance_detail_list"
@@ -4544,10 +4616,10 @@ paths:
     get:
       tags:
       - sim_word_entity_extractors
-      summary: Get list of loaded similarity entity extractors.
+      summary: Get list of similarity entity extractors.
       x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
       operationId: sim_word_entity_extractor_get_details_all
-      description: Get the list of loaded similarity entity extractors.
+      description: Get the list of similarity entity extractors.
       responses:
         200:
           $ref: "#/responses/sim_word_entity_extractor_instance_detail_list"
@@ -4794,10 +4866,10 @@ paths:
     get:
       tags:
       - language_recognisers
-      summary: Get list of loaded text language detectors.
+      summary: Get list of text language detectors.
       x-swagger-router-controller: rest_api.flask_server.controllers.language_recognisers_controller
       operationId: language_recogniser_get_details_all
-      description: Get the list of loaded text language detectors.
+      description: Get the list of text language detectors.
       responses:
         200:
           $ref: "#/responses/language_recogniser_instance_detail_list"
@@ -5013,10 +5085,10 @@ paths:
     get:
       tags:
       - data_objects
-      summary: Get list of names of loaded data_objects.
+      summary: Get list of names of data_objects.
       x-swagger-router-controller: rest_api.flask_server.controllers.data_objects_controller
       operationId: data_object_get_names_all
-      description: Get the list of names of loaded data_objects.
+      description: Get the list of names of data_objects.
       responses:
         200:
           $ref: "#/responses/data_object_name_list"
@@ -5031,7 +5103,7 @@ paths:
       summary: Delete all data_objects. Returns list of names of data_objects deleted. Note that this is a convenience operation. The objects will still need to be vaporised one by one.
       x-swagger-router-controller: rest_api.flask_server.controllers.data_objects_controller
       operationId: data_object_del_all
-      description: Get the list of names of loaded data_objects.
+      description: Delete all data_objects. Returns list of names of data_objects deleted.
       responses:
         200:
           $ref: "#/responses/data_object_name_list"
@@ -5335,7 +5407,7 @@ paths:
       summary: Create an image classifier.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_create
-      description: Create a new image classifier or reload one from the trash. Returns the details of the new or loaded instance.
+      description: Create a new image classifier or reload one from the trash. Returns the details of the instance.
       parameters:
       - in: body
         name: create_details
@@ -5355,10 +5427,10 @@ paths:
     get:
       tags:
       - image_classifiers
-      summary: Get list of loaded image classifiers.
+      summary: Get list of image classifiers.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_get_details_all
-      description: Get the list of loaded image classifiers.
+      description: Get the list of image classifiers.
       responses:
         200:
           $ref: "#/responses/image_classifier_instance_detail_list"
@@ -6025,7 +6097,7 @@ paths:
       summary: Create a text dataset.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
       operationId: text_dataset_create
-      description: Create a new text dataset or reload one from the trash. Returns the details of the new or loaded instance.
+      description: Create a new text dataset or reload one from the trash. Returns the details of the instance.
       parameters:
       - in: body
         name: create_details
@@ -6045,10 +6117,10 @@ paths:
     get:
       tags:
       - text_datasets
-      summary: Get list of loaded text datasets.
+      summary: Get list of text datasets.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
       operationId: text_dataset_get_details_all
-      description: Get the list of loaded text datasets.
+      description: Get the list of text datasets.
       responses:
         200:
           $ref: "#/responses/text_dataset_instance_detail_list"
@@ -6389,7 +6461,7 @@ paths:
       summary: Create an image dataset.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
       operationId: image_dataset_create
-      description: Create a new image dataset or reload one from the trash. Returns the details of the new or loaded instance.
+      description: Create a new image dataset or reload one from the trash. Returns the details of the instance.
       parameters:
       - in: body
         name: create_details
@@ -6409,10 +6481,10 @@ paths:
     get:
       tags:
       - image_datasets
-      summary: Get list of loaded image datasets.
+      summary: Get list of image datasets.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
       operationId: image_dataset_get_details_all
-      description: Get the list of loaded image datasets.
+      description: Get the list of image datasets.
       responses:
         200:
           $ref: "#/responses/image_dataset_instance_detail_list"
@@ -6739,6 +6811,344 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 
+####################################
+####################################
+#########
+### text_pipelines root
+#########
+#  /nlu/v2/text_pipelines:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    post:
+#      tags:
+#      - text_pipelines
+#      summary: Create a text pipeline.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipeline_create
+#      description: Create a new text pipeline or reload one from the trash. Returns the details of the instance.
+#      parameters:
+#      - in: body
+#        name: create_details
+#        description: The details of the instance to create.
+#        required: true
+#        schema:
+#          $ref: "#/definitions/text_pipeline_create_details"
+#
+#      responses:
+#        200:
+#          $ref: "#/responses/text_pipeline_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#    get:
+#      tags:
+#      - text_pipelines
+#      summary: Get list of text pipelines.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipeline_get_details_all
+#      description: Get the list of text pipelines.
+#      responses:
+#        200:
+#          $ref: "#/responses/text_pipeline_instance_detail_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### text_pipelines Get details of named instance
+#########
+#  /nlu/v2/text_pipelines/{instance_name}:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    post:
+#      tags:
+#      - text_pipelines
+#      summary: Create a text pipeline.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipeline_create_from_path
+#      description: Create a new text pipeline or reload one from the trash. Returns the details of the instance.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: create_details
+#        description: The details of the instance to create.
+#        required: true
+#        schema:
+#          $ref: "#/definitions/text_pipeline_create_details"
+#
+#      responses:
+#        200:
+#          $ref: "#/responses/text_pipeline_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#    get:
+#      tags:
+#      - text_pipelines
+#      summary: Get details of named instance.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipeline_get_details
+#      description: Get the details of the named text pipeline instance.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/text_pipeline_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#    delete:
+#      tags:
+#      - text_pipelines
+#      summary: Delete named instance.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipeline_del
+#      description: Delete and return the details of the named text pipeline instance. Deleted models can be reloaded from the trash with the create operation.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/text_pipeline_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### text_pipelines models
+#########
+#  /nlu/v2/text_pipelines/{instance_name}/models:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    post:
+#      tags:
+#      - text_pipelines
+#      summary: Add list of models.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipeline_add_model
+#      description: Add training samples to named text pipeline. Returns the samples added to the model.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: labelled_text_sample_list
+#        description: List of labelled text samples.
+#        required: true
+#        schema:
+#          type: array
+#          items:
+#            $ref: "#/definitions/labelled_text_sample"
+#      responses:
+#        200:
+#          $ref: "#/responses/labelled_text_sample_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#    get:
+#      tags:
+#      - text_pipelines
+#      summary: Get list of models.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipeline_get_models
+#      description: Get the training samples of the named text pipeline.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      - in: query
+#        name: index
+#        description: The sample index to start from.
+#        required: false
+#        type: integer
+#      - in: query
+#        name: len
+#        description: The number of samples to return.
+#        required: false
+#        type: integer
+#      responses:
+#        200:
+#          $ref: "#/responses/labelled_text_sample_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#    delete:
+#      tags:
+#      - text_pipelines
+#      summary: Delete list of models.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipeline_del_models
+#      description: Delete the listed training samples of the named text pipeline. Returns the deleted samples.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: labelled_text_sample_list
+#        description: List of labelled text samples.
+#        required: true
+#        schema:
+#          type: array
+#          items:
+#            $ref: "#/definitions/labelled_text_sample"
+#      responses:
+#        200:
+#          $ref: "#/responses/labelled_text_sample_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### text_pipelines model_params
+#########
+#  /nlu/v2/text_pipelines/{instance_name}/params:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    post:
+#      tags:
+#      - text_pipelines
+#      summary: Set the model parameters of named text pipeline.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipeline_set_params
+#      description: Set the model parameters of named text pipeline.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: model_params
+#        description: The model parameters.
+#        required: true
+#        schema:
+#          $ref: "#/definitions/model_params"
+#      responses:
+#        200:
+#          $ref: "#/responses/text_pipeline_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#    get:
+#      tags:
+#      - text_pipelines
+#      summary: Get the editable model parameters of named text pipeline.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipelines_get_params
+#      description: Get the editable model parameters of named text pipeline.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/model_params"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### text_pipelines retrieve
+#########
+#  /nlu/v2/text_pipelines/{instance_name}/retrieve:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    post:
+#      tags:
+#      - text_pipelines
+#      summary: Run the text pipeline and return the results.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipelines§§_retrieve
+#      description: Run the text pipeline and return the results.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: text_input
+#        description: The input text.
+#        required: true
+#        schema:
+#          $ref: "#/definitions/text_input"
+#      responses:
+#        200:
+#          $ref: "#/responses/scored_label_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### text_pipelines vaporise
+#########
+#  /nlu/v2/text_pipelines/{instance_name}/vaporise:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    post:
+#      tags:
+#      - text_pipelines
+#      summary: Vaporise the named pipeline.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipeline_vaporise
+#      description: Permanently vaporises a model even if not trashed.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the model instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/text_pipeline_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+
 ###################################
 # Descriptions of common parameters
 ###################################
@@ -6764,6 +7174,11 @@ responses:
     description: Your dashboard content.
     schema:
       $ref: "#/definitions/dashboard_detail"
+
+  service_params:
+    description: The service params.
+    schema:
+      $ref: "#/definitions/service_params"
 
   model_params:
     description: The model parameters.
@@ -7245,7 +7660,7 @@ definitions:
         type: boolean
         example: True
       trashed:
-        description: Whether or not this model has been deleted. Deleted models need to be loaded to be used again.
+        description: Whether or not this model has been deleted. Deleted models can be reloaded using the create opeeration.
         type: boolean
         example: False
       history:
@@ -8054,6 +8469,15 @@ definitions:
         default: 10
         example: 10
 
+  service_params:
+    description: Config params for the service.
+    type: object
+    properties:
+      cba:
+        type: boolean
+      dba:
+        type: boolean
+
   image_classifier_create_details:
     description: The details of the model instance to create.
     type: object
@@ -8074,7 +8498,7 @@ definitions:
         type: string
         example: 'An example of this type of model.'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -8102,7 +8526,7 @@ definitions:
         type: string
         example: 'An example of this type of model.'
       load_from_store:
-        description: Indicates if a pre-existing dataset with the specified name should be loaded from the trash. Usually set to False in which case a new dataset is created with details as specified.
+        description: Indicates if a pre-existing dataset with the specified name should be reloaded from the trash. Usually set to False in which case a new dataset is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -8113,9 +8537,9 @@ definitions:
   text_classifier_create_details:
     description: The details of the model instance to create.
     type: object
-    required:
-    - name
-    - load_from_store
+    # required:
+    # - name
+    # - load_from_store
     properties:
       name:
         description: The sluggy-url-friendly-name of the instance.
@@ -8130,7 +8554,7 @@ definitions:
         type: string
         example: 'An example of this type of model.'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -8158,7 +8582,7 @@ definitions:
         type: string
         example: 'An example of this type of model.'
       load_from_store:
-        description: Indicates if a pre-existing dataset with the specified name should be loaded from the trash. Usually set to False in which case a new dataset is created with details as specified.
+        description: Indicates if a pre-existing dataset with the specified name should be reloaded from the trash. Usually set to False in which case a new dataset is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -8190,7 +8614,7 @@ definitions:
         type: string
         example: 'lid_za'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -8222,7 +8646,7 @@ definitions:
         type: string
         example: 'lid_za'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -8250,7 +8674,7 @@ definitions:
         type: string
         example: 'An example of this type of model.'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       word_vectors_file:
@@ -8282,7 +8706,7 @@ definitions:
         type: string
         example: 'An example model of this type.'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -8310,7 +8734,7 @@ definitions:
         type: string
         example: 'An example model of this type.'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -8342,7 +8766,7 @@ definitions:
         type: string
         example: '(?P<license>([A-Z]{3}[ ]?[0-9]{3}[ ]?(GP|NW|MP|EC|L|NC|NW)))'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -8370,7 +8794,7 @@ definitions:
         type: string
         example: 'This is an example of this type of model.'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -8403,7 +8827,7 @@ definitions:
         default: ''
         example: '2017-12-10'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -8443,7 +8867,7 @@ definitions:
         type: string
         example: 'feers_wm_eng'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -8475,7 +8899,7 @@ definitions:
         type: string
         example: 'lid_za'
       load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be loaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -8681,10 +9105,14 @@ definitions:
         description: An optional ISO 639-3 language code hint - eng, afr, nbl, xho, zul, ssw, nso, sot, tsn, ven, tso.
         type: string
         example: 'eng'
-      conversation_id:
-        description: The conversation ID.
+      user_id:
+        description: The user ID.
         type: string
-        example: ''
+        example: 'user_12345'
+      session_id:
+        description: The session or conversation ID.
+        type: string
+        example: 'conv_678'
 
   paragraph:
     description: A paragraph.
@@ -8838,10 +9266,26 @@ definitions:
         type: string
         example: "2017-01-05T15:00"
         description: Structured result value.
+      from_value:
+        type: string
+        example: "2017-01-05T15:00"
+        description: Structured result value for an interval.
+      to_value:
+        type: string
+        example: "2017-01-05T15:00"
+        description: Structured result value for an interval.
       grain:
         type: string
         example: "day"
         description: The granularity/specificity of a time value.
+      from_grain:
+        type: string
+        example: "day"
+        description: The granularity/specificity of a time value for an interval.
+      to_grain:
+        type: string
+        example: "day"
+        description: The granularity/specificity of a time value for an interval.
       unit:
         type: string
         example: "week"
