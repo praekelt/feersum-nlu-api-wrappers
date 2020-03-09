@@ -1,6 +1,18 @@
 Changelog
 *********
 
+Version 2.0.47
+==============
+
+Added user_id and session_id to the retrieve endpoints.
+
+Added missing post endpoints that provide an alternative to create a model and specify the new model's name in the url.
+
+Added a root dashboard as well as vision and audio versions.
+
+Added missing from_ and to_ fields to duckling endpoints' swagger spec.
+
+
 Version 2.0.46
 ==============
 

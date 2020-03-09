@@ -24,7 +24,8 @@ duckling_ent_create_details = \
                                                      reference_time="2017-01-20 0:00+01:00",
                                                      load_from_store=False)
 
-text_input = feersum_nlu.TextInput("I am 16 weeks and 1 day pregnant today at 15:00.")
+# text_input = feersum_nlu.TextInput("The end of the month.")
+text_input = feersum_nlu.TextInput("The end of the month.")
 
 print()
 

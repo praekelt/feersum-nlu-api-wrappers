@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**duckling_entity_extractor_create**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_create) | **POST** /nlu/v2/duckling_entity_extractors | Create a duckling entity extractor.
 [**duckling_entity_extractor_del**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_del) | **DELETE** /nlu/v2/duckling_entity_extractors/{instance_name} | Delete named instance.
 [**duckling_entity_extractor_get_details**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_details) | **GET** /nlu/v2/duckling_entity_extractors/{instance_name} | Get details of named instance.
-[**duckling_entity_extractor_get_details_all**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_details_all) | **GET** /nlu/v2/duckling_entity_extractors | Get list of loaded regular expression entity extractors.
+[**duckling_entity_extractor_get_details_all**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_details_all) | **GET** /nlu/v2/duckling_entity_extractors | Get list of regular expression entity extractors.
 [**duckling_entity_extractor_get_params**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_get_params) | **GET** /nlu/v2/duckling_entity_extractors/{instance_name}/params | Get the editable model parameters of named duckling entity extractor.
 [**duckling_entity_extractor_retrieve**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_retrieve) | **POST** /nlu/v2/duckling_entity_extractors/{instance_name}/retrieve | Extract information based on the regular expression.
 [**duckling_entity_extractor_set_params**](DucklingEntityExtractorsApi.md#duckling_entity_extractor_set_params) | **POST** /nlu/v2/duckling_entity_extractors/{instance_name}/params | Set the model parameters of named duckling entity extractor.
@@ -103,7 +103,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -118,7 +118,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -164,7 +164,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -179,7 +179,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -200,9 +200,9 @@ Name | Type | Description  | Notes
 # **duckling_entity_extractor_get_details_all**
 > list[DucklingEntityExtractorInstanceDetail] duckling_entity_extractor_get_details_all(x_caller=x_caller)
 
-Get list of loaded regular expression entity extractors.
+Get list of regular expression entity extractors.
 
-Get the list of loaded duckling entity extractors.
+Get the list of duckling entity extractors.
 
 ### Example
 ```python
@@ -228,7 +228,7 @@ api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(con
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Get list of loaded regular expression entity extractors.
+    # Get list of regular expression entity extractors.
     api_response = api_instance.duckling_entity_extractor_get_details_all(x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
@@ -284,7 +284,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -299,7 +299,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -345,7 +345,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -361,7 +361,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **text_input** | [**TextInput**](TextInput.md)| The input text. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -408,7 +408,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 model_params = feersum_nlu.ModelParams() # ModelParams | The model parameters.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -424,7 +424,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -471,7 +471,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -486,7 +486,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type

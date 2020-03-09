@@ -7,14 +7,14 @@ Method | HTTP request | Description
 [**image_classifier_add_testing_samples**](ImageClassifiersApi.md#image_classifier_add_testing_samples) | **POST** /vision/v2/image_classifiers/{instance_name}/testing_samples | Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 [**image_classifier_add_training_samples**](ImageClassifiersApi.md#image_classifier_add_training_samples) | **POST** /vision/v2/image_classifiers/{instance_name}/training_samples | Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 [**image_classifier_create**](ImageClassifiersApi.md#image_classifier_create) | **POST** /vision/v2/image_classifiers | Create an image classifier.
-[**image_classifier_curate**](ImageClassifiersApi.md#image_classifier_curate) | **POST** /vision/v2/image_classifiers/{instance_name}/curate | Endpoint to aid in the curation of a model instance.
+[**image_classifier_curate**](ImageClassifiersApi.md#image_classifier_curate) | **POST** /vision/v2/image_classifiers/{instance_name}/curate | Endpoint to aid in the curation of an instance.
 [**image_classifier_del**](ImageClassifiersApi.md#image_classifier_del) | **DELETE** /vision/v2/image_classifiers/{instance_name} | Delete named instance.
 [**image_classifier_del_testing_samples**](ImageClassifiersApi.md#image_classifier_del_testing_samples) | **DELETE** /vision/v2/image_classifiers/{instance_name}/testing_samples | Delete testing samples.
 [**image_classifier_del_testing_samples_all**](ImageClassifiersApi.md#image_classifier_del_testing_samples_all) | **DELETE** /vision/v2/image_classifiers/{instance_name}/testing_samples_all | Delete testing samples.
 [**image_classifier_del_training_samples**](ImageClassifiersApi.md#image_classifier_del_training_samples) | **DELETE** /vision/v2/image_classifiers/{instance_name}/training_samples | Delete training samples.
 [**image_classifier_del_training_samples_all**](ImageClassifiersApi.md#image_classifier_del_training_samples_all) | **DELETE** /vision/v2/image_classifiers/{instance_name}/training_samples_all | Delete all training samples.
 [**image_classifier_get_details**](ImageClassifiersApi.md#image_classifier_get_details) | **GET** /vision/v2/image_classifiers/{instance_name} | Get details of named instance.
-[**image_classifier_get_details_all**](ImageClassifiersApi.md#image_classifier_get_details_all) | **GET** /vision/v2/image_classifiers | Get list of loaded image classifiers.
+[**image_classifier_get_details_all**](ImageClassifiersApi.md#image_classifier_get_details_all) | **GET** /vision/v2/image_classifiers | Get list of image classifiers.
 [**image_classifier_get_labels**](ImageClassifiersApi.md#image_classifier_get_labels) | **GET** /vision/v2/image_classifiers/{instance_name}/labels | Get list of possible labels.
 [**image_classifier_get_params**](ImageClassifiersApi.md#image_classifier_get_params) | **GET** /vision/v2/image_classifiers/{instance_name}/params | Get the editable model parameters of named image classifier.
 [**image_classifier_get_testing_samples**](ImageClassifiersApi.md#image_classifier_get_testing_samples) | **GET** /vision/v2/image_classifiers/{instance_name}/testing_samples | Get testing samples. Image format is 256x256 RGB.
@@ -33,7 +33,7 @@ Method | HTTP request | Description
 
 Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 
-Add testing samples to named image classifier. Returns the samples added to the model.
+Add testing samples to named image classifier. Returns the samples added to the instance.
 
 ### Example
 ```python
@@ -56,7 +56,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -72,7 +72,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -96,7 +96,7 @@ Name | Type | Description  | Notes
 
 Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 
-Add training samples to named image classifier. Returns the samples added to the model.
+Add training samples to named image classifier. Returns the samples added to the instance.
 
 ### Example
 ```python
@@ -119,7 +119,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -135,7 +135,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 Create an image classifier.
 
-Create a new image classifier or reload one from the trash. Returns the details of the new or loaded instance.
+Create a new image classifier or reload one from the trash. Returns the details of the instance.
 
 ### Example
 ```python
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 # **image_classifier_curate**
 > list[LabelledImageSample] image_classifier_curate(instance_name, label_pair, x_caller=x_caller)
 
-Endpoint to aid in the curation of a model instance.
+Endpoint to aid in the curation of an instance.
 
 Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
 
@@ -243,12 +243,12 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 label_pair = feersum_nlu.ClassLabelPair() # ClassLabelPair | The true label, predicted label and matrix (train/test) to use.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Endpoint to aid in the curation of a model instance.
+    # Endpoint to aid in the curation of an instance.
     api_response = api_instance.image_classifier_curate(instance_name, label_pair, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
@@ -259,7 +259,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **label_pair** | [**ClassLabelPair**](ClassLabelPair.md)| The true label, predicted label and matrix (train/test) to use. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -306,7 +306,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -321,7 +321,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -367,7 +367,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of image samples to delete. A sample can be deleted using either its content & label or its uuid.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -383,7 +383,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of image samples to delete. A sample can be deleted using either its content &amp; label or its uuid. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -430,7 +430,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -445,7 +445,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -491,7 +491,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of image samples to delete. A sample can be deleted using either its content & label or its uuid.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -507,7 +507,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of image samples to delete. A sample can be deleted using either its content &amp; label or its uuid. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -554,7 +554,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -569,7 +569,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -615,7 +615,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -630,7 +630,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -651,9 +651,9 @@ Name | Type | Description  | Notes
 # **image_classifier_get_details_all**
 > list[ImageClassifierInstanceDetail] image_classifier_get_details_all(x_caller=x_caller)
 
-Get list of loaded image classifiers.
+Get list of image classifiers.
 
-Get the list of loaded image classifiers.
+Get the list of image classifiers.
 
 ### Example
 ```python
@@ -679,7 +679,7 @@ api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configurati
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Get list of loaded image classifiers.
+    # Get list of image classifiers.
     api_response = api_instance.image_classifier_get_details_all(x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
@@ -735,7 +735,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -750,7 +750,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -796,7 +796,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -811,7 +811,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -857,7 +857,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 index = 56 # int | The sample index to start from. (optional)
 len = 56 # int | The number of samples to return. (optional)
@@ -874,7 +874,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
  **index** | **int**| The sample index to start from. | [optional] 
  **len** | **int**| The number of samples to return. | [optional] 
@@ -922,7 +922,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 index = 56 # int | The sample index to start from. (optional)
 len = 56 # int | The number of samples to return. (optional)
@@ -939,7 +939,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
  **index** | **int**| The sample index to start from. | [optional] 
  **len** | **int**| The number of samples to return. | [optional] 
@@ -964,7 +964,7 @@ Name | Type | Description  | Notes
 
 Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 
-Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the model.
+Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the instance.
 
 ### Example
 ```python
@@ -987,7 +987,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -1003,7 +1003,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -1050,7 +1050,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 image_input = feersum_nlu.ImageInput() # ImageInput | The input image.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -1066,7 +1066,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **image_input** | [**ImageInput**](ImageInput.md)| The input image. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -1113,7 +1113,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 model_params = feersum_nlu.ModelParams() # ModelParams | The model parameters.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -1129,7 +1129,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -1153,7 +1153,7 @@ Name | Type | Description  | Notes
 
 Train the named image classifier.
 
-Train the named image classifier with the training and testing data already provided. Returns the details of the model instance.
+Train the named image classifier with the training and testing data already provided. Returns the details of the instance.
 
 ### Example
 ```python
@@ -1176,7 +1176,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 train_details = feersum_nlu.TrainDetails() # TrainDetails | The arguments provided to the train operation.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -1192,7 +1192,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **train_details** | [**TrainDetails**](TrainDetails.md)| The arguments provided to the train operation. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -1239,7 +1239,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples. A sample's UUIDs is used to uniquely identify it.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -1255,7 +1255,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. A sample&#39;s UUIDs is used to uniquely identify it. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -1302,7 +1302,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples. A sample's UUIDs is used to uniquely identify it.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -1318,7 +1318,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. A sample&#39;s UUIDs is used to uniquely identify it. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -1365,7 +1365,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -1380,7 +1380,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type

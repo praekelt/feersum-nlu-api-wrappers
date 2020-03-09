@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**data_object_del**](DataObjectsApi.md#data_object_del) | **DELETE** /nlu/v2/data_objects/{instance_name} | Trash a data_object.
 [**data_object_del_all**](DataObjectsApi.md#data_object_del_all) | **DELETE** /nlu/v2/data_objects | Delete all data_objects. Returns list of names of data_objects deleted. Note that this is a convenience operation. The objects will still need to be vaporised one by one.
 [**data_object_get_details**](DataObjectsApi.md#data_object_get_details) | **GET** /nlu/v2/data_objects/{instance_name} | Get a data_object.
-[**data_object_get_names_all**](DataObjectsApi.md#data_object_get_names_all) | **GET** /nlu/v2/data_objects | Get list of names of loaded data_objects.
+[**data_object_get_names_all**](DataObjectsApi.md#data_object_get_names_all) | **GET** /nlu/v2/data_objects | Get list of names of data_objects.
 [**data_object_post**](DataObjectsApi.md#data_object_post) | **POST** /nlu/v2/data_objects/{instance_name} | Update/create a data_object.
 [**data_object_untrash**](DataObjectsApi.md#data_object_untrash) | **POST** /nlu/v2/data_objects/{instance_name}/untrash | Untrash the named data_object.
 [**data_object_vaporise**](DataObjectsApi.md#data_object_vaporise) | **POST** /nlu/v2/data_objects/{instance_name}/vaporise | Vaporise the named data_object.
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 Delete all data_objects. Returns list of names of data_objects deleted. Note that this is a convenience operation. The objects will still need to be vaporised one by one.
 
-Get the list of names of loaded data_objects.
+Delete all data_objects. Returns list of names of data_objects deleted.
 
 ### Example
 ```python
@@ -197,9 +197,9 @@ Name | Type | Description  | Notes
 # **data_object_get_names_all**
 > list[DataObjectName] data_object_get_names_all(x_caller=x_caller)
 
-Get list of names of loaded data_objects.
+Get list of names of data_objects.
 
-Get the list of names of loaded data_objects.
+Get the list of names of data_objects.
 
 ### Example
 ```python
@@ -225,7 +225,7 @@ api_instance = feersum_nlu.DataObjectsApi(feersum_nlu.ApiClient(configuration))
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Get list of names of loaded data_objects.
+    # Get list of names of data_objects.
     api_response = api_instance.data_object_get_names_all(x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:

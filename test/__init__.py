@@ -1,6 +1,6 @@
 import os
 
-feersumnlu_host = "http://127.0.0.1:8100"
+feersumnlu_host = "http://127.0.0.1:7100"
 # feersumnlu_host = "https://nlu.playground.feersum.io:443"
 
 
