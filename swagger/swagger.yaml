@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.46
+  version: 2.0.47
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -12,6 +12,7 @@ info:
 host: nlu.feersum.io:443
 # host: 127.0.0.1:8100
 
+# basePath: /nlu/v2
 # basePath: /nlu/v2
 
 schemes:
@@ -87,8 +88,8 @@ tags:
   description: The API to your labelled image datasets useful for things like labelling data. Store unlabelled samples with a label like '_unlabelled'.
 - name: image_readers
   description: The API to your image reader instances.
-- name: text_pipelines
-  description: Build an NLU pipeline with annotators, extractors and classifiers. The annotators enrich the text with POS tags, etc. after which the classifiers and extractors run.
+#- name: text_pipelines
+#  description: Build an NLU pipeline with annotators, extractors and classifiers. The annotators enrich the text with POS tags, etc. after which the classifiers and extractors run.
 
 paths:
 ###################################
@@ -96,7 +97,7 @@ paths:
 ########
 ## dashboard root
 ########
-  /dashboard:
+  /dashboard/v2/dashboard:
     parameters:
     - $ref: '#/parameters/caller'
 
@@ -105,7 +106,7 @@ paths:
       - dashboard
       summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
-      operationId: dashboard_root_get_details
+      operationId: dashboard_get_details
       description: Get your list of model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       responses:
         200:
@@ -327,7 +328,7 @@ paths:
       summary: Create a text classifier.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_create
-      description: Create a new text classifier or reload one from the trash. Returns the details of the model instance.
+      description: Create a new text classifier or reload one from the trash. Returns the details of the instance.
       parameters:
       - in: body
         name: create_details
@@ -360,7 +361,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## text_classifiers Get details of named instance
+## text_classifiers named instance
 ########
   /nlu/v2/text_classifiers/{instance_name}:
     parameters:
@@ -376,7 +377,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -404,7 +405,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -425,7 +426,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -449,11 +450,11 @@ paths:
       summary: Add training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_add_training_samples
-      description: Add training samples to named text classifier. Returns the samples added to the model.
+      description: Add training samples to named text classifier. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -482,7 +483,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -511,7 +512,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -542,7 +543,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -575,7 +576,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -599,11 +600,11 @@ paths:
       summary: Add testing samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_add_testing_samples
-      description: Add testing samples to named text classifier. Returns the samples added to the model.
+      description: Add testing samples to named text classifier. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -632,7 +633,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -661,7 +662,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -692,7 +693,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -725,7 +726,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -749,11 +750,11 @@ paths:
       summary: Train the named text classifier.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_train
-      description: Train the named text classifier with the training and testing data already provided. Returns the details of the model instance.
+      description: Train the named text classifier with the training and testing data already provided. Returns the details of the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -787,7 +788,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -814,7 +815,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -838,11 +839,11 @@ paths:
       summary: Train/update the classifier online with the samples provided.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_online_training_samples
-      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the model.
+      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -878,7 +879,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -912,7 +913,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -940,7 +941,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -961,14 +962,14 @@ paths:
     post:
       tags:
       - text_classifiers
-      summary: Endpoint to aid in the curation of a model instance.
+      summary: Endpoint to aid in the curation of an instance.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
       operationId: text_classifier_curate
       description: Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1002,7 +1003,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1029,7 +1030,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -1073,7 +1074,7 @@ paths:
 #          $ref: "#/responses/UnauthorizedError"
 #
 #########
-### word_manifolds Get details of named instance
+### word_manifolds named instance
 #########
 #  /nlu/v2/word_manifolds/{instance_name}:
 #    parameters:
@@ -1089,7 +1090,7 @@ paths:
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      responses:
@@ -1110,7 +1111,7 @@ paths:
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      responses:
@@ -1138,7 +1139,7 @@ paths:
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      responses:
@@ -1166,7 +1167,7 @@ paths:
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      - in: body
@@ -1202,7 +1203,7 @@ paths:
 #       parameters:
 #       - in: path
 #         name: instance_name
-#         description: The name of the model instance.
+#         description: The name of the instance.
 #         required: true
 #         type: string
 #       - in: body
@@ -1236,7 +1237,7 @@ paths:
 #       parameters:
 #       - in: path
 #         name: instance_name
-#         description: The name of the model instance.
+#         description: The name of the instance.
 #         required: true
 #         type: string
 #       - in: body
@@ -1300,7 +1301,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## intent_classifiers Get details of named instance
+## intent_classifiers named instance
 ########
   /nlu/v2/intent_classifiers/{instance_name}:
     parameters:
@@ -1316,7 +1317,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -1337,7 +1338,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -1361,11 +1362,11 @@ paths:
       summary: Add training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_add_training_samples
-      description: Add training samples to named intent classifier. Returns the samples added to the model.
+      description: Add training samples to named intent classifier. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1394,7 +1395,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1423,7 +1424,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -1454,7 +1455,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1487,7 +1488,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -1511,11 +1512,11 @@ paths:
       summary: Add testing samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_add_testing_samples
-      description: Add testing samples to named intent classifier. Returns the samples added to the model.
+      description: Add testing samples to named intent classifier. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1544,7 +1545,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1573,7 +1574,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -1604,7 +1605,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1637,7 +1638,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -1665,7 +1666,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1699,7 +1700,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1726,7 +1727,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -1750,11 +1751,11 @@ paths:
       summary: Train/update the classifier online with the samples provided.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_online_training_samples
-      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the model.
+      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1790,7 +1791,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1824,7 +1825,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -1852,7 +1853,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -1873,14 +1874,14 @@ paths:
     post:
       tags:
       - intent_classifiers
-      summary: Endpoint to aid in the curation of a model instance.
+      summary: Endpoint to aid in the curation of an instance.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_curate
       description: Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1915,7 +1916,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -1942,7 +1943,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -2001,7 +2002,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## faq_matchers Get details of named instance
+## faq_matchers named instance
 ########
   /nlu/v2/faq_matchers/{instance_name}:
     parameters:
@@ -2017,7 +2018,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -2038,7 +2039,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -2062,11 +2063,11 @@ paths:
       summary: Add training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_add_training_samples
-      description: Add training samples to named faq matcher. Returns the samples added to the model.
+      description: Add training samples to named faq matcher. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2095,7 +2096,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2124,7 +2125,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -2155,7 +2156,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2188,7 +2189,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -2212,11 +2213,11 @@ paths:
       summary: Add testing samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_add_testing_samples
-      description: Add testing samples to named faq matcher. Returns the samples added to the model.
+      description: Add testing samples to named faq matcher. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2245,7 +2246,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2274,7 +2275,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -2305,7 +2306,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2338,7 +2339,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -2366,7 +2367,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2400,7 +2401,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2427,7 +2428,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -2451,11 +2452,11 @@ paths:
       summary: Train/update the classifier online with the samples provided.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_online_training_samples
-      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the model.
+      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2491,7 +2492,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2525,7 +2526,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -2553,7 +2554,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -2574,14 +2575,14 @@ paths:
     post:
       tags:
       - faq_matchers
-      summary: Endpoint to aid in the curation of a model instance.
+      summary: Endpoint to aid in the curation of an instance.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_curate
       description: Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2615,7 +2616,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2642,7 +2643,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -2673,7 +2674,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2710,7 +2711,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2747,7 +2748,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2781,7 +2782,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -2840,7 +2841,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## crf_entity_extractors Get details of named instance
+## crf_entity_extractors named instance
 ########
   /nlu/v2/crf_entity_extractors/{instance_name}:
     parameters:
@@ -2856,7 +2857,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -2877,7 +2878,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -2901,11 +2902,11 @@ paths:
       summary: Add training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
       operationId: crf_entity_extractor_add_training_samples
-      description: Add training samples to named extractor. Returns the samples added to the model.
+      description: Add training samples to named extractor. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2934,7 +2935,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -2963,7 +2964,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -2994,7 +2995,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3027,7 +3028,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -3051,11 +3052,11 @@ paths:
       summary: Add testing samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
       operationId: crf_entity_extractor_add_testing_samples
-      description: Add testing samples to named extractor. Returns the samples added to the model.
+      description: Add testing samples to named extractor. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3084,7 +3085,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3113,7 +3114,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -3144,7 +3145,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3177,7 +3178,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -3205,7 +3206,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3239,7 +3240,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3266,7 +3267,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -3294,7 +3295,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3328,7 +3329,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -3356,7 +3357,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -3415,7 +3416,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## synonym_entity_extractors Get details of named instance
+## synonym_entity_extractors named instance
 ########
   /nlu/v2/synonym_entity_extractors/{instance_name}:
     parameters:
@@ -3431,7 +3432,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -3452,7 +3453,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -3476,11 +3477,11 @@ paths:
       summary: Add training samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
       operationId: synonym_entity_extractor_add_training_samples
-      description: Add training samples to named extractor. Returns the samples added to the model.
+      description: Add training samples to named extractor. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3509,7 +3510,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3538,7 +3539,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -3569,7 +3570,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3602,7 +3603,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -3626,11 +3627,11 @@ paths:
       summary: Add testing samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
       operationId: synonym_entity_extractor_add_testing_samples
-      description: Add testing samples to named extractor. Returns the samples added to the model.
+      description: Add testing samples to named extractor. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3659,7 +3660,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3688,7 +3689,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -3719,7 +3720,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3752,7 +3753,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -3780,7 +3781,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3814,7 +3815,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3841,7 +3842,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -3869,7 +3870,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -3903,7 +3904,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -3931,7 +3932,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -3990,7 +3991,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## regex_entity_extractors Get details of named instance
+## regex_entity_extractors named instance
 ########
   /nlu/v2/regex_entity_extractors/{instance_name}:
     parameters:
@@ -4006,7 +4007,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4027,7 +4028,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4055,7 +4056,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -4082,7 +4083,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4110,7 +4111,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -4144,7 +4145,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4203,7 +4204,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## person_name_entity_extractors Get details of named instance
+## person_name_entity_extractors named instance
 ########
   /nlu/v2/person_name_entity_extractors/{instance_name}:
     parameters:
@@ -4219,7 +4220,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4240,7 +4241,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4268,7 +4269,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -4295,7 +4296,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4323,7 +4324,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -4357,7 +4358,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4416,7 +4417,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## duckling_entity_extractors Get details of named instance
+## duckling_entity_extractors named instance
 ########
   /nlu/v2/duckling_entity_extractors/{instance_name}:
     parameters:
@@ -4432,7 +4433,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4453,7 +4454,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4481,7 +4482,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -4508,7 +4509,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4536,7 +4537,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -4570,7 +4571,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4629,7 +4630,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## sim_word_entity_extractors Get details of named instance
+## sim_word_entity_extractors named instance
 ########
   /nlu/v2/sim_word_entity_extractors/{instance_name}:
     parameters:
@@ -4645,7 +4646,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4666,7 +4667,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4694,7 +4695,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -4721,7 +4722,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4749,7 +4750,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -4783,7 +4784,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4814,7 +4815,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -4879,7 +4880,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## language_recognisers Get details of named instance
+## language_recognisers named instance
 ########
   /nlu/v2/language_recognisers/{instance_name}:
     parameters:
@@ -4895,7 +4896,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4916,7 +4917,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4944,7 +4945,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -4971,7 +4972,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -4999,7 +5000,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -5033,7 +5034,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -5061,7 +5062,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -5440,7 +5441,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## image_classifiers Get details of named instance
+## image_classifiers named instance
 ########
   /vision/v2/image_classifiers/{instance_name}:
     parameters:
@@ -5456,7 +5457,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -5477,7 +5478,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -5501,11 +5502,11 @@ paths:
       summary: Add training samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_add_training_samples
-      description: Add training samples to named image classifier. Returns the samples added to the model.
+      description: Add training samples to named image classifier. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -5534,7 +5535,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -5563,7 +5564,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -5594,7 +5595,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -5627,7 +5628,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -5651,11 +5652,11 @@ paths:
       summary: Add testing samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_add_testing_samples
-      description: Add testing samples to named image classifier. Returns the samples added to the model.
+      description: Add testing samples to named image classifier. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -5684,7 +5685,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -5713,7 +5714,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -5744,7 +5745,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -5777,7 +5778,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -5801,11 +5802,11 @@ paths:
       summary: Train the named image classifier.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_train
-      description: Train the named image classifier with the training and testing data already provided. Returns the details of the model instance.
+      description: Train the named image classifier with the training and testing data already provided. Returns the details of the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -5839,7 +5840,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -5866,7 +5867,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -5890,11 +5891,11 @@ paths:
       summary: Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_online_training_samples
-      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the model.
+      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -5930,7 +5931,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -5964,7 +5965,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -5992,7 +5993,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -6013,14 +6014,14 @@ paths:
     post:
       tags:
       - image_classifiers
-      summary: Endpoint to aid in the curation of a model instance.
+      summary: Endpoint to aid in the curation of an instance.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_curate
       description: Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -6064,7 +6065,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -6130,7 +6131,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## text_datasets Get details of named instance
+## text_datasets named instance
 ########
   /nlu/v2/text_datasets/{instance_name}:
     parameters:
@@ -6146,7 +6147,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -6167,7 +6168,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -6191,11 +6192,11 @@ paths:
       summary: Add samples.
       x-swagger-router-controller: rest_api.flask_server.controllers.text_datasets_controller
       operationId: text_dataset_add_samples
-      description: Add samples to named text dataset. Returns the samples added to the model.
+      description: Add samples to named text dataset. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -6224,7 +6225,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -6253,7 +6254,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -6289,7 +6290,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -6322,7 +6323,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -6351,7 +6352,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -6378,7 +6379,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -6406,7 +6407,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -6434,7 +6435,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -6494,7 +6495,7 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## image_datasets Get details of named instance
+## image_datasets named instance
 ########
   /vision/v2/image_datasets/{instance_name}:
     parameters:
@@ -6510,7 +6511,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -6531,7 +6532,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -6555,11 +6556,11 @@ paths:
       summary: Add samples. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_datasets_controller
       operationId: image_dataset_add_samples
-      description: Add samples to named image dataset. Returns the samples added to the model.
+      description: Add samples to named image dataset. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -6588,7 +6589,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -6617,7 +6618,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: query
@@ -6653,7 +6654,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -6686,7 +6687,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -6715,7 +6716,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       - in: body
@@ -6742,7 +6743,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -6771,7 +6772,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -6799,7 +6800,7 @@ paths:
       parameters:
       - in: path
         name: instance_name
-        description: The name of the model instance.
+        description: The name of the instance.
         required: true
         type: string
       responses:
@@ -6834,7 +6835,6 @@ paths:
 #        required: true
 #        schema:
 #          $ref: "#/definitions/text_pipeline_create_details"
-#
 #      responses:
 #        200:
 #          $ref: "#/responses/text_pipeline_instance_detail"
@@ -6859,7 +6859,7 @@ paths:
 #          $ref: "#/responses/UnauthorizedError"
 #
 #########
-### text_pipelines Get details of named instance
+### text_pipelines named instance
 #########
 #  /nlu/v2/text_pipelines/{instance_name}:
 #    parameters:
@@ -6875,7 +6875,7 @@ paths:
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      - in: body
@@ -6903,7 +6903,7 @@ paths:
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      responses:
@@ -6924,7 +6924,7 @@ paths:
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      responses:
@@ -6947,25 +6947,54 @@ paths:
 #      - text_pipelines
 #      summary: Add list of models.
 #      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipeline_add_model
-#      description: Add training samples to named text pipeline. Returns the samples added to the model.
+#      operationId: text_pipeline_add_models
+#      description: Add models to named text pipeline. Returns the samples added to the instance.
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      - in: body
-#        name: labelled_text_sample_list
-#        description: List of labelled text samples.
+#        name: pipeline_model_list  # Can this be a define like below.
+#        description: List of models to add.
 #        required: true
 #        schema:
 #          type: array
 #          items:
-#            $ref: "#/definitions/labelled_text_sample"
+#            $ref: "#/definitions/pipeline_model"
 #      responses:
 #        200:
-#          $ref: "#/responses/labelled_text_sample_list"
+#          $ref: "#/responses/pipeline_model_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#    put:
+#      tags:
+#      - text_pipelines
+#      summary: Update pipeline models by UUID.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipeline_update_models
+#      description: Update models of the named text pipeline. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: pipeline_model_list
+#        description: List of pipeline models to update. A sample's UUIDs is used to uniquely identify it.
+#        required: true
+#        schema:
+#          type: array
+#          items:
+#            $ref: "#/definitions/pipeline_model"
+#      responses:
+#        200:
+#          $ref: "#/responses/pipeline_model_list"
 #        400:
 #          description: bad request
 #        401:
@@ -6977,11 +7006,11 @@ paths:
 #      summary: Get list of models.
 #      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
 #      operationId: text_pipeline_get_models
-#      description: Get the training samples of the named text pipeline.
+#      description: Get the models of the named text pipeline.
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      - in: query
@@ -6996,7 +7025,7 @@ paths:
 #        type: integer
 #      responses:
 #        200:
-#          $ref: "#/responses/labelled_text_sample_list"
+#          $ref: "#/responses/pipeline_model_list"
 #        400:
 #          description: bad request
 #        401:
@@ -7008,31 +7037,56 @@ paths:
 #      summary: Delete list of models.
 #      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
 #      operationId: text_pipeline_del_models
-#      description: Delete the listed training samples of the named text pipeline. Returns the deleted samples.
+#      description: Delete the listed models of the named text pipeline. Returns the deleted names.
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      - in: body
-#        name: labelled_text_sample_list
-#        description: List of labelled text samples.
+#        name: pipeline_model_list
+#        description: List of pipeline models.
 #        required: true
 #        schema:
 #          type: array
 #          items:
-#            $ref: "#/definitions/labelled_text_sample"
+#            $ref: "#/definitions/pipeline_model"
 #      responses:
 #        200:
-#          $ref: "#/responses/labelled_text_sample_list"
+#          $ref: "#/responses/pipeline_model_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#  /nlu/v2/text_pipelines/{instance_name}/models_all:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    delete:
+#      tags:
+#      - text_pipelines
+#      summary: Delete all models from the pipeline.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+#      operationId: text_pipeline_del_models_all
+#      description: Delete all models from the named pipeline. Returns the deleted models.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/pipeline_model_list"
 #        400:
 #          description: bad request
 #        401:
 #          $ref: "#/responses/UnauthorizedError"
 #
 #########
-### text_pipelines model_params
+### text_pipelines pipeline_params
 #########
 #  /nlu/v2/text_pipelines/{instance_name}/params:
 #    parameters:
@@ -7048,7 +7102,7 @@ paths:
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      - in: body
@@ -7056,7 +7110,7 @@ paths:
 #        description: The model parameters.
 #        required: true
 #        schema:
-#          $ref: "#/definitions/model_params"
+#          $ref: "#/definitions/pipeline_params"
 #      responses:
 #        200:
 #          $ref: "#/responses/text_pipeline_instance_detail"
@@ -7075,12 +7129,12 @@ paths:
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      responses:
 #        200:
-#          $ref: "#/responses/model_params"
+#          $ref: "#/responses/pipeline_params"
 #        400:
 #          description: bad request
 #        401:
@@ -7103,7 +7157,7 @@ paths:
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      - in: body
@@ -7114,7 +7168,7 @@ paths:
 #          $ref: "#/definitions/text_input"
 #      responses:
 #        200:
-#          $ref: "#/responses/scored_label_list"
+#          $ref: "#/responses/text_pipeline_response"
 #        400:
 #          description: bad request
 #        401:
@@ -7137,7 +7191,7 @@ paths:
 #      parameters:
 #      - in: path
 #        name: instance_name
-#        description: The name of the model instance.
+#        description: The name of the instance.
 #        required: true
 #        type: string
 #      responses:
@@ -7186,7 +7240,7 @@ responses:
       $ref: "#/definitions/model_params"
 
   image_classifier_instance_detail:
-    description: The model instance detail
+    description: The instance detail
     schema:
       $ref: "#/definitions/image_classifier_instance_detail"
 
@@ -7209,8 +7263,20 @@ responses:
       items:
         $ref: "#/definitions/image_dataset_instance_detail"
 
+  text_pipeline_instance_detail:
+    description: The instance detail
+    schema:
+      $ref: "#/definitions/text_pipeline_instance_detail"
+
+  text_pipeline_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/text_pipeline_instance_detail"
+
   text_classifier_instance_detail:
-    description: The model instance detail
+    description: The instance detail
     schema:
       $ref: "#/definitions/text_classifier_instance_detail"
 
@@ -7234,7 +7300,7 @@ responses:
         $ref: "#/definitions/text_dataset_instance_detail"
 
   word_manifold_instance_detail:
-    description: The model instance detail
+    description: The instance detail
     schema:
       $ref: "#/definitions/word_manifold_instance_detail"
 
@@ -7246,7 +7312,7 @@ responses:
         $ref: "#/definitions/word_manifold_instance_detail"
 
   faq_matcher_instance_detail:
-    description: The model instance detail
+    description: The instance detail
     schema:
       $ref: "#/definitions/faq_matcher_instance_detail"
 
@@ -7258,7 +7324,7 @@ responses:
         $ref: "#/definitions/faq_matcher_instance_detail"
 
   intent_classifier_instance_detail:
-    description: The model instance detail
+    description: The instance detail
     schema:
       $ref: "#/definitions/intent_classifier_instance_detail"
 
@@ -7270,7 +7336,7 @@ responses:
         $ref: "#/definitions/intent_classifier_instance_detail"
 
   crf_entity_extractor_instance_detail:
-    description: The model instance detail
+    description: The instance detail
     schema:
       $ref: "#/definitions/crf_entity_extractor_instance_detail"
 
@@ -7282,7 +7348,7 @@ responses:
         $ref: "#/definitions/crf_entity_extractor_instance_detail"
 
   synonym_entity_extractor_instance_detail:
-    description: The model instance detail
+    description: The instance detail
     schema:
       $ref: "#/definitions/synonym_entity_extractor_instance_detail"
 
@@ -7294,7 +7360,7 @@ responses:
         $ref: "#/definitions/synonym_entity_extractor_instance_detail"
 
   regex_entity_extractor_instance_detail:
-    description: The model instance detail
+    description: The instance detail
     schema:
       $ref: "#/definitions/regex_entity_extractor_instance_detail"
 
@@ -7306,7 +7372,7 @@ responses:
         $ref: "#/definitions/regex_entity_extractor_instance_detail"
 
   person_name_entity_extractor_instance_detail:
-    description: The model instance detail
+    description: The instance detail
     schema:
       $ref: "#/definitions/person_name_entity_extractor_instance_detail"
 
@@ -7318,7 +7384,7 @@ responses:
         $ref: "#/definitions/person_name_entity_extractor_instance_detail"
 
   duckling_entity_extractor_instance_detail:
-    description: The model instance detail
+    description: The instance detail
     schema:
       $ref: "#/definitions/duckling_entity_extractor_instance_detail"
 
@@ -7330,7 +7396,7 @@ responses:
         $ref: "#/definitions/duckling_entity_extractor_instance_detail"
 
   sim_word_entity_extractor_instance_detail:
-    description: The model instance detail
+    description: The instance detail
     schema:
       $ref: "#/definitions/sim_word_entity_extractor_instance_detail"
 
@@ -7342,7 +7408,7 @@ responses:
         $ref: "#/definitions/sim_word_entity_extractor_instance_detail"
 
   language_recogniser_instance_detail:
-    description: The model instance detail
+    description: The instance detail
     schema:
       $ref: "#/definitions/language_recogniser_instance_detail"
 
@@ -7385,6 +7451,11 @@ responses:
       type: array
       items:
         $ref: "#/definitions/labelled_image_sample"
+
+  text_pipeline_response:
+      description: The text pipeline response on a retrieve operation which is a dict of model responses.
+      schema:
+        $ref: "#/definitions/text_pipeline_response"
 
   labelled_text_sample_list:
     description: The list of labelled text samples.
@@ -7506,7 +7577,7 @@ responses:
 ####################################
 definitions:
 #  rate_limited_response_headers:
-#    description: The model instance detail.
+#    description: The instance detail.
 #    headers:
 #      X-RateLimit-Remaining:
 #        schema:
@@ -7624,7 +7695,7 @@ definitions:
         example: Added training data.
 
   dashboard_model_detail:
-    description: The model instance detail.
+    description: The instance detail.
     type: object
     required:
     - name
@@ -7636,7 +7707,7 @@ definitions:
         type: string
         example: example_instance
       uuid:
-        description: A universally unique ID used to reference this revision of the model.
+        description: A universally unique ID used to reference this revision of the instance.
         type: string
         example: ea0e5aa3-1772-49aa-a805-db7ed6da46bf
       long_name:
@@ -7656,7 +7727,7 @@ definitions:
         type: string
         example: "/faq_matchers"
       has_labels:
-        description: "Whether or not the model is returns a list of scored labels. Unknown if flag not present."
+        description: "Whether or not the model returns a list of scored labels. Unknown if flag not present."
         type: boolean
         example: True
       trashed:
@@ -7694,7 +7765,7 @@ definitions:
         type: string
 
   image_classifier_instance_detail:
-    description: The model instance detail.
+    description: The instance detail.
     type: object
     required:
     - name
@@ -7705,7 +7776,7 @@ definitions:
         type: string
         example: 'example_instance'
       id:
-        description: The unique id of a specific version of the model instance.
+        description: The unique id of a specific version of the instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
@@ -7799,7 +7870,7 @@ definitions:
         example: False
 
   text_classifier_instance_detail:
-    description: The model instance detail.
+    description: The instance detail.
     type: object
     required:
     - name
@@ -7810,7 +7881,7 @@ definitions:
         type: string
         example: 'example_instance'
       id:
-        description: The unique id of a specific version of the model instance.
+        description: The unique id of a specific version of the instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
@@ -7880,6 +7951,39 @@ definitions:
         type: number
         example: 1.0
 
+  text_pipeline_instance_detail:
+    description: The instance detail.
+    type: object
+    required:
+    - name
+    - id
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      id:
+        description: The unique id of a specific version of the instance.
+        type: string
+        example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'This is an example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
+      model_list:
+        description: The list of pipeline models.
+        type: array
+        items:
+          $ref: "#/definitions/pipeline_model"
+
   text_dataset_instance_detail:
     description: The dataset instance detail.
     type: object
@@ -7909,7 +8013,7 @@ definitions:
         example: False
 
   word_manifold_instance_detail:
-    description: The model instance detail.
+    description: The instance detail.
     type: object
     required:
     - name
@@ -7920,7 +8024,7 @@ definitions:
         type: string
         example: 'example_instance'
       id:
-        description: The unique id of a specific version of the model instance.
+        description: The unique id of a specific version of the instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
@@ -7941,7 +8045,7 @@ definitions:
         example: 'glove_za_eng.txt'
 
   faq_matcher_instance_detail:
-    description: The model instance detail.
+    description: The instance detail.
     type: object
     required:
     - name
@@ -7952,7 +8056,7 @@ definitions:
         type: string
         example: 'example_instance'
       id:
-        description: The unique id of a specific version of the model instance.
+        description: The unique id of a specific version of the instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
@@ -8019,7 +8123,7 @@ definitions:
         example: 1.0
 
   intent_classifier_instance_detail:
-    description: The model instance detail.
+    description: The instance detail.
     type: object
     required:
     - name
@@ -8030,7 +8134,7 @@ definitions:
         type: string
         example: 'example_instance'
       id:
-        description: The unique id of a specific version of the model instance.
+        description: The unique id of a specific version of the instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
@@ -8108,7 +8212,7 @@ definitions:
         example: 1.0
 
   crf_entity_extractor_instance_detail:
-    description: The model instance detail.
+    description: The instance detail.
     type: object
     required:
     - name
@@ -8119,7 +8223,7 @@ definitions:
         type: string
         example: 'example_instance'
       id:
-        description: The unique id of a specific version of the model instance.
+        description: The unique id of a specific version of the instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
@@ -8188,7 +8292,7 @@ definitions:
         example: 0.85
 
   synonym_entity_extractor_instance_detail:
-    description: The model instance detail.
+    description: The instance detail.
     type: object
     required:
     - name
@@ -8199,7 +8303,7 @@ definitions:
         type: string
         example: 'example_instance'
       id:
-        description: The unique id of a specific version of the model instance.
+        description: The unique id of a specific version of the instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
@@ -8256,7 +8360,7 @@ definitions:
         example: 0.85
 
   regex_entity_extractor_instance_detail:
-    description: The model instance detail.
+    description: The instance detail.
     type: object
     required:
     - name
@@ -8268,7 +8372,7 @@ definitions:
         type: string
         example: 'example_instance'
       id:
-        description: The unique id of a specific version of the model instance.
+        description: The unique id of a specific version of the instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
@@ -8289,7 +8393,7 @@ definitions:
         example: '(?P<license>([A-Z]{3}[ ]?[0-9]{3}[ ]?(GP|NW|MP|EC|L|NC|NW)))'
 
   person_name_entity_extractor_instance_detail:
-    description: The model instance detail.
+    description: The instance detail.
     type: object
     required:
     - name
@@ -8300,7 +8404,7 @@ definitions:
         type: string
         example: 'example_instance'
       id:
-        description: The unique id of a specific version of the model instance.
+        description: The unique id of a specific version of the instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
@@ -8317,7 +8421,7 @@ definitions:
         example: False
 
   duckling_entity_extractor_instance_detail:
-    description: The model instance detail.
+    description: The instance detail.
     type: object
     required:
     - name
@@ -8328,7 +8432,7 @@ definitions:
         type: string
         example: 'example_instance'
       id:
-        description: The unique id of a specific version of the model instance.
+        description: The unique id of a specific version of the instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
@@ -8349,7 +8453,7 @@ definitions:
         example: '2017-12-10'
 
   sim_word_entity_extractor_instance_detail:
-    description: The model instance detail.
+    description: The instance detail.
     type: object
     required:
     - name
@@ -8363,7 +8467,7 @@ definitions:
         type: string
         example: 'example_instance'
       id:
-        description: The unique id of a specific version of the model instance.
+        description: The unique id of a specific version of the instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
@@ -8394,7 +8498,7 @@ definitions:
         example: 'feers_wm_eng'
 
   language_recogniser_instance_detail:
-    description: The model instance detail.
+    description: The instance detail.
     type: object
     required:
     - name
@@ -8406,7 +8510,7 @@ definitions:
         type: string
         example: 'example_instance'
       id:
-        description: The unique id of a specific version of the model instance.
+        description: The unique id of a specific version of the instance.
         type: string
         example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
       long_name:
@@ -8460,7 +8564,7 @@ definitions:
     type: object
     properties:
       show_data_objects:
-        description: Make True to include the data objects on the dashboard. Default is False.
+        description: Set this to True to include the data objects on the dashboard. Default is False.
         type: boolean
         example: False
       history_size:
@@ -8479,7 +8583,7 @@ definitions:
         type: boolean
 
   image_classifier_create_details:
-    description: The details of the model instance to create.
+    description: The details of the instance to create.
     type: object
     required:
     - name
@@ -8502,7 +8606,7 @@ definitions:
         type: boolean
         example: False
       revision_uuid:
-        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
@@ -8530,12 +8634,12 @@ definitions:
         type: boolean
         example: False
       revision_uuid:
-        description: If provided, the uuid of the revision of the dataset to try and load from the model history.
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
-  text_classifier_create_details:
-    description: The details of the model instance to create.
+  text_pipeline_create_details:
+    description: The details of the instance to create.
     type: object
     # required:
     # - name
@@ -8558,7 +8662,35 @@ definitions:
         type: boolean
         example: False
       revision_uuid:
-        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
+
+  text_classifier_create_details:
+    description: The details of the instance to create.
+    type: object
+    # required:
+    # - name
+    # - load_from_store
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'An example of this type of model.'
+      load_from_store:
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        type: boolean
+        example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
@@ -8591,7 +8723,7 @@ definitions:
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   faq_matcher_create_details:
-    description: The details of the model instance to create.
+    description: The details of the instance to create.
     type: object
     required:
     - name
@@ -8618,12 +8750,12 @@ definitions:
         type: boolean
         example: False
       revision_uuid:
-        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   intent_classifier_create_details:
-    description: The details of the model instance to create.
+    description: The details of the instance to create.
     type: object
     required:
     - name
@@ -8650,12 +8782,12 @@ definitions:
         type: boolean
         example: False
       revision_uuid:
-        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   word_manifold_create_details:
-    description: The details of the model instance to create.
+    description: The details of the instance to create.
     type: object
     required:
     - name
@@ -8682,12 +8814,12 @@ definitions:
         type: string
         example: 'glove_za_eng.txt'
       revision_uuid:
-        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   crf_entity_extractor_create_details:
-    description: The details of the model instance to create.
+    description: The details of the instance to create.
     type: object
     required:
     - name
@@ -8710,12 +8842,12 @@ definitions:
         type: boolean
         example: False
       revision_uuid:
-        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   synonym_entity_extractor_create_details:
-    description: The details of the model instance to create.
+    description: The details of the instance to create.
     type: object
     required:
     - name
@@ -8738,12 +8870,12 @@ definitions:
         type: boolean
         example: False
       revision_uuid:
-        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   regex_entity_extractor_create_details:
-    description: The details of the model instance to create.
+    description: The details of the instance to create.
     type: object
     required:
     - name
@@ -8770,12 +8902,12 @@ definitions:
         type: boolean
         example: False
       revision_uuid:
-        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   person_name_entity_extractor_create_details:
-    description: The details of the model instance to create.
+    description: The details of the instance to create.
     type: object
     required:
     - name
@@ -8798,12 +8930,12 @@ definitions:
         type: boolean
         example: False
       revision_uuid:
-        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   duckling_entity_extractor_create_details:
-    description: The details of the model instance to create.
+    description: The details of the instance to create.
     type: object
     required:
     - name
@@ -8831,12 +8963,12 @@ definitions:
         type: boolean
         example: False
       revision_uuid:
-        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   sim_word_entity_extractor_create_details:
-    description: The details of the model instance to create.
+    description: The details of the instance to create.
     type: object
     required:
     - name
@@ -8871,12 +9003,12 @@ definitions:
         type: boolean
         example: False
       revision_uuid:
-        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   language_recogniser_create_details:
-    description: The details of the model instance to create.
+    description: The details of the instance to create.
     type: object
     required:
     - name
@@ -8903,7 +9035,7 @@ definitions:
         type: boolean
         example: False
       revision_uuid:
-        description: If provided, the uuid of the revision of the model to try and load from the model history.
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
@@ -8925,6 +9057,28 @@ definitions:
         type: string
         example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
         description: The uuid of the sample.
+
+  text_pipeline_response:
+    description: The text pipeline response on a retrieve operation which is a dict of model responses.
+    type: object
+#    required:
+#      - body
+#    properties:
+#      body:
+#        type: string
+#        example: "5 January 2017 at 15:00"
+#        description: The input text associated with the entity.
+
+  pipeline_model:
+    description: Model name and type. The model should already be created, trained, etc.
+    type: object
+    properties:
+      name:
+        type: string
+        example: 'my_model'
+      type:
+        type: string
+        example: 'text_classifier'
 
   labelled_text_sample:
     description: Labelled text sample.

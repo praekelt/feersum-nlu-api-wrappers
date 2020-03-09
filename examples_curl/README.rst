@@ -12,7 +12,7 @@ The below commands can be run from a bash or similar terminal
     AUTH_TOKEN="YOUR_API_KEY"
     
     # Note: One can get the below and more curl commands from 'trying out' commands from the 
-    # swagger generated UI at <https://nlu.playground.feersum.io:443/nlu/v2/ui/>
+    # swagger generated UI at <https://nlu.playground.feersum.io/ui/>
 
 
 .. code-block:: sh

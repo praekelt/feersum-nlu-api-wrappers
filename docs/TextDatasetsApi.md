@@ -10,7 +10,7 @@ Method | HTTP request | Description
 [**text_dataset_del_samples**](TextDatasetsApi.md#text_dataset_del_samples) | **DELETE** /nlu/v2/text_datasets/{instance_name}/samples | Delete samples.
 [**text_dataset_del_samples_all**](TextDatasetsApi.md#text_dataset_del_samples_all) | **DELETE** /nlu/v2/text_datasets/{instance_name}/samples_all | Delete all samples.
 [**text_dataset_get_details**](TextDatasetsApi.md#text_dataset_get_details) | **GET** /nlu/v2/text_datasets/{instance_name} | Get details of named instance.
-[**text_dataset_get_details_all**](TextDatasetsApi.md#text_dataset_get_details_all) | **GET** /nlu/v2/text_datasets | Get list of loaded text datasets.
+[**text_dataset_get_details_all**](TextDatasetsApi.md#text_dataset_get_details_all) | **GET** /nlu/v2/text_datasets | Get list of text datasets.
 [**text_dataset_get_labels**](TextDatasetsApi.md#text_dataset_get_labels) | **GET** /nlu/v2/text_datasets/{instance_name}/labels | Get list of possible labels.
 [**text_dataset_get_params**](TextDatasetsApi.md#text_dataset_get_params) | **GET** /nlu/v2/text_datasets/{instance_name}/params | Get the editable model parameters of named text dataset.
 [**text_dataset_get_samples**](TextDatasetsApi.md#text_dataset_get_samples) | **GET** /nlu/v2/text_datasets/{instance_name}/samples | Get samples.
@@ -24,7 +24,7 @@ Method | HTTP request | Description
 
 Add samples.
 
-Add samples to named text dataset. Returns the samples added to the model.
+Add samples to named text dataset. Returns the samples added to the instance.
 
 ### Example
 ```python
@@ -47,7 +47,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -63,7 +63,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 Create a text dataset.
 
-Create a new text dataset or reload one from the trash. Returns the details of the new or loaded instance.
+Create a new text dataset or reload one from the trash. Returns the details of the instance.
 
 ### Example
 ```python
@@ -171,7 +171,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -186,7 +186,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -232,7 +232,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -248,7 +248,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -295,7 +295,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -310,7 +310,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -356,7 +356,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -371,7 +371,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -392,9 +392,9 @@ Name | Type | Description  | Notes
 # **text_dataset_get_details_all**
 > list[TextDatasetInstanceDetail] text_dataset_get_details_all(x_caller=x_caller)
 
-Get list of loaded text datasets.
+Get list of text datasets.
 
-Get the list of loaded text datasets.
+Get the list of text datasets.
 
 ### Example
 ```python
@@ -420,7 +420,7 @@ api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Get list of loaded text datasets.
+    # Get list of text datasets.
     api_response = api_instance.text_dataset_get_details_all(x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
@@ -476,7 +476,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -491,7 +491,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -537,7 +537,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -552,7 +552,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -598,7 +598,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 index = 56 # int | The sample index to start from. (optional)
 len = 56 # int | The number of samples to return. (optional)
@@ -616,7 +616,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
  **index** | **int**| The sample index to start from. | [optional] 
  **len** | **int**| The number of samples to return. | [optional] 
@@ -665,7 +665,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 model_params = feersum_nlu.ModelParams() # ModelParams | The model parameters.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -681,7 +681,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -728,7 +728,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of text samples to update. A sample's UUIDs is used to uniquely identify it.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -744,7 +744,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of text samples to update. A sample&#39;s UUIDs is used to uniquely identify it. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -791,7 +791,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -806,7 +806,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type

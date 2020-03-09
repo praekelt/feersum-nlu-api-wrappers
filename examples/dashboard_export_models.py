@@ -25,13 +25,13 @@ def main():
 
     try:
         print("Saving ALL dashboard models to disk...", end='', flush=True)
-        dashb_detail = dash_api_instance.dashboard_get_details()  # type: feersum_nlu.models.dashboard_detail.DashboardDetail
+        detail = dash_api_instance.dashboard_get_details()  # type: feersum_nlu.models.dashboard_detail.DashboardDetail
 
-        print(" type(api_response)", type(dashb_detail))
-        print(" api_response", dashb_detail)
+        print(" type(api_response)", type(detail))
+        print(" api_response", detail)
         print()
 
-        for model in dashb_detail.model_list:
+        for model in detail.model_list:
             print(".", end='', flush=True)
 
             if not model.trashed and model.name != "":
@@ -47,11 +47,13 @@ def main():
                     # Add the model type which may be used for type checking on import.
                     training_samples = model_dict.get("training_samples")
                     testing_samples = model_dict.get("testing_samples")
+                    samples = model_dict.get("samples")
 
                     training_samples_json = []
                     testing_samples_json = []
+                    samples_json = []
 
-                    # Convert training & testing samples to JSON-serialisable dicts.
+                    # Convert samples to JSON-serialisable dicts.
                     if training_samples is not None:
                         for sample in training_samples:
                             training_samples_json.append(sample.to_dict())
@@ -60,12 +62,21 @@ def main():
                         for sample in testing_samples:
                             testing_samples_json.append(sample.to_dict())
 
+                    if samples is not None:
+                        for sample in samples:
+                            samples_json.append(sample.to_dict())
+
                     # Add the model type and training+testing data to the instance detail
                     instance_detail["model_type"] = model.model_type
+
                     if len(training_samples_json):
                         instance_detail["training_samples"] = training_samples_json
+
                     if len(testing_samples_json):
                         instance_detail["testing_samples"] = testing_samples_json
+
+                    if len(samples_json):
+                        instance_detail["samples"] = samples_json
 
                     instance_detail_filename = f"exported_models/{model.name}_{feersum_nlu_auth_token}.{model.model_type}"
 
@@ -73,7 +84,12 @@ def main():
                     with open(instance_detail_filename + ".json", "w") as json_file:
                         json.dump(instance_detail, json_file, sort_keys=True, indent=4)
 
-                    if model.model_type in ['text_classifier', 'intent_classifier', 'faq_matcher']:
+                    if model.model_type in ['text_classifier',
+                                            'intent_classifier',
+                                            'faq_matcher',
+                                            'crf_entity_extractor'
+                                            'synonym_entity_extractor',
+                                            'image_classifier']:
                         # Also write the classifiers' training samples to .csv
                         if training_samples is not None:
                             with open(instance_detail_filename + ".train.csv", "w", newline='') as csv_file:
@@ -89,6 +105,16 @@ def main():
                                 csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
                                 for sample in testing_samples:
+                                    # print('(', sample.label, ',', sample.text, ')')
+                                    csv_writer.writerow([sample.label, sample.text])
+                    elif model.model_type in ['text_dataset',
+                                              'image_dataset']:
+                        # Also write the datasets' samples to .csv
+                        if samples is not None:
+                            with open(instance_detail_filename + ".samples.csv", "w", newline='') as csv_file:
+                                csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+                                for sample in samples:
                                     # print('(', sample.label, ',', sample.text, ')')
                                     csv_writer.writerow([sample.label, sample.text])
 

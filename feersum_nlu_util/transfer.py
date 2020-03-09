@@ -20,36 +20,48 @@ def export_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
 
     try:
         # Get the instance_detail if model type is supported for export.
-        if model_type == 'language_recogniser':
-            api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
-            instance_detail = api_instance.language_recogniser_get_details(model_name)
-        elif model_type == 'text_classifier':
+        if model_type == 'text_classifier':
             api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
             instance_detail = api_instance.text_classifier_get_details(model_name)
+        elif model_type == 'text_dataset':
+            api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
+            instance_detail = api_instance.text_dataset_get_details(model_name)
         elif model_type == 'intent_classifier':
             api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
             instance_detail = api_instance.intent_classifier_get_details(model_name)
         elif model_type == 'faq_matcher':
             api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
             instance_detail = api_instance.faq_matcher_get_details(model_name)
-        elif model_type == 'duckling_entity_extractor':
-            api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-            instance_detail = api_instance.duckling_entity_extractor_get_details(model_name)
+        elif model_type == 'language_recogniser':
+            api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
+            instance_detail = api_instance.language_recogniser_get_details(model_name)
         elif model_type == 'regex_entity_extractor':
             api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
             instance_detail = api_instance.regex_entity_extractor_get_details(model_name)
-        elif model_type == 'sim_word_entity_extractor':
-            api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-            instance_detail = api_instance.sim_word_entity_extractor_get_details(model_name)
         elif model_type == 'person_name_entity_extractor':
             api_instance = feersum_nlu.PersonNameEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
             instance_detail = api_instance.person_name_entity_extractor_get_details(model_name)
-        elif model_type == 'crf_entity_extractor':
-            api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-            instance_detail = api_instance.crf_entity_extractor_get_details(model_name)
+        elif model_type == 'duckling_entity_extractor':
+            api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+            instance_detail = api_instance.duckling_entity_extractor_get_details(model_name)
+        elif model_type == 'sim_word_entity_extractor':
+            api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+            instance_detail = api_instance.sim_word_entity_extractor_get_details(model_name)
         elif model_type == 'synonym_entity_extractor':
             api_instance = feersum_nlu.SynonymEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
             instance_detail = api_instance.synonym_entity_extractor_get_details(model_name)
+        elif model_type == 'crf_entity_extractor':
+            api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+            instance_detail = api_instance.crf_entity_extractor_get_details(model_name)
+        elif model_type == 'data_object':
+            api_instance = feersum_nlu.DataObjectsApi(feersum_nlu.ApiClient(configuration))
+            instance_detail = api_instance.data_object_get_details(model_name)
+        elif model_type == 'image_classifier':
+            api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
+            instance_detail = api_instance.image_classifier_get_details(model_name)
+        elif model_type == 'image_dataset':
+            api_instance = feersum_nlu.ImageDatasetsApi(feersum_nlu.ApiClient(configuration))
+            instance_detail = api_instance.image_dataset_get_details(model_name)
         else:
             api_instance = None
             instance_detail = None
@@ -65,28 +77,48 @@ def export_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
             if model_type == 'text_classifier':
                 training_samples = api_instance.text_classifier_get_training_samples(model_name)
                 testing_samples = api_instance.text_classifier_get_testing_samples(model_name)
+                samples = None
+            elif model_type == 'text_dataset':
+                training_samples = None
+                testing_samples = None
+                samples = api_instance.text_dataset_get_samples(model_name)
             elif model_type == 'intent_classifier':
                 training_samples = api_instance.intent_classifier_get_training_samples(model_name)
                 testing_samples = api_instance.intent_classifier_get_testing_samples(model_name)
+                samples = None
             elif model_type == 'faq_matcher':
                 training_samples = api_instance.faq_matcher_get_training_samples(model_name)
                 testing_samples = api_instance.faq_matcher_get_testing_samples(model_name)
+                samples = None
             elif model_type == 'crf_entity_extractor':
                 training_samples = api_instance.crf_entity_extractor_get_training_samples(model_name)
                 testing_samples = api_instance.crf_entity_extractor_get_testing_samples(model_name)
+                samples = None
             elif model_type == 'synonym_entity_extractor':
                 training_samples = api_instance.synonym_entity_extractor_get_training_samples(model_name)
                 testing_samples = api_instance.synonym_entity_extractor_get_testing_samples(model_name)
+                samples = None
+            elif model_type == 'image_classifier':
+                training_samples = api_instance.image_classifier_get_training_samples(model_name)
+                testing_samples = api_instance.image_classifier_get_testing_samples(model_name)
+                samples = None
+            elif model_type == 'image_dataset':
+                training_samples = None
+                testing_samples = None
+                samples = api_instance.image_dataset_get_samples(model_name)
             else:
                 training_samples = None
                 testing_samples = None
+                samples = None
         else:
             training_samples = None
             testing_samples = None
+            samples = None
 
         return {"instance_detail": instance_detail_dict,
                 "training_samples": training_samples,
-                "testing_samples": testing_samples}
+                "testing_samples": testing_samples,
+                "samples": samples}
 
     except ApiException as e:
         print("Exception when calling an api endpoint: %s\n" % e)

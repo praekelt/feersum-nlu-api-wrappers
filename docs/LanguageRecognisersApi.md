@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**language_recogniser_create**](LanguageRecognisersApi.md#language_recogniser_create) | **POST** /nlu/v2/language_recognisers | Create a text language detector.
 [**language_recogniser_del**](LanguageRecognisersApi.md#language_recogniser_del) | **DELETE** /nlu/v2/language_recognisers/{instance_name} | Delete named instance.
 [**language_recogniser_get_details**](LanguageRecognisersApi.md#language_recogniser_get_details) | **GET** /nlu/v2/language_recognisers/{instance_name} | Get details of named instance.
-[**language_recogniser_get_details_all**](LanguageRecognisersApi.md#language_recogniser_get_details_all) | **GET** /nlu/v2/language_recognisers | Get list of loaded text language detectors.
+[**language_recogniser_get_details_all**](LanguageRecognisersApi.md#language_recogniser_get_details_all) | **GET** /nlu/v2/language_recognisers | Get list of text language detectors.
 [**language_recogniser_get_labels**](LanguageRecognisersApi.md#language_recogniser_get_labels) | **GET** /nlu/v2/language_recognisers/{instance_name}/labels | Get list of possible labels.
 [**language_recogniser_get_params**](LanguageRecognisersApi.md#language_recogniser_get_params) | **GET** /nlu/v2/language_recognisers/{instance_name}/params | Get the editable model parameters of named language recogniser.
 [**language_recogniser_retrieve**](LanguageRecognisersApi.md#language_recogniser_retrieve) | **POST** /nlu/v2/language_recognisers/{instance_name}/retrieve | Recognise the language the text is written in.
@@ -104,7 +104,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -119,7 +119,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -165,7 +165,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -180,7 +180,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -201,9 +201,9 @@ Name | Type | Description  | Notes
 # **language_recogniser_get_details_all**
 > list[LanguageRecogniserInstanceDetail] language_recogniser_get_details_all(x_caller=x_caller)
 
-Get list of loaded text language detectors.
+Get list of text language detectors.
 
-Get the list of loaded text language detectors.
+Get the list of text language detectors.
 
 ### Example
 ```python
@@ -229,7 +229,7 @@ api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configur
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Get list of loaded text language detectors.
+    # Get list of text language detectors.
     api_response = api_instance.language_recogniser_get_details_all(x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
@@ -285,7 +285,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -300,7 +300,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -346,7 +346,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -361,7 +361,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type
@@ -407,7 +407,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 text_input = feersum_nlu.TextInput() # TextInput | The input text.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -423,7 +423,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **text_input** | [**TextInput**](TextInput.md)| The input text. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -470,7 +470,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 model_params = feersum_nlu.ModelParams() # ModelParams | The model parameters.
 x_caller = 'x_caller_example' # str |  (optional)
 
@@ -486,7 +486,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
  **x_caller** | **str**|  | [optional] 
 
@@ -533,7 +533,7 @@ configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
 
 # create an instance of the API class
 api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the model instance.
+instance_name = 'instance_name_example' # str | The name of the instance.
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
@@ -548,7 +548,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the model instance. | 
+ **instance_name** | **str**| The name of the instance. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type

@@ -35,16 +35,16 @@ try:
         print(".", end='', flush=True)
 
         # DANGER ! if (model.name != "massmart") and (model.model_type == "sim_word_entity_extractor"):
-        if model.trashed or (str(model.name+"__"+model.model_type) in kill_set):
-            print(str(model.name+"__"+model.model_type))
+        if model.trashed or (str(model.name + "__" + model.model_type) in kill_set):
+            print(str(model.name + "__" + model.model_type))
 
-            if model.model_type == 'language_recogniser':
-                api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
-                instance_detail = api_instance.language_recogniser_vaporise(model.name)
-                print("    VAPORISED.")
-            elif model.model_type == 'text_classifier':
+            if model.model_type == 'text_classifier':
                 api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
                 instance_detail = api_instance.text_classifier_vaporise(model.name)
+                print("    VAPORISED.")
+            elif model.model_type == 'text_datasets':
+                api_instance = feersum_nlu.TextDatasetsApi(feersum_nlu.ApiClient(configuration))
+                instance_detail = api_instance.text_dataset_vaporise(model.name)
                 print("    VAPORISED.")
             elif model.model_type == 'intent_classifier':
                 api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
@@ -54,22 +54,62 @@ try:
                 api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
                 instance_detail = api_instance.faq_matcher_vaporise(model.name)
                 print("    VAPORISED.")
-            elif model.model_type == 'duckling_entity_extractor':
-                api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-                instance_detail = api_instance.duckling_entity_extractor_vaporise(model.name)
+            elif model.model_type == 'language_recogniser':
+                api_instance = feersum_nlu.LanguageRecognisersApi(feersum_nlu.ApiClient(configuration))
+                instance_detail = api_instance.language_recogniser_vaporise(model.name)
+                print("    VAPORISED.")
+            # elif model.model_type == 'date_parser':
+            #     api_instance = feersum_nlu.DateParsersApi(feersum_nlu.ApiClient(configuration))
+            #     instance_detail = api_instance.date_parser_vaporise(model.name)
+            #     print("    VAPORISED.")
+            # elif model.model_type == 'sentiment_detector':
+            #     api_instance = feersum_nlu.SentimentDetectorsApi(feersum_nlu.ApiClient(configuration))
+            #     instance_detail = api_instance.sentiment_detector_vaporise(model.name)
+            #     print("    VAPORISED.")
+            # elif model.model_type == 'emotion_classifier':
+            #     api_instance = feersum_nlu.EmotionClassifiersApi(feersum_nlu.ApiClient(configuration))
+            #     instance_detail = api_instance.emotion_classifier_vaporise(model.name)
+            #     print("    VAPORISED.")
+            elif model.model_type == 'regex_entity_extractor':
+                api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+                instance_detail = api_instance.regex_entity_extractor_vaporise(model.name)
                 print("    VAPORISED.")
             elif model.model_type == 'person_name_entity_extractor':
                 api_instance = feersum_nlu.PersonNameEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
                 instance_detail = api_instance.person_name_entity_extractor_vaporise(model.name)
                 print("    VAPORISED.")
-            elif model.model_type == 'regex_entity_extractor':
-                api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-                instance_detail = api_instance.regex_entity_extractor_vaporise(model.name)
+            elif model.model_type == 'duckling_entity_extractor':
+                api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+                instance_detail = api_instance.duckling_entity_extractor_vaporise(model.name)
                 print("    VAPORISED.")
             elif model.model_type == 'sim_word_entity_extractor':
                 api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
                 instance_detail = api_instance.sim_word_entity_extractor_vaporise(model.name)
                 print("    VAPORISED.")
+            elif model.model_type == 'synonym_entity_extractor':
+                api_instance = feersum_nlu.SynonymEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+                instance_detail = api_instance.synonym_entity_extractor_vaporise(model.name)
+                print("    VAPORISED.")
+            elif model.model_type == 'crf_entity_extractor':
+                api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+                instance_detail = api_instance.crf_entity_extractor_vaporise(model.name)
+                print("    VAPORISED.")
+            elif model.model_type == 'data_object':
+                api_instance = feersum_nlu.DataObjectsApi(feersum_nlu.ApiClient(configuration))
+                instance_detail = api_instance.data_object_vaporise(model.name)
+                print("    VAPORISED.")
+            elif model.model_type == 'image_classifier':
+                api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
+                instance_detail = api_instance.image_classifier_vaporise(model.name)
+                print("    VAPORISED.")
+            elif model.model_type == 'image_datasets':
+                api_instance = feersum_nlu.ImageDatasetsApi(feersum_nlu.ApiClient(configuration))
+                instance_detail = api_instance.image_dataset_vaporise(model.name)
+                print("    VAPORISED.")
+            # elif model.model_type == 'image_readers':
+            #     api_instance = feersum_nlu.ImageReadersApi(feersum_nlu.ApiClient(configuration))
+            #     instance_detail = api_instance.image_reader_vaporise(model.name)
+            #     print("    VAPORISED.")
             else:
                 instance_detail = None
                 print("    NOT!!! VAPORISED.")
