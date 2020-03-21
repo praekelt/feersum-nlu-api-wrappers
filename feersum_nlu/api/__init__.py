@@ -26,3 +26,4 @@ from feersum_nlu.api.sim_word_entity_extractors_api import SimWordEntityExtracto
 from feersum_nlu.api.synonym_entity_extractors_api import SynonymEntityExtractorsApi
 from feersum_nlu.api.text_classifiers_api import TextClassifiersApi
 from feersum_nlu.api.text_datasets_api import TextDatasetsApi
+from feersum_nlu.api.text_pipelines_api import TextPipelinesApi

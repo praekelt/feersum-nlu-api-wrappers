@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.47
+  version: 2.0.47.dev3
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -10,10 +10,8 @@ info:
     email: nlu@feersum.io
 
 host: nlu.feersum.io:443
-# host: 127.0.0.1:8100
 
-# basePath: /nlu/v2
-# basePath: /nlu/v2
+# basePath: /nlu/v2 (outdated; full path now specified in the endpoints.)
 
 schemes:
   - https
@@ -88,8 +86,8 @@ tags:
   description: The API to your labelled image datasets useful for things like labelling data. Store unlabelled samples with a label like '_unlabelled'.
 - name: image_readers
   description: The API to your image reader instances.
-#- name: text_pipelines
-#  description: Build an NLU pipeline with annotators, extractors and classifiers. The annotators enrich the text with POS tags, etc. after which the classifiers and extractors run.
+- name: text_pipelines
+  description: Build an NLU pipeline with annotators, extractors and classifiers. The annotators enrich the text with POS tags, etc. after which the classifiers and extractors run.
 
 paths:
 ###################################
@@ -104,7 +102,7 @@ paths:
     get:
       tags:
       - dashboard
-      summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      summary: Your root service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_get_details
       description: Get your list of model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
@@ -119,7 +117,7 @@ paths:
     post:
       tags:
       - dashboard
-      summary: Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+      summary: Your root service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_get_details_with_params
       description: Get your list of model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
@@ -148,7 +146,7 @@ paths:
     get:
       tags:
       - dashboard
-      summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      summary: Your nlu service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_nlu_get_details
       description: Get your list of model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
@@ -163,7 +161,7 @@ paths:
     post:
       tags:
       - dashboard
-      summary: Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+      summary: Your nlu service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_nlu_get_details_with_params
       description: Get your list of model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
@@ -235,7 +233,7 @@ paths:
     get:
       tags:
       - dashboard
-      summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      summary: Your vision service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_vision_get_details
       description: Get your list of model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
@@ -250,7 +248,7 @@ paths:
     post:
       tags:
       - dashboard
-      summary: Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+      summary: Your vision service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_vision_get_details_with_params
       description: Get your list of model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
@@ -279,7 +277,7 @@ paths:
     get:
       tags:
       - dashboard
-      summary: Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+      summary: Your audio service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_audio_get_details
       description: Get your list of model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
@@ -294,7 +292,7 @@ paths:
     post:
       tags:
       - dashboard
-      summary: Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+      summary: Your audio service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
       x-swagger-router-controller: rest_api.flask_server.controllers.dashboard_controller
       operationId: dashboard_audio_get_details_with_params
       description: Get your list of model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
@@ -6812,396 +6810,396 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 
-####################################
-####################################
-#########
-### text_pipelines root
-#########
-#  /nlu/v2/text_pipelines:
-#    parameters:
-#    - $ref: '#/parameters/caller'
-#
-#    post:
-#      tags:
-#      - text_pipelines
-#      summary: Create a text pipeline.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipeline_create
-#      description: Create a new text pipeline or reload one from the trash. Returns the details of the instance.
-#      parameters:
-#      - in: body
-#        name: create_details
-#        description: The details of the instance to create.
-#        required: true
-#        schema:
-#          $ref: "#/definitions/text_pipeline_create_details"
-#      responses:
-#        200:
-#          $ref: "#/responses/text_pipeline_instance_detail"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
-#    get:
-#      tags:
-#      - text_pipelines
-#      summary: Get list of text pipelines.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipeline_get_details_all
-#      description: Get the list of text pipelines.
-#      responses:
-#        200:
-#          $ref: "#/responses/text_pipeline_instance_detail_list"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
-#########
-### text_pipelines named instance
-#########
-#  /nlu/v2/text_pipelines/{instance_name}:
-#    parameters:
-#    - $ref: '#/parameters/caller'
-#
-#    post:
-#      tags:
-#      - text_pipelines
-#      summary: Create a text pipeline.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipeline_create_from_path
-#      description: Create a new text pipeline or reload one from the trash. Returns the details of the instance.
-#      parameters:
-#      - in: path
-#        name: instance_name
-#        description: The name of the instance.
-#        required: true
-#        type: string
-#      - in: body
-#        name: create_details
-#        description: The details of the instance to create.
-#        required: true
-#        schema:
-#          $ref: "#/definitions/text_pipeline_create_details"
-#
-#      responses:
-#        200:
-#          $ref: "#/responses/text_pipeline_instance_detail"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
-#    get:
-#      tags:
-#      - text_pipelines
-#      summary: Get details of named instance.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipeline_get_details
-#      description: Get the details of the named text pipeline instance.
-#      parameters:
-#      - in: path
-#        name: instance_name
-#        description: The name of the instance.
-#        required: true
-#        type: string
-#      responses:
-#        200:
-#          $ref: "#/responses/text_pipeline_instance_detail"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
-#    delete:
-#      tags:
-#      - text_pipelines
-#      summary: Delete named instance.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipeline_del
-#      description: Delete and return the details of the named text pipeline instance. Deleted models can be reloaded from the trash with the create operation.
-#      parameters:
-#      - in: path
-#        name: instance_name
-#        description: The name of the instance.
-#        required: true
-#        type: string
-#      responses:
-#        200:
-#          $ref: "#/responses/text_pipeline_instance_detail"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
-#########
-### text_pipelines models
-#########
-#  /nlu/v2/text_pipelines/{instance_name}/models:
-#    parameters:
-#    - $ref: '#/parameters/caller'
-#
-#    post:
-#      tags:
-#      - text_pipelines
-#      summary: Add list of models.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipeline_add_models
-#      description: Add models to named text pipeline. Returns the samples added to the instance.
-#      parameters:
-#      - in: path
-#        name: instance_name
-#        description: The name of the instance.
-#        required: true
-#        type: string
-#      - in: body
-#        name: pipeline_model_list  # Can this be a define like below.
-#        description: List of models to add.
-#        required: true
-#        schema:
-#          type: array
-#          items:
-#            $ref: "#/definitions/pipeline_model"
-#      responses:
-#        200:
-#          $ref: "#/responses/pipeline_model_list"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
-#    put:
-#      tags:
-#      - text_pipelines
-#      summary: Update pipeline models by UUID.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipeline_update_models
-#      description: Update models of the named text pipeline. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
-#      parameters:
-#      - in: path
-#        name: instance_name
-#        description: The name of the instance.
-#        required: true
-#        type: string
-#      - in: body
-#        name: pipeline_model_list
-#        description: List of pipeline models to update. A sample's UUIDs is used to uniquely identify it.
-#        required: true
-#        schema:
-#          type: array
-#          items:
-#            $ref: "#/definitions/pipeline_model"
-#      responses:
-#        200:
-#          $ref: "#/responses/pipeline_model_list"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
-#    get:
-#      tags:
-#      - text_pipelines
-#      summary: Get list of models.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipeline_get_models
-#      description: Get the models of the named text pipeline.
-#      parameters:
-#      - in: path
-#        name: instance_name
-#        description: The name of the instance.
-#        required: true
-#        type: string
-#      - in: query
-#        name: index
-#        description: The sample index to start from.
-#        required: false
-#        type: integer
-#      - in: query
-#        name: len
-#        description: The number of samples to return.
-#        required: false
-#        type: integer
-#      responses:
-#        200:
-#          $ref: "#/responses/pipeline_model_list"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
-#    delete:
-#      tags:
-#      - text_pipelines
-#      summary: Delete list of models.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipeline_del_models
-#      description: Delete the listed models of the named text pipeline. Returns the deleted names.
-#      parameters:
-#      - in: path
-#        name: instance_name
-#        description: The name of the instance.
-#        required: true
-#        type: string
-#      - in: body
-#        name: pipeline_model_list
-#        description: List of pipeline models.
-#        required: true
-#        schema:
-#          type: array
-#          items:
-#            $ref: "#/definitions/pipeline_model"
-#      responses:
-#        200:
-#          $ref: "#/responses/pipeline_model_list"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
-#  /nlu/v2/text_pipelines/{instance_name}/models_all:
-#    parameters:
-#    - $ref: '#/parameters/caller'
-#
-#    delete:
-#      tags:
-#      - text_pipelines
-#      summary: Delete all models from the pipeline.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipeline_del_models_all
-#      description: Delete all models from the named pipeline. Returns the deleted models.
-#      parameters:
-#      - in: path
-#        name: instance_name
-#        description: The name of the instance.
-#        required: true
-#        type: string
-#      responses:
-#        200:
-#          $ref: "#/responses/pipeline_model_list"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
-#########
-### text_pipelines pipeline_params
-#########
-#  /nlu/v2/text_pipelines/{instance_name}/params:
-#    parameters:
-#    - $ref: '#/parameters/caller'
-#
-#    post:
-#      tags:
-#      - text_pipelines
-#      summary: Set the model parameters of named text pipeline.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipeline_set_params
-#      description: Set the model parameters of named text pipeline.
-#      parameters:
-#      - in: path
-#        name: instance_name
-#        description: The name of the instance.
-#        required: true
-#        type: string
-#      - in: body
-#        name: model_params
-#        description: The model parameters.
-#        required: true
-#        schema:
-#          $ref: "#/definitions/pipeline_params"
-#      responses:
-#        200:
-#          $ref: "#/responses/text_pipeline_instance_detail"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
-#    get:
-#      tags:
-#      - text_pipelines
-#      summary: Get the editable model parameters of named text pipeline.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipelines_get_params
-#      description: Get the editable model parameters of named text pipeline.
-#      parameters:
-#      - in: path
-#        name: instance_name
-#        description: The name of the instance.
-#        required: true
-#        type: string
-#      responses:
-#        200:
-#          $ref: "#/responses/pipeline_params"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
-#########
-### text_pipelines retrieve
-#########
-#  /nlu/v2/text_pipelines/{instance_name}/retrieve:
-#    parameters:
-#    - $ref: '#/parameters/caller'
-#
-#    post:
-#      tags:
-#      - text_pipelines
-#      summary: Run the text pipeline and return the results.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipelines§§_retrieve
-#      description: Run the text pipeline and return the results.
-#      parameters:
-#      - in: path
-#        name: instance_name
-#        description: The name of the instance.
-#        required: true
-#        type: string
-#      - in: body
-#        name: text_input
-#        description: The input text.
-#        required: true
-#        schema:
-#          $ref: "#/definitions/text_input"
-#      responses:
-#        200:
-#          $ref: "#/responses/text_pipeline_response"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
-#########
-### text_pipelines vaporise
-#########
-#  /nlu/v2/text_pipelines/{instance_name}/vaporise:
-#    parameters:
-#    - $ref: '#/parameters/caller'
-#
-#    post:
-#      tags:
-#      - text_pipelines
-#      summary: Vaporise the named pipeline.
-#      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-#      operationId: text_pipeline_vaporise
-#      description: Permanently vaporises a model even if not trashed.
-#      parameters:
-#      - in: path
-#        name: instance_name
-#        description: The name of the instance.
-#        required: true
-#        type: string
-#      responses:
-#        200:
-#          $ref: "#/responses/text_pipeline_instance_detail"
-#        400:
-#          description: bad request
-#        401:
-#          $ref: "#/responses/UnauthorizedError"
-#
+###################################
+###################################
+########
+## text_pipelines root
+########
+  /nlu/v2/text_pipelines:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - text_pipelines
+      summary: Create a text pipeline.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_create
+      description: Create a new text pipeline or reload one from the trash. Returns the details of the instance.
+      parameters:
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/text_pipeline_create_details"
+      responses:
+        200:
+          $ref: "#/responses/text_pipeline_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - text_pipelines
+      summary: Get list of text pipelines.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_get_details_all
+      description: Get the list of text pipelines.
+      responses:
+        200:
+          $ref: "#/responses/text_pipeline_instance_detail_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## text_pipelines named instance
+########
+  /nlu/v2/text_pipelines/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - text_pipelines
+      summary: Create a text pipeline.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_create_from_path
+      description: Create a new text pipeline or reload one from the trash. Returns the details of the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/text_pipeline_create_details"
+
+      responses:
+        200:
+          $ref: "#/responses/text_pipeline_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - text_pipelines
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_get_details
+      description: Get the details of the named text pipeline instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/text_pipeline_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - text_pipelines
+      summary: Delete named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_del
+      description: Delete and return the details of the named text pipeline instance. Deleted models can be reloaded from the trash with the create operation.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/text_pipeline_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## text_pipelines models
+########
+  /nlu/v2/text_pipelines/{instance_name}/models:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - text_pipelines
+      summary: Add list of models.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_add_models
+      description: Add models to named text pipeline. Returns the samples added to the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: pipeline_model_list  # Can this be a define like below.
+        description: List of models to add.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/pipeline_model"
+      responses:
+        200:
+          $ref: "#/responses/pipeline_model_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - text_pipelines
+      summary: Update pipeline models by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_update_models
+      description: Update models of the named text pipeline. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: pipeline_model_list
+        description: List of pipeline models to update. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/pipeline_model"
+      responses:
+        200:
+          $ref: "#/responses/pipeline_model_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - text_pipelines
+      summary: Get list of models.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_get_models
+      description: Get the models of the named text pipeline.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
+      responses:
+        200:
+          $ref: "#/responses/pipeline_model_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - text_pipelines
+      summary: Delete list of models.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_del_models
+      description: Delete the listed models of the named text pipeline. Returns the deleted names.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: pipeline_model_list
+        description: List of pipeline models.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/pipeline_model"
+      responses:
+        200:
+          $ref: "#/responses/pipeline_model_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /nlu/v2/text_pipelines/{instance_name}/models_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    delete:
+      tags:
+      - text_pipelines
+      summary: Delete all models from the pipeline.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_del_models_all
+      description: Delete all models from the named pipeline. Returns the deleted models.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/pipeline_model_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## text_pipelines pipeline_params
+########
+  /nlu/v2/text_pipelines/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - text_pipelines
+      summary: Set the model parameters of named text pipeline.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_set_params
+      description: Set the model parameters of named text pipeline.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: pipeline_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/pipeline_params"
+      responses:
+        200:
+          $ref: "#/responses/text_pipeline_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - text_pipelines
+      summary: Get the editable model parameters of named text pipeline.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_get_params
+      description: Get the editable model parameters of named text pipeline.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/pipeline_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## text_pipelines retrieve
+########
+  /nlu/v2/text_pipelines/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - text_pipelines
+      summary: Run the text pipeline and return the results.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_retrieve
+      description: Run the text pipeline and return the results.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
+      responses:
+        200:
+          $ref: "#/responses/text_pipeline_response"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## text_pipelines vaporise
+########
+  /nlu/v2/text_pipelines/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - text_pipelines
+      summary: Vaporise the named pipeline.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
+      operationId: text_pipeline_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/text_pipeline_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
 
 ###################################
 # Descriptions of common parameters
@@ -7274,6 +7272,18 @@ responses:
       type: array
       items:
         $ref: "#/definitions/text_pipeline_instance_detail"
+
+  pipeline_model_list:
+    description: A list of pipeline models.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/pipeline_model"
+
+  pipeline_params:
+    description: The pipeline parameters.
+    schema:
+      $ref: "#/definitions/pipeline_params"
 
   text_classifier_instance_detail:
     description: The instance detail
@@ -8246,9 +8256,6 @@ definitions:
         description: The average F-score of the model as measured on the training set.
         type: number
         example: 1.0
-      training_cm:
-        description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
-        type: object
       validation_accuracy:
         description: The accuracy of the model as measured by cross validation on the training set.
         type: number
@@ -8257,9 +8264,6 @@ definitions:
         description: The average F-score of the model as measured by cross validation on the training set.
         type: number
         example: 1.0
-      validation_cm:
-        description: The confusion matrix as measured by cross validation on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
-        type: object
       testing_accuracy:
         description: The accuracy of the model as measured on the testing set.
         type: number
@@ -8268,12 +8272,6 @@ definitions:
         description: The average F-score of the model as measured on the testing set.
         type: number
         example: 1.0
-      testing_cm:
-        description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
-        type: object
-      cm_labels:
-        description: A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer.
-        type: object
       training_stamp:
         description: The time when the training operation concluded.
         type: string
@@ -9079,6 +9077,10 @@ definitions:
       type:
         type: string
         example: 'text_classifier'
+      uuid:
+        type: string
+        example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
+        description: The uuid of this reference. Not the uuid of the model being referred to.
 
   labelled_text_sample:
     description: Labelled text sample.
@@ -9202,6 +9204,17 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/labelled_language_model"
+
+  pipeline_params:
+    description: The model parameters. Dict of parameters like name, long_name, desc, threshold, etc. Models can surface more paramerters. Use the params end-point to get the set of params that is editable.
+    type: object
+    properties:
+      long_name:
+        type: string
+      desc:
+        type: string
+      readonly:
+        type: boolean
 
   model_params:
     description: The model parameters. Dict of parameters like name, long_name, desc, threshold, etc. Models can surface more paramerters. Use the params end-point to get the set of params that is editable.
