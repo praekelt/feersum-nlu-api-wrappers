@@ -55,15 +55,13 @@ with Vimba() as vimba:
                 target_size = 256
 
                 if width > height:
-                    resized_height = target_size
-                    resized_width = int((target_size / height) * width)
+                    new_height = target_size
+                    new_width = int((target_size / height) * width)
                 else:
-                    resized_height = int((target_size / width) * height)
-                    resized_width = target_size
+                    new_height = int((target_size / width) * height)
+                    new_width = target_size
 
-                resized_image = \
-                    cv2.resize(image, (resized_width, resized_height),  # pylint: disable=no-member
-                               interpolation=cv2.INTER_LINEAR)  # pylint: disable=no-member
+                resized_image = cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_LINEAR)  # pylint: disable=no-member
 
                 base64_img_str = image_utils.load_image_opencvBGR(resized_image)
                 image_input = feersum_nlu.ImageInput(base64_img_str)  # The same size as the camera image, but jpeg encoded.

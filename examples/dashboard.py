@@ -44,6 +44,10 @@ try:
     print(" api_response_header", api_response_header)
     print(" calls remaining in this cycle ('-1' means no limit) =", api_response_header.get("X-RateLimit-Remaining"))
 
+    # model_list = api_response.model_list
+    # for model_detail in model_list:
+    #     print(str(model_detail.model_type))
+
     # print("Get dashboard content (use DEFAULT operations params):")
     # api_response, api_response_code, api_response_header = \
     #     api_instance.dashboard_get_details_with_http_info(x_caller=caller_name)

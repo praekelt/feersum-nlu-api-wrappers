@@ -36,7 +36,7 @@ class TestAPIKeyManagement(unittest.TestCase):
 
         try:
             print("Get the details of specific named API key:")
-            api_response = api_instance.api_key_get_details(api_key)
+            api_response = api_instance.api_key_get_details(api_key, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
@@ -49,7 +49,7 @@ class TestAPIKeyManagement(unittest.TestCase):
                 api_key_get_details_call_count_0 = 0
 
             print("Get the details of specific named API key:")
-            api_response = api_instance.api_key_get_details(api_key)
+            api_response = api_instance.api_key_get_details(api_key, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
@@ -57,7 +57,7 @@ class TestAPIKeyManagement(unittest.TestCase):
             call_count_breakdown = api_response.call_count_breakdown
             api_key_get_details_call_count_1 = call_count_breakdown['api_key_get_details']
 
-            self.assertTrue((api_key_get_details_call_count_1 - api_key_get_details_call_count_0) == 1)
+            self.assertTrue((api_key_get_details_call_count_1 - api_key_get_details_call_count_0) >= 1)  # At least one call later.
 
         except ApiException as e:
             print("Exception when calling an api key operation: %s\n" % e)

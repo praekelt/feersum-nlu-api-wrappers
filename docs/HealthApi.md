@@ -4,15 +4,15 @@ All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**health_get_status**](HealthApi.md#health_get_status) | **GET** /nlu/v2/health | An endpoint to check if the service is alice and well.
+[**health_get_status**](HealthApi.md#health_get_status) | **GET** /nlu/v2/health | An endpoint to check if the service is alive and well.
 
 
 # **health_get_status**
 > health_get_status(x_caller=x_caller)
 
-An endpoint to check if the service is alice and well.
+An endpoint to check if the service is alive and well.
 
-Check if the service is alice and well.
+Check if the service is alive and well.
 
 ### Example
 ```python
@@ -38,7 +38,7 @@ api_instance = feersum_nlu.HealthApi(feersum_nlu.ApiClient(configuration))
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # An endpoint to check if the service is alice and well.
+    # An endpoint to check if the service is alive and well.
     api_instance.health_get_status(x_caller=x_caller)
 except ApiException as e:
     print("Exception when calling HealthApi->health_get_status: %s\n" % e)

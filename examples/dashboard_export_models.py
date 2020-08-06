@@ -25,7 +25,7 @@ def main():
 
     try:
         print("Saving ALL dashboard models to disk...", end='', flush=True)
-        detail = dash_api_instance.dashboard_get_details()  # type: feersum_nlu.models.dashboard_detail.DashboardDetail
+        detail = dash_api_instance.dashboard_nlu_get_details()  # type: feersum_nlu.models.dashboard_detail.DashboardDetail
 
         print(" type(api_response)", type(detail))
         print(" api_response", detail)

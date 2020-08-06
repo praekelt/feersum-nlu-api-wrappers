@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.47.dev3
+  version: 2.0.49
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -45,7 +45,7 @@ tags:
 - name: text_classifiers
   description: The API to your text classifier instances useful for things like classifying phrases into predefined action or intent categories. Create a model, add some training data, train it and start doing retrieve/inference calls. A variety of shallow to deep classifier algorithms and language models can be selected at training time from naive Bayes and SVM to fully connected neural classifiers using USent and Elmo features.
 - name: text_datasets
-  description: The API to your labelled text datasets useful for things like labelling data. Store unlabelled samples with a label like '_unlabelled'.
+  description: The API to your labelled text datasets useful for things like labelling data.
 # - name: word_manifolds
 #   description: The API to your word embedding model instances. The service is pre-loaded with default word embeddings sufficient for most use cases.
 - name: intent_classifiers
@@ -59,15 +59,15 @@ tags:
 - name: date_parsers
   description: The API to a pre-configured 'generic' date parser.
 - name: sentiment_detectors
-  description: The API to a pre-configured 'generic' sentiment detector.
+  description: The API to a pre-configured low recall English sentiment detector. Contact us for other languages.
 - name: emotion_classifiers
-  description: The API to a pre-configured 'generic' emotion classifier.
+  description: The API to a pre-configured low recall English emotion classifier. Contact us for other languages.
 - name: regex_entity_extractors
   description: The API to your regular expression entity extractor instances. The extractor returns and labels the text that matched the named regex patterns.
-- name: person_name_entity_extractors
-  description: The API to your person_name entity extractor instances. The extractor returns a list of person names found in the text.
+# - name: person_name_entity_extractors
+#   description: The API to your person_name entity extractor instances. The extractor returns a list of person names found in the text.
 - name: duckling_entity_extractors
-  description: The API to your duckling entity extractor instances for things like distances, volumes, etc. The extractor returns the text recognised as a duckling entity and its parsed/formatted value.
+  description: The API to your duckling entity extractor instances for things like dates, distances, volumes, etc. The extractor returns the text recognised as a duckling entity and its parsed/formatted value.
 - name: sim_word_entity_extractors
   description: The API to your similar/related words entity extractor instances. The extractor returns the text that matched the listed targets words within the given threshold.
 - name: synonym_entity_extractors
@@ -88,6 +88,7 @@ tags:
   description: The API to your image reader instances.
 - name: text_pipelines
   description: Build an NLU pipeline with annotators, extractors and classifiers. The annotators enrich the text with POS tags, etc. after which the classifiers and extractors run.
+
 
 paths:
 ###################################
@@ -4160,214 +4161,214 @@ paths:
 ########
 ## person_name_entity_extractors root
 ########
-  /nlu/v2/person_name_entity_extractors:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - person_name_entity_extractors
-      summary: Create a person_name entity extractor.
-      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
-      operationId: person_name_entity_extractor_create
-      description: Create a new person_name entity extractor or reload one from the trash.
-      parameters:
-      - in: body
-        name: create_details
-        description: The details of the instance to create.
-        required: true
-        schema:
-          $ref: "#/definitions/person_name_entity_extractor_create_details"
-      responses:
-        200:
-          $ref: "#/responses/person_name_entity_extractor_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    get:
-      tags:
-      - person_name_entity_extractors
-      summary: Get list of regular expression entity extractors.
-      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
-      operationId: person_name_entity_extractor_get_details_all
-      description: Get the list of person_name entity extractors.
-      responses:
-        200:
-          $ref: "#/responses/person_name_entity_extractor_instance_detail_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## person_name_entity_extractors named instance
-########
-  /nlu/v2/person_name_entity_extractors/{instance_name}:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    get:
-      tags:
-      - person_name_entity_extractors
-      summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
-      operationId: person_name_entity_extractor_get_details
-      description: Get the details of the named person_name entity extractor instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/person_name_entity_extractor_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    delete:
-      tags:
-      - person_name_entity_extractors
-      summary: Delete named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
-      operationId: person_name_entity_extractor_del
-      description: Delete and return the details of the named person_name entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/person_name_entity_extractor_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## person_name_entity_extractors model_params
-########
-  /nlu/v2/person_name_entity_extractors/{instance_name}/params:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - person_name_entity_extractors
-      summary: Set the model parameters of named person name entity extractor.
-      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
-      operationId: person_name_entity_extractor_set_params
-      description: Set the model parameters of named person name entity extractor.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: model_params
-        description: The model parameters.
-        required: true
-        schema:
-          $ref: "#/definitions/model_params"
-      responses:
-        200:
-          $ref: "#/responses/person_name_entity_extractor_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    get:
-      tags:
-      - person_name_entity_extractors
-      summary: Get the editable model parameters of named person name entity extractor.
-      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
-      operationId: person_name_entity_extractor_get_params
-      description: Get the editable model parameters of named person name entity extractor.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/model_params"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## person_name_entity_extractors retrieve
-########
-  /nlu/v2/person_name_entity_extractors/{instance_name}/retrieve:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - person_name_entity_extractors
-      summary: Extract information based on the regular expression.
-      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
-      operationId: person_name_entity_extractor_retrieve
-      description: Extract the entities parsed by person_name.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: text_input
-        description: The input text.
-        required: true
-        schema:
-          $ref: "#/definitions/text_input"
-      responses:
-        200:
-          $ref: "#/responses/person_name_entity_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## person_name_entity_extractors vaporise
-########
-  /nlu/v2/person_name_entity_extractors/{instance_name}/vaporise:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - person_name_entity_extractors
-      summary: Vaporise the named model.
-      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
-      operationId: person_name_entity_extractor_vaporise
-      description: Permanently vaporises a model even if not trashed.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/person_name_entity_extractor_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-
+#  /nlu/v2/person_name_entity_extractors:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    post:
+#      tags:
+#      - person_name_entity_extractors
+#      summary: Create a person_name entity extractor.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
+#      operationId: person_name_entity_extractor_create
+#      description: Create a new person_name entity extractor or reload one from the trash.
+#      parameters:
+#      - in: body
+#        name: create_details
+#        description: The details of the instance to create.
+#        required: true
+#        schema:
+#          $ref: "#/definitions/person_name_entity_extractor_create_details"
+#      responses:
+#        200:
+#          $ref: "#/responses/person_name_entity_extractor_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#    get:
+#      tags:
+#      - person_name_entity_extractors
+#      summary: Get list of regular expression entity extractors.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
+#      operationId: person_name_entity_extractor_get_details_all
+#      description: Get the list of person_name entity extractors.
+#      responses:
+#        200:
+#          $ref: "#/responses/person_name_entity_extractor_instance_detail_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### person_name_entity_extractors named instance
+#########
+#  /nlu/v2/person_name_entity_extractors/{instance_name}:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    get:
+#      tags:
+#      - person_name_entity_extractors
+#      summary: Get details of named instance.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
+#      operationId: person_name_entity_extractor_get_details
+#      description: Get the details of the named person_name entity extractor instance.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/person_name_entity_extractor_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#    delete:
+#      tags:
+#      - person_name_entity_extractors
+#      summary: Delete named instance.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
+#      operationId: person_name_entity_extractor_del
+#      description: Delete and return the details of the named person_name entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/person_name_entity_extractor_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### person_name_entity_extractors model_params
+#########
+#  /nlu/v2/person_name_entity_extractors/{instance_name}/params:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    post:
+#      tags:
+#      - person_name_entity_extractors
+#      summary: Set the model parameters of named person name entity extractor.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
+#      operationId: person_name_entity_extractor_set_params
+#      description: Set the model parameters of named person name entity extractor.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: model_params
+#        description: The model parameters.
+#        required: true
+#        schema:
+#          $ref: "#/definitions/model_params"
+#      responses:
+#        200:
+#          $ref: "#/responses/person_name_entity_extractor_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#    get:
+#      tags:
+#      - person_name_entity_extractors
+#      summary: Get the editable model parameters of named person name entity extractor.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
+#      operationId: person_name_entity_extractor_get_params
+#      description: Get the editable model parameters of named person name entity extractor.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/model_params"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### person_name_entity_extractors retrieve
+#########
+#  /nlu/v2/person_name_entity_extractors/{instance_name}/retrieve:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    post:
+#      tags:
+#      - person_name_entity_extractors
+#      summary: Extract information based on the regular expression.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
+#      operationId: person_name_entity_extractor_retrieve
+#      description: Extract the entities parsed by person_name.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: text_input
+#        description: The input text.
+#        required: true
+#        schema:
+#          $ref: "#/definitions/text_input"
+#      responses:
+#        200:
+#          $ref: "#/responses/person_name_entity_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### person_name_entity_extractors vaporise
+#########
+#  /nlu/v2/person_name_entity_extractors/{instance_name}/vaporise:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    post:
+#      tags:
+#      - person_name_entity_extractors
+#      summary: Vaporise the named model.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.person_name_entity_extractors_controller
+#      operationId: person_name_entity_extractor_vaporise
+#      description: Permanently vaporises a model even if not trashed.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/person_name_entity_extractor_instance_detail"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#
 ###################################
 ###################################
 ########
@@ -5256,10 +5257,10 @@ paths:
     get:
       tags:
       - health
-      summary: An endpoint to check if the service is alice and well.
+      summary: An endpoint to check if the service is alive and well.
       x-swagger-router-controller: rest_api.flask_server.controllers.health_controller
       operationId: health_get_status
-      description: Check if the service is alice and well.
+      description: Check if the service is alive and well.
       responses:
         200:
           description: service is healthy

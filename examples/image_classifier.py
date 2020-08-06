@@ -23,16 +23,16 @@ configuration.host = feersumnlu_host
 api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
 
 # instance_name = 'under_vs_over_image_clsfr'
-# all_data_path = "/Volumes/256GB/vision_data/DrOetker_cropped/all"
+# all_data_path = "/Users/bduvenhage/Desktop/vision_data/DrOetker_cropped/all"
 # labels = ["over", "under"]
 
-instance_name = 'cat_vs_dog_image_clsfr'
-all_data_path = "/Volumes/256GB/vision_data/dogs-vs-cats/train"
-labels = ["cat", "dog"]
+# instance_name = 'cat_vs_dog_image_clsfr'
+# all_data_path = "/Users/bduvenhage/Desktop/vision_data/dogs-vs-cats/train"
+# labels = ["cat", "dog"]
 
-# instance_name = 'hot_dog_vs_not_hot_dog'
-# all_data_path = "/Volumes/256GB/vision_data/hot-dog-vs-not-hot-dog/train"
-# labels = ["hot_dog", "not_hot_dog"]
+instance_name = 'hot_dog_vs_not_hot_dog'
+all_data_path = "/Users/bduvenhage/Desktop/vision_data/hot-dog-vs-not-hot-dog/train"
+labels = ["hot_dog", "not_hot_dog"]
 
 # === Load the data samples ===
 training_list = []  # type: List[Tuple[str, str]]
@@ -68,7 +68,7 @@ create_details = feersum_nlu.ImageClassifierCreateDetails(name=instance_name,
 train_details = feersum_nlu.TrainDetails(temperature=1.0,
                                          immediate_mode=False,
                                          clsfr_algorithm="resnet152",
-                                         num_epochs=20)
+                                         num_epochs=12)
 
 # image_utils.show_image("/Users/bduvenhage/Desktop/1500x500.jpg")
 # image_string = image_utils.load_image(file_name="/Users/bduvenhage/Desktop/1500x500.jpg")
