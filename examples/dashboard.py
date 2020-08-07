@@ -33,9 +33,9 @@ try:
 
     print("Get dashboard content (use CUSTOM operation params):")
     api_response, api_response_code, api_response_header = \
-        api_instance.dashboard_get_details_with_params_with_http_info(x_caller=caller_name,
-                                                                      params=dash_params,
-                                                                      _request_timeout=2)
+        api_instance.dashboard_nlu_get_details_with_params_with_http_info(x_caller=caller_name,
+                                                                          params=dash_params,
+                                                                          _request_timeout=2)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print(" type(api_response_code)", type(api_response_code))
@@ -43,6 +43,10 @@ try:
     print(" type(api_response_header)", type(api_response_header))
     print(" api_response_header", api_response_header)
     print(" calls remaining in this cycle ('-1' means no limit) =", api_response_header.get("X-RateLimit-Remaining"))
+
+    # model_list = api_response.model_list
+    # for model_detail in model_list:
+    #     print(str(model_detail.model_type))
 
     # print("Get dashboard content (use DEFAULT operations params):")
     # api_response, api_response_code, api_response_header = \

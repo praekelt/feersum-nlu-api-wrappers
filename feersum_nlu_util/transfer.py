@@ -38,9 +38,9 @@ def export_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
         elif model_type == 'regex_entity_extractor':
             api_instance = feersum_nlu.RegexEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
             instance_detail = api_instance.regex_entity_extractor_get_details(model_name)
-        elif model_type == 'person_name_entity_extractor':
-            api_instance = feersum_nlu.PersonNameEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-            instance_detail = api_instance.person_name_entity_extractor_get_details(model_name)
+        # elif model_type == 'person_name_entity_extractor':
+        #     api_instance = feersum_nlu.PersonNameEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+        #     instance_detail = api_instance.person_name_entity_extractor_get_details(model_name)
         elif model_type == 'duckling_entity_extractor':
             api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
             instance_detail = api_instance.duckling_entity_extractor_get_details(model_name)
@@ -209,7 +209,25 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
             if len(testing_samples):
                 api_response = api_instance.text_classifier_add_testing_samples(model_name, testing_samples)
 
-            train_details = feersum_nlu.TrainDetails()
+            clsfr_algorithm = instance_detail.get('clsfr_algorithm')
+
+            train_threshold = instance_detail.get('threshold')
+            train_temperature = instance_detail.get('temperature')
+
+            language_model_list_json = instance_detail.get('language_model_list')
+            language_model_list = []
+
+            for language_model_json in language_model_list_json:
+                lang_code = language_model_json.get("lang_code")
+                lang_model = language_model_json.get("lang_model")
+
+                if lang_code is not None:
+                    language_model_list.append(feersum_nlu.LabelledLanguageModel(lang_code, lang_model))
+
+            train_details = feersum_nlu.TrainDetails(threshold=train_threshold,
+                                                     temperature=train_temperature,
+                                                     clsfr_algorithm=clsfr_algorithm,
+                                                     language_model_list=language_model_list)
 
             print("  train_details =", str(train_details.to_dict()))
 
@@ -256,6 +274,7 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
                 api_response = api_instance.intent_classifier_add_testing_samples(model_name, testing_samples)
 
             train_threshold = instance_detail.get('threshold')
+            train_temperature = instance_detail.get('temperature')
 
             word_manifold_list_json = instance_detail.get('word_manifold_list')
             word_manifold_list = []
@@ -268,9 +287,8 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
                     word_manifold_list.append(feersum_nlu.LabelledWordManifold(language, manifold))
 
             train_details = feersum_nlu.TrainDetails(threshold=train_threshold,
+                                                     temperature=train_temperature,
                                                      word_manifold_list=word_manifold_list)
-
-            print("  train_details =", str(train_details.to_dict()))
 
             print("  train_details =", str(train_details.to_dict()))
 
@@ -317,6 +335,7 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
                 api_response = api_instance.faq_matcher_add_testing_samples(model_name, testing_samples)
 
             train_threshold = instance_detail.get('threshold')
+            train_temperature = instance_detail.get('temperature')
 
             word_manifold_list_json = instance_detail.get('word_manifold_list')
             word_manifold_list = []
@@ -329,6 +348,7 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
                     word_manifold_list.append(feersum_nlu.LabelledWordManifold(language, manifold))
 
             train_details = feersum_nlu.TrainDetails(threshold=train_threshold,
+                                                     temperature=train_temperature,
                                                      word_manifold_list=word_manifold_list)
 
             print("  train_details =", str(train_details.to_dict()))
@@ -402,22 +422,22 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
             print("  Get the details of the imported model ... ", flush=True)
             api_response = api_instance.sim_word_entity_extractor_get_details(model_name)
             print("   api_response", api_response)
-        elif model_type == 'person_name_entity_extractor':
-            create_details = feersum_nlu.PersonNameEntityExtractorCreateDetails(name=model_name,
-                                                                                desc=desc,
-                                                                                long_name=long_name,
-                                                                                load_from_store=False)
-
-            api_instance = feersum_nlu.PersonNameEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-
-            print("  Creating model ... ", flush=True)
-            api_response = api_instance.person_name_entity_extractor_create(create_details)
-
-            print()
-
-            print("  Get the details of the imported model ... ", flush=True)
-            api_response = api_instance.person_name_entity_extractor_get_details(model_name)
-            print("   api_response", api_response)
+        # elif model_type == 'person_name_entity_extractor':
+        #     create_details = feersum_nlu.PersonNameEntityExtractorCreateDetails(name=model_name,
+        #                                                                         desc=desc,
+        #                                                                         long_name=long_name,
+        #                                                                         load_from_store=False)
+        #
+        #     api_instance = feersum_nlu.PersonNameEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+        #
+        #     print("  Creating model ... ", flush=True)
+        #     api_response = api_instance.person_name_entity_extractor_create(create_details)
+        #
+        #     print()
+        #
+        #     print("  Get the details of the imported model ... ", flush=True)
+        #     api_response = api_instance.person_name_entity_extractor_get_details(model_name)
+        #     print("   api_response", api_response)
         elif model_type == 'crf_entity_extractor':
             create_details = feersum_nlu.CrfEntityExtractorCreateDetails(name=model_name,
                                                                          desc=desc,

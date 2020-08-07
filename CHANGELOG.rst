@@ -10,7 +10,9 @@ Added missing post endpoints that provide an alternative to create a model and s
 
 Added a root dashboard as well as vision and audio versions.
 
-Added missing from_ and to_ fields to duckling endpoints' swagger spec.
+Added missing from and to fields to duckling endpoints' swagger spec.
+
+Added a simple text pipeline that for now just puts multiple models behind one retrieve endpoint.
 
 
 Version 2.0.46

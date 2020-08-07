@@ -19,7 +19,7 @@ def main():
 
     # Select the source auth token. Default is same as config/destination token, but it can be different.
     src_feersum_nlu_auth_token = feersum_nlu_auth_token
-    # src_feersum_nlu_auth_token = "63454b82-ee34-4e26-9a63-6b1d4f51db49"
+    # src_feersum_nlu_auth_token = "..."
 
     model_list = [
         ("emergencies_category", "text_classifier"),

@@ -83,19 +83,20 @@ class TestCRFExtractor(unittest.TestCase):
 
         try:
             print("Create the CRF entity extractor:")
-            api_response = api_instance.crf_entity_extractor_create(create_details)
+            api_response = api_instance.crf_entity_extractor_create(create_details, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Add training samples to the CRF entity extractor:")
-            api_response = api_instance.crf_entity_extractor_add_training_samples(instance_name, training_sample_list)
+            api_response = api_instance.crf_entity_extractor_add_training_samples(instance_name, training_sample_list,
+                                                                                  x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Get the training samples of the CRF entity extractor:")
-            api_response = api_instance.crf_entity_extractor_get_training_samples(instance_name)
+            api_response = api_instance.crf_entity_extractor_get_training_samples(instance_name, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
@@ -103,31 +104,35 @@ class TestCRFExtractor(unittest.TestCase):
             print("Del a single training samples of the CRF entity extractor:")
             api_response = \
                 api_instance.crf_entity_extractor_del_training_samples(instance_name,
-                                                                       crf_sample_list=sample_delete_list)
+                                                                       crf_sample_list=sample_delete_list,
+                                                                       x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Del training samples of the CRF entity extractor:")
-            api_response = api_instance.crf_entity_extractor_del_training_samples_all(instance_name)
+            api_response = api_instance.crf_entity_extractor_del_training_samples_all(instance_name,
+                                                                                      x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Get the reduced training samples of the CRF entity extractor:")
-            api_response = api_instance.crf_entity_extractor_get_training_samples(instance_name)
+            api_response = api_instance.crf_entity_extractor_get_training_samples(instance_name, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Add all the training samples back to the CRF entity extractor:")
-            api_response = api_instance.crf_entity_extractor_add_training_samples(instance_name, training_sample_list)
+            api_response = api_instance.crf_entity_extractor_add_training_samples(instance_name, training_sample_list,
+                                                                                  x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Add testing samples to the CRF entity extractor:")
-            api_response = api_instance.crf_entity_extractor_add_testing_samples(instance_name, testing_sample_list)
+            api_response = api_instance.crf_entity_extractor_add_testing_samples(instance_name, testing_sample_list,
+                                                                                 x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
@@ -135,7 +140,8 @@ class TestCRFExtractor(unittest.TestCase):
             try:
                 print("Try to add invalid sample to the CRF entity extractor:")
                 api_instance.crf_entity_extractor_add_testing_samples(instance_name, [
-                    feersum_nlu.CrfSample(text="Can I have a burger with chips please?", intent=None, entity_list=None)])
+                    feersum_nlu.CrfSample(text="Can I have a burger with chips please?", intent=None, entity_list=None)],
+                                                                      x_caller='feersum_nlu_api_wrapper_test')
             except ApiException:
                 self.assertTrue(True)  # This should fail!
 
@@ -143,26 +149,27 @@ class TestCRFExtractor(unittest.TestCase):
                 print("Try to add invalid sample to the CRF entity extractor:")
                 api_instance.crf_entity_extractor_add_testing_samples(instance_name, [
                     feersum_nlu.CrfSample(text=None, intent=None,
-                                          entity_list=[feersum_nlu.CrfEntity(entity="food", index=13, len=17)])])
+                                          entity_list=[feersum_nlu.CrfEntity(entity="food", index=13, len=17)])],
+                                                                      x_caller='feersum_nlu_api_wrapper_test')
             except ApiException:
                 self.assertTrue(True)  # This should fail!
 
             train_details = feersum_nlu.TrainDetails(threshold=0.99)
 
             print("Train the CRF entity extractor:")
-            instance_detail = api_instance.crf_entity_extractor_train(instance_name, train_details)
+            instance_detail = api_instance.crf_entity_extractor_train(instance_name, train_details, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(instance_detail))
             print(" api_response", instance_detail)
             print()
 
             print("Get the details of all loaded CRF entity extractor:")
-            api_response = api_instance.crf_entity_extractor_get_details_all()
+            api_response = api_instance.crf_entity_extractor_get_details_all(x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Get the details of specific named loaded CRF entity extractor:")
-            api_response = api_instance.crf_entity_extractor_get_details(instance_name)
+            api_response = api_instance.crf_entity_extractor_get_details(instance_name, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
@@ -170,19 +177,19 @@ class TestCRFExtractor(unittest.TestCase):
             # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be available
             # after training.
             print("Get the labels of named loaded CRF entity extractor:")
-            api_response = api_instance.crf_entity_extractor_get_labels(instance_name)
+            api_response = api_instance.crf_entity_extractor_get_labels(instance_name, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Extract some entities:")
-            api_response = api_instance.crf_entity_extractor_retrieve(instance_name, text_input_0)
+            api_response = api_instance.crf_entity_extractor_retrieve(instance_name, text_input_0, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Get the parameters:")
-            api_response = api_instance.crf_entity_extractor_get_params(instance_name)
+            api_response = api_instance.crf_entity_extractor_get_params(instance_name, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
@@ -191,7 +198,7 @@ class TestCRFExtractor(unittest.TestCase):
             model_params = \
                 feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test CRF entity extractor.",
                                         long_name="A longer name.", readonly=True)
-            api_response = api_instance.crf_entity_extractor_set_params(instance_name, model_params)
+            api_response = api_instance.crf_entity_extractor_set_params(instance_name, model_params, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
@@ -199,19 +206,19 @@ class TestCRFExtractor(unittest.TestCase):
             print("Update the parameters:")
             model_params = \
                 feersum_nlu.ModelParams(readonly=False)
-            api_response = api_instance.crf_entity_extractor_set_params(instance_name, model_params)
+            api_response = api_instance.crf_entity_extractor_set_params(instance_name, model_params, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Get the details of specific named loaded CRF entity extractor:")
-            api_response = api_instance.crf_entity_extractor_get_details(instance_name)
+            api_response = api_instance.crf_entity_extractor_get_details(instance_name, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Extract some entities:")
-            api_response = api_instance.crf_entity_extractor_retrieve(instance_name, text_input_0)
+            api_response = api_instance.crf_entity_extractor_retrieve(instance_name, text_input_0, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
@@ -222,24 +229,24 @@ class TestCRFExtractor(unittest.TestCase):
             print("Update the parameters:")
             model_params = \
                 feersum_nlu.ModelParams(readonly=False)
-            api_response = api_instance.crf_entity_extractor_set_params(instance_name, model_params)
+            api_response = api_instance.crf_entity_extractor_set_params(instance_name, model_params, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
-            api_response = api_instance.crf_entity_extractor_retrieve(instance_name, text_input_0)
+            api_response = api_instance.crf_entity_extractor_retrieve(instance_name, text_input_0, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Delete specific named loaded CRF entity extractor:")
-            api_response = api_instance.crf_entity_extractor_del(instance_name)
+            api_response = api_instance.crf_entity_extractor_del(instance_name, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Vaporise specific named loaded CRF entity extractor:")
-            api_response = api_instance.crf_entity_extractor_vaporise(instance_name)
+            api_response = api_instance.crf_entity_extractor_vaporise(instance_name, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()

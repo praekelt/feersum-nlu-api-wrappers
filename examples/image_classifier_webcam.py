@@ -48,8 +48,7 @@ try:
             resized_height = int((target_size / width) * height)
             resized_width = target_size
 
-        resized_image = \
-            cv2.resize(image, (resized_width, resized_height), interpolation=cv2.INTER_LINEAR)  # pylint: disable=no-member
+        resized_image = cv2.resize(image, (resized_width, resized_height), interpolation=cv2.INTER_LINEAR)  # pylint: disable=no-member
 
         base64_img_str = image_utils.load_image_opencvBGR(resized_image)
         image_input = feersum_nlu.ImageInput(base64_img_str)  # The same size as the camera frame, but jpeg encoded.

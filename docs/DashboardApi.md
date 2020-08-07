@@ -4,20 +4,20 @@ All URIs are relative to *https://nlu.feersum.io:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**dashboard_audio_get_details**](DashboardApi.md#dashboard_audio_get_details) | **GET** /audio/v2/dashboard | Your service dashboard. Same as POST endpoint, but doesn&#39;t allow params to be supplied to the operation.
-[**dashboard_audio_get_details_with_params**](DashboardApi.md#dashboard_audio_get_details_with_params) | **POST** /audio/v2/dashboard | Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
-[**dashboard_get_details**](DashboardApi.md#dashboard_get_details) | **GET** /dashboard/v2/dashboard | Your service dashboard. Same as POST endpoint, but doesn&#39;t allow params to be supplied to the operation.
-[**dashboard_get_details_with_params**](DashboardApi.md#dashboard_get_details_with_params) | **POST** /dashboard/v2/dashboard | Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
-[**dashboard_nlu_get_details**](DashboardApi.md#dashboard_nlu_get_details) | **GET** /nlu/v2/dashboard | Your service dashboard. Same as POST endpoint, but doesn&#39;t allow params to be supplied to the operation.
-[**dashboard_nlu_get_details_with_params**](DashboardApi.md#dashboard_nlu_get_details_with_params) | **POST** /nlu/v2/dashboard | Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
-[**dashboard_vision_get_details**](DashboardApi.md#dashboard_vision_get_details) | **GET** /vision/v2/dashboard | Your service dashboard. Same as POST endpoint, but doesn&#39;t allow params to be supplied to the operation.
-[**dashboard_vision_get_details_with_params**](DashboardApi.md#dashboard_vision_get_details_with_params) | **POST** /vision/v2/dashboard | Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+[**dashboard_audio_get_details**](DashboardApi.md#dashboard_audio_get_details) | **GET** /audio/v2/dashboard | Your audio service dashboard. Same as POST endpoint, but doesn&#39;t allow params to be supplied to the operation.
+[**dashboard_audio_get_details_with_params**](DashboardApi.md#dashboard_audio_get_details_with_params) | **POST** /audio/v2/dashboard | Your audio service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+[**dashboard_get_details**](DashboardApi.md#dashboard_get_details) | **GET** /dashboard/v2/dashboard | Your root service dashboard. Same as POST endpoint, but doesn&#39;t allow params to be supplied to the operation.
+[**dashboard_get_details_with_params**](DashboardApi.md#dashboard_get_details_with_params) | **POST** /dashboard/v2/dashboard | Your root service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+[**dashboard_nlu_get_details**](DashboardApi.md#dashboard_nlu_get_details) | **GET** /nlu/v2/dashboard | Your nlu service dashboard. Same as POST endpoint, but doesn&#39;t allow params to be supplied to the operation.
+[**dashboard_nlu_get_details_with_params**](DashboardApi.md#dashboard_nlu_get_details_with_params) | **POST** /nlu/v2/dashboard | Your nlu service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+[**dashboard_vision_get_details**](DashboardApi.md#dashboard_vision_get_details) | **GET** /vision/v2/dashboard | Your vision service dashboard. Same as POST endpoint, but doesn&#39;t allow params to be supplied to the operation.
+[**dashboard_vision_get_details_with_params**](DashboardApi.md#dashboard_vision_get_details_with_params) | **POST** /vision/v2/dashboard | Your vision service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
 
 
 # **dashboard_audio_get_details**
 > DashboardDetail dashboard_audio_get_details(x_caller=x_caller)
 
-Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+Your audio service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
 
 Get your list of model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
 
@@ -45,7 +45,7 @@ api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+    # Your audio service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
     api_response = api_instance.dashboard_audio_get_details(x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 # **dashboard_audio_get_details_with_params**
 > DashboardDetail dashboard_audio_get_details_with_params(params, x_caller=x_caller)
 
-Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+Your audio service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
 
 Get your list of model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
 
@@ -105,7 +105,7 @@ params = feersum_nlu.DashboardParams() # DashboardParams | Params like 'show_dat
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+    # Your audio service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
     api_response = api_instance.dashboard_audio_get_details_with_params(params, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 # **dashboard_get_details**
 > DashboardDetail dashboard_get_details(x_caller=x_caller)
 
-Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+Your root service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
 
 Get your list of model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
 
@@ -165,7 +165,7 @@ api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+    # Your root service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
     api_response = api_instance.dashboard_get_details(x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
@@ -196,7 +196,7 @@ Name | Type | Description  | Notes
 # **dashboard_get_details_with_params**
 > DashboardDetail dashboard_get_details_with_params(params, x_caller=x_caller)
 
-Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+Your root service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
 
 Get your list of model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
 
@@ -225,7 +225,7 @@ params = feersum_nlu.DashboardParams() # DashboardParams | Params like 'show_dat
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+    # Your root service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
     api_response = api_instance.dashboard_get_details_with_params(params, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
@@ -257,7 +257,7 @@ Name | Type | Description  | Notes
 # **dashboard_nlu_get_details**
 > DashboardDetail dashboard_nlu_get_details(x_caller=x_caller)
 
-Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+Your nlu service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
 
 Get your list of model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
 
@@ -285,7 +285,7 @@ api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+    # Your nlu service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
     api_response = api_instance.dashboard_nlu_get_details(x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
@@ -316,7 +316,7 @@ Name | Type | Description  | Notes
 # **dashboard_nlu_get_details_with_params**
 > DashboardDetail dashboard_nlu_get_details_with_params(params, x_caller=x_caller)
 
-Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+Your nlu service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
 
 Get your list of model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
 
@@ -345,7 +345,7 @@ params = feersum_nlu.DashboardParams() # DashboardParams | Params like 'show_dat
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+    # Your nlu service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
     api_response = api_instance.dashboard_nlu_get_details_with_params(params, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
@@ -377,7 +377,7 @@ Name | Type | Description  | Notes
 # **dashboard_vision_get_details**
 > DashboardDetail dashboard_vision_get_details(x_caller=x_caller)
 
-Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+Your vision service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
 
 Get your list of model instances, the API version, etc. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
 
@@ -405,7 +405,7 @@ api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Your service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
+    # Your vision service dashboard. Same as POST endpoint, but doesn't allow params to be supplied to the operation.
     api_response = api_instance.dashboard_vision_get_details(x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:
@@ -436,7 +436,7 @@ Name | Type | Description  | Notes
 # **dashboard_vision_get_details_with_params**
 > DashboardDetail dashboard_vision_get_details_with_params(params, x_caller=x_caller)
 
-Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+Your vision service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
 
 Get your list of model instances, the API version, etc. Same as GET endpoint, but allows params to be supplied to the operation.
 
@@ -465,7 +465,7 @@ params = feersum_nlu.DashboardParams() # DashboardParams | Params like 'show_dat
 x_caller = 'x_caller_example' # str |  (optional)
 
 try:
-    # Your service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
+    # Your vision service dashboard. Same as GET endpoint, but allows params to be supplied to the operation.
     api_response = api_instance.dashboard_vision_get_details_with_params(params, x_caller=x_caller)
     pprint(api_response)
 except ApiException as e:

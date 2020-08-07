@@ -47,37 +47,37 @@ class TestDataObject(unittest.TestCase):
 
         try:
             print("Create the data_object:")
-            api_response = api_instance.data_object_post(instance_name, data)
+            api_response = api_instance.data_object_post(instance_name, data, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Get the names of all loaded data_objects:")
-            api_response = api_instance.data_object_get_names_all()
+            api_response = api_instance.data_object_get_names_all(x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Get the details of specific named loaded data_object:")
-            api_response = api_instance.data_object_get_details(instance_name)
+            api_response = api_instance.data_object_get_details(instance_name, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Get the named data_object:")
-            api_response = api_instance.data_object_get_details(instance_name)
+            api_response = api_instance.data_object_get_details(instance_name, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Delete named loaded data_object:")
-            api_response = api_instance.data_object_del(instance_name)
+            api_response = api_instance.data_object_del(instance_name, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()
 
             print("Vaporise named loaded data_object:")
-            api_response = api_instance.data_object_vaporise(instance_name)
+            api_response = api_instance.data_object_vaporise(instance_name, x_caller='feersum_nlu_api_wrapper_test')
             print(" type(api_response)", type(api_response))
             print(" api_response", api_response)
             print()

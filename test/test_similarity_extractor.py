@@ -15,6 +15,7 @@ from test import feersumnlu_host, feersum_nlu_auth_token
 import uuid
 
 
+@unittest.skip("Skipping - This feature is being removed.")
 class TestSimEnt(unittest.TestCase):
     def setUp(self):
         pass

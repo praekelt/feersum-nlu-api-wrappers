@@ -3,10 +3,10 @@ checkfiles = $(_checkfiles) *.py
 
 mypy_flags = --ignore-missing-imports --follow-imports=silent --check-untyped-defs --warn-no-return --warn-unused-ignores
 
-flake8_flags = --max-line-length=125 --exclude db_migrations
+flake8_flags = --max-line-length=140 --exclude db_migrations
 
-pylint_flags = --max-line-length=125
-# pylint_flags = --max-line-length=125 --disable=E1126
+pylint_flags = --max-line-length=140
+# pylint_flags = --max-line-length=140 --disable=E1126
 # ! False positives ... python 3.5.3+ #1295 - https://github.com/PyCQA/pylint/issues/1295
 
 help:
@@ -28,7 +28,7 @@ check:
 	# @echo [mypy]:
 	# @mypy $(mypy_flags) --incremental $(_checkfiles)
 	@echo [pylint]:
-	@pylint -E $(pylint_flags) $(checkfiles) # ! False positives ... python 3.5.3+ #1295 - https://github.com/PyCQA/pylint/issues/1295
+	@pylint -E $(pylint_flags) $(_checkfiles) # ! False positives ... python 3.5.3+ #1295 - https://github.com/PyCQA/pylint/issues/1295
 	@echo [flake8]:
 	@flake8 $(flake8_flags) $(checkfiles)
 
