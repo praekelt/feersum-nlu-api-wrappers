@@ -1,6 +1,12 @@
 Changelog
 *********
 
+Version 2.0.50
+==============
+
+No API changes, but added some examples and service (now 2.0.50) updated to include additional sentence encoders and text classifier algorithms.
+
+
 Version 2.0.47
 ==============
 

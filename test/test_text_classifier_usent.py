@@ -13,7 +13,7 @@ from test import feersumnlu_host, feersum_nlu_auth_token
 import uuid
 
 
-# @unittest.skip("Skipping - This test requires the server to download a LM not yet typically used in production.")
+@unittest.skip("Skipping - This test requires the server to download a LM not yet typically used in production.")
 class TestTextClassifier(unittest.TestCase):
     def setUp(self):
         pass
