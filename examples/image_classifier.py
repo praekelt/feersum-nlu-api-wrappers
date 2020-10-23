@@ -64,11 +64,10 @@ create_details = feersum_nlu.ImageClassifierCreateDetails(name=instance_name,
                                                           desc=instance_name,
                                                           load_from_store=False)
 
-
 train_details = feersum_nlu.TrainDetails(temperature=1.0,
                                          immediate_mode=False,
                                          clsfr_algorithm="resnet152",
-                                         num_epochs=12)
+                                         num_epochs=15)
 
 # image_utils.show_image("/Users/bduvenhage/Desktop/1500x500.jpg")
 # image_string = image_utils.load_image(file_name="/Users/bduvenhage/Desktop/1500x500.jpg")
@@ -76,7 +75,6 @@ train_details = feersum_nlu.TrainDetails(temperature=1.0,
 
 image_input = feersum_nlu.ImageInput(testing_samples[0].image)
 print("len(image_input) =", len(image_input.image))
-
 
 caller_name = 'example_caller'
 

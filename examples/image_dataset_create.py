@@ -18,7 +18,7 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.ImageDatasetsApi(feersum_nlu.ApiClient(configuration))
 
-instance_name = 'bernardt2'
+instance_name = 'labelled_images_1'
 
 create_details = feersum_nlu.ImageDatasetCreateDetails(name=instance_name,
                                                        desc=instance_name,

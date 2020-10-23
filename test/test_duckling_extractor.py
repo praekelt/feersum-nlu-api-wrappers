@@ -1,5 +1,4 @@
 # coding: utf-8
-
 from __future__ import absolute_import
 
 import urllib3
@@ -12,6 +11,7 @@ from test import feersumnlu_host, feersum_nlu_auth_token
 import uuid
 
 
+# @unittest.skip("skipping while fixing duckling!")
 class TestDucklingExtractor(unittest.TestCase):
     def setUp(self):
         pass
@@ -69,7 +69,7 @@ class TestDucklingExtractor(unittest.TestCase):
             entity_list = api_response
             if len(entity_list) > 0:
                 entity = entity_list[0]
-                self.assertTrue((entity.value == '2017-01-05T15:00:00.000'))
+                self.assertTrue((entity.value == '2017-01-05 15:00:00'))
             else:
                 self.assertTrue(False)
 

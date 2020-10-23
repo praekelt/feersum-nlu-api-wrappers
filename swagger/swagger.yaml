@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.49
+  version: 2.0.52
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -58,6 +58,8 @@ tags:
   description: The API to your lr4 language recogniser model instances (deprecated; please use language_recognisers instead). An 'lid_za' input model file is available and trained on all 11 South African languages. Create a model as shown and start doing language ident on your own text.
 - name: date_parsers
   description: The API to a pre-configured 'generic' date parser.
+- name: sentence_translators
+  description: The API to pre-trained sentence translation models.
 - name: sentiment_detectors
   description: The API to a pre-configured low recall English sentiment detector. Contact us for other languages.
 - name: emotion_classifiers
@@ -2685,6 +2687,43 @@ paths:
       responses:
         200:
           $ref: "#/responses/date_entity_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+###################################
+###################################
+########
+## Translate text.
+########
+  /nlu/v2/sentence_translators/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - sentence_translators
+      summary: Translate text. See the dashboard response for the list of available sentence_translators.
+      x-swagger-router-controller: rest_api.flask_server.controllers.sentence_translator_controller
+      operationId: sentence_translator_retrieve
+      description: Translate text. See the dashboard response for the list of available sentence_translators.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
+      responses:
+        200:
+          $ref: "#/responses/seq2seq_resp"
         400:
           description: bad request
         401:
@@ -7576,6 +7615,11 @@ responses:
     schema:
       $ref: "#/definitions/sentiment"
 
+  seq2seq_resp:
+    description: A text response from a seq2seq model.
+    schema:
+      $ref: "#/definitions/seq2seq_resp"
+
   document:
     description: A document.
     schema:
@@ -8784,6 +8828,11 @@ definitions:
         description: If provided, the uuid of the revision of the instance to try and load from the history.
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
+      # revision_name:
+      #   description: The name of the earlier revision of the model.
+      #   type: string
+      #   example: 'example_instan'
+
 
   word_manifold_create_details:
     description: The details of the instance to create.
@@ -9527,6 +9576,15 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/sentiment_detail"
+
+  seq2seq_resp:
+    description: A seq2seq text response.
+    type: object
+    required:
+    - text
+    properties:
+      text:
+        type: string
 
   api_key_create_details:
     description: The details of the api key to create.

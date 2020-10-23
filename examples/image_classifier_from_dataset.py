@@ -23,7 +23,7 @@ dataset_samples = []
 print()
 
 try:
-    print("Load the image dataset (if not loaded already):")
+    print("Load the image dataset:")
     api_response = api_instance.image_dataset_create(create_details)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
