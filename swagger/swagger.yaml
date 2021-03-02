@@ -2,7 +2,7 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.54.dev1
+  version: 2.0.54.dev2
   title: FeersumNLU API
   contact:
     name: Feersum Engine
@@ -7272,10 +7272,10 @@ definitions:
       testing_cm:
         description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
-      sorted_training_cm_labels:
+      training_sorted_cm_labels:
         description: A list that, if present, proposes the order of the labels of the confusion matrix.
         type: object
-      sorted_testing_cm_labels:
+      testing_sorted_cm_labels:
         description: A list that, if present, proposes the order of the labels of the confusion matrix.
         type: object
       testing_weighted_avg_stats:
@@ -7383,10 +7383,10 @@ definitions:
       testing_cm:
         description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
-      sorted_training_cm_labels:
+      training_sorted_cm_labels:
         description: A list that, if present, proposes the order of the labels of the confusion matrix.
         type: object
-      sorted_testing_cm_labels:
+      testing_sorted_cm_labels:
         description: A list that, if present, proposes the order of the labels of the confusion matrix.
         type: object
       testing_weighted_avg_stats:
@@ -7531,10 +7531,10 @@ definitions:
       testing_cm:
         description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
-      sorted_training_cm_labels:
+      training_sorted_cm_labels:
         description: A list that, if present, proposes the order of the labels of the confusion matrix.
         type: object
-      sorted_testing_cm_labels:
+      testing_sorted_cm_labels:
         description: A list that, if present, proposes the order of the labels of the confusion matrix.
         type: object
       testing_weighted_avg_stats:
@@ -7626,10 +7626,10 @@ definitions:
       testing_cm:
         description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
-      sorted_training_cm_labels:
+      training_sorted_cm_labels:
         description: A list that, if present, proposes the order of the labels of the confusion matrix.
         type: object
-      sorted_testing_cm_labels:
+      testing_sorted_cm_labels:
         description: A list that, if present, proposes the order of the labels of the confusion matrix.
         type: object
       testing_weighted_avg_stats:

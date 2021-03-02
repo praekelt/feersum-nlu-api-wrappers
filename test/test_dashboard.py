@@ -38,7 +38,7 @@ class TestDashboard(unittest.TestCase):
             print(api_response)
 
             print("api_response.api_version =", api_response.api_version)
-            self.assertTrue(api_response.api_version == "2.0.54.dev1")
+            self.assertTrue(api_response.api_version == "2.0.54.dev2")
 
             print(" api_response_header", api_response_header)
             print(" calls remaining in this cycle ('-1' means no limit) =", api_response_header.get("X-RateLimit-Remaining"))
