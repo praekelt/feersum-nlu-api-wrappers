@@ -20,7 +20,16 @@ configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative au
 
 configuration.host = feersumnlu_host
 
-api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
+api_client = feersum_nlu.ApiClient(configuration)
+
+# Example of how to setup request retries!
+api_client.rest_client.pool_manager.connection_pool_kw['retries'] = 3
+api_instance = feersum_nlu.ImageClassifiersApi(api_client)
+
+# instance_name = 'freiburg_groceries'
+# all_data_path = "/Users/bduvenhage/Desktop/vision_data/freiburg_groceries_dataset"
+# labels = ["BEANS", "CAKE", "CANDY", "CEREAL", "CHIPS", "CHOCOLATE", "COFFEE", "CORN", "FISH", "FLOUR", "HONEY", "JAM",
+#           "JUICE", "MILK", "NUTS", "OIL", "PASTA", "RICE", "SODA", "SPICES", "SUGAR", "TEA", "TOMATO_SAUCE", "VINEGAR", "WATER"]
 
 # instance_name = 'under_vs_over_image_clsfr'
 # all_data_path = "/Users/bduvenhage/Desktop/vision_data/DrOetker_cropped/all"
@@ -41,11 +50,11 @@ testing_list = []  # type: List[Tuple[str, str]]
 print("Loading data samples...", end='', flush=True)
 for label in labels:
     samples = image_utils.get_image_samples(all_data_path, label,
-                                            max_samples=100)
+                                            max_samples=50)
 
     num_samples = len(samples)
     print(f"label: num_samples = {num_samples}")
-    num_testing_samples = int(num_samples * 0.2)
+    num_testing_samples = int(num_samples * 0.1)
     num_training_samples = num_samples - num_testing_samples
 
     random.shuffle(samples)
@@ -74,7 +83,7 @@ train_details = feersum_nlu.TrainDetails(temperature=1.0,
 # image_utils.save_image(file_name="/Users/bduvenhage/Desktop/1500x500_.png", base64_string=image_string)
 
 image_input = feersum_nlu.ImageInput(testing_samples[0].image)
-print("len(image_input) =", len(image_input.image))
+print("len(image_input.image) =", len(image_input.image))
 
 caller_name = 'example_caller'
 
@@ -94,6 +103,18 @@ try:
     # print(" type(api_response)", type(api_response))
     # print(" api_response", api_response)
     # print()
+    #
+    # print("Delete named loaded image classifier:")
+    # api_response = api_instance.image_classifier_del(instance_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+    #
+    # print("Vaporise named loaded image classifier:")
+    # api_response = api_instance.image_classifier_vaporise(instance_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
     print("Create the image classifier:")
     api_response = api_instance.image_classifier_create(create_details)
@@ -106,24 +127,28 @@ try:
     # print(" api_response", api_response)
     # print()
 
+    batch_size = 25
+
     print("Add training samples to the image classifier:")
-    for training_sample in training_samples:
-        api_response = api_instance.image_classifier_add_training_samples(instance_name, [training_sample])
+    len_training_samples = len(training_samples)
+    for s in range(0, len_training_samples, batch_size):
+        api_response = api_instance.image_classifier_add_training_samples(instance_name, training_samples[s:(s + batch_size)])
         print(" type(api_response)", type(api_response))
-        print(" api_response", api_response)
+        print(" len(api_response)", len(api_response))
     print()
 
     print("Add testing samples to the image classifier:")
-    for testing_sample in testing_samples:
-        api_response = api_instance.image_classifier_add_testing_samples(instance_name, [testing_sample])
+    len_testing_samples = len(testing_samples)
+    for s in range(0, len_testing_samples, batch_size):
+        api_response = api_instance.image_classifier_add_testing_samples(instance_name, testing_samples[s:(s + batch_size)])
         print(" type(api_response)", type(api_response))
-        print(" api_response", api_response)
+        print(" len(api_response)", len(api_response))
     print()
 
     print("Get the training samples of the image classifier:")
     api_response = api_instance.image_classifier_get_training_samples(instance_name)
     print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
+    print(" len(api_response)", len(api_response))
     print()
 
     print("Train the image classifier:")
@@ -133,12 +158,11 @@ try:
     print()
 
     # TRAINING:
-    # If timestamp begins with 'ASYNC...' the the training is running in the background and you need to poll until the
+    # If timestamp is missing then the training is running in the background and you need to poll until the
     # model ID has updated.
-    # if timestamp doesn't begin with ASYNC then the training has completed synchronously and you may continue.
     # In the near future webhooks will be supported to let you know when async training has finished.
 
-    if instance_detail.training_stamp.startswith('ASYNC'):
+    if instance_detail.training_stamp is None:
         # Background training in progress. We'll poll and wait for it to complete.
         print("Background training in progress...", flush=True, end='')
         previous_id = instance_detail.id

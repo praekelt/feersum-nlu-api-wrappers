@@ -26,6 +26,13 @@ caller_name = 'example_caller'
 print()
 
 try:
+    # print("(Re)train the synonym entity extractor:")
+    # train_details = feersum_nlu.TrainDetails(threshold=0.99)
+    # instance_detail = api_instance.synonym_entity_extractor_train(instance_name, train_details)
+    # print(" type(api_response)", type(instance_detail))
+    # print(" api_response", instance_detail)
+    # print()
+    #
     # print("Get the training samples of the synonym entity extractor:")
     # api_response = api_instance.synonym_entity_extractor_get_training_samples(instance_name)
     # print(" type(api_response)", type(api_response))

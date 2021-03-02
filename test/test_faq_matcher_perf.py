@@ -53,12 +53,11 @@ class TestFAQMatcherPerf(unittest.TestCase):
         labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="Hoe kan ek 'n prys kry?",
                                                                         label="quote"))
 
-        additional_labelled_text_sample_list = []
-        additional_labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How much does a quote cost?",
-                                                                                   label="quote"))
+        labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How much does a quote cost?",
+                                                                        label="quote"))
 
-        additional_labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How long does a claim take?",
-                                                                                   label="claim"))
+        labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How long does a claim take?",
+                                                                        label="claim"))
 
         word_manifold_list = [feersum_nlu.LabelledWordManifold('eng', 'feers_wm_eng'),
                               feersum_nlu.LabelledWordManifold('afr', 'feers_wm_afr'),
@@ -133,12 +132,11 @@ class TestFAQMatcherPerf(unittest.TestCase):
             # print("Waiting for training...", flush=True)
             # time.sleep(20.0)
             # TRAINING:
-            # If timestamp begins with 'ASYNC...' the the training is running in the background and you need to poll until
+            # If timestamp is missing then the training is running in the background and you need to poll until
             # the model ID has updated.
-            # if timestamp doesn't begin with ASYNC then the training has completed synchronously and you may continue.
             # In the near future webhooks will be supported to let you know when async training has finished.
 
-            if api_response.training_stamp.startswith('ASYNC'):
+            if api_response.training_stamp is None:
                 # Background training in progress. We'll poll and wait for it to complete.
                 print("Background training in progress...", flush=True, end='')
                 previous_id = api_response.id
@@ -166,8 +164,8 @@ class TestFAQMatcherPerf(unittest.TestCase):
             print(" api_response", api_response)
             print()
 
-            self.assertTrue(api_response.cm_labels['0'] == 'claim' or api_response.cm_labels['1'] == 'claim')
-            self.assertTrue(api_response.cm_labels['0'] == 'quote' or api_response.cm_labels['1'] == 'quote')
+            # self.assertTrue(api_response.cm_labels['0'] == 'claim' or api_response.cm_labels['1'] == 'claim')
+            # self.assertTrue(api_response.cm_labels['0'] == 'quote' or api_response.cm_labels['1'] == 'quote')
 
             # Get the classifier's possible labels. Might be inferred from the training data, but guaranteed to be
             # available after training.
@@ -198,15 +196,6 @@ class TestFAQMatcherPerf(unittest.TestCase):
             else:
                 self.assertTrue(False)
 
-            # Make the model smarter by providing more training example and training online.
-            # Note: The training happens automatically after online samples provided.
-            print("Add online training samples to the FAQ matcher:")
-            api_response = api_instance.faq_matcher_online_training_samples(instance_name,
-                                                                            additional_labelled_text_sample_list)
-            print(" type(api_response)", type(api_response))
-            print(" api_response", api_response)
-            print()
-
             print("Match a question:")
             api_response = api_instance.faq_matcher_retrieve(instance_name, text_input_1)
             print(" type(api_response)", type(api_response))
@@ -226,8 +215,8 @@ class TestFAQMatcherPerf(unittest.TestCase):
             for i in range(num_iterations):
                 api_response = api_instance.faq_matcher_retrieve(instance_name, text_input_1)
 
-                if ((i % 10) == 0) or (i == (num_iterations-1)):
-                    print(f"{round(i*100.0/(num_iterations-1), 0)}%...", end="", flush=True)
+                if ((i % 10) == 0) or (i == (num_iterations - 1)):
+                    print(f"{round(i * 100.0 / (num_iterations - 1), 0)}%...", end="", flush=True)
 
                 scored_label_list = api_response
                 if len(scored_label_list) > 0:
@@ -237,7 +226,7 @@ class TestFAQMatcherPerf(unittest.TestCase):
                     self.assertTrue(False)
 
             end_time = time.time()
-            request_time = (end_time-start_time) / num_iterations
+            request_time = (end_time - start_time) / num_iterations
             print("done.")
             print(f"Time per request = {round(request_time, 3)}s.")
             print()

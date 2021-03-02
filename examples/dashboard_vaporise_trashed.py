@@ -82,10 +82,10 @@ try:
                 api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
                 instance_detail = api_instance.duckling_entity_extractor_vaporise(model.name)
                 print("    VAPORISED.")
-            elif model.model_type == 'sim_word_entity_extractor':
-                api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-                instance_detail = api_instance.sim_word_entity_extractor_vaporise(model.name)
-                print("    VAPORISED.")
+            # elif model.model_type == 'sim_word_entity_extractor':
+            #     api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+            #     instance_detail = api_instance.sim_word_entity_extractor_vaporise(model.name)
+            #     print("    VAPORISED.")
             elif model.model_type == 'synonym_entity_extractor':
                 api_instance = feersum_nlu.SynonymEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
                 instance_detail = api_instance.synonym_entity_extractor_vaporise(model.name)

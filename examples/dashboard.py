@@ -17,7 +17,12 @@ configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative au
 configuration.host = feersumnlu_host
 print(configuration.host)
 
-api_instance = feersum_nlu.DashboardApi(feersum_nlu.ApiClient(configuration))
+api_client = feersum_nlu.ApiClient(configuration)
+
+# Example of how to setup request retries!
+api_client.rest_client.pool_manager.connection_pool_kw['retries'] = 5
+api_instance = feersum_nlu.DashboardApi(api_client)
+
 dash_params = feersum_nlu.DashboardParams(show_data_objects=True,
                                           history_size=5)
 

@@ -15,7 +15,11 @@ configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative au
 
 configuration.host = feersumnlu_host
 
-api_instance = feersum_nlu.FaqMatchersApi(feersum_nlu.ApiClient(configuration))
+api_client = feersum_nlu.ApiClient(configuration)
+
+# Example of how to setup request retries!
+api_client.rest_client.pool_manager.connection_pool_kw['retries'] = 5
+api_instance = feersum_nlu.FaqMatchersApi(api_client)
 
 instance_name = 'test_faq_mtchr'
 
@@ -58,12 +62,6 @@ labelled_text_sample_testing_list.append(feersum_nlu.LabelledTextSample(text="Ca
                                                                         label="quote"))  # text actually on 'claim'.
 labelled_text_sample_testing_list.append(feersum_nlu.LabelledTextSample(text="Waar kan ek 'n prys kry?",
                                                                         label="quote"))
-
-additional_labelled_text_sample_list = []
-additional_labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How much does a quote cost?",
-                                                                           label="quote"))
-additional_labelled_text_sample_list.append(feersum_nlu.LabelledTextSample(text="How long does a claim take?",
-                                                                           label="claim"))
 
 word_manifold_list = [feersum_nlu.LabelledWordManifold('eng', 'feers_wm_eng'),
                       feersum_nlu.LabelledWordManifold('afr', 'feers_wm_afr')]
@@ -151,12 +149,11 @@ try:
     print()
 
     # TRAINING:
-    # If timestamp begins with 'ASYNC...' the the training is running in the background and you need to poll until the
+    # If timestamp is not present then the training is running in the background and you need to poll until the
     # model ID has updated.
-    # if timestamp doesn't begin with ASYNC then the training has completed synchronously and you may continue.
     # In the near future webhooks will be supported to let you know when async training has finished.
 
-    if instance_detail.training_stamp.startswith('ASYNC'):
+    if instance_detail.training_stamp is None:
         # Background training in progress. We'll poll and wait for it to complete.
         print("Background training in progress...", flush=True, end='')
         previous_id = instance_detail.id
@@ -256,28 +253,10 @@ try:
     print(" api_response", api_response)
     print()
 
-    # Make the model smarter by providing more training example and training online.
-    # Note: The training happens automatically after online samples provided.
-    print("Add online training samples to the FAQ matcher:")
-    api_response = api_instance.faq_matcher_online_training_samples(instance_name,
-                                                                    additional_labelled_text_sample_list)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
     print("Update the parameters:")
     model_params = \
         feersum_nlu.ModelParams(readonly=False)
     api_response = api_instance.faq_matcher_set_params(instance_name, model_params)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
-    # Make the model smarter by providing more training example and training online.
-    # Note: The training happens automatically after online samples provided.
-    print("Add online training samples to the FAQ matcher:")
-    api_response = api_instance.faq_matcher_online_training_samples(instance_name,
-                                                                    additional_labelled_text_sample_list)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()

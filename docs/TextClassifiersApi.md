@@ -20,9 +20,9 @@ Method | HTTP request | Description
 [**text_classifier_get_params**](TextClassifiersApi.md#text_classifier_get_params) | **GET** /nlu/v2/text_classifiers/{instance_name}/params | Get the editable model parameters of named text classifier.
 [**text_classifier_get_testing_samples**](TextClassifiersApi.md#text_classifier_get_testing_samples) | **GET** /nlu/v2/text_classifiers/{instance_name}/testing_samples | Get testing samples.
 [**text_classifier_get_training_samples**](TextClassifiersApi.md#text_classifier_get_training_samples) | **GET** /nlu/v2/text_classifiers/{instance_name}/training_samples | Get training samples.
-[**text_classifier_online_training_samples**](TextClassifiersApi.md#text_classifier_online_training_samples) | **POST** /nlu/v2/text_classifiers/{instance_name}/online_training_samples | Train/update the classifier online with the samples provided.
 [**text_classifier_retrieve**](TextClassifiersApi.md#text_classifier_retrieve) | **POST** /nlu/v2/text_classifiers/{instance_name}/retrieve | Classify text.
 [**text_classifier_set_params**](TextClassifiersApi.md#text_classifier_set_params) | **POST** /nlu/v2/text_classifiers/{instance_name}/params | Set the model parameters of named text classifier.
+[**text_classifier_test**](TextClassifiersApi.md#text_classifier_test) | **POST** /nlu/v2/text_classifiers/{instance_name}/test | Test the named text classifier.
 [**text_classifier_train**](TextClassifiersApi.md#text_classifier_train) | **POST** /nlu/v2/text_classifiers/{instance_name}/train | Train the named text classifier.
 [**text_classifier_tsne_get**](TextClassifiersApi.md#text_classifier_tsne_get) | **GET** /nlu/v2/text_classifiers/{instance_name}/tsne | Get the latest results of TSNE.
 [**text_classifier_tsne_post**](TextClassifiersApi.md#text_classifier_tsne_post) | **POST** /nlu/v2/text_classifiers/{instance_name}/tsne | Endpoint to start a TSNE process.
@@ -1025,69 +1025,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **text_classifier_online_training_samples**
-> list[LabelledTextSample] text_classifier_online_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller)
-
-Train/update the classifier online with the samples provided.
-
-Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the instance.
-
-### Example
-```python
-from __future__ import print_function
-import time
-import feersum_nlu
-from feersum_nlu.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: APIKeyHeader
-configuration = feersum_nlu.Configuration()
-configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
-# Configure API key authorization: APIKeyHeader_old
-configuration = feersum_nlu.Configuration()
-configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the instance.
-labelled_text_sample_list = [feersum_nlu.LabelledTextSample()] # list[LabelledTextSample] | List of labelled text samples.
-x_caller = 'x_caller_example' # str |  (optional)
-
-try:
-    # Train/update the classifier online with the samples provided.
-    api_response = api_instance.text_classifier_online_training_samples(instance_name, labelled_text_sample_list, x_caller=x_caller)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling TextClassifiersApi->text_classifier_online_training_samples: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the instance. | 
- **labelled_text_sample_list** | [**list[LabelledTextSample]**](LabelledTextSample.md)| List of labelled text samples. | 
- **x_caller** | **str**|  | [optional] 
-
-### Return type
-
-[**list[LabelledTextSample]**](LabelledTextSample.md)
-
-### Authorization
-
-[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **text_classifier_retrieve**
 > list[ScoredLabel] text_classifier_retrieve(instance_name, text_input, x_caller=x_caller)
 
@@ -1197,6 +1134,69 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the instance. | 
  **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
+ **x_caller** | **str**|  | [optional] 
+
+### Return type
+
+[**TextClassifierInstanceDetail**](TextClassifierInstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **text_classifier_test**
+> TextClassifierInstanceDetail text_classifier_test(instance_name, test_details, x_caller=x_caller)
+
+Test the named text classifier.
+
+Test the named text classifier with the testing data already provided. Returns the details of the instance.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the instance.
+test_details = feersum_nlu.TestDetails() # TestDetails | The arguments provided to the test operation.
+x_caller = 'x_caller_example' # str |  (optional)
+
+try:
+    # Test the named text classifier.
+    api_response = api_instance.text_classifier_test(instance_name, test_details, x_caller=x_caller)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TextClassifiersApi->text_classifier_test: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the instance. | 
+ **test_details** | [**TestDetails**](TestDetails.md)| The arguments provided to the test operation. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type

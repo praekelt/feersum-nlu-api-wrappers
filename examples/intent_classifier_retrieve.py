@@ -16,7 +16,7 @@ configuration.host = feersumnlu_host
 
 api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
 
-instance_name = 'navigation'
+instance_name = 'navigation2'
 
 
 text_input = feersum_nlu.TextInput("How do I get a quote?")
@@ -35,6 +35,7 @@ try:
     api_response = api_instance.intent_classifier_get_labels(instance_name)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
+    print(" len(api_response)", len(api_response))
     print()
 
     print("Classify intent:")

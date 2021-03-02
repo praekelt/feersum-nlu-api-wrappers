@@ -109,12 +109,11 @@ try:
     print()
 
     # TRAINING:
-    # If timestamp begins with 'ASYNC...' the the training is running in the background and you need to poll until the
+    # If timestamp is missing then the training is running in the background and you need to poll until the
     # model ID has updated.
-    # if timestamp doesn't begin with ASYNC then the training has completed synchronously and you may continue.
     # In the near future webhooks will be supported to let you know when async training has finished.
 
-    if instance_detail.training_stamp.startswith('ASYNC'):
+    if instance_detail.training_stamp is None:
         # Background training in progress. We'll poll and wait for it to complete.
         print("Background training in progress...", flush=True, end='')
         previous_id = instance_detail.id

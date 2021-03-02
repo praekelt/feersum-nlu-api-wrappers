@@ -43,10 +43,7 @@ class TestAPIKeyManagement(unittest.TestCase):
 
             call_count_breakdown = api_response.call_count_breakdown
 
-            if call_count_breakdown is not None:
-                api_key_get_details_call_count_0 = call_count_breakdown['api_key_get_details']
-            else:
-                api_key_get_details_call_count_0 = 0
+            api_key_get_details_call_count_0 = call_count_breakdown.get('api_key_get_details', 0)
 
             print("Get the details of specific named API key:")
             api_response = api_instance.api_key_get_details(api_key, x_caller='feersum_nlu_api_wrapper_test')
@@ -55,7 +52,7 @@ class TestAPIKeyManagement(unittest.TestCase):
             print()
 
             call_count_breakdown = api_response.call_count_breakdown
-            api_key_get_details_call_count_1 = call_count_breakdown['api_key_get_details']
+            api_key_get_details_call_count_1 = call_count_breakdown.get('api_key_get_details', 0)
 
             self.assertTrue((api_key_get_details_call_count_1 - api_key_get_details_call_count_0) >= 1)  # At least one call later.
 

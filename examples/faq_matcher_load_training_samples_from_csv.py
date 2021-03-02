@@ -45,8 +45,6 @@ with open('training_samples.csv',
                                                                label=row[0],
                                                                lang_code=None))
 
-offline_batch_size = 10
-
 word_manifold_list = [feersum_nlu.LabelledWordManifold('eng', 'feers_wm_eng'),
                       feersum_nlu.LabelledWordManifold('afr', 'feers_wm_afr'),
                       feersum_nlu.LabelledWordManifold('nbl', 'feers_wm_nbl'),
@@ -80,7 +78,7 @@ try:
 
     print("Add training samples to the FAQ matcher:")
     api_response = api_instance.faq_matcher_add_training_samples(instance_name,
-                                                                 text_sample_list[:offline_batch_size])
+                                                                 text_sample_list)
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
@@ -98,12 +96,11 @@ try:
     print()
 
     # TRAINING:
-    # If timestamp begins with 'ASYNC...' the the training is running in the background and you need to poll until the
-    # model ID has updated.
-    # if timestamp doesn't begin with ASYNC then the training has completed synchronously and you may continue.
+    # If there is no timestamp then the training is running in the background and you need to poll until the
+    # model ID has updated else the training has completed synchronously and you may continue.
     # In the near future webhooks will be supported to let you know when async training has finished.
 
-    if instance_detail.training_stamp.startswith('ASYNC'):
+    if instance_detail.training_stamp is None:
         # Background training in progress. We'll poll and wait for it to complete.
         print("Background training in progress...", flush=True, end='')
         previous_id = instance_detail.id
@@ -131,17 +128,6 @@ try:
     print(" type(api_response)", type(api_response))
     print(" api_response", api_response)
     print()
-
-    print("Online train the FAQ matcher:")
-    # Make the model smarter by providing more training example and training online.
-    # Note: The training happens automatically after online samples provided.
-    online_batch_size = 10
-    for i in range(offline_batch_size, len(text_sample_list), online_batch_size):
-        batch_end = min(i + online_batch_size, len(text_sample_list))
-        api_response = \
-            api_instance.faq_matcher_online_training_samples(instance_name,
-                                                             text_sample_list[i:batch_end])
-        print(f"{batch_end}/{len(text_sample_list)}")
 
     # print("Delete specific named loaded FAQ matcher:")
     # api_response = api_instance.faq_matcher_del(instance_name)

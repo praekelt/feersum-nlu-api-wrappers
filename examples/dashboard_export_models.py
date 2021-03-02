@@ -88,8 +88,7 @@ def main():
                                             'intent_classifier',
                                             'faq_matcher',
                                             'crf_entity_extractor'
-                                            'synonym_entity_extractor',
-                                            'image_classifier']:
+                                            'synonym_entity_extractor']:
                         # Also write the classifiers' training samples to .csv
                         if training_samples is not None:
                             with open(instance_detail_filename + ".train.csv", "w", newline='') as csv_file:
@@ -107,8 +106,27 @@ def main():
                                 for sample in testing_samples:
                                     # print('(', sample.label, ',', sample.text, ')')
                                     csv_writer.writerow([sample.label, sample.text])
-                    elif model.model_type in ['text_dataset',
-                                              'image_dataset']:
+
+                    elif model.model_type in ['image_classifier']:
+                        # Also write the classifiers' training samples to .csv
+                        if training_samples is not None:
+                            with open(instance_detail_filename + ".train.csv", "w", newline='') as csv_file:
+                                csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+                                for sample in training_samples:
+                                    # print('(', sample.label, ',', sample.image, ')')
+                                    csv_writer.writerow([sample.label, sample.image])
+
+                        # Also write the classifiers' testing samples to .csv
+                        if testing_samples is not None:
+                            with open(instance_detail_filename + ".test.csv", "w", newline='') as csv_file:
+                                csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+                                for sample in testing_samples:
+                                    # print('(', sample.label, ',', sample.image, ')')
+                                    csv_writer.writerow([sample.label, sample.image])
+
+                    elif model.model_type in ['text_dataset']:
                         # Also write the datasets' samples to .csv
                         if samples is not None:
                             with open(instance_detail_filename + ".samples.csv", "w", newline='') as csv_file:
@@ -117,6 +135,16 @@ def main():
                                 for sample in samples:
                                     # print('(', sample.label, ',', sample.text, ')')
                                     csv_writer.writerow([sample.label, sample.text])
+
+                    elif model.model_type in ['image_dataset']:
+                        # Also write the datasets' samples to .csv
+                        if samples is not None:
+                            with open(instance_detail_filename + ".samples.csv", "w", newline='') as csv_file:
+                                csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+                                for sample in samples:
+                                    # print('(', sample.label, ',', sample.image, ')')
+                                    csv_writer.writerow([sample.label, sample.image])
 
         print(' done.', flush=True)
 

@@ -42,7 +42,7 @@ def _base64_encode_from_pil_image(pil_image: Image) -> str:
     :return: utf8 encoded base64 string.
     """
     image_file = io.BytesIO()
-    pil_image.save(fp=image_file, format="jpeg", quality=50)
+    pil_image.save(fp=image_file, format="jpeg", quality=75)
     base64_bytes = base64.b64encode(image_file.getvalue())
     return base64_bytes.decode('utf-8')
 

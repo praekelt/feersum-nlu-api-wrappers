@@ -14,7 +14,11 @@ configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative au
 
 configuration.host = feersumnlu_host
 
-api_instance = feersum_nlu.IntentClassifiersApi(feersum_nlu.ApiClient(configuration))
+api_client = feersum_nlu.ApiClient(configuration)
+
+# Example of how to setup request retries!
+api_client.rest_client.pool_manager.connection_pool_kw['retries'] = 3
+api_instance = feersum_nlu.IntentClassifiersApi(api_client)
 
 instance_name = 'test_intent_clsfr'
 

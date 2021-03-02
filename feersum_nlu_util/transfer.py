@@ -44,9 +44,6 @@ def export_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
         elif model_type == 'duckling_entity_extractor':
             api_instance = feersum_nlu.DucklingEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
             instance_detail = api_instance.duckling_entity_extractor_get_details(model_name)
-        elif model_type == 'sim_word_entity_extractor':
-            api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-            instance_detail = api_instance.sim_word_entity_extractor_get_details(model_name)
         elif model_type == 'synonym_entity_extractor':
             api_instance = feersum_nlu.SynonymEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
             instance_detail = api_instance.synonym_entity_extractor_get_details(model_name)
@@ -398,29 +395,6 @@ def import_model(model_name: str, model_type: str, configuration: feersum_nlu.Co
 
             print("  Get the details of the imported model ... ", flush=True)
             api_response = api_instance.regex_entity_extractor_get_details(model_name)
-            print("   api_response", api_response)
-        elif model_type == 'sim_word_entity_extractor':
-            similar_words = instance_detail.get('similar_words')
-            sim_word_threshold = instance_detail.get('threshold')
-            word_manifold = instance_detail.get('word_manifold')
-
-            create_details = feersum_nlu.SimWordEntityExtractorCreateDetails(name=model_name,
-                                                                             desc=desc,
-                                                                             long_name=long_name,
-                                                                             similar_words=similar_words,
-                                                                             threshold=sim_word_threshold,
-                                                                             word_manifold=word_manifold,
-                                                                             load_from_store=False)
-
-            api_instance = feersum_nlu.SimWordEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
-
-            print("  Creating model ... ", flush=True)
-            api_response = api_instance.sim_word_entity_extractor_create(create_details)
-
-            print()
-
-            print("  Get the details of the imported model ... ", flush=True)
-            api_response = api_instance.sim_word_entity_extractor_get_details(model_name)
             print("   api_response", api_response)
         # elif model_type == 'person_name_entity_extractor':
         #     create_details = feersum_nlu.PersonNameEntityExtractorCreateDetails(name=model_name,

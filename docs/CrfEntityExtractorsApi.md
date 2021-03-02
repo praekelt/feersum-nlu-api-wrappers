@@ -20,6 +20,7 @@ Method | HTTP request | Description
 [**crf_entity_extractor_get_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_get_training_samples) | **GET** /nlu/v2/crf_entity_extractors/{instance_name}/training_samples | Get training samples.
 [**crf_entity_extractor_retrieve**](CrfEntityExtractorsApi.md#crf_entity_extractor_retrieve) | **POST** /nlu/v2/crf_entity_extractors/{instance_name}/retrieve | Predict which entities was mentioned.
 [**crf_entity_extractor_set_params**](CrfEntityExtractorsApi.md#crf_entity_extractor_set_params) | **POST** /nlu/v2/crf_entity_extractors/{instance_name}/params | Set the model parameters of named crf entity extractor.
+[**crf_entity_extractor_test**](CrfEntityExtractorsApi.md#crf_entity_extractor_test) | **POST** /nlu/v2/crf_entity_extractors/{instance_name}/test | Test the named crf entity extractor.
 [**crf_entity_extractor_train**](CrfEntityExtractorsApi.md#crf_entity_extractor_train) | **POST** /nlu/v2/crf_entity_extractors/{instance_name}/train | Train the named crf extractor.
 [**crf_entity_extractor_update_testing_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_update_testing_samples) | **PUT** /nlu/v2/crf_entity_extractors/{instance_name}/testing_samples | Update testing samples by UUID.
 [**crf_entity_extractor_update_training_samples**](CrfEntityExtractorsApi.md#crf_entity_extractor_update_training_samples) | **PUT** /nlu/v2/crf_entity_extractors/{instance_name}/training_samples | Update training samples by UUID.
@@ -1003,6 +1004,69 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the instance. | 
  **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
+ **x_caller** | **str**|  | [optional] 
+
+### Return type
+
+[**CrfEntityExtractorInstanceDetail**](CrfEntityExtractorInstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **crf_entity_extractor_test**
+> CrfEntityExtractorInstanceDetail crf_entity_extractor_test(instance_name, test_details, x_caller=x_caller)
+
+Test the named crf entity extractor.
+
+Test the named crf entity extractor with the testing data already provided. Returns the details of the instance.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.CrfEntityExtractorsApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the instance.
+test_details = feersum_nlu.TestDetails() # TestDetails | The arguments provided to the test operation.
+x_caller = 'x_caller_example' # str |  (optional)
+
+try:
+    # Test the named crf entity extractor.
+    api_response = api_instance.crf_entity_extractor_test(instance_name, test_details, x_caller=x_caller)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CrfEntityExtractorsApi->crf_entity_extractor_test: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the instance. | 
+ **test_details** | [**TestDetails**](TestDetails.md)| The arguments provided to the test operation. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type

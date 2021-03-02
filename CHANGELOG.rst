@@ -1,6 +1,18 @@
 Changelog
 *********
 
+Version 2.0.54
+==============
+
+Released to accompany version 2.0.54 of the NLU service. Note the refactorings in the service's changelog. Below are the external API changes.
+
+Removed the online training endpoints.
+
+Removed the similar word entity extractor.
+
+Added a 'test' end point to generate a model's test report without needing to re-train it.
+
+
 Version 2.0.52
 ==============
 

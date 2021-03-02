@@ -19,9 +19,9 @@ Method | HTTP request | Description
 [**image_classifier_get_params**](ImageClassifiersApi.md#image_classifier_get_params) | **GET** /vision/v2/image_classifiers/{instance_name}/params | Get the editable model parameters of named image classifier.
 [**image_classifier_get_testing_samples**](ImageClassifiersApi.md#image_classifier_get_testing_samples) | **GET** /vision/v2/image_classifiers/{instance_name}/testing_samples | Get testing samples. Image format is 256x256 RGB.
 [**image_classifier_get_training_samples**](ImageClassifiersApi.md#image_classifier_get_training_samples) | **GET** /vision/v2/image_classifiers/{instance_name}/training_samples | Get training samples. Image format is 256x256 RGB.
-[**image_classifier_online_training_samples**](ImageClassifiersApi.md#image_classifier_online_training_samples) | **POST** /vision/v2/image_classifiers/{instance_name}/online_training_samples | Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 [**image_classifier_retrieve**](ImageClassifiersApi.md#image_classifier_retrieve) | **POST** /vision/v2/image_classifiers/{instance_name}/retrieve | Classify image; Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 [**image_classifier_set_params**](ImageClassifiersApi.md#image_classifier_set_params) | **POST** /vision/v2/image_classifiers/{instance_name}/params | Set the model parameters of named image classifier.
+[**image_classifier_test**](ImageClassifiersApi.md#image_classifier_test) | **POST** /nlu/v2/image_classifiers/{instance_name}/test | Test the named image classifier.
 [**image_classifier_train**](ImageClassifiersApi.md#image_classifier_train) | **POST** /vision/v2/image_classifiers/{instance_name}/train | Train the named image classifier.
 [**image_classifier_update_testing_samples**](ImageClassifiersApi.md#image_classifier_update_testing_samples) | **PUT** /vision/v2/image_classifiers/{instance_name}/testing_samples | Update testing samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
 [**image_classifier_update_training_samples**](ImageClassifiersApi.md#image_classifier_update_training_samples) | **PUT** /vision/v2/image_classifiers/{instance_name}/training_samples | Update training samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
@@ -959,69 +959,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **image_classifier_online_training_samples**
-> list[LabelledImageSample] image_classifier_online_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller)
-
-Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
-
-Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the instance.
-
-### Example
-```python
-from __future__ import print_function
-import time
-import feersum_nlu
-from feersum_nlu.rest import ApiException
-from pprint import pprint
-
-# Configure API key authorization: APIKeyHeader
-configuration = feersum_nlu.Configuration()
-configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
-# Configure API key authorization: APIKeyHeader_old
-configuration = feersum_nlu.Configuration()
-configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
-
-# create an instance of the API class
-api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
-instance_name = 'instance_name_example' # str | The name of the instance.
-labelled_image_sample_list = [feersum_nlu.LabelledImageSample()] # list[LabelledImageSample] | List of labelled image samples.
-x_caller = 'x_caller_example' # str |  (optional)
-
-try:
-    # Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
-    api_response = api_instance.image_classifier_online_training_samples(instance_name, labelled_image_sample_list, x_caller=x_caller)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ImageClassifiersApi->image_classifier_online_training_samples: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **instance_name** | **str**| The name of the instance. | 
- **labelled_image_sample_list** | [**list[LabelledImageSample]**](LabelledImageSample.md)| List of labelled image samples. | 
- **x_caller** | **str**|  | [optional] 
-
-### Return type
-
-[**list[LabelledImageSample]**](LabelledImageSample.md)
-
-### Authorization
-
-[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **image_classifier_retrieve**
 > list[ScoredLabel] image_classifier_retrieve(instance_name, image_input, x_caller=x_caller)
 
@@ -1131,6 +1068,69 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_name** | **str**| The name of the instance. | 
  **model_params** | [**ModelParams**](ModelParams.md)| The model parameters. | 
+ **x_caller** | **str**|  | [optional] 
+
+### Return type
+
+[**ImageClassifierInstanceDetail**](ImageClassifierInstanceDetail.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [APIKeyHeader_old](../README.md#APIKeyHeader_old)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **image_classifier_test**
+> ImageClassifierInstanceDetail image_classifier_test(instance_name, test_details, x_caller=x_caller)
+
+Test the named image classifier.
+
+Test the named image classifier with the testing data already provided. Returns the details of the instance.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import feersum_nlu
+from feersum_nlu.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: APIKeyHeader
+configuration = feersum_nlu.Configuration()
+configuration.api_key['X-Auth-Token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Auth-Token'] = 'Bearer'
+# Configure API key authorization: APIKeyHeader_old
+configuration = feersum_nlu.Configuration()
+configuration.api_key['AUTH_TOKEN'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['AUTH_TOKEN'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = feersum_nlu.ImageClassifiersApi(feersum_nlu.ApiClient(configuration))
+instance_name = 'instance_name_example' # str | The name of the instance.
+test_details = feersum_nlu.TestDetails() # TestDetails | The arguments provided to the test operation.
+x_caller = 'x_caller_example' # str |  (optional)
+
+try:
+    # Test the named image classifier.
+    api_response = api_instance.image_classifier_test(instance_name, test_details, x_caller=x_caller)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ImageClassifiersApi->image_classifier_test: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_name** | **str**| The name of the instance. | 
+ **test_details** | [**TestDetails**](TestDetails.md)| The arguments provided to the test operation. | 
  **x_caller** | **str**|  | [optional] 
 
 ### Return type

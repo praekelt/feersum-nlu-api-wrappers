@@ -2,11 +2,11 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.52
+  version: 2.0.54.dev1
   title: FeersumNLU API
   contact:
     name: Feersum Engine
-    url: https://www.feersum.io
+    url: https://www.praekelt.com/feersum
     email: nlu@feersum.io
 
 host: nlu.feersum.io:443
@@ -62,16 +62,14 @@ tags:
   description: The API to pre-trained sentence translation models.
 - name: sentiment_detectors
   description: The API to a pre-configured low recall English sentiment detector. Contact us for other languages.
-- name: emotion_classifiers
-  description: The API to a pre-configured low recall English emotion classifier. Contact us for other languages.
+#- name: emotion_classifiers
+#  description: The API to a pre-configured low recall English emotion classifier. Contact us for other languages.
 - name: regex_entity_extractors
   description: The API to your regular expression entity extractor instances. The extractor returns and labels the text that matched the named regex patterns.
 # - name: person_name_entity_extractors
 #   description: The API to your person_name entity extractor instances. The extractor returns a list of person names found in the text.
 - name: duckling_entity_extractors
   description: The API to your duckling entity extractor instances for things like dates, distances, volumes, etc. The extractor returns the text recognised as a duckling entity and its parsed/formatted value.
-- name: sim_word_entity_extractors
-  description: The API to your similar/related words entity extractor instances. The extractor returns the text that matched the listed targets words within the given threshold.
 - name: synonym_entity_extractors
   description: The API to your synonym entity extractor instances. The extractor matches text to a number of synonym sets and returns the set label and matched text.
 - name: crf_entity_extractors
@@ -88,8 +86,6 @@ tags:
   description: The API to your labelled image datasets useful for things like labelling data. Store unlabelled samples with a label like '_unlabelled'.
 - name: image_readers
   description: The API to your image reader instances.
-- name: text_pipelines
-  description: Build an NLU pipeline with annotators, extractors and classifiers. The annotators enrich the text with POS tags, etc. after which the classifiers and extractors run.
 
 
 paths:
@@ -773,6 +769,40 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
+## text_classifiers test
+########
+  /nlu/v2/text_classifiers/{instance_name}/test:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - text_classifiers
+      summary: Test the named text classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
+      operationId: text_classifier_test
+      description: Test the named text classifier with the testing data already provided. Returns the details of the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: test_details
+        description: The arguments provided to the test operation.
+        required: true
+        schema:
+          $ref: "#/definitions/test_details"
+      responses:
+        200:
+          $ref: "#/responses/text_classifier_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
 ## text_classifiers model_params
 ########
   /nlu/v2/text_classifiers/{instance_name}/params:
@@ -822,42 +852,6 @@ paths:
       responses:
         200:
           $ref: "#/responses/model_params"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## text_classifiers train online
-########
-  /nlu/v2/text_classifiers/{instance_name}/online_training_samples:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - text_classifiers
-      summary: Train/update the classifier online with the samples provided.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_classifiers_controller
-      operationId: text_classifier_online_training_samples
-      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: labelled_text_sample_list
-        description: List of labelled text samples.
-        required: true
-        schema:
-          type: array
-          items:
-            $ref: "#/definitions/labelled_text_sample"
-      responses:
-        200:
-          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -1685,6 +1679,40 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
+## intent_classifiers test
+########
+  /nlu/v2/intent_classifiers/{instance_name}/test:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - intent_classifiers
+      summary: Test the named intent classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
+      operationId: intent_classifier_test
+      description: Test the named intent classifier with the testing data already provided. Returns the details of the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: test_details
+        description: The arguments provided to the test operation.
+        required: true
+        schema:
+          $ref: "#/definitions/test_details"
+      responses:
+        200:
+          $ref: "#/responses/intent_classifier_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
 ## intent_classifiers model_params
 ########
   /nlu/v2/intent_classifiers/{instance_name}/params:
@@ -1734,42 +1762,6 @@ paths:
       responses:
         200:
           $ref: "#/responses/model_params"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## intent_classifiers train online
-########
-  /nlu/v2/intent_classifiers/{instance_name}/online_training_samples:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - intent_classifiers
-      summary: Train/update the classifier online with the samples provided.
-      x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
-      operationId: intent_classifier_online_training_samples
-      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: labelled_text_sample_list
-        description: List of labelled text samples.
-        required: true
-        schema:
-          type: array
-          items:
-            $ref: "#/definitions/labelled_text_sample"
-      responses:
-        200:
-          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -2386,6 +2378,40 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
+## faq_matchers test
+########
+  /nlu/v2/faq_matchers/{instance_name}/test:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - faq_matchers
+      summary: Test the named faq matcher.
+      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
+      operationId: faq_matcher_test
+      description: Test the named faq matcher with the testing data already provided. Returns the details of the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: test_details
+        description: The arguments provided to the test operation.
+        required: true
+        schema:
+          $ref: "#/definitions/test_details"
+      responses:
+        200:
+          $ref: "#/responses/faq_matcher_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
 ## faq_matchers model_params
 ########
   /nlu/v2/faq_matchers/{instance_name}/params:
@@ -2435,42 +2461,6 @@ paths:
       responses:
         200:
           $ref: "#/responses/model_params"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## faq_matchers train online
-########
-  /nlu/v2/faq_matchers/{instance_name}/online_training_samples:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - faq_matchers
-      summary: Train/update the classifier online with the samples provided.
-      x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
-      operationId: faq_matcher_online_training_samples
-      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: labelled_text_sample_list
-        description: List of labelled text samples.
-        required: true
-        schema:
-          type: array
-          items:
-            $ref: "#/definitions/labelled_text_sample"
-      responses:
-        200:
-          $ref: "#/responses/labelled_text_sample_list"
         400:
           description: bad request
         401:
@@ -2767,70 +2757,70 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 
-###################################
-###################################
-########
-## Detect the emotion in the text input - Generic, always available, model.
-########
-  /nlu/v2/emotion_classifiers/{instance_name}/retrieve:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - emotion_classifiers
-      summary: Classify emotion.
-      x-swagger-router-controller: rest_api.flask_server.controllers.emotion_classifiers_controller
-      operationId: emotion_classifier_retrieve
-      description: Classifies the emotion in the text and returns a probability sorted list of classes.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: text_input
-        description: The input text.
-        required: true
-        schema:
-          $ref: "#/definitions/text_input"
-      responses:
-        200:
-          $ref: "#/responses/scored_label_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## emotion_classifiers get list of class labels
-########
-  /nlu/v2/emotion_classifiers/{instance_name}/labels:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    get:
-      tags:
-      - emotion_classifiers
-      summary: Get list of possible labels.
-      x-swagger-router-controller: rest_api.flask_server.controllers.emotion_classifiers_controller
-      operationId: emotion_classifier_get_labels
-      description: Returns the classifier's list of possible class labels.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/labels"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
+####################################
+####################################
+#########
+### Detect the emotion in the text input - Generic, always available, model.
+#########
+#  /nlu/v2/emotion_classifiers/{instance_name}/retrieve:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    post:
+#      tags:
+#      - emotion_classifiers
+#      summary: Classify emotion.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.emotion_classifiers_controller
+#      operationId: emotion_classifier_retrieve
+#      description: Classifies the emotion in the text and returns a probability sorted list of classes.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: text_input
+#        description: The input text.
+#        required: true
+#        schema:
+#          $ref: "#/definitions/text_input"
+#      responses:
+#        200:
+#          $ref: "#/responses/scored_label_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
+#########
+### emotion_classifiers get list of class labels
+#########
+#  /nlu/v2/emotion_classifiers/{instance_name}/labels:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    get:
+#      tags:
+#      - emotion_classifiers
+#      summary: Get list of possible labels.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.emotion_classifiers_controller
+#      operationId: emotion_classifier_get_labels
+#      description: Returns the classifier's list of possible class labels.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the instance.
+#        required: true
+#        type: string
+#      responses:
+#        200:
+#          $ref: "#/responses/labels"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+#
 
 ###################################
 ###################################
@@ -3253,6 +3243,40 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/train_details"
+      responses:
+        200:
+          $ref: "#/responses/crf_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## crf_entity_extractors test
+########
+  /nlu/v2/crf_entity_extractors/{instance_name}/test:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - crf_entity_extractors
+      summary: Test the named crf entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
+      operationId: crf_entity_extractor_test
+      description: Test the named crf entity extractor with the testing data already provided. Returns the details of the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: test_details
+        description: The arguments provided to the test operation.
+        required: true
+        schema:
+          $ref: "#/definitions/test_details"
       responses:
         200:
           $ref: "#/responses/crf_entity_extractor_instance_detail"
@@ -3828,6 +3852,40 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/train_details"
+      responses:
+        200:
+          $ref: "#/responses/synonym_entity_extractor_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## synonym_entity_extractors test
+########
+  /nlu/v2/synonym_entity_extractors/{instance_name}/test:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - synonym_entity_extractors
+      summary: Test the named synonym entity extractor.
+      x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
+      operationId: synonym_entity_extractor_test
+      description: Test the named synonym entity extractor with the testing data already provided. Returns the details of the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: test_details
+        description: The arguments provided to the test operation.
+        required: true
+        schema:
+          $ref: "#/definitions/test_details"
       responses:
         200:
           $ref: "#/responses/synonym_entity_extractor_instance_detail"
@@ -4615,219 +4673,6 @@ paths:
       responses:
         200:
           $ref: "#/responses/duckling_entity_extractor_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-
-###################################
-###################################
-########
-## sim_word_entity_extractors root
-########
-  /nlu/v2/sim_word_entity_extractors:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - sim_word_entity_extractors
-      summary: Create a word similarity entity extractor.
-      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
-      operationId: sim_word_entity_extractor_create
-      description: Create a new word similarity entity extractor or reload one from the trash.
-      parameters:
-      - in: body
-        name: create_details
-        description: The details of the instance to create.
-        required: true
-        schema:
-          $ref: "#/definitions/sim_word_entity_extractor_create_details"
-      responses:
-        200:
-          $ref: "#/responses/sim_word_entity_extractor_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    get:
-      tags:
-      - sim_word_entity_extractors
-      summary: Get list of similarity entity extractors.
-      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
-      operationId: sim_word_entity_extractor_get_details_all
-      description: Get the list of similarity entity extractors.
-      responses:
-        200:
-          $ref: "#/responses/sim_word_entity_extractor_instance_detail_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## sim_word_entity_extractors named instance
-########
-  /nlu/v2/sim_word_entity_extractors/{instance_name}:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    get:
-      tags:
-      - sim_word_entity_extractors
-      summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
-      operationId: sim_word_entity_extractor_get_details
-      description: Get the details of the named similarity entity extractor instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/sim_word_entity_extractor_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    delete:
-      tags:
-      - sim_word_entity_extractors
-      summary: Delete named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
-      operationId: sim_word_entity_extractor_del
-      description: Delete and return the details of the named similarity entity extractor instance. Deleted models can be reloaded from the trash with the create operation.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/sim_word_entity_extractor_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## sim_word_entity_extractors model_params
-########
-  /nlu/v2/sim_word_entity_extractors/{instance_name}/params:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - sim_word_entity_extractors
-      summary: Set the model parameters of named similarity entity extractor.
-      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
-      operationId: sim_word_entity_extractor_set_params
-      description: Set the model parameters of named similarity entity extractor.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: model_params
-        description: The model parameters.
-        required: true
-        schema:
-          $ref: "#/definitions/model_params"
-      responses:
-        200:
-          $ref: "#/responses/sim_word_entity_extractor_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    get:
-      tags:
-      - sim_word_entity_extractors
-      summary: Get the editable model parameters of named similarity entity extractor.
-      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
-      operationId: sim_word_entity_extractor_get_params
-      description: Get the editable model parameters of named similarity entity extractor.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/model_params"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## sim_word_entity_extractors retrieve
-########
-  /nlu/v2/sim_word_entity_extractors/{instance_name}/retrieve:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - sim_word_entity_extractors
-      summary: Extract information based on word similarity.
-      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
-      operationId: sim_word_entity_extractor_retrieve
-      description: Extract the word entities that are similar to the list of words used to create this model instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: text_input
-        description: The input text.
-        required: true
-        schema:
-          $ref: "#/definitions/text_input"
-      responses:
-        200:
-          $ref: "#/responses/sim_word_entity_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## sim_word_entity_extractors vaporise
-########
-  /nlu/v2/sim_word_entity_extractors/{instance_name}/vaporise:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - sim_word_entity_extractors
-      summary: Vaporise the named model.
-      x-swagger-router-controller: rest_api.flask_server.controllers.sim_word_entity_extractors_controller
-      operationId: sim_word_entity_extractor_vaporise
-      description: Permanently vaporises a model even if not trashed.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/sim_word_entity_extractor_instance_detail"
         400:
           description: bad request
         401:
@@ -5862,6 +5707,40 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
+## image_classifiers test
+########
+  /nlu/v2/image_classifiers/{instance_name}/test:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - image_classifiers
+      summary: Test the named image classifier.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
+      operationId: image_classifier_test
+      description: Test the named image classifier with the testing data already provided. Returns the details of the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: test_details
+        description: The arguments provided to the test operation.
+        required: true
+        schema:
+          $ref: "#/definitions/test_details"
+      responses:
+        200:
+          $ref: "#/responses/image_classifier_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
 ## image_classifiers model_params
 ########
   /vision/v2/image_classifiers/{instance_name}/params:
@@ -5911,42 +5790,6 @@ paths:
       responses:
         200:
           $ref: "#/responses/model_params"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## image_classifiers train online
-########
-  /vision/v2/image_classifiers/{instance_name}/online_training_samples:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - image_classifiers
-      summary: Train/update the classifier online with the samples provided. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
-      x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
-      operationId: image_classifier_online_training_samples
-      description: Train/update the classifier online with the samples provided. This operation is more efficient than a full re-train. Returns the samples added to the instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: labelled_image_sample_list
-        description: List of labelled image samples.
-        required: true
-        schema:
-          type: array
-          items:
-            $ref: "#/definitions/labelled_image_sample"
-      responses:
-        200:
-          $ref: "#/responses/labelled_image_sample_list"
         400:
           description: bad request
         401:
@@ -6851,397 +6694,6 @@ paths:
 
 
 ###################################
-###################################
-########
-## text_pipelines root
-########
-  /nlu/v2/text_pipelines:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - text_pipelines
-      summary: Create a text pipeline.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_create
-      description: Create a new text pipeline or reload one from the trash. Returns the details of the instance.
-      parameters:
-      - in: body
-        name: create_details
-        description: The details of the instance to create.
-        required: true
-        schema:
-          $ref: "#/definitions/text_pipeline_create_details"
-      responses:
-        200:
-          $ref: "#/responses/text_pipeline_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    get:
-      tags:
-      - text_pipelines
-      summary: Get list of text pipelines.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_get_details_all
-      description: Get the list of text pipelines.
-      responses:
-        200:
-          $ref: "#/responses/text_pipeline_instance_detail_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## text_pipelines named instance
-########
-  /nlu/v2/text_pipelines/{instance_name}:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - text_pipelines
-      summary: Create a text pipeline.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_create_from_path
-      description: Create a new text pipeline or reload one from the trash. Returns the details of the instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: create_details
-        description: The details of the instance to create.
-        required: true
-        schema:
-          $ref: "#/definitions/text_pipeline_create_details"
-
-      responses:
-        200:
-          $ref: "#/responses/text_pipeline_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    get:
-      tags:
-      - text_pipelines
-      summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_get_details
-      description: Get the details of the named text pipeline instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/text_pipeline_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    delete:
-      tags:
-      - text_pipelines
-      summary: Delete named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_del
-      description: Delete and return the details of the named text pipeline instance. Deleted models can be reloaded from the trash with the create operation.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/text_pipeline_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## text_pipelines models
-########
-  /nlu/v2/text_pipelines/{instance_name}/models:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - text_pipelines
-      summary: Add list of models.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_add_models
-      description: Add models to named text pipeline. Returns the samples added to the instance.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: pipeline_model_list  # Can this be a define like below.
-        description: List of models to add.
-        required: true
-        schema:
-          type: array
-          items:
-            $ref: "#/definitions/pipeline_model"
-      responses:
-        200:
-          $ref: "#/responses/pipeline_model_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    put:
-      tags:
-      - text_pipelines
-      summary: Update pipeline models by UUID.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_update_models
-      description: Update models of the named text pipeline. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: pipeline_model_list
-        description: List of pipeline models to update. A sample's UUIDs is used to uniquely identify it.
-        required: true
-        schema:
-          type: array
-          items:
-            $ref: "#/definitions/pipeline_model"
-      responses:
-        200:
-          $ref: "#/responses/pipeline_model_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    get:
-      tags:
-      - text_pipelines
-      summary: Get list of models.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_get_models
-      description: Get the models of the named text pipeline.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: query
-        name: index
-        description: The sample index to start from.
-        required: false
-        type: integer
-      - in: query
-        name: len
-        description: The number of samples to return.
-        required: false
-        type: integer
-      responses:
-        200:
-          $ref: "#/responses/pipeline_model_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    delete:
-      tags:
-      - text_pipelines
-      summary: Delete list of models.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_del_models
-      description: Delete the listed models of the named text pipeline. Returns the deleted names.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: pipeline_model_list
-        description: List of pipeline models.
-        required: true
-        schema:
-          type: array
-          items:
-            $ref: "#/definitions/pipeline_model"
-      responses:
-        200:
-          $ref: "#/responses/pipeline_model_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-  /nlu/v2/text_pipelines/{instance_name}/models_all:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    delete:
-      tags:
-      - text_pipelines
-      summary: Delete all models from the pipeline.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_del_models_all
-      description: Delete all models from the named pipeline. Returns the deleted models.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/pipeline_model_list"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## text_pipelines pipeline_params
-########
-  /nlu/v2/text_pipelines/{instance_name}/params:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - text_pipelines
-      summary: Set the model parameters of named text pipeline.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_set_params
-      description: Set the model parameters of named text pipeline.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: pipeline_params
-        description: The model parameters.
-        required: true
-        schema:
-          $ref: "#/definitions/pipeline_params"
-      responses:
-        200:
-          $ref: "#/responses/text_pipeline_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-    get:
-      tags:
-      - text_pipelines
-      summary: Get the editable model parameters of named text pipeline.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_get_params
-      description: Get the editable model parameters of named text pipeline.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/pipeline_params"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## text_pipelines retrieve
-########
-  /nlu/v2/text_pipelines/{instance_name}/retrieve:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - text_pipelines
-      summary: Run the text pipeline and return the results.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_retrieve
-      description: Run the text pipeline and return the results.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      - in: body
-        name: text_input
-        description: The input text.
-        required: true
-        schema:
-          $ref: "#/definitions/text_input"
-      responses:
-        200:
-          $ref: "#/responses/text_pipeline_response"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-########
-## text_pipelines vaporise
-########
-  /nlu/v2/text_pipelines/{instance_name}/vaporise:
-    parameters:
-    - $ref: '#/parameters/caller'
-
-    post:
-      tags:
-      - text_pipelines
-      summary: Vaporise the named pipeline.
-      x-swagger-router-controller: rest_api.flask_server.controllers.text_pipelines_controller
-      operationId: text_pipeline_vaporise
-      description: Permanently vaporises a model even if not trashed.
-      parameters:
-      - in: path
-        name: instance_name
-        description: The name of the instance.
-        required: true
-        type: string
-      responses:
-        200:
-          $ref: "#/responses/text_pipeline_instance_detail"
-        400:
-          description: bad request
-        401:
-          $ref: "#/responses/UnauthorizedError"
-
-
-###################################
 # Descriptions of common parameters
 ###################################
 parameters:
@@ -7300,30 +6752,6 @@ responses:
       type: array
       items:
         $ref: "#/definitions/image_dataset_instance_detail"
-
-  text_pipeline_instance_detail:
-    description: The instance detail
-    schema:
-      $ref: "#/definitions/text_pipeline_instance_detail"
-
-  text_pipeline_instance_detail_list:
-    description: A list of models' instance details
-    schema:
-      type: array
-      items:
-        $ref: "#/definitions/text_pipeline_instance_detail"
-
-  pipeline_model_list:
-    description: A list of pipeline models.
-    schema:
-      type: array
-      items:
-        $ref: "#/definitions/pipeline_model"
-
-  pipeline_params:
-    description: The pipeline parameters.
-    schema:
-      $ref: "#/definitions/pipeline_params"
 
   text_classifier_instance_detail:
     description: The instance detail
@@ -7445,18 +6873,6 @@ responses:
       items:
         $ref: "#/definitions/duckling_entity_extractor_instance_detail"
 
-  sim_word_entity_extractor_instance_detail:
-    description: The instance detail
-    schema:
-      $ref: "#/definitions/sim_word_entity_extractor_instance_detail"
-
-  sim_word_entity_extractor_instance_detail_list:
-    description: A list of models' instance details
-    schema:
-      type: array
-      items:
-        $ref: "#/definitions/sim_word_entity_extractor_instance_detail"
-
   language_recogniser_instance_detail:
     description: The instance detail
     schema:
@@ -7501,11 +6917,6 @@ responses:
       type: array
       items:
         $ref: "#/definitions/labelled_image_sample"
-
-  text_pipeline_response:
-      description: The text pipeline response on a retrieve operation which is a dict of model responses.
-      schema:
-        $ref: "#/definitions/text_pipeline_response"
 
   labelled_text_sample_list:
     description: The list of labelled text samples.
@@ -7595,13 +7006,6 @@ responses:
       type: array
       items:
         $ref: "#/definitions/person_name_entity"
-
-  sim_word_entity_list:
-    description: The list of extracted similar word entities.
-    schema:
-      type: array
-      items:
-        $ref: "#/definitions/sim_word_entity"
 
   date_entity_list:
     description: The list of structured date entities.
@@ -7868,8 +7272,14 @@ definitions:
       testing_cm:
         description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
-      cm_labels:
-        description: A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer.
+      sorted_training_cm_labels:
+        description: A list that, if present, proposes the order of the labels of the confusion matrix.
+        type: object
+      sorted_testing_cm_labels:
+        description: A list that, if present, proposes the order of the labels of the confusion matrix.
+        type: object
+      testing_weighted_avg_stats:
+        description: Some model performance stats.
         type: object
       training_stamp:
         description: The time when the training operation concluded.
@@ -7973,8 +7383,14 @@ definitions:
       testing_cm:
         description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
-      cm_labels:
-        description: A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer.
+      sorted_training_cm_labels:
+        description: A list that, if present, proposes the order of the labels of the confusion matrix.
+        type: object
+      sorted_testing_cm_labels:
+        description: A list that, if present, proposes the order of the labels of the confusion matrix.
+        type: object
+      testing_weighted_avg_stats:
+        description: Some model performance stats.
         type: object
       training_stamp:
         description: The time when the training operation concluded.
@@ -8005,39 +7421,6 @@ definitions:
         description: The softmax temperature. The lower the temperature the more pronounced the winning class' probability will be. The default is 1.0. A lower temperature is useful in a many class problem when the probabilty might otherwise be diluted amongst the classes.
         type: number
         example: 1.0
-
-  text_pipeline_instance_detail:
-    description: The instance detail.
-    type: object
-    required:
-    - name
-    - id
-    properties:
-      name:
-        description: The sluggy-url-friendly-name of the instance.
-        type: string
-        example: 'example_instance'
-      id:
-        description: The unique id of a specific version of the instance.
-        type: string
-        example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
-      long_name:
-        description: The human-friendly-name of the instance.
-        type: string
-        example: The example instance.
-      desc:
-        description: The longer existential description of this instance's purpose in life.
-        type: string
-        example: 'This is an example of this type of model.'
-      readonly:
-        description: Indicates if the model is readonly and not editable.
-        type: boolean
-        example: False
-      model_list:
-        description: The list of pipeline models.
-        type: array
-        items:
-          $ref: "#/definitions/pipeline_model"
 
   text_dataset_instance_detail:
     description: The dataset instance detail.
@@ -8148,8 +7531,14 @@ definitions:
       testing_cm:
         description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
-      cm_labels:
-        description: A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer.
+      sorted_training_cm_labels:
+        description: A list that, if present, proposes the order of the labels of the confusion matrix.
+        type: object
+      sorted_testing_cm_labels:
+        description: A list that, if present, proposes the order of the labels of the confusion matrix.
+        type: object
+      testing_weighted_avg_stats:
+        description: Some model performance stats.
         type: object
       training_stamp:
         description: The time when the training operation concluded.
@@ -8237,8 +7626,14 @@ definitions:
       testing_cm:
         description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
         type: object
-      cm_labels:
-        description: A dict that, if present, maps from the confusion matrix row and column labels to longer more descriptive labels. For example, if present it maps an FAQ answer ID to the string answer which may be either a label or the full text answer.
+      sorted_training_cm_labels:
+        description: A list that, if present, proposes the order of the labels of the confusion matrix.
+        type: object
+      sorted_testing_cm_labels:
+        description: A list that, if present, proposes the order of the labels of the confusion matrix.
+        type: object
+      testing_weighted_avg_stats:
+        description: Some model performance stats.
         type: object
       training_stamp:
         description: The time when the training operation concluded.
@@ -8495,51 +7890,6 @@ definitions:
         type: string
         example: '2017-12-10'
 
-  sim_word_entity_extractor_instance_detail:
-    description: The instance detail.
-    type: object
-    required:
-    - name
-    - id
-    - similar_words
-    - threshold
-    - word_manifold
-    properties:
-      name:
-        description: The sluggy-url-friendly-name of the instance.
-        type: string
-        example: 'example_instance'
-      id:
-        description: The unique id of a specific version of the instance.
-        type: string
-        example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
-      long_name:
-        description: The human-friendly-name of the instance.
-        type: string
-        example: The example instance.
-      desc:
-        description: The longer existential description of this instance's purpose in life.
-        type: string
-        example: 'An example of this type of model.'
-      readonly:
-        description: Indicates if the model is readonly and not editable.
-        type: boolean
-        example: False
-      similar_words:
-        description: The list of similar words to test against.
-        type: array
-        items:
-          type: string
-          example: 'cat'
-      threshold:
-        description: The threshold below which words are not similar.
-        type: number
-        example: 0.65
-      word_manifold:
-        description: The word manifold used to measure word similarity.
-        type: string
-        example: 'feers_wm_eng'
-
   language_recogniser_instance_detail:
     description: The instance detail.
     type: object
@@ -8674,34 +8024,6 @@ definitions:
         example: 'An example of this type of model.'
       load_from_store:
         description: Indicates if a pre-existing dataset with the specified name should be reloaded from the trash. Usually set to False in which case a new dataset is created with details as specified.
-        type: boolean
-        example: False
-      revision_uuid:
-        description: If provided, the uuid of the revision of the instance to try and load from the history.
-        type: string
-        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
-
-  text_pipeline_create_details:
-    description: The details of the instance to create.
-    type: object
-    # required:
-    # - name
-    # - load_from_store
-    properties:
-      name:
-        description: The sluggy-url-friendly-name of the instance.
-        type: string
-        example: 'example_instance'
-      long_name:
-        description: The human-friendly-name of the instance.
-        type: string
-        example: The example instance.
-      desc:
-        description: The longer existential description of this instance's purpose in life.
-        type: string
-        example: 'An example of this type of model.'
-      load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
         type: boolean
         example: False
       revision_uuid:
@@ -9015,46 +8337,6 @@ definitions:
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
-  sim_word_entity_extractor_create_details:
-    description: The details of the instance to create.
-    type: object
-    required:
-    - name
-    - load_from_store
-    properties:
-      name:
-        description: The sluggy-url-friendly-name of the instance to create.
-        type: string
-        example: 'example_instance'
-      long_name:
-        description: The human-friendly-name of the instance.
-        type: string
-        example: The example instance.
-      desc:
-        description: The longer existential description of this instance's purpose in life.
-        type: string
-        example: 'An example of this type of model'
-      similar_words:
-        type: array
-        items:
-          type: string
-          example: 'cat'
-      threshold:
-        description: The threshold below which words are not similar.
-        type: number
-        example: 0.65
-      word_manifold:
-        type: string
-        example: 'feers_wm_eng'
-      load_from_store:
-        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
-        type: boolean
-        example: False
-      revision_uuid:
-        description: If provided, the uuid of the revision of the instance to try and load from the history.
-        type: string
-        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
-
   language_recogniser_create_details:
     description: The details of the instance to create.
     type: object
@@ -9105,32 +8387,6 @@ definitions:
         type: string
         example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
         description: The uuid of the sample.
-
-  text_pipeline_response:
-    description: The text pipeline response on a retrieve operation which is a dict of model responses.
-    type: object
-#    required:
-#      - body
-#    properties:
-#      body:
-#        type: string
-#        example: "5 January 2017 at 15:00"
-#        description: The input text associated with the entity.
-
-  pipeline_model:
-    description: Model name and type. The model should already be created, trained, etc.
-    type: object
-    properties:
-      name:
-        type: string
-        example: 'my_model'
-      type:
-        type: string
-        example: 'text_classifier'
-      uuid:
-        type: string
-        example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
-        description: The uuid of this reference. Not the uuid of the model being referred to.
 
   labelled_text_sample:
     description: Labelled text sample.
@@ -9212,6 +8468,15 @@ definitions:
         type: string
         example: 'feers_usent_eng'
 
+  test_details:
+    description: The parameters provided to the test operation.
+    type: object
+    properties:
+      immediate_mode:
+        description: Set immediate_mode to True to do synchronous/blocking testing. Might be forced to False in production.
+        type: boolean
+        example: False
+
   train_details:
     description: The parameters provided to the train operation.
     type: object
@@ -9254,17 +8519,6 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/labelled_language_model"
-
-  pipeline_params:
-    description: The model parameters. Dict of parameters like name, long_name, desc, threshold, etc. Models can surface more paramerters. Use the params end-point to get the set of params that is editable.
-    type: object
-    properties:
-      long_name:
-        type: string
-      desc:
-        type: string
-      readonly:
-        type: boolean
 
   model_params:
     description: The model parameters. Dict of parameters like name, long_name, desc, threshold, etc. Models can surface more paramerters. Use the params end-point to get the set of params that is editable.
@@ -9512,22 +8766,6 @@ definitions:
     description: A person name extracted by the person name entity extractor.
     type: object
     example: ["Tom"]
-
-  sim_word_entity:
-    description: A word with a similarity score extracted by a similar word entity extractor.
-    type: object
-    required:
-    - entity
-    - similarity
-    properties:
-      entity:
-        description: The extracted word.
-        type: string
-        example: "orange"
-      similarity:
-        description: The cosine similarity between the extracted word and the closest example word.
-        type: number
-        example: 0.691
 
   date_entity:
     description: A structured date-time string with a best guess on the specificity/granularity (i.e. hour, day, month)

@@ -14,7 +14,11 @@ configuration.api_key['X-Auth-Token'] = feersum_nlu_auth_token  # Alternative au
 
 configuration.host = feersumnlu_host
 
-api_instance = feersum_nlu.TextClassifiersApi(feersum_nlu.ApiClient(configuration))
+api_client = feersum_nlu.ApiClient(configuration)
+
+# Example of how to setup request retries!
+api_client.rest_client.pool_manager.connection_pool_kw['retries'] = 3
+api_instance = feersum_nlu.TextClassifiersApi(api_client)
 
 instance_name = 'test_txt_clsfr'
 
@@ -187,20 +191,20 @@ try:
     print(" api_response", api_response)
     print()
 
-    print("Update the model params:")
-    model_params = feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test text classifier.",
-                                           long_name='Test Text Classifier',
-                                           readonly=True)
-    api_response = api_instance.text_classifier_set_params(instance_name, model_params)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
-
-    print("Get the details of specific named loaded text classifiers:")
-    api_response = api_instance.text_classifier_get_details(instance_name)
-    print(" type(api_response)", type(api_response))
-    print(" api_response", api_response)
-    print()
+    # print("Update the model params:")
+    # model_params = feersum_nlu.ModelParams(threshold=0.9, desc="Examples: Test text classifier.",
+    #                                        long_name='Test Text Classifier',
+    #                                        readonly=True)
+    # api_response = api_instance.text_classifier_set_params(instance_name, model_params)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
+    #
+    # print("Get the details of specific named loaded text classifiers:")
+    # api_response = api_instance.text_classifier_get_details(instance_name)
+    # print(" type(api_response)", type(api_response))
+    # print(" api_response", api_response)
+    # print()
 
     print("Delete named loaded text classifier:")
     api_response = api_instance.text_classifier_del(instance_name)
