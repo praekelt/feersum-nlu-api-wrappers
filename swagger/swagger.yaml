@@ -2,14 +2,14 @@ swagger: "2.0"
 
 info:
   description: This is the HTTP API for Feersum NLU. See https://github.com/praekelt/feersum-nlu-api-wrappers for examples of how to use the API.
-  version: 2.0.54.dev2
+  version: 2.0.55
   title: FeersumNLU API
   contact:
     name: Feersum Engine
     url: https://www.praekelt.com/feersum
     email: nlu@feersum.io
 
-host: nlu.feersum.io:443
+host: nlu.qa.feersum.io
 
 # basePath: /nlu/v2 (outdated; full path now specified in the endpoints.)
 
@@ -74,6 +74,8 @@ tags:
   description: The API to your synonym entity extractor instances. The extractor matches text to a number of synonym sets and returns the set label and matched text.
 - name: crf_entity_extractors
   description: The API to your crf entity extractor instances. The extractor recognises words as entities within the context of the rest of the text. The extractor returns the entity label as well as the associated words from the text.
+- name: entity_intent_crf_naive_bayes
+  description: The API to your entity_intent extractor\classifier instances. The extractor recognises words as entities within the context of the rest of the text. The extractor returns the entity label as well as the associated words from the text.
 - name: data_objects
   description: The API to a general data_object store useful to hold general application data like user profiles, logs and tables. A data_object is, similar to a json object, of type JSONObj = Union[str, int, float, bool, None, Dict[str, JSONObj], List[JSONObj]].
 - name: health
@@ -82,10 +84,14 @@ tags:
   description: An enpoint to manage API keys.
 - name: image_classifiers
   description: The API to your image classifier instances. Create a model, add some training data, train it and start doing retrieve/inference calls.
+- name: image_detectors
+  description: The API to your image object detector instances. Create a model, add some training data, train it and start doing retrieve/inference calls.
 - name: image_datasets
   description: The API to your labelled image datasets useful for things like labelling data. Store unlabelled samples with a label like '_unlabelled'.
 - name: image_readers
   description: The API to your image reader instances.
+- name: active_learners
+  description: THE API to iteratively label data and or create models.
 
 
 paths:
@@ -1039,6 +1045,311 @@ paths:
 
 ####################################
 ####################################
+
+####################################
+## active learner root
+####################################
+  /nlu/v2/active_learners:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - active_learners
+      summary: Create an active learner.
+      x-swagger-router-controller: rest_api.flask_server.controllers.active_learners_controller
+      operationId: active_learner_create
+      description: Create a new active learner or reload one from the trash. Returns the details of the instance.
+      parameters:
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/active_learner_instance_detail"
+
+      responses:
+        200:
+          $ref: "#/responses/active_learner_candidates"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - active_learners
+      summary: Get list of active learners.
+      x-swagger-router-controller: rest_api.flask_server.controllers.active_learners_controller
+      operationId: active_learner_get_details_all
+      description: Get the list of active learners.
+      responses:
+        200:
+          $ref: "#/responses/active_learner_instance_detail_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## active_learners named instance
+########
+  /nlu/v2/active_learners/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - active_learners
+      summary: Create an active learner.
+      x-swagger-router-controller: rest_api.flask_server.controllers.active_learners_controller
+      operationId: active_learner_create_from_path
+      description: Create a new active learner or reload one from the trash. Returns the details of the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/active_learner_instance_detail"
+
+      responses:
+        200:
+          $ref: "#/responses/active_learner_candidates"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+       tags:
+       - active_learners
+       summary: Get details of named instance.
+       x-swagger-router-controller: rest_api.flask_server.controllers.active_learners_controller
+       operationId: active_learner_get_details
+       description: Get the details of the named active learner instance.
+       parameters:
+       - in: path
+         name: instance_name
+         description: The name of the instance.
+         required: true
+         type: string
+       responses:
+         200:
+           $ref: "#/responses/active_learner_instance_detail"
+         400:
+           description: bad request
+         401:
+           $ref: "#/responses/UnauthorizedError"
+
+    delete:
+       tags:
+       - active_learners
+       summary: Delete named instance.
+       x-swagger-router-controller: rest_api.flask_server.controllers.active_learners_controller
+       operationId: active_learner_del
+       description: Delete and return the details of the named active learner instance. Deleted models can be reloaded from the trash with the create operation.
+       parameters:
+       - in: path
+         name: instance_name
+         description: The name of the instance.
+         required: true
+         type: string
+       responses:
+         200:
+           $ref: "#/responses/active_learner_instance_detail"
+         400:
+           description: bad request
+         401:
+           $ref: "#/responses/UnauthorizedError"
+
+########
+## active_learners samples
+########
+  /nlu/v2/active_learners/{instance_name}/samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    # add samples
+    post:
+      tags:
+      - active_learners
+      summary: Add  samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.active_learners_controller
+      operationId: active_learner_add_samples
+      description: Add  samples to named active learner. Returns the samples added to the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_text_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
+      responses:
+        200:
+          $ref: "#/responses/active_learner_candidates"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    # return samples
+    get:
+      tags:
+      - active_learners
+      summary: Get labelled samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.active_learners_controller
+      operationId: active_learner_get_samples
+      description: Get the labelled samples from the named active learner.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labelled_text_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+#    delete:
+#      tags:
+#      - active_learners
+#      summary: Delete training samples.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.active_learners_controller
+#      operationId: active_learner_del_training_samples
+#      description: Delete the listed training samples of the named active learner. Returns the deleted samples.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: labelled_text_sample_list
+#        description: List of labelled text samples.
+#        required: true
+#        schema:
+#          type: array
+#          items:
+#            $ref: "#/definitions/labelled_text_sample"
+#      responses:
+#        200:
+#          $ref: "#/responses/labelled_text_sample_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+
+
+#########
+### active_learners retrieve
+#########
+#  /nlu/v2/active_learners/{instance_name}/retrieve:
+#    parameters:
+#    - $ref: '#/parameters/caller'
+#
+#    post:
+#      tags:
+#      - active_learners
+#      summary: Classify text.
+#      x-swagger-router-controller: rest_api.flask_server.controllers.active_learners_controller
+#      operationId: active_learner_retrieve
+#      description: Classifies the text and returns a probability sorted list of classes.
+#      parameters:
+#      - in: path
+#        name: instance_name
+#        description: The name of the instance.
+#        required: true
+#        type: string
+#      - in: body
+#        name: text_input
+#        description: The input text.
+#        required: true
+#        schema:
+#          $ref: "#/definitions/text_input"
+#      responses:
+#        200:
+#          $ref: "#/responses/scored_label_list"
+#        400:
+#          description: bad request
+#        401:
+#          $ref: "#/responses/UnauthorizedError"
+
+########
+## active_learners vaporise
+########
+  /nlu/v2/active_learners/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - active_learners
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.active_learners_controller
+      operationId: active_learner_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/active_learner_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## active_learners get list of class labels
+########
+  /nlu/v2/active_learners/{instance_name}/labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    get:
+      tags:
+      - active_learners
+      summary: Get list of possible labels.
+      x-swagger-router-controller: rest_api.flask_server.controllers.active_learners_controller
+      operationId: active_learner_get_labels
+      description: Returns the active learner's list of possible class labels.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labels"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+####################################
+####################################
 #########
 ### word_manifolds root
 #########
@@ -1386,7 +1697,7 @@ paths:
       summary: Update training samples by UUID.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_update_training_samples
-      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      description: Update training samples of the named intent classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -1536,7 +1847,7 @@ paths:
       summary: Update testning samples by UUID.
       x-swagger-router-controller: rest_api.flask_server.controllers.intent_classifiers_controller
       operationId: intent_classifier_update_testing_samples
-      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      description: Update training samples of the named intent classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -1948,6 +2259,712 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 
+############################################################
+#####################################################
+###################################################### Entity_Intent CRF_Naive-Bayes ##############
+
+## entity_intent_crf_naive_bayes root
+########
+  /nlu/v2/entity_intent_crf_naive_bayes:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Create an entity(CRF)_intent(Naive Bayes) model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_create
+      description: Create a new entity(CRF)_intent(Naive Bayes) model or reload one from the trash. Returns the details of the instance.
+      parameters:
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/entity_intent_crf_naive_bayes_create_details"
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Get list of entity(CRF)_intent(Naive Bayes) models.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_get_details_all
+      description: Returns the list of entity(CRF)_intent(Naive Bayes) models.
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## entity_intent_crf_naive_bayes named instance
+########
+  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    get:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_get_details
+      description: Returns the details of the named entity(CRF)_intent(Naive Bayes) model instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Delete named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_del
+      description: Delete and return the details of the named entity(CRF)_intent(Naive Bayes) model instance. Deleted models can be reloaded from the trash with the create operation.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## entity_intent_crf_naive_bayes training samples
+########
+  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Add training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_add_training_samples
+      description: Add training samples to named entity(CRF)_intent(Naive Bayes) model. Returns the samples added to the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: entity_intent_sample_list
+        description: List of entity_intent samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/entity_intent_sample"
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Update training samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_update_training_samples
+      description: Update training samples of the named entity(CRF)_intent(Naive Bayes) model. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: entity_intent_sample_list
+        description: List of entity_intent samples. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/entity_intent_sample"
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Get training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_get_training_samples
+      description: Returns the training samples of the named entity(CRF)_intent(Naive Bayes) model.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Delete training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_del_training_samples
+      description: Delete the listed training samples of the named entity(CRF)_intent(Naive Bayes) model. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: entity_intent_sample_list
+        description: List of entity_intent samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/entity_intent_sample"
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/training_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    delete:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Delete all training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_del_training_samples_all
+      description: Delete the listed training samples of the named entity(CRF)_intent(Naive Bayes) model. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## entity_intent_crf_naive_bayes testing samples
+########
+  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/testing_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Add testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_add_testing_samples
+      description: Add testing samples to named entity(CRF)_intent(Naive Bayes) model. Returns the samples added to the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: entity_intent_sample_list
+        description: List of entity_intent samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/entity_intent_sample"
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Update testning samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_update_testing_samples
+      description: Update training samples of the named entity(CRF)_intent(Naive Bayes) model. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: entity_intent_sample_list
+        description: List of text samples to update. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/entity_intent_sample"
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Get testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_get_testing_samples
+      description: Returns the testing samples of the named entity(CRF)_intent(Naive Bayes) model.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Delete testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_del_testing_samples
+      description: Delete the listed testing samples of the named entity(CRF)_intent(Naive Bayes) model. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: entity_intent_sample_list
+        description: List of labelled text samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/entity_intent_sample"
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/testing_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    delete:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Delete all testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_del_testing_samples_all
+      description: Delete all testing samples of the named entity(CRF)_intent(Naive Bayes) model. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## entity_intent_crf_naive_bayes train
+########
+  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/train:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Train the named entity(CRF)_intent(Naive Bayes) model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_train
+      description: Train the named entity(CRF)_intent(Naive Bayes) model with the training and testing data already provided. Returns the updated instance details.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: train_details
+        description: The arguments provided to the train operation.
+        required: true
+        schema:
+          $ref: "#/definitions/train_details"
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## entity_intent_crf_naive_bayes test
+########
+  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/test:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Test the named entity(CRF)_intent(Naive Bayes) model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_test
+      description: Test the named entity(CRF)_intent(Naive Bayes) model with the testing data already provided. Returns the details of the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: test_details
+        description: The arguments provided to the test operation.
+        required: true
+        schema:
+          $ref: "#/definitions/test_details"
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## entity_intent_crf_naive_bayes model_params
+########
+  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Set the model parameters of named entity(CRF)_intent(Naive Bayes) model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_set_params
+      description: Set the model parameters of named entity(CRF)_intent(Naive Bayes) model.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Get the editable model parameters of named entity(CRF)_intent(Naive Bayes) model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_get_params
+      description: Get the editable model parameters of named entity(CRF)_intent(Naive Bayes) model.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## entity_intent_crf_naive_bayes retrieve
+########
+  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Classify crf_intent.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_retrieve
+      description: Classifies the crf_intent and returns a probability sorted list of classes.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: text_input
+        description: The input text.
+        required: true
+        schema:
+          $ref: "#/definitions/text_input"
+      responses:
+        200:
+          $ref: "#/responses/scored_label_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## entity_intent_crf_naive_bayes vaporise
+########
+  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## entity_intent_crf_naive_bayes get list of class labels and entity labels
+########
+  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    get:
+      tags:
+      - entity_intent_crf_naive_bayes
+      summary: Get list of possible labels.
+      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+      operationId: entity_intent_crf_naive_bayes_get_labels
+      description: Returns the classifier's list of possible class labels.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labels"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+# ########
+# ## entity_intent_crf_naive_bayes curation endpoint
+# ########
+#   /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/curate:
+#     parameters:
+#     - $ref: '#/parameters/caller'
+
+#     post:
+#       tags:
+#       - entity_intent_crf_naive_bayes
+#       summary: Endpoint to aid in the curation of an instance.
+#       x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+#       operationId: entity_intent_crf_naive_bayes_curate
+#       description: Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
+#       parameters:
+#       - in: path
+#         name: instance_name
+#         description: The name of the instance.
+#         required: true
+#         type: string
+#       - in: body
+#         name: label_pair
+#         description: The true label, predicted label and matrix (train/test) to use.
+#         required: true
+#         schema:
+#           $ref: "#/definitions/class_label_pair"
+#       responses:
+#         200:
+#           $ref: "#/responses/entity_intent_sample_list"
+#         400:
+#           description: bad request
+#         401:
+#           $ref: "#/responses/UnauthorizedError"
+
+
+########
+## entity_intent_crf_naive_bayes tsne endpoint
+########
+  # /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/tsne:
+  #   parameters:
+  #   - $ref: '#/parameters/caller'
+
+  #   post:
+  #     tags:
+  #     - entity_intent_crf_naive_bayes
+  #     summary: Endpoint to start a TSNE process.
+  #     x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+  #     operationId: entity_intent_crf_naive_bayes_tsne_post
+  #     description: Starts a TSNE process.
+  #     parameters:
+  #     - in: path
+  #       name: instance_name
+  #       description: The name of the instance.
+  #       required: true
+  #       type: string
+  #     - in: body
+  #       name: tsne_settings
+  #       description: The TSNE settings.
+  #       required: true
+  #       schema:
+  #         $ref: "#/definitions/tsne_settings"
+  #     responses:
+  #       200:
+  #         description: successful request
+  #       400:
+  #         description: bad request
+  #       401:
+  #         $ref: "#/responses/UnauthorizedError"
+
+    # get:
+    #   tags:
+    #   - entity_intent_crf_naive_bayes
+    #   summary: Get the latest results of TSNE.
+    #   x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
+    #   operationId: entity_intent_crf_naive_bayes_tsne_get
+    #   description: Get the latest results of TSNE.
+    #   parameters:
+    #   - in: path
+    #     name: instance_name
+    #     description: The name of the instance.
+    #     required: true
+    #     type: string
+    #   responses:
+    #     200:
+    #       $ref: "#/responses/tsne_sample_list"
+    #     400:
+    #       description: bad request
+    #     401:
+    #       $ref: "#/responses/UnauthorizedError"
+
+
+##############################################
+#################################################
+####################################################
+
+
+
 ###################################
 ###################################
 ########
@@ -2085,7 +3102,7 @@ paths:
       summary: Update training samples by UUID.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_update_training_samples
-      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      description: Update training samples of the named faq matcher. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -2235,7 +3252,7 @@ paths:
       summary: Update testning samples by UUID.
       x-swagger-router-controller: rest_api.flask_server.controllers.faq_matchers_controller
       operationId: faq_matcher_update_testing_samples
-      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      description: Update training samples of the named faq matcher. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -2959,7 +3976,7 @@ paths:
       summary: Update training samples by UUID.
       x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
       operationId: crf_entity_extractor_update_training_samples
-      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      description: Update training samples of the named entity extractor. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -3109,7 +4126,7 @@ paths:
       summary: Update testing samples by UUID.
       x-swagger-router-controller: rest_api.flask_server.controllers.crf_entity_extractors_controller
       operationId: crf_entity_extractor_update_testing_samples
-      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      description: Update training samples of the named entity extractor. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -3568,7 +4585,7 @@ paths:
       summary: Update training samples by UUID.
       x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
       operationId: synonym_entity_extractor_update_training_samples
-      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      description: Update training samples of the named entity detector. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -3718,7 +4735,7 @@ paths:
       summary: Update testing samples by UUID.
       x-swagger-router-controller: rest_api.flask_server.controllers.synonym_entity_extractors_controller
       operationId: synonym_entity_extractor_update_testing_samples
-      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      description: Update training samples of the named entity detector. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -5414,7 +6431,7 @@ paths:
       summary: Update training samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_update_training_samples
-      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      description: Update training samples of the named image classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -5564,7 +6581,7 @@ paths:
       summary: Update testing samples by UUID. Image format is 256x256 RGB; jpeg encoding at quality 50 is suggested.
       x-swagger-router-controller: rest_api.flask_server.controllers.image_classifiers_controller
       operationId: image_classifier_update_testing_samples
-      description: Update training samples of the named text classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      description: Update training samples of the named image classifier. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -5914,6 +6931,616 @@ paths:
       responses:
         200:
           $ref: "#/responses/labelled_image_sample_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+
+###################################
+###################################
+########
+## image_detectors root
+########
+  /vision/v2/image_detectors:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - image_detectors
+      summary: Create an image object detector.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_create
+      description: Create a new image object detector or reload one from the trash. Returns the details of the instance.
+      parameters:
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/image_detector_create_details"
+
+      responses:
+        200:
+          $ref: "#/responses/image_detector_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - image_detectors
+      summary: Get list of image object detectors.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_get_details_all
+      description: Get the list of image object detectors.
+      responses:
+        200:
+          $ref: "#/responses/image_detector_instance_detail_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_detectors named instance
+########
+  /vision/v2/image_detectors/{instance_name}:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    get:
+      tags:
+      - image_detectors
+      summary: Get details of named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_get_details
+      description: Get the details of the named image object detector instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/image_detector_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - image_detectors
+      summary: Delete named instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_del
+      description: Delete and return the details of the named image object detector instance. Deleted models can be reloaded from the trash with the create operation.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/image_detector_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_detectors training samples
+########
+  /vision/v2/image_detectors/{instance_name}/training_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - image_detectors
+      summary: Add training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_add_training_samples
+      description: Add training samples to named image object detector. Returns the samples added to the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_detections_list
+        description: List of image samples each with a number of labelled detections.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_detections"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_detections_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - image_detectors
+      summary: Update training samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_update_training_samples
+      description: Update training samples of the named image object detector. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_detections_list
+        description: List of image samples each with a number of labelled detections. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_detections"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_detections_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - image_detectors
+      summary: Get training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_get_training_samples
+      description: Get the training samples of the named image object detector.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_detections_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - image_detectors
+      summary: Delete training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_del_training_samples
+      description: Delete the listed training samples of the named image object detector. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_detections_list
+        description: List of image samples to delete. A sample can be deleted using either its content & label or its uuid.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_detections"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_detections_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /vision/v2/image_detectors/{instance_name}/training_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    delete:
+      tags:
+      - image_detectors
+      summary: Delete all training samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_del_training_samples_all
+      description: Delete all training samples of the named image object detector. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_detections_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_detectors testing samples
+########
+  /vision/v2/image_detectors/{instance_name}/testing_samples:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - image_detectors
+      summary: Add testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_add_testing_samples
+      description: Add testing samples to named image object detector. Returns the samples added to the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_detections_list
+        description: List of labelled image samples.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_detections"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_detections_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    put:
+      tags:
+      - image_detectors
+      summary: Update testing samples by UUID.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_update_testing_samples
+      description: Update training samples of the named image object detector. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_detections_list
+        description: List of labelled image samples. A sample's UUIDs is used to uniquely identify it.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_detections"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_detections_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - image_detectors
+      summary: Get testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_get_testing_samples
+      description: Get the testing samples of the named image object detector.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: query
+        name: index
+        description: The sample index to start from.
+        required: false
+        type: integer
+      - in: query
+        name: len
+        description: The number of samples to return.
+        required: false
+        type: integer
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_detections_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    delete:
+      tags:
+      - image_detectors
+      summary: Delete testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_del_testing_samples
+      description: Delete the listed testing samples of the named image object detector. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: labelled_image_detections_list
+        description: List of image samples to delete. A sample can be deleted using either its content & label or its uuid.
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/labelled_image_detections"
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_detections_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+  /vision/v2/image_detectors/{instance_name}/testing_samples_all:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    delete:
+      tags:
+      - image_detectors
+      summary: Delete testing samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_del_testing_samples_all
+      description: Delete all testing samples of the named image object detector. Returns the deleted samples.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labelled_image_detections_list"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_detectors train
+########
+  /vision/v2/image_detectors/{instance_name}/train:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - image_detectors
+      summary: Train the named image object dector.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_train
+      description: Train the named image object detector with the training and testing data already provided. Returns the details of the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: train_details
+        description: The arguments provided to the train operation.
+        required: true
+        schema:
+          $ref: "#/definitions/train_details"
+      responses:
+        200:
+          $ref: "#/responses/image_detector_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_detectors test
+########
+  /nlu/v2/image_detectors/{instance_name}/test:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - image_detectors
+      summary: Test the named image object detector.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_test
+      description: Test the named image object detector with the testing data already provided. Returns the details of the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: test_details
+        description: The arguments provided to the test operation.
+        required: true
+        schema:
+          $ref: "#/definitions/test_details"
+      responses:
+        200:
+          $ref: "#/responses/image_detector_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_detectors model_params
+########
+  /vision/v2/image_detectors/{instance_name}/params:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - image_detectors
+      summary: Set the model parameters of named image object detector.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_set_params
+      description: Set the model parameters of named image object detector.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: model_params
+        description: The model parameters.
+        required: true
+        schema:
+          $ref: "#/definitions/model_params"
+      responses:
+        200:
+          $ref: "#/responses/image_detector_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+    get:
+      tags:
+      - image_detectors
+      summary: Get the editable model parameters of named image object detector.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_get_params
+      description: Get the editable model parameters of named image object detector.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/model_params"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_detectors retrieve
+########
+  /vision/v2/image_detectors/{instance_name}/retrieve:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - image_detectors
+      summary: Detect and classify objects in the image.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_retrieve
+      description: Detect and classify objects in the image and returns a probability sorted list of detections.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: image_input
+        description: The input image.
+        required: true
+        schema:
+          $ref: "#/definitions/image_input"
+      responses:
+        200:
+          $ref: "#/responses/scored_image_detections"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_detectors vaporise
+########
+  /vision/v2/image_detectors/{instance_name}/vaporise:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    post:
+      tags:
+      - image_detectors
+      summary: Vaporise the named model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_vaporise
+      description: Permanently vaporises a model even if not trashed.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/image_detector_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
+########
+## image_detectors get list of class labels
+########
+  /vision/v2/image_detectors/{instance_name}/labels:
+    parameters:
+    - $ref: '#/parameters/caller'
+
+    get:
+      tags:
+      - image_detectors
+      summary: Get list of possible labels.
+      x-swagger-router-controller: rest_api.flask_server.controllers.image_detectors_controller
+      operationId: image_detector_get_labels
+      description: Returns the object detectors's list of possible class labels.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      responses:
+        200:
+          $ref: "#/responses/labels"
         400:
           description: bad request
         401:
@@ -6741,6 +8368,18 @@ responses:
       items:
         $ref: "#/definitions/image_classifier_instance_detail"
 
+  image_detector_instance_detail:
+    description: The instance detail
+    schema:
+      $ref: "#/definitions/image_detector_instance_detail"
+
+  image_detector_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/image_detector_instance_detail"
+
   image_dataset_instance_detail:
     description: The dataset instance detail
     schema:
@@ -6812,6 +8451,18 @@ responses:
       type: array
       items:
         $ref: "#/definitions/intent_classifier_instance_detail"
+
+  entity_intent_crf_naive_bayes_instance_detail:
+    description: The instance detail
+    schema:
+      $ref: "#/definitions/entity_intent_crf_naive_bayes_instance_detail"
+
+  entity_intent_crf_naive_bayes_instance_detail_list:
+    description: A list of models' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/entity_intent_crf_naive_bayes_instance_detail"
 
   crf_entity_extractor_instance_detail:
     description: The instance detail
@@ -6903,6 +8554,13 @@ responses:
       type: array
       items:
         $ref: "#/definitions/crf_sample"
+  
+  entity_intent_sample_list:
+    description: List of entity_intent samples.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/entity_intent_sample"
 
   synonym_sample_list:
     description: List of synonym samples.
@@ -6917,6 +8575,13 @@ responses:
       type: array
       items:
         $ref: "#/definitions/labelled_image_sample"
+
+  labelled_image_detections_list:
+    description: The list of labelled image detections.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/labelled_image_detections"
 
   labelled_text_sample_list:
     description: The list of labelled text samples.
@@ -6964,6 +8629,11 @@ responses:
       type: array
       items:
         $ref: "#/definitions/scored_label"
+
+  scored_image_detections:
+    description: The list of scored and sorted detections + optionally a marked up image.
+    schema:
+      $ref: "#/definitions/scored_image_detections"
 
   labels:
     description: The list of possible labels.
@@ -7031,6 +8701,23 @@ responses:
       items:
         $ref: "#/definitions/paragraph"
 
+  active_learner_instance_detail:
+      description: The active learner instance detail
+      schema:
+        $ref: "#/definitions/active_learner_instance_detail"
+
+  active_learner_instance_detail_list:
+    description: A list of active learners' instance details
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/active_learner_instance_detail"
+
+  active_learner_candidates:
+      description: The active learner candidates for labelling
+      schema:
+        $ref: "#/definitions/active_learner_candidates"
+
 ####################################
 # Descriptions of common definitions
 ####################################
@@ -7078,6 +8765,46 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/crf_entity"
+      uuid:
+        type: string
+        example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
+        description: The uuid of the sample.
+
+  entity_intent_crf_nb:
+    description: A crf entity.
+    type: object
+    required:
+    - entity
+    - index
+    - len
+    properties:
+      entity:
+        type: string
+        description: The entity label/class/type.
+      value:
+        type: string
+        description: The value of the entity as extracted from the input text. Not used during training!
+      index:
+        type: integer
+        description: The first character of the entity in the associated utterance.
+      len:
+        type: integer
+        description: The length of the extracted entity in the associated utterance.
+    example: {"entity": "location", "index": 31, "len": 8}
+
+  entity_intent_sample:
+    description: A crf entity extractor training/testing utterance with labelled entities.
+    type: object
+    properties:
+      text:
+        type: string
+      intent:
+        type: string
+      entity_list:
+        description: A list of labelled entities.
+        type: array
+        items:
+          $ref: "#/definitions/entity_intent_crf_nb"
       uuid:
         type: string
         example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
@@ -7305,6 +9032,95 @@ definitions:
         description: The softmax temperature. The lower the temperature the more pronounced the winning class' probability will be. The default is 1.0. A lower temperature is useful in a many class problem when the probabilty might otherwise be diluted amongst the classes.
         type: number
         example: 1.0
+
+  image_detector_instance_detail:
+    description: The instance detail.
+    type: object
+    required:
+    - name
+    - id
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      id:
+        description: The unique id of a specific version of the instance.
+        type: string
+        example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'This is an example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
+      training_accuracy:
+        description: The accuracy of the model as measured on the training set.
+        type: number
+        example: 1.0
+      training_f1:
+        description: The average F-score of the model as measured on the training set.
+        type: number
+        example: 1.0
+      training_cm:
+        description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      testing_accuracy:
+        description: The accuracy of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      testing_f1:
+        description: The average F-score of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      testing_cm:
+        description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      training_sorted_cm_labels:
+        description: A list that, if present, proposes the order of the labels of the confusion matrix.
+        type: object
+      testing_sorted_cm_labels:
+        description: A list that, if present, proposes the order of the labels of the confusion matrix.
+        type: object
+      testing_weighted_avg_stats:
+        description: Some model performance stats.
+        type: object
+      training_stamp:
+        description: The time when the training operation concluded.
+        type: string
+        example: '2017-10-26 10:42:01.589979'
+      num_training_samples:
+        description: The model's number of training samples.
+        type: integer
+        example: 100
+      num_testing_samples:
+        description: The model's number of testing samples.
+        type: integer
+        example: 100
+      clsfr_algorithm:
+        description: The name of the algorithm that should be used for the classification.
+        type: string
+        example: "'resnet152', etc."
+      threshold:
+        description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
+        type: number
+        example: 0.85
+      temperature:
+        description: The softmax temperature. The lower the temperature the more pronounced the winning class' probability will be. The default is 1.0. A lower temperature is useful in a many class problem when the probabilty might otherwise be diluted amongst the classes.
+        type: number
+        example: 1.0
+      label_count_dict:
+        description: The detection counter by label.
+        type: object
+      detection_rate:
+        description: The current detection rate.
+        type: number
 
   image_dataset_instance_detail:
     description: The dataset instance detail.
@@ -7661,6 +9477,101 @@ definitions:
         type: number
         example: 1.0
 
+  entity_intent_crf_naive_bayes_instance_detail:
+    description: The instance detail.
+    type: object
+    required:
+    - name
+    - id
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      id:
+        description: The unique id of a specific version of the instance.
+        type: string
+        example: '7986d2ef-0b98-4c91-b847-7b66110e2f61'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'This is an example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
+      training_accuracy:
+        description: The accuracy of the model as measured on the training set.
+        type: number
+        example: 1.0
+      training_f1:
+        description: The average F-score of the model as measured on the training set.
+        type: number
+        example: 1.0
+      training_cm:
+        description: The confusion matrix as measured on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      validation_accuracy:
+        description: The accuracy of the model as measured by cross validation on the training set.
+        type: number
+        example: 1.0
+      validation_f1:
+        description: The average F-score of the model as measured by cross validation on the training set.
+        type: number
+        example: 1.0
+      validation_cm:
+        description: The confusion matrix as measured by cross validation on the training set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      testing_accuracy:
+        description: The accuracy of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      testing_f1:
+        description: The average F-score of the model as measured on the testing set.
+        type: number
+        example: 1.0
+      testing_cm:
+        description: The confusion matrix as measured on the testing set. The matrix is expected to be quite sparse so a compact dict of dicts representation is used.
+        type: object
+      training_sorted_cm_labels:
+        description: A list that, if present, proposes the order of the labels of the confusion matrix.
+        type: object
+      testing_sorted_cm_labels:
+        description: A list that, if present, proposes the order of the labels of the confusion matrix.
+        type: object
+      testing_weighted_avg_stats:
+        description: Some model performance stats.
+        type: object
+      training_stamp:
+        description: The time when the training operation concluded.
+        type: string
+        example: '2017-10-26 10:42:01.589979'
+      num_training_samples:
+        description: The model's number of training samples.
+        type: integer
+        example: 100
+      num_testing_samples:
+        description: The model's number of testing samples.
+        type: integer
+        example: 100
+      # word_manifold_list:
+      #   description: The list of labelled word manifolds used for training.
+      #   type: array
+      #   items:
+      #     $ref: "#/definitions/labelled_word_manifold"
+      threshold:
+        description: There is typically some model dependent threshold to be set upon training and which is possibly mutable post training. This is that threshold.
+        type: number
+        example: 0.85
+      temperature:
+        description: The softmax temperature. The lower the temperature the more pronounced the winning class' probability will be. The default is 1.0. A lower temperature is useful in a many class problem when the probabilty might otherwise be diluted amongst the classes.
+        type: number
+        example: 1.0
+
   crf_entity_extractor_instance_detail:
     description: The instance detail.
     type: object
@@ -8003,6 +9914,34 @@ definitions:
         type: string
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
+  image_detector_create_details:
+    description: The details of the instance to create.
+    type: object
+    required:
+    - name
+    - load_from_store
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'An example of this type of model.'
+      load_from_store:
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        type: boolean
+        example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
+
   image_dataset_create_details:
     description: The details of the dataset instance to create.
     type: object
@@ -8120,6 +10059,42 @@ definitions:
         example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
 
   intent_classifier_create_details:
+    description: The details of the instance to create.
+    type: object
+    required:
+    - name
+    - load_from_store
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'An example of this type of model.'
+      lid_model_file:
+        description: The pre-trained LID model to load.
+        type: string
+        example: 'lid_za'
+      load_from_store:
+        description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
+        type: boolean
+        example: False
+      revision_uuid:
+        description: If provided, the uuid of the revision of the instance to try and load from the history.
+        type: string
+        example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
+      # revision_name:
+      #   description: The name of the earlier revision of the model.
+      #   type: string
+      #   example: 'example_instan'
+
+  entity_intent_crf_naive_bayes_create_details:
     description: The details of the instance to create.
     type: object
     required:
@@ -8388,6 +10363,29 @@ definitions:
         example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
         description: The uuid of the sample.
 
+  labelled_image_detections:
+    description: One sample of an image with labelled detections.
+    type: object
+    required:
+    - image
+    - detections
+    properties:
+      image:
+        type: string
+        format: byte  # base64-encoded file contents
+      detections:
+        type: array
+        items:
+          $ref: "#/definitions/image_detection"
+      comment:
+        description: A string note about the sample.
+        type: string
+        example: "Second sighting of a unicorn, but still looks a lot like a horse with a horn glued on."
+      uuid:
+        type: string
+        example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
+        description: The uuid of the sample.
+
   labelled_text_sample:
     description: Labelled text sample.
     type: object
@@ -8410,6 +10408,10 @@ definitions:
         type: string
         example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
         description: The uuid of the sample.
+      suggested_labels:
+        type: string
+        example: '8'
+        description: The label suggested for the sample using the active learner
 
   tsne_sample:
     description: A TSNE data sample.
@@ -8561,6 +10563,15 @@ definitions:
         description: The URL to the image.
         type: string
 
+  image_output:
+    description: An image (e.g. the marked up input image) returned by a model.
+    type: object
+    properties:
+      image:
+        description: The base64 image.
+        type: string
+        format: byte  # base64-encoded file contents
+
   # Input text.
   text_input:
     description: The text input to be classified, matched or parsed.
@@ -8670,6 +10681,62 @@ definitions:
       probability:
         type: number
         example: 0.95
+
+  scored_image_detections:
+    description: A list object detection with an associated probablity/score + optionally a input image with markup.
+    type: object
+    required:
+    - scored_detections
+    properties:
+      scored_detections:
+        type: array
+        items:
+          $ref: "#/definitions/scored_image_detection"
+      output_image:
+        $ref: "#/definitions/image_output"
+
+  scored_image_detection:
+    description: An object detection with an associated probablity/score.
+    type: object
+    required:
+    - detection
+    - probability
+    properties:
+      detection:
+        $ref: "#/definitions/image_detection"
+      probability:
+        type: number
+        example: 0.95
+
+  image_detection:
+    description: A class label with an associated detection box.
+    type: object
+    required:
+    - label
+    - box_x
+    - box_y
+    - box_w
+    - box_h
+    - id
+    properties:
+      label:
+        type: string
+        example: 'pizza'
+      box_x:
+        type: number
+        example: 0.5
+      box_y:
+        type: number
+        example: 0.5
+      box_w:
+        type: number
+        example: 0.02
+      box_h:
+        type: number
+        example: 0.02
+      id:
+        type: integer
+        example: 42
 
   class_label:
     description: A class label.
@@ -8836,3 +10903,96 @@ definitions:
         description: The number of calls loaded on this key. 'None' or no value implies unlimited.
         type: integer
         example: 5000
+
+  text_classifier_get_labels:
+      description: The details of the instance to create.
+      type: object
+      properties:
+        name:
+          description: The sluggy-url-friendly-name of the instance.
+          type: string
+          example: 'example_instance'
+        long_name:
+          description: The human-friendly-name of the instance.
+          type: string
+          example: The example instance.
+        desc:
+          description: The longer existential description of this instance's purpose in life.
+          type: string
+          example: 'An example of this type of model.'
+        load_from_store:
+          description: Indicates if a pre-existing model with the specified name should be reloaded from the trash. Usually set to False in which case a new model is created with details as specified.
+          type: boolean
+          example: False
+        revision_uuid:
+          description: If provided, the uuid of the revision of the instance to try and load from the history.
+          type: string
+          example: 'ea0e5aa3-1772-49aa-a805-db7ed6da46bf'
+        labelled_text_sample_list:
+          description: List of labelled text samples.
+          type: array
+          items:
+            $ref: "#/definitions/labelled_text_sample"
+        score:
+          description: The quality metric to track the performance of active labelling.
+          type: number
+          example: 1.0
+
+  active_learner_candidates:
+    description: The candidate text samples returned for labelling
+    type: object
+
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      candidate_text_sample_list:
+        description: List of candidate text samples to be labelled.
+        type: array
+        items:
+          $ref: "#/definitions/labelled_text_sample"
+      score:
+        description: The quality metric to track the performance of active labelling.
+        type: number
+        example: 1.0
+
+  active_learner_instance_detail:
+    description: The instance detail.
+    type: object
+#    required:
+#    - name
+    properties:
+      name:
+        description: The sluggy-url-friendly-name of the instance.
+        type: string
+        example: 'example_instance'
+      long_name:
+        description: The human-friendly-name of the instance.
+        type: string
+        example: The example instance.
+      desc:
+        description: The longer existential description of this instance's purpose in life.
+        type: string
+        example: 'This is an example of this type of model.'
+      readonly:
+        description: Indicates if the model is readonly and not editable.
+        type: boolean
+        example: False
+      clsfr_algorithm:
+        description: The name of the classifier used inside the active learner
+        type: string
+        example: 'svm'
+      alm_algorithm:
+        description: The type of active learner used
+        type: string
+        example: 'uncertainty_lc'
+      sentence_encoder_name:
+        description: The model to encode sentences, used for clustering
+        type: string
+        example: 'all-MiniLM-L6-v2'  # this is a distilled task-agnostic pretrained model from SBERT = 80MB
+      # labelled_text_sample_list:
+      #   description: List of labelled text samples.
+      #   type: array
+      #   items:
+      #     $ref: "#/definitions/labelled_text_sample"
