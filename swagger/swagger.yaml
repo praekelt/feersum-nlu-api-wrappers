@@ -2268,7 +2268,7 @@ paths:
   /nlu/v2/entity_intent_crf_naive_bayes:
     parameters:
     - $ref: '#/parameters/caller'
-
+  
     post:
       tags:
       - entity_intent_crf_naive_bayes

@@ -54,8 +54,6 @@ train_details = feersum_nlu.TrainDetails(threshold=1.0,
                                          word_manifold_list=word_manifold_list,
                                          immediate_mode=True)
 
-text_input = feersum_nlu.TextInput("How do I get a quote?")
-
 caller_name = 'example_caller'
 
 print()
