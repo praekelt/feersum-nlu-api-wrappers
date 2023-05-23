@@ -42,16 +42,6 @@ flask==2.2.5
     #   connexion
 idna==3.4
     # via requests
-importlib-metadata==4.2.0
-    # via
-    #   attrs
-    #   click
-    #   connexion
-    #   flake8
-    #   flask
-    #   jsonschema
-importlib-resources==5.12.0
-    # via jsonschema
 inflection==0.5.1
     # via connexion
 isort==5.11.5
@@ -78,7 +68,7 @@ mypy==1.3.0
     # via -r etc/requirements.in
 mypy-extensions==1.0.0
     # via mypy
-numpy==1.21.6
+numpy==1.22.0
     # via
     #   opencv-python
     #   pymba
@@ -88,8 +78,6 @@ packaging==23.1
     # via connexion
 pillow==9.5.0
     # via -r etc/requirements.in
-pkgutil-resolve-name==1.3.10
-    # via jsonschema
 platformdirs==3.5.1
     # via pylint
 psycopg2-binary==2.9.6
@@ -121,24 +109,10 @@ six==1.16.0
     # via
     #   -r etc/requirements.in
     #   python-dateutil
-tomli==2.0.1
-    # via
-    #   mypy
-    #   pylint
 tomlkit==0.11.8
     # via pylint
-typed-ast==1.5.4
-    # via
-    #   astroid
-    #   mypy
 typing-extensions==4.5.0
-    # via
-    #   astroid
-    #   importlib-metadata
-    #   jsonschema
-    #   mypy
-    #   platformdirs
-    #   pylint
+    # via mypy
 urllib3==2.0.2
     # via
     #   -r etc/requirements.in
@@ -149,7 +123,3 @@ werkzeug==2.2.3
     #   flask
 wrapt==1.15.0
     # via astroid
-zipp==3.15.0
-    # via
-    #   importlib-metadata
-    #   importlib-resources
