@@ -10,6 +10,7 @@ info:
     email: nlu@feersum.io
 
 host: nlu.qa.feersum.io
+# host: nlu.feersum.io:443
 
 # basePath: /nlu/v2 (outdated; full path now specified in the endpoints.)
 
@@ -2268,7 +2269,7 @@ paths:
   /nlu/v2/entity_intent_crf_naive_bayes:
     parameters:
     - $ref: '#/parameters/caller'
-  
+
     post:
       tags:
       - entity_intent_crf_naive_bayes
@@ -2806,7 +2807,7 @@ paths:
           $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/scored_label_list"
+          $ref: "#/responses/entity_intent_sample_list"
         400:
           description: bad request
         401:
@@ -8770,27 +8771,27 @@ definitions:
         example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
         description: The uuid of the sample.
 
-  entity_intent_crf_nb:
-    description: A crf entity.
-    type: object
-    required:
-    - entity
-    - index
-    - len
-    properties:
-      entity:
-        type: string
-        description: The entity label/class/type.
-      value:
-        type: string
-        description: The value of the entity as extracted from the input text. Not used during training!
-      index:
-        type: integer
-        description: The first character of the entity in the associated utterance.
-      len:
-        type: integer
-        description: The length of the extracted entity in the associated utterance.
-    example: {"entity": "location", "index": 31, "len": 8}
+  # entity_intent_crf_nb:
+  #   description: A crf entity with an intent.
+  #   type: object
+  #   required:
+  #   - entity
+  #   - index
+  #   - len
+  #   properties:
+  #     entity:
+  #       type: string
+  #       description: The entity label/class/type.
+  #     value:
+  #       type: string
+  #       description: The value of the entity as extracted from the input text. Not used during training!
+  #     index:
+  #       type: integer
+  #       description: The first character of the entity in the associated utterance.
+  #     len:
+  #       type: integer
+  #       description: The length of the extracted entity in the associated utterance.
+  #   example: {"entity": "location", "index": 31, "len": 8}
 
   entity_intent_sample:
     description: A crf entity extractor training/testing utterance with labelled entities.
@@ -8804,7 +8805,7 @@ definitions:
         description: A list of labelled entities.
         type: array
         items:
-          $ref: "#/definitions/entity_intent_crf_nb"
+          $ref: "#/definitions/crf_entity"
       uuid:
         type: string
         example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
