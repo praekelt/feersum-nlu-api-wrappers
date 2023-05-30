@@ -376,7 +376,6 @@ Class | Method | HTTP request | Description
  - [DucklingEntityExtractorInstanceDetail](docs/DucklingEntityExtractorInstanceDetail.md)
  - [EntityIntentCrfNaiveBayesCreateDetails](docs/EntityIntentCrfNaiveBayesCreateDetails.md)
  - [EntityIntentCrfNaiveBayesInstanceDetail](docs/EntityIntentCrfNaiveBayesInstanceDetail.md)
- - [EntityIntentCrfNb](docs/EntityIntentCrfNb.md)
  - [EntityIntentSample](docs/EntityIntentSample.md)
  - [FaqMatcherCreateDetails](docs/FaqMatcherCreateDetails.md)
  - [FaqMatcherInstanceDetail](docs/FaqMatcherInstanceDetail.md)

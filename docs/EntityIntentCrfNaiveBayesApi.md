@@ -896,7 +896,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **entity_intent_crf_naive_bayes_retrieve**
-> list[ScoredLabel] entity_intent_crf_naive_bayes_retrieve(instance_name, text_input, x_caller=x_caller)
+> list[EntityIntentSample] entity_intent_crf_naive_bayes_retrieve(instance_name, text_input, x_caller=x_caller)
 
 Classify crf_intent.
 
@@ -945,7 +945,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**list[ScoredLabel]**](ScoredLabel.md)
+[**list[EntityIntentSample]**](EntityIntentSample.md)
 
 ### Authorization
 

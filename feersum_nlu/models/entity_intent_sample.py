@@ -16,7 +16,7 @@ import re  # noqa: F401
 
 import six
 
-from feersum_nlu.models.entity_intent_crf_nb import EntityIntentCrfNb  # noqa: F401,E501
+from feersum_nlu.models.crf_entity import CrfEntity  # noqa: F401,E501
 
 
 class EntityIntentSample(object):
@@ -35,7 +35,7 @@ class EntityIntentSample(object):
     swagger_types = {
         'text': 'str',
         'intent': 'str',
-        'entity_list': 'list[EntityIntentCrfNb]',
+        'entity_list': 'list[CrfEntity]',
         'uuid': 'str'
     }
 
@@ -113,7 +113,7 @@ class EntityIntentSample(object):
         A list of labelled entities.  # noqa: E501
 
         :return: The entity_list of this EntityIntentSample.  # noqa: E501
-        :rtype: list[EntityIntentCrfNb]
+        :rtype: list[CrfEntity]
         """
         return self._entity_list
 
@@ -124,7 +124,7 @@ class EntityIntentSample(object):
         A list of labelled entities.  # noqa: E501
 
         :param entity_list: The entity_list of this EntityIntentSample.  # noqa: E501
-        :type: list[EntityIntentCrfNb]
+        :type: list[CrfEntity]
         """
 
         self._entity_list = entity_list
