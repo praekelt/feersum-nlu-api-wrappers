@@ -75,8 +75,8 @@ tags:
   description: The API to your synonym entity extractor instances. The extractor matches text to a number of synonym sets and returns the set label and matched text.
 - name: crf_entity_extractors
   description: The API to your crf entity extractor instances. The extractor recognises words as entities within the context of the rest of the text. The extractor returns the entity label as well as the associated words from the text.
-- name: entity_intent_crf_naive_bayes
-  description: The API to your entity_intent extractor\classifier instances. The extractor recognises words as entities within the context of the rest of the text. The extractor returns the entity label as well as the associated words from the text.
+- name: dual_entity_intent
+  description: The API to your entity_intent extractor\classifier instances. The extractor recognises words as entities within the context of the rest of the text. The extractor returns the entity label as well as the associated words from the text. While the intent classifier model instances are used to classify a user's utterance into a predefined action or intent category.
 - name: data_objects
   description: The API to a general data_object store useful to hold general application data like user profiles, logs and tables. A data_object is, similar to a json object, of type JSONObj = Union[str, int, float, bool, None, Dict[str, JSONObj], List[JSONObj]].
 - name: health
@@ -2262,31 +2262,31 @@ paths:
 
 ############################################################
 #####################################################
-###################################################### Entity_Intent CRF_Naive-Bayes ##############
+###################################################### Dual Entity_Intent ##############
 
-## entity_intent_crf_naive_bayes root
+## dual_entity_intent root
 ########
-  /nlu/v2/entity_intent_crf_naive_bayes:
+  /nlu/v2/dual_entity_intent:
     parameters:
     - $ref: '#/parameters/caller'
 
     post:
       tags:
-      - entity_intent_crf_naive_bayes
-      summary: Create an entity(CRF)_intent(Naive Bayes) model.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_create
-      description: Create a new entity(CRF)_intent(Naive Bayes) model or reload one from the trash. Returns the details of the instance.
+      - dual_entity_intent
+      summary: Create an dual_entity_intent model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_create
+      description: Create a new dual_entity_intent model or reload one from the trash. Returns the details of the instance.
       parameters:
       - in: body
         name: create_details
         description: The details of the instance to create.
         required: true
         schema:
-          $ref: "#/definitions/entity_intent_crf_naive_bayes_create_details"
+          $ref: "#/definitions/dual_entity_intent_create_details"
       responses:
         200:
-          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+          $ref: "#/responses/dual_entity_intent_instance_detail"
         400:
           description: bad request
         401:
@@ -2294,33 +2294,61 @@ paths:
 
     get:
       tags:
-      - entity_intent_crf_naive_bayes
-      summary: Get list of entity(CRF)_intent(Naive Bayes) models.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_get_details_all
-      description: Returns the list of entity(CRF)_intent(Naive Bayes) models.
+      - dual_entity_intent
+      summary: Get list of dual_entity_intent models.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_get_details_all
+      description: Returns the list of dual_entity_intent models.
       responses:
         200:
-          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail_list"
+          $ref: "#/responses/dual_entity_intent_instance_detail_list"
         400:
           description: bad request
         401:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## entity_intent_crf_naive_bayes named instance
+## dual_entity_intent named instance
 ########
-  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}:
+  /nlu/v2/dual_entity_intent/{instance_name}:
     parameters:
     - $ref: '#/parameters/caller'
 
+    post:
+      tags:
+      - dual_entity_intent
+      summary: Create a dual_entity_intent model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_create_from_path
+      description: Create a new dual_entity_intent or reload one from the trash. Returns the details of the instance.
+      parameters:
+      - in: path
+        name: instance_name
+        description: The name of the instance.
+        required: true
+        type: string
+      - in: body
+        name: create_details
+        description: The details of the instance to create.
+        required: true
+        schema:
+          $ref: "#/definitions/dual_entity_intent_create_details"
+
+      responses:
+        200:
+          $ref: "#/responses/dual_entity_intent_instance_detail"
+        400:
+          description: bad request
+        401:
+          $ref: "#/responses/UnauthorizedError"
+
     get:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Get details of named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_get_details
-      description: Returns the details of the named entity(CRF)_intent(Naive Bayes) model instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_get_details
+      description: Returns the details of the named dual_entity_intent model instance.
       parameters:
       - in: path
         name: instance_name
@@ -2329,7 +2357,7 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+          $ref: "#/responses/dual_entity_intent_instance_detail"
         400:
           description: bad request
         401:
@@ -2337,11 +2365,11 @@ paths:
 
     delete:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Delete named instance.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_del
-      description: Delete and return the details of the named entity(CRF)_intent(Naive Bayes) model instance. Deleted models can be reloaded from the trash with the create operation.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_del
+      description: Delete and return the details of the named dual_entity_intent model instance. Deleted models can be reloaded from the trash with the create operation.
       parameters:
       - in: path
         name: instance_name
@@ -2350,26 +2378,26 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+          $ref: "#/responses/dual_entity_intent_instance_detail"
         400:
           description: bad request
         401:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## entity_intent_crf_naive_bayes training samples
+## dual_entity_intent training samples
 ########
-  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/training_samples:
+  /nlu/v2/dual_entity_intent/{instance_name}/training_samples:
     parameters:
     - $ref: '#/parameters/caller'
 
     post:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Add training samples.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_add_training_samples
-      description: Add training samples to named entity(CRF)_intent(Naive Bayes) model. Returns the samples added to the instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_add_training_samples
+      description: Add training samples to named dual_entity_intent model. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
@@ -2394,11 +2422,11 @@ paths:
 
     put:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Update training samples by UUID.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_update_training_samples
-      description: Update training samples of the named entity(CRF)_intent(Naive Bayes) model. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_update_training_samples
+      description: Update training samples of the named dual_entity_intent model. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -2423,11 +2451,11 @@ paths:
 
     get:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Get training samples.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_get_training_samples
-      description: Returns the training samples of the named entity(CRF)_intent(Naive Bayes) model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_get_training_samples
+      description: Returns the training samples of the named dual_entity_intent model.
       parameters:
       - in: path
         name: instance_name
@@ -2454,11 +2482,11 @@ paths:
 
     delete:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Delete training samples.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_del_training_samples
-      description: Delete the listed training samples of the named entity(CRF)_intent(Naive Bayes) model. Returns the deleted samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_del_training_samples
+      description: Delete the listed training samples of the named dual_entity_intent model. Returns the deleted samples.
       parameters:
       - in: path
         name: instance_name
@@ -2481,17 +2509,17 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/training_samples_all:
+  /nlu/v2/dual_entity_intent/{instance_name}/training_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
 
     delete:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Delete all training samples.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_del_training_samples_all
-      description: Delete the listed training samples of the named entity(CRF)_intent(Naive Bayes) model. Returns the deleted samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_del_training_samples_all
+      description: Delete the listed training samples of the named dual_entity_intent model. Returns the deleted samples.
       parameters:
       - in: path
         name: instance_name
@@ -2507,19 +2535,19 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## entity_intent_crf_naive_bayes testing samples
+## dual_entity_intent testing samples
 ########
-  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/testing_samples:
+  /nlu/v2/dual_entity_intent/{instance_name}/testing_samples:
     parameters:
     - $ref: '#/parameters/caller'
 
     post:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Add testing samples.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_add_testing_samples
-      description: Add testing samples to named entity(CRF)_intent(Naive Bayes) model. Returns the samples added to the instance.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_add_testing_samples
+      description: Add testing samples to named dual_entity_intent model. Returns the samples added to the instance.
       parameters:
       - in: path
         name: instance_name
@@ -2544,11 +2572,11 @@ paths:
 
     put:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Update testning samples by UUID.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_update_testing_samples
-      description: Update training samples of the named entity(CRF)_intent(Naive Bayes) model. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_update_testing_samples
+      description: Update training samples of the named dual_entity_intent model. A sample's UUIDs is used to uniquely identify it. Returns the samples that were updated.
       parameters:
       - in: path
         name: instance_name
@@ -2573,11 +2601,11 @@ paths:
 
     get:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Get testing samples.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_get_testing_samples
-      description: Returns the testing samples of the named entity(CRF)_intent(Naive Bayes) model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_get_testing_samples
+      description: Returns the testing samples of the named dual_entity_intent model.
       parameters:
       - in: path
         name: instance_name
@@ -2604,11 +2632,11 @@ paths:
 
     delete:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Delete testing samples.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_del_testing_samples
-      description: Delete the listed testing samples of the named entity(CRF)_intent(Naive Bayes) model. Returns the deleted samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_del_testing_samples
+      description: Delete the listed testing samples of the named dual_entity_intent model. Returns the deleted samples.
       parameters:
       - in: path
         name: instance_name
@@ -2631,17 +2659,17 @@ paths:
         401:
           $ref: "#/responses/UnauthorizedError"
 
-  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/testing_samples_all:
+  /nlu/v2/dual_entity_intent/{instance_name}/testing_samples_all:
     parameters:
     - $ref: '#/parameters/caller'
 
     delete:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Delete all testing samples.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_del_testing_samples_all
-      description: Delete all testing samples of the named entity(CRF)_intent(Naive Bayes) model. Returns the deleted samples.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_del_testing_samples_all
+      description: Delete all testing samples of the named dual_entity_intent model. Returns the deleted samples.
       parameters:
       - in: path
         name: instance_name
@@ -2657,19 +2685,19 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## entity_intent_crf_naive_bayes train
+## dual_entity_intent train
 ########
-  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/train:
+  /nlu/v2/dual_entity_intent/{instance_name}/train:
     parameters:
     - $ref: '#/parameters/caller'
 
     post:
       tags:
-      - entity_intent_crf_naive_bayes
-      summary: Train the named entity(CRF)_intent(Naive Bayes) model.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_train
-      description: Train the named entity(CRF)_intent(Naive Bayes) model with the training and testing data already provided. Returns the updated instance details.
+      - dual_entity_intent
+      summary: Train the named dual_entity_intent model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_train
+      description: Train the named dual_entity_intent model with the training and testing data already provided. Returns the updated instance details.
       parameters:
       - in: path
         name: instance_name
@@ -2684,26 +2712,26 @@ paths:
           $ref: "#/definitions/train_details"
       responses:
         200:
-          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+          $ref: "#/responses/dual_entity_intent_instance_detail"
         400:
           description: bad request
         401:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## entity_intent_crf_naive_bayes test
+## dual_entity_intent test
 ########
-  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/test:
+  /nlu/v2/dual_entity_intent/{instance_name}/test:
     parameters:
     - $ref: '#/parameters/caller'
 
     post:
       tags:
-      - entity_intent_crf_naive_bayes
-      summary: Test the named entity(CRF)_intent(Naive Bayes) model.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_test
-      description: Test the named entity(CRF)_intent(Naive Bayes) model with the testing data already provided. Returns the details of the instance.
+      - dual_entity_intent
+      summary: Test the named dual_entity_intent model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_test
+      description: Test the named dual_entity_intent model with the testing data already provided. Returns the details of the instance.
       parameters:
       - in: path
         name: instance_name
@@ -2718,26 +2746,26 @@ paths:
           $ref: "#/definitions/test_details"
       responses:
         200:
-          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+          $ref: "#/responses/dual_entity_intent_instance_detail"
         400:
           description: bad request
         401:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## entity_intent_crf_naive_bayes model_params
+## dual_entity_intent model_params
 ########
-  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/params:
+  /nlu/v2/dual_entity_intent/{instance_name}/params:
     parameters:
     - $ref: '#/parameters/caller'
 
     post:
       tags:
-      - entity_intent_crf_naive_bayes
-      summary: Set the model parameters of named entity(CRF)_intent(Naive Bayes) model.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_set_params
-      description: Set the model parameters of named entity(CRF)_intent(Naive Bayes) model.
+      - dual_entity_intent
+      summary: Set the model parameters of named dual_entity_intent model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_set_params
+      description: Set the model parameters of named dual_entity_intent model.
       parameters:
       - in: path
         name: instance_name
@@ -2752,7 +2780,7 @@ paths:
           $ref: "#/definitions/model_params"
       responses:
         200:
-          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+          $ref: "#/responses/dual_entity_intent_instance_detail"
         400:
           description: bad request
         401:
@@ -2760,11 +2788,11 @@ paths:
 
     get:
       tags:
-      - entity_intent_crf_naive_bayes
-      summary: Get the editable model parameters of named entity(CRF)_intent(Naive Bayes) model.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_get_params
-      description: Get the editable model parameters of named entity(CRF)_intent(Naive Bayes) model.
+      - dual_entity_intent
+      summary: Get the editable model parameters of named dual_entity_intent model.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_get_params
+      description: Get the editable model parameters of named dual_entity_intent model.
       parameters:
       - in: path
         name: instance_name
@@ -2780,18 +2808,18 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## entity_intent_crf_naive_bayes retrieve
+## dual_entity_intent retrieve
 ########
-  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/retrieve:
+  /nlu/v2/dual_entity_intent/{instance_name}/retrieve:
     parameters:
     - $ref: '#/parameters/caller'
 
     post:
       tags:
-      - entity_intent_crf_naive_bayes
-      summary: Classify crf_intent.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_retrieve
+      - dual_entity_intent
+      summary: Classify entity_intent.
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_retrieve
       description: Classifies the crf_intent and returns a probability sorted list of classes.
       parameters:
       - in: path
@@ -2807,25 +2835,25 @@ paths:
           $ref: "#/definitions/text_input"
       responses:
         200:
-          $ref: "#/responses/entity_intent_sample_list"
+          $ref: "#/responses/dual_entity_intent_list"
         400:
           description: bad request
         401:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## entity_intent_crf_naive_bayes vaporise
+## dual_entity_intent vaporise
 ########
-  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/vaporise:
+  /nlu/v2/dual_entity_intent/{instance_name}/vaporise:
     parameters:
     - $ref: '#/parameters/caller'
 
     post:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Vaporise the named model.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_vaporise
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_vaporise
       description: Permanently vaporises a model even if not trashed.
       parameters:
       - in: path
@@ -2835,25 +2863,25 @@ paths:
         type: string
       responses:
         200:
-          $ref: "#/responses/entity_intent_crf_naive_bayes_instance_detail"
+          $ref: "#/responses/dual_entity_intent_instance_detail"
         400:
           description: bad request
         401:
           $ref: "#/responses/UnauthorizedError"
 
 ########
-## entity_intent_crf_naive_bayes get list of class labels and entity labels
+## dual_entity_intent get list of class labels and entity labels
 ########
-  /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/labels:
+  /nlu/v2/dual_entity_intent/{instance_name}/labels:
     parameters:
     - $ref: '#/parameters/caller'
 
     get:
       tags:
-      - entity_intent_crf_naive_bayes
+      - dual_entity_intent
       summary: Get list of possible labels.
-      x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-      operationId: entity_intent_crf_naive_bayes_get_labels
+      x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+      operationId: dual_entity_intent_get_labels
       description: Returns the classifier's list of possible class labels.
       parameters:
       - in: path
@@ -2870,18 +2898,18 @@ paths:
           $ref: "#/responses/UnauthorizedError"
 
 # ########
-# ## entity_intent_crf_naive_bayes curation endpoint
+# ## dual_entity_intent curation endpoint
 # ########
-#   /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/curate:
+#   /nlu/v2/dual_entity_intent/{instance_name}/curate:
 #     parameters:
 #     - $ref: '#/parameters/caller'
 
 #     post:
 #       tags:
-#       - entity_intent_crf_naive_bayes
+#       - dual_entity_intent
 #       summary: Endpoint to aid in the curation of an instance.
-#       x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-#       operationId: entity_intent_crf_naive_bayes_curate
+#       x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+#       operationId: dual_entity_intent_curate
 #       description: Returns the list of samples behind a cell of the confusion matrix of the training or testing samples.
 #       parameters:
 #       - in: path
@@ -2905,18 +2933,18 @@ paths:
 
 
 ########
-## entity_intent_crf_naive_bayes tsne endpoint
+## dual_entity_intent tsne endpoint
 ########
-  # /nlu/v2/entity_intent_crf_naive_bayes/{instance_name}/tsne:
+  # /nlu/v2/dual_entity_intent/{instance_name}/tsne:
   #   parameters:
   #   - $ref: '#/parameters/caller'
 
   #   post:
   #     tags:
-  #     - entity_intent_crf_naive_bayes
+  #     - dual_entity_intent
   #     summary: Endpoint to start a TSNE process.
-  #     x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-  #     operationId: entity_intent_crf_naive_bayes_tsne_post
+  #     x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+  #     operationId: dual_entity_intent_tsne_post
   #     description: Starts a TSNE process.
   #     parameters:
   #     - in: path
@@ -2940,10 +2968,10 @@ paths:
 
     # get:
     #   tags:
-    #   - entity_intent_crf_naive_bayes
+    #   - dual_entity_intent
     #   summary: Get the latest results of TSNE.
-    #   x-swagger-router-controller: rest_api.flask_server.controllers.entity_intent_crf_naive_bayes_controller
-    #   operationId: entity_intent_crf_naive_bayes_tsne_get
+    #   x-swagger-router-controller: rest_api.flask_server.controllers.dual_entity_intent_controller
+    #   operationId: dual_entity_intent_tsne_get
     #   description: Get the latest results of TSNE.
     #   parameters:
     #   - in: path
@@ -8453,17 +8481,17 @@ responses:
       items:
         $ref: "#/definitions/intent_classifier_instance_detail"
 
-  entity_intent_crf_naive_bayes_instance_detail:
+  dual_entity_intent_instance_detail:
     description: The instance detail
     schema:
-      $ref: "#/definitions/entity_intent_crf_naive_bayes_instance_detail"
+      $ref: "#/definitions/dual_entity_intent_instance_detail"
 
-  entity_intent_crf_naive_bayes_instance_detail_list:
+  dual_entity_intent_instance_detail_list:
     description: A list of models' instance details
     schema:
       type: array
       items:
-        $ref: "#/definitions/entity_intent_crf_naive_bayes_instance_detail"
+        $ref: "#/definitions/dual_entity_intent_instance_detail"
 
   crf_entity_extractor_instance_detail:
     description: The instance detail
@@ -8630,6 +8658,13 @@ responses:
       type: array
       items:
         $ref: "#/definitions/scored_label"
+  
+  dual_entity_intent_list:
+    description: The list of extracted entities and classified intents.
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/dual_entity_intent"
 
   scored_image_detections:
     description: The list of scored and sorted detections + optionally a marked up image.
@@ -8771,27 +8806,32 @@ definitions:
         example: 'e11c7557-98bb-4a19-a13a-e23f0bf51870'
         description: The uuid of the sample.
 
-  # entity_intent_crf_nb:
-  #   description: A crf entity with an intent.
-  #   type: object
-  #   required:
-  #   - entity
-  #   - index
-  #   - len
-  #   properties:
-  #     entity:
-  #       type: string
-  #       description: The entity label/class/type.
-  #     value:
-  #       type: string
-  #       description: The value of the entity as extracted from the input text. Not used during training!
-  #     index:
-  #       type: integer
-  #       description: The first character of the entity in the associated utterance.
-  #     len:
-  #       type: integer
-  #       description: The length of the extracted entity in the associated utterance.
-  #   example: {"entity": "location", "index": 31, "len": 8}
+  dual_entity_intent:
+    description: A dual entity intent.
+    type: object
+    required:
+    - entity
+    - value
+    - index
+    - len
+    - intent
+    properties:
+      entity:
+        type: string
+        description: The entity label/class/type.
+      value:
+        type: string
+        description: The value of the entity extracted from the input text. Not used during training!
+      index:
+        type: integer
+        description: The first character of the entity in the associated utterance.
+      len:
+        type: integer
+        description: The length of the extracted entity in the associated utterance.
+      intent:
+        type: string
+        description: The intent label/class/type.
+    example: {'intent': 'Buy', 'entity_list': [{'entity': 'amount', 'index': 4, 'len': 4, 'value': 'R100'}]}
 
   entity_intent_sample:
     description: A crf entity extractor training/testing utterance with labelled entities.
@@ -9478,7 +9518,7 @@ definitions:
         type: number
         example: 1.0
 
-  entity_intent_crf_naive_bayes_instance_detail:
+  dual_entity_intent_instance_detail:
     description: The instance detail.
     type: object
     required:
@@ -9559,6 +9599,15 @@ definitions:
         description: The model's number of testing samples.
         type: integer
         example: 100
+      dual_extr_clsfr_algorithm:
+        description: The name of the algorithm that should be used for the classification.
+        type: string
+        example: "'crf_naive_bayes', crf_knn, etc."
+      language_model_list:
+        description: The list of labelled language models used as sentence encoders.
+        type: array
+        items:
+          $ref: "#/definitions/labelled_language_model"
       # word_manifold_list:
       #   description: The list of labelled word manifolds used for training.
       #   type: array
@@ -10095,7 +10144,7 @@ definitions:
       #   type: string
       #   example: 'example_instan'
 
-  entity_intent_crf_naive_bayes_create_details:
+  dual_entity_intent_create_details:
     description: The details of the instance to create.
     type: object
     required:
