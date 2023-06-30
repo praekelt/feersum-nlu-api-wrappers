@@ -1,4 +1,4 @@
-# EntityIntentCrfNaiveBayesCreateDetails
+# DualEntityIntentCreateDetails
 
 ## Properties
 Name | Type | Description | Notes
